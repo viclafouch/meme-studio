@@ -2,34 +2,42 @@
   "name": "meme-studio",
   "version": "1.0.0",
   "description": "A simple meme generator building in React",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server --mode development --open --hot",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/viclafouch/meme-studio.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "typescript",
+    "react-hooks",
+    "meme-generator"
+  ],
+  "author": "Victor de la Fouchardiere",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/viclafouch/meme-studio/issues"
   },
   "homepage": "https://github.com/viclafouch/meme-studio#readme",
   "devDependencies": {
+    "@types/react": "^16.9.13",
+    "@types/react-dom": "^16.9.4",
     "@typescript-eslint/eslint-plugin": "^2.8.0",
     "@typescript-eslint/parser": "^2.8.0",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.1",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prettier": "^3.1.1",
+    "html-webpack-plugin": "^3.2.0",
     "prettier": "^1.19.1",
     "source-map-loader": "^0.2.4",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.2",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
   },
   "dependencies": {
     "react": "^16.12.0",
