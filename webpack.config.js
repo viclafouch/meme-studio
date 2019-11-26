@@ -33,14 +33,7 @@ module.exports = () => ({
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              prependData: `
-                @import "./src/scss/global/_variables.scss";
-              `
-            }
-          }
+          'sass-loader'
         ],
         exclude: /node_modules/
       },

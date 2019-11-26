@@ -1,23 +1,29 @@
 @import 'reset';
+@import './global/variables';
+@import 'transition.min';
 @import url('https://fonts.googleapis.com/css?family=Alata&display=swap');
 
 html {
-  --color-primary: #444444;
-  --background-primary: #f3f0ec;
+  font-size: 24px;
 }
 
 body {
-  background-color: var(--background-primary);
+  background-color: var(--azure);
   font-family: 'Alata', sans-serif;
-  color: var(--color-primary);
+  color: var(--grey-dark);
 
   #root {
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background: url('https://loading.io/mod/background/particles/index.svg') no-repeat;
-    background-position: center center;
-    background-size: cover;
+    position: relative;
+
+    .wrapper-container {
+      min-height: inherit;
+      display: flex;
+      flex-direction: column;
+      background: url('https://loading.io/mod/background/particles/index.svg') no-repeat;
+      background-position: center center;
+      background-size: cover;
+    }
 
     #fork-me {
       display: none;
@@ -29,22 +35,22 @@ body {
         display: block;
       }
     }
-
-    main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
   }
 }
 
-.main__header,
-.main__body {
+main {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  text-align: center;
+  align-items: center;
+
+  & > .main__header,
+  & > .main__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
 }
 
 .main__header {
@@ -71,4 +77,33 @@ body {
 
 .main__body {
   margin-top: 150px;
+
+  .get_started_button {
+    width: 100%;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    transition-property: background-color, transform;
+    transition-duration: 0.3s;
+
+    &:hover {
+      transform: translateY(-6px);
+      background-color: var(--blue-light);
+    }
+  }
+
+  .last-memes {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 2em;
+
+    .last-meme__article {
+      padding: 0 12px;
+      img {
+        width: 200px;
+        border: 2px solid #444444;
+      }
+    }
+  }
 }
