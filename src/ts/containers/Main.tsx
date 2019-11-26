@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react'
 import ReactSVG from 'react-svg'
-import Button from '../components/Button/Button'
-import Meme from '../shared/models/Meme'
+import Button from '@components/Button/Button'
+import Meme from '@shared/models/Meme'
 
 function Main(): JSX.Element {
   const [memes, setMemes] = useState([])

@@ -1,7 +1,7 @@
 import * as React from 'react'
-import Header from './components/Header/Header'
-import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
-import MainContainer from './containers/Main'
+import Header from '@components/Header/Header'
+import ErrorBoundary from '@components/ErrorBoundary/ErrorBoundary'
+import MainContainer from '@containers/Main'
 
 function App(): JSX.Element {
   return (

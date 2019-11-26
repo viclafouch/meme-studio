@@ -10,6 +10,12 @@ module.exports = (env, argv) => ({
   watch: argv.mode === "development",
   devtool: 'source-map',
   resolve: {
+    alias: {
+      '@components': path.resolve(__dirname, './src/ts/components'),
+      '@containers': path.resolve(__dirname, './src/ts/containers'),
+      '@shared': path.resolve(__dirname, './src/ts/shared'),
+      '@': path.resolve(__dirname, './src')
+    },
     extensions: [".ts", ".tsx", ".js", ".json", ".scss"]
   },
   entry: {
