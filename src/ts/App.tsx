@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Header from './components/Header/Header'
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import MainContainer from './containers/Main'
 
 function App(): JSX.Element {
@@ -12,8 +13,12 @@ function App(): JSX.Element {
           data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png"
         />
       </a>
-      <Header />
-      <MainContainer />
+      <ErrorBoundary>
+        <div className="wrapper-container">
+          <Header />
+          <MainContainer />
+        </div>
+      </ErrorBoundary>
     </>
   )
 }
