@@ -1,11 +1,13 @@
 const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
+const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries")
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
-module.exports = () => ({
+module.exports = (env, argv) => ({
   cache: false,
-  watch: true,
+  watch: argv.mode === "development",
   devtool: 'source-map',
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json", ".scss"]
@@ -16,7 +18,7 @@ module.exports = () => ({
   },
   output: {
     path: path.join(__dirname, "/dist"),
-    filename: "index_bundle.js"
+    filename: "[name].bundle.js"
   },
   module: {
     rules: [
@@ -46,11 +48,17 @@ module.exports = () => ({
     ]
   },
   plugins: [
+    new CleanWebpackPlugin({
+      verbose: true,
+      cleanStaleWebpackAssets: false,
+      protectWebpackAssets: true,
+    }),
+    new FixStyleOnlyEntriesPlugin(),
     new HtmlWebpackPlugin({
       template: "./src/html/index.html"
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css'
+      filename: '[name].[chunkhash:8].css'
     }),
     new CopyPlugin([ { from: 'src/img', to: 'images' } ])
   ]
