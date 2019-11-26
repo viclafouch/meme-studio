@@ -1,13 +1,18 @@
 const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = () => ({
   cache: false,
+  watch: true,
   devtool: 'source-map',
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".json"]
+    extensions: [".ts", ".tsx", ".js", ".json", ".scss"]
   },
-  entry: "./src/ts/index.tsx",
+  entry: {
+    main: path.join(__dirname, 'src', 'ts', 'index.tsx'),
+    styles: path.join(__dirname, 'src', 'scss', 'styles.scss')
+  },
   output: {
     path: path.join(__dirname, "/dist"),
     filename: "index_bundle.js"
@@ -23,7 +28,22 @@ module.exports = () => ({
           }
         ]
       },
-      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+      {
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              prependData: `
+                @import "./src/scss/global/_variables.scss";
+              `
+            }
+          }
+        ],
+        exclude: /node_modules/
+      },
       {
         enforce: 'pre',
         test: /\.js$/,
@@ -34,6 +54,9 @@ module.exports = () => ({
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/html/index.html"
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css'
     })
   ]
 })
