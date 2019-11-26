@@ -1,0 +1,74 @@
+@import 'reset';
+@import url('https://fonts.googleapis.com/css?family=Alata&display=swap');
+
+html {
+  --color-primary: #444444;
+  --background-primary: #f3f0ec;
+}
+
+body {
+  background-color: var(--background-primary);
+  font-family: 'Alata', sans-serif;
+  color: var(--color-primary);
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: url('https://loading.io/mod/background/particles/index.svg') no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    #fork-me {
+      display: none;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      z-index: 9999999;
+      @media (min-width: 1250px) {
+        display: block;
+      }
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
+
+.main__header,
+.main__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.main__header {
+  h1 {
+    font-size: 42px;
+    letter-spacing: 0;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 46px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 22px;
+    max-width: 600px;
+    text-align: center;
+    margin: 20px auto;
+  }
+}
+
+.main__body {
+  margin-top: 150px;
+}
