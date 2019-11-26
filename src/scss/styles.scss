@@ -44,6 +44,13 @@ main {
   flex-direction: column;
   align-items: center;
 
+  .is-loading-memes {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   & > .main__header,
   & > .main__body {
     display: flex;
@@ -83,11 +90,10 @@ main {
     max-width: 650px;
     margin-left: auto;
     margin-right: auto;
-    transition-property: background-color, transform;
+    transition-property: background-color;
     transition-duration: 0.3s;
 
     &:hover {
-      transform: translateY(-6px);
       background-color: var(--blue-light);
     }
   }
