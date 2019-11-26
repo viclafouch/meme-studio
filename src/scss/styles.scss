@@ -153,6 +153,11 @@ main {
     margin-bottom: 5px;
     border-bottom: 1px solid rgba(52, 52, 52, 0.274);
 
+    .active {
+      background-color: var(--blue);
+      color: var(--azure);
+    }
+
     button {
       flex: 1;
       background-color: transparent;
@@ -165,6 +170,7 @@ main {
         border-left: 1px solid rgba(52, 52, 52, 0.274);
         margin-right: -1px;
       }
+
     }
   }
 
