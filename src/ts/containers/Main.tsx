@@ -6,10 +6,10 @@ import Studio from './Studio'
 import Meme from '@shared/models/Meme'
 
 function Main(): JSX.Element {
-  const [memes, setMemes] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [isError, setIsError] = useState(false)
-  const [isOnStudio, setIsOnStudio] = useState(false)
+  const [memes, setMemes] = useState<Array<Meme>>([])
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isError, setIsError] = useState<boolean>(false)
+  const [isOnStudio, setIsOnStudio] = useState<boolean>(false)
 
   useEffect(() => {
     fetch('https://api.imgflip.com/get_memes')

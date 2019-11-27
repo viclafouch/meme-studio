@@ -141,6 +141,11 @@ main {
     align-items: center;
     justify-content: center;
     border-right: 2px solid rgba(52, 52, 52, 0.274);
+    img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+    }
   }
 
   .Studio__aside {
@@ -170,31 +175,22 @@ main {
         border-left: 1px solid rgba(52, 52, 52, 0.274);
         margin-right: -1px;
       }
-
     }
   }
 
-  .gallery__memes {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    padding: 0 4px;
-    height: 100%;
-    overflow-y: scroll;
-    overflow-x: hidden;
+  .studio__tab {
+    &:not(.studio__tab__active) {
+      display: none !important;
+    }
 
-    .meme__article {
-      border: 1px solid rgba(52, 52, 52, 0.671);
-      cursor: pointer;
-
-      & + .meme__article {
-        margin-top: 8px;
-      }
-
-      img {
-        width: 100%;
-        object-fit: cover;
-      }
+    &#gallery-tab {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      padding: 0 4px;
+      height: 100%;
+      overflow-y: scroll;
+      overflow-x: hidden;
     }
   }
 }

@@ -1,40 +1,57 @@
 import * as React from 'react'
 import { useState } from 'react'
 import Meme from '@shared/models/Meme'
+import GalleryTab from '@components/Tabs/Gallery/Gallery'
+import CustomizationTab from '@components/Tabs/Customization/Customization'
+
+const TAB_GALLERY = 'TAB_GALLERY'
+const TAB_CUSTOMIZATION = 'TAB_CUSTOMIZATION'
 
 type StudioProps = {
   memes: Array<Meme>
 }
 
 function Studio({ memes }: StudioProps): JSX.Element {
-  const [state, setState] = useState('memes');
-  const [memeUrl, setMemeSelected] = useState(null)
-  
+  const [currentTab, setCurrentTab] = useState<string>(TAB_GALLERY)
+  const [memeSelected, setMemeSelected] = useState<Meme | null>(null)
 
   return (
     <div className="Studio">
       <div className="Studio__content">
-        {
-          memeUrl !== null ? <img src={memeUrl} width="100%" /> : <span>Select a template</span>
-        }
+        {memeSelected && <img src={memeSelected.url} />}
+        {!memeSelected && <span>Select a template</span>}
       </div>
       <aside className="Studio__aside">
-        {/* TODO: each time we update the state, it call the api, need to store meme urls */}
         <div className="buttons__actions">
-          <button className={state === 'memes' ? 'active' : null} onClick={(): void => setState('memes')}>Memes</button>
-          <button className={state === 'edit' ? 'active' : null} onClick={(): void => setState('edit')}>Edit</button>
+          <button
+            className={currentTab === TAB_GALLERY ? 'tab-button-active' : null}
+            onClick={(): void => setCurrentTab(TAB_GALLERY)}
+            id="tab-gallery-btn"
+          >
+            Memes
+          </button>
+          <button
+            className={currentTab === TAB_CUSTOMIZATION ? 'tab-button-active' : null}
+            onClick={(): void => setCurrentTab(TAB_CUSTOMIZATION)}
+            id="tab-customization-btn"
+          >
+            Edit
+          </button>
         </div>
-        {
-          state === 'memes' ? <div className="gallery__memes">
-            {memes.map(
-              ({ id, url, name }: Meme): React.ReactNode => (
-                <article key={id} data-id={id} className="meme__article">
-                  <img onClick={(): void => setMemeSelected(url)} src={url} alt={name} />
-                </article>
-              )
-            )}
-          </div> : <div>Edit your meme</div>
-        }
+        <div
+          className={`studio__tab ${currentTab === TAB_GALLERY ? 'studio__tab__active' : null}`}
+          aria-hidden={currentTab !== TAB_GALLERY}
+          id="gallery-tab"
+        >
+          <GalleryTab memes={memes} onSelectMeme={(meme: Meme): void => setMemeSelected(meme)} />
+        </div>
+        <div
+          className={`studio__tab ${currentTab === TAB_CUSTOMIZATION ? 'studio__tab__active' : null}`}
+          aria-hidden={currentTab !== TAB_CUSTOMIZATION}
+          id="customization-tab"
+        >
+          <CustomizationTab memeSelected={memeSelected} />
+        </div>
       </aside>
     </div>
   )
