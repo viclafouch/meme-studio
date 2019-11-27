@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { memo } from 'react'
 import Meme from '@shared/models/Meme'
-import 'customization.scss'
+import './customization.scss'
 
 type CustomizationProps = {
   memeSelected: Meme | null
