@@ -3,6 +3,8 @@ import { useState } from 'react'
 import Meme from '@shared/models/Meme'
 import GalleryTab from '@components/Tabs/Gallery/Gallery'
 import CustomizationTab from '@components/Tabs/Customization/Customization'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Button from '@components/Button/Button'
 
 const TAB_GALLERY = 'TAB_GALLERY'
 const TAB_CUSTOMIZATION = 'TAB_CUSTOMIZATION'
@@ -23,20 +25,20 @@ function Studio({ memes }: StudioProps): JSX.Element {
       </div>
       <aside className="Studio__aside">
         <div className="buttons__actions">
-          <button
+          <Button
             className={currentTab === TAB_GALLERY ? 'tab-button-active' : null}
             onClick={(): void => setCurrentTab(TAB_GALLERY)}
             id="tab-gallery-btn"
           >
-            Memes
-          </button>
-          <button
+            <FontAwesomeIcon icon="image" />
+          </Button>
+          <Button
             className={currentTab === TAB_CUSTOMIZATION ? 'tab-button-active' : null}
             onClick={(): void => setCurrentTab(TAB_CUSTOMIZATION)}
             id="tab-customization-btn"
           >
-            Edit
-          </button>
+            <FontAwesomeIcon icon="heading" />
+          </Button>
         </div>
         <div
           className={`studio__tab ${currentTab === TAB_GALLERY ? 'studio__tab__active' : null}`}

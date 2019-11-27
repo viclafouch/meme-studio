@@ -10,7 +10,10 @@
     "paths": {
       "@components/*": ["src/ts/components/*"],
       "@containers/*": ["src/ts/containers/*"],
-      "@shared/*": ["src/ts/shared/*"]
+      "@shared/*": ["src/ts/shared/*"],
+      "@store/*": ["src/ts/store/*"],
+      "@utils/*": ["src/ts/utils/*"],
+      "@/*": ["src/*"]
     }
   }
 }

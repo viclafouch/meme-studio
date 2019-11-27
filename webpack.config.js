@@ -14,6 +14,8 @@ module.exports = (env, argv) => ({
       '@components': path.resolve(__dirname, './src/ts/components'),
       '@containers': path.resolve(__dirname, './src/ts/containers'),
       '@shared': path.resolve(__dirname, './src/ts/shared'),
+      '@store': path.resolve(__dirname, './src/ts/store'),
+      '@utils': path.resolve(__dirname, './src/ts/utils'),
       '@': path.resolve(__dirname, './src')
     },
     extensions: [".ts", ".tsx", ".js", ".json", ".scss"]

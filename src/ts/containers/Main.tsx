@@ -1,22 +1,28 @@
 import * as React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import ReactSVG from 'react-svg'
-import Button from '@components/Button/Button'
 import Studio from './Studio'
 import Meme from '@shared/models/Meme'
+import Header from '@components/Header/Header'
+import Intro from './Intro'
+import { DefaultContext, State } from '@store/DefaultContext'
+import { SET_MEMES } from '@store/reducer/constants'
 
 function Main(): JSX.Element {
-  const [memes, setMemes] = useState<Array<Meme>>([])
+  const [{ memes, onStudio }, dispatch] = useContext<any>(DefaultContext)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [isError, setIsError] = useState<boolean>(false)
-  const [isOnStudio, setIsOnStudio] = useState<boolean>(false)
+  const [_, setIsError] = useState<boolean>(false)
 
   useEffect(() => {
     fetch('https://api.imgflip.com/get_memes')
       .then((response: Response): any => response.json())
       .then((response: any): void => {
         if (!response.success) setIsError(true)
-        else setMemes(response.data.memes.map((m: Meme) => new Meme(m)))
+        else
+          dispatch({
+            type: SET_MEMES,
+            memes: response.data.memes.map((m: Meme) => new Meme(m))
+          })
       })
       .finally(async () => {
         await new Promise(resolve => setTimeout(resolve, 1000))
@@ -25,40 +31,22 @@ function Main(): JSX.Element {
   }, [])
 
   return (
-    <main>
-      {isLoading ? (
+    <main className="Main">
+      {isLoading && (
         <div className="is-loading-memes" aria-busy="true">
           <ReactSVG src="images/dual-ball.svg" wrapper="span" />
         </div>
-      ) : (
-        <>
-          <div className="main__header">
-            <h1>Meme Studio</h1>
-            <p>Create a meme from JPG, GIF or PNG images. Edit your image and make a meme.</p>
+      )}
+      {!isLoading && !onStudio && <Intro />}
+      {!isLoading && onStudio && (
+        <div className="wrapper-studio">
+          <div className="ld ld-fall-ttb-in studio-header">
+            <Header />
           </div>
-          <div className="main__body">
-            {!isOnStudio ? (
-              <div className="main__body__intro">
-                <Button className="get_started_button ld ld-fall-ttb-in" onClick={(): void => setIsOnStudio(true)}>
-                  Get started
-                </Button>
-                <ul className="last-memes">
-                  {memes.slice(0, 3).map((meme: Meme, index: number) => (
-                    <li key={index}>
-                      <article className="last-meme__article">
-                        <img src={meme.url} alt={meme.name} />
-                      </article>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : (
-              <div className="ld ld-power-on main__body__studio">
-                <Studio memes={memes} />
-              </div>
-            )}
+          <div className="ld ld-zoom-in studio-body">
+            <Studio memes={memes} />
           </div>
-        </>
+        </div>
       )}
     </main>
   )

@@ -1,7 +1,11 @@
 import * as React from 'react'
-import Header from '@components/Header/Header'
+import { DefaultProvider } from '@store/DefaultContext'
 import ErrorBoundary from '@components/ErrorBoundary/ErrorBoundary'
 import MainContainer from '@containers/Main'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faImage, faHeading } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faImage, faHeading)
 
 function App(): JSX.Element {
   return (
@@ -14,10 +18,11 @@ function App(): JSX.Element {
         />
       </a>
       <ErrorBoundary>
-        <div className="wrapper-container">
-          <Header />
-          <MainContainer />
-        </div>
+        <DefaultProvider>
+          <div className="wrapper-container">
+            <MainContainer />
+          </div>
+        </DefaultProvider>
       </ErrorBoundary>
     </>
   )

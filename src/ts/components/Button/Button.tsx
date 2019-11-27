@@ -3,7 +3,7 @@ import './button.scss'
 
 function Button(props: any): JSX.Element {
   return (
-    <button onClick={props.onClick} className={'Button ' + (props.className || '')}>
+    <button onClick={props.onClick} className={'Button ' + (props.className || '')} id={props.id || ''}>
       {props.children}
     </button>
   )
