@@ -1,13 +1,12 @@
 .Gallery {
   list-style: none;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 8px;
 
   .meme__item {
     cursor: pointer;
-
-    & + .meme__item {
-      margin-top: 8px;
-    }
-
     img {
       width: 100%;
       object-fit: cover;

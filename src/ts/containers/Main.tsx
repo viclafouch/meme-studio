@@ -43,7 +43,7 @@ function Main(): JSX.Element {
           <div className="ld ld-fall-ttb-in studio-header">
             <Header />
           </div>
-          <div className="ld ld-zoom-in studio-body">
+          <div className="ld ld-float-btt-in studio-body">
             <Studio memes={memes} />
           </div>
         </div>
