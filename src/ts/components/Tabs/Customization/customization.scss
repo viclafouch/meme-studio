@@ -1,0 +1,17 @@
+.Customization {
+  height: 100%;
+
+  .customization-empty {
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+    .wrapper-sad-svg {
+      display: block;
+      width: 100px;
+    }
+  }
+}

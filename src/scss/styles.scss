@@ -159,10 +159,9 @@ main {
     padding: 20px 30px;
     background-color: #f2f3f8;
 
-    img {
+    canvas {
       max-height: 100%;
       max-width: 100%;
-      object-fit: contain;
       box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
     }
   }
@@ -200,7 +199,8 @@ main {
       display: none !important;
     }
 
-    &#gallery-tab {
+    &#gallery-tab,
+    &#customization-tab {
       width: 100%;
       padding: 0 4px;
       flex: 1;

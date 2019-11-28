@@ -5,7 +5,7 @@ import Studio from './Studio'
 import Meme from '@shared/models/Meme'
 import Header from '@components/Header/Header'
 import Intro from './Intro'
-import { DefaultContext, State } from '@store/DefaultContext'
+import { DefaultContext } from '@store/DefaultContext'
 import { SET_MEMES } from '@store/reducer/constants'
 
 function Main(): JSX.Element {
