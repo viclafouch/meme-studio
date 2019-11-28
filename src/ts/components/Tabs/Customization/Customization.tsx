@@ -1,14 +1,13 @@
 import * as React from 'react'
-import { useState } from 'react'
 import ReactSVG from 'react-svg'
 import { memo } from 'react'
 import Meme from '@shared/models/Meme'
-import Text from '@shared/models/Text'
+import TextBox from '@shared/models/TextBox'
 import './customization.scss'
 
 type CustomizationProps = {
   memeSelected: Meme | null
-  texts: Array<Text>
+  texts: Array<TextBox>
   onChangeTexts: Function
 }
 

@@ -14,4 +14,10 @@ export default class Meme {
     this.height = meme.height
     this.boxCount = meme.box_count
   }
+
+  get image(): HTMLImageElement {
+    const image = new Image()
+    image.src = this.url
+    return image
+  }
 }

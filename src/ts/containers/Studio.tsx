@@ -5,7 +5,7 @@ import GalleryTab from '@components/Tabs/Gallery/Gallery'
 import CustomizationTab from '@components/Tabs/Customization/Customization'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Button from '@components/Button/Button'
-import Text from '@shared/models/Text'
+import TextBox from '@shared/models/TextBox'
 import { randomID } from '@utils/index'
 
 const TAB_GALLERY = 'TAB_GALLERY'
@@ -18,7 +18,7 @@ type StudioProps = {
 function Studio({ memes }: StudioProps): JSX.Element {
   const [currentTab, setCurrentTab] = useState<string>(TAB_GALLERY)
   const [memeSelected, setMemeSelected] = useState<Meme | null>(null)
-  const [texts, setTexts] = useState<Array<Text>>([])
+  const [texts, setTexts] = useState<Array<TextBox>>([])
   const canvasRef = useRef(null)
 
   const initCanvas = useCallback(async () => {
@@ -29,7 +29,7 @@ function Studio({ memes }: StudioProps): JSX.Element {
     image.src = memeSelected.url
     await new Promise(resolve => {
       image.onload = (): void => {
-        ctx.drawImage(image, 0, 0)
+        ctx.drawImage(image, 0, 0, memeSelected.width, memeSelected.height)
         resolve()
       }
     })
@@ -39,12 +39,23 @@ function Studio({ memes }: StudioProps): JSX.Element {
     if (memeSelected) {
       setTexts(
         [...Array(memeSelected.boxCount)].map((_, i) => ({
-          staticStyles: '',
+          transform: '',
+          top: 22,
+          left: 22,
+          fontSize: 22,
+          fontFamily: 'Arial',
           value: '',
           id: randomID(),
           color: ''
         }))
       )
+      const canvas = canvasRef.current
+      const width = canvas.clientWidth
+      const height = canvas.clientHeight
+      if (canvas.width !== width || canvas.height !== height) {
+        canvasRef.current.width = width
+        canvasRef.current.height = height
+      }
     }
   }, [memeSelected])
 
@@ -71,8 +82,8 @@ function Studio({ memes }: StudioProps): JSX.Element {
     <div className="Studio">
       <div className="Studio__content">
         {memeSelected && (
-          <div className="wrapper-canvas">
-            <canvas ref={canvasRef} width={memeSelected.width} height={memeSelected.height} id="meme-canvas" />
+          <div>
+            <canvas className="canvas" ref={canvasRef} width={memeSelected.width} height={memeSelected.height} id="meme-canvas" />
           </div>
         )}
         {!memeSelected && <span>Select a template</span>}
