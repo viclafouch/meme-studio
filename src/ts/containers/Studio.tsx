@@ -76,7 +76,7 @@ function Studio({ memes }: StudioProps): JSX.Element {
     if (memeSelected) {
       const properties = calcCanvasProperties(
         memeSelected,
-        [...Array(1)].map((_, i) => ({
+        [...Array(memeSelected.boxCount)].map((_, i) => ({
           transform: '',
           y: 44,
           x: 429 / 2,
@@ -84,7 +84,7 @@ function Studio({ memes }: StudioProps): JSX.Element {
           fontFamily: 'serif',
           value: '',
           id: randomID(),
-          color: ''
+          color: '#000000'
         }))
       )
       setCanvasProperties(properties)

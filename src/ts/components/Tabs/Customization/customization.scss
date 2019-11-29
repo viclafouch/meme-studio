@@ -14,4 +14,26 @@
       width: 100px;
     }
   }
+
+  .customization-not-empty {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    h2 {
+      text-align: center;
+      font-size: 0.8em;
+      margin: 20px 0;
+    }
+
+    .customization-textbox-section {
+      padding: 4px;
+      .Textarea-exdended {
+        padding: 10px;
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 10px;
+      }
+    }
+  }
 }
