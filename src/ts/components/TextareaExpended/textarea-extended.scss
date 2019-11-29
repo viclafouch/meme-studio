@@ -1,0 +1,11 @@
+.Textarea-exdended {
+  max-height: 250px;
+  overflow: hidden;
+  width: 100%;
+  font-size: 14px;
+  display: block;
+  outline: none;
+  resize: none;
+  border-radius: 2px;
+  border: 2px solid var(--blue);
+}
