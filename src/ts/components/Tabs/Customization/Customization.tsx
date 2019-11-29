@@ -2,21 +2,21 @@ import * as React from 'react'
 import ReactSVG from 'react-svg'
 import { memo } from 'react'
 import Meme from '@shared/models/Meme'
-import TextBox from '@shared/models/TextBox'
 import './customization.scss'
+import { CanvasProperties } from '@shared/validators'
 
 type CustomizationProps = {
   memeSelected: Meme | null
-  texts: Array<TextBox>
-  onChangeTexts: Function
+  canvasProperties: CanvasProperties
+  onCustomize: Function
 }
 
-function Customization({ memeSelected, texts, onChangeTexts }: CustomizationProps): JSX.Element {
+function Customization({ memeSelected, canvasProperties, onCustomize }: CustomizationProps): JSX.Element {
   const handleChangeText = (textId: string, event: React.ChangeEvent<HTMLInputElement>): void => {
-    const textsUpdated = [...texts]
+    const textsUpdated = [...canvasProperties.texts]
     const textIndex = textsUpdated.findIndex(t => t.id === textId)
     textsUpdated[textIndex].value = event.target.value
-    onChangeTexts(textsUpdated)
+    onCustomize(textsUpdated)
   }
 
   return (
@@ -27,10 +27,10 @@ function Customization({ memeSelected, texts, onChangeTexts }: CustomizationProp
           <h3>No template selected</h3>
         </div>
       )}
-      {memeSelected && (
+      {canvasProperties && (
         <div className="customization-not-empty">
           <h2>Edit {memeSelected.name}</h2>
-          {texts.map(
+          {canvasProperties.texts.map(
             ({ value, id }): React.ReactNode => (
               <input value={value} type="text" key={id} onChange={(e): void => handleChangeText(id, e)} />
             )
