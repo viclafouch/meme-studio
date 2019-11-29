@@ -6,7 +6,8 @@ import CustomizationTab from '@components/Tabs/Customization/Customization'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Button from '@components/Button/Button'
 import TextBox from '@shared/models/TextBox'
-import { randomID } from '@utils/index'
+import { randomID, innerDemensions } from '@utils/index'
+import { useWindowWidth } from '@utils/hooks'
 
 const TAB_GALLERY = 'TAB_GALLERY'
 const TAB_CUSTOMIZATION = 'TAB_CUSTOMIZATION'
@@ -19,74 +20,98 @@ function Studio({ memes }: StudioProps): JSX.Element {
   const [currentTab, setCurrentTab] = useState<string>(TAB_GALLERY)
   const [memeSelected, setMemeSelected] = useState<Meme | null>(null)
   const [texts, setTexts] = useState<Array<TextBox>>([])
-  const canvasRef = useRef(null)
+  const canvasRef = useRef<any>(null)
+  const contentRef = useRef<any>(null)
+  const windowWidth = useWindowWidth()
 
-  const initCanvas = useCallback(async () => {
-    const canvas = canvasRef.current
-    const ctx = canvas.getContext('2d')
-    ctx.clearRect(0, 0, memeSelected.height, memeSelected.width)
-    const image = new Image()
-    image.src = memeSelected.url
-    await new Promise(resolve => {
-      image.onload = (): void => {
-        ctx.drawImage(image, 0, 0, memeSelected.width, memeSelected.height)
-        resolve()
+  const initCanvas = useCallback(
+    (memeSelected: Meme) => {
+      const canvas: HTMLCanvasElement = canvasRef.current
+      const ctx: CanvasRenderingContext2D = canvas.getContext('2d')
+      if (memeSelected) {
+        let currentWidth: number = memeSelected.width
+        let currentHeight: number = memeSelected.height
+        const content: HTMLElement = contentRef.current
+        const { width: maxWidth, height: maxHeight }: any = innerDemensions(content)
+
+        if (currentWidth > maxWidth) {
+          const ratioW: number = maxWidth / memeSelected.width
+          currentWidth = maxWidth
+          currentHeight = memeSelected.height * ratioW
+        }
+
+        if (currentHeight > maxHeight) {
+          const ratioH: number = maxHeight / currentHeight
+          currentWidth = currentWidth * ratioH
+          currentHeight = currentHeight * ratioH
+        }
+
+        canvasRef.current.width = currentWidth
+        canvasRef.current.height = currentHeight
+
+        ctx.drawImage(memeSelected.image, 0, 0, currentWidth, currentHeight)
       }
-    })
-  }, [memeSelected])
+      return (): void => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+      }
+    },
+    [windowWidth]
+  )
+
+  const draw = useCallback(() => {
+    const canvas = canvasRef.current
+    const context = canvas.getContext('2d')
+    context.font = 'italic 18px Arial'
+    context.textAlign = 'center'
+    context.textBaseline = 'middle'
+    for (const text of texts) {
+      context.fillStyle = text.color || 'black'
+      context.fillText(text.value, text.left, text.top)
+    }
+    return (): void => {
+      context.clearRect(0, 0, canvas.width, canvas.height)
+    }
+  }, [texts])
 
   useEffect(() => {
     if (memeSelected) {
       setTexts(
         [...Array(memeSelected.boxCount)].map((_, i) => ({
           transform: '',
-          top: 22,
-          left: 22,
-          fontSize: 22,
+          top: 22 * i + 1,
+          left: 22 * i,
+          fontSize: 22 + i,
           fontFamily: 'Arial',
           value: '',
           id: randomID(),
           color: ''
         }))
       )
-      const canvas = canvasRef.current
-      const width = canvas.clientWidth
-      const height = canvas.clientHeight
-      if (canvas.width !== width || canvas.height !== height) {
-        canvasRef.current.width = width
-        canvasRef.current.height = height
-      }
     }
   }, [memeSelected])
 
+  useEffect(() => {
+    draw()
+  }, [draw])
+
   useLayoutEffect(() => {
-    if (texts.length > 0) {
-      const draw = async (): Promise<any> => {
-        /* TODO NEED TO FIX REDRAW EVERY TIME */
-        await initCanvas()
-        const canvas = canvasRef.current
-        const ctx = canvas.getContext('2d')
-        ctx.font = 'italic 18px Arial'
-        ctx.textAlign = 'center'
-        ctx.textBaseline = 'middle'
-        for (const text of texts) {
-          ctx.fillStyle = text.color || 'black'
-          ctx.fillText(text.value, 150, 50)
-        }
-      }
-      draw()
-    }
-  }, [texts])
+    initCanvas(memeSelected)
+    console.log('changed')
+  }, [initCanvas, memeSelected])
 
   return (
     <div className="Studio">
-      <div className="Studio__content">
-        {memeSelected && (
-          <div>
-            <canvas className="canvas" ref={canvasRef} width={memeSelected.width} height={memeSelected.height} id="meme-canvas" />
-          </div>
-        )}
-        {!memeSelected && <span>Select a template</span>}
+      <div className="Studio__content" ref={contentRef}>
+        <div className={`${texts.length > 0 ? 'show' : 'hide'}`}>
+          <canvas
+            className="canvas"
+            ref={canvasRef}
+            width={memeSelected ? memeSelected.width : 0}
+            height={memeSelected ? memeSelected.height : 0}
+            id="meme-canvas"
+          />
+        </div>
+        <span className={`${texts.length === 0 ? 'show' : 'hide'}`}>Select a template</span>
       </div>
       <aside className="Studio__aside">
         <div className="buttons__actions">

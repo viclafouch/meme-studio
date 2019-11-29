@@ -8,3 +8,12 @@ export const randomID = (): string =>
     .substr(2, 9)
 
 export const wait = (timeout = 1000): Promise<any> => new Promise(resolve => setTimeout(resolve, timeout))
+
+export const innerDemensions = (node: HTMLElement): { height: number; width: number } => {
+  const computedStyle: CSSStyleDeclaration = getComputedStyle(node)
+  let height: number = node.clientHeight
+  let width: number = node.clientWidth
+  height -= parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom)
+  width -= parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight)
+  return { height, width }
+}
