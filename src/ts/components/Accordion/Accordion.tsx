@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useState, useRef, useLayoutEffect, useEffect } from 'react'
+import { useState, useRef, useLayoutEffect } from 'react'
 import './accordion.scss'
 
 type AccordionProps = {
@@ -12,10 +12,14 @@ function Accordion(props: AccordionProps): JSX.Element {
   const [currentHeight, setCurrentHeight] = useState<string>('0px')
   const content = useRef<any>(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    content.current.style.overflow = 'hidden'
     setCurrentHeight(isActive ? `${content.current.scrollHeight}px` : '0px')
     const timeout = setTimeout(() => {
-      if (isActive) setCurrentHeight('inherit')
+      if (isActive) {
+        content.current.style.overflow = 'visible'
+        setCurrentHeight('inherit')
+      }
     }, 600)
     return (): void => {
       clearTimeout(timeout)
