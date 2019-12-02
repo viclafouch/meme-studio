@@ -2,7 +2,11 @@ import * as React from 'react'
 import './header.scss'
 import Button from '@components/Button/Button'
 
-function Header(): JSX.Element {
+type HeaderProps = {
+  export: Function
+}
+
+function Header(props: HeaderProps): JSX.Element {
   return (
     <header className="Header">
       <div></div>
@@ -10,7 +14,9 @@ function Header(): JSX.Element {
         <h1>Meme Studio</h1>
       </div>
       <div>
-        <Button className="button-export">Export Meme</Button>
+        <Button className="button-export" onClick={props.export}>
+          Export Meme
+        </Button>
       </div>
     </header>
   )

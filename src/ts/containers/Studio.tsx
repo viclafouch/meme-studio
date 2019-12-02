@@ -17,11 +17,10 @@ type StudioProps = {
   memes: Array<Meme>
 }
 
-function Studio({ memes }: StudioProps): JSX.Element {
+function Studio(props: any): JSX.Element {
   const [currentTab, setCurrentTab] = useState<string>(TAB_GALLERY)
   const [memeSelected, setMemeSelected] = useState<Meme | null>(null)
   const [canvasProperties, setCanvasProperties] = useState<CanvasProperties | null>(null)
-  const canvasRef = useRef<any>(null)
   const contentRef = useRef<any>(null)
   const windowWidth = useWindowWidth()
 
@@ -47,7 +46,7 @@ function Studio({ memes }: StudioProps): JSX.Element {
           currentHeight = currentHeight * ratioH
         }
 
-        const canvas: HTMLCanvasElement = canvasRef.current
+        const canvas: HTMLCanvasElement = props.forwardedRef.current
         canvas.width = currentWidth
         canvas.height = currentHeight
 
@@ -99,7 +98,7 @@ function Studio({ memes }: StudioProps): JSX.Element {
   }, [calcCanvasProperties])
 
   useLayoutEffect(() => {
-    const canvas: HTMLCanvasElement = canvasRef.current
+    const canvas: HTMLCanvasElement = props.forwardedRef.current
     const ctx: CanvasRenderingContext2D = canvas.getContext('2d')
     if (canvasProperties) {
       ctx.drawImage(canvasProperties.image, 0, 0, canvasProperties.width, canvasProperties.height)
@@ -131,7 +130,7 @@ function Studio({ memes }: StudioProps): JSX.Element {
         <div className={`${memeSelected ? 'show' : 'hide'}`}>
           <canvas
             className="canvas"
-            ref={canvasRef}
+            ref={props.forwardedRef}
             width={memeSelected ? memeSelected.width : 0}
             height={memeSelected ? memeSelected.height : 0}
             id="meme-canvas"
@@ -161,7 +160,7 @@ function Studio({ memes }: StudioProps): JSX.Element {
           aria-hidden={currentTab !== TAB_GALLERY}
           id="gallery-tab"
         >
-          <GalleryTab memes={memes} onSelectMeme={(meme: Meme): void => setMemeSelected(meme)} />
+          <GalleryTab memes={props.memes} onSelectMeme={(meme: Meme): void => setMemeSelected(meme)} />
         </div>
         <div
           className={`studio__tab ${currentTab === TAB_CUSTOMIZATION ? 'studio__tab__active' : null}`}
@@ -175,4 +174,6 @@ function Studio({ memes }: StudioProps): JSX.Element {
   )
 }
 
-export default Studio
+export default React.forwardRef((props: StudioProps, ref) => {
+  return <Studio {...props} forwardedRef={ref} />
+})

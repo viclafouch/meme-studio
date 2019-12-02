@@ -17,6 +17,7 @@ export default class Meme {
 
   get image(): HTMLImageElement {
     const image = new Image()
+    image.crossOrigin = 'Anonymous'
     image.src = this.url
     return image
   }
