@@ -76,7 +76,7 @@ function Studio({ memes }: StudioProps): JSX.Element {
     if (memeSelected) {
       const properties = calcCanvasProperties(
         memeSelected,
-        [...Array(memeSelected.boxCount)].map((_, i) => ({
+        [...Array(1)].map((_, i) => ({
           transform: '',
           y: 44,
           x: 429 / 2,
@@ -104,12 +104,20 @@ function Studio({ memes }: StudioProps): JSX.Element {
     if (canvasProperties) {
       ctx.drawImage(canvasProperties.image, 0, 0, canvasProperties.width, canvasProperties.height)
       for (const text of canvasProperties.texts) {
+        ctx.save()
         const fontSize: number = text.fontSize * canvasProperties.scale
-        const y: number = text.y * canvasProperties.scale
-        const x: number = text.x * canvasProperties.scale
-        ctx.font = `${fontSize}px ${text.fontFamily}`
+        let y: number = text.y * canvasProperties.scale
+        let x: number = text.x * canvasProperties.scale
         ctx.fillStyle = text.color || 'black'
+        ctx.font = `${fontSize}px ${text.fontFamily}`
+
+        const measure: TextMetrics = ctx.measureText(text.value)
+
+        y = fontSize / 2 + y
+        x = (canvasProperties.width - measure.width) / 2
+
         ctx.fillText(text.value, x, y)
+        ctx.restore()
       }
     }
     return (): void => {

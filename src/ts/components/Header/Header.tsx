@@ -1,10 +1,17 @@
 import * as React from 'react'
 import './header.scss'
+import Button from '@components/Button/Button'
 
 function Header(): JSX.Element {
   return (
     <header className="Header">
-      <h1>Meme Studio</h1>
+      <div></div>
+      <div className="center-column">
+        <h1>Meme Studio</h1>
+      </div>
+      <div>
+        <Button className="button-export">Export Meme</Button>
+      </div>
     </header>
   )
 }

@@ -3,13 +3,39 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding: 0 10px;
+  justify-content: space-between;
   background-color: var(--blue-light);
+
+  div {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    &.center-column {
+      flex: 1;
+    }
+    &:first-child {
+      justify-content: flex-start;
+    }
+    &:last-child {
+      justify-content: flex-end;
+    }
+  }
 
   h1 {
     font-size: 32px;
     letter-spacing: 0;
     font-weight: 500;
     color: #ffffff;
+  }
+
+  .button-export {
+    padding: 12px 28px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    background-color: #ffffff;
+    color: var(--blue-light);
+    text-transform: uppercase;
   }
 }
