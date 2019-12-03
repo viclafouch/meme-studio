@@ -222,3 +222,52 @@ main {
     }
   }
 }
+
+.Export {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  width: 100%;
+
+  .meme-actions-share {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 15px;
+
+    .share-button {
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 4px;
+      outline: none;
+
+      svg {
+        width: 18px;
+        height: auto;
+      }
+
+      &#share-local {
+        background-color: #aeb5bc;
+        color: #ffffff;
+      }
+      &#share-facebook {
+        background-color: #3b5998;
+        color: #ffffff;
+      }
+      &#share-twitter {
+        background-color: #4099ff;
+        color: #ffffff;
+      }
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}
