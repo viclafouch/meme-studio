@@ -100,25 +100,28 @@ function Studio(props: any): JSX.Element {
   useLayoutEffect(() => {
     const canvas: HTMLCanvasElement = props.forwardedRef.current
     const ctx: CanvasRenderingContext2D = canvas.getContext('2d')
-    if (canvasProperties) {
-      ctx.drawImage(canvasProperties.image, 0, 0, canvasProperties.width, canvasProperties.height)
-      for (const text of canvasProperties.texts) {
-        ctx.save()
-        const fontSize: number = text.fontSize * canvasProperties.scale
-        let y: number = text.y * canvasProperties.scale
-        let x: number = text.x * canvasProperties.scale
-        ctx.fillStyle = text.color || 'black'
-        ctx.font = `${fontSize}px ${text.fontFamily}`
+    ;(async (): Promise<void> => {
+      if (canvasProperties) {
+        const image = await canvasProperties.image
+        ctx.drawImage(image, 0, 0, canvasProperties.width, canvasProperties.height)
+        for (const text of canvasProperties.texts) {
+          ctx.save()
+          const fontSize: number = text.fontSize * canvasProperties.scale
+          let y: number = text.y * canvasProperties.scale
+          let x: number = text.x * canvasProperties.scale
+          ctx.fillStyle = text.color || 'black'
+          ctx.font = `${fontSize}px ${text.fontFamily}`
 
-        const measure: TextMetrics = ctx.measureText(text.value)
+          const measure: TextMetrics = ctx.measureText(text.value)
 
-        y = fontSize / 2 + y
-        x = (canvasProperties.width - measure.width) / 2
+          y = fontSize / 2 + y
+          x = (canvasProperties.width - measure.width) / 2
 
-        ctx.fillText(text.value, x, y)
-        ctx.restore()
+          ctx.fillText(text.value, x, y)
+          ctx.restore()
+        }
       }
-    }
+    })()
     return (): void => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
     }

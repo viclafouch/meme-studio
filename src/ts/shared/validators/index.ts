@@ -4,6 +4,6 @@ export interface CanvasProperties {
   texts: Array<TextBox>
   height: number
   width: number
-  image: HTMLImageElement
+  image: Promise<HTMLImageElement>
   scale: number
 }
