@@ -77,10 +77,14 @@ function Studio(props: any): JSX.Element {
         memeSelected,
         [...Array(1)].map((_, i) => ({
           transform: '',
-          y: 44,
-          x: 429 / 2,
+          centerY: 50,
+          centerX: 340,
+          height: 100,
+          width: 680,
           fontSize: 22,
           fontFamily: 'serif',
+          textAlign: 'center',
+          alignVertical: 'middle',
           value: '',
           id: randomID(),
           color: '#000000'
@@ -107,17 +111,36 @@ function Studio(props: any): JSX.Element {
         for (const text of canvasProperties.texts) {
           ctx.save()
           const fontSize: number = text.fontSize * canvasProperties.scale
-          let y: number = text.y * canvasProperties.scale
-          let x: number = text.x * canvasProperties.scale
-          ctx.fillStyle = text.color || 'black'
           ctx.font = `${fontSize}px ${text.fontFamily}`
 
           const measure: TextMetrics = ctx.measureText(text.value)
 
-          y = fontSize / 2 + y
-          x = (canvasProperties.width - measure.width) / 2
+          let top: number = text.centerY * canvasProperties.scale
+          let left: number = text.centerX * canvasProperties.scale
+          const height = text.height * canvasProperties.scale
+          const width = text.width * canvasProperties.scale
 
-          ctx.fillText(text.value, x, y)
+          const padding = 4
+
+          if (text.alignVertical === 'top') {
+            top = top - height / 2 + fontSize + padding
+          } else if (text.alignVertical === 'middle') {
+            top = top + fontSize / 4
+          } else {
+            top = top + height / 2 - padding // TODO (letter q, p out :/)
+          }
+
+          if (text.textAlign === 'left') {
+            left = left - width / 2 + padding
+          } else if (text.textAlign === 'center') {
+            left = left - measure.width / 2
+          } else {
+            left = left + width / 2 - measure.width - padding
+          }
+
+          ctx.fillStyle = text.color || 'black'
+
+          ctx.fillText(text.value, left, top)
           ctx.restore()
         }
       }
@@ -131,6 +154,28 @@ function Studio(props: any): JSX.Element {
     <div className="Studio">
       <div className="Studio__content" ref={contentRef}>
         <div className={`${memeSelected ? 'show' : 'hide'}`}>
+          {canvasProperties && (
+            <div
+              className="wrapper-text-boxes"
+              style={{
+                width: canvasProperties.width,
+                height: canvasProperties.height
+              }}
+            >
+              {canvasProperties.texts.map((text: TextBox) => (
+                <div
+                  key={text.id}
+                  className="text-box"
+                  style={{
+                    height: text.height * canvasProperties.scale,
+                    width: text.width * canvasProperties.scale,
+                    top: text.centerY * canvasProperties.scale - (text.height * canvasProperties.scale) / 2,
+                    left: text.centerX * canvasProperties.scale - (text.width * canvasProperties.scale) / 2
+                  }}
+                />
+              ))}
+            </div>
+          )}
           <canvas
             className="canvas"
             ref={props.forwardedRef}

@@ -170,11 +170,22 @@ main {
       overflow: scroll;
     }
 
-    .canvas {
+    .canvas,
+    .wrapper-text-boxes {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
       display: block;
+    }
+
+    .wrapper-text-boxes {
+      z-index: 2;
+
+      .text-box {
+        background-color: transparent;
+        border: 2px dotted grey;
+        position: absolute;
+      }
     }
   }
 

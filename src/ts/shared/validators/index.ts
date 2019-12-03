@@ -7,3 +7,9 @@ export interface CanvasProperties {
   image: Promise<HTMLImageElement>
   scale: number
 }
+
+export interface TextCustomization {
+  value: any
+  textId: string
+  type: string
+}

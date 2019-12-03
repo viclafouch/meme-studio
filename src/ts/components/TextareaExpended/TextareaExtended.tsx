@@ -22,7 +22,15 @@ function TextareaExtended(
     textarea.style.height = height + 'px'
   }
 
-  return <textarea className="Textarea-exdended" {...props} ref={textareaRef} onKeyDown={handleKeyDown}></textarea>
+  return (
+    <textarea
+      {...props}
+      onChange={(e: any): void => props.onChange(e.target.value)}
+      className="Textarea-exdended"
+      ref={textareaRef}
+      onKeyDown={handleKeyDown}
+    ></textarea>
+  )
 }
 
 export default TextareaExtended
