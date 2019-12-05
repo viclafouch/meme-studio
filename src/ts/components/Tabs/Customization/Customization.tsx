@@ -56,11 +56,11 @@ function Customization({ memeSelected, canvasProperties, onCustomize }: Customiz
                   <div className="field-customization">
                     <ColorPicker
                       color={color}
-                      setColor={(color: ColorResult): void =>
+                      setColor={({ hex }: ColorResult): void =>
                         handleCustom({
                           textId: id,
                           type: 'color',
-                          value: color
+                          value: hex
                         })
                       }
                     />
