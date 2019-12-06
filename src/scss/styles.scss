@@ -27,20 +27,9 @@ body {
       min-height: inherit;
       display: flex;
       flex-direction: column;
-      background: url('https://loading.io/mod/background/particles/index.svg') no-repeat;
+      background: url('/images/particles.svg') no-repeat;
       background-position: center center;
       background-size: cover;
-    }
-
-    #fork-me {
-      display: none;
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      z-index: 9999999;
-      @media (min-width: 1250px) {
-        display: block;
-      }
     }
   }
 }
