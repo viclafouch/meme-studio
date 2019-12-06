@@ -32,12 +32,12 @@ export function fillText(
 ): void {
   ctx.save()
   const str = text.value.replace(/\r/g, '')
-  const lines: Array<Line> = str.split('\n').map((str: string, index: number) => ({
+  const lines: Array<Line> = str.split('\n').map((str: string, index: number, arr: Array<string>) => ({
     x: 0,
     y: 0,
     lineHeight: (): number => {
-      if (lines.length > 1) {
-        if (index === 0 || index === lines.length - 1) return fontSize
+      if (arr.length > 1) {
+        if (index === arr.length - 1) return fontSize
         else return 1.2 * fontSize
       } else {
         return fontSize
@@ -71,7 +71,7 @@ export function fillText(
 
   for (let index = 0; index < lines.length; index++) {
     const line: Line = lines[index]
-    const lineHeight = line.lineHeight()
+    const previousLineHeight = index === 0 ? 0 : lines[index - 1].lineHeight()
     const lineWidth = line.lineWidth()
 
     if (text.textAlign === 'left') {
@@ -84,14 +84,15 @@ export function fillText(
 
     if (text.alignVertical === 'top') {
       if (index === 0) line.y = y - maxHeight / 2 + paddingY
-      else line.y = lines[index - 1].y + lineHeight
+      else line.y = lines[index - 1].y + previousLineHeight
     } else if (text.alignVertical === 'middle') {
       if (index === 0) line.y = line.y = y - totalHeight() / 2
-      else line.y = lines[index - 1].y + lineHeight
+      else line.y = lines[index - 1].y + previousLineHeight
     } else {
       if (index === 0) line.y = maxHeight - paddingY - totalHeight()
-      else line.y = lines[index - 1].y + lineHeight
+      else line.y = lines[index - 1].y + previousLineHeight
     }
+
     ctx.fillText(line.value, line.x, line.y)
   }
   ctx.restore()
