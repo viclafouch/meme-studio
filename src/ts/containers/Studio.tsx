@@ -87,7 +87,8 @@ function Studio(props: any): JSX.Element {
           alignVertical: 'middle',
           value: '',
           id: randomID(),
-          color: '#000000'
+          color: '#000000',
+          isUppercase: false
         }))
       )
       setCanvasProperties(properties)

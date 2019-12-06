@@ -11,6 +11,7 @@ export default class TextBox {
   public color: string
   public alignVertical: string
   public textAlign: string
+  public isUppercase: boolean
 
   constructor(text: any) {
     this.id = text.id
@@ -25,5 +26,6 @@ export default class TextBox {
     this.color = text.color
     this.alignVertical = text.alignVertical
     this.textAlign = text.textAlign
+    this.isUppercase = text.isUppercase
   }
 }

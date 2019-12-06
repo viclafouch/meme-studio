@@ -37,7 +37,7 @@ function Customization({ memeSelected, canvasProperties, onCustomize }: Customiz
         <div className="customization-not-empty">
           <h2>Edit {memeSelected.name}</h2>
           {canvasProperties.texts.map(
-            ({ value, id, color, fontSize, alignVertical, textAlign }, i): React.ReactNode => (
+            ({ value, id, color, fontSize, alignVertical, textAlign, isUppercase }, i): React.ReactNode => (
               <Accordion title={value.trim() || `Text #${i + 1}`} key={id}>
                 <div className="customization-textbox-section">
                   <div className="field-customization">
@@ -113,6 +113,21 @@ function Customization({ memeSelected, canvasProperties, onCustomize }: Customiz
                       <option value="center">Center</option>
                       <option value="right">Right</option>
                     </select>
+                  </div>
+                  <div className="field-customization">
+                    <span>Text Uppercase</span>
+                    <input
+                      type="checkbox"
+                      name="uppercase"
+                      checked={isUppercase}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
+                        handleCustom({
+                          textId: id,
+                          type: 'isUppercase',
+                          value: event.target.checked
+                        })
+                      }
+                    />
                   </div>
                 </div>
               </Accordion>

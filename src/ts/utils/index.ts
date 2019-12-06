@@ -43,8 +43,8 @@ export function fillText(
         return fontSize
       }
     },
-    value: str,
-    lineWidth: (): number => ctx.measureText(str).width
+    value: text.isUppercase ? str.toUpperCase() : str,
+    lineWidth: (): number => ctx.measureText(text.isUppercase ? str.toUpperCase() : str).width
   }))
 
   const paddingX = 4
@@ -55,7 +55,6 @@ export function fillText(
 
   for (const line of lines) {
     ctx.font = `${fontSize}px ${text.fontFamily}`
-
     while (line.lineWidth() + paddingX * 2 > maxWidth) {
       fontSize--
       ctx.font = `${fontSize}px ${text.fontFamily}`
