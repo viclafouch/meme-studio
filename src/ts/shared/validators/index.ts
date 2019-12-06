@@ -13,3 +13,11 @@ export interface TextCustomization {
   textId: string
   type: string
 }
+
+export interface Line {
+  x: number
+  y: number
+  value: string
+  lineHeight: Function
+  lineWidth: Function
+}

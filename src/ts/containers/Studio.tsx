@@ -6,7 +6,7 @@ import CustomizationTab from '@components/Tabs/Customization/Customization'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Button from '@components/Button/Button'
 import TextBox from '@shared/models/TextBox'
-import { randomID, innerDemensions } from '@utils/index'
+import { randomID, innerDemensions, fillText } from '@utils/index'
 import { useWindowWidth } from '@shared/hooks/index'
 import { CanvasProperties } from '@shared/validators/index'
 
@@ -109,39 +109,15 @@ function Studio(props: any): JSX.Element {
         const image = await canvasProperties.image
         ctx.drawImage(image, 0, 0, canvasProperties.width, canvasProperties.height)
         for (const text of canvasProperties.texts) {
-          ctx.save()
           const fontSize: number = text.fontSize * canvasProperties.scale
-          ctx.font = `${fontSize}px ${text.fontFamily}`
 
-          const measure: TextMetrics = ctx.measureText(text.value)
+          const top: number = text.centerY * canvasProperties.scale
+          const left: number = text.centerX * canvasProperties.scale
 
-          let top: number = text.centerY * canvasProperties.scale
-          let left: number = text.centerX * canvasProperties.scale
           const height = text.height * canvasProperties.scale
           const width = text.width * canvasProperties.scale
 
-          const padding = 4
-
-          if (text.alignVertical === 'top') {
-            top = top - height / 2 + fontSize + padding
-          } else if (text.alignVertical === 'middle') {
-            top = top + fontSize / 4
-          } else {
-            top = top + height / 2 - padding // TODO (letter q, p out :/)
-          }
-
-          if (text.textAlign === 'left') {
-            left = left - width / 2 + padding
-          } else if (text.textAlign === 'center') {
-            left = left - measure.width / 2
-          } else {
-            left = left + width / 2 - measure.width - padding
-          }
-
-          ctx.fillStyle = text.color || 'black'
-
-          ctx.fillText(text.value, left, top)
-          ctx.restore()
+          fillText(text, ctx, width, height, fontSize, left, top)
         }
       }
     })()
