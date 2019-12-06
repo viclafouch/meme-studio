@@ -85,7 +85,7 @@ export function fillText(
       if (index === 0) line.y = y - maxHeight / 2 + paddingY
       else line.y = lines[index - 1].y + previousLineHeight
     } else if (text.alignVertical === 'middle') {
-      if (index === 0) line.y = line.y = y - totalHeight() / 2
+      if (index === 0) line.y = y - totalHeight() / 2
       else line.y = lines[index - 1].y + previousLineHeight
     } else {
       if (index === 0) line.y = maxHeight - paddingY - totalHeight()
