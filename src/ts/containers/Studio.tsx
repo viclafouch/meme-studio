@@ -82,12 +82,12 @@ function Studio(props: any): JSX.Element {
           height: 100,
           width: 680,
           fontSize: 22,
-          fontFamily: 'serif',
+          fontFamily: 'impact',
           textAlign: 'center',
           alignVertical: 'middle',
           value: '',
           id: randomID(),
-          color: '#000000',
+          color: '#ffffff',
           isUppercase: false
         }))
       )

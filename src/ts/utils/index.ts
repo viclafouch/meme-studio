@@ -52,6 +52,9 @@ export function fillText(
 
   ctx.fillStyle = text.color || 'black'
   ctx.textBaseline = 'top'
+  ctx.strokeStyle = 'black'
+  ctx.lineWidth = 8
+  ctx.lineJoin = 'round'
 
   for (const line of lines) {
     ctx.font = `${fontSize}px ${text.fontFamily}`
@@ -92,6 +95,7 @@ export function fillText(
       else line.y = lines[index - 1].y + previousLineHeight
     }
 
+    ctx.strokeText(line.value, line.x, line.y)
     ctx.fillText(line.value, line.x, line.y)
   }
   ctx.restore()
