@@ -9,6 +9,7 @@ import TextBox from '@shared/models/TextBox'
 import { randomID, innerDemensions, fillText } from '@utils/index'
 import { useWindowWidth } from '@shared/hooks/index'
 import { CanvasProperties } from '@shared/validators/index'
+import Draggable from '@components/Draggable/Draggable'
 
 const TAB_GALLERY = 'TAB_GALLERY'
 const TAB_CUSTOMIZATION = 'TAB_CUSTOMIZATION'
@@ -21,7 +22,7 @@ function Studio(props: any): JSX.Element {
   const [currentTab, setCurrentTab] = useState<string>(TAB_GALLERY)
   const [memeSelected, setMemeSelected] = useState<Meme | null>(null)
   const [canvasProperties, setCanvasProperties] = useState<CanvasProperties | null>(null)
-  const contentRef = useRef<any>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
   const windowWidth = useWindowWidth()
 
   const calcCanvasProperties = useCallback(
@@ -140,16 +141,21 @@ function Studio(props: any): JSX.Element {
               }}
             >
               {canvasProperties.texts.map((text: TextBox) => (
-                <div
+                <Draggable
                   key={text.id}
                   className="text-box"
-                  style={{
-                    height: text.height * canvasProperties.scale,
-                    width: text.width * canvasProperties.scale,
-                    top: text.centerY * canvasProperties.scale - (text.height * canvasProperties.scale) / 2,
-                    left: text.centerX * canvasProperties.scale - (text.width * canvasProperties.scale) / 2
+                  position={{
+                    x: text.centerX * canvasProperties.scale - (text.width * canvasProperties.scale) / 2,
+                    y: text.centerY * canvasProperties.scale - (text.height * canvasProperties.scale) / 2
                   }}
-                />
+                  height={text.height * canvasProperties.scale}
+                  width={text.width * canvasProperties.scale}
+                  onMove={handleCustomize}
+                  canvasProperties={canvasProperties}
+                  id={text.id}
+                >
+                  <div />
+                </Draggable>
               ))}
             </div>
           )}
