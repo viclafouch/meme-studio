@@ -53,6 +53,14 @@ function Studio(props: any): JSX.Element {
 
         const scale: number = Math.min(currentWidth / memeSelected.width, currentHeight / memeSelected.height)
 
+        texts = texts.map((text: TextBox) => {
+          text.height *= scale
+          text.width *= scale
+          text.centerY *= scale
+          text.centerX *= scale
+          return text
+        })
+
         return {
           texts: texts,
           width: currentWidth,
@@ -113,11 +121,11 @@ function Studio(props: any): JSX.Element {
         for (const text of canvasProperties.texts) {
           const fontSize: number = text.fontSize * canvasProperties.scale
 
-          const top: number = text.centerY * canvasProperties.scale
-          const left: number = text.centerX * canvasProperties.scale
+          const top: number = text.centerY
+          const left: number = text.centerX
 
-          const height = text.height * canvasProperties.scale
-          const width = text.width * canvasProperties.scale
+          const height: number = text.height
+          const width: number = text.width
 
           fillText(text, ctx, width, height, fontSize, left, top)
         }
@@ -145,11 +153,11 @@ function Studio(props: any): JSX.Element {
                   key={text.id}
                   className="text-box"
                   position={{
-                    x: text.centerX * canvasProperties.scale - (text.width * canvasProperties.scale) / 2,
-                    y: text.centerY * canvasProperties.scale - (text.height * canvasProperties.scale) / 2
+                    x: text.centerX,
+                    y: text.centerY
                   }}
-                  height={text.height * canvasProperties.scale}
-                  width={text.width * canvasProperties.scale}
+                  height={text.height}
+                  width={text.width}
                   onMove={handleCustomize}
                   canvasProperties={canvasProperties}
                   id={text.id}

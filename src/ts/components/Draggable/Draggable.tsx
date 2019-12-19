@@ -21,8 +21,8 @@ export function Draggable(props: DraggableProps): JSX.Element {
   const [isDragging, setIsDragging] = useState<boolean>(false)
   const el = useRef<any>(null)
   const [position, setPosition] = useState({
-    left: props.position.x,
-    top: props.position.y,
+    left: props.position.x * props.canvasProperties.scale - (props.width * props.canvasProperties.scale) / 2,
+    top: props.position.y * props.canvasProperties.scale - (props.height * props.canvasProperties.scale) / 2,
     startX: null,
     startY: null
   })
@@ -42,17 +42,16 @@ export function Draggable(props: DraggableProps): JSX.Element {
           top,
           left
         })
-        const textsUpdated = [...canvasProperties.texts] as any
+        const textsUpdated = [...canvasProperties.texts] as Array<TextBox>
         const textIndex = textsUpdated.findIndex((t: TextBox) => t.id === id)
-        textsUpdated[textIndex].centerY = top * canvasProperties.scale + height / 2
-        // textsUpdated[textIndex].centerX = left + width
+        textsUpdated[textIndex].centerY = top + height / 2
+        textsUpdated[textIndex].centerX = left + width / 2
         onMove(textsUpdated)
       }
     },
     [isDragging, props]
   )
 
-  // mouse left click hold
   const handleMouseDown = useCallback(
     (event: React.MouseEvent) => {
       event.preventDefault()
@@ -66,7 +65,6 @@ export function Draggable(props: DraggableProps): JSX.Element {
     [position]
   )
 
-  // mouse left click release
   const handleMouseUp = useCallback(() => {
     if (isDragging) setIsDragging(false)
   }, [isDragging])
