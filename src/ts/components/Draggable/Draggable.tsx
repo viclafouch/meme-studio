@@ -9,7 +9,7 @@ type DraggableProps = {
     y: number
   }
   className?: string
-  children: React.ReactNode
+  children?: React.ReactNode
   height: number
   width: number
   onMove: Function
@@ -80,7 +80,9 @@ export function Draggable(props: DraggableProps): JSX.Element {
 
   return (
     <div
+      aria-grabbed={isDragging}
       ref={el}
+      draggable={true}
       className={props.className || ''}
       onMouseDown={handleMouseDown}
       style={{

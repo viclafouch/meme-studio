@@ -161,9 +161,7 @@ function Studio(props: any): JSX.Element {
                   onMove={handleCustomize}
                   canvasProperties={canvasProperties}
                   id={text.id}
-                >
-                  <div />
-                </Draggable>
+                />
               ))}
             </div>
           )}
