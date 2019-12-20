@@ -53,11 +53,11 @@ function Studio(props: any): JSX.Element {
 
         const scale: number = Math.min(currentWidth / memeSelected.width, currentHeight / memeSelected.height)
 
-        texts = texts.map((text: TextBox) => {
-          text.height *= scale
-          text.width *= scale
-          text.centerY *= scale
-          text.centerX *= scale
+        texts = texts.map((text: any) => {
+          text.height = text.base.height * scale
+          text.width = text.base.width * scale
+          text.centerY = text.base.centerY * scale
+          text.centerX = text.base.centerX * scale
           return text
         })
 
@@ -90,6 +90,12 @@ function Studio(props: any): JSX.Element {
           centerX: 340,
           height: 100,
           width: 680,
+          base: {
+            centerY: 50,
+            centerX: 340,
+            height: 100,
+            width: 680
+          },
           fontSize: 22,
           fontFamily: 'impact',
           textAlign: 'center',
