@@ -24,7 +24,7 @@ function Main(): JSX.Element {
     fetch('https://api.imgflip.com/get_memes', { signal: controller.signal })
       .then((response: Response): any => {
         clearTimeout(timeout)
-        response.json()
+        return response.json()
       })
       .then((response: any): void => {
         if (!response.success) throw new Error(response)
