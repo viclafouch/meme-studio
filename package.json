@@ -6,7 +6,7 @@
     "commit": "git-cz",
     "build": "webpack --mode production",
     "postinstall": "npx commitizen init cz-conventional-changelog --save-dev --save-exact --force",
-    "start": "webpack-dev-server --mode development --open --hot"
+    "start": "webpack-dev-server --mode development --open"
   },
   "repository": {
     "type": "git",
