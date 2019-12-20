@@ -27,12 +27,37 @@
     }
 
     .customization-textbox-section {
-      padding: 4px;
+      padding: 10px 6px;
       .Textarea-exdended {
         padding: 10px;
         width: 100%;
-        border-radius: 10px;
+        border-radius: 2px;
         margin-bottom: 10px;
+      }
+
+      select {
+        width: 100px;
+        height: 2em;
+        background: transparent;
+        border-color: var(--input-border-color);
+        outline: none;
+        &:focus {
+          border-color: var(--blue-light);
+        }
+      }
+
+      .Color-picker button {
+        box-shadow: 0 0 0 1px var(--input-border-color);
+      }
+    }
+
+    .field-customization {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      & + .field-customization {
+        margin-top: 1em;
       }
     }
   }
