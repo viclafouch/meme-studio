@@ -1,5 +1,13 @@
 import * as React from 'react'
+import { ReactSVG } from 'react-svg'
 import './error-boundary.scss'
+
+export const FatalError = (): JSX.Element => (
+  <div className="Error-boundary">
+    <ReactSVG id="error-image" src="images/error_illustration_v2.svg" wrapper="div" />
+    <span>Oops something went wrong</span>
+  </div>
+)
 
 export class ErrorBoundary extends React.Component {
   state = {
@@ -17,15 +25,7 @@ export class ErrorBoundary extends React.Component {
   render(): React.ReactNode {
     const { hasError } = this.state
     const { children } = this.props
-    if (hasError) {
-      return (
-        <div className="Error-boundary">
-          <img id="error-image" src="https://www.gstatic.com/youtube/img/creator/error_illustration_v2.svg" />
-          <span>Oops something went wrong</span>
-        </div>
-      )
-    }
-
+    if (hasError) return <FatalError />
     return children
   }
 }

@@ -1,19 +1,24 @@
 import * as React from 'react'
-import { useState } from 'react'
+import { useState, useImperativeHandle } from 'react'
 import { ChromePicker, ColorResult } from 'react-color'
 import './color-picker.scss'
 
 type ColorPickerProps = {
   color: string
+  forwardedRef: any
   setColor: Function
 }
 
-function ColorPicker(props: ColorPickerProps): JSX.Element {
+const ColorPicker = React.forwardRef((props: any, ref: any) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const handleClick = (): void => setIsOpen(!isOpen)
 
   const handleClose = (): void => setIsOpen(false)
+
+  useImperativeHandle(ref, () => ({
+    open: handleClick
+  }))
 
   return (
     <div className="Color-picker">
@@ -22,6 +27,7 @@ function ColorPicker(props: ColorPickerProps): JSX.Element {
         style={{
           backgroundColor: props.color
         }}
+        ref={props.forwardedRef}
         onClick={handleClick}
       ></button>
       {isOpen && (
@@ -32,6 +38,6 @@ function ColorPicker(props: ColorPickerProps): JSX.Element {
       )}
     </div>
   )
-}
+})
 
 export default ColorPicker

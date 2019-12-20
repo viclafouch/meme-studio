@@ -22,8 +22,6 @@ function Export(props: ExportProps): JSX.Element {
     })()
   }, [])
 
-  const handleDownload = (): void => {}
-
   const handleClose = (): void => {
     props.onClose()
     setImg(null)

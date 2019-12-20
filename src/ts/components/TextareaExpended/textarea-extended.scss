@@ -1,5 +1,6 @@
 .Textarea-exdended {
   max-height: 250px;
+  min-height: 70px;
   overflow: hidden;
   width: 100%;
   font-size: 14px;
@@ -7,5 +8,10 @@
   outline: none;
   resize: none;
   border-radius: 2px;
-  border: 2px solid var(--blue);
+  border: 2px solid var(--input-border-color);
+
+  &::placeholder {
+    font-size: 12px;
+    color: #c8c8c8;
+  }
 }

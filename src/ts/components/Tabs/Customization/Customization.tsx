@@ -1,6 +1,6 @@
 import * as React from 'react'
-import ReactSVG from 'react-svg'
-import { memo } from 'react'
+import { ReactSVG } from 'react-svg'
+import { memo, useRef } from 'react'
 import Meme from '@shared/models/Meme'
 import './customization.scss'
 import { CanvasProperties, TextCustomization } from '@shared/validators'
@@ -18,6 +18,8 @@ type CustomizationProps = {
 }
 
 function Customization({ memeSelected, canvasProperties, onCustomize }: CustomizationProps): JSX.Element {
+  const colorPicker = useRef(null)
+
   const handleCustom = (customization: TextCustomization): void => {
     const textsUpdated = [...canvasProperties.texts] as any
     const textIndex = textsUpdated.findIndex((t: TextBox) => t.id === customization.textId)
@@ -43,6 +45,7 @@ function Customization({ memeSelected, canvasProperties, onCustomize }: Customiz
                   <div className="field-customization">
                     <TextareaExtended
                       rows={1}
+                      placeholder={`Text #${i + 1}`}
                       defaultValue={value}
                       onChange={(value: any): void =>
                         handleCustom({
@@ -54,20 +57,11 @@ function Customization({ memeSelected, canvasProperties, onCustomize }: Customiz
                     />
                   </div>
                   <div className="field-customization">
-                    <ColorPicker
-                      color={color}
-                      setColor={({ hex }: ColorResult): void =>
-                        handleCustom({
-                          textId: id,
-                          type: 'color',
-                          value: hex
-                        })
-                      }
-                    />
-                  </div>
-                  <div className="field-customization">
+                    <label htmlFor="font-size">Max Font size</label>
                     <InputRangeSlider
+                      id="font-size"
                       max={50}
+                      width={98}
                       min={0}
                       step={1}
                       value={fontSize}
@@ -76,6 +70,22 @@ function Customization({ memeSelected, canvasProperties, onCustomize }: Customiz
                           textId: id,
                           type: 'fontSize',
                           value
+                        })
+                      }
+                    />
+                  </div>
+                  <div className="field-customization">
+                    <label htmlFor="color" onClick={(): void => colorPicker.current.open()}>
+                      Color
+                    </label>
+                    <ColorPicker
+                      ref={colorPicker}
+                      color={color}
+                      setColor={({ hex }: ColorResult): void =>
+                        handleCustom({
+                          textId: id,
+                          type: 'color',
+                          value: hex
                         })
                       }
                     />

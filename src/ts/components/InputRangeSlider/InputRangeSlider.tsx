@@ -1,4 +1,5 @@
 import * as React from 'react'
+import './input-range-slider.scss'
 
 type InputRangeSliderProps = {
   min?: number
@@ -6,13 +7,17 @@ type InputRangeSliderProps = {
   value: number
   step?: number
   onChange: any
+  showValue?: boolean
+  width?: number
+  id?: string
 }
 
 function InputRangeSlider(props: InputRangeSliderProps): JSX.Element {
   return (
-    <div style={{ marginTop: '20px', marginBottom: '20px' }} className="Input-range-slider">
-      <span style={{ fontSize: '16px', marginBottom: '6px' }}>{props.value}</span>
+    <div className="Input-range-slider">
+      {props.showValue && <span>{props.value}</span>}
       <input
+        id={props.id}
         type="range"
         defaultValue={props.value}
         min={props.min | 0}
@@ -20,6 +25,9 @@ function InputRangeSlider(props: InputRangeSliderProps): JSX.Element {
         className="slider"
         onChange={(e: React.ChangeEvent<HTMLInputElement>): void => props.onChange(e.target.value)}
         step={props.step | 1}
+        style={{
+          width: (props.width || 150) + 'px'
+        }}
       />
     </div>
   )
