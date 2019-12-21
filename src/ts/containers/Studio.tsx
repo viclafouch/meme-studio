@@ -66,6 +66,7 @@ function Studio(props: any): JSX.Element {
           width: currentWidth,
           height: currentHeight,
           image: memeSelected.image,
+          name: memeSelected.name,
           scale
         }
       }
@@ -210,7 +211,7 @@ function Studio(props: any): JSX.Element {
           aria-hidden={currentTab !== TAB_CUSTOMIZATION}
           id="customization-tab"
         >
-          <CustomizationTab memeSelected={memeSelected} canvasProperties={canvasProperties} onCustomize={handleCustomize} />
+          <CustomizationTab canvasProperties={canvasProperties} onCustomize={handleCustomize} />
         </div>
       </aside>
     </div>

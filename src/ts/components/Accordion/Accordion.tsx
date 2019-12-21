@@ -1,15 +1,17 @@
 import * as React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useState, useRef, useLayoutEffect } from 'react'
+import { useState, useRef, useLayoutEffect, useImperativeHandle } from 'react'
 import './accordion.scss'
+import { wait } from '@utils/index'
 
 type AccordionProps = {
   title: string
   children: React.ReactNode
   removeText: Function
+  ref: any
 }
 
-function Accordion(props: AccordionProps): JSX.Element {
+const Accordion = React.forwardRef((props: AccordionProps, ref: any) => {
   const [isActive, setIsActive] = useState<boolean>(false)
   const [currentHeight, setCurrentHeight] = useState<string>('0px')
   const content = useRef<any>(null)
@@ -27,6 +29,14 @@ function Accordion(props: AccordionProps): JSX.Element {
       clearTimeout(timeout)
     }
   }, [isActive])
+
+  useImperativeHandle(ref, () => ({
+    open: async (): Promise<void> => {
+      setIsActive(true)
+      await wait(600)
+    },
+    close: (): void => setIsActive(false)
+  }))
 
   const handleRemoveText = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     e.stopPropagation()
@@ -50,6 +60,6 @@ function Accordion(props: AccordionProps): JSX.Element {
       </div>
     </section>
   )
-}
+})
 
 export default Accordion
