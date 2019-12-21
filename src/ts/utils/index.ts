@@ -91,7 +91,7 @@ export function fillText(
       if (index === 0) line.y = y - totalHeight() / 2
       else line.y = lines[index - 1].y + previousLineHeight
     } else {
-      if (index === 0) line.y = maxHeight - paddingY - totalHeight()
+      if (index === 0) line.y = y + maxHeight / 2 - paddingY - totalHeight()
       else line.y = lines[index - 1].y + previousLineHeight
     }
 
