@@ -10,6 +10,7 @@ import ColorPicker from '@components/ColorPicker/ColorPicker'
 import { ColorResult } from 'react-color'
 import InputRangeSlider from '@components/InputRangeSlider/InputRangeSlider'
 import TextBox from '@shared/models/TextBox'
+import { randomID } from '@utils/index'
 
 type CustomizationProps = {
   memeSelected: Meme | null
@@ -27,6 +28,44 @@ function Customization({ memeSelected, canvasProperties, onCustomize }: Customiz
     onCustomize(textsUpdated)
   }
 
+  const addText = (): void => {
+    const textsUpdated = [...canvasProperties.texts] as any
+    const text = {
+      transform: '',
+      centerY: 50,
+      centerX: 340,
+      height: 100,
+      width: 680,
+      base: {
+        centerY: 50,
+        centerX: 340,
+        height: 100,
+        width: 680
+      },
+      fontSize: 22,
+      fontFamily: 'impact',
+      textAlign: 'center',
+      alignVertical: 'middle',
+      value: '',
+      id: randomID(),
+      color: '#ffffff',
+      isUppercase: false
+    }
+    text.height = text.base.height * canvasProperties.scale
+    text.width = text.base.width * canvasProperties.scale
+    text.centerY = canvasProperties.height / 2
+    text.centerX = canvasProperties.width / 2
+    textsUpdated.push(text)
+    onCustomize(textsUpdated)
+  }
+
+  const removeText = (textId: string): void => {
+    const textsUpdated = [...canvasProperties.texts] as any
+    const textIndex = textsUpdated.findIndex((t: TextBox) => t.id === textId)
+    textsUpdated.splice(textIndex, 1)
+    onCustomize(textsUpdated)
+  }
+
   return (
     <div className="Customization">
       {!memeSelected && (
@@ -40,7 +79,7 @@ function Customization({ memeSelected, canvasProperties, onCustomize }: Customiz
           <h2>Edit {memeSelected.name}</h2>
           {canvasProperties.texts.map(
             ({ value, id, color, fontSize, alignVertical, textAlign, isUppercase }, i): React.ReactNode => (
-              <Accordion title={value.trim() || `Text #${i + 1}`} key={id}>
+              <Accordion title={value.trim() || `Text #${i + 1}`} key={id} removeText={(): void => removeText(id)}>
                 <div className="customization-textbox-section">
                   <div className="field-customization">
                     <TextareaExtended
@@ -143,6 +182,9 @@ function Customization({ memeSelected, canvasProperties, onCustomize }: Customiz
               </Accordion>
             )
           )}
+          <button className="add-text" onClick={(): void => addText()}>
+            Add Text
+          </button>
         </div>
       )}
     </div>

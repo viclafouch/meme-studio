@@ -21,8 +21,8 @@ export function Draggable(props: DraggableProps): JSX.Element {
   const [isDragging, setIsDragging] = useState<boolean>(false)
   const el = useRef<any>(null)
   const [position, setPosition] = useState({
-    left: props.position.x * props.canvasProperties.scale - (props.width * props.canvasProperties.scale) / 2,
-    top: props.position.y * props.canvasProperties.scale - (props.height * props.canvasProperties.scale) / 2,
+    left: props.position.x - props.width / 2,
+    top: props.position.y - props.height / 2,
     startX: null,
     startY: null
   })

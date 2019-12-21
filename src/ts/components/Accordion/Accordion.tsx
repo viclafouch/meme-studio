@@ -1,10 +1,12 @@
 import * as React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState, useRef, useLayoutEffect } from 'react'
 import './accordion.scss'
 
 type AccordionProps = {
   title: string
   children: React.ReactNode
+  removeText: Function
 }
 
 function Accordion(props: AccordionProps): JSX.Element {
@@ -26,11 +28,23 @@ function Accordion(props: AccordionProps): JSX.Element {
     }
   }, [isActive])
 
+  const handleRemoveText = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+    e.stopPropagation()
+    props.removeText()
+  }
+
   return (
     <section className={`Accordion ${isActive ? 'accordion-active' : ''}`}>
-      <button className="accordion-button" onClick={(): void => setIsActive(!isActive)}>
+      <div className="accordion-trigger" onClick={(): void => setIsActive(!isActive)}>
         <p className="accordion-title">{props.title}</p>
-      </button>
+        <button
+          aria-label="Remove Text"
+          className="accordion-remove-text"
+          onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => handleRemoveText(e)}
+        >
+          <FontAwesomeIcon icon={['fas', 'trash-alt']} />
+        </button>
+      </div>
       <div className="accordion-content" ref={content} style={{ maxHeight: `${currentHeight}` }}>
         {props.children}
       </div>
