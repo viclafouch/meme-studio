@@ -10,6 +10,7 @@ import { ColorResult } from 'react-color'
 import InputRangeSlider from '@components/InputRangeSlider/InputRangeSlider'
 import TextBox from '@shared/models/TextBox'
 import { randomID } from '@utils/index'
+import { fontsFamily } from '@shared/config-editor'
 
 type CustomizationProps = {
   canvasProperties: CanvasProperties
@@ -57,7 +58,7 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
         width: 680
       },
       fontSize: 22,
-      fontFamily: 'impact',
+      fontFamily: 'Impact',
       textAlign: 'center',
       alignVertical: 'middle',
       value: '',
@@ -91,7 +92,7 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
     <div className="customization-not-empty">
       <h2>Edit {canvasProperties.name}</h2>
       {canvasProperties.texts.map(
-        ({ value, id, color, fontSize, alignVertical, textAlign, isUppercase }, i): React.ReactNode => (
+        ({ value, id, color, fontSize, alignVertical, textAlign, isUppercase, fontFamily }, i): React.ReactNode => (
           <Accordion
             ref={refs.current[i].accordion}
             title={value.trim() || `Text #${i + 1}`}
@@ -148,6 +149,25 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
                     })
                   }
                 />
+              </div>
+              <div className="field-customization">
+                <span>Font family</span>
+                <select
+                  value={fontFamily}
+                  onChange={(event: React.ChangeEvent<HTMLSelectElement>): void =>
+                    handleCustom({
+                      textId: id,
+                      type: 'fontFamily',
+                      value: event.target.value
+                    })
+                  }
+                >
+                  {fontsFamily.map((font: string) => (
+                    <option value={font} key={font.replace(/ /g, '+')}>
+                      {font}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className="field-customization">
                 <span>Align vertical</span>

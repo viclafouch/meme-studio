@@ -98,7 +98,7 @@ function Studio(props: any): JSX.Element {
             width: 680
           },
           fontSize: 22,
-          fontFamily: 'impact',
+          fontFamily: 'Impact',
           textAlign: 'center',
           alignVertical: 'middle',
           value: '',
