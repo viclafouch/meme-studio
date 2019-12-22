@@ -1,6 +1,7 @@
 .Accordion {
   display: flex;
   flex-direction: column;
+  --accordion-duration: unset;
 
   .accordion-trigger {
     background-color: var(--blue-light);
@@ -13,6 +14,9 @@
     border: none;
     outline: none;
     transition: background-color 0.6s ease;
+    transition-property: background-color;
+    transition-timing-function: ease;
+    transition-duration: var(--accordion-duration);
     width: 100%;
 
     .accordion-remove-text {
@@ -40,6 +44,8 @@
   .accordion-content {
     background-color: white;
     overflow: hidden;
-    transition: max-height 0.6s ease;
+    transition-property: max-height;
+    transition-timing-function: ease;
+    transition-duration: var(--accordion-duration);
   }
 }

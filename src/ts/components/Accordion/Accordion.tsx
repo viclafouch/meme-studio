@@ -4,17 +4,20 @@ import { useState, useRef, useLayoutEffect, useImperativeHandle } from 'react'
 import './accordion.scss'
 import { wait } from '@utils/index'
 
+const durationAccordion = 600
+
 type AccordionProps = {
   title: string
   children: React.ReactNode
   removeText: Function
+  afterOpening?: Function
   ref: any
 }
 
 const Accordion = React.forwardRef((props: AccordionProps, ref: any) => {
   const [isActive, setIsActive] = useState<boolean>(false)
   const [currentHeight, setCurrentHeight] = useState<string>('0px')
-  const content = useRef<any>(null)
+  const content = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
     content.current.style.overflow = 'hidden'
@@ -23,8 +26,9 @@ const Accordion = React.forwardRef((props: AccordionProps, ref: any) => {
       if (isActive) {
         content.current.style.overflow = 'visible'
         setCurrentHeight('inherit')
+        props.afterOpening && props.afterOpening()
       }
-    }, 600)
+    }, durationAccordion)
     return (): void => {
       clearTimeout(timeout)
     }
@@ -33,7 +37,7 @@ const Accordion = React.forwardRef((props: AccordionProps, ref: any) => {
   useImperativeHandle(ref, () => ({
     open: async (): Promise<void> => {
       setIsActive(true)
-      await wait(600)
+      await wait(durationAccordion)
     },
     close: (): void => setIsActive(false)
   }))
@@ -43,8 +47,10 @@ const Accordion = React.forwardRef((props: AccordionProps, ref: any) => {
     props.removeText()
   }
 
+  const cssVar = { '--accordion-duration': durationAccordion + 'ms' } as React.CSSProperties
+
   return (
-    <section className={`Accordion ${isActive ? 'accordion-active' : ''}`}>
+    <section className={`Accordion ${isActive ? 'accordion-active' : ''}`} style={cssVar}>
       <div className="accordion-trigger" onClick={(): void => setIsActive(!isActive)}>
         <p className="accordion-title">{props.title}</p>
         <button
