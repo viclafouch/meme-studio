@@ -17,8 +17,8 @@ type CustomizationProps = {
 }
 
 function Customization({ canvasProperties, onCustomize }: CustomizationProps): JSX.Element {
-  const colorPicker = useRef(null)
-  const refs = useRef(
+  const colorPicker = useRef<any>(null)
+  const refs = useRef<any>(
     Array.from({ length: canvasProperties.texts.length }).map(() => ({
       accordion: React.createRef(),
       textarea: React.createRef()
@@ -73,8 +73,9 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
     onCustomize(textsUpdated)
     updateAccordionRefs(textsUpdated.length)
     setTimeout(async () => {
-      await (refs.current[textsUpdated.length - 1].accordion.current as any).open()
-      ;(refs.current[textsUpdated.length - 1].textarea.current as any).focus()
+      refs.current[textsUpdated.length - 1].accordion.current
+        .open()
+        .then(() => refs.current[textsUpdated.length - 1].textarea.current.focus())
     }, 0)
   }
 
@@ -84,7 +85,6 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
     textsUpdated.splice(textIndex, 1)
     onCustomize(textsUpdated)
     updateAccordionRefs(textsUpdated.length)
-    console.log(refs)
   }
 
   return (
@@ -97,6 +97,7 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
             title={value.trim() || `Text #${i + 1}`}
             key={id}
             removeText={(): void => removeText(id)}
+            afterOpening={(): void => (refs.current[i].textarea.current as any).focus()}
           >
             <div className="customization-textbox-section">
               <div className="field-customization">
