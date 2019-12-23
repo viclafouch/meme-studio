@@ -12,17 +12,14 @@ export default class Meme {
     this.url = meme.url
     this.width = meme.width
     this.height = meme.height
-    this.boxCount = meme.box_count
+    this.boxCount = meme.boxCount
   }
 
   get image(): Promise<HTMLImageElement> {
     return new Promise(resolve => {
       const image = new Image()
-      image.crossOrigin = 'Anonymous'
       image.src = this.url
-      image.onload = (): void => {
-        resolve(image)
-      }
+      image.onload = (): void => resolve(image)
     })
   }
 }
