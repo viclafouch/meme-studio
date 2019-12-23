@@ -19,6 +19,14 @@
     transition-duration: var(--accordion-duration);
     width: 100%;
 
+    .accordion-title {
+      font-weight: 600;
+      font-size: 14px;
+      max-width: 80%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
     .accordion-remove-text {
       background-color: transparent;
       border: 0;
@@ -28,11 +36,6 @@
         color: #444444;
         cursor: pointer;
       }
-    }
-
-    p {
-      font-weight: 600;
-      font-size: 14px;
     }
   }
 

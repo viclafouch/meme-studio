@@ -42,6 +42,11 @@ const Accordion = React.forwardRef((props: AccordionProps, ref: any) => {
     close: (): void => setIsActive(false)
   }))
 
+  const handleOpen = (e: React.MouseEvent): void => {
+    e.preventDefault()
+    setIsActive(!isActive)
+  }
+
   const handleRemoveText = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     e.stopPropagation()
     props.removeText()
@@ -51,7 +56,7 @@ const Accordion = React.forwardRef((props: AccordionProps, ref: any) => {
 
   return (
     <section className={`Accordion ${isActive ? 'accordion-active' : ''}`} style={cssVar}>
-      <div className="accordion-trigger" onClick={(): void => setIsActive(!isActive)}>
+      <div className="accordion-trigger" onClick={handleOpen}>
         <p className="accordion-title">{props.title}</p>
         <button
           aria-label="Remove Text"
