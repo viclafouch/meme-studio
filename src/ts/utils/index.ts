@@ -1,5 +1,6 @@
 import TextBox from '@shared/models/TextBox'
 import { Line } from '@shared/validators'
+import { API_URL } from '@shared/api'
 
 export const debug = (str: string): void =>
   process.env.NODE_ENV !== 'production' && console.log(`%c ${str}`, 'color: yellow; font-weight: bold')
@@ -99,4 +100,15 @@ export function fillText(
     ctx.fillText(line.value, line.x, line.y)
   }
   ctx.restore()
+}
+
+export const fetchApi = async (path = '', params = {}): Promise<object> => {
+  const url: string = API_URL + path
+  return fetch(url, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    ...params
+  }).then((response: Response) => response.json())
 }

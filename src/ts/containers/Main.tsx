@@ -3,13 +3,14 @@ import AbortController from 'abort-controller'
 import { useState, useEffect, useContext, useRef } from 'react'
 import { ReactSVG } from 'react-svg'
 import Studio from './Studio'
-import Meme from '@shared/models/Meme'
 import Header from '@components/Header/Header'
 import Intro from './Intro'
 import Export from './Export'
 import { DefaultContext } from '@store/DefaultContext'
 import { SET_MEMES } from '@store/reducer/constants'
 import { FatalError } from '@components/ErrorBoundary/ErrorBoundary'
+import { getMemes } from '@shared/api'
+import { wait } from '@utils/index'
 
 function Main(): JSX.Element {
   const canvasRef = useRef(null)
@@ -19,29 +20,29 @@ function Main(): JSX.Element {
   const [isModalExportOpen, setIsModalExportOpen] = useState(false)
 
   useEffect(() => {
-    const controller = new AbortController()
-    const timeout = setTimeout(() => controller.abort(), 10000)
-    fetch('https://api.imgflip.com/get_memes', { signal: controller.signal })
-      .then((response: Response): any => {
+    ;(async (): Promise<void> => {
+      const controller: AbortController = new AbortController()
+      const timeout: any = setTimeout(() => controller.abort(), 10000)
+      try {
+        const response = await getMemes({
+          signal: controller.signal
+        })
         clearTimeout(timeout)
-        return response.json()
-      })
-      .then((response: any): void => {
-        if (!response.success) throw new Error(response)
-        else
-          dispatch({
-            type: SET_MEMES,
-            memes: response.data.memes.map((m: Meme) => new Meme(m))
-          })
-      })
-      .catch(e => {
-        console.warn(e)
+        dispatch({
+          type: SET_MEMES,
+          memes: response.memes
+        })
+      } catch (error) {
+        if (error.name !== 'AbortError') {
+          clearTimeout(timeout)
+          console.warn(error)
+        }
         setIsError(true)
-      })
-      .finally(async () => {
-        await new Promise(resolve => setTimeout(resolve, 1000))
+      } finally {
+        await wait(1000)
         setIsLoading(false)
-      })
+      }
+    })()
   }, [])
 
   return (
