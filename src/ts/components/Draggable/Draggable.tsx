@@ -19,7 +19,6 @@ type DraggableProps = {
 
 export function Draggable(props: DraggableProps): JSX.Element {
   const [isDragging, setIsDragging] = useState<boolean>(false)
-  const el = useRef<any>(null)
   const [position, setPosition] = useState({
     left: props.position.x - props.width / 2,
     top: props.position.y - props.height / 2,
@@ -81,7 +80,6 @@ export function Draggable(props: DraggableProps): JSX.Element {
   return (
     <div
       aria-grabbed={isDragging}
-      ref={el}
       draggable={true}
       className={props.className || ''}
       onMouseDown={handleMouseDown}

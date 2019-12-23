@@ -1,12 +1,13 @@
 import * as React from 'react'
+import { ColorResult } from 'react-color'
 import { ReactSVG } from 'react-svg'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useRef } from 'react'
 import './customization.scss'
 import { CanvasProperties, TextCustomization } from '@shared/validators'
 import Accordion from '@components/Accordion/Accordion'
 import TextareaExtended from '@components/TextareaExpended/TextareaExtended'
 import ColorPicker from '@components/ColorPicker/ColorPicker'
-import { ColorResult } from 'react-color'
 import InputRangeSlider from '@components/InputRangeSlider/InputRangeSlider'
 import TextBox from '@shared/models/TextBox'
 import { randomID } from '@utils/index'
@@ -19,7 +20,7 @@ type CustomizationProps = {
 
 function Customization({ canvasProperties, onCustomize }: CustomizationProps): JSX.Element {
   const colorPicker = useRef<any>(null)
-  const refs = useRef<any>(
+  const refs = useRef<Array<any>>(
     Array.from({ length: canvasProperties.texts.length }).map(() => ({
       accordion: React.createRef(),
       textarea: React.createRef()
@@ -222,8 +223,9 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
           </Accordion>
         )
       )}
-      <button className="add-text" onClick={(): void => addText()}>
-        Add Text
+      <button className="add-text-button" onClick={(): void => addText()}>
+        <FontAwesomeIcon className="icon-plus" icon={['fas', 'plus']} />
+        <span>Add Text</span>
       </button>
     </div>
   )

@@ -4,8 +4,8 @@
   --accordion-duration: unset;
 
   .accordion-trigger {
-    background-color: var(--blue-light);
     color: #ffffff;
+    background-color: #ccc;
     cursor: pointer;
     padding: 18px;
     display: flex;
@@ -36,16 +36,15 @@
     }
   }
 
-  .accordion-trigger:hover,
-  &.accordion-active .accordion-trigger {
-    background-color: #ccc;
-  }
-
   .accordion-content {
     background-color: white;
     overflow: hidden;
     transition-property: max-height;
     transition-timing-function: ease;
     transition-duration: var(--accordion-duration);
+  }
+
+  & + .Accordion .accordion-trigger {
+    border-top: 1px solid #ffffff;
   }
 }

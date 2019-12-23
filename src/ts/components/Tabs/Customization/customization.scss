@@ -22,7 +22,7 @@
 
     h2 {
       text-align: center;
-      font-size: 0.8em;
+      font-size: 1.1em;
       margin: 20px 0;
     }
 
@@ -58,6 +58,29 @@
 
       & + .field-customization {
         margin-top: 1em;
+      }
+    }
+
+    .add-text-button {
+      border-radius: 0;
+      border: 0;
+      height: 40px;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      outline: none;
+      background-color: var(--blue);
+      color: #ffffff;
+      font-weight: 500;
+      flex-shrink: 0;
+      &:hover {
+        background-color: var(--blue-light);
+      }
+
+      .icon-plus {
+        margin-right: 7px;
       }
     }
   }
