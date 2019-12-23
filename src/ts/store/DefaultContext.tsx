@@ -6,11 +6,21 @@ import Meme from '@shared/models/Meme'
 export interface State {
   onStudio: boolean
   memes: Array<Meme>
+  cursorMemes: {
+    before: string
+    after: string
+  }
+  hasNextMemes: boolean
 }
 
 const initialState: State = {
   onStudio: false,
-  memes: []
+  memes: [],
+  cursorMemes: {
+    before: null,
+    after: null
+  },
+  hasNextMemes: true
 }
 
 export const DefaultContext = createContext<State | any>(initialState)

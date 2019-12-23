@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { useState, useEffect, useRef, useLayoutEffect, useCallback } from 'react'
 import Meme from '@shared/models/Meme'
-import GalleryTab from '@components/Tabs/Gallery/Gallery'
-import CustomizationTab from '@components/Tabs/Customization/Customization'
+import Gallery from '@components/Tabs/Gallery/Gallery'
+import Customization from '@components/Tabs/Customization/Customization'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Button from '@components/Button/Button'
 import TextBox from '@shared/models/TextBox'
@@ -10,15 +10,16 @@ import { randomID, innerDemensions, fillText } from '@utils/index'
 import { useWindowWidth } from '@shared/hooks/index'
 import { CanvasProperties } from '@shared/validators/index'
 import Draggable from '@components/Draggable/Draggable'
+import Tab from '@components/Tabs/Tab'
 
 const TAB_GALLERY = 'TAB_GALLERY'
 const TAB_CUSTOMIZATION = 'TAB_CUSTOMIZATION'
 
 type StudioProps = {
-  memes: Array<Meme>
+  forwardedRef: React.MutableRefObject<HTMLCanvasElement>
 }
 
-function Studio(props: any): JSX.Element {
+function Studio(props: StudioProps): JSX.Element {
   const [currentTab, setCurrentTab] = useState<string>(TAB_GALLERY)
   const [memeSelected, setMemeSelected] = useState<Meme | null>(null)
   const [canvasProperties, setCanvasProperties] = useState<CanvasProperties | null>(null)
@@ -183,41 +184,33 @@ function Studio(props: any): JSX.Element {
         <span className={`${memeSelected ? 'hide' : 'show'}`}>Select a template</span>
       </div>
       <aside className="Studio__aside">
-        <div className="buttons__actions">
+        <div className="tabs__buttons__container">
           <Button
-            className={currentTab === TAB_GALLERY ? 'tab-button-active' : null}
+            className={currentTab === TAB_GALLERY ? 'tab__button__active' : null}
             onClick={(): void => setCurrentTab(TAB_GALLERY)}
             id="tab-gallery-btn"
           >
-            <FontAwesomeIcon icon="image" />
+            <FontAwesomeIcon className="icon-image" icon={['fas', 'image']} />
           </Button>
           <Button
-            className={currentTab === TAB_CUSTOMIZATION ? 'tab-button-active' : null}
+            className={currentTab === TAB_CUSTOMIZATION ? 'tab__button__active' : null}
             onClick={(): void => setCurrentTab(TAB_CUSTOMIZATION)}
             id="tab-customization-btn"
           >
-            <FontAwesomeIcon icon="heading" />
+            <FontAwesomeIcon className="icon-heading" icon={['fas', 'heading']} />
           </Button>
         </div>
-        <div
-          className={`studio__tab ${currentTab === TAB_GALLERY ? 'studio__tab__active' : null}`}
-          aria-hidden={currentTab !== TAB_GALLERY}
-          id="gallery-tab"
-        >
-          <GalleryTab memes={props.memes} onSelectMeme={(meme: Meme): void => setMemeSelected(meme)} />
-        </div>
-        <div
-          className={`studio__tab ${currentTab === TAB_CUSTOMIZATION ? 'studio__tab__active' : null}`}
-          aria-hidden={currentTab !== TAB_CUSTOMIZATION}
-          id="customization-tab"
-        >
-          <CustomizationTab canvasProperties={canvasProperties} onCustomize={handleCustomize} />
-        </div>
+        <Tab active={currentTab === TAB_GALLERY} id="gallery-tab">
+          <Gallery onSelectMeme={(meme: Meme): void => setMemeSelected(meme)} />
+        </Tab>
+        <Tab active={currentTab === TAB_CUSTOMIZATION} id="customization-tab">
+          <Customization canvasProperties={canvasProperties} onCustomize={handleCustomize} />
+        </Tab>
       </aside>
     </div>
   )
 }
 
-export default React.forwardRef((props: StudioProps, ref) => {
+export default React.forwardRef((props: any, ref) => {
   return <Studio {...props} forwardedRef={ref} />
 })

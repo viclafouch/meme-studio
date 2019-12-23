@@ -187,15 +187,18 @@ main {
     flex-direction: column;
   }
 
-  .buttons__actions {
+  .tabs__buttons__container {
     height: 50px;
     display: flex;
     margin-bottom: 5px;
+    flex-shrink: 0;
+
     .Button {
       flex: 1;
       position: relative;
       border-radius: 0;
-      &.tab-button-active {
+
+      &.tab__button__active {
         background-color: var(--blue-light);
       }
 
@@ -208,16 +211,12 @@ main {
     }
   }
 
-  .studio__tab {
-    &:not(.studio__tab__active) {
-      display: none !important;
-    }
+  .Tab {
+    width: 100%;
+    padding: 0 4px;
+    height: calc(100% - 50px);
 
-    &#gallery-tab,
-    &#customization-tab {
-      width: 100%;
-      padding: 0 4px;
-      flex: 1;
+    &#custumozation-tab {
       overflow-y: scroll;
       overflow-x: hidden;
     }

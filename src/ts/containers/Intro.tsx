@@ -4,9 +4,11 @@ import Button from '@components/Button/Button'
 import Meme from '@shared/models/Meme'
 import { DefaultContext } from '@store/DefaultContext'
 import { SET_ON_STUDIO } from '@store/reducer/constants'
+import { useMemes } from '@shared/hooks'
 
 function Intro(): JSX.Element {
-  const [{ memes }, dispatch] = useContext<any>(DefaultContext)
+  const { memes } = useMemes()
+  const [_, dispatch] = useContext<any>(DefaultContext)
 
   return (
     <div className="Intro">

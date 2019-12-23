@@ -112,3 +112,9 @@ export const fetchApi = async (path = '', params = {}): Promise<object> => {
     ...params
   }).then((response: Response) => response.json())
 }
+
+export const parseSearchParams = (params: any): string => {
+  const searchParams = new URLSearchParams()
+  for (const iterator in params) searchParams.append(iterator, params[iterator])
+  return searchParams.toString()
+}
