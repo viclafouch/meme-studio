@@ -1,0 +1,56 @@
+.Draggable {
+  background-color: transparent;
+  border: 2px dotted grey;
+  position: absolute;
+  cursor: move;
+
+  div:not([class]) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .draggable-resize {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: grey;
+    z-index: 2;
+    position: absolute;
+
+    &[data-side="nw"],
+    &[data-side="se"] {
+      cursor: nwse-resize;
+    }
+
+    &[data-side="ne"],
+    &[data-side="sw"] {
+      cursor: nesw-resize;
+    }
+
+    &[data-side^="n"] {
+      top: 0;
+    }
+    &[data-side^="s"] {
+      top: 100%;
+    }
+    &[data-side$="e"] {
+      left: 100%;
+    }
+    &[data-side$="w"] {
+      left: 0;
+    }
+    &[data-side="ne"] {
+      transform: translate(-50%, -50%);
+    }
+    &[data-side="nw"] {
+      transform: translate(-50%, -50%);
+    }
+    &[data-side="sw"] {
+      transform: translate(-50%, -50%);
+    }
+    &[data-side="se"] {
+      transform: translate(-50%, -50%);
+    }
+  }
+}
