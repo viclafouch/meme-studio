@@ -87,7 +87,7 @@ function Studio(props: StudioProps): JSX.Element {
       const properties = calcCanvasProperties(
         memeSelected,
         [...Array(1)].map((_, i) => ({
-          transform: '',
+          transform: 0,
           centerY: 50,
           centerX: 340,
           height: 100,
@@ -166,6 +166,7 @@ function Studio(props: StudioProps): JSX.Element {
                   }}
                   height={text.height}
                   width={text.width}
+                  rotate={text.transform}
                   onMove={handleCustomize}
                   canvasProperties={canvasProperties}
                   id={text.id}

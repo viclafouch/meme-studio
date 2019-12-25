@@ -1,33 +1,50 @@
 .Draggable {
   background-color: transparent;
-  border: 2px dotted grey;
   position: absolute;
   cursor: move;
+  --draggable-color: var(--draggable-area-color);
+  --bubble-size: 18px;
 
-  div:not([class]) {
-    width: 100%;
+  &::after,
+  &::before {
+    content: '';
+    top: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+  }
+  &::after {
+    width: calc(100% - var(--bubble-size));
     height: 100%;
+    border-top: 1px dotted var(--draggable-area-color);
+    border-bottom: 1px dotted var(--draggable-area-color);
+  }
+  &::before {
+    width: 100%;
+    height: calc(100% - var(--bubble-size));
+    border-left: 1px dotted var(--draggable-area-color);
+    border-right: 1px dotted var(--draggable-area-color);
   }
 
   .draggable-resize {
     display: block;
-    width: 10px;
-    height: 10px;
+    width: var(--bubble-size);
+    height: var(--bubble-size);
     border-radius: 50%;
-    background-color: grey;
+    background-color: var(--draggable-area-color);
     z-index: 2;
     position: absolute;
+    transform: translate(-50%, -50%);
+    border: 1px solid #FFFFFF;
 
     &[data-side="nw"],
     &[data-side="se"] {
       cursor: nwse-resize;
     }
-
     &[data-side="ne"],
     &[data-side="sw"] {
       cursor: nesw-resize;
     }
-
     &[data-side^="n"] {
       top: 0;
     }
@@ -40,17 +57,26 @@
     &[data-side$="w"] {
       left: 0;
     }
-    &[data-side="ne"] {
-      transform: translate(-50%, -50%);
-    }
-    &[data-side="nw"] {
-      transform: translate(-50%, -50%);
-    }
-    &[data-side="sw"] {
-      transform: translate(-50%, -50%);
-    }
-    &[data-side="se"] {
-      transform: translate(-50%, -50%);
+  }
+
+  .draggable-rotate {
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--draggable-area-color);
+    position: absolute;
+    padding: 3px;
+    border: 1px solid #FFFFFF;
+    height: 20px;
+    width: 20px;
+    cursor: move;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+
+    svg {
+      fill: rgba($color: #FFFFFF, $alpha: 0.6)
     }
   }
 }

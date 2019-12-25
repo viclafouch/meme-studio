@@ -22,6 +22,10 @@ export const innerDemensions = (node: HTMLElement): { height: number; width: num
   return { height, width }
 }
 
+export const radToDegree = (rad: number): number => (rad * 180) / Math.PI
+
+export const degreeToRad = (degree: number): number => (degree * Math.PI) / 180
+
 export function fillText(
   text: TextBox,
   ctx: CanvasRenderingContext2D,
@@ -71,6 +75,10 @@ export function fillText(
     fontSize--
     ctx.font = `${fontSize}px ${text.fontFamily}`
   }
+
+  ctx.translate(x, y)
+  ctx.rotate(degreeToRad(text.transform))
+  ctx.translate(-x, -y)
 
   for (let index = 0; index < lines.length; index++) {
     const line: Line = lines[index]

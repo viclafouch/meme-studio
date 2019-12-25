@@ -5,7 +5,7 @@ export default class TextBox {
   public height: number
   public centerX: number
   public centerY: number
-  public transform: string
+  public transform: number
   public fontSize: number
   public fontFamily: string
   public color: string
