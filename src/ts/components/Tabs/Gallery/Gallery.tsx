@@ -25,7 +25,7 @@ function Gallery({ onSelectMeme }: GalleryProps): JSX.Element {
         console.warn(error)
       }
     }
-  }, [fetchNextMemes, isLoading])
+  }, [fetchNextMemes, isLoading, hasNextMemes])
 
   return (
     <ul className="Gallery" onScroll={handleScroll} ref={scrollerRef}>
