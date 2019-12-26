@@ -51,7 +51,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
   const draggableRef = useRef<HTMLDivElement>(null)
   const [resizing, setResizing] = useState<ResizingInt | null>(null)
   const [rotating, setRotating] = useState<RotatingInt | null>(null)
-  const [position, setPosition] = useState<PositionInt>({
+  const [positioning, setPositioning] = useState<PositionInt>({
     left: props.position.x - props.width / 2,
     top: props.position.y - props.height / 2,
     startX: null,
@@ -63,15 +63,15 @@ export function Draggable(props: DraggableProps): JSX.Element {
 
   const handleMouseMove = useCallback(
     ({ pageY, pageX }: MouseEvent): void => {
-      if (position.isDragging || resizing || rotating) {
+      if (positioning.isDragging || resizing || rotating) {
         const { canvasProperties, id, onMove } = props
         const textsUpdated = [...canvasProperties.texts] as Array<TextBox>
         const textIndex = textsUpdated.findIndex((t: TextBox) => t.id === id)
-        let { top, left } = position
+        let { top, left } = positioning
         let { centerX, centerY, height, width, transform } = textsUpdated[textIndex]
-        if (position.isDragging) {
-          top = pageY - position.startY
-          left = pageX - position.startX
+        if (positioning.isDragging) {
+          top = pageY - positioning.startY
+          left = pageX - positioning.startX
           if (top < 0) top = 0
           else if (top + height >= canvasProperties.height) top = canvasProperties.height - height
           if (left < 0) left = 0
@@ -85,7 +85,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
               height = resizing.height + (pageY - resizing.mouseY)
               if (top + height >= canvasProperties.height) height = canvasProperties.height - top
             } else height = minimalSize
-            centerY = position.top + height / 2
+            centerY = top + height / 2
           }
           // top
           else if (resizing.side === 'nw' || resizing.side === 'ne') {
@@ -94,7 +94,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
               if (top < 0) top = 0
               else height = resizing.height - (pageY - resizing.mouseY)
             } else height = minimalSize
-            centerY = position.top + height / 2
+            centerY = top + height / 2
           }
           // right
           if (resizing.side === 'ne' || resizing.side === 'se') {
@@ -102,7 +102,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
               width = resizing.width + (pageX - resizing.mouseX)
               if (left + width >= canvasProperties.width) width = canvasProperties.width - left
             } else width = minimalSize
-            centerX = position.left + width / 2
+            centerX = left + width / 2
           }
           // left
           else if (resizing.side === 'nw' || resizing.side === 'sw') {
@@ -111,7 +111,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
               if (left <= 0) left = 0
               else width = resizing.width - (pageX - resizing.mouseX)
             } else width = minimalSize
-            centerX = position.left + width / 2
+            centerX = left + width / 2
           }
         } else if (rotating) {
           if (rotating.startOffsetLeft !== pageX && rotating.startOffsetTop !== pageY) {
@@ -128,72 +128,63 @@ export function Draggable(props: DraggableProps): JSX.Element {
         textsUpdated[textIndex].height = height
         textsUpdated[textIndex].transform = transform
         onMove(textsUpdated)
-        setPosition({
-          ...position,
+        setPositioning({
+          ...positioning,
           top,
           left
         })
       }
     },
-    [props.canvasProperties, resizing, rotating, minimalSize, position]
+    [props.canvasProperties, resizing, rotating, minimalSize, positioning]
   )
 
   const handleMouseDown = useCallback(
     (event: React.MouseEvent) => {
       event.preventDefault()
-      setPosition({
-        ...position,
-        startX: event.pageX - position.left,
-        startY: event.pageY - position.top,
-        isDragging: true
-      })
+      const type = (event.currentTarget as HTMLElement).getAttribute('data-type')
+      if (type === 'drag') {
+        setPositioning({
+          ...positioning,
+          startX: event.pageX - positioning.left,
+          startY: event.pageY - positioning.top,
+          isDragging: true
+        })
+      } else if (type === 'rotate') {
+        event.stopPropagation()
+        const { left, top } = draggableRef.current.getBoundingClientRect()
+        setRotating({
+          startOffsetLeft: left + props.width / 2,
+          startOffsetTop: top + props.height / 2,
+          lastAngle: degreeToRad(props.rotate),
+          startEventX: event.pageX,
+          startEventY: event.pageY
+        })
+      } else if (type === 'resize') {
+        event.stopPropagation()
+        const side = (event.target as HTMLDivElement).getAttribute('data-side')
+        setResizing({
+          side: side as ResizingInt['side'],
+          mouseX: event.pageX,
+          mouseY: event.pageY,
+          height: props.height,
+          width: props.width,
+          top: positioning.top,
+          left: positioning.left
+        })
+      }
     },
-    [position.left, position.top]
-  )
-
-  const handleResizeDown = useCallback(
-    (event: React.MouseEvent) => {
-      event.preventDefault()
-      event.stopPropagation()
-      const side = (event.target as HTMLDivElement).getAttribute('data-side')
-      setResizing({
-        side: side as ResizingInt['side'],
-        mouseX: event.pageX,
-        mouseY: event.pageY,
-        height: props.height,
-        width: props.width,
-        top: position.top,
-        left: position.left
-      })
-    },
-    [position.top, position.left, props.height, props.width]
-  )
-
-  const handleRotateDown = useCallback(
-    (event: React.MouseEvent) => {
-      event.preventDefault()
-      event.stopPropagation()
-      const { left, top } = draggableRef.current.getBoundingClientRect()
-      setRotating({
-        startOffsetLeft: left + props.width / 2,
-        startOffsetTop: top + props.height / 2,
-        lastAngle: degreeToRad(props.rotate),
-        startEventX: event.pageX,
-        startEventY: event.pageY
-      })
-    },
-    [props.rotate, props.width, props.height]
+    [positioning.left, positioning.top, props.height, props.width, props.rotate]
   )
 
   const handleMouseUp = useCallback(() => {
-    if (position.isDragging)
-      setPosition({
-        ...position,
+    if (positioning.isDragging)
+      setPositioning({
+        ...positioning,
         isDragging: false
       })
     else if (resizing) setResizing(null)
     else if (rotating) setRotating(null)
-  }, [position, resizing, rotating])
+  }, [positioning, resizing, rotating])
 
   useLayoutEffect(() => {
     window.addEventListener('mousemove', handleMouseMove)
@@ -206,24 +197,25 @@ export function Draggable(props: DraggableProps): JSX.Element {
 
   return (
     <div
-      aria-grabbed={position.isDragging}
+      aria-grabbed={positioning.isDragging}
       draggable={true}
       ref={draggableRef}
+      data-type="drag"
       className={`Draggable ${props.className || ''}`}
       style={{
-        left: position.left,
-        top: position.top,
+        left: positioning.left,
+        top: positioning.top,
         height: props.height,
         width: props.width,
         transform: `rotate(${props.rotate}deg)`
       }}
       onMouseDown={handleMouseDown}
     >
-      <div className="draggable-resize" data-side="ne" onMouseDown={handleResizeDown} />
-      <div className="draggable-resize" data-side="nw" onMouseDown={handleResizeDown} />
-      <div className="draggable-resize" data-side="se" onMouseDown={handleResizeDown} />
-      <div className="draggable-resize" data-side="sw" onMouseDown={handleResizeDown} />
-      <div className="draggable-rotate" onMouseDown={handleRotateDown}>
+      <div className="draggable-resize" data-type="resize" data-side="ne" onMouseDown={handleMouseDown} />
+      <div className="draggable-resize" data-type="resize" data-side="nw" onMouseDown={handleMouseDown} />
+      <div className="draggable-resize" data-type="resize" data-side="se" onMouseDown={handleMouseDown} />
+      <div className="draggable-resize" data-type="resize" data-side="sw" onMouseDown={handleMouseDown} />
+      <div className="draggable-rotate" data-type="rotate" onMouseDown={handleMouseDown}>
         <ReactSVG src="images/rotation.svg" wrapper="span" className="wrapper-rotate-svg" />
       </div>
       {props.children}
