@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useState, useLayoutEffect, useCallback, useRef } from 'react'
+import { useState, useLayoutEffect, useCallback, useRef, useMemo } from 'react'
 import { CanvasProperties } from '@shared/validators'
 import TextBox from '@shared/models/TextBox'
 import './draggable.scss'
@@ -33,8 +33,10 @@ export function Draggable(props: DraggableProps): JSX.Element {
     startY: null
   })
 
+  const minimalSize = useMemo(() => props.canvasProperties.scale * 40, [props.canvasProperties.scale])
+
   const handleMouseMove = useCallback(
-    ({ clientX, clientY, pageY, pageX }: MouseEvent): void => {
+    ({ pageY, pageX }: MouseEvent): void => {
       if (isDragging || resizing || rotating) {
         const { canvasProperties, id, onMove } = props
         const textsUpdated = [...canvasProperties.texts] as Array<TextBox>
@@ -42,8 +44,8 @@ export function Draggable(props: DraggableProps): JSX.Element {
         let { top, left } = position
         let { centerX, centerY, height, width, transform } = textsUpdated[textIndex]
         if (isDragging) {
-          top = clientY - position.startY
-          left = clientX - position.startX
+          top = pageY - position.startY
+          left = pageX - position.startX
           if (top < 0) top = 0
           else if (top + height >= canvasProperties.height) top = canvasProperties.height - height
           if (left < 0) left = 0
@@ -51,24 +53,38 @@ export function Draggable(props: DraggableProps): JSX.Element {
           centerY = top + height / 2
           centerX = left + width / 2
         } else if (resizing) {
+          // bottom
           if (resizing.side === 'sw' || resizing.side === 'se') {
-            height = resizing.height + (pageY - resizing.mouseY)
-            if (top + height > canvasProperties.height) height = canvasProperties.height - top
-            centerY = position.top + height / 2
-          } else if (resizing.side === 'nw' || resizing.side === 'ne') {
-            top = resizing.top + (pageY - resizing.mouseY)
-            if (top < 0) top = 0
-            else height = resizing.height - (pageY - resizing.mouseY)
+            if (resizing.height + (pageY - resizing.mouseY) > minimalSize) {
+              height = resizing.height + (pageY - resizing.mouseY)
+              if (top + height >= canvasProperties.height) height = canvasProperties.height - top
+            } else height = minimalSize
             centerY = position.top + height / 2
           }
+          // top
+          else if (resizing.side === 'nw' || resizing.side === 'ne') {
+            if (resizing.height - (pageY - resizing.mouseY) > minimalSize) {
+              top = resizing.top + (pageY - resizing.mouseY)
+              if (top < 0) top = 0
+              else height = resizing.height - (pageY - resizing.mouseY)
+            } else height = minimalSize
+            centerY = position.top + height / 2
+          }
+          // right
           if (resizing.side === 'ne' || resizing.side === 'se') {
-            width = resizing.width + (pageX - resizing.mouseX)
-            if (left + width > canvasProperties.width) width = canvasProperties.width - left
+            if (resizing.width + (pageX - resizing.mouseX) > minimalSize) {
+              width = resizing.width + (pageX - resizing.mouseX)
+              if (left + width >= canvasProperties.width) width = canvasProperties.width - left
+            } else width = minimalSize
             centerX = position.left + width / 2
-          } else if (resizing.side === 'nw' || resizing.side === 'sw') {
-            left = resizing.left + (pageX - resizing.mouseX)
-            if (left <= 0) left = 0
-            else width = resizing.width - (pageX - resizing.mouseX)
+          }
+          // left
+          else if (resizing.side === 'nw' || resizing.side === 'sw') {
+            if (resizing.width - (pageX - resizing.mouseX) > minimalSize) {
+              left = resizing.left + (pageX - resizing.mouseX)
+              if (left <= 0) left = 0
+              else width = resizing.width - (pageX - resizing.mouseX)
+            } else width = minimalSize
             centerX = position.left + width / 2
           }
         } else if (rotating) {
@@ -93,7 +109,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
         })
       }
     },
-    [isDragging, props, resizing, rotating]
+    [isDragging, props.canvasProperties, resizing, rotating, minimalSize, position]
   )
 
   const handleMouseDown = useCallback(
