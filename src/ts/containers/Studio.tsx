@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useState, useEffect, useRef, useLayoutEffect, useCallback } from 'react'
+import { useState, useEffect, useRef, useLayoutEffect, useCallback, useContext } from 'react'
 import Meme from '@shared/models/Meme'
 import Gallery from '@components/Tabs/Gallery/Gallery'
 import Customization from '@components/Tabs/Customization/Customization'
@@ -11,6 +11,8 @@ import { useWindowWidth } from '@shared/hooks/index'
 import { CanvasProperties } from '@shared/validators/index'
 import Draggable from '@components/Draggable/Draggable'
 import Tab from '@components/Tabs/Tab'
+import { EditorContext } from '@store/EditorContext'
+import { SET_TEXT_ID_SELECTED } from '@store/reducer/constants'
 
 const TAB_GALLERY = 'TAB_GALLERY'
 const TAB_CUSTOMIZATION = 'TAB_CUSTOMIZATION'
@@ -21,6 +23,7 @@ type StudioProps = {
 
 function Studio(props: StudioProps): JSX.Element {
   const [currentTab, setCurrentTab] = useState<string>(TAB_GALLERY)
+  const [{ textIdSelected }, dispatchEditor] = useContext(EditorContext)
   const [memeSelected, setMemeSelected] = useState<Meme | null>(null)
   const [canvasProperties, setCanvasProperties] = useState<CanvasProperties | null>(null)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -68,6 +71,7 @@ function Studio(props: StudioProps): JSX.Element {
           height: currentHeight,
           image: memeSelected.image,
           name: memeSelected.name,
+          textIdSelected: null,
           scale
         }
       }
@@ -164,12 +168,20 @@ function Studio(props: StudioProps): JSX.Element {
                     x: text.centerX,
                     y: text.centerY
                   }}
+                  onClick={(): void => {
+                    setCurrentTab(TAB_CUSTOMIZATION)
+                    dispatchEditor({
+                      type: SET_TEXT_ID_SELECTED,
+                      textIdSelected: text.id
+                    })
+                  }}
                   height={text.height}
                   width={text.width}
                   rotate={text.transform}
                   onMove={handleCustomize}
                   canvasProperties={canvasProperties}
                   id={text.id}
+                  active={text.id === textIdSelected}
                 />
               ))}
             </div>

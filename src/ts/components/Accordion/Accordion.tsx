@@ -11,6 +11,7 @@ type AccordionProps = {
   children: React.ReactNode
   removeText: Function
   afterOpening?: Function
+  afterImmediateOpening?: Function
   ref: any
 }
 
@@ -22,6 +23,7 @@ const Accordion = React.forwardRef((props: AccordionProps, ref: any) => {
   useLayoutEffect(() => {
     content.current.style.overflow = 'hidden'
     setCurrentHeight(isActive ? `${content.current.scrollHeight}px` : '0px')
+    if (isActive) props.afterImmediateOpening && props.afterImmediateOpening()
     const timeout = setTimeout(() => {
       if (isActive) {
         content.current.style.overflow = 'visible'

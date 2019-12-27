@@ -6,6 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faImage, faHeading, faDownload, faTrashAlt, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { ModalProvider } from '@store/ModalContext'
+import { EditorProvider } from '@store/EditorContext'
 
 library.add(faImage, faHeading, faTwitter, faDownload, faTrashAlt, faPlus)
 
@@ -14,9 +15,11 @@ function App(): JSX.Element {
     <ErrorBoundary>
       <DefaultProvider>
         <ModalProvider>
-          <div className="wrapper-container">
-            <MainContainer />
-          </div>
+          <EditorProvider>
+            <div className="wrapper-container">
+              <MainContainer />
+            </div>
+          </EditorProvider>
         </ModalProvider>
       </DefaultProvider>
     </ErrorBoundary>

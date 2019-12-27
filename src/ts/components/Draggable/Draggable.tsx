@@ -19,6 +19,8 @@ type DraggableProps = {
   onMove: Function
   canvasProperties: CanvasProperties
   id: string
+  onClick?: Function
+  active?: boolean
 }
 
 interface ResizingInt {
@@ -201,7 +203,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
       draggable={true}
       ref={draggableRef}
       data-type="drag"
-      className={`Draggable ${props.className || ''}`}
+      className={`Draggable ${props.className || ''} ${props.active ? 'draggable-active' : ''}`}
       style={{
         left: positioning.left,
         top: positioning.top,
@@ -210,6 +212,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
         transform: `rotate(${props.rotate}deg)`
       }}
       onMouseDown={handleMouseDown}
+      onClick={(): void => props.onClick && props.onClick()}
     >
       <div className="draggable-resize" data-type="resize" data-side="ne" onMouseDown={handleMouseDown} />
       <div className="draggable-resize" data-type="resize" data-side="nw" onMouseDown={handleMouseDown} />

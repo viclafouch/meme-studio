@@ -2,7 +2,7 @@ import * as React from 'react'
 import { ColorResult } from 'react-color'
 import { ReactSVG } from 'react-svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useRef } from 'react'
+import { useRef, useLayoutEffect, useContext } from 'react'
 import './customization.scss'
 import { CanvasProperties, TextCustomization } from '@shared/validators'
 import Accordion from '@components/Accordion/Accordion'
@@ -10,8 +10,10 @@ import TextareaExtended from '@components/TextareaExpended/TextareaExtended'
 import ColorPicker from '@components/ColorPicker/ColorPicker'
 import InputRangeSlider from '@components/InputRangeSlider/InputRangeSlider'
 import TextBox from '@shared/models/TextBox'
-import { randomID } from '@utils/index'
+import { randomID, wait } from '@utils/index'
 import { fontsFamily } from '@shared/config-editor'
+import { EditorContext } from '@store/EditorContext'
+import { SET_TEXT_ID_SELECTED } from '@store/reducer/constants'
 
 type CustomizationProps = {
   canvasProperties: CanvasProperties
@@ -20,6 +22,7 @@ type CustomizationProps = {
 
 function Customization({ canvasProperties, onCustomize }: CustomizationProps): JSX.Element {
   const colorPicker = useRef<any>(null)
+  const [{ textIdSelected }, dispatchEditor] = useContext(EditorContext)
   const refs = useRef<Array<any>>(
     Array.from({ length: canvasProperties.texts.length }).map(() => ({
       accordion: React.createRef(),
@@ -74,17 +77,35 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
     textsUpdated.push(text)
     onCustomize(textsUpdated)
     updateAccordionRefs(textsUpdated.length)
-    setTimeout(async () => {
-      refs.current[textsUpdated.length - 1].accordion.current
-        .open()
-        .then(() => refs.current[textsUpdated.length - 1].textarea.current.focus())
-    }, 0)
+    wait(0).then(() => {
+      for (let index = 0; index < refs.current.length; index++) {
+        const ref = refs.current[index]
+        if (refs.current.length - 1 !== index) ref.accordion.current.close()
+        else ref.accordion.current.open()
+      }
+    })
   }
+
+  useLayoutEffect(() => {
+    if (refs.current.length && textIdSelected) {
+      const textIndex = canvasProperties.texts.findIndex(t => t.id === textIdSelected)
+      for (let index = 0; index < refs.current.length; index++) {
+        const ref = refs.current[index]
+        if (textIndex !== index) ref.accordion.current.close()
+        else ref.accordion.current.open()
+      }
+    }
+  }, [textIdSelected])
 
   const removeText = (textId: string): void => {
     const textsUpdated = [...canvasProperties.texts] as any
     const textIndex = textsUpdated.findIndex((t: TextBox) => t.id === textId)
     textsUpdated.splice(textIndex, 1)
+    if (textId === textIdSelected)
+      dispatchEditor({
+        type: SET_TEXT_ID_SELECTED,
+        textIdSelected: null
+      })
     onCustomize(textsUpdated)
     updateAccordionRefs(textsUpdated.length)
   }
@@ -99,6 +120,12 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
             title={value.trim() || `Text #${i + 1}`}
             key={id}
             removeText={(): void => removeText(id)}
+            afterImmediateOpening={(): void =>
+              dispatchEditor({
+                type: SET_TEXT_ID_SELECTED,
+                textIdSelected: id
+              })
+            }
             afterOpening={(): void => (refs.current[i].textarea.current as any).focus()}
           >
             <div className="customization-textbox-section">
