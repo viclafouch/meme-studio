@@ -1,5 +1,5 @@
 export default class Meme {
-  public id: number
+  public id: string
   public name: string
   public url: string
   public width: number

@@ -115,10 +115,10 @@ export function Draggable(props: DraggableProps): JSX.Element {
           }
         } else if (rotating) {
           if (rotating.startOffsetLeft !== pageX && rotating.startOffsetTop !== pageY) {
-            let rad = Math.atan2(pageY - rotating.startOffsetTop, pageX - rotating.startOffsetLeft)
-            rad -= Math.atan2(rotating.startEventY - rotating.startOffsetTop, rotating.startEventX - rotating.startOffsetLeft)
-            rad += rotating.lastAngle
-            const degree = radToDegree(rad)
+            let radian = Math.atan2(pageY - rotating.startOffsetTop, pageX - rotating.startOffsetLeft)
+            radian -= Math.atan2(rotating.startEventY - rotating.startOffsetTop, rotating.startEventX - rotating.startOffsetLeft)
+            radian += rotating.lastAngle
+            const degree = radToDegree(radian)
             transform = degree
           }
         }
