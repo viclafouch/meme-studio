@@ -1,0 +1,17 @@
+.Wrapper-canvas {
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+  .canvas,
+  .wrapper-text-boxes {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+  }
+
+  .wrapper-text-boxes {
+    z-index: 2;
+  }
+}

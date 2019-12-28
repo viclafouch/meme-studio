@@ -8,6 +8,7 @@ import { SET_CANVAS, SET_TEXT_ID_SELECTED, SET_DRAW_PROPERTIES, SET_TEXTS } from
 import TextBox from '@shared/models/TextBox'
 import Draggable from '@components/Draggable/Draggable'
 import { createText } from '@shared/config-editor'
+import './wrapper-canvas.scss'
 
 type WrapperCanvasProps = {
   changeTab: Function
