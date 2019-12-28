@@ -1,12 +1,12 @@
 import { debug } from '@utils/index'
 import { SET_ON_STUDIO, SET_MEMES, SET_CURSOR_MEMES, SET_HAS_NEXT_MEMES } from './constants'
-import { State } from '../DefaultContext'
+import { DefaultState } from '../DefaultContext'
 
-export interface Actions extends State {
+export interface Actions extends DefaultState {
   type: string
 }
 
-const DefaultReducer: React.Reducer<State, Actions> = (state, action) => {
+const DefaultReducer: React.Reducer<DefaultState, Actions> = (state, action) => {
   debug(`TCL: DefaultReducer -> type : ${action.type}`)
   const { onStudio, memes, cursorMemes, hasNextMemes, type } = action
   switch (type) {

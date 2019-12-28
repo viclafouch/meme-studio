@@ -3,7 +3,7 @@ import { createContext } from 'react'
 import DefaultReducer, { Actions } from './reducer/default'
 import Meme from '@shared/models/Meme'
 
-export interface State {
+export interface DefaultState {
   onStudio: boolean
   memes: Array<Meme>
   cursorMemes: {
@@ -13,7 +13,7 @@ export interface State {
   hasNextMemes: boolean
 }
 
-const initialState: State = {
+const initialState: DefaultState = {
   onStudio: false,
   memes: [],
   cursorMemes: {
@@ -23,9 +23,9 @@ const initialState: State = {
   hasNextMemes: true
 }
 
-export const DefaultContext = createContext<State | any>(initialState)
+export const DefaultContext = createContext<DefaultState | any>(initialState)
 
 export function DefaultProvider(props: any): JSX.Element {
-  const [state, dispatch] = React.useReducer<React.Reducer<State, Actions>>(DefaultReducer, initialState)
+  const [state, dispatch] = React.useReducer<React.Reducer<DefaultState, Actions>>(DefaultReducer, initialState)
   return <DefaultContext.Provider value={[state, dispatch]}>{props.children}</DefaultContext.Provider>
 }

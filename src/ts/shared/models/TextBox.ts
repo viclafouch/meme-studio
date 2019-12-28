@@ -1,5 +1,5 @@
 export default class TextBox {
-  public id: string
+  readonly id: string
   public value: string
   public width: number
   public height: number
@@ -12,8 +12,14 @@ export default class TextBox {
   public alignVertical: string
   public textAlign: string
   public isUppercase: boolean
+  readonly base: {
+    readonly width: number
+    readonly height: number
+    readonly centerX: number
+    readonly centerY: number
+  }
 
-  constructor(text: any) {
+  constructor(text: TextBox) {
     this.id = text.id
     this.value = text.value
     this.width = text.width
@@ -27,5 +33,11 @@ export default class TextBox {
     this.alignVertical = text.alignVertical
     this.textAlign = text.textAlign
     this.isUppercase = text.isUppercase
+    this.base = {
+      width: this.width,
+      height: this.height,
+      centerX: this.centerX,
+      centerY: this.centerY
+    }
   }
 }

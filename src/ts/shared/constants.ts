@@ -1,0 +1,2 @@
+export const TAB_GALLERY = 'TAB_GALLERY'
+export const TAB_CUSTOMIZATION = 'TAB_CUSTOMIZATION'

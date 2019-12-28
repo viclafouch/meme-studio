@@ -3,7 +3,7 @@ import { Line } from '@shared/validators'
 import { API_URL } from '@shared/api'
 
 export const debug = (str: string): void =>
-  process.env.NODE_ENV !== 'production' && console.log(`%c ${str}`, 'color: yellow; font-weight: bold')
+  process.env.NODE_ENV === 'production' && console.log(`%c ${str}`, 'color: yellow; font-weight: bold')
 
 export const randomID = (): string =>
   '_' +

@@ -1,18 +1,22 @@
 import * as React from 'react'
-import { memo, useState, useCallback, useRef } from 'react'
+import { memo, useState, useCallback, useRef, RefObject } from 'react'
 import Meme from '@shared/models/Meme'
-import './gallery.scss'
 import { useMemes } from '@shared/hooks'
 import { wait } from '@utils/index'
+import './gallery.scss'
 
 type GalleryProps = {
   onSelectMeme: Function
 }
 
-function Gallery({ onSelectMeme }: GalleryProps): JSX.Element {
-  const { memes, fetchNextMemes, hasNextMemes } = useMemes()
+function Gallery(props: GalleryProps): JSX.Element {
+  const {
+    memes,
+    fetchNextMemes,
+    hasNextMemes
+  }: { memes: Array<any>; fetchNextMemes: Function; hasNextMemes: boolean } = useMemes()
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const scrollerRef = useRef<HTMLUListElement>(null)
+  const scrollerRef: RefObject<HTMLUListElement> = useRef(null)
 
   const handleScroll = useCallback(async () => {
     const isAtBottom = scrollerRef.current.offsetHeight + scrollerRef.current.scrollTop >= scrollerRef.current.scrollHeight - 150
@@ -36,7 +40,7 @@ function Gallery({ onSelectMeme }: GalleryProps): JSX.Element {
               loading="lazy"
               width={meme.width}
               height={meme.height}
-              onClick={(): void => onSelectMeme(meme)}
+              onClick={(): void => props.onSelectMeme(meme)}
               src={meme.url}
               alt={meme.name}
             />

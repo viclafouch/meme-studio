@@ -1,3 +1,6 @@
+import { randomID } from '@utils/index'
+import TextBox from './models/TextBox'
+
 export const fontsFamily = [
   'Arial',
   'Helvetica',
@@ -8,3 +11,17 @@ export const fontsFamily = [
   'Courier New',
   'Lucida Console'
 ]
+
+export const createText = (base: TextBox['base']): TextBox => ({
+  transform: 0,
+  ...base,
+  base,
+  fontSize: 22,
+  fontFamily: 'Impact',
+  textAlign: 'center',
+  alignVertical: 'middle',
+  value: '',
+  id: randomID(),
+  color: '#ffffff',
+  isUppercase: false
+})

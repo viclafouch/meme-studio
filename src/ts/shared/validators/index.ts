@@ -1,12 +1,8 @@
-import TextBox from '../models/TextBox'
-
-export interface CanvasProperties {
-  texts: Array<TextBox>
+export interface DrawProperties {
   height: number
   width: number
   image: Promise<HTMLImageElement>
   scale: number
-  name: string
 }
 
 export interface TextCustomization {

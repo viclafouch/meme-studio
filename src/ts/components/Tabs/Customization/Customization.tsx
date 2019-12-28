@@ -3,28 +3,29 @@ import { ColorResult } from 'react-color'
 import { ReactSVG } from 'react-svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useRef, useLayoutEffect, useContext } from 'react'
-import './customization.scss'
-import { CanvasProperties, TextCustomization } from '@shared/validators'
+import { TextCustomization } from '@shared/validators'
 import Accordion from '@components/Accordion/Accordion'
 import TextareaExtended from '@components/TextareaExpended/TextareaExtended'
 import ColorPicker from '@components/ColorPicker/ColorPicker'
 import InputRangeSlider from '@components/InputRangeSlider/InputRangeSlider'
 import TextBox from '@shared/models/TextBox'
-import { randomID, wait } from '@utils/index'
-import { fontsFamily } from '@shared/config-editor'
-import { EditorContext } from '@store/EditorContext'
+import { wait } from '@utils/index'
+import { fontsFamily, createText } from '@shared/config-editor'
+import { EditorContext, EditorState } from '@store/EditorContext'
 import { SET_TEXT_ID_SELECTED } from '@store/reducer/constants'
+import Meme from '@shared/models/Meme'
+import './customization.scss'
 
 type CustomizationProps = {
-  canvasProperties: CanvasProperties
-  onCustomize: Function
+  onCustomizeTexts: Function
+  memeSelected: Meme
 }
 
-function Customization({ canvasProperties, onCustomize }: CustomizationProps): JSX.Element {
+function Customization({ onCustomizeTexts, memeSelected }: CustomizationProps): JSX.Element {
   const colorPicker = useRef<any>(null)
-  const [{ textIdSelected }, dispatchEditor] = useContext(EditorContext)
+  const [{ textIdSelected, texts, drawProperties }, dispatchEditor]: [EditorState, Function] = useContext(EditorContext)
   const refs = useRef<Array<any>>(
-    Array.from({ length: canvasProperties.texts.length }).map(() => ({
+    Array.from({ length: memeSelected.boxCount }).map(() => ({
       accordion: React.createRef(),
       textarea: React.createRef()
     }))
@@ -40,42 +41,27 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
     }
   }
 
-  const handleCustom = (customization: TextCustomization): void => {
-    const textsUpdated = [...canvasProperties.texts] as any
+  const handleEdit = (customization: TextCustomization): void => {
+    const textsUpdated = [...texts] as any
     const textIndex = textsUpdated.findIndex((t: TextBox) => t.id === customization.textId)
     textsUpdated[textIndex][customization.type] = customization.value
-    onCustomize(textsUpdated)
+    onCustomizeTexts(textsUpdated)
   }
 
   const addText = (): void => {
-    const textsUpdated = [...canvasProperties.texts] as any
-    const text = {
-      transform: '',
+    const textsUpdated = [...texts] as any
+    const text = createText({
       centerY: 50,
       centerX: 340,
       height: 100,
-      width: 680,
-      base: {
-        centerY: 50,
-        centerX: 340,
-        height: 100,
-        width: 680
-      },
-      fontSize: 22,
-      fontFamily: 'Impact',
-      textAlign: 'center',
-      alignVertical: 'middle',
-      value: '',
-      id: randomID(),
-      color: '#ffffff',
-      isUppercase: false
-    }
-    text.height = text.base.height * canvasProperties.scale
-    text.width = text.base.width * canvasProperties.scale
-    text.centerY = canvasProperties.height / 2
-    text.centerX = canvasProperties.width / 2
+      width: 680
+    })
+    text.height = text.base.height * drawProperties.scale
+    text.width = text.base.width * drawProperties.scale
+    text.centerY = drawProperties.height / 2
+    text.centerX = drawProperties.width / 2
     textsUpdated.push(text)
-    onCustomize(textsUpdated)
+    onCustomizeTexts(textsUpdated)
     updateAccordionRefs(textsUpdated.length)
     wait(0).then(() => {
       for (let index = 0; index < refs.current.length; index++) {
@@ -88,7 +74,7 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
 
   useLayoutEffect(() => {
     if (refs.current.length && textIdSelected) {
-      const textIndex = canvasProperties.texts.findIndex(t => t.id === textIdSelected)
+      const textIndex = texts.findIndex((text: TextBox) => text.id === textIdSelected)
       for (let index = 0; index < refs.current.length; index++) {
         const ref = refs.current[index]
         if (textIndex !== index) ref.accordion.current.close()
@@ -98,7 +84,7 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
   }, [textIdSelected])
 
   const removeText = (textId: string): void => {
-    const textsUpdated = [...canvasProperties.texts] as any
+    const textsUpdated = [...texts] as any
     const textIndex = textsUpdated.findIndex((t: TextBox) => t.id === textId)
     textsUpdated.splice(textIndex, 1)
     if (textId === textIdSelected)
@@ -106,14 +92,14 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
         type: SET_TEXT_ID_SELECTED,
         textIdSelected: null
       })
-    onCustomize(textsUpdated)
+    onCustomizeTexts(textsUpdated)
     updateAccordionRefs(textsUpdated.length)
   }
 
   return (
     <div className="customization-not-empty">
-      <h2>Edit {canvasProperties.name}</h2>
-      {canvasProperties.texts.map(
+      <h2>Edit Name</h2>
+      {texts.map(
         ({ value, id, color, fontSize, alignVertical, textAlign, isUppercase, fontFamily }, i): React.ReactNode => (
           <Accordion
             ref={refs.current[i].accordion}
@@ -136,7 +122,7 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
                   placeholder={`Text #${i + 1}`}
                   defaultValue={value}
                   onChange={(value: any): void =>
-                    handleCustom({
+                    handleEdit({
                       textId: id,
                       type: 'value',
                       value
@@ -154,7 +140,7 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
                   step={1}
                   value={fontSize}
                   onChange={(value: number): void =>
-                    handleCustom({
+                    handleEdit({
                       textId: id,
                       type: 'fontSize',
                       value
@@ -170,7 +156,7 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
                   ref={colorPicker}
                   color={color}
                   setColor={({ hex }: ColorResult): void =>
-                    handleCustom({
+                    handleEdit({
                       textId: id,
                       type: 'color',
                       value: hex
@@ -183,7 +169,7 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
                 <select
                   value={fontFamily}
                   onChange={(event: React.ChangeEvent<HTMLSelectElement>): void =>
-                    handleCustom({
+                    handleEdit({
                       textId: id,
                       type: 'fontFamily',
                       value: event.target.value
@@ -202,7 +188,7 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
                 <select
                   value={alignVertical}
                   onChange={(event: React.ChangeEvent<HTMLSelectElement>): void =>
-                    handleCustom({
+                    handleEdit({
                       textId: id,
                       type: 'alignVertical',
                       value: event.target.value
@@ -219,7 +205,7 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
                 <select
                   value={textAlign}
                   onChange={(event: React.ChangeEvent<HTMLSelectElement>): void =>
-                    handleCustom({
+                    handleEdit({
                       textId: id,
                       type: 'textAlign',
                       value: event.target.value
@@ -238,7 +224,7 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
                   name="uppercase"
                   checked={isUppercase}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
-                    handleCustom({
+                    handleEdit({
                       textId: id,
                       type: 'isUppercase',
                       value: event.target.checked
@@ -258,17 +244,21 @@ function Customization({ canvasProperties, onCustomize }: CustomizationProps): J
   )
 }
 
-export default (props: CustomizationProps): JSX.Element => {
+export default (props: any): JSX.Element => {
   return (
-    <div className="Customization">
-      {props.canvasProperties ? (
-        <Customization {...props} />
-      ) : (
-        <div className="customization-empty">
-          <ReactSVG src="images/sad.svg" wrapper="span" className="wrapper-sad-svg" />
-          <h3>No template selected</h3>
+    <EditorContext.Consumer>
+      {([{ memeSelected }]: [EditorState]): JSX.Element => (
+        <div className="Customization">
+          {memeSelected ? (
+            <Customization {...props} memeSelected={memeSelected} />
+          ) : (
+            <div className="customization-empty">
+              <ReactSVG src="images/sad.svg" wrapper="span" className="wrapper-sad-svg" />
+              <h3>No template selected</h3>
+            </div>
+          )}
         </div>
       )}
-    </div>
+    </EditorContext.Consumer>
   )
 }

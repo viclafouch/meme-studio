@@ -1,7 +1,8 @@
 import * as React from 'react'
-import { useState, useLayoutEffect, useCallback, useRef, useMemo } from 'react'
+import { useState, useLayoutEffect, useCallback, useRef, useMemo, useContext, RefObject } from 'react'
 import { ReactSVG } from 'react-svg'
-import { CanvasProperties } from '@shared/validators'
+import { EditorContext, EditorState } from '@store/EditorContext'
+import { DrawProperties } from '@shared/validators'
 import TextBox from '@shared/models/TextBox'
 import { radToDegree, degreeToRad } from '@utils/index'
 import './draggable.scss'
@@ -17,7 +18,7 @@ type DraggableProps = {
   width: number
   rotate: number
   onMove: Function
-  canvasProperties: CanvasProperties
+  drawProperties: DrawProperties
   id: string
   onClick?: Function
   active?: boolean
@@ -50,7 +51,8 @@ interface RotatingInt {
 }
 
 export function Draggable(props: DraggableProps): JSX.Element {
-  const draggableRef = useRef<HTMLDivElement>(null)
+  const draggableRef: RefObject<HTMLDivElement> = useRef(null)
+  const [{ showTextAreas, texts }]: [EditorState] = useContext(EditorContext)
   const [resizing, setResizing] = useState<ResizingInt | null>(null)
   const [rotating, setRotating] = useState<RotatingInt | null>(null)
   const [positioning, setPositioning] = useState<PositionInt>({
@@ -61,13 +63,13 @@ export function Draggable(props: DraggableProps): JSX.Element {
     isDragging: false
   })
 
-  const minimalSize = useMemo(() => props.canvasProperties.scale * 40, [props.canvasProperties.scale])
+  const minimalSize: number = useMemo(() => props.drawProperties.scale * 40, [props.drawProperties.scale])
 
   const handleMouseMove = useCallback(
     ({ pageY, pageX }: MouseEvent): void => {
       if (positioning.isDragging || resizing || rotating) {
-        const { canvasProperties, id, onMove } = props
-        const textsUpdated = [...canvasProperties.texts] as Array<TextBox>
+        const { drawProperties, id, onMove } = props
+        const textsUpdated = [...texts] as Array<TextBox>
         const textIndex = textsUpdated.findIndex((t: TextBox) => t.id === id)
         let { top, left } = positioning
         let { centerX, centerY, height, width, transform } = textsUpdated[textIndex]
@@ -75,9 +77,9 @@ export function Draggable(props: DraggableProps): JSX.Element {
           top = pageY - positioning.startY
           left = pageX - positioning.startX
           if (top < 0) top = 0
-          else if (top + height >= canvasProperties.height) top = canvasProperties.height - height
+          else if (top + height >= drawProperties.height) top = drawProperties.height - height
           if (left < 0) left = 0
-          else if (left + width >= canvasProperties.width) left = canvasProperties.width - width
+          else if (left + width >= drawProperties.width) left = drawProperties.width - width
           centerY = top + height / 2
           centerX = left + width / 2
         } else if (resizing) {
@@ -85,7 +87,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
           if (resizing.side === 'sw' || resizing.side === 'se') {
             if (resizing.height + (pageY - resizing.mouseY) > minimalSize) {
               height = resizing.height + (pageY - resizing.mouseY)
-              if (top + height >= canvasProperties.height) height = canvasProperties.height - top
+              if (top + height >= drawProperties.height) height = drawProperties.height - top
             } else height = minimalSize
             centerY = top + height / 2
           }
@@ -102,7 +104,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
           if (resizing.side === 'ne' || resizing.side === 'se') {
             if (resizing.width + (pageX - resizing.mouseX) > minimalSize) {
               width = resizing.width + (pageX - resizing.mouseX)
-              if (left + width >= canvasProperties.width) width = canvasProperties.width - left
+              if (left + width >= drawProperties.width) width = drawProperties.width - left
             } else width = minimalSize
             centerX = left + width / 2
           }
@@ -137,7 +139,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
         })
       }
     },
-    [props.canvasProperties, resizing, rotating, minimalSize, positioning]
+    [props.drawProperties, resizing, rotating, minimalSize, positioning]
   )
 
   const handleMouseDown = useCallback(
@@ -209,7 +211,8 @@ export function Draggable(props: DraggableProps): JSX.Element {
         top: positioning.top,
         height: props.height,
         width: props.width,
-        transform: `rotate(${props.rotate}deg)`
+        transform: `rotate(${props.rotate}deg)`,
+        ...(!showTextAreas ? { display: 'none' } : null)
       }}
       onMouseDown={handleMouseDown}
       onClick={(): void => props.onClick && props.onClick()}

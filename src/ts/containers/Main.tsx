@@ -1,22 +1,22 @@
 import * as React from 'react'
-import { useState, useEffect, useContext, useRef } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { ReactSVG } from 'react-svg'
 import Studio from './Studio'
 import Header from '@components/Header/Header'
 import Intro from './Intro'
 import Export from './Export'
-import { DefaultContext } from '@store/DefaultContext'
+import { DefaultContext, DefaultState } from '@store/DefaultContext'
 import { FatalError } from '@components/ErrorBoundary/ErrorBoundary'
 import { wait } from '@utils/index'
 import { useMemes } from '@shared/hooks'
+import Tools from '@components/Tools/Tools'
 
 function Main(): JSX.Element {
-  const canvasRef = useRef(null)
   const { fetchNextMemes } = useMemes()
-  const [{ onStudio }] = useContext<any>(DefaultContext)
+  const [{ onStudio }]: [DefaultState] = useContext(DefaultContext)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isError, setIsError] = useState<boolean>(false)
-  const [isModalExportOpen, setIsModalExportOpen] = useState(false)
+  const [isModalExportOpen, setIsModalExportOpen] = useState<boolean>(false)
 
   useEffect(() => {
     ;(async (): Promise<void> => {
@@ -47,12 +47,13 @@ function Main(): JSX.Element {
             <Header export={(): void => setIsModalExportOpen(true)} />
           </div>
           <div className="ld ld-float-btt-in studio-body">
-            <Studio ref={canvasRef} />
+            <Tools />
+            <Studio />
           </div>
         </div>
       )}
 
-      {isModalExportOpen && <Export onClose={(): void => setIsModalExportOpen(false)} canvas={canvasRef} />}
+      {isModalExportOpen && <Export onClose={(): void => setIsModalExportOpen(false)} />}
     </main>
   )
 }
