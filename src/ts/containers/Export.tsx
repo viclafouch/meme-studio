@@ -1,12 +1,10 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
 import Modal from '@components/Modal/Modal'
-import { wait } from '@utils/index'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 type ExportProps = {
   onClose: Function
-  canvas: React.RefObject<HTMLCanvasElement>
 }
 
 function Export(props: ExportProps): JSX.Element {
@@ -15,10 +13,7 @@ function Export(props: ExportProps): JSX.Element {
 
   useEffect(() => {
     ;(async (): Promise<void> => {
-      const dataUrl: string = props.canvas.current.toDataURL()
-      setImg(dataUrl)
-      await wait()
-      setIsLoading(false)
+      //
     })()
   }, [])
 
