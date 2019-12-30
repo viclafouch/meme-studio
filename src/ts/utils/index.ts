@@ -126,3 +126,17 @@ export const parseSearchParams = (params: any): string => {
   for (const iterator in params) searchParams.append(iterator, params[iterator])
   return searchParams.toString()
 }
+
+export const debounce = (func: any, wait: number): any => {
+  let timeout: any
+  return function(...args: any): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const context = this
+    const later = (): void => {
+      timeout = null
+      func.apply(context, args)
+    }
+    clearTimeout(timeout)
+    timeout = setTimeout(later, wait)
+  }
+}

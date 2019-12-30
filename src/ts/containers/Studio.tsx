@@ -7,20 +7,28 @@ import Button from '@components/Button/Button'
 import WrapperCanvas from '@components/WrapperCanvas/WrapperCanvas'
 import Tab from '@components/Tabs/Tab'
 import { EditorContext, EditorState } from '@store/EditorContext'
+import { HistoryContext, HistoryState, HistoryDispatcher } from '@store/HistoryContext'
 import { SET_TEXTS, SET_MEME_SELECTED } from '@store/reducer/constants'
 import { TAB_CUSTOMIZATION, TAB_GALLERY } from '@shared/constants'
 import Meme from '@shared/models/Meme'
 import TextBox from '@shared/models/TextBox'
 
 function Studio(): JSX.Element {
-  const [currentTab, setCurrentTab] = useState<string>(TAB_GALLERY)
-  const [{ memeSelected }, dispatchEditor]: [EditorState, Function] = useContext(EditorContext)
+  const [currentTab, setCurrentTab]: [string, Function] = useState<string>(TAB_GALLERY)
+  const [, { setToHistory }]: [HistoryState, HistoryDispatcher] = useContext(HistoryContext)
+  const [{ memeSelected, drawProperties }, dispatchEditor]: [EditorState, Function] = useContext(EditorContext)
 
-  const handleCustomizeTexts = (texts: Array<TextBox>): void =>
+  const handleCustomizeTexts = (texts: Array<TextBox>, type: string): void => {
     dispatchEditor({
       type: SET_TEXTS,
       texts
     })
+    setToHistory({
+      type,
+      texts,
+      drawProperties
+    })
+  }
 
   const handleChooseMeme = (meme: Meme): void =>
     dispatchEditor({

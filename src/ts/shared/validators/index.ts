@@ -18,3 +18,16 @@ export interface Line {
   lineHeight: Function
   lineWidth: Function
 }
+
+export type typeString =
+  | 'initial'
+  | 'resize'
+  | 'move'
+  | 'rotate'
+  | 'fontFamily'
+  | 'fontSize'
+  | 'color'
+  | 'value'
+  | 'textAlign'
+  | 'isUppercase'
+  | 'alignVertical'

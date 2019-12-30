@@ -3,11 +3,12 @@ import { useLayoutEffect, useEffect, useContext, useRef, RefObject } from 'react
 import { EditorContext, EditorState } from '@store/EditorContext'
 import { useWindowWidth } from '@shared/hooks'
 import { innerDemensions, fillText } from '@utils/index'
-import { TAB_CUSTOMIZATION } from '@shared/constants'
+import { TAB_CUSTOMIZATION, INITIAL } from '@shared/constants'
 import { SET_CANVAS, SET_TEXT_ID_SELECTED, SET_DRAW_PROPERTIES, SET_TEXTS } from '@store/reducer/constants'
 import TextBox from '@shared/models/TextBox'
 import Draggable from '@components/Draggable/Draggable'
 import { createText } from '@shared/config-editor'
+import { HistoryContext, HistoryState, HistoryDispatcher } from '@store/HistoryContext'
 import './wrapper-canvas.scss'
 
 type WrapperCanvasProps = {
@@ -21,9 +22,10 @@ function WrapperCanvas(props: WrapperCanvasProps): JSX.Element {
     Function,
     RefObject<HTMLCanvasElement>
   ] = useContext(EditorContext)
+  const [, { clearHistory, setToHistory }]: [HistoryState, HistoryDispatcher] = useContext(HistoryContext)
   const windowWidth: number = useWindowWidth()
   const wrapperRef: RefObject<HTMLDivElement> = useRef(null)
-  const memeIdRef: any = useRef(null)
+  const memeIdRef: RefObject<string> = useRef(null)
 
   useEffect(() => {
     dispatchEditor({
@@ -71,22 +73,32 @@ function WrapperCanvas(props: WrapperCanvasProps): JSX.Element {
     })
 
     if (memeIdRef.current !== memeSelected.id) {
-      ;(memeIdRef as React.MutableRefObject<string>).current = memeSelected.id
+      ;(memeIdRef as React.MutableRefObject<string>).current = memeSelected.id // avoid readOnly
+
+      const texts = [...Array(memeSelected.boxCount)].map(() => {
+        const text = createText({
+          centerY: 50,
+          centerX: 340,
+          height: 100,
+          width: 680
+        })
+        text.height = text.base.height * drawProperties.scale
+        text.width = text.base.width * drawProperties.scale
+        text.centerY = drawProperties.height / 2
+        text.centerX = drawProperties.width / 2
+        return text
+      })
+
       dispatchEditor({
         type: SET_TEXTS,
-        texts: [...Array(memeSelected.boxCount)].map(() => {
-          const text = createText({
-            centerY: 50,
-            centerX: 340,
-            height: 100,
-            width: 680
-          })
-          text.height = text.base.height * drawProperties.scale
-          text.width = text.base.width * drawProperties.scale
-          text.centerY = drawProperties.height / 2
-          text.centerX = drawProperties.width / 2
-          return text
-        })
+        texts
+      })
+
+      clearHistory()
+      setToHistory({
+        texts,
+        drawProperties,
+        type: INITIAL
       })
     }
   }, [windowWidth, memeSelected])

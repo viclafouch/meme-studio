@@ -3,7 +3,7 @@ import { ColorResult } from 'react-color'
 import { ReactSVG } from 'react-svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useRef, useLayoutEffect, useContext } from 'react'
-import { TextCustomization } from '@shared/validators'
+import { TextCustomization, typeString } from '@shared/validators'
 import Accordion from '@components/Accordion/Accordion'
 import TextareaExtended from '@components/TextareaExpended/TextareaExtended'
 import ColorPicker from '@components/ColorPicker/ColorPicker'
@@ -14,6 +14,7 @@ import { fontsFamily, createText } from '@shared/config-editor'
 import { EditorContext, EditorState } from '@store/EditorContext'
 import { SET_TEXT_ID_SELECTED } from '@store/reducer/constants'
 import Meme from '@shared/models/Meme'
+import { toHistoryType } from '@utils/helpers'
 import './customization.scss'
 
 type CustomizationProps = {
@@ -44,8 +45,11 @@ function Customization({ onCustomizeTexts, memeSelected }: CustomizationProps): 
   const handleEdit = (customization: TextCustomization): void => {
     const textsUpdated = [...texts] as any
     const textIndex = textsUpdated.findIndex((t: TextBox) => t.id === customization.textId)
-    textsUpdated[textIndex][customization.type] = customization.value
-    onCustomizeTexts(textsUpdated)
+    const text = { ...textsUpdated[textIndex] }
+    const type = customization.type as typeString
+    text[type] = customization.value
+    textsUpdated[textIndex] = text
+    onCustomizeTexts(textsUpdated, toHistoryType(type))
   }
 
   const addText = (): void => {
@@ -120,7 +124,7 @@ function Customization({ onCustomizeTexts, memeSelected }: CustomizationProps): 
                   rows={1}
                   ref={refs.current[i].textarea}
                   placeholder={`Text #${i + 1}`}
-                  defaultValue={value}
+                  value={value}
                   onChange={(value: any): void =>
                     handleEdit({
                       textId: id,

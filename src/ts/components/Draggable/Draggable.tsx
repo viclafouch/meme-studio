@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useState, useLayoutEffect, useCallback, useRef, useMemo, useContext, RefObject } from 'react'
 import { ReactSVG } from 'react-svg'
 import { EditorContext, EditorState } from '@store/EditorContext'
-import { DrawProperties } from '@shared/validators'
+import { DrawProperties, typeString } from '@shared/validators'
 import TextBox from '@shared/models/TextBox'
 import { radToDegree, degreeToRad } from '@utils/index'
 import './draggable.scss'
@@ -71,8 +71,9 @@ export function Draggable(props: DraggableProps): JSX.Element {
         const { drawProperties, id, onMove } = props
         const textsUpdated = [...texts] as Array<TextBox>
         const textIndex = textsUpdated.findIndex((t: TextBox) => t.id === id)
+        const text = { ...textsUpdated[textIndex] }
         let { top, left } = positioning
-        let { centerX, centerY, height, width, transform } = textsUpdated[textIndex]
+        let { centerX, centerY, height, width, transform } = text
         if (positioning.isDragging) {
           top = pageY - positioning.startY
           left = pageX - positioning.startX
@@ -126,12 +127,14 @@ export function Draggable(props: DraggableProps): JSX.Element {
             transform = degree
           }
         }
-        textsUpdated[textIndex].centerX = centerX
-        textsUpdated[textIndex].centerY = centerY
-        textsUpdated[textIndex].width = width
-        textsUpdated[textIndex].height = height
-        textsUpdated[textIndex].transform = transform
-        onMove(textsUpdated)
+        const type: typeString = positioning.isDragging ? 'move' : resizing ? 'resize' : 'rotate'
+        text.centerX = centerX
+        text.centerY = centerY
+        text.width = width
+        text.height = height
+        text.transform = transform
+        textsUpdated[textIndex] = text
+        onMove(textsUpdated, type)
         setPositioning({
           ...positioning,
           top,

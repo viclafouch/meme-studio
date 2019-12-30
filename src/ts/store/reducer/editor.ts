@@ -15,7 +15,7 @@ export interface Actions extends EditorState {
 
 const EditorReducer: React.Reducer<EditorState, Actions> = (state, action) => {
   debug(`TCL: EditorReducer -> type : ${action.type}`)
-  const { textIdSelected, showTextAreas, memeSelected, canvas, drawProperties, type, texts } = action
+  const { textIdSelected, showTextAreas, memeSelected, canvas, drawProperties, texts, type } = action
   switch (type) {
     case SET_TEXT_ID_SELECTED:
       debug(`TCL: EditorReducer -> set textIdSelected to ${textIdSelected}`)
