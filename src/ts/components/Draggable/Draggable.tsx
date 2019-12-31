@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useState, useLayoutEffect, useCallback, useRef, useMemo, useContext, RefObject } from 'react'
+import { useState, useLayoutEffect, useCallback, useRef, useMemo, useContext, RefObject, useEffect } from 'react'
 import { ReactSVG } from 'react-svg'
 import { EditorContext, EditorState } from '@store/EditorContext'
 import { DrawProperties, typeString } from '@shared/validators'
@@ -53,15 +53,25 @@ interface RotatingInt {
 export function Draggable(props: DraggableProps): JSX.Element {
   const draggableRef: RefObject<HTMLDivElement> = useRef(null)
   const [{ showTextAreas, texts }]: [EditorState] = useContext(EditorContext)
-  const [resizing, setResizing] = useState<ResizingInt | null>(null)
-  const [rotating, setRotating] = useState<RotatingInt | null>(null)
-  const [positioning, setPositioning] = useState<PositionInt>({
+  const [resizing, setResizing]: [ResizingInt, Function] = useState<ResizingInt | null>(null)
+  const [rotating, setRotating]: [RotatingInt, Function] = useState<RotatingInt | null>(null)
+  const [positioning, setPositioning]: [PositionInt, Function] = useState<PositionInt>({
     left: props.position.x - props.width / 2,
     top: props.position.y - props.height / 2,
     startX: null,
     startY: null,
     isDragging: false
   })
+
+  useEffect(() => {
+    setPositioning({
+      left: props.position.x - props.width / 2,
+      top: props.position.y - props.height / 2,
+      startX: null,
+      startY: null,
+      isDragging: false
+    })
+  }, [props.drawProperties.scale])
 
   const minimalSize: number = useMemo(() => props.drawProperties.scale * 40, [props.drawProperties.scale])
 

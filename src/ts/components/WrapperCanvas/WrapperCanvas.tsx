@@ -58,9 +58,11 @@ function WrapperCanvas(props: WrapperCanvasProps): JSX.Element {
     canvas.width = currentWidth
     canvas.height = currentHeight
 
+    const { width: oldWidth, height: oldHeight } = drawProperties || {}
+
     const scale: number = Math.min(currentWidth / memeSelected.width, currentHeight / memeSelected.height)
 
-    const drawProperties = {
+    const newDrawProperties = {
       width: currentWidth,
       height: currentHeight,
       image: memeSelected.image,
@@ -69,7 +71,7 @@ function WrapperCanvas(props: WrapperCanvasProps): JSX.Element {
 
     dispatchEditor({
       type: SET_DRAW_PROPERTIES,
-      drawProperties
+      drawProperties: newDrawProperties
     })
 
     if (memeIdRef.current !== memeSelected.id) {
@@ -82,10 +84,10 @@ function WrapperCanvas(props: WrapperCanvasProps): JSX.Element {
           height: 100,
           width: 680
         })
-        text.height = text.base.height * drawProperties.scale
-        text.width = text.base.width * drawProperties.scale
-        text.centerY = drawProperties.height / 2
-        text.centerX = drawProperties.width / 2
+        text.height = text.base.height * newDrawProperties.scale
+        text.width = text.base.width * newDrawProperties.scale
+        text.centerY = text.base.centerY * newDrawProperties.scale
+        text.centerX = text.base.centerX * newDrawProperties.scale
         return text
       })
 
@@ -97,8 +99,19 @@ function WrapperCanvas(props: WrapperCanvasProps): JSX.Element {
       clearHistory()
       setToHistory({
         texts,
-        drawProperties,
+        drawProperties: newDrawProperties,
         type: INITIAL
+      })
+    } else {
+      dispatchEditor({
+        type: SET_TEXTS,
+        texts: texts.map((text: TextBox) => {
+          text.centerX = (text.centerX / oldWidth) * newDrawProperties.width
+          text.centerY = (text.centerY / oldHeight) * newDrawProperties.height
+          text.width = (text.width / oldWidth) * newDrawProperties.width
+          text.height = (text.height / oldHeight) * newDrawProperties.height
+          return text
+        })
       })
     }
   }, [windowWidth, memeSelected])
