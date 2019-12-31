@@ -5,6 +5,7 @@ import { EditorContext, EditorState } from './EditorContext'
 import TextBox from '@shared/models/TextBox'
 import { DrawProperties } from '@shared/validators'
 import { SET_DRAW_PROPERTIES, SET_TEXTS } from './reducer/constants'
+import { INITIAL } from '@shared/constants'
 
 export const HistoryContext = createContext(null)
 
@@ -38,22 +39,22 @@ export function HistoryProvider(props: any): JSX.Element {
       let index: number
       if (historyIndex <= 0) index = 1
       else index = historyIndex + 1
-      const historyUpdated = [...history].slice(0, index) as Array<HistoryInt>
+      const historyUpdated = [...(type === INITIAL ? [] : history)].slice(0, index) as Array<HistoryInt>
       historyUpdated.push({ texts, drawProperties, type })
       setHistory(historyUpdated)
-      setHistoryIndex(historyUpdated.length - 1)
+      setHistoryIndex(type === INITIAL ? 0 : historyUpdated.length - 1)
     }, 500),
     [setHistory, setHistoryIndex, history, historyIndex]
   )
 
   const canUndo: boolean = useMemo(() => {
     const index: number = historyIndex - 1
-    return !!history[index]
+    return !!history[index] && history.length > 1
   }, [history, historyIndex])
 
   const canRedo: boolean = useMemo(() => {
     const index: number = historyIndex + 1
-    return !!history[index]
+    return !!history[index] && history.length > 1
   }, [history, historyIndex])
 
   const clearHistory = useCallback(() => {

@@ -22,7 +22,7 @@ function WrapperCanvas(props: WrapperCanvasProps): JSX.Element {
     Function,
     RefObject<HTMLCanvasElement>
   ] = useContext(EditorContext)
-  const [, { clearHistory, setToHistory }]: [HistoryState, HistoryDispatcher] = useContext(HistoryContext)
+  const [, { setToHistory }]: [HistoryState, HistoryDispatcher] = useContext(HistoryContext)
   const windowWidth: number = useWindowWidth()
   const wrapperRef: RefObject<HTMLDivElement> = useRef(null)
   const memeIdRef: RefObject<string> = useRef(null)
@@ -95,8 +95,6 @@ function WrapperCanvas(props: WrapperCanvasProps): JSX.Element {
         type: SET_TEXTS,
         texts
       })
-
-      clearHistory()
       setToHistory({
         texts,
         drawProperties: newDrawProperties,
