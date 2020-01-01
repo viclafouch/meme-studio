@@ -55,13 +55,13 @@ export function Draggable(props: DraggableProps): JSX.Element {
   const [{ showTextAreas, texts }]: [EditorState] = useContext(EditorContext)
   const [resizing, setResizing]: [ResizingInt, Function] = useState<ResizingInt | null>(null)
   const [rotating, setRotating]: [RotatingInt, Function] = useState<RotatingInt | null>(null)
-  const [positioning, setPositioning]: [PositionInt, Function] = useState<PositionInt>({
+  const [positioning, setPositioning]: [PositionInt, Function] = useState<PositionInt>(() => ({
     left: props.position.x - props.width / 2,
     top: props.position.y - props.height / 2,
     startX: null,
     startY: null,
     isDragging: false
-  })
+  }))
 
   useEffect(() => {
     setPositioning({

@@ -13,34 +13,16 @@ import { wait } from '@utils/index'
 import { fontsFamily, createText } from '@shared/config-editor'
 import { EditorContext, EditorState } from '@store/EditorContext'
 import { SET_TEXT_ID_SELECTED } from '@store/reducer/constants'
-import Meme from '@shared/models/Meme'
 import { toHistoryType } from '@utils/helpers'
 import './customization.scss'
 
 type CustomizationProps = {
   onCustomizeTexts: Function
-  memeSelected: Meme
 }
 
-function Customization({ onCustomizeTexts, memeSelected }: CustomizationProps): JSX.Element {
+function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
   const colorPicker = useRef<any>(null)
   const [{ textIdSelected, texts, drawProperties }, dispatchEditor]: [EditorState, Function] = useContext(EditorContext)
-  const refs = useRef<Array<any>>(
-    Array.from({ length: memeSelected.boxCount }).map(() => ({
-      accordion: React.createRef(),
-      textarea: React.createRef()
-    }))
-  )
-
-  const updateAccordionRefs = (value: number): void => {
-    refs.current = refs.current.splice(0, value)
-    for (let i = 0; i < value; i++) {
-      refs.current[i] = {
-        accordion: React.createRef(),
-        textarea: React.createRef()
-      }
-    }
-  }
 
   const handleEdit = (customization: TextCustomization): void => {
     const textsUpdated = [...texts] as any
@@ -66,26 +48,23 @@ function Customization({ onCustomizeTexts, memeSelected }: CustomizationProps): 
     text.centerX = drawProperties.width / 2
     textsUpdated.push(text)
     onCustomizeTexts(textsUpdated)
-    updateAccordionRefs(textsUpdated.length)
     wait(0).then(() => {
-      for (let index = 0; index < refs.current.length; index++) {
-        const ref = refs.current[index]
-        if (refs.current.length - 1 !== index) ref.accordion.current.close()
-        else ref.accordion.current.open()
+      for (let index = 0; index < textsUpdated.length; index++) {
+        const text = textsUpdated[index]
+        if (textsUpdated.length - 1 !== index) text.refs.accordion.current.close()
+        else text.refs.accordion.current.open()
       }
     })
   }
 
   useLayoutEffect(() => {
-    if (refs.current.length && textIdSelected) {
-      const textIndex = texts.findIndex((text: TextBox) => text.id === textIdSelected)
-      for (let index = 0; index < refs.current.length; index++) {
-        const ref = refs.current[index]
-        if (textIndex !== index) ref.accordion.current.close()
-        else ref.accordion.current.open()
+    if (textIdSelected) {
+      for (const text of texts) {
+        if (text.id === textIdSelected) text.refs.accordion.current.open()
+        else text.refs.accordion.current.close()
       }
     }
-  }, [textIdSelected])
+  }, [textIdSelected, texts])
 
   const removeText = (textId: string): void => {
     const textsUpdated = [...texts] as any
@@ -97,16 +76,15 @@ function Customization({ onCustomizeTexts, memeSelected }: CustomizationProps): 
         textIdSelected: null
       })
     onCustomizeTexts(textsUpdated)
-    updateAccordionRefs(textsUpdated.length)
   }
 
   return (
     <div className="customization-not-empty">
       <h2>Edit Name</h2>
       {texts.map(
-        ({ value, id, color, fontSize, alignVertical, textAlign, isUppercase, fontFamily }, i): React.ReactNode => (
+        ({ value, id, color, fontSize, alignVertical, textAlign, isUppercase, fontFamily, refs }, i): React.ReactNode => (
           <Accordion
-            ref={refs.current[i].accordion}
+            ref={refs.accordion}
             title={value.trim() || `Text #${i + 1}`}
             key={id}
             removeText={(): void => removeText(id)}
@@ -116,13 +94,13 @@ function Customization({ onCustomizeTexts, memeSelected }: CustomizationProps): 
                 textIdSelected: id
               })
             }
-            afterOpening={(): void => (refs.current[i].textarea.current as any).focus()}
+            afterOpening={(): void => (refs.textarea.current as any).focus()}
           >
             <div className="customization-textbox-section">
               <div className="field-customization">
                 <TextareaExtended
                   rows={1}
-                  ref={refs.current[i].textarea}
+                  ref={refs.textarea}
                   placeholder={`Text #${i + 1}`}
                   value={value}
                   onChange={(value: any): void =>

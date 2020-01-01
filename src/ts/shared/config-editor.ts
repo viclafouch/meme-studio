@@ -1,3 +1,4 @@
+import { createRef } from 'react'
 import { randomID } from '@utils/index'
 import TextBox from './models/TextBox'
 
@@ -23,5 +24,9 @@ export const createText = (base: TextBox['base']): TextBox => ({
   value: '',
   id: randomID(),
   color: '#ffffff',
-  isUppercase: false
+  isUppercase: false,
+  refs: {
+    accordion: createRef(),
+    textarea: createRef()
+  }
 })

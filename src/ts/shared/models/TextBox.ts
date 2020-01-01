@@ -1,3 +1,5 @@
+import { RefObject } from 'react'
+
 export default class TextBox {
   public id: string
   public value: string
@@ -18,8 +20,12 @@ export default class TextBox {
     readonly centerX: number
     readonly centerY: number
   }
+  readonly refs: {
+    readonly accordion: RefObject<any>
+    readonly textarea: RefObject<any>
+  }
 
-  constructor(text: TextBox) {
+  constructor(text: any) {
     this.id = text.id
     this.value = text.value
     this.width = text.width
@@ -39,5 +45,6 @@ export default class TextBox {
       centerX: this.centerX,
       centerY: this.centerY
     }
+    this.refs = text.refs
   }
 }
