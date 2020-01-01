@@ -13,11 +13,12 @@ type AccordionProps = {
   afterOpening?: Function
   afterImmediateOpening?: Function
   ref: any
+  defaultOpened: boolean
 }
 
 const Accordion = React.forwardRef((props: AccordionProps, ref: any) => {
-  const [isActive, setIsActive] = useState<boolean>(false)
-  const [currentHeight, setCurrentHeight] = useState<string>('0px')
+  const [isActive, setIsActive] = useState<boolean>(props.defaultOpened)
+  const [currentHeight, setCurrentHeight] = useState<string>(props.defaultOpened ? 'inherit' : '0px')
   const content = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {

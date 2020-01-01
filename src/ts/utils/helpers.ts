@@ -8,8 +8,7 @@ import {
   EDIT_TEXT_ALIGN,
   EDIT_TEXT_VERTICAL,
   EDIT_UPPERCASE,
-  EDIT_VALUE,
-  EDIT_UNKNOWN
+  EDIT_VALUE
 } from '@shared/constants'
 import { typeString } from '@shared/validators'
 
@@ -36,6 +35,6 @@ export const toHistoryType = (type: typeString): string => {
     case 'value':
       return EDIT_VALUE
     default:
-      return EDIT_UNKNOWN
+      return type
   }
 }

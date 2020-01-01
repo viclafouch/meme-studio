@@ -4,7 +4,7 @@ import { debounce, randomID } from '@utils/index'
 import { EditorContext, EditorState } from './EditorContext'
 import TextBox from '@shared/models/TextBox'
 import { DrawProperties } from '@shared/validators'
-import { SET_DRAW_PROPERTIES, SET_TEXTS } from './reducer/constants'
+import { SET_DRAW_PROPERTIES, SET_TEXTS, SET_TEXT_ID_SELECTED } from './reducer/constants'
 import { INITIAL } from '@shared/constants'
 
 export const HistoryContext = createContext(null)
@@ -115,6 +115,10 @@ export function HistoryProvider(props: any): JSX.Element {
         type: SET_TEXTS,
         texts
       })
+      dispatchEditor({
+        type: SET_TEXT_ID_SELECTED,
+        textIdSelected: texts[index] ? texts[index].id : null
+      })
       setHistoryIndex(index)
     }
   }, [setHistory, history, historyIndex, setHistoryIndex, drawProperties])
@@ -136,6 +140,10 @@ export function HistoryProvider(props: any): JSX.Element {
       dispatchEditor({
         type: SET_TEXTS,
         texts
+      })
+      dispatchEditor({
+        type: SET_TEXT_ID_SELECTED,
+        textIdSelected: texts[index] ? texts[index].id : null
       })
       setHistoryIndex(index)
     }

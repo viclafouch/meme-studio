@@ -1,6 +1,8 @@
 import { RefObject } from 'react'
+import { randomID } from '@utils/index'
 
 export default class TextBox {
+  readonly uuid: string
   public id: string
   public value: string
   public width: number
@@ -26,6 +28,7 @@ export default class TextBox {
   }
 
   constructor(text: any) {
+    this.uuid = randomID()
     this.id = text.id
     this.value = text.value
     this.width = text.width

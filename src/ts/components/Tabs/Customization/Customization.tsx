@@ -14,6 +14,7 @@ import { fontsFamily, createText } from '@shared/config-editor'
 import { EditorContext, EditorState } from '@store/EditorContext'
 import { SET_TEXT_ID_SELECTED } from '@store/reducer/constants'
 import { toHistoryType } from '@utils/helpers'
+import { ADD_TEXT, REMOVE_TEXT } from '@shared/constants'
 import './customization.scss'
 
 type CustomizationProps = {
@@ -22,7 +23,9 @@ type CustomizationProps = {
 
 function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
   const colorPicker = useRef<any>(null)
-  const [{ textIdSelected, texts, drawProperties }, dispatchEditor]: [EditorState, Function] = useContext(EditorContext)
+  const [{ textIdSelected, texts, drawProperties, memeSelected }, dispatchEditor]: [EditorState, Function] = useContext(
+    EditorContext
+  )
 
   const handleEdit = (customization: TextCustomization): void => {
     const textsUpdated = [...texts] as any
@@ -35,7 +38,7 @@ function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
   }
 
   const addText = (): void => {
-    const textsUpdated = [...texts] as any
+    const textsUpdated = [...texts] as Array<TextBox>
     const text = createText({
       centerY: 50,
       centerX: 340,
@@ -47,7 +50,7 @@ function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
     text.centerY = drawProperties.height / 2
     text.centerX = drawProperties.width / 2
     textsUpdated.push(text)
-    onCustomizeTexts(textsUpdated)
+    onCustomizeTexts(textsUpdated, ADD_TEXT)
     wait(0).then(() => {
       for (let index = 0; index < textsUpdated.length; index++) {
         const text = textsUpdated[index]
@@ -75,18 +78,19 @@ function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
         type: SET_TEXT_ID_SELECTED,
         textIdSelected: null
       })
-    onCustomizeTexts(textsUpdated)
+    onCustomizeTexts(textsUpdated, REMOVE_TEXT)
   }
 
   return (
     <div className="customization-not-empty">
-      <h2>Edit Name</h2>
+      <h2>Edit {memeSelected.name}</h2>
       {texts.map(
-        ({ value, id, color, fontSize, alignVertical, textAlign, isUppercase, fontFamily, refs }, i): React.ReactNode => (
+        ({ value, id, uuid, color, fontSize, alignVertical, textAlign, isUppercase, fontFamily, refs }, i): React.ReactNode => (
           <Accordion
+            defaultOpened={id === textIdSelected}
             ref={refs.accordion}
             title={value.trim() || `Text #${i + 1}`}
-            key={id}
+            key={uuid}
             removeText={(): void => removeText(id)}
             afterImmediateOpening={(): void =>
               dispatchEditor({
@@ -232,7 +236,7 @@ export default (props: any): JSX.Element => {
       {([{ memeSelected }]: [EditorState]): JSX.Element => (
         <div className="Customization">
           {memeSelected ? (
-            <Customization {...props} memeSelected={memeSelected} />
+            <Customization {...props} />
           ) : (
             <div className="customization-empty">
               <ReactSVG src="images/sad.svg" wrapper="span" className="wrapper-sad-svg" />

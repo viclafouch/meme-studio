@@ -13,20 +13,20 @@ export const fontsFamily = [
   'Lucida Console'
 ]
 
-export const createText = (base: TextBox['base']): TextBox => ({
-  transform: 0,
-  ...base,
-  base,
-  fontSize: 22,
-  fontFamily: 'Impact',
-  textAlign: 'center',
-  alignVertical: 'middle',
-  value: '',
-  id: randomID(),
-  color: '#ffffff',
-  isUppercase: false,
-  refs: {
-    accordion: createRef(),
-    textarea: createRef()
-  }
-})
+export const createText = (base: TextBox['base']): any =>
+  new TextBox({
+    transform: 0,
+    ...base,
+    fontSize: 22,
+    fontFamily: 'Impact',
+    textAlign: 'center',
+    alignVertical: 'middle',
+    value: '',
+    id: randomID(),
+    color: '#ffffff',
+    isUppercase: false,
+    refs: {
+      accordion: createRef(),
+      textarea: createRef()
+    }
+  })

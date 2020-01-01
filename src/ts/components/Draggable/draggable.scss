@@ -4,9 +4,11 @@
   cursor: move;
   --draggable-color: var(--draggable-area-color);
   --bubble-size: 18px;
+  z-index: 1;
 
   &.draggable-active {
     --draggable-color: var(--blue);
+    z-index: 2;
   }
 
   &::after,
