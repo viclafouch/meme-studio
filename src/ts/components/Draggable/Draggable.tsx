@@ -71,7 +71,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
       startY: null,
       isDragging: false
     })
-  }, [props.drawProperties.scale])
+  }, [props.drawProperties.scale, props.id])
 
   const minimalSize: number = useMemo(() => props.drawProperties.scale * 40, [props.drawProperties.scale])
 

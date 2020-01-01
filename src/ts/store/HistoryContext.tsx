@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { createContext, useState, useCallback, useContext, useMemo } from 'react'
-import { debounce } from '@utils/index'
+import { debounce, randomID } from '@utils/index'
 import { EditorContext, EditorState } from './EditorContext'
 import TextBox from '@shared/models/TextBox'
 import { DrawProperties } from '@shared/validators'
@@ -32,7 +32,7 @@ export interface HistoryDispatcher {
 export function HistoryProvider(props: any): JSX.Element {
   const [history, setHistory]: [Array<HistoryInt>, Function] = useState<HistoryInt[]>([])
   const [historyIndex, setHistoryIndex]: [number, Function] = useState<number>(-1)
-  const [, dispatchEditor]: [EditorState, Function] = useContext(EditorContext)
+  const [{ drawProperties }, dispatchEditor]: [EditorState, Function] = useContext(EditorContext)
 
   const setToHistory = useCallback(
     debounce(({ texts, drawProperties, type }: HistoryInt) => {
@@ -62,39 +62,84 @@ export function HistoryProvider(props: any): JSX.Element {
     setHistoryIndex(-1)
   }, [setHistory, setHistoryIndex])
 
+  const checkNewSize = ({
+    oldProperties,
+    newProperties,
+    texts
+  }: {
+    oldProperties: DrawProperties
+    newProperties: DrawProperties
+    texts: Array<TextBox>
+  }): { newDrawProperties: DrawProperties; texts: Array<TextBox> } => {
+    let drawProperties: DrawProperties
+    if (oldProperties.scale !== newProperties.scale) {
+      drawProperties = { ...newProperties }
+      const oldWidth = oldProperties.width
+      const oldHeight = oldProperties.height
+      texts = texts.map((text: TextBox) => ({
+        ...text,
+        height: (text.height / oldHeight) * drawProperties.height,
+        width: (text.width / oldWidth) * drawProperties.width,
+        centerX: (text.centerX / oldWidth) * drawProperties.width,
+        centerY: (text.centerY / oldHeight) * drawProperties.height
+      }))
+    } else {
+      drawProperties = { ...oldProperties }
+    }
+
+    return {
+      newDrawProperties: drawProperties,
+      texts: texts.map((text: TextBox) => ({
+        ...text,
+        id: randomID()
+      }))
+    }
+  }
+
   const undoHistory = useCallback(() => {
     const historyUpdated = [...history] as Array<HistoryInt>
     const index: number = historyIndex - 1
     const previousItem: HistoryInt | undefined = historyUpdated[index]
+
     if (previousItem) {
+      const { newDrawProperties, texts } = checkNewSize({
+        oldProperties: previousItem.drawProperties,
+        newProperties: drawProperties,
+        texts: [...previousItem.texts]
+      })
       dispatchEditor({
         type: SET_DRAW_PROPERTIES,
-        drawProperties: previousItem.drawProperties
+        drawProperties: newDrawProperties
       })
       dispatchEditor({
         type: SET_TEXTS,
-        texts: previousItem.texts
+        texts
       })
       setHistoryIndex(index)
     }
-  }, [setHistory, history, historyIndex, setHistoryIndex])
+  }, [setHistory, history, historyIndex, setHistoryIndex, drawProperties])
 
   const redoHistory = useCallback(() => {
     const historyUpdated = [...history] as Array<HistoryInt>
     const index: number = historyIndex + 1
     const nextItem: HistoryInt | undefined = historyUpdated[index]
     if (nextItem) {
+      const { newDrawProperties, texts } = checkNewSize({
+        oldProperties: nextItem.drawProperties,
+        newProperties: drawProperties,
+        texts: [...nextItem.texts]
+      })
       dispatchEditor({
         type: SET_DRAW_PROPERTIES,
-        drawProperties: nextItem.drawProperties
+        drawProperties: newDrawProperties
       })
       dispatchEditor({
         type: SET_TEXTS,
-        texts: nextItem.texts
+        texts
       })
       setHistoryIndex(index)
     }
-  }, [setHistory, history, historyIndex, setHistoryIndex])
+  }, [setHistory, history, historyIndex, setHistoryIndex, drawProperties])
 
   return (
     <HistoryContext.Provider

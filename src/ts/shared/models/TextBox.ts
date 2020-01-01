@@ -1,5 +1,5 @@
 export default class TextBox {
-  readonly id: string
+  public id: string
   public value: string
   public width: number
   public height: number
