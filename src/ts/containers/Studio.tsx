@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useState, useContext } from 'react'
+import { ReactSVG } from 'react-svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Gallery from '@components/Tabs/Gallery/Gallery'
 import Customization from '@components/Tabs/Customization/Customization'
@@ -40,7 +41,12 @@ function Studio(): JSX.Element {
     <div className="Studio">
       <div className="Studio__content">
         {memeSelected && <WrapperCanvas changeTab={setCurrentTab} onCustomizeTexts={handleCustomizeTexts} />}
-        {!memeSelected && <span>Select a template</span>}
+        {!memeSelected && (
+          <div className="empty-meme">
+            <ReactSVG src="images/choose-meme.svg" wrapper="span" className="choose-meme-svg" />
+            <p>Please, select a meme to custom</p>
+          </div>
+        )}
       </div>
       <aside className="Studio__aside">
         <div className="tabs__buttons__container">
