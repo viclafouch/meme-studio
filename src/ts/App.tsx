@@ -11,14 +11,15 @@ import {
   faPlus,
   faCropAlt,
   faUndoAlt,
-  faRedoAlt
+  faRedoAlt,
+  faQuestionCircle
 } from '@fortawesome/free-solid-svg-icons'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { ModalProvider } from '@store/ModalContext'
 import { EditorProvider } from '@store/EditorContext'
 import { HistoryProvider } from '@store/HistoryContext'
 
-library.add(faImage, faHeading, faTwitter, faDownload, faTrashAlt, faPlus, faCropAlt, faUndoAlt, faRedoAlt)
+library.add(faImage, faHeading, faTwitter, faDownload, faTrashAlt, faPlus, faCropAlt, faUndoAlt, faRedoAlt, faQuestionCircle)
 
 function App(): JSX.Element {
   return (

@@ -1,10 +1,11 @@
 import * as React from 'react'
-import { useContext, memo } from 'react'
+import { useContext, memo, useRef, RefObject } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { EditorContext, EditorState } from '@store/EditorContext'
 import { SET_SHOW_TEXT_AREAS } from '@store/reducer/constants'
-import './tools.scss'
 import { HistoryContext, HistoryState, HistoryDispatcher } from '@store/HistoryContext'
+import Faq from '@components/Faq/Faq'
+import './tools.scss'
 
 type ToolsProps = {
   showTextAreas: boolean
@@ -17,6 +18,8 @@ type ToolsProps = {
 
 const Tools = memo(
   ({ showTextAreas, dispatchEditor, undoHistory, redoHistory, canUndo, canRedo }: ToolsProps): JSX.Element => {
+    const faqModal: RefObject<any> = useRef(null)
+
     return (
       <div className="Tools">
         <ul className="list-tools">
@@ -44,6 +47,14 @@ const Tools = memo(
             </button>
           </li>
         </ul>
+        <ul className="list-tools">
+          <li>
+            <button className="tool" onClick={(): void => faqModal.current.open()}>
+              <FontAwesomeIcon fixedWidth icon={['fas', 'question-circle']} />
+            </button>
+          </li>
+        </ul>
+        <Faq ref={faqModal} />
       </div>
     )
   }

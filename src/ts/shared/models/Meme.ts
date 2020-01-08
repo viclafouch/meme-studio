@@ -12,7 +12,7 @@ export default class Meme {
     this.url = meme.url
     this.width = meme.width
     this.height = meme.height
-    this.boxCount = 1
+    this.boxCount = meme.box_count
   }
 
   get image(): Promise<HTMLImageElement> {

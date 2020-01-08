@@ -7,7 +7,7 @@ import './modal.scss'
 type ModalProps = {
   onClose: Function
   children: React.ReactNode
-  isLoading: boolean
+  isLoading?: boolean
 }
 export function Modal({ onClose, isLoading, children }: ModalProps): JSX.Element {
   const modalNode = useContext(ModalContext)
@@ -23,5 +23,9 @@ export function Modal({ onClose, isLoading, children }: ModalProps): JSX.Element
       )
     : null
 }
+
+Modal.defaultProps = {
+  isLoading: false
+} as ModalProps
 
 export default memo(Modal)
