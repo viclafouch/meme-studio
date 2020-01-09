@@ -5,6 +5,7 @@ import { EditorContext, EditorState } from '@store/EditorContext'
 import { SET_SHOW_TEXT_AREAS } from '@store/reducer/constants'
 import { HistoryContext, HistoryState, HistoryDispatcher } from '@store/HistoryContext'
 import Faq from '@components/Faq/Faq'
+import { useInitStudio } from '@shared/hooks'
 import './tools.scss'
 
 type ToolsProps = {
@@ -19,6 +20,7 @@ type ToolsProps = {
 const Tools = memo(
   ({ showTextAreas, dispatchEditor, undoHistory, redoHistory, canUndo, canRedo }: ToolsProps): JSX.Element => {
     const faqModal: RefObject<any> = useRef(null)
+    const initStudio = useInitStudio()
 
     return (
       <div className="Tools">
@@ -44,6 +46,11 @@ const Tools = memo(
           <li>
             <button className="tool" disabled={!canRedo} onClick={(): void => canRedo && redoHistory()}>
               <FontAwesomeIcon icon={['fas', 'redo-alt']} />
+            </button>
+          </li>
+          <li>
+            <button className="tool" onClick={(): void => initStudio()}>
+              <FontAwesomeIcon icon={['fas', 'trash-restore-alt']} />
             </button>
           </li>
         </ul>

@@ -210,8 +210,8 @@ main {
     padding: 0 4px;
     height: calc(100% - 50px);
 
-    &#custumozation-tab {
-      overflow-y: scroll;
+    &#customization-tab {
+      overflow-y: auto;
       overflow-x: hidden;
     }
   }
