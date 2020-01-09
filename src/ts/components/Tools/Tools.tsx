@@ -49,7 +49,7 @@ const Tools = memo(
             </button>
           </li>
           <li>
-            <button className="tool" onClick={(): void => initStudio()}>
+            <button className="tool" disabled={!canUndo} onClick={(): void => initStudio()}>
               <FontAwesomeIcon icon={['fas', 'trash-restore-alt']} />
             </button>
           </li>
