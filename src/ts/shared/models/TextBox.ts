@@ -9,7 +9,7 @@ export default class TextBox {
   public height: number
   public centerX: number
   public centerY: number
-  public transform: number
+  public rotate: number
   public fontSize: number
   public fontFamily: string
   public color: string
@@ -35,7 +35,7 @@ export default class TextBox {
     this.height = text.height
     this.centerX = text.centerX
     this.centerY = text.centerY
-    this.transform = text.transform
+    this.rotate = text.rotate
     this.fontSize = text.fontSize
     this.fontFamily = text.fontFamily
     this.color = text.color

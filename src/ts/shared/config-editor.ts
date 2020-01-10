@@ -15,7 +15,7 @@ export const fontsFamily = [
 
 export const createText = (base: TextBox['base']): any =>
   new TextBox({
-    transform: 0,
+    rotate: 0,
     ...base,
     fontSize: 22,
     fontFamily: 'Impact',

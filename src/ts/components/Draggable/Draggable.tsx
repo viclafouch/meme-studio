@@ -83,7 +83,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
         const textIndex = textsUpdated.findIndex((t: TextBox) => t.id === id)
         const text = { ...textsUpdated[textIndex] }
         let { top, left } = positioning
-        let { centerX, centerY, height, width, transform } = text
+        let { centerX, centerY, height, width, rotate } = text
         if (positioning.isDragging) {
           top = pageY - positioning.startY
           left = pageX - positioning.startX
@@ -134,7 +134,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
             radian -= Math.atan2(rotating.startEventY - rotating.startOffsetTop, rotating.startEventX - rotating.startOffsetLeft)
             radian += rotating.lastAngle
             const degree = radToDegree(radian)
-            transform = degree
+            rotate = degree
           }
         }
         const type: typeString = positioning.isDragging ? 'move' : resizing ? 'resize' : 'rotate'
@@ -142,7 +142,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
         text.centerY = centerY
         text.width = width
         text.height = height
-        text.transform = transform
+        text.rotate = rotate
         textsUpdated[textIndex] = text
         onMove(textsUpdated, type)
         setPositioning({

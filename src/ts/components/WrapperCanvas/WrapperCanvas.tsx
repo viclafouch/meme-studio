@@ -141,7 +141,7 @@ function WrapperCanvas(props: WrapperCanvasProps): JSX.Element {
             }}
             height={text.height}
             width={text.width}
-            rotate={text.transform}
+            rotate={text.rotate}
             onMove={props.onCustomizeTexts}
             drawProperties={drawProperties}
             id={text.id}

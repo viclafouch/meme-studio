@@ -77,7 +77,7 @@ export function fillText(
   }
 
   ctx.translate(x, y)
-  ctx.rotate(degreeToRad(text.transform))
+  ctx.rotate(degreeToRad(text.rotate))
   ctx.translate(-x, -y)
 
   for (let index = 0; index < lines.length; index++) {
