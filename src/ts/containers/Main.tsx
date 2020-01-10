@@ -9,7 +9,6 @@ import { DefaultContext, DefaultState } from '@store/DefaultContext'
 import { FatalError } from '@components/ErrorBoundary/ErrorBoundary'
 import { wait } from '@utils/index'
 import { useMemes } from '@shared/hooks'
-import Tools from '@components/Tools/Tools'
 
 function Main(): JSX.Element {
   const { fetchNextMemes } = useMemes()
@@ -47,7 +46,6 @@ function Main(): JSX.Element {
             <Header export={(): void => setIsModalExportOpen(true)} />
           </div>
           <div className="ld ld-float-btt-in studio-body">
-            <Tools />
             <Studio />
           </div>
         </div>

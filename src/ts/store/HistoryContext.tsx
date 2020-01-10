@@ -27,6 +27,7 @@ export interface HistoryDispatcher {
   clearHistory: Function
   undoHistory: Function
   redoHistory: Function
+  setToHistoryDebounced: Function
 }
 
 export function HistoryProvider(props: any): JSX.Element {
@@ -35,7 +36,7 @@ export function HistoryProvider(props: any): JSX.Element {
   const [{ drawProperties }, dispatchEditor]: [EditorState, Function] = useContext(EditorContext)
 
   const setToHistory = useCallback(
-    debounce(({ texts, drawProperties, type }: HistoryInt) => {
+    ({ texts, drawProperties, type }: HistoryInt) => {
       let index: number
       if (historyIndex <= 0) index = 1
       else index = historyIndex + 1
@@ -43,8 +44,13 @@ export function HistoryProvider(props: any): JSX.Element {
       historyUpdated.push({ texts, drawProperties, type })
       setHistory(historyUpdated)
       setHistoryIndex(type === INITIAL ? 0 : historyUpdated.length - 1)
-    }, 500),
+    },
     [setHistory, setHistoryIndex, history, historyIndex]
+  )
+
+  const setToHistoryDebounced = useCallback(
+    debounce((args: HistoryInt) => setToHistory(args), 500),
+    [setToHistory]
   )
 
   const canUndo: boolean = useMemo(() => {
@@ -154,7 +160,7 @@ export function HistoryProvider(props: any): JSX.Element {
       value={
         [
           { canUndo, canRedo },
-          { setToHistory, clearHistory, undoHistory, redoHistory }
+          { setToHistory, clearHistory, undoHistory, redoHistory, setToHistoryDebounced }
         ] as [HistoryState, HistoryDispatcher]
       }
     >

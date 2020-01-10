@@ -13,10 +13,11 @@ import { SET_TEXTS, SET_MEME_SELECTED } from '@store/reducer/constants'
 import { TAB_CUSTOMIZATION, TAB_GALLERY } from '@shared/constants'
 import Meme from '@shared/models/Meme'
 import TextBox from '@shared/models/TextBox'
+import Tools from '@components/Tools/Tools'
 
 function Studio(): JSX.Element {
   const [currentTab, setCurrentTab]: [string, Function] = useState<string>(TAB_GALLERY)
-  const [, { setToHistory }]: [HistoryState, HistoryDispatcher] = useContext(HistoryContext)
+  const [, { setToHistoryDebounced }]: [HistoryState, HistoryDispatcher] = useContext(HistoryContext)
   const [{ memeSelected, drawProperties }, dispatchEditor]: [EditorState, Function] = useContext(EditorContext)
 
   const handleCustomizeTexts = (texts: Array<TextBox>, type: string): void => {
@@ -24,7 +25,7 @@ function Studio(): JSX.Element {
       type: SET_TEXTS,
       texts
     })
-    setToHistory({
+    setToHistoryDebounced({
       type,
       texts,
       drawProperties
@@ -39,6 +40,7 @@ function Studio(): JSX.Element {
 
   return (
     <div className="Studio">
+      <Tools />
       <div className="Studio__content">
         {memeSelected && <WrapperCanvas changeTab={setCurrentTab} onCustomizeTexts={handleCustomizeTexts} />}
         {!memeSelected && (
