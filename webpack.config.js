@@ -75,6 +75,7 @@ module.exports = (env, argv) => ({
     new MiniCssExtractPlugin({
       filename: '[name].[chunkhash:8].css'
     }),
-    new CopyPlugin([ { from: 'src/img', to: 'images' } ])
+    new CopyPlugin([ { from: 'src/img', to: 'images' } ]),
+    new CopyPlugin([ { from: 'public', to: 'public' } ])
   ]
 })

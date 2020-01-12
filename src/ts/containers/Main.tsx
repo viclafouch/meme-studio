@@ -9,6 +9,8 @@ import { DefaultContext, DefaultState } from '@store/DefaultContext'
 import { FatalError } from '@components/ErrorBoundary/ErrorBoundary'
 import { wait } from '@utils/index'
 import { useMemes } from '@shared/hooks'
+import { Switch, Route } from 'react-router-dom'
+import About from './About'
 
 function Main(): JSX.Element {
   const { fetchNextMemes } = useMemes()
@@ -33,24 +35,20 @@ function Main(): JSX.Element {
 
   return (
     <main className="Main">
-      {isLoading && (
+      {isLoading ? (
         <div className="is-loading-memes" aria-busy="true">
           <ReactSVG src="images/dual-ball.svg" wrapper="span" />
         </div>
+      ) : isError ? (
+        <FatalError />
+      ) : (
+        <Switch>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/">{!onStudio ? <Intro /> : <Studio setIsModalExportOpen={setIsModalExportOpen} />}</Route>
+        </Switch>
       )}
-      {isError && !isLoading && <FatalError />}
-      {!isError && !isLoading && !onStudio && <Intro />}
-      {!isError && !isLoading && onStudio && (
-        <div className="wrapper-studio">
-          <div className="ld ld-fall-ttb-in studio-header">
-            <Header export={(): void => setIsModalExportOpen(true)} />
-          </div>
-          <div className="ld ld-float-btt-in studio-body">
-            <Studio />
-          </div>
-        </div>
-      )}
-
       {isModalExportOpen && <Export onClose={(): void => setIsModalExportOpen(false)} />}
     </main>
   )

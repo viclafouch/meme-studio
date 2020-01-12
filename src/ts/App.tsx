@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { HashRouter as Router } from 'react-router-dom'
 import { DefaultProvider } from '@store/DefaultContext'
 import ErrorBoundary from '@components/ErrorBoundary/ErrorBoundary'
 import MainContainer from '@containers/Main'
@@ -37,17 +38,17 @@ library.add(
 function App(): JSX.Element {
   return (
     <ErrorBoundary>
-      <DefaultProvider>
-        <ModalProvider>
-          <EditorProvider>
-            <HistoryProvider>
-              <div className="wrapper-container">
+      <Router>
+        <DefaultProvider>
+          <ModalProvider>
+            <EditorProvider>
+              <HistoryProvider>
                 <MainContainer />
-              </div>
-            </HistoryProvider>
-          </EditorProvider>
-        </ModalProvider>
-      </DefaultProvider>
+              </HistoryProvider>
+            </EditorProvider>
+          </ModalProvider>
+        </DefaultProvider>
+      </Router>
     </ErrorBoundary>
   )
 }
