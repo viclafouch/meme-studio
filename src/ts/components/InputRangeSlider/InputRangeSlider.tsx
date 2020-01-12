@@ -14,7 +14,7 @@ type InputRangeSliderProps = {
 
 function InputRangeSlider(props: InputRangeSliderProps): JSX.Element {
   return (
-    <div className="Input-range-slider">
+    <div className="input-range-slider">
       {props.showValue && <span>{props.value}</span>}
       <input
         id={props.id}

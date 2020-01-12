@@ -14,7 +14,7 @@ export function Modal({ onClose, isLoading, children }: ModalProps): JSX.Element
 
   return modalNode
     ? createPortal(
-        <div className="Modal ld ld-fade-in">
+        <div className="modal ld ld-fade-in">
           <div className="modal-overlay" onClick={(): void => !isLoading && onClose()} />
           {isLoading && <div className="modal-content-loading">Loading</div>}
           {!isLoading && <div className="modal-content">{children}</div>}

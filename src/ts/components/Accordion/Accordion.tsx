@@ -58,7 +58,7 @@ const Accordion = React.forwardRef((props: AccordionProps, ref: any) => {
   const cssVar = { '--accordion-duration': durationAccordion + 'ms' } as React.CSSProperties
 
   return (
-    <section className={`Accordion ${isActive ? 'accordion-active' : ''}`} style={cssVar}>
+    <section className={`accordion ${isActive ? 'accordion-active' : ''}`} style={cssVar}>
       <div className="accordion-trigger" onClick={handleOpen}>
         <p className="accordion-title">{props.title}</p>
         <button

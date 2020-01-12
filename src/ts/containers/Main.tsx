@@ -34,7 +34,7 @@ function Main(): JSX.Element {
   }, [])
 
   return (
-    <main className="Main">
+    <main className="main-wrapper">
       {isLoading ? (
         <div className="is-loading-memes" aria-busy="true">
           <ReactSVG src="images/dual-ball.svg" wrapper="span" />

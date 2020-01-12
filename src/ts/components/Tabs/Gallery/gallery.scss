@@ -1,12 +1,11 @@
-.Gallery {
+.gallery {
   list-style: none;
   height: 100%;
-  overflow-y: auto;
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 8px;
 
-  .meme__item {
+  .gallery-item {
     cursor: pointer;
     img {
       width: 100%;

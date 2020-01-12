@@ -40,7 +40,7 @@ function Studio(props: any): JSX.Element {
     })
 
   return (
-    <div className="page page__studio">
+    <div className="page page-studio">
       <div className="ld ld-fall-ttb-in studio-header">
         <Header export={(): void => props.setIsModalExportOpen(true)} />
       </div>

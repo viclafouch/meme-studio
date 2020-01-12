@@ -24,7 +24,7 @@ function Export(props: ExportProps): JSX.Element {
 
   return (
     <Modal onClose={handleClose} isLoading={isLoading}>
-      <div className="Export">
+      <div className="export">
         <div className="meme-img">
           <img src={img} />
         </div>

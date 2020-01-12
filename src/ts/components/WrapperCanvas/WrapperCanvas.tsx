@@ -115,9 +115,9 @@ function WrapperCanvas(props: WrapperCanvasProps): JSX.Element {
   }, [drawProperties, texts])
 
   return (
-    <div className="Wrapper-canvas" ref={wrapperRef}>
+    <div className="wrapper-canvas" ref={wrapperRef}>
       <div
-        className="wrapper-text-boxes"
+        className="wrapper-canvas-container"
         style={{
           width: drawProperties ? drawProperties.width : '100%',
           height: drawProperties ? drawProperties.height : 'auto'

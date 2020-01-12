@@ -234,7 +234,7 @@ export default (props: any): JSX.Element => {
   return (
     <EditorContext.Consumer>
       {([{ memeSelected }]: [EditorState]): JSX.Element => (
-        <div className="Customization">
+        <div className="customization">
           {memeSelected ? (
             <Customization {...props} />
           ) : (

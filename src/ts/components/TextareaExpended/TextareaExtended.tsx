@@ -29,7 +29,7 @@ const TextareaExtended = React.forwardRef(
       <textarea
         {...props}
         onChange={(e: any): void => props.onChange(e.target.value)}
-        className="Textarea-exdended"
+        className="textarea-exdended"
         ref={textareaRef}
         onKeyDown={handleKeyDown}
       ></textarea>

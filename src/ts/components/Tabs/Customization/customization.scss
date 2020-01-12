@@ -1,4 +1,4 @@
-.Customization {
+.customization {
   height: 100%;
 
   .customization-empty {
@@ -28,7 +28,7 @@
 
     .customization-textbox-section {
       padding: 10px 6px 23px 6px;
-      .Textarea-exdended {
+      .textarea-exdended {
         padding: 10px;
         width: 100%;
         border-radius: 2px;
@@ -46,7 +46,7 @@
         }
       }
 
-      .Color-picker button {
+      .color-picker button {
         box-shadow: 0 0 0 1px var(--input-border-color);
       }
     }

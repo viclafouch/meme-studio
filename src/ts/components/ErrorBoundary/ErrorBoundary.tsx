@@ -3,8 +3,8 @@ import { ReactSVG } from 'react-svg'
 import './error-boundary.scss'
 
 export const FatalError = (): JSX.Element => (
-  <div className="Error-boundary">
-    <ReactSVG id="error-image" src="images/error_illustration_v2.svg" wrapper="div" />
+  <div className="error-boundary">
+    <ReactSVG className="error-boundary-img" src="images/error_illustration_v2.svg" wrapper="div" />
     <span>Oops something went wrong</span>
   </div>
 )

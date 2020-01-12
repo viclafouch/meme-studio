@@ -10,7 +10,7 @@ function Tab(props: TabProps): JSX.Element {
   return (
     <div
       aria-hidden={!props.active}
-      className="Tab"
+      className="tab"
       id={props.id}
       style={{
         ...(!props.active ? { display: 'none' } : null)

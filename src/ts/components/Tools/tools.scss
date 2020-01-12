@@ -1,13 +1,11 @@
-.Tools {
-  width: 54px;
-  z-index: 2;
+.tools {
   height: 100%;
-  box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.29);
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  .list-tools {
+  .tools-list {
     display: flex;
     flex-direction: column;
 
@@ -16,7 +14,7 @@
     }
   }
 
-  .tool {
+  .tools-list-btn {
     display: flex;
     align-items: center;
     justify-content: center;

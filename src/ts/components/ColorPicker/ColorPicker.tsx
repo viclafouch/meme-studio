@@ -20,7 +20,7 @@ const ColorPicker = React.forwardRef((props: ColorPickerProps, ref: any) => {
   }))
 
   return (
-    <div className="Color-picker">
+    <div className="color-picker">
       <button
         className="color-picker-button"
         style={{

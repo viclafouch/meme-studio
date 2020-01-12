@@ -1,4 +1,4 @@
-.Error-boundary {
+.error-boundary {
   width: 100%;
   display: flex;
   align-items: center;
@@ -7,7 +7,7 @@
   min-height: inherit;
   flex: 1;
 
-  #error-image {
+  #error-boundary-img {
     width: 200px;
     display: inline-block;
   }

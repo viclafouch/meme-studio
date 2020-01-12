@@ -23,11 +23,11 @@ const Tools = memo(
     const initStudio = useInitStudio()
 
     return (
-      <div className="Tools">
-        <ul className="list-tools">
+      <div className="tools">
+        <ul className="tools-list">
           <li>
             <button
-              className="tool"
+              className="tools-list-btn"
               onClick={(): void =>
                 dispatchEditor({
                   type: SET_SHOW_TEXT_AREAS,
@@ -39,24 +39,24 @@ const Tools = memo(
             </button>
           </li>
           <li>
-            <button className="tool" disabled={!canUndo} onClick={(): void => canUndo && undoHistory()}>
+            <button className="tools-list-btn" disabled={!canUndo} onClick={(): void => canUndo && undoHistory()}>
               <FontAwesomeIcon icon={['fas', 'undo-alt']} />
             </button>
           </li>
           <li>
-            <button className="tool" disabled={!canRedo} onClick={(): void => canRedo && redoHistory()}>
+            <button className="tools-list-btn" disabled={!canRedo} onClick={(): void => canRedo && redoHistory()}>
               <FontAwesomeIcon icon={['fas', 'redo-alt']} />
             </button>
           </li>
           <li>
-            <button className="tool" disabled={!canUndo} onClick={(): void => initStudio()}>
+            <button className="tools-list-btn" disabled={!canUndo} onClick={(): void => initStudio()}>
               <FontAwesomeIcon icon={['fas', 'trash-restore-alt']} />
             </button>
           </li>
         </ul>
-        <ul className="list-tools">
+        <ul className="tools-list">
           <li>
-            <button className="tool" onClick={(): void => faqModal.current.open()}>
+            <button className="tools-list-btn" onClick={(): void => faqModal.current.open()}>
               <FontAwesomeIcon fixedWidth icon={['fas', 'question-circle']} />
             </button>
           </li>

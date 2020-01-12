@@ -218,7 +218,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
       draggable={true}
       ref={draggableRef}
       data-type="drag"
-      className={`Draggable ${props.className || ''} ${props.active ? 'draggable-active' : ''}`}
+      className={`draggable ${props.className || ''} ${props.active ? 'draggable-active' : ''}`}
       style={{
         left: positioning.left,
         top: positioning.top,

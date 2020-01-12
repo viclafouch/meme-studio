@@ -11,14 +11,14 @@ function Intro(): JSX.Element {
   const [_, dispatch] = useContext<any>(DefaultContext)
 
   return (
-    <div className="Intro">
+    <div className="intro">
       <div className="intro-title">
         <h1>Meme Studio</h1>
         <p>Create a meme from JPG, GIF or PNG images. Edit your image and make a meme.</p>
       </div>
       <div className="intro-content">
         <Button
-          className="get-started-button ld ld-fall-ttb-in"
+          className="intro-get-started-btn ld ld-fall-ttb-in"
           onClick={(): void =>
             dispatch({
               type: SET_ON_STUDIO,
@@ -28,10 +28,10 @@ function Intro(): JSX.Element {
         >
           Get started
         </Button>
-        <ul className="last-memes">
+        <ul className="intro-last-memes">
           {memes.slice(0, 3).map((meme: Meme, index: number) => (
             <li key={index}>
-              <article className="last-meme__article">
+              <article className="intro-last-memes-article">
                 <img src={meme.url} alt={meme.name} />
               </article>
             </li>

@@ -1,4 +1,4 @@
-.Accordion {
+.accordion {
   display: flex;
   flex-direction: column;
   --accordion-duration: unset;
@@ -47,7 +47,7 @@
     transition-duration: var(--accordion-duration);
   }
 
-  & + .Accordion .accordion-trigger {
+  & + .accordion .accordion-trigger {
     border-top: 1px solid #ffffff;
   }
 }

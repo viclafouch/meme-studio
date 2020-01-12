@@ -3,12 +3,12 @@ import './header.scss'
 import Button from '@components/Button/Button'
 
 type HeaderProps = {
-  export: Function
+  export?: Function
 }
 
 function Header(props: HeaderProps): JSX.Element {
   return (
-    <header className="Header">
+    <header className="header">
       <div></div>
       <div className="center-column">
         <h1>Meme Studio</h1>

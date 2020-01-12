@@ -32,10 +32,10 @@ function Gallery(props: GalleryProps): JSX.Element {
   }, [fetchNextMemes, isLoading, hasNextMemes])
 
   return (
-    <ul className="Gallery" onScroll={handleScroll} ref={scrollerRef}>
+    <ul className="gallery" onScroll={handleScroll} ref={scrollerRef}>
       {memes.map(
         (meme: Meme): React.ReactNode => (
-          <li key={meme.id} data-id={meme.id} className="meme__item">
+          <li key={meme.id} data-id={meme.id} className="gallery-item">
             <img
               loading="lazy"
               width={meme.width}
