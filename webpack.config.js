@@ -29,6 +29,9 @@ module.exports = (env, argv) => ({
     chunkFilename: '[name].bundle.js',
     filename: "[name].bundle.js"
   },
+  devServer: {
+    historyApiFallback: true,
+  },
   module: {
     rules: [
       {

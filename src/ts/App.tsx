@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { HashRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { DefaultProvider } from '@store/DefaultContext'
 import ErrorBoundary from '@components/ErrorBoundary/ErrorBoundary'
 import MainContainer from '@containers/Main'
