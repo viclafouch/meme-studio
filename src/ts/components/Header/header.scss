@@ -7,7 +7,7 @@
   justify-content: space-between;
   background-color: var(--blue-light);
 
-  div {
+  & > div {
     flex: 3;
     display: flex;
     align-items: center;
@@ -35,12 +35,16 @@
   }
 
   .button-export {
-    padding: 12px 28px;
+    padding: 12px 22px;
     font-weight: 600;
     font-size: 16px;
     line-height: 16px;
     background-color: #ffffff;
     color: var(--blue-light);
     text-transform: uppercase;
+  }
+
+  .lang-selector {
+    margin-right: 10px;
   }
 }

@@ -1,7 +1,26 @@
 {
-  "title": "Welcome to react using react-i18next",
-  "description": {
-    "part1": "To get started, edit <1>src/App.js</1> and save to reload.",
-    "part2": "Switch language between english and german using buttons above."
+  "intro": {
+    "description": "Create a meme from JPG, GIF or PNG images. Edit your image and make your custom meme.",
+    "getStarted": "Get started"
+  },
+  "studio": {
+    "selectMeme": "Please select a meme in the gallery.",
+    "export": "Export",
+    "noMemeSelected": "No meme selected",
+    "text": "Text",
+    "editMeme": "Edit {{name}}",
+    "addText": "Add Text",
+    "color": "Color",
+    "textAlign": "Horizontal align",
+    "alignVertical": "Vertical Align",
+    "fontFamily": "Font family",
+    "maxFontSize": "Font size max",
+    "textUppercase": "All caps",
+    "top": "Top",
+    "left": "Left",
+    "right": "Right",
+    "bottom": "Bottom",
+    "middle": "Middle",
+    "center": "Center"
   }
 }

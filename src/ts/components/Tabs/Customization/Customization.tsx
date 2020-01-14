@@ -4,6 +4,7 @@ import { ReactSVG } from 'react-svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useRef, useLayoutEffect, useContext } from 'react'
 import { TextCustomization, typeString } from '@shared/validators'
+import { Translation, useTranslation } from 'react-i18next'
 import Accordion from '@components/Accordion/Accordion'
 import TextareaExtended from '@components/TextareaExpended/TextareaExtended'
 import ColorPicker from '@components/ColorPicker/ColorPicker'
@@ -22,6 +23,7 @@ type CustomizationProps = {
 }
 
 function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
+  const { t } = useTranslation()
   const colorPicker = useRef<any>(null)
   const [{ textIdSelected, texts, drawProperties, memeSelected }, dispatchEditor]: [EditorState, Function] = useContext(
     EditorContext
@@ -83,13 +85,13 @@ function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
 
   return (
     <div className="customization-not-empty">
-      <h2>Edit {memeSelected.name}</h2>
+      <h2>{t('studio.editMeme', { name: memeSelected.name })}</h2>
       {texts.map(
         ({ value, id, uuid, color, fontSize, alignVertical, textAlign, isUppercase, fontFamily, refs }, i): React.ReactNode => (
           <Accordion
             defaultOpened={id === textIdSelected}
             ref={refs.accordion}
-            title={value.trim() || `Text #${i + 1}`}
+            title={value.trim() || `${t('studio.text')} #${i + 1}`}
             key={uuid}
             removeText={(): void => removeText(id)}
             afterImmediateOpening={(): void =>
@@ -105,7 +107,7 @@ function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
                 <TextareaExtended
                   rows={1}
                   ref={refs.textarea}
-                  placeholder={`Text #${i + 1}`}
+                  placeholder={`${t('studio.text')} #${i + 1}`}
                   value={value}
                   onChange={(value: any): void =>
                     handleEdit({
@@ -117,7 +119,7 @@ function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
                 />
               </div>
               <div className="field-customization">
-                <label htmlFor="font-size">Max Font size</label>
+                <label htmlFor="font-size">{t('studio.maxFontSize')}</label>
                 <InputRangeSlider
                   id="font-size"
                   max={50}
@@ -136,7 +138,7 @@ function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
               </div>
               <div className="field-customization">
                 <label htmlFor="color" onClick={(): void => colorPicker.current.open()}>
-                  Color
+                  {t('studio.color')}
                 </label>
                 <ColorPicker
                   ref={colorPicker}
@@ -151,7 +153,7 @@ function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
                 />
               </div>
               <div className="field-customization">
-                <span>Font family</span>
+                <span>{t('studio.fontFamily')}</span>
                 <select
                   value={fontFamily}
                   onChange={(event: React.ChangeEvent<HTMLSelectElement>): void =>
@@ -170,7 +172,7 @@ function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
                 </select>
               </div>
               <div className="field-customization">
-                <span>Align vertical</span>
+                <span>{t('studio.alignVertical')}</span>
                 <select
                   value={alignVertical}
                   onChange={(event: React.ChangeEvent<HTMLSelectElement>): void =>
@@ -181,13 +183,13 @@ function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
                     })
                   }
                 >
-                  <option value="top">Top</option>
-                  <option value="middle">Middle</option>
-                  <option value="bottom">Bottom</option>
+                  <option value="top">{t('studio.top')}</option>
+                  <option value="middle">{t('studio.middle')}</option>
+                  <option value="bottom">{t('studio.bottom')}</option>
                 </select>
               </div>
               <div className="field-customization">
-                <span>Text align</span>
+                <span>{t('studio.textAlign')}</span>
                 <select
                   value={textAlign}
                   onChange={(event: React.ChangeEvent<HTMLSelectElement>): void =>
@@ -198,13 +200,13 @@ function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
                     })
                   }
                 >
-                  <option value="left">Left</option>
-                  <option value="center">Center</option>
-                  <option value="right">Right</option>
+                  <option value="left">{t('studio.left')}</option>
+                  <option value="center">{t('studio.center')}</option>
+                  <option value="right">{t('studio.right')}</option>
                 </select>
               </div>
               <div className="field-customization">
-                <span>Text Uppercase</span>
+                <span>{t('studio.textUppercase')}</span>
                 <input
                   type="checkbox"
                   name="uppercase"
@@ -224,7 +226,7 @@ function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
       )}
       <button className="add-text-button" onClick={(): void => addText()}>
         <FontAwesomeIcon className="icon-plus" icon={['fas', 'plus']} />
-        <span>Add Text</span>
+        <span>{t('studio.addText')}</span>
       </button>
     </div>
   )
@@ -240,7 +242,7 @@ export default (props: any): JSX.Element => {
           ) : (
             <div className="customization-empty">
               <ReactSVG src="images/sad.svg" wrapper="span" className="wrapper-sad-svg" />
-              <h3>No template selected</h3>
+              <Translation>{(t): any => <h3>{t('studio.noMemeSelected')}</h3>}</Translation>
             </div>
           )}
         </div>

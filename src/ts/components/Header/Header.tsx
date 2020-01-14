@@ -1,16 +1,19 @@
 import * as React from 'react'
 import { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import './header.scss'
 import Button from '@components/Button/Button'
 import { DefaultContext, DefaultState } from '@store/DefaultContext'
 import { SET_ON_STUDIO } from '@store/reducer/constants'
+import LangSelector from '@components/LangSelector/LangSelector'
 
 type HeaderProps = {
   export?: Function
 }
 
 function Header(props: HeaderProps): JSX.Element {
+  const { t } = useTranslation()
   const [, dispatchDefault]: [DefaultState, Function] = useContext(DefaultContext)
   const { location, push } = useHistory()
 
@@ -33,8 +36,9 @@ function Header(props: HeaderProps): JSX.Element {
         </a>
       </div>
       <div>
+        <LangSelector />
         <Button className="button-export" onClick={props.export}>
-          Export Meme
+          {t('studio.export')}
         </Button>
       </div>
     </header>

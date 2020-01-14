@@ -4,6 +4,7 @@
     "sourceMap": true,
     "noImplicitAny": true,
     "module": "commonjs",
+    "resolveJsonModule": true,
     "target": "es6",
     "jsx": "react",
     "baseUrl": "./",

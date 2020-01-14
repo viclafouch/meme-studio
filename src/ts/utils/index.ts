@@ -11,6 +11,9 @@ export const randomID = (): string =>
     .toString(36)
     .substr(2, 9)
 
+export const getDefaultLang = (availableLangs: Array<string>, defaultLang = 'en'): string =>
+  navigator.languages.map(l => l.substr(0, 2)).find(lang => availableLangs.includes(lang)) || defaultLang
+
 export const wait = (timeout = 1000): Promise<any> => new Promise(resolve => setTimeout(resolve, timeout))
 
 export const innerDemensions = (node: HTMLElement): { height: number; width: number } => {

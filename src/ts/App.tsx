@@ -14,7 +14,8 @@ import {
   faUndoAlt,
   faRedoAlt,
   faQuestionCircle,
-  faTrashRestoreAlt
+  faTrashRestoreAlt,
+  faGlobe
 } from '@fortawesome/free-solid-svg-icons'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { ModalProvider } from '@store/ModalContext'
@@ -32,7 +33,8 @@ library.add(
   faUndoAlt,
   faRedoAlt,
   faQuestionCircle,
-  faTrashRestoreAlt
+  faTrashRestoreAlt,
+  faGlobe
 )
 
 function App(): JSX.Element {

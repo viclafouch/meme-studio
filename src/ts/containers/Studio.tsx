@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useState, useContext } from 'react'
 import { ReactSVG } from 'react-svg'
+import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Gallery from '@components/Tabs/Gallery/Gallery'
 import Customization from '@components/Tabs/Customization/Customization'
@@ -17,6 +18,7 @@ import Tools from '@components/Tools/Tools'
 import Header from '@components/Header/Header'
 
 function Studio(props: any): JSX.Element {
+  const { t } = useTranslation()
   const [currentTab, setCurrentTab]: [string, Function] = useState<string>(TAB_GALLERY)
   const [, { setToHistoryDebounced }]: [HistoryState, HistoryDispatcher] = useContext(HistoryContext)
   const [{ memeSelected, drawProperties }, dispatchEditor]: [EditorState, Function] = useContext(EditorContext)
@@ -53,7 +55,7 @@ function Studio(props: any): JSX.Element {
           {!memeSelected && (
             <div className="empty-meme">
               <ReactSVG src="images/choose-meme.svg" wrapper="span" className="choose-meme-svg" />
-              <p>Please, select a meme to custom</p>
+              <p>{t('studio.selectMeme')}</p>
             </div>
           )}
         </div>
