@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useState, useEffect, useContext } from 'react'
 import { ReactSVG } from 'react-svg'
+import { useTranslation } from 'react-i18next'
 import Studio from './Studio'
 import Header from '@components/Header/Header'
 import Intro from './Intro'
@@ -13,6 +14,7 @@ import { Switch, Route } from 'react-router-dom'
 import About from './About'
 
 function Main(): JSX.Element {
+  const { i18n } = useTranslation()
   const { fetchNextMemes } = useMemes()
   const [{ onStudio }]: [DefaultState] = useContext(DefaultContext)
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -37,7 +39,11 @@ function Main(): JSX.Element {
     <main className="main-wrapper">
       {isLoading ? (
         <div className="is-loading-memes" aria-busy="true">
-          <ReactSVG src="images/dual-ball.svg" wrapper="span" />
+          {i18n.language === 'fr' ? (
+            <ReactSVG src="images/dual-ball-fr.svg" wrapper="span" />
+          ) : (
+            <ReactSVG src="images/dual-ball-en.svg" wrapper="span" />
+          )}
         </div>
       ) : isError ? (
         <FatalError />
