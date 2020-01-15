@@ -50,7 +50,7 @@ function Studio(props: any): JSX.Element {
         <div className="studio-tools">
           <Tools />
         </div>
-        <div className="studio-content">
+        <div className={`studio-content ${memeSelected ? 'studio-content-active' : ''}`}>
           {memeSelected && <WrapperCanvas changeTab={setCurrentTab} onCustomizeTexts={handleCustomizeTexts} />}
           {!memeSelected && (
             <div className="empty-meme">

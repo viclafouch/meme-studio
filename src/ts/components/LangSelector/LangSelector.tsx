@@ -27,7 +27,8 @@ function LangSelector(): JSX.Element {
   return (
     <div className={`lang-selector ${isActive ? 'lang-selector-active' : ''}`}>
       <Button className="lang-selector-btn" onClick={handleClick}>
-        <FontAwesomeIcon icon={['fas', 'globe']} className="icon-globe" /> {i18n.options.resources[i18n.language].name}
+        <FontAwesomeIcon icon={['fas', 'globe']} className="icon-globe" />
+        {i18n.options.resources[i18n.language].name}
       </Button>
       <div className="lang-selector-popup">
         <ul className="lang-selector-list">
