@@ -2,6 +2,7 @@ import * as React from 'react'
 import { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './header.scss'
 import Button from '@components/Button/Button'
 import { DefaultContext, DefaultState } from '@store/DefaultContext'
@@ -38,6 +39,7 @@ function Header(props: HeaderProps): JSX.Element {
       <div>
         <LangSelector />
         <Button className="button-export" onClick={props.export}>
+          <FontAwesomeIcon icon={['fas', 'arrow-circle-down']} className="icon-arrow-circle-down" />
           {t('studio.export')}
         </Button>
       </div>

@@ -194,7 +194,7 @@ body {
       .studio-aside-header {
         height: 50px;
         display: flex;
-        margin-bottom: 5px;
+        margin-bottom: 2px;
         flex-shrink: 0;
 
         .studio-aside-header-btn {
@@ -217,7 +217,7 @@ body {
 
       .studio-aside-content {
         width: 100%;
-        padding: 0 4px;
+        padding: 0 2px;
         height: calc(100% - 50px);
         overflow-y: auto;
         overflow-x: hidden;
