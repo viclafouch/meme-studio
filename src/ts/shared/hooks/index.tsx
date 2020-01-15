@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from 'react'
 import AbortController from 'abort-controller'
 import { DefaultContext } from '@store/DefaultContext'
 import { getMemes } from '@shared/api'
-import { SET_MEMES, SET_CURSOR_MEMES, SET_HAS_NEXT_MEMES, SET_TEXTS } from '@store/reducer/constants'
+import { SET_MEMES, SET_CURSOR_MEMES, SET_HAS_NEXT_MEMES, SET_TEXTS, SET_MEME_SELECTED } from '@store/reducer/constants'
 import Meme from '@shared/models/Meme'
 import { HistoryContext, HistoryState, HistoryDispatcher } from '@store/HistoryContext'
 import { EditorState, EditorContext } from '@store/EditorContext'
@@ -25,11 +25,22 @@ export function useWindowWidth(): number {
   return width
 }
 
-export function useInitStudio(): Function {
-  const [, { setToHistory }]: [HistoryState, HistoryDispatcher] = useContext(HistoryContext)
+export function useInitStudio(): {
+  initWithoutMeme: Function
+  initWithMeme: Function
+} {
+  const [, { setToHistory, clearHistory }]: [HistoryState, HistoryDispatcher] = useContext(HistoryContext)
   const [{ drawProperties, memeSelected }, dispatchEditor]: [EditorState, Function] = useContext(EditorContext)
 
-  return (currentDrawProperty: DrawProperties = drawProperties, currentMemeSelected: Meme = memeSelected): void => {
+  const initWithoutMeme = (): void => {
+    clearHistory()
+    dispatchEditor({
+      type: SET_MEME_SELECTED,
+      memeSelected: null
+    })
+  }
+
+  const initWithMeme = (currentDrawProperty: DrawProperties = drawProperties, currentMemeSelected: Meme = memeSelected): void => {
     const texts = [...Array(currentMemeSelected.boxCount)].map(() => {
       const text = createText({
         centerY: 50,
@@ -53,6 +64,11 @@ export function useInitStudio(): Function {
       drawProperties: currentDrawProperty,
       type: INITIAL
     })
+  }
+
+  return {
+    initWithoutMeme,
+    initWithMeme
   }
 }
 

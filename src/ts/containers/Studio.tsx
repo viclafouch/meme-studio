@@ -77,7 +77,7 @@ function Studio(props: any): JSX.Element {
       </div>
       <div className="ld ld-float-btt-in studio-body">
         <div className="studio-tools">
-          <Tools />
+          <Tools setCurrentTab={setCurrentTab} />
         </div>
         <div className={`studio-content ${memeSelected ? 'studio-content-active' : ''}`}>
           {memeSelected && <WrapperCanvas changeTab={setCurrentTab} onCustomizeTexts={handleCustomizeTexts} />}
@@ -91,6 +91,7 @@ function Studio(props: any): JSX.Element {
                   ref={inputDrop}
                   onChange={(): any => handleImportImage()}
                   className="import-image-label-input"
+                  accept="image/png, image/jpeg"
                   id="local-meme"
                 />
                 {t('studio.or')} <span className="import-image-label-text">{t('studio.importImage')}</span>.

@@ -7,6 +7,8 @@ import { HistoryContext, HistoryState, HistoryDispatcher } from '@store/HistoryC
 import Faq from '@components/Faq/Faq'
 import { useInitStudio } from '@shared/hooks'
 import './tools.scss'
+import Meme from '@shared/models/Meme'
+import { TAB_GALLERY } from '@shared/constants'
 
 type ToolsProps = {
   showTextAreas: boolean
@@ -15,12 +17,23 @@ type ToolsProps = {
   redoHistory: Function
   canUndo: boolean
   canRedo: boolean
+  memeSelected: Meme
+  setCurrentTab: Function
 }
 
 const Tools = memo(
-  ({ showTextAreas, dispatchEditor, undoHistory, redoHistory, canUndo, canRedo }: ToolsProps): JSX.Element => {
+  ({
+    showTextAreas,
+    dispatchEditor,
+    undoHistory,
+    redoHistory,
+    canUndo,
+    canRedo,
+    memeSelected,
+    setCurrentTab
+  }: ToolsProps): JSX.Element => {
     const faqModal: RefObject<any> = useRef(null)
-    const initStudio = useInitStudio()
+    const { initWithMeme, initWithoutMeme } = useInitStudio()
 
     return (
       <div className="tools">
@@ -49,7 +62,19 @@ const Tools = memo(
             </button>
           </li>
           <li>
-            <button className="tools-list-btn" disabled={!canUndo} onClick={(): void => initStudio()}>
+            <button className="tools-list-btn" disabled={!canUndo} onClick={(): void => initWithMeme()}>
+              <FontAwesomeIcon icon={['fas', 'eraser']} />
+            </button>
+          </li>
+          <li>
+            <button
+              className="tools-list-btn"
+              disabled={!memeSelected}
+              onClick={(): void => {
+                initWithoutMeme()
+                setCurrentTab(TAB_GALLERY)
+              }}
+            >
               <FontAwesomeIcon icon={['fas', 'trash-restore-alt']} />
             </button>
           </li>
@@ -67,12 +92,14 @@ const Tools = memo(
   }
 )
 
-export default (): JSX.Element => {
-  const [{ showTextAreas }, dispatchEditor]: [EditorState, Function] = useContext(EditorContext)
+export default (props: any): JSX.Element => {
+  const [{ showTextAreas, memeSelected }, dispatchEditor]: [EditorState, Function] = useContext(EditorContext)
   const [{ canUndo, canRedo }, { undoHistory, redoHistory }]: [HistoryState, HistoryDispatcher] = useContext(HistoryContext)
 
   return (
     <Tools
+      {...props}
+      memeSelected={memeSelected}
       canUndo={canUndo}
       canRedo={canRedo}
       showTextAreas={showTextAreas}

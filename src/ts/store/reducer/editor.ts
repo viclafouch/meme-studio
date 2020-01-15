@@ -30,7 +30,9 @@ const EditorReducer: React.Reducer<EditorState, Actions> = (state, action) => {
         showTextAreas
       }
     case SET_MEME_SELECTED:
-      debug(`TCL: EditorReducer -> set memeSelected to ${memeSelected.name}`)
+      debug(
+        `TCL: EditorReducer -> ${!memeSelected ? 'remove' : 'set'} memeSelected ${memeSelected ? 'to' + memeSelected.name : ''}`
+      )
       return {
         ...state,
         memeSelected

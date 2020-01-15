@@ -23,7 +23,7 @@ function WrapperCanvas(props: WrapperCanvasProps): JSX.Element {
   const windowWidth: number = useWindowWidth()
   const wrapperRef: RefObject<HTMLDivElement> = useRef(null)
   const memeIdRef: RefObject<string> = useRef(null)
-  const initStudio = useInitStudio()
+  const { initWithMeme } = useInitStudio()
 
   useEffect(() => {
     dispatchEditor({
@@ -33,6 +33,7 @@ function WrapperCanvas(props: WrapperCanvasProps): JSX.Element {
   }, [])
 
   useEffect(() => {
+    if (!memeSelected) return
     let currentWidth: number = memeSelected.width
     let currentHeight: number = memeSelected.height
     let ratioW = 1
@@ -74,7 +75,7 @@ function WrapperCanvas(props: WrapperCanvasProps): JSX.Element {
 
     if (memeIdRef.current !== memeSelected.id) {
       ;(memeIdRef as React.MutableRefObject<string>).current = memeSelected.id // avoid readOnly
-      initStudio(newDrawProperties, memeSelected)
+      initWithMeme(newDrawProperties, memeSelected)
     } else {
       dispatchEditor({
         type: SET_TEXTS,
