@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
+import { ReactSVG } from 'react-svg'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './header.scss'
@@ -30,7 +31,17 @@ function Header(props: HeaderProps): JSX.Element {
 
   return (
     <header className="header">
-      <div></div>
+      <div>
+        <a
+          target="_blank"
+          href="https://github.com/viclafouch/meme-studio"
+          className="github-corner"
+          aria-label={t('viewSource')}
+          title={t('viewSource')}
+        >
+          <ReactSVG src="images/github.svg" wrapper="div" className="github-svg" />
+        </a>
+      </div>
       <div className="center-column">
         <a href="/" onClick={handleClick}>
           <h1>Meme Studio</h1>

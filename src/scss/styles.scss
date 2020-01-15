@@ -63,7 +63,14 @@ body {
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  align-items: center;
   width: 100%;
+
+  .lang-selector {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
 
   .intro-title {
     & > h1 {

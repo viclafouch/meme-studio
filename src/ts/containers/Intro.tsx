@@ -6,6 +6,7 @@ import { DefaultContext, DefaultState } from '@store/DefaultContext'
 import { SET_ON_STUDIO } from '@store/reducer/constants'
 import { useMemes } from '@shared/hooks'
 import { useTranslation } from 'react-i18next'
+import LangSelector from '@components/LangSelector/LangSelector'
 
 function Intro(): JSX.Element {
   const { t } = useTranslation()
@@ -14,6 +15,7 @@ function Intro(): JSX.Element {
 
   return (
     <div className="intro">
+      <LangSelector />
       <div className="intro-title">
         <h1>Meme Studio</h1>
         <p>{t('intro.description')}</p>
