@@ -27,7 +27,7 @@ i18n
     resources: languages,
     lng,
     fallbackLng,
-    debug: true,
+    debug: process.env.NODE_ENV !== 'production',
     interpolation: {
       escapeValue: false // not needed for react as it escapes by default
     }

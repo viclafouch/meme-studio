@@ -34,6 +34,7 @@ export function useInitStudio(): {
 
   const initWithoutMeme = (): void => {
     clearHistory()
+    document.title = `Meme Studio`
     dispatchEditor({
       type: SET_MEME_SELECTED,
       memeSelected: null
@@ -54,6 +55,8 @@ export function useInitStudio(): {
       text.centerX = text.base.centerX * currentDrawProperty.scale
       return text
     })
+
+    document.title = `Meme Studio - ${currentMemeSelected.name}`
 
     dispatchEditor({
       type: SET_TEXTS,
