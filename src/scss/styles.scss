@@ -18,7 +18,7 @@ body {
     box-sizing: border-box;
   }
 
-  #root {
+  #app-root {
     min-height: 100vh;
     position: relative;
   }
@@ -178,8 +178,30 @@ body {
           max-width: 360px;
         }
 
-        p {
+        p,
+        .import-image-label {
           margin-top: 1em;
+        }
+
+        .import-image-label {
+
+          .import-image-label-input {
+            visibility: hidden;
+            width: 0;
+            height: 0;
+            cursor: default;
+            opacity: 0;
+            position: absolute;
+          }
+
+          .import-image-label-text {
+            text-decoration: underline;
+            color: var(--blue);
+            cursor: pointer;
+            &:hover {
+              color: var(--blue-light);
+            }
+          }
         }
       }
     }

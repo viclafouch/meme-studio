@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useState, useContext } from 'react'
+import { useState, useContext, useRef, RefObject } from 'react'
 import { ReactSVG } from 'react-svg'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -16,8 +16,11 @@ import Meme from '@shared/models/Meme'
 import TextBox from '@shared/models/TextBox'
 import Tools from '@components/Tools/Tools'
 import Header from '@components/Header/Header'
+import { endWithExt, randomID } from '@utils/index'
+import DragAndDrop from '@components/DragAndDrop/DragAndDrop'
 
 function Studio(props: any): JSX.Element {
+  const inputDrop: RefObject<HTMLInputElement> = useRef(null)
   const { t } = useTranslation()
   const [currentTab, setCurrentTab]: [string, Function] = useState<string>(TAB_GALLERY)
   const [, { setToHistoryDebounced }]: [HistoryState, HistoryDispatcher] = useContext(HistoryContext)
@@ -41,6 +44,32 @@ function Studio(props: any): JSX.Element {
       memeSelected: meme
     })
 
+  const handleImportImage = async (fileList?: FileList): Promise<void> => {
+    const files = fileList || inputDrop.current.files
+    if (!files.length) return
+    else if (files.length > 1) return console.log('not multiple files')
+    else if (!endWithExt(['.jpg', '.png', 'jpeg'], files[0].name)) return console.log('not good extension')
+
+    const meme = new Meme({
+      id: randomID(),
+      height: 0,
+      width: 0,
+      boxCount: 0,
+      name: files[0].name,
+      url: window.URL.createObjectURL(files[0])
+    })
+
+    const { width, height } = await meme.image
+
+    meme.width = width
+    meme.height = height
+
+    dispatchEditor({
+      type: SET_MEME_SELECTED,
+      memeSelected: meme
+    })
+  }
+
   return (
     <div className="page page-studio">
       <div className="ld ld-fall-ttb-in studio-header">
@@ -56,6 +85,17 @@ function Studio(props: any): JSX.Element {
             <div className="empty-meme">
               <ReactSVG src="images/choose-meme.svg" wrapper="span" className="choose-meme-svg" />
               <p>{t('studio.selectMeme')}</p>
+              <label className="import-image-label" htmlFor="local-meme">
+                <input
+                  type="file"
+                  ref={inputDrop}
+                  onChange={(): any => handleImportImage()}
+                  className="import-image-label-input"
+                  id="local-meme"
+                />
+                {t('studio.or')} <span className="import-image-label-text">{t('studio.importImage')}</span>.
+              </label>
+              <DragAndDrop onDrop={handleImportImage} id="dragenter-root" />
             </div>
           )}
         </div>

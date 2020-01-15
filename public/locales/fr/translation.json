@@ -4,7 +4,9 @@
     "getStarted": "Commencer maintenant"
   },
   "studio": {
-    "selectMeme": "Veuillez sélectionner un meme de la galerie.",
+    "selectMeme": "Veuillez sélectionner un mème de la galerie",
+    "or": "ou",
+    "importImage": "importez une image",
     "export": "Exporter",
     "noMemeSelected": "Aucun meme sélectionné",
     "text": "Texte",
@@ -21,6 +23,7 @@
     "right": "Droite",
     "bottom": "Bas",
     "middle": "Milieu",
-    "center": "Centre"
+    "center": "Centre",
+    "dropImage": "Déposez votre image au format PNG ou JPG ici"
   }
 }

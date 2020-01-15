@@ -16,6 +16,8 @@ export const getDefaultLang = (availableLangs: Array<string>, defaultLang = 'en'
 
 export const wait = (timeout = 1000): Promise<any> => new Promise(resolve => setTimeout(resolve, timeout))
 
+export const endWithExt = (exts: Array<string>, filename: string): boolean => exts.some(x => filename.toLowerCase().endsWith(x))
+
 export const innerDemensions = (node: HTMLElement): { height: number; width: number } => {
   const computedStyle: CSSStyleDeclaration = getComputedStyle(node)
   let height: number = node.clientHeight

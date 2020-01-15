@@ -5,6 +5,8 @@
   },
   "studio": {
     "selectMeme": "Please select a meme in the gallery.",
+    "or": "or",
+    "importImage": "drop an image",
     "export": "Export",
     "noMemeSelected": "No meme selected",
     "text": "Text",
@@ -21,6 +23,7 @@
     "right": "Right",
     "bottom": "Bottom",
     "middle": "Middle",
-    "center": "Center"
+    "center": "Center",
+    "dropImage": "Drop your image in PNG or JPG format here"
   }
 }
