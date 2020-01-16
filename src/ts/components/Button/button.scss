@@ -2,7 +2,7 @@
   background-color: var(--blue);
   padding: 24px 56px;
   font-weight: 600;
-  font-size: 28px;
+  font-size: 25px;
   line-height: 32px;
   color: #ffffff;
   border-radius: 8px;
@@ -13,4 +13,15 @@
   cursor: pointer;
   border: 0;
   outline: none;
+  transition-property: opacity box-shadow;
+  transition-duration: 0.3s;
+
+  &:not(:disabled):hover {
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.22);
+    opacity: 0.85;
+  }
+
+  &:disabled {
+    color: #dcdcdc !important;
+  }
 }
