@@ -9,6 +9,7 @@ import Button from '@components/Button/Button'
 import { DefaultContext, DefaultState } from '@store/DefaultContext'
 import { SET_ON_STUDIO } from '@store/reducer/constants'
 import LangSelector from '@components/LangSelector/LangSelector'
+import { EditorContext, EditorState } from '@store/EditorContext'
 
 type HeaderProps = {
   export?: Function
@@ -17,6 +18,7 @@ type HeaderProps = {
 function Header(props: HeaderProps): JSX.Element {
   const { t } = useTranslation()
   const [, dispatchDefault]: [DefaultState, Function] = useContext(DefaultContext)
+  const [{ memeSelected }]: [EditorState, Function] = useContext(EditorContext)
   const { location, push } = useHistory()
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {
@@ -49,7 +51,7 @@ function Header(props: HeaderProps): JSX.Element {
       </div>
       <div>
         <LangSelector />
-        <Button className="button-export" onClick={props.export}>
+        <Button className="button-export" disabled={!memeSelected} onClick={props.export}>
           <FontAwesomeIcon icon={['fas', 'arrow-circle-down']} className="icon-arrow-circle-down" />
           {t('studio.export')}
         </Button>

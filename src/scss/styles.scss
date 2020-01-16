@@ -266,6 +266,10 @@ body {
   background-color: #ffffff;
   width: 100%;
 
+  .meme-img {
+    max-width: 100%;
+  }
+
   .meme-actions-share {
     display: flex;
     justify-content: center;
