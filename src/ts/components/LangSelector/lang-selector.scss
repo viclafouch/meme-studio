@@ -1,9 +1,11 @@
 .lang-selector {
   position: relative;
+  font-size: 12px;
+
   &-btn {
     padding: 12px 14px;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 1em;
     line-height: 16px;
     background-color: #ffffff;
     text-transform: uppercase;
@@ -31,6 +33,7 @@
     line-height: 26px;
     border-radius: 4px;
     width: 100%;
+    font-size: 1.1em;
 
     pointer-events: none;
     opacity: 0;

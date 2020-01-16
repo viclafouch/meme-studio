@@ -41,6 +41,7 @@ const Tools = memo(
           <li>
             <button
               className="tools-list-btn"
+              disabled={!memeSelected}
               onClick={(): void =>
                 dispatchEditor({
                   type: SET_SHOW_TEXT_AREAS,

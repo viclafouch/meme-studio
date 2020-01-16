@@ -24,9 +24,13 @@
     outline: none;
     border: 0;
     background-color: transparent;
-    font-size: 14px;
-    &:not(:disabled):hover {
-      opacity: 0.65;
+    font-size: 13px;
+
+    &:not(:disabled) {
+      color: #444444;
+      &:hover {
+        opacity: 0.65;
+      }
     }
   }
 }
