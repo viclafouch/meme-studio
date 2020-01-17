@@ -7,7 +7,7 @@
     color: #ffffff;
     background-color: #ccc;
     cursor: pointer;
-    padding: 18px;
+    padding: 18px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -33,8 +33,9 @@
       border: 0;
       color: #ffffff;
       outline: none;
+      font-size: 14px;
       &:hover {
-        color: #444444;
+        color: rgba($color: #ffffff, $alpha: 0.6);
         cursor: pointer;
       }
     }

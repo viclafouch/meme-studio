@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useContext, memo, useRef, RefObject } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useTranslation } from 'react-i18next'
 import { EditorContext, EditorState } from '@store/EditorContext'
 import { SET_SHOW_TEXT_AREAS } from '@store/reducer/constants'
 import { HistoryContext, HistoryState, HistoryDispatcher } from '@store/HistoryContext'
@@ -32,6 +33,7 @@ const Tools = memo(
     memeSelected,
     setCurrentTab
   }: ToolsProps): JSX.Element => {
+    const { t } = useTranslation()
     const faqModal: RefObject<any> = useRef(null)
     const { initWithMeme, initWithoutMeme } = useInitStudio()
 
@@ -41,6 +43,7 @@ const Tools = memo(
           <li>
             <button
               className="tools-list-btn"
+              data-tooltip={t('attr.hideTextboxes')}
               disabled={!memeSelected}
               onClick={(): void =>
                 dispatchEditor({
@@ -53,23 +56,39 @@ const Tools = memo(
             </button>
           </li>
           <li>
-            <button className="tools-list-btn" disabled={!canUndo} onClick={(): void => canUndo && undoHistory()}>
+            <button
+              className="tools-list-btn"
+              data-tooltip={t('attr.undo')}
+              disabled={!canUndo}
+              onClick={(): void => canUndo && undoHistory()}
+            >
               <FontAwesomeIcon icon={['fas', 'undo-alt']} />
             </button>
           </li>
           <li>
-            <button className="tools-list-btn" disabled={!canRedo} onClick={(): void => canRedo && redoHistory()}>
+            <button
+              className="tools-list-btn"
+              data-tooltip={t('attr.redo')}
+              disabled={!canRedo}
+              onClick={(): void => canRedo && redoHistory()}
+            >
               <FontAwesomeIcon icon={['fas', 'redo-alt']} />
             </button>
           </li>
           <li>
-            <button className="tools-list-btn" disabled={!canUndo} onClick={(): void => initWithMeme()}>
+            <button
+              className="tools-list-btn"
+              data-tooltip={t('attr.eraseAll')}
+              disabled={!canUndo}
+              onClick={(): void => initWithMeme()}
+            >
               <FontAwesomeIcon icon={['fas', 'eraser']} />
             </button>
           </li>
           <li>
             <button
               className="tools-list-btn"
+              data-tooltip={t('attr.reset')}
               disabled={!memeSelected}
               onClick={(): void => {
                 initWithoutMeme()
@@ -82,7 +101,12 @@ const Tools = memo(
         </ul>
         <ul className="tools-list">
           <li>
-            <button className="tools-list-btn" onClick={(): void => faqModal.current.open()}>
+            <button
+              className="tools-list-btn"
+              data-tooltip={t('attr.faq')}
+              disabled={false}
+              onClick={(): void => faqModal.current.open()}
+            >
               <FontAwesomeIcon fixedWidth icon={['fas', 'question-circle']} />
             </button>
           </li>

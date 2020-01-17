@@ -26,10 +26,32 @@
     background-color: transparent;
     font-size: 13px;
 
+    &[data-tooltip]::after,
+    &[data-tooltip]::before {
+      left: 110%;
+      top: 50%;
+      bottom: auto;
+      transform: translateY(-50%);
+    }
+
+    &[data-tooltip]::before {
+      margin-bottom: 0;
+      white-space: nowrap;
+      text-align: left;
+      padding: 6px 7px;
+    }
+
+    &[data-tooltip]::after {
+      border-bottom: 5px solid transparent;
+      border-right: 5px solid var(--background-tooltip);
+      border-top: 5px solid transparent;
+      border-left: 0;
+    }
+
     &:not(:disabled) {
       color: #444444;
       &:hover {
-        opacity: 0.65;
+        color:rgba(68, 68, 68, 0.644);
       }
     }
   }

@@ -1,8 +1,9 @@
 import * as React from 'react'
+import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState, useRef, useLayoutEffect, useImperativeHandle } from 'react'
-import './accordion.scss'
 import { wait } from '@utils/index'
+import './accordion.scss'
 
 const durationAccordion = 600
 
@@ -17,6 +18,7 @@ type AccordionProps = {
 }
 
 const Accordion = React.forwardRef((props: AccordionProps, ref: any) => {
+  const { t } = useTranslation()
   const [isActive, setIsActive] = useState<boolean>(props.defaultOpened)
   const [currentHeight, setCurrentHeight] = useState<string>(props.defaultOpened ? 'inherit' : '0px')
   const content = useRef<HTMLDivElement>(null)
@@ -62,7 +64,8 @@ const Accordion = React.forwardRef((props: AccordionProps, ref: any) => {
       <div className="accordion-trigger" onClick={handleOpen}>
         <p className="accordion-title">{props.title}</p>
         <button
-          aria-label="Remove Text"
+          data-tooltip={t('attr.delete')}
+          aria-label={t('attr.delete')}
           className="accordion-remove-text"
           onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => handleRemoveText(e)}
         >

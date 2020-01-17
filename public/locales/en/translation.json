@@ -1,7 +1,14 @@
 {
   "attr": {
     "viewSource": "View source on GitHub",
-    "close": "Fermer"
+    "close": "Close",
+    "delete": "Delete",
+    "hideTextboxes": "Hide textboxes",
+    "undo": "Undo",
+    "redo": "Redo",
+    "eraseAll": "Erase all",
+    "reset": "Reset",
+    "faq": "Faq"
   },
   "loading": "Loading",
   "download": "Download",

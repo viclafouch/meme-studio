@@ -1,7 +1,14 @@
 {
   "attr": {
     "viewSource": "Voir les sources sur Github",
-    "close": "Close"
+    "close": "Fermer",
+    "delete": "Supprimer",
+    "hideTextboxes": "Cacher les zones de texte",
+    "undo": "Annuler",
+    "redo": "Rétablir",
+    "eraseAll": "Écraser tout",
+    "reset": "Réinitialiser",
+    "faq": "Faq"
   },
   "loading": "Chargement",
   "download": "Télécharger",
