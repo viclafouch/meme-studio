@@ -266,8 +266,23 @@ body {
   background-color: #ffffff;
   width: 100%;
 
+  .export-title {
+    text-align: center;
+    font-size: 1.55em;
+  }
+
   .meme-img {
+    margin-top: 20px;
     max-width: 100%;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  }
+
+  .meme-info-size {
+    padding: 3px 1px;
+    color: var(--grey-dark);
+    text-align: right;
+    font-size: 12px;
+    margin-bottom: 0;
   }
 
   .meme-actions-share {
@@ -275,39 +290,22 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-top: 15px;
 
-    .share-button {
-      cursor: pointer;
-      width: 40px;
-      height: 40px;
-      border: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 4px;
-      outline: none;
+    a {
+      text-decoration: none;
+    }
 
-      svg {
-        width: 18px;
-        height: auto;
-      }
+    .button-export {
+      padding: 12px 22px;
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 16px;
+      background-color: #aeb5bc;
+      color: #ffffff;
+      text-transform: uppercase;
 
-      &#share-local {
-        background-color: #aeb5bc;
-        color: #ffffff;
-      }
-      &#share-facebook {
-        background-color: #3b5998;
-        color: #ffffff;
-      }
-      &#share-twitter {
-        background-color: #4099ff;
-        color: #ffffff;
-      }
-
-      &:hover {
-        opacity: 0.8;
+      .icon-arrow-circle-down {
+        margin-right: 7px;
       }
     }
   }
