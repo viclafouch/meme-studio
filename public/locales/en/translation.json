@@ -1,5 +1,10 @@
 {
-  "viewSource": "View source on GitHub",
+  "attr": {
+    "viewSource": "View source on GitHub",
+    "close": "Fermer"
+  },
+  "loading": "Loading",
+  "download": "Download",
   "intro": {
     "description": "Create a meme from JPG, GIF or PNG images. Edit your image and make your custom meme.",
     "getStarted": "Get started"

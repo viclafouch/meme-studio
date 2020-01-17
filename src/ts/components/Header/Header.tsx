@@ -38,8 +38,8 @@ function Header(props: HeaderProps): JSX.Element {
           target="_blank"
           href="https://github.com/viclafouch/meme-studio"
           className="github-corner"
-          aria-label={t('viewSource')}
-          title={t('viewSource')}
+          aria-label={t('attr.viewSource')}
+          title={t('attr.viewSource')}
         >
           <ReactSVG src="images/github.svg" wrapper="div" className="github-svg" />
         </a>

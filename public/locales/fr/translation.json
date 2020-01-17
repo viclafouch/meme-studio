@@ -1,5 +1,10 @@
 {
-  "viewSource": "Voir les sources sur Github",
+  "attr": {
+    "viewSource": "Voir les sources sur Github",
+    "close": "Close"
+  },
+  "loading": "Chargement",
+  "download": "Télécharger",
   "intro": {
     "description": "Créez un mème à partir d'images JPG, GIF ou PNG. Modifiez votre image et créez votre mème personnalisé !",
     "getStarted": "Commencer maintenant"

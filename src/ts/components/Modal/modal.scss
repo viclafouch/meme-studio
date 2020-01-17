@@ -34,6 +34,15 @@
     overflow-x: hidden;
     overflow-y: auto;
     z-index: 2;
-    padding: 15px;
+    padding: 15px 7px;
+    position: relative;
+
+    .modal-close {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      color: #444444;
+      cursor: pointer;
+    }
   }
 }

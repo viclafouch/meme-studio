@@ -17,7 +17,8 @@ import {
   faTrashRestoreAlt,
   faGlobe,
   faArrowCircleDown,
-  faEraser
+  faEraser,
+  faTimes
 } from '@fortawesome/free-solid-svg-icons'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { ModalProvider } from '@store/ModalContext'
@@ -38,7 +39,8 @@ library.add(
   faTrashRestoreAlt,
   faGlobe,
   faArrowCircleDown,
-  faEraser
+  faEraser,
+  faTimes
 )
 
 function App(): JSX.Element {
