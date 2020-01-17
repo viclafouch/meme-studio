@@ -271,10 +271,23 @@ body {
     font-size: 1.55em;
   }
 
-  .meme-img {
-    margin-top: 20px;
-    max-width: 100%;
-    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  .meme-wrapper-img {
+    position: relative;
+    .meme-img {
+      margin-top: 20px;
+      max-width: 100%;
+      max-height: 490px;
+      box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    }
+    &::after {
+      content: '';
+      z-index: 2;
+      height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      position: absolute;
+    }
   }
 
   .meme-info-size {
@@ -300,8 +313,6 @@ body {
       font-weight: 600;
       font-size: 13px;
       line-height: 16px;
-      background-color: #aeb5bc;
-      color: #ffffff;
       text-transform: uppercase;
 
       .icon-arrow-circle-down {

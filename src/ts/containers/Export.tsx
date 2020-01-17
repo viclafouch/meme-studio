@@ -57,8 +57,13 @@ function Export(props: ExportProps): JSX.Element {
   return (
     <Modal onClose={handleClose} isLoading={isLoading}>
       <div className="export">
-        <h2 className="export-title">Prévisualisation</h2>
-        <img src={img} className="meme-img" />
+        <h2 className="export-title">{t('preview')}</h2>
+        <div
+          className="meme-wrapper-img"
+          onContextMenu={(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => e.preventDefault()}
+        >
+          <img src={img} className="meme-img" />
+        </div>
         <span className="meme-info-size">
           {memeSelected.width} x {memeSelected.height}
         </span>
