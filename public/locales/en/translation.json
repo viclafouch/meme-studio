@@ -4,6 +4,7 @@
     "close": "Close",
     "delete": "Delete",
     "hideTextboxes": "Hide textboxes",
+    "showTextboxes": "Show textboxes",
     "undo": "Undo",
     "redo": "Redo",
     "eraseAll": "Erase all",

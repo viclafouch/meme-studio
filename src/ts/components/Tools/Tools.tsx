@@ -43,7 +43,7 @@ const Tools = memo(
           <li>
             <button
               className="tools-list-btn"
-              data-tooltip={t('attr.hideTextboxes')}
+              data-tooltip={showTextAreas ? t('attr.hideTextboxes') : t('attr.showTextboxes')}
               disabled={!memeSelected}
               onClick={(): void =>
                 dispatchEditor({
