@@ -52,7 +52,7 @@ const Tools = memo(
                 })
               }
             >
-              <FontAwesomeIcon icon={['fas', 'crop-alt']} />
+              {showTextAreas ? <FontAwesomeIcon icon={['fas', 'crop']} /> : <FontAwesomeIcon icon={['fas', 'crop-alt']} />}
             </button>
           </li>
           <li>
