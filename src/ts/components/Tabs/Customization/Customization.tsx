@@ -87,7 +87,10 @@ function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
     <div className="customization-not-empty">
       <h2>{t('studio.editMeme', { name: memeSelected.name })}</h2>
       {texts.map(
-        ({ value, id, uuid, color, fontSize, alignVertical, textAlign, isUppercase, fontFamily, refs }, i): React.ReactNode => (
+        (
+          { value, id, uuid, color, fontSize, alignVertical, textAlign, isUppercase, fontFamily, boxShadow, refs },
+          i
+        ): React.ReactNode => (
           <Accordion
             defaultOpened={id === textIdSelected}
             ref={refs.accordion}
@@ -131,6 +134,24 @@ function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
                     handleEdit({
                       textId: id,
                       type: 'fontSize',
+                      value
+                    })
+                  }
+                />
+              </div>
+              <div className="field-customization">
+                <label htmlFor="box-shadow">{t('studio.boxShadow')}</label>
+                <InputRangeSlider
+                  id="box-shadow"
+                  max={10}
+                  width={98}
+                  min={0}
+                  step={1}
+                  value={boxShadow}
+                  onChange={(value: number): void =>
+                    handleEdit({
+                      textId: id,
+                      type: 'boxShadow',
                       value
                     })
                   }

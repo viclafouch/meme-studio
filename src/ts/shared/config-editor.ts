@@ -13,7 +13,7 @@ export const fontsFamily = [
   'Lucida Console'
 ]
 
-export const createText = (base: TextBox['base']): any =>
+export const createText = (base: TextBox['base']): TextBox =>
   new TextBox({
     rotate: 0,
     ...base,
@@ -21,6 +21,7 @@ export const createText = (base: TextBox['base']): any =>
     fontFamily: 'Impact',
     textAlign: 'center',
     alignVertical: 'middle',
+    boxShadow: 2,
     value: '',
     id: randomID(),
     color: '#ffffff',

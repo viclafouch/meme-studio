@@ -12,6 +12,7 @@ export default class TextBox {
   public rotate: number
   public fontSize: number
   public fontFamily: string
+  public boxShadow: number
   public color: string
   public alignVertical: string
   public textAlign: string
@@ -35,6 +36,7 @@ export default class TextBox {
     this.height = text.height
     this.centerX = text.centerX
     this.centerY = text.centerY
+    this.boxShadow = text.boxShadow
     this.rotate = text.rotate
     this.fontSize = text.fontSize
     this.fontFamily = text.fontFamily
