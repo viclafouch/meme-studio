@@ -54,7 +54,12 @@ module.exports = (env, argv) => ({
             }
           },
           'css-loader',
-          'sass-loader'
+          {
+            loader: 'sass-loader',
+            options: {
+              prependData: "@import './src/scss/global/mixins';",
+            },
+          }
         ],
         exclude: /node_modules/
       },
