@@ -18,6 +18,10 @@ body {
     box-sizing: border-box;
   }
 
+  img {
+    max-width: 100%;
+  }
+
   #app-root {
     min-height: 100vh;
     position: relative;
@@ -65,6 +69,7 @@ body {
   text-align: center;
   align-items: center;
   width: 100%;
+  padding: 0 20px;
 
   .lang-selector {
     position: absolute;
@@ -95,6 +100,8 @@ body {
   }
 
   div.intro-content {
+    width: 100%;
+
     & > button.intro-get-started-btn {
       width: 100%;
       max-width: 650px;
@@ -115,11 +122,25 @@ body {
       margin-top: 2em;
       list-style: none;
 
+      li {
+        &:not(:first-child) {
+          display: none;
+          @include md {
+            display: block;
+          }
+        }
+      }
+
       .intro-last-memes-article {
-        padding: 0 12px;
         img {
-          width: 200px;
           border: 2px solid #444444;
+        }
+
+        @include md {
+          padding: 0 12px;
+          img {
+            width: 200px;
+          }
         }
       }
     }

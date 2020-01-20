@@ -1,9 +1,9 @@
 .button {
   background-color: var(--blue);
-  padding: 24px 56px;
+  padding: 16px 21px;
   font-weight: 600;
-  font-size: 25px;
-  line-height: 32px;
+  font-size: 19px;
+  line-height: 22px;
   color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.14);
@@ -15,6 +15,24 @@
   outline: none;
   transition-property: opacity box-shadow;
   transition-duration: 0.3s;
+
+  @include sm {
+    padding: 17px 23px;
+    font-size: 21px;
+    line-height: 24px;
+  }
+
+  @include md {
+    padding: 18px 25px;
+    font-size: 23px;
+    line-height: 26px;
+  }
+
+  @include lg {
+    padding: 24px 56px;
+    font-size: 25px;
+    line-height: 32px;
+  }
 
   &:not(:disabled):hover {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.22);
