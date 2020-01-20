@@ -84,18 +84,20 @@ function Studio(props: any): JSX.Element {
           {!memeSelected && (
             <div className="empty-meme">
               <ReactSVG src="images/choose-meme.svg" wrapper="span" className="choose-meme-svg" />
-              <p>{t('studio.selectMeme')}</p>
-              <label className="import-image-label" htmlFor="local-meme">
-                <input
-                  type="file"
-                  ref={inputDrop}
-                  onChange={(): any => handleImportImage()}
-                  className="import-image-label-input"
-                  accept="image/png, image/jpeg"
-                  id="local-meme"
-                />
-                {t('studio.or')} <span className="import-image-label-text">{t('studio.importImage')}</span>.
-              </label>
+              <p>
+                {t('studio.selectMeme')} <br />{' '}
+                <label className="import-image-label" htmlFor="local-meme">
+                  <input
+                    type="file"
+                    ref={inputDrop}
+                    onChange={(): any => handleImportImage()}
+                    className="import-image-label-input"
+                    accept="image/png, image/jpeg"
+                    id="local-meme"
+                  />
+                  {t('studio.or')} <span className="import-image-label-text">{t('studio.importImage')}</span>.
+                </label>
+              </p>
               <DragAndDrop onDrop={handleImportImage} id="dragenter-root" />
             </div>
           )}

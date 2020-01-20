@@ -16,6 +16,10 @@
   transition-property: opacity box-shadow;
   transition-duration: 0.3s;
 
+  svg + span {
+    margin-left: 7px;
+  }
+
   @include sm {
     padding: 17px 23px;
     font-size: 21px;

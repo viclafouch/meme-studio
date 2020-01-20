@@ -53,7 +53,7 @@ function Header(props: HeaderProps): JSX.Element {
         <LangSelector />
         <Button className="button-export" disabled={!memeSelected} onClick={props.export}>
           <FontAwesomeIcon icon={['fas', 'arrow-circle-down']} className="icon-arrow-circle-down" />
-          {t('studio.export')}
+          <span>{t('studio.export')}</span>
         </Button>
       </div>
     </header>

@@ -34,6 +34,7 @@
     background: #f6f8fa;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
     overflow: hidden;
+    display: none;
 
     .github-svg {
       color: #24292e;
@@ -52,6 +53,10 @@
       .octo-arm {
         animation: octocat-wave 560ms ease-in-out;
       }
+    }
+
+    @include sm {
+      display: block;
     }
   }
 
@@ -92,19 +97,26 @@
 
   .button-export {
     padding: 12px 22px;
-    font-weight: 600;
     font-size: 13px;
     line-height: 16px;
     background-color: #ffffff;
     color: var(--blue);
     text-transform: uppercase;
-
-    .icon-arrow-circle-down {
-      margin-right: 7px;
+    display: none;
+    @include md {
+      display: block;
     }
   }
 
   .lang-selector {
     margin-right: 10px;
+  }
+
+  .button-export svg + span,
+  .lang-selector svg + span {
+    display: none;
+    @include md {
+      display: inline;
+    }
   }
 }

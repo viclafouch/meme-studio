@@ -11,6 +11,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1.75em;
+
+  &.ld {
+    animation-duration: 0.3s;
+  }
 
   & > .modal-overlay {
     width: inherit;

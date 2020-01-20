@@ -10,14 +10,15 @@ type ModalProps = {
   onClose: Function
   children: React.ReactNode
   isLoading?: boolean
+  id?: string
 }
-export function Modal({ onClose, isLoading, children }: ModalProps): JSX.Element {
+export function Modal({ onClose, isLoading, children, id }: ModalProps): JSX.Element {
   const { t } = useTranslation()
   const modalNode = useContext(ModalContext)
 
   return modalNode
     ? createPortal(
-        <div className="modal ld ld-fade-in">
+        <div className="modal ld ld-fade-in" id={id}>
           <div className="modal-overlay" onClick={(): void => !isLoading && onClose()} />
           {isLoading && <div className="modal-content-loading">{t('loading')}</div>}
           {!isLoading && (
@@ -35,7 +36,8 @@ export function Modal({ onClose, isLoading, children }: ModalProps): JSX.Element
 }
 
 Modal.defaultProps = {
-  isLoading: false
+  isLoading: false,
+  id: ''
 } as ModalProps
 
 export default memo(Modal)

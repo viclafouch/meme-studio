@@ -7,10 +7,12 @@ import * as translationEN from '../../../public/locales/en/translation.json'
 export const languages = {
   fr: {
     name: 'Francais',
+    flag: '/images/flag-fr.svg',
     translation: translationFR
   },
   en: {
     name: 'English',
+    flag: '/images/flag-en.svg',
     translation: translationEN
   }
 }

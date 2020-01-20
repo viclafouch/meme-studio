@@ -3,7 +3,7 @@
   font-size: 12px;
 
   &-btn {
-    padding: 12px 14px;
+    padding: 8px 11px;
     font-weight: 600;
     font-size: 1em;
     line-height: 16px;
@@ -12,8 +12,12 @@
     z-index: 9999999;
     color: var(--blue-light);
 
-    .icon-globe {
-      margin-right: 7px;
+    @include md {
+      padding: 12px 14px;
+    }
+
+    .lang-flag {
+      width: 20px;
     }
   }
 
@@ -26,7 +30,8 @@
     transition-duration: .3s;
     transition-timing-function: ease;
     will-change: transform, opacity;
-    left: 0;
+    right: 0;
+    text-align: left;
     top: 100%;
     margin-top: 5px;
     z-index: 999999;
@@ -34,20 +39,15 @@
     border-radius: 4px;
     width: 100%;
     font-size: 1.1em;
+    min-width: 88px;
 
     pointer-events: none;
     opacity: 0;
     visibility: hidden;
 
-    .lang-selector-list {
-      .lang-selector-list-item {
-        padding: 9px 11px;
-        cursor: pointer;
-
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.05);
-        }
-      }
+    @include md {
+      right: auto;
+      left: 0;
     }
   }
 
@@ -57,5 +57,31 @@
     transform: none;
     opacity: 1;
     pointer-events: auto;
+  }
+}
+
+// because in modal too
+.lang-selector-list {
+  .lang-selector-list-item {
+    padding: 9px 11px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+}
+
+.modal#lang-selector-modal .modal-content {
+  min-width: auto;
+  min-height: auto;
+
+  .lang-selector-list {
+    margin-top: 12px;
+    width: 200px;
+
+    .lang-selector-list-item {
+      padding: 16px 11px;
+    }
   }
 }
