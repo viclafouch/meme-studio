@@ -6,7 +6,7 @@ import { EditorContext, EditorState } from '@store/EditorContext'
 import { SET_SHOW_TEXT_AREAS } from '@store/reducer/constants'
 import { HistoryContext, HistoryState, HistoryDispatcher } from '@store/HistoryContext'
 import Faq from '@components/Faq/Faq'
-import { useInitStudio } from '@shared/hooks'
+import { useInitStudio, useWindowWidth } from '@shared/hooks'
 import './tools.scss'
 import Meme from '@shared/models/Meme'
 import { TAB_GALLERY } from '@shared/constants'
@@ -33,6 +33,7 @@ const Tools = memo(
     memeSelected,
     setCurrentTab
   }: ToolsProps): JSX.Element => {
+    const { isMinLgSize } = useWindowWidth()
     const { t } = useTranslation()
     const faqModal: RefObject<any> = useRef(null)
     const { initWithMeme, initWithoutMeme } = useInitStudio()
@@ -43,6 +44,7 @@ const Tools = memo(
           <li>
             <button
               className="tools-list-btn"
+              id="show-text-areas"
               data-tooltip={showTextAreas ? t('attr.hideTextboxes') : t('attr.showTextboxes')}
               disabled={!memeSelected}
               onClick={(): void =>
@@ -92,7 +94,7 @@ const Tools = memo(
               disabled={!memeSelected}
               onClick={(): void => {
                 initWithoutMeme()
-                setCurrentTab(TAB_GALLERY)
+                isMinLgSize && setCurrentTab(TAB_GALLERY)
               }}
             >
               <FontAwesomeIcon icon={['fas', 'trash-restore-alt']} />

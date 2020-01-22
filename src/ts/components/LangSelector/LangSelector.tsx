@@ -10,7 +10,7 @@ import { useWindowWidth } from '@shared/hooks'
 
 function LangSelector(): JSX.Element {
   const [isActive, setIsActive]: [boolean, Function] = useState(false)
-  const windowWidth = useWindowWidth()
+  const { isMinMdSize } = useWindowWidth()
   const { i18n } = useTranslation()
 
   const handleClick = (e: MouseEvent): void => {
@@ -30,7 +30,7 @@ function LangSelector(): JSX.Element {
   return (
     <div className={`lang-selector ${isActive ? 'lang-selector-active' : ''}`}>
       <Button className="lang-selector-btn" onClick={handleClick}>
-        {windowWidth < 768 ? (
+        {!isMinMdSize ? (
           <img src={i18n.options.resources[i18n.language].flag as string} className="lang-flag" />
         ) : (
           <>
@@ -39,7 +39,7 @@ function LangSelector(): JSX.Element {
           </>
         )}
       </Button>
-      {windowWidth >= 768 && (
+      {isMinMdSize && (
         <div className="lang-selector-popup">
           <ul className="lang-selector-list">
             {Object.keys(i18n.options.resources).map((key: string) => (
@@ -52,7 +52,7 @@ function LangSelector(): JSX.Element {
           </ul>
         </div>
       )}
-      {windowWidth < 768 && isActive && (
+      {!isMinMdSize && isActive && (
         <Modal onClose={(): void => setIsActive(false)} id="lang-selector-modal">
           <ul className="lang-selector-list">
             {Object.keys(i18n.options.resources).map((key: string) => (

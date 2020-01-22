@@ -160,13 +160,13 @@ body {
     height: calc(100vh - var(--header-height));
     top: var(--header-height);
     background-color: #ffffff;
-    border-radius: 3px;
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: auto var(--tools-item-height);
+    grid-template-rows: 60px auto var(--tools-item-height);
     overflow: hidden;
 
     @include lg {
+      border-radius: 3px;
       grid-template-rows: auto;
       grid-template-columns: var(--tools-width) auto var(--aside-width);
     }
@@ -179,13 +179,27 @@ body {
     }
 
     .studio-tools {
+      order: 3;
+      @include lg {
+        order: 1;
+      }
+    }
+    .studio-aside {
+      order: 1;
+      @include lg {
+        order: 3;
+      }
+    }
+    .studio-content {
+      order: 2;
+    }
+
+    .studio-tools {
       z-index: 2;
       height: 100%;
       box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.29);
-      order: 1;
 
       @include lg {
-        order: 0;
         width: var(--tools-width);
       }
     }
@@ -193,10 +207,14 @@ body {
     .studio-content {
       border-right: 1px solid #e9ecef;
       background-color: #f2f3f8;
-      padding: 50px 100px;
+      padding: 50px 40px;
       background: url('/images/particles-studio.svg') no-repeat;
       background-position: center center;
       background-size: cover;
+
+      @include lg {
+        padding: 50px 100px;
+      }
 
       &.studio-content-active {
         background: none;
@@ -250,18 +268,24 @@ body {
       overflow: hidden;
       background-color: #f0f0f0;
       display: flex;
-      flex-direction: column;
-      width: var(--aside-width);
+      width: 100%;
+      flex-direction: row;
 
-      // test
-      position: absolute;
-      visibility: hidden;
+      @include lg {
+        flex-direction: column;
+        width: var(--aside-width);
+      }
 
       .studio-aside-header {
-        height: 50px;
+        height: 100%;
+        width: 100%;
         display: flex;
-        margin-bottom: 2px;
         flex-shrink: 0;
+
+        @include lg {
+          height: 50px;
+          margin-bottom: 2px;
+        }
 
         .studio-aside-header-btn {
           flex: 1;
@@ -410,5 +434,18 @@ body {
 
   @include lg {
     position: relative;
+  }
+}
+
+.modal#customization-tab .modal-content {
+  width: 75%;
+  margin: 0 auto;
+  .customization-empty {
+    margin-top: 3px;
+    padding: 30px;
+  }
+
+  @include md {
+    max-width: 500px;
   }
 }

@@ -1,13 +1,17 @@
 import * as React from 'react'
+import { useWindowWidth } from '@shared/hooks'
+import { Modal } from '@components/Modal/Modal'
 
 type TabProps = {
   children?: React.ReactNode
+  onCloseModal: Function
   active: boolean
   id?: string
 }
 
 function Tab(props: TabProps): JSX.Element {
-  return (
+  const { isMinLgSize } = useWindowWidth()
+  return isMinLgSize ? (
     <div
       aria-hidden={!props.active}
       className="tab"
@@ -18,7 +22,11 @@ function Tab(props: TabProps): JSX.Element {
     >
       {props.children}
     </div>
-  )
+  ) : props.active ? (
+    <Modal id={props.id} onClose={props.onCloseModal}>
+      {props.children}
+    </Modal>
+  ) : null
 }
 
 Tab.defaultProps = {

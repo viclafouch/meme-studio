@@ -26,7 +26,7 @@ export function Modal({ onClose, isLoading, children, id }: ModalProps): JSX.Ele
               <span role="button" className="modal-close" aria-label={t('attr.close')} onClick={(): void => onClose()}>
                 <FontAwesomeIcon icon={['fas', 'times']} className="icon-times" />
               </span>
-              {children}
+              <div className="modal-content-scrollable">{children}</div>
             </div>
           )}
         </div>,

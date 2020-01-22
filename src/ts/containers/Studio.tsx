@@ -18,11 +18,13 @@ import Tools from '@components/Tools/Tools'
 import Header from '@components/Header/Header'
 import { endWithExt, randomID } from '@utils/index'
 import DragAndDrop from '@components/DragAndDrop/DragAndDrop'
+import { useWindowWidth } from '@shared/hooks'
 
 function Studio(props: any): JSX.Element {
   const inputDrop: RefObject<HTMLInputElement> = useRef(null)
   const { t } = useTranslation()
-  const [currentTab, setCurrentTab]: [string, Function] = useState<string>(TAB_GALLERY)
+  const { isMinLgSize } = useWindowWidth()
+  const [currentTab, setCurrentTab]: [string, Function] = useState<string>(isMinLgSize ? TAB_GALLERY : null)
   const [, { setToHistoryDebounced }]: [HistoryState, HistoryDispatcher] = useContext(HistoryContext)
   const [{ memeSelected, drawProperties }, dispatchEditor]: [EditorState, Function] = useContext(EditorContext)
 
@@ -69,6 +71,8 @@ function Studio(props: any): JSX.Element {
       memeSelected: meme
     })
   }
+
+  const closeTabModal = (): void => setCurrentTab(null)
 
   return (
     <div className="page page-studio">
@@ -120,10 +124,10 @@ function Studio(props: any): JSX.Element {
             </Button>
           </header>
           <div className="studio-aside-content">
-            <Tab active={currentTab === TAB_GALLERY} id="gallery-tab">
+            <Tab active={currentTab === TAB_GALLERY} id="gallery-tab" onCloseModal={closeTabModal}>
               <Gallery onSelectMeme={handleChooseMeme} />
             </Tab>
-            <Tab active={currentTab === TAB_CUSTOMIZATION} id="customization-tab">
+            <Tab active={currentTab === TAB_CUSTOMIZATION} id="customization-tab" onCloseModal={closeTabModal}>
               <Customization onCustomizeTexts={handleCustomizeTexts} />
             </Tab>
           </div>

@@ -1,5 +1,7 @@
 .customization {
   height: 100%;
+  width: 100%;
+  min-height: inherit;
 
   .customization-empty {
     text-align: center;
@@ -8,6 +10,7 @@
     flex-direction: column;
     justify-content: center;
     height: 100%;
+    min-height: inherit;
 
     .wrapper-sad-svg {
       display: block;

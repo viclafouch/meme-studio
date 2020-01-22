@@ -31,6 +31,14 @@
     background-color: transparent;
     font-size: 13px;
 
+    &#show-text-areas {
+      display: none;
+
+      @include md {
+        display: block;
+      }
+    }
+
     &:disabled {
       color: #dcdcdc !important;
     }

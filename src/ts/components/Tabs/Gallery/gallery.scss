@@ -4,6 +4,8 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 8px;
+  max-width: 402px;
+  width: 100%;
 
   .gallery-item {
     cursor: pointer;

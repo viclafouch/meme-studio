@@ -20,7 +20,7 @@ function WrapperCanvas(props: WrapperCanvasProps): JSX.Element {
     Function,
     RefObject<HTMLCanvasElement>
   ] = useContext(EditorContext)
-  const windowWidth: number = useWindowWidth()
+  const { width, isMinLgSize } = useWindowWidth()
   const wrapperRef: RefObject<HTMLDivElement> = useRef(null)
   const memeIdRef: RefObject<string> = useRef(null)
   const { initWithMeme } = useInitStudio()
@@ -75,6 +75,7 @@ function WrapperCanvas(props: WrapperCanvasProps): JSX.Element {
 
     if (memeIdRef.current !== memeSelected.id) {
       ;(memeIdRef as React.MutableRefObject<string>).current = memeSelected.id // avoid readOnly
+      if (!isMinLgSize) props.changeTab(null)
       initWithMeme(newDrawProperties, memeSelected)
     } else {
       dispatchEditor({
@@ -88,7 +89,7 @@ function WrapperCanvas(props: WrapperCanvasProps): JSX.Element {
         })
       })
     }
-  }, [windowWidth, memeSelected])
+  }, [width, memeSelected, props.changeTab, isMinLgSize])
 
   useLayoutEffect(() => {
     const canvas: HTMLCanvasElement = canvasRef.current
@@ -124,31 +125,32 @@ function WrapperCanvas(props: WrapperCanvasProps): JSX.Element {
           height: drawProperties ? drawProperties.height : 'auto'
         }}
       >
-        {texts.map((text: TextBox) => (
-          <Draggable
-            key={text.id}
-            className="text-box"
-            position={{
-              x: text.centerX,
-              y: text.centerY
-            }}
-            onClick={(): void => {
-              if (text.id !== textIdSelected)
-                dispatchEditor({
-                  type: SET_TEXT_ID_SELECTED,
-                  textIdSelected: text.id
-                })
-              props.changeTab(TAB_CUSTOMIZATION)
-            }}
-            height={text.height}
-            width={text.width}
-            rotate={text.rotate}
-            onMove={props.onCustomizeTexts}
-            drawProperties={drawProperties}
-            id={text.id}
-            active={text.id === textIdSelected}
-          />
-        ))}
+        {isMinLgSize &&
+          texts.map((text: TextBox) => (
+            <Draggable
+              key={text.id}
+              className="text-box"
+              position={{
+                x: text.centerX,
+                y: text.centerY
+              }}
+              onClick={(): void => {
+                if (text.id !== textIdSelected)
+                  dispatchEditor({
+                    type: SET_TEXT_ID_SELECTED,
+                    textIdSelected: text.id
+                  })
+                props.changeTab(TAB_CUSTOMIZATION)
+              }}
+              height={text.height}
+              width={text.width}
+              rotate={text.rotate}
+              onMove={props.onCustomizeTexts}
+              drawProperties={drawProperties}
+              id={text.id}
+              active={text.id === textIdSelected}
+            />
+          ))}
       </div>
       <canvas
         className="canvas"
