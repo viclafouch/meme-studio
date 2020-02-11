@@ -1,32 +1,47 @@
 import * as React from 'react'
-import { createContext, useRef, RefObject } from 'react'
-import EditorReducer, { Actions } from './reducer/editor'
+import { useReducer, createContext } from 'react'
 import Meme from '@shared/models/Meme'
 import TextBox from '@shared/models/TextBox'
-import { DrawProperties } from '@shared/validators'
+import { DrawProperties, HistoryInt } from '@shared/validators'
+import EditorReducer from './reducer/editor'
 
 export interface EditorState {
   textIdSelected: string
   showTextAreas: boolean
   memeSelected: Meme
-  canvas: HTMLCanvasElement
+  canvasRef: React.RefObject<HTMLCanvasElement>
   texts: Array<TextBox>
   drawProperties: DrawProperties
+  innerDimensions: {
+    width: number
+    height: number
+  }
+  history: {
+    items: Array<HistoryInt>
+    currentIndex: number
+  }
 }
 
 const initialState: EditorState = {
   textIdSelected: null,
   showTextAreas: true,
   memeSelected: null,
-  canvas: null,
+  canvasRef: React.createRef(),
   texts: [],
-  drawProperties: null
+  drawProperties: null,
+  innerDimensions: {
+    width: 0,
+    height: 0
+  },
+  history: {
+    items: [],
+    currentIndex: 0
+  }
 }
 
 export const EditorContext = createContext<EditorState | any>(initialState)
 
 export function EditorProvider(props: any): JSX.Element {
-  const canvasRef: RefObject<HTMLCanvasElement> = useRef(null)
-  const [state, dispatch] = React.useReducer<React.Reducer<EditorState, Actions>>(EditorReducer, initialState)
-  return <EditorContext.Provider value={[state, dispatch, canvasRef]}>{props.children}</EditorContext.Provider>
+  const [state, updater] = useReducer(EditorReducer, initialState)
+  return <EditorContext.Provider value={[state, updater]}>{props.children}</EditorContext.Provider>
 }

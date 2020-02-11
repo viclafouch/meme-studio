@@ -24,7 +24,6 @@ import {
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { ModalProvider } from '@store/ModalContext'
 import { EditorProvider } from '@store/EditorContext'
-import { HistoryProvider } from '@store/HistoryContext'
 
 library.add(
   faImage,
@@ -52,9 +51,7 @@ function App(): JSX.Element {
         <DefaultProvider>
           <ModalProvider>
             <EditorProvider>
-              <HistoryProvider>
-                <MainContainer />
-              </HistoryProvider>
+              <MainContainer />
             </EditorProvider>
           </ModalProvider>
         </DefaultProvider>

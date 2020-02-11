@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useState, useContext, useRef, RefObject } from 'react'
+import { useState, useRef, RefObject, useEffect } from 'react'
 import { ReactSVG } from 'react-svg'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,43 +8,60 @@ import Customization from '@components/Tabs/Customization/Customization'
 import Button from '@components/Button/Button'
 import WrapperCanvas from '@components/WrapperCanvas/WrapperCanvas'
 import Tab from '@components/Tabs/Tab'
-import { EditorContext, EditorState } from '@store/EditorContext'
-import { HistoryContext, HistoryState, HistoryDispatcher } from '@store/HistoryContext'
-import { SET_TEXTS, SET_MEME_SELECTED } from '@store/reducer/constants'
+import { EditorState } from '@store/EditorContext'
+import { SET_MEME_SELECTED, RESIZE_WINDOW } from '@store/reducer/constants'
 import { TAB_CUSTOMIZATION, TAB_GALLERY } from '@shared/constants'
 import Meme from '@shared/models/Meme'
-import TextBox from '@shared/models/TextBox'
 import Tools from '@components/Tools/Tools'
 import Header from '@components/Header/Header'
-import { endWithExt, randomID } from '@utils/index'
+import { endWithExt, randomID, innerDimensions, wait } from '@utils/index'
 import DragAndDrop from '@components/DragAndDrop/DragAndDrop'
-import { useWindowWidth } from '@shared/hooks'
+import { useWindowWidth, useEditor } from '@shared/hooks'
+import { Modal } from '@components/Modal/Modal'
 
 function Studio(props: any): JSX.Element {
   const inputDrop: RefObject<HTMLInputElement> = useRef(null)
+  const contentRef: RefObject<HTMLDivElement> = useRef(null)
+  const [isLoading, setIsLoading]: [boolean, Function] = useState<boolean>(false)
   const { t } = useTranslation()
-  const { isMinLgSize } = useWindowWidth()
+  const { width, isMinLgSize } = useWindowWidth()
   const [currentTab, setCurrentTab]: [string, Function] = useState<string>(isMinLgSize ? TAB_GALLERY : null)
-  const [, { setToHistoryDebounced }]: [HistoryState, HistoryDispatcher] = useContext(HistoryContext)
-  const [{ memeSelected, drawProperties }, dispatchEditor]: [EditorState, Function] = useContext(EditorContext)
+  const [{ memeSelected }, dispatchEditor]: [EditorState, Function] = useEditor()
 
-  const handleCustomizeTexts = (texts: Array<TextBox>, type: string): void => {
+  useEffect(() => {
+    const wrapper: HTMLElement = contentRef.current
     dispatchEditor({
-      type: SET_TEXTS,
-      texts
+      type: RESIZE_WINDOW,
+      innerDimensions: innerDimensions(wrapper)
     })
-    setToHistoryDebounced({
-      type,
-      texts,
-      drawProperties
-    })
+  }, [width])
+
+  const handleChooseMeme = async (meme: Meme): Promise<void> => {
+    try {
+      setIsLoading(true)
+      // const { texts } = await getMeme(meme.id) // TODO
+      await wait(300)
+      dispatchEditor({
+        type: SET_MEME_SELECTED,
+        memeSelected: meme
+      })
+      setCurrentTab(TAB_CUSTOMIZATION)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
-  const handleChooseMeme = (meme: Meme): void =>
-    dispatchEditor({
-      type: SET_MEME_SELECTED,
-      memeSelected: meme
-    })
+  useEffect(() => {
+    if (memeSelected) {
+      document.title = `Meme Studio - ${memeSelected.name}`
+      setCurrentTab(TAB_CUSTOMIZATION)
+    } else {
+      document.title = `Meme Studio`
+      setCurrentTab(TAB_GALLERY)
+    }
+  }, [memeSelected])
 
   const handleImportImage = async (fileList?: FileList): Promise<void> => {
     const files = fileList || inputDrop.current.files
@@ -68,72 +85,78 @@ function Studio(props: any): JSX.Element {
 
     dispatchEditor({
       type: SET_MEME_SELECTED,
-      memeSelected: meme
+      memeSelected: meme,
+      texts: []
     })
   }
 
   const closeTabModal = (): void => setCurrentTab(null)
 
   return (
-    <div className="page page-studio">
-      <div className="ld ld-fall-ttb-in studio-header">
-        <Header export={(): void => props.setIsModalExportOpen(true)} />
-      </div>
-      <div className="ld ld-float-btt-in studio-body">
-        <div className="studio-tools">
-          <Tools setCurrentTab={setCurrentTab} />
+    <>
+      <div className="page page-studio">
+        <div className="ld ld-fall-ttb-in studio-header">
+          <Header export={(): void => props.setIsModalExportOpen(true)} />
         </div>
-        <div className={`studio-content ${memeSelected ? 'studio-content-active' : ''}`}>
-          {memeSelected && <WrapperCanvas changeTab={setCurrentTab} onCustomizeTexts={handleCustomizeTexts} />}
-          {!memeSelected && (
-            <div className="empty-meme">
-              <ReactSVG src="images/choose-meme.svg" wrapper="span" className="choose-meme-svg" />
-              <p>
-                {t('studio.selectMeme')} <br />{' '}
-                <label className="import-image-label" htmlFor="local-meme">
-                  <input
-                    type="file"
-                    ref={inputDrop}
-                    onChange={(): any => handleImportImage()}
-                    className="import-image-label-input"
-                    accept="image/png, image/jpeg"
-                    id="local-meme"
-                  />
-                  {t('studio.or')} <span className="import-image-label-text">{t('studio.importImage')}</span>.
-                </label>
-              </p>
-              <DragAndDrop onDrop={handleImportImage} id="dragenter-root" />
-            </div>
-          )}
-        </div>
-        <aside className="studio-aside">
-          <header className="studio-aside-header">
-            <Button
-              className={`studio-aside-header-btn ${currentTab === TAB_GALLERY ? 'studio-aside-header-btn-active' : null}`}
-              onClick={(): void => setCurrentTab(TAB_GALLERY)}
-              id="tab-gallery-btn"
-            >
-              <FontAwesomeIcon className="icon-image" icon={['fas', 'image']} />
-            </Button>
-            <Button
-              className={`studio-aside-header-btn ${currentTab === TAB_CUSTOMIZATION ? 'studio-aside-header-btn-active' : null}`}
-              onClick={(): void => setCurrentTab(TAB_CUSTOMIZATION)}
-              id="tab-customization-btn"
-            >
-              <FontAwesomeIcon className="icon-heading" icon={['fas', 'heading']} />
-            </Button>
-          </header>
-          <div className="studio-aside-content">
-            <Tab active={currentTab === TAB_GALLERY} id="gallery-tab" onCloseModal={closeTabModal}>
-              <Gallery onSelectMeme={handleChooseMeme} />
-            </Tab>
-            <Tab active={currentTab === TAB_CUSTOMIZATION} id="customization-tab" onCloseModal={closeTabModal}>
-              <Customization onCustomizeTexts={handleCustomizeTexts} />
-            </Tab>
+        <div className="ld ld-float-btt-in studio-body">
+          <div className="studio-tools">
+            <Tools setCurrentTab={setCurrentTab} />
           </div>
-        </aside>
+          <div className={`studio-content ${memeSelected ? 'studio-content-active' : ''}`} ref={contentRef}>
+            {memeSelected && <WrapperCanvas changeTab={setCurrentTab} />}
+            {!memeSelected && (
+              <div className="empty-meme">
+                <ReactSVG src="images/choose-meme.svg" wrapper="span" className="choose-meme-svg" />
+                <p>
+                  {t('studio.selectMeme')} <br />{' '}
+                  <label className="import-image-label" htmlFor="local-meme">
+                    <input
+                      type="file"
+                      ref={inputDrop}
+                      onChange={(): any => handleImportImage()}
+                      className="import-image-label-input"
+                      accept="image/png, image/jpeg"
+                      id="local-meme"
+                    />
+                    {t('studio.or')} <span className="import-image-label-text">{t('studio.importImage')}</span>.
+                  </label>
+                </p>
+                <DragAndDrop onDrop={handleImportImage} id="dragenter-root" />
+              </div>
+            )}
+          </div>
+          <aside className="studio-aside">
+            <header className="studio-aside-header">
+              <Button
+                className={`studio-aside-header-btn ${currentTab === TAB_GALLERY ? 'studio-aside-header-btn-active' : null}`}
+                onClick={(): void => setCurrentTab(TAB_GALLERY)}
+                id="tab-gallery-btn"
+              >
+                <FontAwesomeIcon className="icon-image" icon={['fas', 'image']} />
+              </Button>
+              <Button
+                className={`studio-aside-header-btn ${
+                  currentTab === TAB_CUSTOMIZATION ? 'studio-aside-header-btn-active' : null
+                }`}
+                onClick={(): void => setCurrentTab(TAB_CUSTOMIZATION)}
+                id="tab-customization-btn"
+              >
+                <FontAwesomeIcon className="icon-heading" icon={['fas', 'heading']} />
+              </Button>
+            </header>
+            <div className="studio-aside-content">
+              <Tab active={currentTab === TAB_GALLERY} id="gallery-tab" onCloseModal={closeTabModal}>
+                <Gallery onSelectMeme={handleChooseMeme} />
+              </Tab>
+              <Tab active={currentTab === TAB_CUSTOMIZATION} id="customization-tab" onCloseModal={closeTabModal}>
+                <Customization />
+              </Tab>
+            </div>
+          </aside>
+        </div>
       </div>
-    </div>
+      {isLoading && <Modal isLoading={isLoading} />}
+    </>
   )
 }
 

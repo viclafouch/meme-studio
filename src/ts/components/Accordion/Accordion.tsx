@@ -19,8 +19,8 @@ type AccordionProps = {
 
 const Accordion = React.forwardRef((props: AccordionProps, ref: any) => {
   const { t } = useTranslation()
-  const [isActive, setIsActive] = useState<boolean>(props.defaultOpened)
-  const [currentHeight, setCurrentHeight] = useState<string>(props.defaultOpened ? 'inherit' : '0px')
+  const [isActive, setIsActive]: [boolean, Function] = useState<boolean>(props.defaultOpened)
+  const [currentHeight, setCurrentHeight]: [string, Function] = useState<string>(props.defaultOpened ? 'inherit' : '0px')
   const content = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {

@@ -1,3 +1,6 @@
+import TextBox from '@shared/models/TextBox'
+import { EditorState } from '@store/EditorContext'
+
 export interface DrawProperties {
   height: number
   width: number
@@ -8,7 +11,7 @@ export interface DrawProperties {
 export interface TextCustomization {
   value: any
   textId: string
-  type: string
+  type: typeString
 }
 
 export interface Line {
@@ -17,6 +20,18 @@ export interface Line {
   value: string
   lineHeight: Function
   lineWidth: Function
+}
+
+export interface HistoryInt {
+  drawProperties: DrawProperties
+  texts: Array<TextBox>
+  type: string
+}
+
+export interface UseEditorInt extends EditorState {
+  canUndo: boolean
+  canRedo: boolean
+  saveToEditor: Function
 }
 
 export type typeString =
@@ -31,3 +46,4 @@ export type typeString =
   | 'textAlign'
   | 'isUppercase'
   | 'alignVertical'
+  | 'boxShadow'

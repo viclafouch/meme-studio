@@ -2,45 +2,47 @@ import * as React from 'react'
 import { ColorResult } from 'react-color'
 import { ReactSVG } from 'react-svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useRef, useLayoutEffect, useContext } from 'react'
-import { TextCustomization, typeString } from '@shared/validators'
+import { useRef, memo, useMemo, createRef, useLayoutEffect } from 'react'
+import { TextCustomization, UseEditorInt } from '@shared/validators'
 import { Translation, useTranslation } from 'react-i18next'
 import Accordion from '@components/Accordion/Accordion'
 import TextareaExtended from '@components/TextareaExpended/TextareaExtended'
 import ColorPicker from '@components/ColorPicker/ColorPicker'
 import InputRangeSlider from '@components/InputRangeSlider/InputRangeSlider'
 import TextBox from '@shared/models/TextBox'
-import { wait } from '@utils/index'
 import { fontsFamily, createText } from '@shared/config-editor'
 import { EditorContext, EditorState } from '@store/EditorContext'
-import { SET_TEXT_ID_SELECTED } from '@store/reducer/constants'
+import { CUSTOM_TEXT, ADD_TEXT, REMOVE_TEXT, SET_TEXT_ID_SELECTED } from '@store/reducer/constants'
+import { useEditor } from '@shared/hooks'
 import { toHistoryType } from '@utils/helpers'
-import { ADD_TEXT, REMOVE_TEXT } from '@shared/constants'
+import { wait } from '@utils/index'
 import './customization.scss'
 
-type CustomizationProps = {
-  onCustomizeTexts: Function
-}
-
-function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
+function Customization(): JSX.Element {
   const { t } = useTranslation()
   const colorPicker = useRef<any>(null)
-  const [{ textIdSelected, texts, drawProperties, memeSelected }, dispatchEditor]: [EditorState, Function] = useContext(
-    EditorContext
+  const [{ textIdSelected, texts, drawProperties, memeSelected, saveToEditor }, dispatchEditor]: [
+    UseEditorInt,
+    Function
+  ] = useEditor()
+
+  const textsRef: Array<any> = useMemo(
+    () =>
+      Array.from({ length: texts.length }).map(() => ({
+        textarea: createRef(),
+        accordion: createRef(),
+        colorPicker: createRef()
+      })),
+    [texts.length]
   )
 
-  const handleEdit = (customization: TextCustomization): void => {
-    const textsUpdated = [...texts] as any
-    const textIndex = textsUpdated.findIndex((t: TextBox) => t.id === customization.textId)
-    const text = { ...textsUpdated[textIndex] }
-    const type = customization.type as typeString
-    text[type] = customization.value
-    textsUpdated[textIndex] = text
-    onCustomizeTexts(textsUpdated, toHistoryType(type))
+  const handleEdit = ({ textId, type, value }: TextCustomization): void => {
+    const text: any = { ...texts.find((t: TextBox) => t.id === textId) }
+    if (type in text) text[type] = value
+    saveToEditor({ type: CUSTOM_TEXT, text, historyType: toHistoryType(type) })
   }
 
   const addText = (): void => {
-    const textsUpdated = [...texts] as Array<TextBox>
     const text = createText({
       centerY: 50,
       centerX: 340,
@@ -51,65 +53,63 @@ function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
     text.width = text.base.width * drawProperties.scale
     text.centerY = drawProperties.height / 2
     text.centerX = drawProperties.width / 2
-    textsUpdated.push(text)
-    onCustomizeTexts(textsUpdated, ADD_TEXT)
-    wait(0).then(() => {
-      for (let index = 0; index < textsUpdated.length; index++) {
-        const text = textsUpdated[index]
-        if (textsUpdated.length - 1 !== index) text.refs.accordion.current.close()
-        else text.refs.accordion.current.open()
-      }
-    })
+    saveToEditor({ type: ADD_TEXT, text })
+    wait(0).then(() =>
+      dispatchEditor({
+        type: SET_TEXT_ID_SELECTED,
+        textIdSelected: text.id
+      })
+    )
+  }
+
+  const removeText = (textId: string): void => {
+    const text = texts.find(t => t.id === textId)
+    saveToEditor({ type: REMOVE_TEXT, text })
   }
 
   useLayoutEffect(() => {
     if (textIdSelected) {
-      for (const text of texts) {
-        if (text.id === textIdSelected) text.refs.accordion.current.open()
-        else text.refs.accordion.current.close()
+      const textIndex = texts.findIndex(text => text.id === textIdSelected)
+      for (let index = 0; index < textsRef.length; index++) {
+        const accordion: any = textsRef[index].accordion.current
+        if (index === textIndex) accordion.open()
+        else accordion.close()
       }
     }
-  }, [textIdSelected, texts])
-
-  const removeText = (textId: string): void => {
-    const textsUpdated = [...texts] as any
-    const textIndex = textsUpdated.findIndex((t: TextBox) => t.id === textId)
-    textsUpdated.splice(textIndex, 1)
-    if (textId === textIdSelected)
-      dispatchEditor({
-        type: SET_TEXT_ID_SELECTED,
-        textIdSelected: null
-      })
-    onCustomizeTexts(textsUpdated, REMOVE_TEXT)
-  }
+  }, [textIdSelected, texts, textsRef])
 
   return (
     <div className="customization-not-empty">
       <h2>{t('studio.editMeme', { name: memeSelected.name })}</h2>
       {texts.map(
         (
-          { value, id, uuid, color, fontSize, alignVertical, textAlign, isUppercase, fontFamily, boxShadow, refs },
+          { value, id, uuid, color, fontSize, alignVertical, textAlign, isUppercase, fontFamily, boxShadow },
           i
         ): React.ReactNode => (
           <Accordion
             defaultOpened={id === textIdSelected}
-            ref={refs.accordion}
+            ref={textsRef[i].accordion}
             title={value.trim() || `${t('studio.text')} #${i + 1}`}
             key={uuid}
             removeText={(): void => removeText(id)}
-            afterImmediateOpening={(): void =>
-              dispatchEditor({
-                type: SET_TEXT_ID_SELECTED,
-                textIdSelected: id
-              })
-            }
-            afterOpening={(): void => (refs.textarea.current as any).focus()}
+            afterImmediateOpening={(): void => {
+              if (id !== textIdSelected) {
+                dispatchEditor({
+                  type: SET_TEXT_ID_SELECTED,
+                  textIdSelected: id
+                })
+              }
+            }}
+            afterOpening={(): void => {
+              const textarea: any = textsRef[i].textarea.current
+              textarea.focus()
+            }}
           >
             <div className="customization-textbox-section">
               <div className="field-customization">
                 <TextareaExtended
                   rows={1}
-                  ref={refs.textarea}
+                  ref={textsRef[i].textarea}
                   placeholder={`${t('studio.text')} #${i + 1}`}
                   value={value}
                   onChange={(value: any): void =>
@@ -162,7 +162,7 @@ function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
                   {t('studio.color')}
                 </label>
                 <ColorPicker
-                  ref={colorPicker}
+                  ref={textsRef[i].colorPicker}
                   color={color}
                   setColor={({ hex }: ColorResult): void =>
                     handleEdit({
@@ -253,21 +253,23 @@ function Customization({ onCustomizeTexts }: CustomizationProps): JSX.Element {
   )
 }
 
-export default (props: any): JSX.Element => {
-  return (
-    <EditorContext.Consumer>
-      {([{ memeSelected }]: [EditorState]): JSX.Element => (
-        <div className="customization">
-          {memeSelected ? (
-            <Customization {...props} />
-          ) : (
-            <div className="customization-empty">
-              <ReactSVG src="images/sad.svg" wrapper="span" className="wrapper-sad-svg" />
-              <Translation>{(t): any => <h3>{t('studio.noMemeSelected')}</h3>}</Translation>
-            </div>
-          )}
-        </div>
-      )}
-    </EditorContext.Consumer>
-  )
-}
+export default memo(
+  (props: any): JSX.Element => {
+    return (
+      <EditorContext.Consumer>
+        {([{ memeSelected }]: [EditorState]): JSX.Element => (
+          <div className="customization">
+            {memeSelected ? (
+              <Customization {...props} />
+            ) : (
+              <div className="customization-empty">
+                <ReactSVG src="images/sad.svg" wrapper="span" className="wrapper-sad-svg" />
+                <Translation>{(t): any => <h3>{t('studio.noMemeSelected')}</h3>}</Translation>
+              </div>
+            )}
+          </div>
+        )}
+      </EditorContext.Consumer>
+    )
+  }
+)

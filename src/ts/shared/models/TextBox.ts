@@ -1,4 +1,3 @@
-import { RefObject } from 'react'
 import { randomID } from '@utils/index'
 
 export default class TextBox {
@@ -23,10 +22,6 @@ export default class TextBox {
     readonly centerX: number
     readonly centerY: number
   }
-  readonly refs: {
-    readonly accordion: RefObject<any>
-    readonly textarea: RefObject<any>
-  }
 
   constructor(text: any) {
     this.uuid = randomID()
@@ -50,6 +45,5 @@ export default class TextBox {
       centerX: this.centerX,
       centerY: this.centerY
     }
-    this.refs = text.refs
   }
 }

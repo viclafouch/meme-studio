@@ -3,7 +3,7 @@ import { Line } from '@shared/validators'
 import { API_URL } from '@shared/api'
 
 export const debug = (str: string): void =>
-  process.env.NODE_ENV !== 'production' && console.log(`%c ${str}`, 'color: yellow; font-weight: bold')
+  process.env.NODE_ENV === 'production' && console.log(`%c ${str}`, 'color: yellow; font-weight: bold')
 
 export const randomID = (): string =>
   '_' +
@@ -18,7 +18,7 @@ export const wait = (timeout = 1000): Promise<any> => new Promise(resolve => set
 
 export const endWithExt = (exts: Array<string>, filename: string): boolean => exts.some(x => filename.toLowerCase().endsWith(x))
 
-export const innerDemensions = (node: HTMLElement): { height: number; width: number } => {
+export const innerDimensions = (node: HTMLElement): { height: number; width: number } => {
   const computedStyle: CSSStyleDeclaration = getComputedStyle(node)
   let height: number = node.clientHeight
   let width: number = node.clientWidth

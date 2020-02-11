@@ -1,10 +1,12 @@
 import * as React from 'react'
-import { useState, useLayoutEffect, useCallback, useRef, useMemo, useContext, RefObject, useEffect } from 'react'
+import { useState, useLayoutEffect, useCallback, useRef, useMemo, RefObject, useEffect } from 'react'
 import { ReactSVG } from 'react-svg'
-import { EditorContext, EditorState } from '@store/EditorContext'
-import { DrawProperties, typeString } from '@shared/validators'
+import { DrawProperties, typeString, UseEditorInt } from '@shared/validators'
 import TextBox from '@shared/models/TextBox'
 import { radToDegree, degreeToRad } from '@utils/index'
+import { useEditor } from '@shared/hooks'
+import { CUSTOM_TEXT } from '@store/reducer/constants'
+import { toHistoryType } from '@utils/helpers'
 import './draggable.scss'
 
 type DraggableProps = {
@@ -17,7 +19,6 @@ type DraggableProps = {
   height: number
   width: number
   rotate: number
-  onMove: Function
   drawProperties: DrawProperties
   id: string
   onClick?: Function
@@ -52,7 +53,7 @@ interface RotatingInt {
 
 export function Draggable(props: DraggableProps): JSX.Element {
   const draggableRef: RefObject<HTMLDivElement> = useRef(null)
-  const [{ showTextAreas, texts }]: [EditorState] = useContext(EditorContext)
+  const [{ showTextAreas, texts, saveToEditor }]: [UseEditorInt, Function] = useEditor()
   const [resizing, setResizing]: [ResizingInt, Function] = useState<ResizingInt | null>(null)
   const [rotating, setRotating]: [RotatingInt, Function] = useState<RotatingInt | null>(null)
   const [positioning, setPositioning]: [PositionInt, Function] = useState<PositionInt>(() => ({
@@ -78,10 +79,8 @@ export function Draggable(props: DraggableProps): JSX.Element {
   const handleMouseMove = useCallback(
     ({ pageY, pageX }: MouseEvent): void => {
       if (positioning.isDragging || resizing || rotating) {
-        const { drawProperties, id, onMove } = props
-        const textsUpdated = [...texts] as Array<TextBox>
-        const textIndex = textsUpdated.findIndex((t: TextBox) => t.id === id)
-        const text = { ...textsUpdated[textIndex] }
+        const { drawProperties, id } = props
+        const text: any = { ...texts.find((t: TextBox) => t.id === id) }
         let { top, left } = positioning
         let { centerX, centerY, height, width, rotate } = text
         if (positioning.isDragging) {
@@ -143,13 +142,8 @@ export function Draggable(props: DraggableProps): JSX.Element {
         text.width = width
         text.height = height
         text.rotate = rotate
-        textsUpdated[textIndex] = text
-        onMove(textsUpdated, type)
-        setPositioning({
-          ...positioning,
-          top,
-          left
-        })
+        saveToEditor({ type: CUSTOM_TEXT, text, historyType: toHistoryType(type) })
+        setPositioning({ ...positioning, top, left })
       }
     },
     [props.drawProperties, resizing, rotating, minimalSize, positioning]

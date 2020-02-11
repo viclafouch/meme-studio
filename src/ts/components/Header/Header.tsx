@@ -4,12 +4,13 @@ import { useHistory } from 'react-router-dom'
 import { ReactSVG } from 'react-svg'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import './header.scss'
 import Button from '@components/Button/Button'
 import { DefaultContext, DefaultState } from '@store/DefaultContext'
 import { SET_ON_STUDIO } from '@store/reducer/constants'
 import LangSelector from '@components/LangSelector/LangSelector'
-import { EditorContext, EditorState } from '@store/EditorContext'
+import { useEditor } from '@shared/hooks'
+import { UseEditorInt } from '@shared/validators'
+import './header.scss'
 
 type HeaderProps = {
   export?: Function
@@ -18,7 +19,7 @@ type HeaderProps = {
 function Header(props: HeaderProps): JSX.Element {
   const { t } = useTranslation()
   const [, dispatchDefault]: [DefaultState, Function] = useContext(DefaultContext)
-  const [{ memeSelected }]: [EditorState, Function] = useContext(EditorContext)
+  const [{ memeSelected }]: [UseEditorInt, Function] = useEditor()
   const { location, push } = useHistory()
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {
