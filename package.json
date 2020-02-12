@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A simple meme generator building in React",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
+    "start": "webpack-dev-server --mode development --open --host 10.0.11.72",
     "commit": "git-cz",
     "build": "webpack --mode production",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}'",
