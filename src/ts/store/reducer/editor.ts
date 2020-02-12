@@ -26,27 +26,27 @@ export interface Actions extends EditorState {
   text: TextBox
 }
 
-const updateDrawing = (state: Draft<EditorState>, texts: Array<TextBox> = state.texts): void => {
-  let currentWidth: number = state.memeSelected.width
-  let currentHeight: number = state.memeSelected.height
+const updateDrawing = (draft: Draft<EditorState>, texts: Array<TextBox> = draft.texts): void => {
+  let currentWidth: number = draft.memeSelected.width
+  let currentHeight: number = draft.memeSelected.height
   let ratioW = 1
   let ratioH = 1
 
-  if (currentWidth > state.innerDimensions.width) {
-    ratioW = state.innerDimensions.width / state.memeSelected.width
-    currentWidth = state.innerDimensions.width
-    currentHeight = state.memeSelected.height * ratioW
+  if (currentWidth > draft.innerDimensions.width) {
+    ratioW = draft.innerDimensions.width / draft.memeSelected.width
+    currentWidth = draft.innerDimensions.width
+    currentHeight = draft.memeSelected.height * ratioW
   }
 
-  if (currentHeight > state.innerDimensions.height) {
-    ratioH = state.innerDimensions.height / currentHeight
+  if (currentHeight > draft.innerDimensions.height) {
+    ratioH = draft.innerDimensions.height / currentHeight
     currentWidth = currentWidth * ratioH
     currentHeight = currentHeight * ratioH
   }
 
-  const scale: number = Math.min(currentWidth / state.memeSelected.width, currentHeight / state.memeSelected.height)
+  const scale: number = Math.min(currentWidth / draft.memeSelected.width, currentHeight / draft.memeSelected.height)
 
-  state.texts = [...Array(2)].map((t: TextBox) => {
+  draft.texts = [...Array(2)].map((t: TextBox) => {
     const text = createText({
       centerY: 50,
       centerX: 340,
@@ -60,10 +60,10 @@ const updateDrawing = (state: Draft<EditorState>, texts: Array<TextBox> = state.
     return text
   })
 
-  state.drawProperties = {
+  draft.drawProperties = {
     width: currentWidth,
     height: currentHeight,
-    image: state.memeSelected.image,
+    image: draft.memeSelected.image,
     scale
   }
 }
@@ -99,125 +99,125 @@ const checkSize = ({
   return { drawProperties, texts }
 }
 
-const saveToHistory = (state: Draft<EditorState>, history: HistoryInt): void => {
+const saveToHistory = (draft: Draft<EditorState>, history: HistoryInt): void => {
   let index: number
-  if (state.history.currentIndex <= 0) index = 1
-  else index = state.history.currentIndex + 1
-  state.history.items = [...(history.type === INITIAL ? [] : state.history.items)].slice(0, index)
-  state.history.items.push(history)
-  state.history.currentIndex = history.type === INITIAL ? 0 : state.history.items.length - 1
+  if (draft.history.currentIndex <= 0) index = 1
+  else index = draft.history.currentIndex + 1
+  draft.history.items = [...(history.type === INITIAL ? [] : draft.history.items)].slice(0, index)
+  draft.history.items.push(history)
+  draft.history.currentIndex = history.type === INITIAL ? 0 : draft.history.items.length - 1
 }
 
-const clearHistory = (state: Draft<EditorState>): void => {
-  state.history.items = []
-  state.history.currentIndex = -1
+const clearHistory = (draft: Draft<EditorState>): void => {
+  draft.history.items = []
+  draft.history.currentIndex = -1
 }
 
-const undoHistory = (state: Draft<EditorState>, eraseAll = false): void => {
-  const index: number = eraseAll ? 0 : state.history.currentIndex - 1
-  const previousItem = state.history.items[index]
+const undoHistory = (draft: Draft<EditorState>, eraseAll = false): void => {
+  const index: number = eraseAll ? 0 : draft.history.currentIndex - 1
+  const previousItem = draft.history.items[index]
 
   if (previousItem) {
     const { drawProperties, texts } = checkSize({
       oldProperties: previousItem.drawProperties,
-      newProperties: state.drawProperties,
+      newProperties: draft.drawProperties,
       texts: previousItem.texts
     })
-    state.texts = texts.map((text: TextBox) => {
+    draft.texts = texts.map((text: TextBox) => {
       text.id = randomID()
       return text
     })
-    state.drawProperties = drawProperties
-    state.history.currentIndex = index
+    draft.drawProperties = drawProperties
+    draft.history.currentIndex = index
     if (eraseAll) {
-      saveToHistory(state, {
+      saveToHistory(draft, {
         drawProperties,
-        texts: state.texts,
+        texts: draft.texts,
         type: INITIAL
       })
     }
   }
 }
 
-const redoHistory = (state: Draft<EditorState>): void => {
-  const index: number = state.history.currentIndex + 1
-  const nextItem = state.history.items[index]
+const redoHistory = (draft: Draft<EditorState>): void => {
+  const index: number = draft.history.currentIndex + 1
+  const nextItem = draft.history.items[index]
   if (nextItem) {
     const { drawProperties, texts } = checkSize({
       oldProperties: nextItem.drawProperties,
-      newProperties: state.drawProperties,
+      newProperties: draft.drawProperties,
       texts: nextItem.texts
     })
-    state.texts = texts.map((text: TextBox) => {
+    draft.texts = texts.map((text: TextBox) => {
       text.id = randomID()
       return text
     })
-    state.drawProperties = drawProperties
-    state.history.currentIndex = index
+    draft.drawProperties = drawProperties
+    draft.history.currentIndex = index
   }
 }
 
-const EditorReducer = (draft: EditorState, action: Actions): any => {
-  const state = createDraft(draft)
+const EditorReducer = (state: EditorState, action: Actions): EditorState => {
+  const draft: Draft<EditorState> = createDraft(state)
   let textIndex: number
   switch (action.type) {
     case SET_MEME_SELECTED:
-      state.memeSelected = action.memeSelected
-      updateDrawing(state, action.texts)
-      saveToHistory(state, {
-        drawProperties: state.drawProperties,
-        texts: state.texts,
+      draft.memeSelected = action.memeSelected
+      updateDrawing(draft, action.texts)
+      saveToHistory(draft, {
+        drawProperties: draft.drawProperties,
+        texts: draft.texts,
         type: INITIAL
       })
       break
     case RESIZE_WINDOW:
-      state.innerDimensions = action.innerDimensions
-      if (state.memeSelected) updateDrawing(state)
+      draft.innerDimensions = action.innerDimensions
+      if (draft.memeSelected) updateDrawing(draft)
       break
     case SET_SHOW_TEXT_AREAS:
-      state.showTextAreas = action.showTextAreas
+      draft.showTextAreas = action.showTextAreas
       break
     case SET_TEXT_ID_SELECTED:
-      state.textIdSelected = action.textIdSelected
+      draft.textIdSelected = action.textIdSelected
       break
     case CUSTOM_TEXT:
-      textIndex = state.texts.findIndex(text => text.id === action.text.id)
-      state.texts[textIndex] = action.text
+      textIndex = draft.texts.findIndex(text => text.id === action.text.id)
+      draft.texts[textIndex] = action.text
       break
     case ADD_TEXT:
-      state.texts.push(action.text)
+      draft.texts.push(action.text)
       break
     case REMOVE_TEXT:
-      textIndex = state.texts.findIndex(text => text.id === action.text.id)
-      state.texts.splice(textIndex, 1)
+      textIndex = draft.texts.findIndex(text => text.id === action.text.id)
+      draft.texts.splice(textIndex, 1)
       break
     case UNDO_HISTORY:
-      undoHistory(state)
+      undoHistory(draft)
       break
     case SET_HISTORY:
-      saveToHistory(state, {
-        drawProperties: state.drawProperties,
-        texts: state.texts,
+      saveToHistory(draft, {
+        drawProperties: draft.drawProperties,
+        texts: draft.texts,
         type: action.historyType
       })
       break
     case REDO_HISTORY:
-      redoHistory(state)
+      redoHistory(draft)
       break
     case ERASE_ALL:
-      undoHistory(state, true)
+      undoHistory(draft, true)
       break
     case RESET:
-      state.textIdSelected = null
-      state.memeSelected = null
-      state.texts = []
-      clearHistory(state)
+      draft.textIdSelected = null
+      draft.memeSelected = null
+      draft.texts = []
+      clearHistory(draft)
       break
   }
 
-  const result = finishDraft(state)
-  console.log(action.type, { result })
-  return result
+  const stateUpdated: any = finishDraft(draft)
+  console.log('EDITOR : ' + action.type, { stateUpdated })
+  return stateUpdated
 }
 
 export default EditorReducer
