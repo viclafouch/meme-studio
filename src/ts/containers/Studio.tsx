@@ -56,10 +56,10 @@ function Studio(props: any): JSX.Element {
   useEffect(() => {
     if (memeSelected) {
       document.title = `Meme Studio - ${memeSelected.name}`
-      setCurrentTab(TAB_CUSTOMIZATION)
+      setCurrentTab(isMinLgSize ? TAB_CUSTOMIZATION : null)
     } else {
       document.title = `Meme Studio`
-      setCurrentTab(TAB_GALLERY)
+      setCurrentTab(isMinLgSize ? TAB_GALLERY : null)
     }
   }, [memeSelected])
 
@@ -107,21 +107,42 @@ function Studio(props: any): JSX.Element {
             {!memeSelected && (
               <div className="empty-meme">
                 <ReactSVG src="images/choose-meme.svg" wrapper="span" className="choose-meme-svg" />
-                <p>
-                  {t('studio.selectMeme')} <br />{' '}
-                  <label className="import-image-label" htmlFor="local-meme">
-                    <input
-                      type="file"
-                      ref={inputDrop}
-                      onChange={(): any => handleImportImage()}
-                      className="import-image-label-input"
-                      accept="image/png, image/jpeg"
-                      id="local-meme"
-                    />
-                    {t('studio.or')} <span className="import-image-label-text">{t('studio.importImage')}</span>.
-                  </label>
-                </p>
-                <DragAndDrop onDrop={handleImportImage} id="dragenter-root" />
+                {isMinLgSize ? (
+                  <>
+                    <p>
+                      {t('studio.selectMeme')} <br />{' '}
+                      <label className="import-image-label" htmlFor="local-meme">
+                        <input
+                          type="file"
+                          ref={inputDrop}
+                          onChange={(): any => handleImportImage()}
+                          className="import-image-label-input"
+                          accept="image/png, image/jpeg"
+                          id="local-meme"
+                        />
+                        {t('studio.or')} <span className="import-image-label-text">{t('studio.importImage')}</span>.
+                      </label>
+                    </p>
+                    <DragAndDrop onDrop={handleImportImage} id="dragenter-root" />
+                  </>
+                ) : (
+                  <div className="empty-meme-buttons-container">
+                    <Button className={'button-select-gallery'} big onClick={(): void => setCurrentTab(TAB_GALLERY)}>
+                      Sélectionner un meme
+                    </Button>
+                    <label htmlFor="local-meme" className="import-image-label button button-big button-select-gallery">
+                      <span>Importer un meme</span>
+                      <input
+                        type="file"
+                        ref={inputDrop}
+                        onChange={(): any => handleImportImage()}
+                        className="import-image-label-input"
+                        accept="image/png, image/jpeg"
+                        id="local-meme"
+                      />
+                    </label>
+                  </div>
+                )}
               </div>
             )}
           </div>

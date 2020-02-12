@@ -2,12 +2,8 @@ import * as React from 'react'
 import { useState, useImperativeHandle, forwardRef, RefObject } from 'react'
 import Modal from '@components/Modal/Modal'
 
-type FaqProps = {
-  ref: RefObject<any>
-}
-
 const Faq = forwardRef(
-  (props: FaqProps, ref): JSX.Element => {
+  (props: any, ref): JSX.Element => {
     const [isOpen, setIsOpen] = useState(false)
 
     useImperativeHandle(

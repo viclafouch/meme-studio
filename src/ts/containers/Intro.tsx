@@ -23,6 +23,7 @@ function Intro(): JSX.Element {
       <div className="intro-content">
         <Button
           className="intro-get-started-btn ld ld-fall-ttb-in"
+          big
           onClick={(): void =>
             dispatch({
               type: SET_ON_STUDIO,

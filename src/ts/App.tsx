@@ -22,7 +22,6 @@ import {
   faTimes
 } from '@fortawesome/free-solid-svg-icons'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
-import { ModalProvider } from '@store/ModalContext'
 import { EditorProvider } from '@store/EditorContext'
 
 library.add(
@@ -49,11 +48,9 @@ function App(): JSX.Element {
     <ErrorBoundary>
       <Router>
         <DefaultProvider>
-          <ModalProvider>
-            <EditorProvider>
-              <MainContainer />
-            </EditorProvider>
-          </ModalProvider>
+          <EditorProvider>
+            <MainContainer />
+          </EditorProvider>
         </DefaultProvider>
       </Router>
     </ErrorBoundary>

@@ -1,4 +1,4 @@
-import { debug } from '@utils/index'
+import { createDraft, Draft, finishDraft } from 'immer'
 import { SET_ON_STUDIO, SET_MEMES, SET_CURSOR_MEMES, SET_HAS_NEXT_MEMES } from './constants'
 import { DefaultState } from '../DefaultContext'
 
@@ -6,37 +6,25 @@ export interface Actions extends DefaultState {
   type: string
 }
 
-const DefaultReducer: React.Reducer<DefaultState, Actions> = (state, action) => {
-  debug(`TCL: DefaultReducer -> type : ${action.type}`)
-  const { onStudio, memes, cursorMemes, hasNextMemes, type } = action
-  switch (type) {
+const DefaultReducer = (state: DefaultState, action: Actions): DefaultState => {
+  const draft: Draft<DefaultState> = createDraft(state)
+  switch (action.type) {
     case SET_ON_STUDIO:
-      debug(`TCL: DefaultReducer -> set onStudio to ${status}`)
-      return {
-        ...state,
-        onStudio
-      }
+      draft.onStudio = action.onStudio
+      break
     case SET_MEMES:
-      debug(`TCL: DefaultReducer -> set ${memes.length} memes`)
-      return {
-        ...state,
-        memes
-      }
+      draft.memes = action.memes
+      break
     case SET_CURSOR_MEMES:
-      debug(`TCL: DefaultReducer -> set new memes cursor (after: ${cursorMemes.after})`)
-      return {
-        ...state,
-        cursorMemes
-      }
+      draft.cursorMemes = action.cursorMemes
+      break
     case SET_HAS_NEXT_MEMES:
-      debug(`TCL: DefaultReducer -> set has next memes to ${hasNextMemes}`)
-      return {
-        ...state,
-        hasNextMemes
-      }
-    default:
-      return state
+      draft.hasNextMemes = action.hasNextMemes
+      break
   }
+  const stateUpdated: any = finishDraft(draft)
+  console.log('DEFAULT : ' + action.type, { stateUpdated })
+  return stateUpdated
 }
 
 export default DefaultReducer

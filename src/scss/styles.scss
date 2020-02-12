@@ -134,13 +134,14 @@ body {
       .intro-last-memes-article {
         img {
           border: 2px solid #444444;
+          width: 400px;
+          max-height: 400px;
         }
 
         @include md {
           padding: 0 12px;
-          img {
-            width: 200px;
-          }
+          width: 200px;
+          max-height: none;
         }
       }
     }
@@ -239,6 +240,15 @@ body {
         p {
           margin-top: 1em;
           line-height: 20px;
+        }
+
+        .empty-meme-buttons-container {
+          display: flex;
+          flex-direction: column;
+
+          .button {
+            margin-top: 10px;
+          }
         }
 
         .import-image-label {
@@ -370,12 +380,7 @@ body {
     }
 
     .button-export {
-      padding: 12px 22px;
-      font-weight: 600;
-      font-size: 13px;
-      line-height: 16px;
       text-transform: uppercase;
-
       .icon-arrow-circle-down {
         margin-right: 7px;
       }

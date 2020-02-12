@@ -1,9 +1,7 @@
 .button {
   background-color: var(--blue);
-  padding: 16px 21px;
+  font-family: Alata, sans-serif;
   font-weight: 600;
-  font-size: 19px;
-  line-height: 22px;
   color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.14);
@@ -13,29 +11,88 @@
   cursor: pointer;
   border: 0;
   outline: none;
-  transition-property: opacity box-shadow;
+  transition-property: opacity, box-shadow;
   transition-duration: 0.3s;
+  letter-spacing: 0.5px;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  appearance: none;
+  text-rendering: auto;
 
   svg + span {
     margin-left: 7px;
   }
 
-  @include sm {
+  &.button-small {
+    padding: 13px 18px;
+    font-size: 13px;
+    line-height: 19px;
+
+    @include sm {
+      padding: 14px 20px;
+      font-size: 19px;
+      line-height: 21px;
+    }
+
+    @include md {
+      padding: 15px 22px;
+      font-size: 20px;
+      line-height: 23px;
+    }
+
+    @include lg {
+      padding: 21px 53px;
+      font-size: 22px;
+      line-height: 29px;
+    }
+  }
+  &.button-medium {
+    padding: 16px 21px;
+    font-size: 17px;
+    line-height: 22px;
+
+    @include sm {
+      padding: 17px 23px;
+      font-size: 21px;
+      line-height: 24px;
+    }
+
+    @include md {
+      padding: 12px 17px;
+      font-size: 14px;
+      line-height: 12px;
+    }
+
+    @include lg {
+      padding: 13px 18px;
+      font-size: 15px;
+      line-height: 17px;
+    }
+  }
+  &.button-big {
     padding: 17px 23px;
-    font-size: 21px;
-    line-height: 24px;
-  }
+    font-size: 18px;
+    line-height: 22px;
 
-  @include md {
-    padding: 18px 25px;
-    font-size: 23px;
-    line-height: 26px;
-  }
+    @include sm {
+      padding: 20px 26px;
+      font-size: 21px;
+      line-height: 24px;
+    }
 
-  @include lg {
-    padding: 24px 56px;
-    font-size: 25px;
-    line-height: 32px;
+    @include md {
+      padding: 19px 19px;
+      font-size: 21px;
+      line-height: 22px;
+    }
+
+    @include lg {
+      padding: 21px 28px;
+      font-size: 26px;
+      line-height: 29px;
+    }
   }
 
   &:not(:disabled):hover {

@@ -3,7 +3,7 @@ import { useContext, memo } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
-import { ModalContext } from '@store/ModalContext'
+import { DefaultContext, DefaultState } from '@store/DefaultContext'
 import './modal.scss'
 
 type ModalProps = {
@@ -14,25 +14,23 @@ type ModalProps = {
 }
 export function Modal({ onClose, isLoading, children, id }: ModalProps): JSX.Element {
   const { t } = useTranslation()
-  const modalNode = useContext(ModalContext)
+  const [{ modalRef }]: [DefaultState, Function] = useContext(DefaultContext)
 
-  return modalNode
-    ? createPortal(
-        <div className="modal ld ld-fade-in" id={id}>
-          <div className="modal-overlay" onClick={(): void => !isLoading && onClose()} />
-          {isLoading && <div className="modal-content-loading">{t('loading')}</div>}
-          {!isLoading && (
-            <div className="modal-content">
-              <span role="button" className="modal-close" aria-label={t('attr.close')} onClick={(): void => onClose()}>
-                <FontAwesomeIcon icon={['fas', 'times']} className="icon-times" />
-              </span>
-              <div className="modal-content-scrollable">{children}</div>
-            </div>
-          )}
-        </div>,
-        modalNode
-      )
-    : null
+  return createPortal(
+    <div className="modal ld ld-fade-in" id={id}>
+      <div className="modal-overlay" onClick={(): void => !isLoading && onClose()} />
+      {isLoading && <div className="modal-content-loading">{t('loading')}</div>}
+      {!isLoading && (
+        <div className="modal-content">
+          <span role="button" className="modal-close" aria-label={t('attr.close')} onClick={(): void => onClose()}>
+            <FontAwesomeIcon icon={['fas', 'times']} className="icon-times" />
+          </span>
+          <div className="modal-content-scrollable">{children}</div>
+        </div>
+      )}
+    </div>,
+    modalRef.current
+  )
 }
 
 Modal.defaultProps = {

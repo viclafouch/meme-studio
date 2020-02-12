@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useReducer, createContext } from 'react'
+import { useReducer, createContext, RefObject, createRef, ReactNode } from 'react'
 import Meme from '@shared/models/Meme'
 import TextBox from '@shared/models/TextBox'
 import { DrawProperties, HistoryInt } from '@shared/validators'
@@ -9,7 +9,7 @@ export interface EditorState {
   textIdSelected: string
   showTextAreas: boolean
   memeSelected: Meme
-  canvasRef: React.RefObject<HTMLCanvasElement>
+  canvasRef: RefObject<HTMLCanvasElement>
   texts: Array<TextBox>
   drawProperties: DrawProperties
   innerDimensions: {
@@ -26,7 +26,7 @@ const initialState: EditorState = {
   textIdSelected: null,
   showTextAreas: true,
   memeSelected: null,
-  canvasRef: React.createRef(),
+  canvasRef: createRef(),
   texts: [],
   drawProperties: null,
   innerDimensions: {
@@ -41,7 +41,7 @@ const initialState: EditorState = {
 
 export const EditorContext = createContext<EditorState | any>(initialState)
 
-export function EditorProvider(props: any): JSX.Element {
+export function EditorProvider({ children }: { children: ReactNode }): JSX.Element {
   const [state, updater] = useReducer(EditorReducer, initialState)
-  return <EditorContext.Provider value={[state, updater]}>{props.children}</EditorContext.Provider>
+  return <EditorContext.Provider value={[state, updater]}>{children}</EditorContext.Provider>
 }
