@@ -18,6 +18,7 @@ import { endWithExt, randomID, innerDimensions, wait } from '@utils/index'
 import DragAndDrop from '@components/DragAndDrop/DragAndDrop'
 import { useWindowWidth, useEditor } from '@shared/hooks'
 import { Modal } from '@components/Modal/Modal'
+import { getMeme } from '@shared/api'
 
 function Studio(props: any): JSX.Element {
   const inputDrop: RefObject<HTMLInputElement> = useRef(null)
@@ -39,11 +40,12 @@ function Studio(props: any): JSX.Element {
   const handleChooseMeme = async (meme: Meme): Promise<void> => {
     try {
       setIsLoading(true)
-      // const { texts } = await getMeme(meme.id) // TODO
+      const { texts } = await getMeme(meme.id)
       await wait(300)
       dispatchEditor({
         type: SET_MEME_SELECTED,
-        memeSelected: meme
+        memeSelected: meme,
+        texts
       })
       setCurrentTab(TAB_CUSTOMIZATION)
     } catch (error) {

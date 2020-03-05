@@ -10,11 +10,7 @@ type GalleryProps = {
 }
 
 function Gallery(props: GalleryProps): JSX.Element {
-  const {
-    memes,
-    fetchNextMemes,
-    hasNextMemes
-  }: { memes: Array<any>; fetchNextMemes: Function; hasNextMemes: boolean } = useMemes()
+  const { memes, fetchNextMemes, hasNextMemes } = useMemes()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const scrollerRef: RefObject<HTMLUListElement> = useRef(null)
 
@@ -27,6 +23,8 @@ function Gallery(props: GalleryProps): JSX.Element {
         await fetchNextMemes()
       } catch (error) {
         console.warn(error)
+      } finally {
+        setIsLoading(false)
       }
     }
   }, [fetchNextMemes, isLoading, hasNextMemes])

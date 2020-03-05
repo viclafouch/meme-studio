@@ -7,10 +7,7 @@ export interface DefaultState {
   onStudio: boolean
   modalRef: RefObject<HTMLDivElement>
   memes: Array<Meme>
-  cursorMemes: {
-    before: string
-    after: string
-  }
+  numPage: number
   hasNextMemes: boolean
 }
 
@@ -18,10 +15,7 @@ const initialState: DefaultState = {
   onStudio: false,
   modalRef: createRef(),
   memes: [],
-  cursorMemes: {
-    before: null,
-    after: null
-  },
+  numPage: 0,
   hasNextMemes: true
 }
 

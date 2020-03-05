@@ -1,50 +1,37 @@
 import Meme from '@shared/models/Meme'
-import { fetchApi, parseSearchParams } from '@utils/index'
+import { fetchApi } from '@utils/index'
 import TextBox from '@shared/models/TextBox'
 
-export const API_URL = 'https://meme-studio.herokuapp.com'
+export const API_URL = process.env.NODE_ENV === 'production' ? 'http://localhost:3000' : 'http://localhost:3000'
 
-const useImgflip = true
-
-/**
- * getMemes
- * @params object - fetch params
- * @return Promise<GetMemesInt> - Pagination of memes
- */
-
-export interface GetMemesInt {
-  memes: Array<Meme>
-  cursor: {
-    before: string | null
-    after: string | null
+interface ResultMemeIndex {
+  success: boolean
+  data: {
+    memes: Array<object>
+    pages: number
   }
 }
 
-export const getMemes = (query: object, params?: object): Promise<GetMemesInt> => {
-  if (useImgflip) {
-    return fetch('https://api.imgflip.com/get_memes')
-      .then(response => response.json())
-      .then((response: any) => ({
-        memes: response.data.memes.map((item: object) => new Meme(item)),
-        cursor: {
-          after: null,
-          before: null
-        }
-      }))
-  } else {
-    return fetchApi(`/memes?${parseSearchParams(query)}`, params).then(({ response }: any) => ({
-      memes: response.items.map((item: object) => new Meme(item)),
-      cursor: response.cursor
-    }))
+export const getMemes = (page: number, params?: object): Promise<{ memes: Array<Meme>; pages: number }> =>
+  fetchApi(`/memes`, {
+    method: 'POST',
+    body: JSON.stringify({ page }),
+    ...params
+  }).then((response: ResultMemeIndex) => ({
+    memes: response.data.memes.map((meme: object) => new Meme(meme)),
+    pages: response.data.pages
+  }))
+
+export interface ResultMemeShowInt {
+  success: boolean
+  data: {
+    meme: object
+    texts: Array<object>
   }
 }
-export interface GetMemeInt {
-  meme: Meme
-  texts: Array<TextBox>
-}
 
-export const getMeme = (id: string, params?: object): Promise<GetMemeInt> =>
-  fetchApi(`/memes/${id}`, params).then(({ response }: any) => ({
-    texts: response.TextBoxes.map((text: any) => new TextBox(text)),
-    meme: { ...response }
+export const getMeme = (id: string): Promise<{ texts: Array<TextBox>; meme: Meme }> =>
+  fetchApi(`/memes/${id}`, { method: 'POST' }).then((response: ResultMemeShowInt) => ({
+    texts: response.data.texts.map((text: object) => new TextBox(text)),
+    meme: new Meme(response.data.meme)
   }))

@@ -46,18 +46,12 @@ const updateDrawing = (draft: Draft<EditorState>, texts: Array<TextBox> = draft.
 
   const scale: number = Math.min(currentWidth / draft.memeSelected.width, currentHeight / draft.memeSelected.height)
 
-  draft.texts = [...Array(2)].map((t: TextBox) => {
-    const text = createText({
-      centerY: 50,
-      centerX: 340,
-      height: 100,
-      width: 680
-    })
-    text.height = text.base.height * scale
-    text.width = text.base.width * scale
-    text.centerY = text.base.centerY * scale
-    text.centerX = text.base.centerX * scale
-    return text
+  draft.texts = texts.map((t: TextBox) => {
+    t.height = t.base.height * scale
+    t.width = t.base.width * scale
+    t.centerY = t.base.centerY * scale
+    t.centerX = t.base.centerX * scale
+    return t
   })
 
   draft.drawProperties = {

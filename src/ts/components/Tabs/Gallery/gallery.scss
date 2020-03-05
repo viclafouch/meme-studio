@@ -6,6 +6,7 @@
   grid-gap: 8px;
   max-width: 402px;
   width: 100%;
+  overflow-y: auto;
 
   .gallery-item {
     cursor: pointer;

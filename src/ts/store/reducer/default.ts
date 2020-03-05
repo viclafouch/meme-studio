@@ -1,5 +1,5 @@
 import { createDraft, Draft, finishDraft } from 'immer'
-import { SET_ON_STUDIO, SET_MEMES, SET_CURSOR_MEMES, SET_HAS_NEXT_MEMES } from './constants'
+import { SET_ON_STUDIO, SET_MEMES, SET_HAS_NEXT_MEMES, SET_NUM_PAGE } from './constants'
 import { DefaultState } from '../DefaultContext'
 
 export interface Actions extends DefaultState {
@@ -15,11 +15,11 @@ const DefaultReducer = (state: DefaultState, action: Actions): DefaultState => {
     case SET_MEMES:
       draft.memes = action.memes
       break
-    case SET_CURSOR_MEMES:
-      draft.cursorMemes = action.cursorMemes
-      break
     case SET_HAS_NEXT_MEMES:
       draft.hasNextMemes = action.hasNextMemes
+      break
+    case SET_NUM_PAGE:
+      draft.numPage = action.numPage
       break
   }
   const stateUpdated: any = finishDraft(draft)

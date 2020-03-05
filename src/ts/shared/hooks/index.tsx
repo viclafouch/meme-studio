@@ -1,15 +1,15 @@
 import { useEffect, useState, useContext, useMemo, useCallback } from 'react'
 import AbortController from 'abort-controller'
-import { DefaultContext } from '@store/DefaultContext'
+import { DefaultContext, DefaultState } from '@store/DefaultContext'
 import { getMemes } from '@shared/api'
 import {
   SET_MEMES,
-  SET_CURSOR_MEMES,
-  SET_HAS_NEXT_MEMES,
   ADD_TEXT,
   SET_HISTORY,
   REMOVE_TEXT,
-  CUSTOM_TEXT
+  CUSTOM_TEXT,
+  SET_HAS_NEXT_MEMES,
+  SET_NUM_PAGE
 } from '@store/reducer/constants'
 import Meme from '@shared/models/Meme'
 import { EditorContext, EditorState } from '@store/EditorContext'
@@ -73,35 +73,30 @@ export function useWindowWidth(): {
 
 export function useMemes(): {
   memes: Array<Meme>
-  hasNextMemes: boolean
   fetchNextMemes: Function
+  numPage: number
+  hasNextMemes: boolean
 } {
-  const [{ memes, cursorMemes, hasNextMemes }, dispatch] = useContext<any>(DefaultContext)
+  const [{ memes, numPage, hasNextMemes }, dispatch]: [DefaultState, Function] = useContext<any>(DefaultContext)
 
-  const fetchNextMemes = async (): Promise<Array<Meme>> => {
-    if (!hasNextMemes) return memes
+  const fetchNextMemes = async (): Promise<void> => {
     const controller = new AbortController()
     const timeout: any = setTimeout(() => controller.abort(), 10000)
-    const response = await getMemes(
-      {
-        ...(cursorMemes.after ? { after: cursorMemes.after } : null)
-      },
-      {
-        signal: controller.signal
-      }
-    )
-
-    dispatch({ type: SET_CURSOR_MEMES, cursorMemes: response.cursor })
-    dispatch({ type: SET_HAS_NEXT_MEMES, hasNextMemes: !!response.cursor.after })
+    const currentPage = numPage + 1
+    const response = await getMemes(currentPage, {
+      signal: controller.signal
+    })
+    dispatch({ type: SET_NUM_PAGE, numPage: currentPage })
+    dispatch({ type: SET_HAS_NEXT_MEMES, hasNextMemes: currentPage < response.pages })
     clearTimeout(timeout)
     const newMemes = [...memes, ...response.memes]
     dispatch({ type: SET_MEMES, memes: newMemes })
-    return newMemes
   }
 
   return {
     memes,
-    hasNextMemes,
-    fetchNextMemes
+    fetchNextMemes,
+    numPage,
+    hasNextMemes
   }
 }
