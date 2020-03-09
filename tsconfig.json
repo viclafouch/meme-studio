@@ -4,17 +4,22 @@
     "sourceMap": true,
     "noImplicitAny": true,
     "module": "commonjs",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "target": "es6",
     "jsx": "react",
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "paths": {
-      "@components/*": ["src/ts/components/*"],
-      "@containers/*": ["src/ts/containers/*"],
-      "@shared/*": ["src/ts/shared/*"],
-      "@store/*": ["src/ts/store/*"],
-      "@utils/*": ["src/ts/utils/*"],
-      "@/*": ["src/*"]
-    }
-  }
+      "@client/components/*": ["client/ts/components/*"],
+      "@client/containers/*": ["client/ts/containers/*"],
+      "@client/store/*": ["client/ts/store/*"],
+      "@client/utils/*": ["client/ts/utils/*"],
+      "@client/*": ["client/ts/*"],
+      "@api/*": ["api/lib/*"],
+      "@shared/*": ["shared/*"],
+      "@src/*": ["*"]
+    },
+    "typeRoots": ["./src/client/node_modules/@types/", "./node_modules/@types/", "./src/api/node_modules/@types/"],
+  },
+  "include": ["./src/client/ts/**/*.ts", "./src/client/ts/**/*.tsx", "./src/api/**/*.ts"],
 }

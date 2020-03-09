@@ -1,4 +1,6 @@
-webpack.config.js
-.prettierrc.js
 /dist
 /node_modules
+/src/client/node_modules
+/src/api/node_modules
+**/*.js
+webpack.config.ts
