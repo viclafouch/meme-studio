@@ -1,13 +1,9 @@
-import * as path from 'path'
-import * as fs from 'fs'
-
 const IS_DEV = process.env.NODE_ENV !== 'production'
 
-const packageJsonPath = path.join(process.cwd(), 'package.json')
-const rawPackageJson = fs.readFileSync(packageJsonPath).toString()
-const PackageJson = JSON.parse(rawPackageJson)
-const { version: VERSION } = PackageJson
+const PORT_CLIENT_DEV = 3000
+const PORT_API_DEV = 8080
+const PORT_ALL_PROD: number = JSON.parse(process.env.PORT || '3000')
 
-const SERVER_PORT: number = JSON.parse(process.env.PORT || '3000')
+const API_URL = IS_DEV ? `http://localhost:${PORT_API_DEV}` : '...' // TODO
 
-export { IS_DEV, VERSION, SERVER_PORT }
+export { IS_DEV, PORT_ALL_PROD, PORT_CLIENT_DEV, PORT_API_DEV, API_URL }
