@@ -4,8 +4,9 @@ import Meme from './models/meme.model'
 import { TextBox } from './models/textbox.model'
 import * as datas from '../memes.json'
 import { MemeIJson } from '../memes.int'
+import { IS_DEV, PORT_API_DEV, PORT_ALL_PROD } from '@shared/config'
 
-const PORT = process.env.PORT || 3000
+const PORT = IS_DEV ? PORT_API_DEV : PORT_ALL_PROD
 
 const memes: Array<MemeIJson> = datas.memes as Array<MemeIJson>
 

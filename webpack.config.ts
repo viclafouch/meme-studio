@@ -1,5 +1,5 @@
 import * as path from "path"
-import { IS_DEV, SERVER_PORT } from "./src/shared/config"
+import { IS_DEV, PORT_CLIENT_DEV } from "./src/shared/config"
 import * as HtmlWebpackPlugin from "html-webpack-plugin"
 import * as MiniCssExtractPlugin from "mini-css-extract-plugin"
 import * as CopyPlugin from "copy-webpack-plugin"
@@ -35,10 +35,10 @@ const config: Configuration = {
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
-    port: SERVER_PORT,
+    port: PORT_CLIENT_DEV,
     overlay: IS_DEV,
     open: IS_DEV,
-    openPage: `http://localhost:${SERVER_PORT}`,
+    openPage: `http://localhost:${PORT_CLIENT_DEV}`,
     historyApiFallback: true
   },
   module: {

@@ -2,8 +2,6 @@ import Meme from '@client/shared/models/Meme'
 import { fetchApi } from '@client/utils/index'
 import TextBox from '@client/shared/models/TextBox'
 
-export const API_URL = process.env.NODE_ENV === 'production' ? 'http://localhost:3000' : 'http://localhost:3000'
-
 interface ResultMemeIndex {
   success: boolean
   data: {
