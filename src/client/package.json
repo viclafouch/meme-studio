@@ -4,10 +4,6 @@
   "description": "A simple meme generator building in React",
   "author": "Victor de la Fouchardiere",
   "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/viclafouch/meme-studio.git"
-  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "1.2.27",
     "@fortawesome/free-brands-svg-icons": "5.12.1",
