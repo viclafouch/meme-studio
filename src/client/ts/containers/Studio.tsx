@@ -14,7 +14,7 @@ import { TAB_CUSTOMIZATION, TAB_GALLERY } from '@client/shared/constants'
 import Meme from '@client/shared/models/Meme'
 import Tools from '@client/components/Tools/Tools'
 import Header from '@client/components/Header/Header'
-import { endWithExt, innerDimensions } from '@client/utils/index'
+import { endWithExt, innerDimensions, debug } from '@client/utils/index'
 import { randomID, wait } from '@shared/utils'
 import DragAndDrop from '@client/components/DragAndDrop/DragAndDrop'
 import { useWindowWidth, useEditor } from '@client/shared/hooks'
@@ -69,8 +69,8 @@ function Studio(props: any): JSX.Element {
   const handleImportImage = async (fileList?: FileList): Promise<void> => {
     const files = fileList || inputDrop.current.files
     if (!files.length) return
-    else if (files.length > 1) return console.log('not multiple files')
-    else if (!endWithExt(['.jpg', '.png', 'jpeg'], files[0].name)) return console.log('not good extension')
+    else if (files.length > 1) return
+    else if (!endWithExt(['.jpg', '.png', 'jpeg'], files[0].name)) return debug('extension not valid') // TODO
 
     const meme = new Meme({
       id: randomID(),

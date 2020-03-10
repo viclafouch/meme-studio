@@ -5,12 +5,12 @@ import * as morgan from 'morgan'
 import { Request, Response, NextFunction } from 'express'
 import * as cors from 'cors'
 import * as bodyParser from 'body-parser'
-import { MemeController } from '@api/controllers/meme.controller'
-import HttpException from '@api/exceptions/HttpException'
-import { IS_DEV, API_URL } from '@shared/config'
+import { MemeController } from '@server/controllers/meme.controller'
+import HttpException from '../exceptions/HttpException'
+import { IS_DEV } from '@shared/config'
 
 const templateDir = '/templates'
-const distDir = '/dist'
+const clientDir = '/dist/client'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const handleError = (err: HttpException, req: Request, res: Response, next?: NextFunction): void => {
@@ -45,26 +45,9 @@ class App {
     this.app.use(bodyParser.json())
     this.app.use(bodyParser.urlencoded({ extended: false }))
     this.app.use(morgan('combined'))
-    if (!IS_DEV) this.app.use(express.static(process.cwd() + distDir))
+    if (!IS_DEV) this.app.use(express.static(process.cwd() + clientDir))
     this.app.use(templateDir, express.static(process.cwd() + templateDir))
-    this.setCors()
-  }
-
-  private setCors(): void {
-    const whitelist = [API_URL]
-    const corsOptions = !IS_DEV
-      ? {
-          origin: (origin: string, callback: Function): void => {
-            if (whitelist.indexOf(origin) !== -1) {
-              callback(null, true)
-            } else {
-              callback(new HttpException(401, 'Not allowed'))
-            }
-          },
-          credentials: true
-        }
-      : {}
-    this.app.use(cors(corsOptions))
+    this.app.use(cors())
   }
 
   private initializeRoutes(): void {

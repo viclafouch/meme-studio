@@ -1,6 +1,7 @@
 import { createDraft, Draft, finishDraft } from 'immer'
 import { SET_ON_STUDIO, SET_MEMES, SET_HAS_NEXT_MEMES, SET_NUM_PAGE } from './constants'
 import { DefaultState } from '../DefaultContext'
+import { debug } from '@client/utils/index'
 
 export interface Actions extends DefaultState {
   type: string
@@ -23,7 +24,7 @@ const DefaultReducer = (state: DefaultState, action: Actions): DefaultState => {
       break
   }
   const stateUpdated: any = finishDraft(draft)
-  console.log('DEFAULT : ' + action.type, { stateUpdated })
+  debug(`DEFAULT REDUCER: ${action.type}`, { stateUpdated })
   return stateUpdated
 }
 

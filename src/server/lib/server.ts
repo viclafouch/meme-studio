@@ -4,7 +4,7 @@ import Meme from './models/meme.model'
 import { TextBox } from './models/textbox.model'
 import * as datas from '../memes.json'
 import { MemeIJson } from '../memes.int'
-import { IS_DEV, PORT_API_DEV, PORT_ALL_PROD } from '@shared/config'
+import { IS_DEV, PORT_API_DEV, PORT_ALL_PROD } from '../../shared/config'
 
 const PORT = IS_DEV ? PORT_API_DEV : PORT_ALL_PROD
 
@@ -33,7 +33,7 @@ async function start(resetDb: boolean): Promise<void> {
     )
     console.log(`${memes.length} memes have been added!`)
   }
-  app.listen(PORT, () => console.log(`Server is listening on port ${PORT}!`))
+  app.listen(PORT, () => console.log(`Server is listening on port ${PORT}! \nisDev: ${IS_DEV}`))
 }
 
 export default start

@@ -18,6 +18,7 @@ import TextBox from '@client/shared/models/TextBox'
 import { DrawProperties, HistoryInt } from '@client/shared/validators'
 import { randomID } from '@shared/utils'
 import { INITIAL } from '@client/shared/constants'
+import { debug } from '@client/utils/index'
 
 export interface Actions extends EditorState {
   type: string
@@ -209,7 +210,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
   }
 
   const stateUpdated: any = finishDraft(draft)
-  console.log('EDITOR : ' + action.type, { stateUpdated })
+  debug(`EDITOR REDUCER: ${action.type}`, { stateUpdated })
   return stateUpdated
 }
 

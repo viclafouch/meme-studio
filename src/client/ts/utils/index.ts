@@ -1,9 +1,8 @@
 import TextBox from '@client/shared/models/TextBox'
 import { Line } from '@client/shared/validators'
-import { API_URL } from '@shared/config'
+import { API_URL, IS_DEV } from '@shared/config'
 
-export const debug = (str: string): void =>
-  process.env.NODE_ENV === 'production' && console.log(`%c ${str}`, 'color: yellow; font-weight: bold')
+export const debug = (text: string, ...args: any[]): void => IS_DEV && console.log(`%c ${text}\n`, 'font-weight: bold', args)
 
 export const getDefaultLang = (availableLangs: Array<string>, defaultLang = 'en'): string =>
   navigator.languages.map(l => l.substr(0, 2)).find(lang => availableLangs.includes(lang)) || defaultLang

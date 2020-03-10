@@ -1,0 +1,17 @@
+{
+  "name": "meme-studio-server",
+  "version": "1.0.0",
+  "description": "Server side for Meme Studio",
+  "author": "Victor de la Fouchardiere",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viclafouch/meme-studio.git"
+  },
+  "scripts": {
+    "download-memes": "node tasks/download.js"
+  },
+  "devDependencies": {
+    "image-size": "^0.8.3"
+  }
+}

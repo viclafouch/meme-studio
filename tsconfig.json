@@ -15,11 +15,11 @@
       "@client/store/*": ["client/ts/store/*"],
       "@client/utils/*": ["client/ts/utils/*"],
       "@client/*": ["client/ts/*"],
-      "@api/*": ["api/lib/*"],
+      "@server/*": ["server/lib/*"],
       "@shared/*": ["shared/*"],
       "@src/*": ["*"]
     },
-    "typeRoots": ["./src/client/node_modules/@types/", "./node_modules/@types/", "./src/api/node_modules/@types/"],
+    "typeRoots": ["./src/client/node_modules/@types/", "./node_modules/@types/", "src/server/node_modules/@types"],
   },
-  "include": ["./src/client/ts/**/*.ts", "./src/client/ts/**/*.tsx", "./src/api/**/*.ts"],
+  "include": ["./src/client/ts/**/*.ts", "./src/client/ts/**/*.tsx", "src/server/**/*.ts"]
 }

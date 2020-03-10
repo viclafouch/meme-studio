@@ -25,10 +25,10 @@ ncu.run({
 ncu.run({
     // Any command-line option can be specified here.
     // These are set by default:
-    packageFile: './src/api/package.json',
+    packageFile: './src/server/package.json',
     jsonUpgraded: true,
     packageManager: 'npm',
     silent: true
 }).then((upgraded) => {
-    console.log('Api dependencies to upgrade:', upgraded);
+    console.log('Server dependencies to upgrade:', upgraded);
 });
