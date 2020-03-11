@@ -9,7 +9,7 @@
     "build": "npm run build:client && npm run build:server",
     "build:client": "webpack --mode production",
     "build:server": "tsc -b ./build/tsconfig.server.json && npx tscpaths -p build/tsconfig.resolve.json -s ./dist -o ./dist",
-    "start": "cross-env NODE_ENV=production node ./dist/server/index.js",
+    "start": "node ./dist/server/index.js",
     "commit": "git-cz",
     "lint": "tsc --noEmit && eslint '*/**/*.{ts,tsx}'",
     "ncu": "node tasks/ncu.js",
