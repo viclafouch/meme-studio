@@ -15,6 +15,9 @@
     "ncu": "node tasks/ncu.js",
     "postinstall": "(cd src/server && npm install); (cd src/client && npm install);"
   },
+  "engines": {
+    "node": "12.8.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/viclafouch/meme-studio.git"
