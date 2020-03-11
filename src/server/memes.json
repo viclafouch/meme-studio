@@ -1,0 +1,719 @@
+{
+  "memes": [
+    {
+      "name": "Drake Hotline Bling",
+      "width": 1200,
+      "height": 1200,
+      "boxCount": 2,
+      "src": "templates/lWytxzFN.jpg",
+      "texts": [
+        {
+          "height": 30,
+          "width": 30,
+          "fontSize": 10,
+          "fontFamily": "Impact",
+          "boxShadow": 2,
+          "color": "#ffffff",
+          "centerY": 30,
+          "centerX": 30,
+          "textAlign": "left",
+          "alignVertical": "middle",
+          "isUppercase": true
+        }
+      ]
+    },
+    {
+      "name": "Distracted Boyfriend",
+      "width": 1200,
+      "height": 800,
+      "boxCount": 3,
+      "src": "templates/dYOsr-jHL.jpg"
+    },
+    {
+      "name": "Two Buttons",
+      "width": 600,
+      "height": 908,
+      "boxCount": 2,
+      "src": "templates/zVjxDDx5O.jpg"
+    },
+    {
+      "name": "Mocking Spongebob",
+      "width": 502,
+      "height": 353,
+      "boxCount": 2,
+      "src": "templates/5AaDmSeZi.jpg"
+    },
+    {
+      "name": "Change My Mind",
+      "width": 482,
+      "height": 361,
+      "boxCount": 2,
+      "src": "templates/Xsap4XbXX.jpg"
+    },
+    {
+      "name": "Left Exit 12 Off Ramp",
+      "width": 804,
+      "height": 767,
+      "boxCount": 3,
+      "src": "templates/vpb7bTFA.jpg"
+    },
+    {
+      "name": "Expanding Brain",
+      "width": 857,
+      "height": 1202,
+      "boxCount": 4,
+      "src": "templates/E4L59Jdg8.jpg"
+    },
+    {
+      "name": "Batman Slapping Robin",
+      "width": 400,
+      "height": 387,
+      "boxCount": 2,
+      "src": "templates/4fpnRv9lt.jpg"
+    },
+    {
+      "name": "Running Away Balloon",
+      "width": 761,
+      "height": 1024,
+      "boxCount": 5,
+      "src": "templates/5fR6-zUJn.jpg"
+    },
+    {
+      "name": "Blank Nut Button",
+      "width": 600,
+      "height": 446,
+      "boxCount": 2,
+      "src": "templates/lgajt9L8x.jpg"
+    },
+    {
+      "name": "Boardroom Meeting Suggestion",
+      "width": 500,
+      "height": 649,
+      "boxCount": 4,
+      "src": "templates/f0DnYf6Ew.jpg"
+    },
+    {
+      "name": "Waiting Skeleton",
+      "width": 298,
+      "height": 403,
+      "boxCount": 2,
+      "src": "templates/0QQQSIyx_.jpg"
+    },
+    {
+      "name": "Surprised Pikachu",
+      "width": 1893,
+      "height": 1892,
+      "boxCount": 3,
+      "src": "templates/zIt-cKGd.jpg"
+    },
+    {
+      "name": "Roll Safe Think About It",
+      "width": 702,
+      "height": 395,
+      "boxCount": 2,
+      "src": "templates/nhiKus4t1.jpg"
+    },
+    {
+      "name": "Tuxedo Winnie The Pooh",
+      "width": 800,
+      "height": 582,
+      "boxCount": 2,
+      "src": "templates/-Oxz7WPsM.jpg"
+    },
+    {
+      "name": "Inhaling Seagull",
+      "width": 1269,
+      "height": 2825,
+      "boxCount": 4,
+      "src": "templates/XF8VyzY7O.jpg"
+    },
+    {
+      "name": "Disaster Girl",
+      "width": 500,
+      "height": 375,
+      "boxCount": 2,
+      "src": "templates/UHN-UgDVA.jpg"
+    },
+    {
+      "name": "One Does Not Simply",
+      "width": 568,
+      "height": 335,
+      "boxCount": 2,
+      "src": "templates/IbuukDao_.jpg"
+    },
+    {
+      "name": "X, X Everywhere",
+      "width": 2118,
+      "height": 1440,
+      "boxCount": 2,
+      "src": "templates/AgieYdld0.jpg"
+    },
+    {
+      "name": "Is This A Pigeon",
+      "width": 1587,
+      "height": 1425,
+      "boxCount": 3,
+      "src": "templates/eb-OfmFs.jpg"
+    },
+    {
+      "name": "Marked Safe From",
+      "width": 618,
+      "height": 499,
+      "boxCount": 2,
+      "src": "templates/vaMdULwnP.jpg"
+    },
+    {
+      "name": "Spongebob Ight Imma Head Out",
+      "width": 822,
+      "height": 960,
+      "boxCount": 2,
+      "src": "templates/srvIVUPhM.jpg"
+    },
+    {
+      "name": "Epic Handshake",
+      "width": 900,
+      "height": 645,
+      "boxCount": 3,
+      "src": "templates/HFHm8izK0.jpg"
+    },
+    {
+      "name": "The Scroll Of Truth",
+      "width": 1280,
+      "height": 1236,
+      "boxCount": 2,
+      "src": "templates/gKLU44GiW.jpg"
+    },
+    {
+      "name": "Ancient Aliens",
+      "width": 500,
+      "height": 436,
+      "boxCount": 2,
+      "src": "templates/xPZh28OmH.jpg"
+    },
+    {
+      "name": "Hide the Pain Harold",
+      "width": 480,
+      "height": 601,
+      "boxCount": 2,
+      "src": "templates/yVIHIcjMa.jpg"
+    },
+    {
+      "name": "Trump Bill Signing",
+      "width": 1866,
+      "height": 1529,
+      "boxCount": 2,
+      "src": "templates/mMwsh5ON.jpg"
+    },
+    {
+      "name": "American Chopper Argument",
+      "width": 640,
+      "height": 1800,
+      "boxCount": 5,
+      "src": "templates/eXlqknTVY.jpg"
+    },
+    {
+      "name": "Y'all Got Any More Of That",
+      "width": 600,
+      "height": 471,
+      "boxCount": 2,
+      "src": "templates/dO1XWeqKo.jpg"
+    },
+    {
+      "name": "The Rock Driving",
+      "width": 568,
+      "height": 700,
+      "boxCount": 2,
+      "src": "templates/3gFST4U7r.jpg"
+    },
+    {
+      "name": "Oprah You Get A",
+      "width": 620,
+      "height": 464,
+      "boxCount": 2,
+      "src": "templates/h4QZDeN4W.jpg"
+    },
+    {
+      "name": "Unsettled Tom",
+      "width": 680,
+      "height": 550,
+      "boxCount": 2,
+      "src": "templates/CLN10tBf1.jpg"
+    },
+    {
+      "name": "Third World Skeptical Kid",
+      "width": 426,
+      "height": 426,
+      "boxCount": 2,
+      "src": "templates/fxwDbJyPb.jpg"
+    },
+    {
+      "name": "Futurama Fry",
+      "width": 552,
+      "height": 414,
+      "boxCount": 2,
+      "src": "templates/zCBhXhmN.jpg"
+    },
+    {
+      "name": "Hard To Swallow Pills",
+      "width": 680,
+      "height": 979,
+      "boxCount": 2,
+      "src": "templates/kuFOaHnyc.jpg"
+    },
+    {
+      "name": "Finding Neverland",
+      "width": 423,
+      "height": 600,
+      "boxCount": 3,
+      "src": "templates/gW8TqHVbz.jpg"
+    },
+    {
+      "name": "Who Killed Hannibal",
+      "width": 1280,
+      "height": 1440,
+      "boxCount": 3,
+      "src": "templates/IIXhLbxvP.jpg"
+    },
+    {
+      "name": "Star Wars Yoda",
+      "width": 620,
+      "height": 713,
+      "boxCount": 2,
+      "src": "templates/SmmeQE1Or.jpg"
+    },
+    {
+      "name": "Third World Success Kid",
+      "width": 500,
+      "height": 500,
+      "boxCount": 2,
+      "src": "templates/0vtPXWK1L.jpg"
+    },
+    {
+      "name": "The Most Interesting Man In The World",
+      "width": 550,
+      "height": 690,
+      "boxCount": 2,
+      "src": "templates/u3mq6tTx.jpg"
+    },
+    {
+      "name": "Evil Kermit",
+      "width": 700,
+      "height": 325,
+      "boxCount": 2,
+      "src": "templates/dlq6c_Zsu.jpg"
+    },
+    {
+      "name": "Dont You Squidward",
+      "width": 500,
+      "height": 333,
+      "boxCount": 2,
+      "src": "templates/DF5WIKJ-p.jpg"
+    },
+    {
+      "name": "Grandma Finds The Internet",
+      "width": 640,
+      "height": 480,
+      "boxCount": 2,
+      "src": "templates/MIpWpGEF9.jpg"
+    },
+    {
+      "name": "That Would Be Great",
+      "width": 526,
+      "height": 440,
+      "boxCount": 2,
+      "src": "templates/vxrthFGA9.jpg"
+    },
+    {
+      "name": "Doge",
+      "width": 620,
+      "height": 620,
+      "boxCount": 5,
+      "src": "templates/xbgv6yQG2.jpg"
+    },
+    {
+      "name": "Leonardo Dicaprio Cheers",
+      "width": 600,
+      "height": 400,
+      "boxCount": 2,
+      "src": "templates/xWyvV6Crd.jpg"
+    },
+    {
+      "name": "Black Girl Wat",
+      "width": 599,
+      "height": 626,
+      "boxCount": 2,
+      "src": "templates/HLUMweVgF.jpg"
+    },
+    {
+      "name": "First World Problems",
+      "width": 552,
+      "height": 367,
+      "boxCount": 2,
+      "src": "templates/pCh7ftH0.jpg"
+    },
+    {
+      "name": "But Thats None Of My Business",
+      "width": 600,
+      "height": 600,
+      "boxCount": 2,
+      "src": "templates/Y5HBex0fs.jpg"
+    },
+    {
+      "name": "Who Would Win?",
+      "width": 802,
+      "height": 500,
+      "boxCount": 2,
+      "src": "templates/A8HUdAnsf.jpg"
+    },
+    {
+      "name": "Evil Toddler",
+      "width": 500,
+      "height": 331,
+      "boxCount": 2,
+      "src": "templates/cVLxsgsUt.jpg"
+    },
+    {
+      "name": "Y U No",
+      "width": 500,
+      "height": 500,
+      "boxCount": 2,
+      "src": "templates/ocEmCCwYe.jpg"
+    },
+    {
+      "name": "Brace Yourselves X is Coming",
+      "width": 622,
+      "height": 477,
+      "boxCount": 2,
+      "src": "templates/8yd4iC11V.jpg"
+    },
+    {
+      "name": "Me And The Boys",
+      "width": 720,
+      "height": 476,
+      "boxCount": 2,
+      "src": "templates/ldsiTWnJv.jpg"
+    },
+    {
+      "name": "Bad Luck Brian",
+      "width": 475,
+      "height": 562,
+      "boxCount": 2,
+      "src": "templates/GenMUNio.jpg"
+    },
+    {
+      "name": "Laughing Men In Suits",
+      "width": 500,
+      "height": 333,
+      "boxCount": 2,
+      "src": "templates/5mee9P6aQ.jpg"
+    },
+    {
+      "name": "Face You Make Robert Downey Jr",
+      "width": 460,
+      "height": 523,
+      "boxCount": 2,
+      "src": "templates/G2IigWEVg.jpg"
+    },
+    {
+      "name": "X All The Y",
+      "width": 500,
+      "height": 355,
+      "boxCount": 2,
+      "src": "templates/IzlBNbzKT.jpg"
+    },
+    {
+      "name": "Dr Evil Laser",
+      "width": 500,
+      "height": 405,
+      "boxCount": 2,
+      "src": "templates/vp2QTDRdG.jpg"
+    },
+    {
+      "name": "Success Kid",
+      "width": 500,
+      "height": 500,
+      "boxCount": 2,
+      "src": "templates/aG9xemKlB.jpg"
+    },
+    {
+      "name": "This Is Where I'd Put My Trophy If I Had One",
+      "width": 300,
+      "height": 418,
+      "boxCount": 2,
+      "src": "templates/vVs-D6vC.jpg"
+    },
+    {
+      "name": "Jack Sparrow Being Chased",
+      "width": 500,
+      "height": 375,
+      "boxCount": 2,
+      "src": "templates/24U5jQKax.jpg"
+    },
+    {
+      "name": "UNO Draw 25 Cards",
+      "width": 500,
+      "height": 494,
+      "boxCount": 2,
+      "src": "templates/myQmXXp6r.jpg"
+    },
+    {
+      "name": "Squidward",
+      "width": 500,
+      "height": 750,
+      "boxCount": 2,
+      "src": "templates/OlrUYb_hX.jpg"
+    },
+    {
+      "name": "Presidential Alert",
+      "width": 920,
+      "height": 534,
+      "boxCount": 2,
+      "src": "templates/F5YNQU3fk.jpg"
+    },
+    {
+      "name": "Sleeping Shaq",
+      "width": 640,
+      "height": 631,
+      "boxCount": 2,
+      "src": "templates/8bl9eYaj_.jpg"
+    },
+    {
+      "name": "Scared Cat",
+      "width": 620,
+      "height": 463,
+      "boxCount": 2,
+      "src": "templates/4PeWXsEQw.jpg"
+    },
+    {
+      "name": "Uncle Sam",
+      "width": 620,
+      "height": 833,
+      "boxCount": 2,
+      "src": "templates/0wXQ03AeE.jpg"
+    },
+    {
+      "name": "Imagination Spongebob",
+      "width": 500,
+      "height": 366,
+      "boxCount": 2,
+      "src": "templates/_T3SAjTDm.jpg"
+    },
+    {
+      "name": "Look At Me",
+      "width": 300,
+      "height": 300,
+      "boxCount": 2,
+      "src": "templates/R4kmLQq1.jpg"
+    },
+    {
+      "name": "See Nobody Cares",
+      "width": 620,
+      "height": 675,
+      "boxCount": 2,
+      "src": "templates/b7GrE7zK3.jpg"
+    },
+    {
+      "name": "Say it Again, Dexter",
+      "width": 698,
+      "height": 900,
+      "boxCount": 2,
+      "src": "templates/Ol41wx41O.jpg"
+    },
+    {
+      "name": "Surprised Koala",
+      "width": 500,
+      "height": 667,
+      "boxCount": 2,
+      "src": "templates/PXqPMhXQQ.jpg"
+    },
+    {
+      "name": "Grumpy Cat",
+      "width": 500,
+      "height": 616,
+      "boxCount": 2,
+      "src": "templates/FZdqtEWhA.jpg"
+    },
+    {
+      "name": "Matrix Morpheus",
+      "width": 500,
+      "height": 303,
+      "boxCount": 2,
+      "src": "templates/auTAmmshE.jpg"
+    },
+    {
+      "name": "Creepy Condescending Wonka",
+      "width": 550,
+      "height": 545,
+      "boxCount": 2,
+      "src": "templates/ZfiD5x0kC.jpg"
+    },
+    {
+      "name": "Simba Shadowy Place",
+      "width": 363,
+      "height": 720,
+      "boxCount": 2,
+      "src": "templates/ipKBHutF2.jpg"
+    },
+    {
+      "name": "Well Yes, But Actually No",
+      "width": 1600,
+      "height": 1218,
+      "boxCount": 2,
+      "src": "templates/CAVoxrM-.jpg"
+    },
+    {
+      "name": "Put It Somewhere Else Patrick",
+      "width": 343,
+      "height": 604,
+      "boxCount": 2,
+      "src": "templates/u9n4tjuQw.jpg"
+    },
+    {
+      "name": "Maury Lie Detector",
+      "width": 381,
+      "height": 378,
+      "boxCount": 2,
+      "src": "templates/JUM9dzIp7.jpg"
+    },
+    {
+      "name": "Bird Box",
+      "width": 1400,
+      "height": 1400,
+      "boxCount": 2,
+      "src": "templates/cWkTt--bF.jpg"
+    },
+    {
+      "name": "Marvel Civil War 1",
+      "width": 423,
+      "height": 734,
+      "boxCount": 2,
+      "src": "templates/AKFClN-6g.jpg"
+    },
+    {
+      "name": "Am I The Only One Around Here",
+      "width": 500,
+      "height": 348,
+      "boxCount": 2,
+      "src": "templates/fICr1mqmD.jpg"
+    },
+    {
+      "name": "Philosoraptor",
+      "width": 500,
+      "height": 500,
+      "boxCount": 2,
+      "src": "templates/QvNVag2Jq.jpg"
+    },
+    {
+      "name": "Too Damn High",
+      "width": 420,
+      "height": 316,
+      "boxCount": 2,
+      "src": "templates/LXLA2gdG.jpg"
+    },
+    {
+      "name": "Kevin Hart",
+      "width": 560,
+      "height": 371,
+      "boxCount": 2,
+      "src": "templates/P-HQ7FBe-.jpg"
+    },
+    {
+      "name": "Ill Just Wait Here",
+      "width": 491,
+      "height": 550,
+      "boxCount": 2,
+      "src": "templates/yjmb6eBRB.jpg"
+    },
+    {
+      "name": "Be Like Bill",
+      "width": 913,
+      "height": 907,
+      "boxCount": 4,
+      "src": "templates/11g65OsJC.jpg"
+    },
+    {
+      "name": "Peter Parker Cry",
+      "width": 400,
+      "height": 992,
+      "boxCount": 4,
+      "src": "templates/TjBxQNWD-.jpg"
+    },
+    {
+      "name": "Yo Dawg Heard You",
+      "width": 500,
+      "height": 323,
+      "boxCount": 2,
+      "src": "templates/K6Y4ukU6b.jpg"
+    },
+    {
+      "name": "Mr Krabs Blur Meme",
+      "width": 708,
+      "height": 495,
+      "boxCount": 2,
+      "src": "templates/m9Bk7NYm.jpg"
+    },
+    {
+      "name": "Picard Wtf",
+      "width": 500,
+      "height": 350,
+      "boxCount": 2,
+      "src": "templates/CLGx3D1bf.jpg"
+    },
+    {
+      "name": "Star Wars No",
+      "width": 620,
+      "height": 664,
+      "boxCount": 2,
+      "src": "templates/cYZ0XCzs3.jpg"
+    },
+    {
+      "name": "Captain Picard Facepalm",
+      "width": 500,
+      "height": 324,
+      "boxCount": 2,
+      "src": "templates/thwdp0yKj.jpg"
+    },
+    {
+      "name": "Sparta Leonidas",
+      "width": 500,
+      "height": 263,
+      "boxCount": 2,
+      "src": "templates/nwinwLki4.jpg"
+    },
+    {
+      "name": "Mugatu So Hot Right Now",
+      "width": 620,
+      "height": 496,
+      "boxCount": 2,
+      "src": "templates/WXX-3SZiu.jpg"
+    },
+    {
+      "name": "Pentagon Hexagon Octagon",
+      "width": 720,
+      "height": 710,
+      "boxCount": 2,
+      "src": "templates/TNQIg9Jfl.jpg"
+    },
+    {
+      "name": "And Just Like That",
+      "width": 1012,
+      "height": 675,
+      "boxCount": 2,
+      "src": "templates/d2lGXqmHd.jpg"
+    },
+    {
+      "name": "Good Fellas Hilarious",
+      "width": 1600,
+      "height": 1150,
+      "boxCount": 2,
+      "src": "templates/vRwmC7qg.jpg"
+    },
+    {
+      "name": "Woman Yelling At Cat",
+      "width": 680,
+      "height": 438,
+      "boxCount": 2,
+      "src": "templates/3gLJWOeu.jpg"
+    }
+  ]
+}
