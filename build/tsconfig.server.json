@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "outDir": "../dist",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "target": "es6",
+    "baseUrl": "../src",
+    "paths": {
+      "@server/*": ["server/lib/*"],
+      "@shared/*": ["shared/*"],
+      "@src/*": ["*"]
+    },
+    "typeRoots": ["../node_modules/@types/", "../src/server/node_modules/@types/"]
+  },
+  "include": ["../src/server/**/*.ts"]
+}
