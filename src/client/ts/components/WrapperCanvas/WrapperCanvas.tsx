@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { useLayoutEffect } from 'react'
-import { useWindowWidth, useEditor } from '@client/shared/hooks'
+import { useWindowWidth, useEditor } from '@client/ts/shared/hooks'
 import { fillText } from '@client/utils/index'
-import TextBox from '@client/shared/models/TextBox'
+import TextBox from '@client/ts/shared/models/TextBox'
 import Draggable from '@client/components/Draggable/Draggable'
-import { UseEditorInt } from '@client/shared/validators'
+import { UseEditorInt } from '@client/ts/shared/validators'
 import { SET_TEXT_ID_SELECTED } from '@client/store/reducer/constants'
-import { TAB_CUSTOMIZATION } from '@client/shared/constants'
+import { TAB_CUSTOMIZATION } from '@client/ts/shared/constants'
 import './wrapper-canvas.scss'
 
 function WrapperCanvas(props: any): JSX.Element {

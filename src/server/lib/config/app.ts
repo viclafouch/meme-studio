@@ -6,10 +6,9 @@ import { Request, Response, NextFunction } from 'express'
 import * as cors from 'cors'
 import * as bodyParser from 'body-parser'
 import { MemeController } from '@server/controllers/meme.controller'
-import HttpException from '../exceptions/HttpException'
+import HttpException from '@server/exceptions/HttpException'
 import { IS_DEV } from '@shared/config'
 
-const templateDir = '/templates'
 const clientDir = '/dist/client'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -46,7 +45,6 @@ class App {
     this.app.use(bodyParser.urlencoded({ extended: false }))
     this.app.use(morgan('combined'))
     if (!IS_DEV) this.app.use(express.static(process.cwd() + clientDir))
-    this.app.use(templateDir, express.static(process.cwd() + templateDir))
     this.app.use(cors())
   }
 
@@ -54,9 +52,7 @@ class App {
     this.app.route('/memes').post(this.memeController.index)
     this.app.route('/memes/:id').post(this.memeController.show)
     this.app.route('/status').get(function(req: Request, res: Response) {
-      send(res, {
-        imageUrl: req.protocol + '://' + req.get('host') + templateDir
-      })
+      send(res, {})
     })
     this.app.route('*').all(function(req: Request, res: Response) {
       handleError(new HttpException(404, 'Not Found'), req, res)

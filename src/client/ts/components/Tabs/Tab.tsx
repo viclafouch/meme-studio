@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useWindowWidth } from '@client/shared/hooks'
+import { useWindowWidth } from '@client/ts/shared/hooks'
 import { Modal } from '@client/components/Modal/Modal'
 
 type TabProps = {

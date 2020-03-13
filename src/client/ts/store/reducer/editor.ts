@@ -14,10 +14,10 @@ import {
   SET_HISTORY
 } from './constants'
 import { EditorState } from '../EditorContext'
-import TextBox from '@client/shared/models/TextBox'
-import { DrawProperties, HistoryInt } from '@client/shared/validators'
+import TextBox from '@client/ts/shared/models/TextBox'
+import { DrawProperties, HistoryInt } from '@client/ts/shared/validators'
 import { randomID } from '@shared/utils'
-import { INITIAL } from '@client/shared/constants'
+import { INITIAL } from '@client/ts/shared/constants'
 import { debug } from '@client/utils/index'
 
 export interface Actions extends EditorState {

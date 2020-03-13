@@ -8,8 +8,8 @@ import Button from '@client/components/Button/Button'
 import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
 import { SET_ON_STUDIO } from '@client/store/reducer/constants'
 import LangSelector from '@client/components/LangSelector/LangSelector'
-import { useEditor } from '@client/shared/hooks'
-import { UseEditorInt } from '@client/shared/validators'
+import { useEditor } from '@client/ts/shared/hooks'
+import { UseEditorInt } from '@client/ts/shared/validators'
 import './header.scss'
 
 type HeaderProps = {

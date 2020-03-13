@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useTranslation } from 'react-i18next'
 import { SET_SHOW_TEXT_AREAS, UNDO_HISTORY, REDO_HISTORY, ERASE_ALL, RESET } from '@client/store/reducer/constants'
 import Faq from '@client/components/Faq/Faq'
-import { useEditor } from '@client/shared/hooks'
-import { UseEditorInt } from '@client/shared/validators'
+import { useEditor } from '@client/ts/shared/hooks'
+import { UseEditorInt } from '@client/ts/shared/validators'
 import './tools.scss'
 
 type ToolsProps = {

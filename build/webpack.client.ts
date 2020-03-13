@@ -11,10 +11,10 @@ const clientConfig: Configuration = {
     alias: {
       '@client/components': path.resolve(__dirname, '../src/client/ts/components'),
       '@client/containers': path.resolve(__dirname, '../src/client/ts/containers'),
-      '@client/shared': path.resolve(__dirname, '../src/client/ts/shared'),
+      '@client/ts/shared': path.resolve(__dirname, '../src/client/ts/shared'),
       '@client/store': path.resolve(__dirname, '../src/client/ts/store'),
       '@client/utils': path.resolve(__dirname, '../src/client/ts/utils'),
-      '@client': path.resolve(__dirname, '../src/client/ts')
+      '@client': path.resolve(__dirname, '../src/client')
     },
     extensions: ['.tsx', '.scss']
   },
@@ -64,7 +64,7 @@ const clientConfig: Configuration = {
       filename: '[name].[chunkhash:8].css'
     }),
     new CopyPlugin([ { from: path.join(__dirname, '..', 'src', 'client', 'img'), to: 'images' } ]),
-    new CopyPlugin([ { from: 'public', to: 'public' } ])
+    new CopyPlugin([ { from: 'static', to: 'static' } ])
   ]
 }
 

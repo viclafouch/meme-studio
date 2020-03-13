@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext, useMemo, useCallback } from 'react'
 import AbortController from 'abort-controller'
 import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
-import { getMemes } from '@client/shared/api'
+import { getMemes } from '@client/ts/shared/api'
 import {
   SET_MEMES,
   ADD_TEXT,
@@ -11,11 +11,11 @@ import {
   SET_HAS_NEXT_MEMES,
   SET_NUM_PAGE
 } from '@client/store/reducer/constants'
-import Meme from '@client/shared/models/Meme'
+import Meme from '@client/ts/shared/models/Meme'
 import { EditorContext, EditorState } from '@client/store/EditorContext'
-import { UseEditorInt } from '@client/shared/validators'
+import { UseEditorInt } from '@client/ts/shared/validators'
 import { debounce } from '@client/utils/index'
-import { TEXT_ADDED, TEXT_REMOVED } from '@client/shared/constants'
+import { TEXT_ADDED, TEXT_REMOVED } from '@client/ts/shared/constants'
 
 export const useEditor = (): [UseEditorInt, Function] => {
   const [state, dispatch]: [EditorState, Function] = useContext(EditorContext)

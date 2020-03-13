@@ -5,15 +5,15 @@
   "scripts": {
     "dev": "npm run dev:server & npm run dev:client",
     "dev:client": "webpack-dev-server -w",
-    "dev:server": "ts-node -r tsconfig-paths/register ./src/server/index.ts",
+    "dev:server": "ts-node -r tsconfig-paths/register ./src/server/index.ts --force",
     "build": "npm run build:client && npm run build:server",
     "build:client": "webpack --mode production",
     "build:server": "tsc -b ./build/tsconfig.server.json && npx tscpaths -p build/tsconfig.resolve.json -s ./dist -o ./dist",
-    "start": "node ./dist/server/index.js",
+    "start": "npx cross-env NODE_ENV=production node ./dist/server/index.js --force",
     "commit": "git-cz",
     "lint": "tsc --noEmit && eslint '*/**/*.{ts,tsx}'",
     "ncu": "node tasks/ncu.js",
-    "postinstall": "(cd src/server && npm install); (cd src/client && npm install);"
+    "postinstall": "(cd src/server && npm install); (cd src/client && npm install); (cd src/server && npm run download)"
   },
   "engines": {
     "node": "12.8.1"

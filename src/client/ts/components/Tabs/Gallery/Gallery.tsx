@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { memo, useState, useCallback, useRef, RefObject } from 'react'
-import Meme from '@client/shared/models/Meme'
-import { useMemes } from '@client/shared/hooks'
+import Meme from '@client/ts/shared/models/Meme'
+import { useMemes } from '@client/ts/shared/hooks'
 import { wait } from '@shared/utils'
 import './gallery.scss'
 
@@ -39,7 +39,7 @@ function Gallery(props: GalleryProps): JSX.Element {
               width={meme.width}
               height={meme.height}
               onClick={(): void => props.onSelectMeme(meme)}
-              src={meme.url}
+              src={meme.url()}
               alt={meme.name}
             />
           </li>

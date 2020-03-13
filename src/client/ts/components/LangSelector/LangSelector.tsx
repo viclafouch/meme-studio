@@ -6,7 +6,7 @@ import Button from '@client/components/Button/Button'
 import './lang-selector.scss'
 import { TFunction } from 'i18next'
 import { Modal } from '@client/components/Modal/Modal'
-import { useWindowWidth } from '@client/shared/hooks'
+import { useWindowWidth } from '@client/ts/shared/hooks'
 
 function LangSelector(): JSX.Element {
   const [isActive, setIsActive]: [boolean, Function] = useState(false)

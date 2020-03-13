@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { createContext, useReducer, createRef, RefObject } from 'react'
 import DefaultReducer from './reducer/default'
-import Meme from '@client/shared/models/Meme'
+import Meme from '@client/ts/shared/models/Meme'
 
 export interface DefaultState {
   onStudio: boolean

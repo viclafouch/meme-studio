@@ -1,5 +1,5 @@
-import TextBox from '@client/shared/models/TextBox'
-import { Line } from '@client/shared/validators'
+import TextBox from '@client/ts/shared/models/TextBox'
+import { Line } from '@client/ts/shared/validators'
 import { API_URL, IS_DEV } from '@shared/config'
 
 export const debug = (text: string, ...args: any[]): void => IS_DEV && console.log(`%c ${text}\n`, 'font-weight: bold', args)

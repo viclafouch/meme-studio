@@ -8,7 +8,7 @@ import Export from './Export'
 import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
 import { FatalError } from '@client/components/ErrorBoundary/ErrorBoundary'
 import { wait } from '@shared/utils'
-import { useMemes } from '@client/shared/hooks'
+import { useMemes } from '@client/ts/shared/hooks'
 import { Switch, Route } from 'react-router-dom'
 import About from './About'
 

@@ -14,7 +14,7 @@
       "@client/containers/*": ["client/ts/containers/*"],
       "@client/store/*": ["client/ts/store/*"],
       "@client/utils/*": ["client/ts/utils/*"],
-      "@client/*": ["client/ts/*"],
+      "@client/*": ["client/*"],
       "@server/*": ["server/lib/*"],
       "@shared/*": ["shared/*"],
       "@src/*": ["*"]

@@ -1,6 +1,6 @@
-import Meme from '@client/shared/models/Meme'
+import Meme from '@client/ts/shared/models/Meme'
 import { fetchApi } from '@client/utils/index'
-import TextBox from '@client/shared/models/TextBox'
+import TextBox from '@client/ts/shared/models/TextBox'
 
 interface ResultMemeIndex {
   success: boolean

@@ -1,4 +1,4 @@
-import TextBox from '@client/shared/models/TextBox'
+import TextBox from '@client/ts/shared/models/TextBox'
 import { EditorState } from '@client/store/EditorContext'
 
 export interface DrawProperties {

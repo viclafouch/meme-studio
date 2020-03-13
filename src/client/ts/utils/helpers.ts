@@ -9,8 +9,8 @@ import {
   EDIT_TEXT_VERTICAL,
   EDIT_UPPERCASE,
   EDIT_VALUE
-} from '@client/shared/constants'
-import { typeString } from '@client/shared/validators'
+} from '@client/ts/shared/constants'
+import { typeString } from '@client/ts/shared/validators'
 
 export const toHistoryType = (type: typeString): string => {
   switch (type) {

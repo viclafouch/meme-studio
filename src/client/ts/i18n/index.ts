@@ -1,8 +1,8 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import { getDefaultLang } from '@client/utils/index'
-import * as translationFR from '../../../../public/locales/fr/translation.json'
-import * as translationEN from '../../../../public/locales/en/translation.json'
+import * as translationFR from '@client/locales/fr/translation.json'
+import * as translationEN from '@client/locales/en/translation.json'
 
 export const languages = {
   fr: {

@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { useContext } from 'react'
 import Button from '@client/components/Button/Button'
-import Meme from '@client/shared/models/Meme'
+import Meme from '@client/ts/shared/models/Meme'
 import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
 import { SET_ON_STUDIO } from '@client/store/reducer/constants'
-import { useMemes } from '@client/shared/hooks'
+import { useMemes } from '@client/ts/shared/hooks'
 import { useTranslation } from 'react-i18next'
 import LangSelector from '@client/components/LangSelector/LangSelector'
 
@@ -37,7 +37,7 @@ function Intro(): JSX.Element {
           {memes.slice(0, 3).map((meme: Meme, index: number) => (
             <li key={index}>
               <article className="intro-last-memes-article">
-                <img src={meme.url} alt={meme.name} />
+                <img src={meme.url()} alt={meme.name} />
               </article>
             </li>
           ))}

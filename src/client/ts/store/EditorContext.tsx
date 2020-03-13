@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { useReducer, createContext, RefObject, createRef, ReactNode } from 'react'
-import Meme from '@client/shared/models/Meme'
-import TextBox from '@client/shared/models/TextBox'
-import { DrawProperties, HistoryInt } from '@client/shared/validators'
+import Meme from '@client/ts/shared/models/Meme'
+import TextBox from '@client/ts/shared/models/TextBox'
+import { DrawProperties, HistoryInt } from '@client/ts/shared/validators'
 import EditorReducer from './reducer/editor'
 
 export interface EditorState {

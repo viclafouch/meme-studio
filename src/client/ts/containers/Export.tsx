@@ -7,7 +7,7 @@ import { EditorContext, EditorState } from '@client/store/EditorContext'
 import { fillText } from '@client/utils/index'
 import { wait } from '@shared/utils'
 import Button from '@client/components/Button/Button'
-import TextBox from '@client/shared/models/TextBox'
+import TextBox from '@client/ts/shared/models/TextBox'
 
 type ExportProps = {
   onClose: Function
