@@ -15,23 +15,16 @@ async function start(resetDb: boolean): Promise<void> {
   if (resetDb) {
     await Promise.all(
       memes.map(async meme => {
-        const [uuid, ext] = meme.src.replace(/^.*[\\\/]/, '').split('.')
-        const { id } = await Meme.create<Meme>({
-          ...meme,
-          uuid,
-          ext
-        })
-        if (meme.texts) {
-          for (const text of meme.texts) {
-            await TextBox.create({
-              ...text,
-              memeId: id
-            })
-          }
+        const { id } = await Meme.create<Meme>(meme)
+        for (const text of meme.texts) {
+          await TextBox.create({
+            ...text,
+            memeId: id
+          })
         }
       })
     )
-    console.log(`${memes.length} memes have been added!`)
+    console.log(`${memes.length} memes have been added to db!`)
   }
   app.listen(PORT, () => console.log(`Server is listening on port ${PORT}! \nisDev: ${IS_DEV}`))
 }

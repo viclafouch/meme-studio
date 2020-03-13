@@ -18,6 +18,7 @@ export interface MemeIJson {
   width: number
   height: number
   boxCount: number
-  src: string
+  uuid: string
+  ext: string
   texts: Array<TextBoxIJson>
 }

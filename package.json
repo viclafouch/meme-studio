@@ -13,7 +13,7 @@
     "commit": "git-cz",
     "lint": "tsc --noEmit && eslint '*/**/*.{ts,tsx}'",
     "ncu": "node tasks/ncu.js",
-    "postinstall": "(cd src/server && npm install); (cd src/client && npm install); (cd src/server && npm run download)"
+    "postinstall": "(cd src/server && npm install); (cd src/client && npm install); (node tasks/download.js)"
   },
   "engines": {
     "node": "12.8.1"
@@ -69,6 +69,7 @@
     "eslint-plugin-prettier": "3.1.2",
     "html-webpack-plugin": "3.2.0",
     "husky": "4.2.3",
+    "image-size": "0.8.3",
     "mini-css-extract-plugin": "0.9.0",
     "node-sass": "4.13.1",
     "npm-check-updates": "4.0.4",
