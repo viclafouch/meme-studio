@@ -13,10 +13,11 @@
     "commit": "git-cz",
     "lint": "tsc --noEmit && eslint '*/**/*.{ts,tsx}'",
     "ncu": "node tasks/ncu.js",
-    "postinstall": "(cd src/server && npm install); (cd src/client && npm install); (node tasks/download.js)"
+    "postinstall": "(cd src/client && npm install); (node tasks/download.js)"
   },
   "engines": {
-    "node": "12.8.1"
+    "node": "12.8.1",
+    "npm": "6.13.7"
   },
   "repository": {
     "type": "git",
@@ -107,7 +108,6 @@
     "express-session": "^1.17.0",
     "helmet": "^3.21.3",
     "morgan": "^1.9.1",
-    "prettier": "^1.19.1",
     "sequelize": "^5.21.5",
     "shortid": "^2.2.15",
     "sqlite": "^3.0.3"
