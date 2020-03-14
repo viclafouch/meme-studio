@@ -4,24 +4,22 @@ import { DefaultProvider } from '@client/store/DefaultContext'
 import ErrorBoundary from '@client/components/ErrorBoundary/ErrorBoundary'
 import MainContainer from '@client/containers/Main'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import {
-  faImage,
-  faHeading,
-  faDownload,
-  faTrashAlt,
-  faPlus,
-  faCropAlt,
-  faCrop,
-  faUndoAlt,
-  faRedoAlt,
-  faQuestionCircle,
-  faTrashRestoreAlt,
-  faGlobe,
-  faArrowCircleDown,
-  faEraser,
-  faTimes
-} from '@fortawesome/free-solid-svg-icons'
-import { faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { faImage } from '@fortawesome/free-solid-svg-icons/faImage'
+import { faHeading } from '@fortawesome/free-solid-svg-icons/faHeading'
+import { faDownload } from '@fortawesome/free-solid-svg-icons/faDownload'
+import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons/faTrashAlt'
+import { faCropAlt } from '@fortawesome/free-solid-svg-icons/faCropAlt'
+import { faCrop } from '@fortawesome/free-solid-svg-icons/faCrop'
+import { faUndoAlt } from '@fortawesome/free-solid-svg-icons/faUndoAlt'
+import { faRedoAlt } from '@fortawesome/free-solid-svg-icons/faRedoAlt'
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons/faQuestionCircle'
+import { faTrashRestoreAlt } from '@fortawesome/free-solid-svg-icons/faTrashRestoreAlt'
+import { faGlobe } from '@fortawesome/free-solid-svg-icons/faGlobe'
+import { faArrowCircleDown } from '@fortawesome/free-solid-svg-icons/faArrowCircleDown'
+import { faEraser } from '@fortawesome/free-solid-svg-icons/faEraser'
+import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes'
+import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter'
 import { EditorProvider } from '@client/store/EditorContext'
 
 library.add(

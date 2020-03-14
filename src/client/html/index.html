@@ -10,23 +10,16 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/gh/loadingio/transition.css@v2.0.0/dist/transition.min.css"
     />
-    <style>
-      #fork-me {
-        display: none;
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        z-index: 9999999;
-      }
-      @media (min-width: 1250px) {
-        #fork-me {
-          display: none;
-        }
-      }
-    </style>
     <title>Meme Studio</title>
   </head>
   <body>
     <div id="app-root"></div>
+    <% if (htmlWebpackPlugin.options.env.IS_DEV) { %>
+      <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+      <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <% } else { %>
+      <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+      <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <% } %>
   </body>
 </html>
