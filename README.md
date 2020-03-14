@@ -1,12 +1,10 @@
-# meme-studio [![Netlify Status](https://api.netlify.com/api/v1/badges/830ba421-c45f-4143-b26c-3b046529e42c/deploy-status)](https://app.netlify.com/sites/kind-wright-a28262/deploys)
+# meme-studio
 
 ![alt](https://github.com/viclafouch/meme-studio/blob/master/meme-studio.png)
 
 The Meme Studio is designed to be insanely fast and provide powerful customization for your memes, while still being simple and easy to use.
 
-Website : https://kind-wright-a28262.netlify.com/
-
-API (in progress) : https://github.com/viclafouch/meme-studio-api
+Website : https://real-meme-studio.herokuapp.com/
 
 #### Langs supported :
 
