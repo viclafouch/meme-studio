@@ -899,6 +899,42 @@
       "uuid": "CLOk7Aihu",
       "ext": "jpg",
       "texts": []
+    },
+    {
+      "name": "Bernie I Am Once Again Asking For Your Support",
+      "width": 750,
+      "height": 750,
+      "boxCount": 2,
+      "uuid": "ZkaSYMMb8",
+      "ext": "jpg",
+      "texts": []
+    },
+    {
+      "name": "Sad Pablo Escobar",
+      "width": 720,
+      "height": 709,
+      "boxCount": 3,
+      "uuid": "oX_VfngxZy",
+      "ext": "jpg",
+      "texts": []
+    },
+    {
+      "name": "Monkey Puppet",
+      "width": 923,
+      "height": 768,
+      "boxCount": 2,
+      "uuid": "l-5wTxf3oK",
+      "ext": "jpg",
+      "texts": []
+    },
+    {
+      "name": "Keep Calm And Carry On Red",
+      "width": 500,
+      "height": 704,
+      "boxCount": 2,
+      "uuid": "dO6cxcs4PO",
+      "ext": "jpg",
+      "texts": []
     }
   ]
 }

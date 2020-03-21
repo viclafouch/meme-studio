@@ -56,9 +56,16 @@ const clientConfig: Configuration = {
       }
     ]
   },
+  externals: {
+    'react': 'React',
+    'react-dom': 'ReactDOM'
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '..', 'src', 'client', 'html', 'index.html'),
+      env: {
+        IS_DEV
+      }
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[chunkhash:8].css'
