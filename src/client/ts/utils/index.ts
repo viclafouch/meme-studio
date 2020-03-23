@@ -55,6 +55,7 @@ export function fillText(
   ctx.textBaseline = 'top'
   ctx.strokeStyle = 'black'
   ctx.lineJoin = 'round'
+
   if (text.boxShadow > 0) ctx.lineWidth = text.boxShadow
 
   for (const line of lines) {
@@ -101,7 +102,7 @@ export function fillText(
     }
 
     ctx.fillText(line.value, line.x, line.y)
-    ctx.strokeText(line.value, line.x, line.y)
+    if (text.boxShadow > 0) ctx.strokeText(line.value, line.x, line.y)
   }
   ctx.restore()
 }

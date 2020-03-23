@@ -23,7 +23,7 @@ function InputRangeSlider(props: InputRangeSliderProps): JSX.Element {
         min={props.min | 0}
         max={props.max | 10}
         className="slider"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>): void => props.onChange(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>): void => props.onChange(parseInt(e.target.value))}
         step={props.step | 1}
         style={{
           width: (props.width || 150) + 'px'

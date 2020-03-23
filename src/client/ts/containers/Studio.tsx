@@ -48,7 +48,6 @@ function Studio(props: any): JSX.Element {
         memeSelected: meme,
         texts
       })
-      setCurrentTab(TAB_CUSTOMIZATION)
     } catch (error) {
       console.error(error)
     } finally {
@@ -72,25 +71,37 @@ function Studio(props: any): JSX.Element {
     else if (files.length > 1) return
     else if (!endWithExt(['.jpg', '.png', 'jpeg'], files[0].name)) return debug('extension not valid') // TODO
 
-    const meme = new Meme({
-      id: randomID(),
-      height: 0,
-      width: 0,
-      boxCount: 0,
-      name: files[0].name,
-      url: window.URL.createObjectURL(files[0])
-    })
+    try {
+      setIsLoading(true)
+      const meme = new Meme({
+        id: randomID(),
+        height: 0,
+        width: 0,
+        boxCount: 0,
+        name: files[0].name,
+        ext: files[0].name
+          .split('.')
+          .pop()
+          .toLowerCase(),
+        localImageUrl: window.URL.createObjectURL(files[0])
+      })
 
-    const { width, height } = await meme.image
+      const { width, height } = await meme.image
 
-    meme.width = width
-    meme.height = height
-
-    dispatchEditor({
-      type: SET_MEME_SELECTED,
-      memeSelected: meme,
-      texts: []
-    })
+      meme.width = width
+      meme.height = height
+      await wait(300)
+      meme.ext = dispatchEditor({
+        type: SET_MEME_SELECTED,
+        memeSelected: meme,
+        texts: []
+      })
+    } catch (error) {
+      // TODO
+      console.warn(error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const closeTabModal = (): void => setCurrentTab(null)
