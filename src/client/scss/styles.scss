@@ -399,8 +399,8 @@ body {
   }
 
   @include lg {
-    [data-tooltip]:hover::before,
-    [data-tooltip]:hover::after {
+    &:not(:disabled):hover::before,
+    &:not(:disabled):hover::after {
       opacity: 1;
       visibility: visible;
     }
