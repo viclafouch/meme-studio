@@ -4,6 +4,7 @@ import { PORT_CLIENT_DEV, IS_DEV } from '../src/shared/config'
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
+const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries")
 
 const clientConfig: Configuration = {
   target: "web",
@@ -61,6 +62,7 @@ const clientConfig: Configuration = {
     'react-dom': 'ReactDOM'
   },
   plugins: [
+    new FixStyleOnlyEntriesPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '..', 'src', 'client', 'html', 'index.html'),
       env: {
