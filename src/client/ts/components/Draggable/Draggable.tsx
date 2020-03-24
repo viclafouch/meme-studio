@@ -23,6 +23,8 @@ type DraggableProps = {
   id: string
   onClick?: Function
   active?: boolean
+  memeWidth: number
+  memeHeight: number
 }
 
 interface ResizingInt {
@@ -136,17 +138,24 @@ export function Draggable(props: DraggableProps): JSX.Element {
             rotate = degree
           }
         }
+
         const type: typeString = positioning.isDragging ? 'move' : resizing ? 'resize' : 'rotate'
         text.centerX = centerX
         text.centerY = centerY
         text.width = width
         text.height = height
+        text.base = {
+          centerX: (centerX / drawProperties.width) * props.memeWidth,
+          centerY: (centerY / drawProperties.height) * props.memeHeight,
+          width: (width / drawProperties.width) * props.memeWidth,
+          height: (height / drawProperties.height) * props.memeHeight
+        }
         text.rotate = rotate
         saveToEditor({ type: CUSTOM_TEXT, text, historyType: toHistoryType(type) })
         setPositioning({ ...positioning, top, left })
       }
     },
-    [props.drawProperties, resizing, rotating, minimalSize, positioning]
+    [props.drawProperties, resizing, rotating, minimalSize, positioning, props.memeHeight, props.memeWidth]
   )
 
   const handleMouseDown = useCallback(

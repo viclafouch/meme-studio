@@ -69,6 +69,8 @@ function WrapperCanvas(props: any): JSX.Element {
               height={text.height}
               width={text.width}
               rotate={text.rotate}
+              memeWidth={memeSelected.width}
+              memeHeight={memeSelected.height}
               drawProperties={drawProperties}
               id={text.id}
               active={text.id === textIdSelected}

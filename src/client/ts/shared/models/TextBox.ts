@@ -16,11 +16,11 @@ export default class TextBox {
   public alignVertical: string
   public textAlign: string
   public isUppercase: boolean
-  readonly base: {
-    readonly width: number
-    readonly height: number
-    readonly centerX: number
-    readonly centerY: number
+  public base: {
+    width: number
+    height: number
+    centerX: number
+    centerY: number
   }
 
   constructor(text: any) {

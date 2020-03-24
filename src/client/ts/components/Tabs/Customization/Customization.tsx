@@ -44,15 +44,15 @@ function Customization(): JSX.Element {
 
   const addText = (): void => {
     const text = createText({
-      centerY: 50,
-      centerX: 340,
-      height: 100,
-      width: 680
+      centerY: memeSelected.height / 2,
+      centerX: memeSelected.width / 2,
+      height: memeSelected.height * (33 / 100),
+      width: memeSelected.width * (33 / 100)
     })
     text.height = text.base.height * drawProperties.scale
     text.width = text.base.width * drawProperties.scale
-    text.centerY = drawProperties.height / 2
-    text.centerX = drawProperties.width / 2
+    text.centerY = text.base.centerY * drawProperties.scale
+    text.centerX = text.base.centerX * drawProperties.scale
     saveToEditor({ type: ADD_TEXT, text })
     wait(0).then(() =>
       dispatchEditor({
