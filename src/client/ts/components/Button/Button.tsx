@@ -28,7 +28,7 @@ function Button(props: ButtonProps): JSX.Element {
 Button.defaultProps = {
   small: false,
   medium: true,
-  big: false
+  big: false,
 } as ButtonProps
 
 export default Button

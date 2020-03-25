@@ -44,7 +44,7 @@ const Accordion = React.forwardRef((props: AccordionProps, ref: any) => {
       setIsActive(true)
       await wait(durationAccordion)
     },
-    close: (): void => setIsActive(false)
+    close: (): void => setIsActive(false),
   }))
 
   const handleOpen = (e: React.MouseEvent): void => {

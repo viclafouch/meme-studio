@@ -29,7 +29,7 @@ const Tools = (props: ToolsProps): JSX.Element => {
             onClick={(): void =>
               dispatchEditor({
                 type: SET_SHOW_TEXT_AREAS,
-                showTextAreas: !showTextAreas
+                showTextAreas: !showTextAreas,
               })
             }
           >

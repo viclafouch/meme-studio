@@ -9,7 +9,7 @@ import {
   REMOVE_TEXT,
   CUSTOM_TEXT,
   SET_HAS_NEXT_MEMES,
-  SET_NUM_PAGE
+  SET_NUM_PAGE,
 } from '@client/store/reducer/constants'
 import Meme from '@client/ts/shared/models/Meme'
 import { EditorContext, EditorState } from '@client/store/EditorContext'
@@ -84,7 +84,7 @@ export function useMemes(): {
     const timeout: any = setTimeout(() => controller.abort(), 10000)
     const currentPage = numPage + 1
     const response = await getMemes(currentPage, {
-      signal: controller.signal
+      signal: controller.signal,
     })
     dispatch({ type: SET_NUM_PAGE, numPage: currentPage })
     dispatch({ type: SET_HAS_NEXT_MEMES, hasNextMemes: currentPage < response.pages })
@@ -97,6 +97,6 @@ export function useMemes(): {
     memes,
     fetchNextMemes,
     numPage,
-    hasNextMemes
+    hasNextMemes,
   }
 }

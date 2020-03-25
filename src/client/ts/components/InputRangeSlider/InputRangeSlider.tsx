@@ -26,7 +26,7 @@ function InputRangeSlider(props: InputRangeSliderProps): JSX.Element {
         onChange={(e: React.ChangeEvent<HTMLInputElement>): void => props.onChange(parseInt(e.target.value))}
         step={props.step | 1}
         style={{
-          width: (props.width || 150) + 'px'
+          width: (props.width || 150) + 'px',
         }}
       />
     </div>

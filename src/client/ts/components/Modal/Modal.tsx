@@ -35,7 +35,7 @@ export function Modal({ onClose, isLoading, children, id }: ModalProps): JSX.Ele
 
 Modal.defaultProps = {
   isLoading: false,
-  id: ''
+  id: '',
 } as ModalProps
 
 export default memo(Modal)

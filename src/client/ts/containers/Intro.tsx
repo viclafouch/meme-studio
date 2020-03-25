@@ -27,7 +27,7 @@ function Intro(): JSX.Element {
           onClick={(): void =>
             dispatch({
               type: SET_ON_STUDIO,
-              onStudio: true
+              onStudio: true,
             })
           }
         >

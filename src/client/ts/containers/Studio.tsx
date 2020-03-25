@@ -34,7 +34,7 @@ function Studio(props: any): JSX.Element {
     const wrapper: HTMLElement = contentRef.current
     dispatchEditor({
       type: RESIZE_WINDOW,
-      innerDimensions: innerDimensions(wrapper)
+      innerDimensions: innerDimensions(wrapper),
     })
   }, [width])
 
@@ -46,7 +46,7 @@ function Studio(props: any): JSX.Element {
       dispatchEditor({
         type: SET_MEME_SELECTED,
         memeSelected: meme,
-        texts
+        texts,
       })
     } catch (error) {
       console.error(error)
@@ -79,11 +79,8 @@ function Studio(props: any): JSX.Element {
         width: 0,
         boxCount: 0,
         name: files[0].name,
-        ext: files[0].name
-          .split('.')
-          .pop()
-          .toLowerCase(),
-        localImageUrl: window.URL.createObjectURL(files[0])
+        ext: files[0].name.split('.').pop().toLowerCase(),
+        localImageUrl: window.URL.createObjectURL(files[0]),
       })
 
       const { width, height } = await meme.image
@@ -94,7 +91,7 @@ function Studio(props: any): JSX.Element {
       meme.ext = dispatchEditor({
         type: SET_MEME_SELECTED,
         memeSelected: meme,
-        texts: []
+        texts: [],
       })
     } catch (error) {
       // TODO

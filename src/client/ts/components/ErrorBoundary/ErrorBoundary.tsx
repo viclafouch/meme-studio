@@ -11,7 +11,7 @@ export const FatalError = (): JSX.Element => (
 
 export class ErrorBoundary extends React.Component {
   state = {
-    hasError: false
+    hasError: false,
   }
 
   static getDerivedStateFromError(): any {

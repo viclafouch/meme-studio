@@ -8,7 +8,7 @@ import {
   EDIT_TEXT_ALIGN,
   EDIT_TEXT_VERTICAL,
   EDIT_UPPERCASE,
-  EDIT_VALUE
+  EDIT_VALUE,
 } from '@client/ts/shared/constants'
 import { typeString } from '@client/ts/shared/validators'
 

@@ -8,13 +8,13 @@ export const languages = {
   fr: {
     name: 'Francais',
     flag: '/images/flag-fr.svg',
-    translation: translationFR
+    translation: translationFR,
   },
   en: {
     name: 'English',
     flag: '/images/flag-en.svg',
-    translation: translationEN
-  }
+    translation: translationEN,
+  },
 }
 
 const fallbackLng = 'en'
@@ -31,8 +31,8 @@ i18n
     fallbackLng,
     debug: process.env.NODE_ENV !== 'production',
     interpolation: {
-      escapeValue: false // not needed for react as it escapes by default
-    }
+      escapeValue: false, // not needed for react as it escapes by default
+    },
   })
 
 export default i18n

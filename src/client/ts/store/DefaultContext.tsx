@@ -16,7 +16,7 @@ const initialState: DefaultState = {
   modalRef: createRef(),
   memes: [],
   numPage: 0,
-  hasNextMemes: true
+  hasNextMemes: true,
 }
 
 export const DefaultContext = createContext<DefaultState | any>(initialState)

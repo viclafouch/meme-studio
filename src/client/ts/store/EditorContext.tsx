@@ -31,12 +31,12 @@ const initialState: EditorState = {
   drawProperties: null,
   innerDimensions: {
     width: 0,
-    height: 0
+    height: 0,
   },
   history: {
     items: [],
-    currentIndex: 0
-  }
+    currentIndex: 0,
+  },
 }
 
 export const EditorContext = createContext<EditorState | any>(initialState)

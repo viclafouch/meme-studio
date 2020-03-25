@@ -27,7 +27,7 @@ function Header(props: HeaderProps): JSX.Element {
     if (location.pathname === '/')
       dispatchDefault({
         type: SET_ON_STUDIO,
-        onStudio: false
+        onStudio: false,
       })
     else push('/')
   }

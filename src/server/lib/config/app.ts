@@ -17,14 +17,14 @@ const handleError = (err: HttpException, req: Request, res: Response, next?: Nex
   res.status(status).json({
     status,
     message,
-    success: false
+    success: false,
   })
 }
 
 export const send = (res: Response, data: object, status = 200): Response =>
   res.status(status).json({
     data,
-    success: true
+    success: true,
   })
 
 class App {
@@ -51,10 +51,10 @@ class App {
   private initializeRoutes(): void {
     this.app.route('/memes').post(this.memeController.index)
     this.app.route('/memes/:id').post(this.memeController.show)
-    this.app.route('/status').get(function(req: Request, res: Response) {
+    this.app.route('/status').get(function (req: Request, res: Response) {
       send(res, {})
     })
-    this.app.route('*').all(function(req: Request, res: Response) {
+    this.app.route('*').all(function (req: Request, res: Response) {
       handleError(new HttpException(404, 'Not Found'), req, res)
     })
   }

@@ -43,7 +43,7 @@ export default class TextBox {
       width: this.width,
       height: this.height,
       centerX: this.centerX,
-      centerY: this.centerY
+      centerY: this.centerY,
     }
   }
 }

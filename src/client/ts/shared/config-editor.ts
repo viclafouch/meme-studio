@@ -10,7 +10,7 @@ export const fontsFamily = [
   'Arial Black',
   'Times New Roman',
   'Courier New',
-  'Lucida Console'
+  'Lucida Console',
 ]
 
 export const createText = (base: TextBox['base']): TextBox =>
@@ -28,6 +28,6 @@ export const createText = (base: TextBox['base']): TextBox =>
     isUppercase: false,
     refs: {
       accordion: createRef(),
-      textarea: createRef()
-    }
+      textarea: createRef(),
+    },
   })

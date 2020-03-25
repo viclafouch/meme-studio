@@ -24,7 +24,7 @@ export default class Meme {
   }
 
   get image(): Promise<HTMLImageElement> {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const image = new Image()
       image.src = this.url()
       image.onload = (): void => resolve(image)

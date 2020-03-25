@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useState, useImperativeHandle, forwardRef, RefObject } from 'react'
+import { useState, useImperativeHandle, forwardRef } from 'react'
 import Modal from '@client/components/Modal/Modal'
 
 const Faq = forwardRef(
@@ -10,7 +10,7 @@ const Faq = forwardRef(
       ref,
       () => ({
         open: (): void => setIsOpen(true),
-        close: (): void => setIsOpen(false)
+        close: (): void => setIsOpen(false),
       }),
       [setIsOpen]
     )

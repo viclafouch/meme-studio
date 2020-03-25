@@ -31,7 +31,7 @@ function Customization(): JSX.Element {
       Array.from({ length: texts.length }).map(() => ({
         textarea: createRef(),
         accordion: createRef(),
-        colorPicker: createRef()
+        colorPicker: createRef(),
       })),
     [texts.length]
   )
@@ -47,7 +47,7 @@ function Customization(): JSX.Element {
       centerY: memeSelected.height / 2,
       centerX: memeSelected.width / 2,
       height: memeSelected.height * (33 / 100),
-      width: memeSelected.width * (33 / 100)
+      width: memeSelected.width * (33 / 100),
     })
     text.height = text.base.height * drawProperties.scale
     text.width = text.base.width * drawProperties.scale
@@ -57,19 +57,19 @@ function Customization(): JSX.Element {
     wait(0).then(() =>
       dispatchEditor({
         type: SET_TEXT_ID_SELECTED,
-        textIdSelected: text.id
+        textIdSelected: text.id,
       })
     )
   }
 
   const removeText = (textId: string): void => {
-    const text = texts.find(t => t.id === textId)
+    const text = texts.find((t) => t.id === textId)
     saveToEditor({ type: REMOVE_TEXT, text })
   }
 
   useLayoutEffect(() => {
     if (textIdSelected) {
-      const textIndex = texts.findIndex(text => text.id === textIdSelected)
+      const textIndex = texts.findIndex((text) => text.id === textIdSelected)
       for (let index = 0; index < textsRef.length; index++) {
         const accordion: any = textsRef[index].accordion.current
         if (index === textIndex) accordion.open()
@@ -96,7 +96,7 @@ function Customization(): JSX.Element {
               if (id !== textIdSelected) {
                 dispatchEditor({
                   type: SET_TEXT_ID_SELECTED,
-                  textIdSelected: id
+                  textIdSelected: id,
                 })
               }
             }}
@@ -116,7 +116,7 @@ function Customization(): JSX.Element {
                     handleEdit({
                       textId: id,
                       type: 'value',
-                      value
+                      value,
                     })
                   }
                 />
@@ -134,7 +134,7 @@ function Customization(): JSX.Element {
                     handleEdit({
                       textId: id,
                       type: 'fontSize',
-                      value
+                      value,
                     })
                   }
                 />
@@ -152,7 +152,7 @@ function Customization(): JSX.Element {
                     handleEdit({
                       textId: id,
                       type: 'boxShadow',
-                      value
+                      value,
                     })
                   }
                 />
@@ -168,7 +168,7 @@ function Customization(): JSX.Element {
                     handleEdit({
                       textId: id,
                       type: 'color',
-                      value: hex
+                      value: hex,
                     })
                   }
                 />
@@ -181,7 +181,7 @@ function Customization(): JSX.Element {
                     handleEdit({
                       textId: id,
                       type: 'fontFamily',
-                      value: event.target.value
+                      value: event.target.value,
                     })
                   }
                 >
@@ -200,7 +200,7 @@ function Customization(): JSX.Element {
                     handleEdit({
                       textId: id,
                       type: 'alignVertical',
-                      value: event.target.value
+                      value: event.target.value,
                     })
                   }
                 >
@@ -217,7 +217,7 @@ function Customization(): JSX.Element {
                     handleEdit({
                       textId: id,
                       type: 'textAlign',
-                      value: event.target.value
+                      value: event.target.value,
                     })
                   }
                 >
@@ -236,7 +236,7 @@ function Customization(): JSX.Element {
                     handleEdit({
                       textId: id,
                       type: 'isUppercase',
-                      value: event.target.checked
+                      value: event.target.checked,
                     })
                   }
                 />

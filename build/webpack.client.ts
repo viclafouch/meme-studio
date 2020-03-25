@@ -7,6 +7,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries")
 
 const clientConfig: Configuration = {
+  stats: 'minimal',
   target: "web",
   resolve: {
     alias: {
@@ -31,7 +32,8 @@ const clientConfig: Configuration = {
     overlay: IS_DEV,
     open: IS_DEV,
     openPage: `http://localhost:${PORT_CLIENT_DEV}`,
-    historyApiFallback: true
+    historyApiFallback: true,
+    clientLogLevel: 'silent'
   },
   module: {
     rules: [
