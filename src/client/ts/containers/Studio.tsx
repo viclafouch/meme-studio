@@ -27,8 +27,16 @@ function Studio(props: any): JSX.Element {
   const [isLoading, setIsLoading]: [boolean, Function] = useState<boolean>(false)
   const { t } = useTranslation()
   const { width, isMinLgSize } = useWindowWidth()
-  const [currentTab, setCurrentTab]: [string, Function] = useState<string>(isMinLgSize ? TAB_GALLERY : null)
+  const [currentTab, setCurrentTab]: [string, Function] = useState<string>(TAB_GALLERY)
   const [{ memeSelected }, dispatchEditor]: [EditorState, Function] = useEditor()
+
+  useEffect(() => {
+    if (isMinLgSize) {
+      setCurrentTab(TAB_GALLERY)
+    } else {
+      setCurrentTab(null)
+    }
+  }, [isMinLgSize])
 
   useEffect(() => {
     const wrapper: HTMLElement = contentRef.current
@@ -111,7 +119,7 @@ function Studio(props: any): JSX.Element {
         </div>
         <div className="ld ld-float-btt-in studio-body">
           <div className="studio-tools">
-            <Tools setCurrentTab={setCurrentTab} />
+            <Tools export={(): void => props.setIsModalExportOpen(true)} />
           </div>
           <div className={`studio-content ${memeSelected ? 'studio-content-active' : ''}`} ref={contentRef}>
             {memeSelected && <WrapperCanvas changeTab={setCurrentTab} />}

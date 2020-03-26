@@ -20,6 +20,7 @@ import { faArrowCircleDown } from '@fortawesome/free-solid-svg-icons/faArrowCirc
 import { faEraser } from '@fortawesome/free-solid-svg-icons/faEraser'
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter'
+import { faSave } from '@fortawesome/free-solid-svg-icons/faSave'
 import { EditorProvider } from '@client/store/EditorContext'
 
 library.add(
@@ -38,7 +39,8 @@ library.add(
   faGlobe,
   faArrowCircleDown,
   faEraser,
-  faTimes
+  faTimes,
+  faSave
 )
 
 function App(): JSX.Element {

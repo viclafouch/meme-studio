@@ -29,7 +29,7 @@ function LangSelector(): JSX.Element {
 
   return (
     <div className={`lang-selector ${isActive ? 'lang-selector-active' : ''}`}>
-      <Button className="lang-selector-btn" onClick={handleClick}>
+      <Button small={!isMinMdSize} className="lang-selector-btn" onClick={handleClick}>
         {!isMinMdSize ? (
           <img src={i18n.options.resources[i18n.language].flag as string} className="lang-flag" />
         ) : (

@@ -4,17 +4,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useTranslation } from 'react-i18next'
 import { SET_SHOW_TEXT_AREAS, UNDO_HISTORY, REDO_HISTORY, ERASE_ALL, RESET } from '@client/store/reducer/constants'
 import Faq from '@client/components/Faq/Faq'
-import { useEditor } from '@client/ts/shared/hooks'
+import { useEditor, useWindowWidth } from '@client/ts/shared/hooks'
 import { UseEditorInt } from '@client/ts/shared/validators'
 import './tools.scss'
 
 type ToolsProps = {
-  setCurrentTab: Function
+  export: Function
 }
 
 const Tools = (props: ToolsProps): JSX.Element => {
   const faqModal: RefObject<any> = useRef(null)
   const { t } = useTranslation()
+  const { isMinLgSize } = useWindowWidth()
   const [{ showTextAreas, memeSelected, canUndo, canRedo }, dispatchEditor]: [UseEditorInt, Function] = useEditor()
 
   return (
@@ -76,6 +77,18 @@ const Tools = (props: ToolsProps): JSX.Element => {
             <FontAwesomeIcon icon={['fas', 'trash-restore-alt']} />
           </button>
         </li>
+        {!isMinLgSize && (
+          <li>
+            <button
+              className="tools-list-btn"
+              data-tooltip={t('studio.export')}
+              disabled={!memeSelected}
+              onClick={(): void => memeSelected && props.export()}
+            >
+              <FontAwesomeIcon icon={['fas', 'save']} />
+            </button>
+          </li>
+        )}
       </ul>
       <ul className="tools-list">
         <li>

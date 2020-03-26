@@ -54,9 +54,9 @@
     line-height: 22px;
 
     @include sm {
-      padding: 17px 23px;
-      font-size: 21px;
-      line-height: 24px;
+      padding: 14px 17px;
+      font-size: 18px;
+      line-height: 22px;
     }
 
     @include md {
@@ -72,19 +72,19 @@
     }
   }
   &.button-big {
-    padding: 17px 23px;
+    padding: 12px 17px;
     font-size: 18px;
     line-height: 22px;
 
     @include sm {
-      padding: 20px 26px;
-      font-size: 21px;
-      line-height: 24px;
+      padding: 12px 17px;
+      font-size: 18px;
+      line-height: 22px;
     }
 
     @include md {
-      padding: 19px 19px;
-      font-size: 21px;
+      padding: 12px 16px;
+      font-size: 17px;
       line-height: 22px;
     }
 
