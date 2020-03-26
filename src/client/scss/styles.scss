@@ -212,6 +212,14 @@ body {
       background: url('/images/particles-studio.svg') no-repeat;
       background-position: center center;
       background-size: cover;
+      position: relative;
+
+      .canvas-debugger {
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 99;
+      }
 
       @include lg {
         padding: 50px 100px;

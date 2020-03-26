@@ -7,6 +7,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries")
 
 const clientConfig: Configuration = {
+  cache: true,
   stats: 'minimal',
   target: "web",
   resolve: {

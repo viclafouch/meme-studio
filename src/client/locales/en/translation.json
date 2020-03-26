@@ -8,6 +8,7 @@
     "undo": "Undo",
     "redo": "Redo",
     "eraseAll": "Erase all",
+    "openDebugger": "Open debugger",
     "reset": "Reset",
     "faq": "Faq"
   },

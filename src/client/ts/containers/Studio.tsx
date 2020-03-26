@@ -20,6 +20,8 @@ import DragAndDrop from '@client/components/DragAndDrop/DragAndDrop'
 import { useWindowWidth, useEditor } from '@client/ts/shared/hooks'
 import { Modal } from '@client/components/Modal/Modal'
 import { getMeme } from '@client/ts/shared/api'
+import CanvasDebugger from '@client/components/CanvasDebugger/CanvasDebugger'
+import { IS_DEV } from '@shared/config'
 
 function Studio(props: any): JSX.Element {
   const inputDrop: RefObject<HTMLInputElement> = useRef(null)
@@ -123,6 +125,7 @@ function Studio(props: any): JSX.Element {
           </div>
           <div className={`studio-content ${memeSelected ? 'studio-content-active' : ''}`} ref={contentRef}>
             {memeSelected && <WrapperCanvas changeTab={setCurrentTab} />}
+            {IS_DEV && <CanvasDebugger />}
             {!memeSelected && (
               <div className="empty-meme">
                 <ReactSVG src="images/choose-meme.svg" wrapper="span" className="choose-meme-svg" />

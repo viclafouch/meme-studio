@@ -8,6 +8,7 @@
     "undo": "Annuler",
     "redo": "Rétablir",
     "eraseAll": "Écraser tout",
+    "openDebugger": "Ouvrir le debugger",
     "reset": "Réinitialiser",
     "faq": "Faq"
   },

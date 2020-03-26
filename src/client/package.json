@@ -27,6 +27,7 @@
     "react-dom": "16.13.1",
     "react-i18next": "11.3.4",
     "react-router-dom": "5.1.2",
-    "react-svg": "11.0.15"
+    "react-svg": "11.0.15",
+    "react-json-view": "1.19.1"
   }
 }

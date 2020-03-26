@@ -935,6 +935,15 @@
       "uuid": "dO6cxcs4PO",
       "ext": "jpg",
       "texts": []
+    },
+    {
+      "name": "This Is Fine",
+      "width": 580,
+      "height": 282,
+      "boxCount": 2,
+      "uuid": "4gNFK32XF",
+      "ext": "jpg",
+      "texts": []
     }
   ]
 }
