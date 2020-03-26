@@ -463,3 +463,11 @@ body {
     max-width: 500px;
   }
 }
+.modal#gallery-tab {
+  .modal-content-scrollable {
+    overflow-y: hidden;
+    .gallery {
+      max-height: inherit;
+    }
+  }
+}
