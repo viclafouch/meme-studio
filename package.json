@@ -3,17 +3,17 @@
   "version": "1.0.0",
   "description": "A complete meme generator coded in React / Express / Typescript",
   "scripts": {
-    "dev": "npm run dev:server & npm run dev:client",
+    "dev": "npm-run-all --parallel dev:server dev:client",
     "dev:client": "webpack-dev-server -w",
     "dev:server": "ts-node -r tsconfig-paths/register ./src/server/index.ts --force",
-    "build": "npm run build:client && npm run build:server",
+    "build": "npm-run-all --parallel build:client build:server",
     "build:client": "webpack --mode production",
     "build:server": "tsc -b ./build/tsconfig.server.json && npx tscpaths -p build/tsconfig.resolve.json -s ./dist -o ./dist",
     "start": "npx cross-env NODE_ENV=production node ./dist/server/index.js --force",
     "commit": "git-cz",
-    "lint": "tsc --noEmit && eslint '*/**/*.{ts,tsx}'",
+    "lint": "tsc --noEmit && eslint --ext .ts,.tsx src/",
     "ncu": "node tasks/ncu.js",
-    "postinstall": "(cd src/client && npm install); (node tasks/download.js)"
+    "postinstall": "(node tasks/download.js) && (cd src/client && npm install);"
   },
   "engines": {
     "node": "12.8.1",
@@ -74,6 +74,7 @@
     "mini-css-extract-plugin": "0.9.0",
     "node-sass": "4.13.1",
     "npm-check-updates": "4.0.5",
+    "npm-run-all": "4.1.5",
     "prettier": "2.0.2",
     "sass-loader": "8.0.2",
     "source-map-loader": "0.2.4",
@@ -110,6 +111,6 @@
     "morgan": "^1.10.0",
     "sequelize": "^5.21.5",
     "shortid": "^2.2.15",
-    "sqlite": "^3.0.6"
+    "sqlite3": "4.1.1"
   }
 }
