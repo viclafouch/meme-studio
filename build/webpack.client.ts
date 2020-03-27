@@ -82,7 +82,7 @@ const clientConfig = (env: any, argv: any, IS_DEV = argv.mode !== 'production'):
       'react-dom': 'ReactDOM'
     },
     plugins: [
-      new BundleAnalyzerPlugin(),
+      // new BundleAnalyzerPlugin(),
       new FixStyleOnlyEntriesPlugin(),
       new HtmlWebpackPlugin({
         template: path.join(__dirname, '..', 'src', 'client', 'html', 'index.html'),
