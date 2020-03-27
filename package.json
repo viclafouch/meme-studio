@@ -4,10 +4,10 @@
   "description": "A complete meme generator coded in React / Express / Typescript",
   "scripts": {
     "dev": "npm-run-all --parallel dev:server dev:client",
-    "dev:client": "webpack-dev-server -w",
+    "dev:client": "webpack-dev-server --config ./build/webpack.client.ts -w",
     "dev:server": "ts-node -r tsconfig-paths/register ./src/server/index.ts --force",
     "build": "npm-run-all --parallel build:client build:server",
-    "build:client": "webpack --mode production",
+    "build:client": "webpack --config ./build/webpack.client.ts -p",
     "build:server": "tsc -b ./build/tsconfig.server.json && npx tscpaths -p build/tsconfig.resolve.json -s ./dist -o ./dist",
     "start": "npx cross-env NODE_ENV=production node ./dist/server/index.js --force",
     "commit": "git-cz",
@@ -55,7 +55,6 @@
     "@types/validator": "^12.0.1",
     "@types/webpack": "4.41.8",
     "@types/webpack-dev-server": "3.10.1",
-    "@types/webpack-merge": "4.1.5",
     "@typescript-eslint/eslint-plugin": "2.25.0",
     "@typescript-eslint/parser": "2.25.0",
     "babel-eslint": "10.1.0",
@@ -87,8 +86,7 @@
     "webpack-bundle-analyzer": "3.6.1",
     "webpack-cli": "3.3.11",
     "webpack-dev-server": "3.10.3",
-    "webpack-fix-style-only-entries": "0.4.0",
-    "webpack-merge": "4.2.2"
+    "webpack-fix-style-only-entries": "0.4.0"
   },
   "husky": {
     "hooks": {
