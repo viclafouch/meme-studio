@@ -38,7 +38,7 @@ export default class TextBox {
     this.color = text.color
     this.alignVertical = text.alignVertical
     this.textAlign = text.textAlign
-    this.isUppercase = text.isUppercase
+    this.isUppercase = !!text.isUppercase
     this.base = {
       width: this.width,
       height: this.height,

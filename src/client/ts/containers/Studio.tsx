@@ -50,9 +50,7 @@ function Studio(props: any): JSX.Element {
 
   const handleChooseMeme = async (meme: Meme): Promise<void> => {
     try {
-      setIsLoading(true)
       const { texts } = await getMeme(meme.id)
-      await wait(300)
       dispatchEditor({
         type: SET_MEME_SELECTED,
         memeSelected: meme,
@@ -60,8 +58,6 @@ function Studio(props: any): JSX.Element {
       })
     } catch (error) {
       console.error(error)
-    } finally {
-      setIsLoading(false)
     }
   }
 
@@ -82,9 +78,9 @@ function Studio(props: any): JSX.Element {
     else if (!endWithExt(['.jpg', '.png', 'jpeg'], files[0].name)) return debug('extension not valid') // TODO
 
     try {
-      setIsLoading(true)
       const meme = new Meme({
         id: randomID(),
+        uuid: randomID(),
         height: 0,
         width: 0,
         boxCount: 0,
@@ -97,8 +93,7 @@ function Studio(props: any): JSX.Element {
 
       meme.width = width
       meme.height = height
-      await wait(300)
-      meme.ext = dispatchEditor({
+      dispatchEditor({
         type: SET_MEME_SELECTED,
         memeSelected: meme,
         texts: [],
@@ -106,8 +101,6 @@ function Studio(props: any): JSX.Element {
     } catch (error) {
       // TODO
       console.warn(error)
-    } finally {
-      setIsLoading(false)
     }
   }
 

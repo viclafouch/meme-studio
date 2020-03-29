@@ -54,24 +54,10 @@ TextBox.init(
     centerX: {
       type: new DataTypes.NUMBER(),
       allowNull: false,
-      validate: {
-        customValidator(value: number): void {
-          if (value > this.width) {
-            throw new Error("centerX can't be greater than the width")
-          }
-        },
-      },
     },
     centerY: {
       type: new DataTypes.NUMBER(),
       allowNull: false,
-      validate: {
-        customValidator(value: number): void {
-          if (value > this.height) {
-            throw new Error("centerX can't be greater than the width")
-          }
-        },
-      },
     },
     rotate: {
       type: new DataTypes.NUMBER(),

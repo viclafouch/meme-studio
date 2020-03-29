@@ -10,7 +10,7 @@ import TextareaExtended from '@client/components/TextareaExpended/TextareaExtend
 import ColorPicker from '@client/components/ColorPicker/ColorPicker'
 import InputRangeSlider from '@client/components/InputRangeSlider/InputRangeSlider'
 import TextBox from '@client/ts/shared/models/TextBox'
-import { fontsFamily, createText } from '@client/ts/shared/config-editor'
+import { fontsFamilyConfig, createText, fontSizeConfig, boxShadowConfig } from '@client/ts/shared/config-editor'
 import { EditorContext, EditorState } from '@client/store/EditorContext'
 import { CUSTOM_TEXT, ADD_TEXT, REMOVE_TEXT, SET_TEXT_ID_SELECTED } from '@client/store/reducer/constants'
 import { useEditor } from '@client/ts/shared/hooks'
@@ -84,12 +84,12 @@ function Customization(): JSX.Element {
       {texts.map(
         (
           { value, id, uuid, color, fontSize, alignVertical, textAlign, isUppercase, fontFamily, boxShadow },
-          i
+          textIndex
         ): React.ReactNode => (
           <Accordion
             defaultOpened={id === textIdSelected}
-            ref={textsRef[i].accordion}
-            title={value.trim() || `${t('studio.text')} #${i + 1}`}
+            ref={textsRef[textIndex].accordion}
+            title={value.trim() || `${t('studio.text')} #${textIndex + 1}`}
             key={uuid}
             removeText={(): void => removeText(id)}
             afterImmediateOpening={(): void => {
@@ -101,7 +101,7 @@ function Customization(): JSX.Element {
               }
             }}
             afterOpening={(): void => {
-              const textarea: any = textsRef[i].textarea.current
+              const textarea: any = textsRef[textIndex].textarea.current
               textarea.focus()
             }}
           >
@@ -109,8 +109,8 @@ function Customization(): JSX.Element {
               <div className="field-customization">
                 <TextareaExtended
                   rows={1}
-                  ref={textsRef[i].textarea}
-                  placeholder={`${t('studio.text')} #${i + 1}`}
+                  ref={textsRef[textIndex].textarea}
+                  placeholder={`${t('studio.text')} #${textIndex + 1}`}
                   value={value}
                   onChange={(value: any): void =>
                     handleEdit({
@@ -125,9 +125,9 @@ function Customization(): JSX.Element {
                 <label htmlFor="font-size">{t('studio.maxFontSize')}</label>
                 <InputRangeSlider
                   id="font-size"
-                  max={50}
+                  max={fontSizeConfig.max}
                   width={98}
-                  min={0}
+                  min={fontSizeConfig.min}
                   step={1}
                   value={fontSize}
                   onChange={(value: number): void =>
@@ -143,9 +143,9 @@ function Customization(): JSX.Element {
                 <label htmlFor="box-shadow">{t('studio.boxShadow')}</label>
                 <InputRangeSlider
                   id="box-shadow"
-                  max={10}
+                  max={boxShadowConfig.max}
                   width={98}
-                  min={0}
+                  min={boxShadowConfig.min}
                   step={1}
                   value={boxShadow}
                   onChange={(value: number): void =>
@@ -162,7 +162,7 @@ function Customization(): JSX.Element {
                   {t('studio.color')}
                 </label>
                 <ColorPicker
-                  ref={textsRef[i].colorPicker}
+                  ref={textsRef[textIndex].colorPicker}
                   color={color}
                   setColor={({ hex }: ColorResult): void =>
                     handleEdit({
@@ -185,7 +185,7 @@ function Customization(): JSX.Element {
                     })
                   }
                 >
-                  {fontsFamily.map((font: string) => (
+                  {fontsFamilyConfig.map((font: string) => (
                     <option value={font} key={font.replace(/ /g, '+')}>
                       {font}
                     </option>

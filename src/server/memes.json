@@ -7,7 +7,23 @@
       "boxCount": 2,
       "uuid": "igbRPJHqr",
       "ext": "jpg",
-      "texts": []
+      "texts": [
+        {
+          "value": "",
+          "width": 396,
+          "height": 396,
+          "centerX": 600,
+          "centerY": 600,
+          "boxShadow": 2,
+          "rotate": 0,
+          "fontSize": 22,
+          "fontFamily": "Impact",
+          "color": "#ffffff",
+          "alignVertical": "middle",
+          "textAlign": "center",
+          "isUppercase": false
+        }
+      ]
     },
     {
       "name": "Distracted Boyfriend",

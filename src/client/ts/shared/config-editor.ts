@@ -2,7 +2,7 @@ import { createRef } from 'react'
 import { randomID } from '@shared/utils'
 import TextBox from './models/TextBox'
 
-export const fontsFamily = [
+export const fontsFamilyConfig = [
   'Arial',
   'Helvetica',
   'Impact',
@@ -12,6 +12,9 @@ export const fontsFamily = [
   'Courier New',
   'Lucida Console',
 ]
+
+export const fontSizeConfig = { min: 1, max: 100 }
+export const boxShadowConfig = { min: 0, max: 10 }
 
 export const createText = (base: TextBox['base']): TextBox =>
   new TextBox({

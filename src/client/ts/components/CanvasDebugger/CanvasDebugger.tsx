@@ -5,6 +5,7 @@ import { useState } from 'react'
 import ReactJson from 'react-json-view'
 import { UseEditorInt } from '@client/ts/shared/validators'
 import { useEditor } from '@client/ts/shared/hooks'
+import TextBox from '@client/ts/shared/models/TextBox'
 import './canvas-debugger.scss'
 
 function CanvasDebugger(): JSX.Element {
@@ -13,6 +14,31 @@ function CanvasDebugger(): JSX.Element {
   const [{ texts, drawProperties, memeSelected }]: [UseEditorInt, Function] = useEditor()
 
   const toggleActive = (): void => setIsActive(!isActive)
+
+  const object = memeSelected
+    ? {
+        name: memeSelected.name,
+        width: memeSelected.width,
+        height: memeSelected.height,
+        boxCount: memeSelected.boxCount,
+        uuid: memeSelected.uuid,
+        ext: memeSelected.ext,
+        texts: texts.map(({ ...text }: TextBox) => {
+          const t = {
+            ...text,
+            value: '',
+            centerX: Math.round((text.centerX / drawProperties.width) * memeSelected.width),
+            centerY: Math.round((text.centerY / drawProperties.height) * memeSelected.height),
+            width: Math.round((text.width / drawProperties.width) * memeSelected.width),
+            height: Math.round((text.height / drawProperties.height) * memeSelected.height),
+          }
+          delete t.base
+          delete t.id
+          delete t.uuid
+          return t
+        }),
+      }
+    : {}
 
   return (
     <div className={`canvas-debugger ${isActive ? `canvas-debugger-active` : ``}`}>
@@ -43,12 +69,7 @@ function CanvasDebugger(): JSX.Element {
           ...(!isActive ? { display: 'none' } : null),
         }}
       >
-        <ReactJson
-          src={{ texts, drawProperties, memeSelected }}
-          enableClipboard
-          displayObjectSize={false}
-          displayDataTypes={false}
-        />
+        <ReactJson src={object} enableClipboard displayObjectSize={false} displayDataTypes={false} />
       </div>
     </div>
   )
