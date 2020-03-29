@@ -11,6 +11,7 @@ type AccordionProps = {
   title: string
   children: React.ReactNode
   removeText: Function
+  duplicateText: Function
   afterOpening?: Function
   afterImmediateOpening?: Function
   ref: any
@@ -57,20 +58,35 @@ const Accordion = React.forwardRef((props: AccordionProps, ref: any) => {
     props.removeText()
   }
 
+  const handleDuplicate = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+    e.stopPropagation()
+    props.duplicateText()
+  }
+
   const cssVar = { '--accordion-duration': durationAccordion + 'ms' } as React.CSSProperties
 
   return (
     <section className={`accordion ${isActive ? 'accordion-active' : ''}`} style={cssVar}>
       <div className="accordion-trigger" onClick={handleOpen}>
         <p className="accordion-title">{props.title}</p>
-        <button
-          data-tooltip={t('attr.delete')}
-          aria-label={t('attr.delete')}
-          className="accordion-remove-text"
-          onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => handleRemoveText(e)}
-        >
-          <FontAwesomeIcon icon={['fas', 'trash-alt']} />
-        </button>
+        <div>
+          <button
+            data-tooltip={t('attr.duplicate')}
+            aria-label={t('attr.duplicate')}
+            className="accordion-remove-text"
+            onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => handleDuplicate(e)}
+          >
+            <FontAwesomeIcon icon={['fas', 'clone']} />
+          </button>
+          <button
+            data-tooltip={t('attr.delete')}
+            aria-label={t('attr.delete')}
+            className="accordion-remove-text"
+            onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => handleRemoveText(e)}
+          >
+            <FontAwesomeIcon icon={['fas', 'trash-alt']} />
+          </button>
+        </div>
       </div>
       <div className="accordion-content" ref={content} style={{ maxHeight: `${currentHeight}` }}>
         {props.children}

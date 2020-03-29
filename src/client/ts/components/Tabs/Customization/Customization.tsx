@@ -15,7 +15,7 @@ import { EditorContext, EditorState } from '@client/store/EditorContext'
 import { CUSTOM_TEXT, ADD_TEXT, REMOVE_TEXT, SET_TEXT_ID_SELECTED } from '@client/store/reducer/constants'
 import { useEditor } from '@client/ts/shared/hooks'
 import { toHistoryType } from '@client/utils/helpers'
-import { wait } from '@shared/utils'
+import { wait, randomID } from '@shared/utils'
 import './customization.scss'
 
 function Customization(): JSX.Element {
@@ -67,6 +67,15 @@ function Customization(): JSX.Element {
     saveToEditor({ type: REMOVE_TEXT, text })
   }
 
+  const duplicateText = (textId: string): void => {
+    const textDuplicated = texts.find((t) => t.id === textId)
+    const text = new TextBox({
+      ...textDuplicated,
+      id: randomID(),
+    })
+    saveToEditor({ type: ADD_TEXT, text })
+  }
+
   useLayoutEffect(() => {
     if (textIdSelected) {
       const textIndex = texts.findIndex((text) => text.id === textIdSelected)
@@ -91,6 +100,7 @@ function Customization(): JSX.Element {
             ref={textsRef[textIndex].accordion}
             title={value.trim() || `${t('studio.text')} #${textIndex + 1}`}
             key={uuid}
+            duplicateText={(): void => duplicateText(id)}
             removeText={(): void => removeText(id)}
             afterImmediateOpening={(): void => {
               if (id !== textIdSelected) {

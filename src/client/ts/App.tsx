@@ -22,6 +22,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons/faTwitter'
 import { faSave } from '@fortawesome/free-solid-svg-icons/faSave'
 import { faCode } from '@fortawesome/free-solid-svg-icons/faCode'
+import { faClone } from '@fortawesome/free-solid-svg-icons/faClone'
 import { EditorProvider } from '@client/store/EditorContext'
 
 library.add(
@@ -42,7 +43,8 @@ library.add(
   faEraser,
   faTimes,
   faSave,
-  faCode
+  faCode,
+  faClone
 )
 
 function App(): JSX.Element {
