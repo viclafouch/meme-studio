@@ -31,6 +31,7 @@ function CanvasDebugger(): JSX.Element {
             centerY: Math.round((text.centerY / drawProperties.height) * memeSelected.height),
             width: Math.round((text.width / drawProperties.width) * memeSelected.width),
             height: Math.round((text.height / drawProperties.height) * memeSelected.height),
+            rotate: Math.round(text.rotate),
           }
           delete t.base
           delete t.id

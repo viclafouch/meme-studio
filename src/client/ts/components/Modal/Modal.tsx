@@ -21,7 +21,7 @@ export function Modal({ onClose, isLoading, children, id }: ModalProps): JSX.Ele
       <div className="modal-overlay" onClick={(): void => !isLoading && onClose()} />
       {isLoading && <div className="modal-content-loading">{t('loading')}</div>}
       {!isLoading && (
-        <div className="modal-content">
+        <div className="modal-content ld ld-float-ttb-in">
           <span role="button" className="modal-close" aria-label={t('attr.close')} onClick={(): void => onClose()}>
             <FontAwesomeIcon icon={['fas', 'times']} className="icon-times" />
           </span>

@@ -14,7 +14,7 @@ export const fontsFamilyConfig = [
 ]
 
 export const fontSizeConfig = { min: 1, max: 100 }
-export const boxShadowConfig = { min: 0, max: 10 }
+export const boxShadowConfig = { min: 0, max: 5 }
 
 export const createText = (base: TextBox['base']): TextBox =>
   new TextBox({
