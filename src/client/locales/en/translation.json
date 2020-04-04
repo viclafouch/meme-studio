@@ -16,6 +16,8 @@
   "loading": "Loading",
   "download": "Download",
   "preview": "Preview",
+  "yourText": "Your text",
+  "share": "Share",
   "intro": {
     "description": "Create a meme from JPG, GIF or PNG images. Edit your image and make your custom meme.",
     "getStarted": "Get started"

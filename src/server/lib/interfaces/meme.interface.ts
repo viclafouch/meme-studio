@@ -23,3 +23,11 @@ export interface ResultMemeShowInt {
   meme: Meme
   texts: Array<TextBox>
 }
+
+export interface ReqShareToTwitter extends Request {
+  image: string
+}
+
+export interface ResultShareToTwitter {
+  url: string
+}

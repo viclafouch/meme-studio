@@ -8,6 +8,7 @@ import { fillText } from '@client/utils/index'
 import { wait } from '@shared/utils'
 import Button from '@client/components/Button/Button'
 import TextBox from '@client/ts/shared/models/TextBox'
+import { postToTwitter } from '../shared/api'
 
 type ExportProps = {
   onClose: Function
@@ -50,6 +51,20 @@ function Export(props: ExportProps): JSX.Element {
     })()
   }, [])
 
+  const shareToTwitter = async (e: Event): Promise<void> => {
+    e.preventDefault()
+    try {
+      setIsLoading(true)
+      const imageUrl = await postToTwitter(img)
+      window.open(`https://twitter.com/intent/tweet?text=[${t('yourText')}] ${imageUrl}`, '_blank').focus()
+    } catch (error) {
+      // TODO
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const handleClose = (): void => {
     props.onClose()
     setImg(null)
@@ -69,12 +84,19 @@ function Export(props: ExportProps): JSX.Element {
           {memeSelected.width} x {memeSelected.height}
         </span>
         <div className="meme-actions-share">
-          <a download="meme.png" href={img.replace(/^data:image\/png/, 'data:application/octet-stream')}>
-            <Button className="button-export">
-              <FontAwesomeIcon icon={['fas', 'arrow-circle-down']} className="icon-arrow-circle-down" />
-              {t('download')}
-            </Button>
+          <a
+            className="button button-medium button-export"
+            id="share-local"
+            download="meme.png"
+            href={img.replace(/^data:image\/png/, 'data:application/octet-stream')}
+          >
+            <FontAwesomeIcon icon={['fas', 'arrow-circle-down']} className="icon-arrow-circle-down" />
+            {t('download')}
           </a>
+          <Button className="button-export" id="export-twitter" onClick={shareToTwitter}>
+            <FontAwesomeIcon icon={['fab', 'twitter']} className="icon-twitter" />
+            {t('share')}
+          </Button>
         </div>
       </div>
     </Modal>

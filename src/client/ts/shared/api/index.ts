@@ -33,3 +33,18 @@ export const getMeme = (id: string): Promise<{ texts: Array<TextBox>; meme: Meme
     texts: response.data.texts.map((text: object) => new TextBox(text)),
     meme: new Meme(response.data.meme),
   }))
+
+export interface ResultPostToTwitter {
+  success: boolean
+  data: {
+    url: string
+  }
+}
+
+export const postToTwitter = (img64: string): any =>
+  fetchApi(`/share`, {
+    method: 'POST',
+    body: JSON.stringify({
+      image: img64,
+    }),
+  }).then((response: ResultPostToTwitter) => response.data.url)

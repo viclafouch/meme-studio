@@ -390,8 +390,13 @@ body {
 
     .button-export {
       text-transform: uppercase;
-      .icon-arrow-circle-down {
+      margin-right: 10px;
+      .icon-arrow-circle-down,
+      .icon-twitter {
         margin-right: 7px;
+      }
+      &#export-twitter {
+        background-color: #1DA1F2;
       }
     }
   }

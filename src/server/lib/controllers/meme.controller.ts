@@ -3,7 +3,17 @@ import Meme from '../models/meme.model'
 import TextBox from '../models/textbox.model'
 import MemeNotFoundException from '../exceptions/MemeNotFoundException'
 import { send } from '../config/app'
-import { ReqMemeShowInt, ResultMemeShowInt, ResultMemeIndex, ReqMemeIndex } from '../interfaces/meme.interface'
+import * as Twit from 'twit'
+import {
+  ReqMemeShowInt,
+  ResultMemeShowInt,
+  ResultMemeIndex,
+  ReqMemeIndex,
+  ReqShareToTwitter,
+  ResultShareToTwitter,
+} from '../interfaces/meme.interface'
+import twitterConfig from '@server/config/twitter'
+import { IS_DEV } from '@shared/config'
 
 export class MemeController {
   public async index(req: ReqMemeIndex, res: Response): Promise<void> {
@@ -44,5 +54,52 @@ export class MemeController {
 
       send(res, result)
     } else next(new MemeNotFoundException(id))
+  }
+
+  public async share(req: ReqShareToTwitter, res: Response): Promise<void> {
+    const image: string = req.body.image
+    const T = new Twit(twitterConfig)
+
+    const upload = (image64: string): Promise<any> =>
+      new Promise((resolve: any, reject: any) =>
+        // eslint-disable-next-line @typescript-eslint/camelcase
+        T.post('media/upload', { media_data: image64 }, function (err, data: any) {
+          if (err) reject(err)
+          else resolve(data)
+        })
+      )
+
+    const data = await upload(image.split(',')[1])
+
+    const create = (mediaId: string): Promise<any> =>
+      new Promise((resolve, reject) => {
+        // eslint-disable-next-line @typescript-eslint/camelcase
+        T.post('media/metadata/create', { media_id: mediaId }, function (err) {
+          if (err) reject(err)
+          else {
+            // eslint-disable-next-line @typescript-eslint/camelcase
+            const params = { media_ids: [mediaId] }
+            T.post('statuses/update', params, function (err, data) {
+              if (err) reject(err)
+              else resolve(data)
+            })
+          }
+        })
+      })
+
+    let imageUrl
+
+    if (!IS_DEV) {
+      const mediaId = data.media_id_string
+      const tweet = await create(mediaId)
+      imageUrl = tweet.entities.media[0].display_url // pic.twitter.com/:id
+    } else {
+      imageUrl = 'pic.twitter.com/zTI4JZoShU'
+    }
+
+    const result: ResultShareToTwitter = {
+      url: imageUrl,
+    }
+    send(res, result)
   }
 }

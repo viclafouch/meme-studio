@@ -41,8 +41,8 @@ class App {
   private initializeMiddlewares(): void {
     this.app.use(helmet())
     this.app.use(cookieParser())
-    this.app.use(bodyParser.json())
-    this.app.use(bodyParser.urlencoded({ extended: false }))
+    this.app.use(bodyParser.json({ limit: '50mb' }))
+    this.app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }))
     this.app.use(morgan('combined'))
     if (!IS_DEV) this.app.use(express.static(process.cwd() + clientDir))
     this.app.use(cors())
@@ -51,9 +51,7 @@ class App {
   private initializeRoutes(): void {
     this.app.route('/memes').post(this.memeController.index)
     this.app.route('/memes/:id').post(this.memeController.show)
-    this.app.route('/status').get(function (req: Request, res: Response) {
-      send(res, {})
-    })
+    this.app.route('/share').post(this.memeController.share)
     this.app.route('*').all(function (req: Request, res: Response) {
       handleError(new HttpException(404, 'Not Found'), req, res)
     })
