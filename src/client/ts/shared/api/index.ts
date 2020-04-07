@@ -36,7 +36,8 @@ export const getMeme = (id: string): Promise<{ texts: Array<TextBox>; meme: Meme
 
 export interface ResultPostToTwitter {
   success: boolean
-  data: {
+  message?: string
+  data?: {
     url: string
   }
 }
@@ -47,4 +48,7 @@ export const postToTwitter = (img64: string): any =>
     body: JSON.stringify({
       image: img64,
     }),
-  }).then((response: ResultPostToTwitter) => response.data.url)
+  }).then((response: ResultPostToTwitter) => {
+    if (!response.success) throw new Error(response.message)
+    else return response.data.url
+  })
