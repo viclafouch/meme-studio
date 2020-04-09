@@ -3,14 +3,15 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries")
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
-  cache: true,
+  cache: IS_DEV,
   stats: 'minimal',
   target: "web",
   watch: IS_DEV,
-  mode: IS_DEV ? 'development' : 'production',
+  mode: argv.mode,
   devtool: IS_DEV ? 'inline-source-map' : false,
   output: {
     filename: `[name]-[hash:8]-bundle.js`,
@@ -81,6 +82,7 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
   },
   plugins: [
     // new BundleAnalyzerPlugin(),
+    new CleanWebpackPlugin(),
     new FixStyleOnlyEntriesPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '..', 'src', 'client', 'html', 'index.html'),

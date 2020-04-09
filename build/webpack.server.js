@@ -4,13 +4,15 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const WebpackShellPlugin = require('webpack-shell-plugin')
 
 module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
+  cache: IS_DEV,
   entry: './src/server/index.ts',
+  stats: 'minimal',
   mode: argv.mode,
   target: 'node',
   watch: IS_DEV,
   externals: [nodeExternals()],
   output: {
-    path: path.resolve(process.cwd(), 'dist', 'server'),
+    path: path.join(__dirname, '..', 'dist', 'server'),
     filename: 'index.js'
   },
   resolve: {
@@ -19,7 +21,7 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
       new TsconfigPathsPlugin({
         configFile: "./tsconfig.json",
         logLevel: "info",
-        extensions: [".ts"]
+        extensions: [".ts", "json"]
       })
     ]
   },
@@ -29,7 +31,7 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
         test: /\.ts$/,
         loader: "ts-loader",
         options: {
-          configFile: path.join(process.cwd(), '/tsconfig.json') // Need absolute
+          configFile: path.join(__dirname, '..', 'tsconfig.json'),
         }
       }
     ]

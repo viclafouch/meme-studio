@@ -18,7 +18,13 @@
       "@shared/*": ["shared/*"],
       "@src/*": ["*"]
     },
-    "typeRoots": ["./src/client/node_modules/@types/", "./node_modules/@types/", "src/server/node_modules/@types"]
   },
-  "include": ["./src/client/ts/**/*.ts", "./src/client/ts/**/*.tsx", "src/server/**/*.ts"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/client/node_modules/**/*",
+    "**/*.spec.ts"
+  ]
 }
