@@ -4,12 +4,12 @@
   "description": "A complete meme generator coded in React / Express / Typescript",
   "scripts": {
     "dev": "npm-run-all --parallel dev:server dev:client",
-    "dev:client": "webpack-dev-server --config ./build/webpack.client.ts -w",
-    "dev:server": "ts-node -r tsconfig-paths/register ./src/server/index.ts --force",
+    "dev:client": "webpack-dev-server --config ./build/webpack.client.js -d",
+    "dev:server": "webpack --config ./build/webpack.server.js -d",
     "build": "npm-run-all --parallel build:client build:server",
-    "build:client": "webpack --config ./build/webpack.client.ts -p",
-    "build:server": "tsc -b ./build/tsconfig.server.json && npx tscpaths -p build/tsconfig.resolve.json -s ./dist -o ./dist",
-    "start": "npx cross-env NODE_ENV=production node ./dist/server/index.js --force",
+    "build:client": "webpack --config ./build/webpack.client.js -p",
+    "build:server": "webpack --config ./build/webpack.server.js -p",
+    "start": "cross-env NODE_ENV=production node ./dist/server/index.js",
     "commit": "git-cz",
     "lint": "tsc --noEmit && eslint --ext .ts,.tsx src/",
     "ncu": "node tasks/ncu.js",
@@ -82,12 +82,15 @@
     "ts-loader": "6.2.2",
     "ts-node": "^8.8.1",
     "tsconfig-paths": "3.9.0",
+    "tsconfig-paths-webpack-plugin": "3.2.0",
     "typescript": "3.8.3",
     "webpack": "4.42.1",
     "webpack-bundle-analyzer": "3.6.1",
     "webpack-cli": "3.3.11",
     "webpack-dev-server": "3.10.3",
-    "webpack-fix-style-only-entries": "0.4.0"
+    "webpack-fix-style-only-entries": "0.4.0",
+    "webpack-node-externals": "1.7.2",
+    "webpack-shell-plugin": "0.5.0"
   },
   "husky": {
     "hooks": {

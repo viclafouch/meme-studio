@@ -25,7 +25,9 @@ export interface ResultMemeShowInt {
 }
 
 export interface ReqShareToTwitter extends Request {
-  image: string
+  body: {
+    image: string
+  }
 }
 
 export interface ResultShareToTwitter {

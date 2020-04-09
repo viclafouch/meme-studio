@@ -1,3 +1,3 @@
 import start from './lib/server'
-const forceReset = process.argv.some((arg) => arg === '--force')
+const forceReset = true
 start(forceReset)
