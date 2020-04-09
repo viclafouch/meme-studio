@@ -9,7 +9,7 @@
     "build": "npm-run-all --parallel build:client build:server",
     "build:client": "webpack --config ./build/webpack.client.js -p",
     "build:server": "webpack --config ./build/webpack.server.js -p",
-    "start": "cross-env NODE_ENV=production node ./dist/server/index.js",
+    "start": "npx cross-env NODE_ENV=production node ./dist/server/index.js",
     "commit": "git-cz",
     "lint": "tsc --noEmit && eslint --ext .ts,.tsx src/",
     "ncu": "node tasks/ncu.js",
