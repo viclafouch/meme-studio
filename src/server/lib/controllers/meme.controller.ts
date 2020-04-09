@@ -60,8 +60,6 @@ export class MemeController {
   public async share(req: ReqShareToTwitter, res: Response, next: NextFunction): Promise<void> {
     try {
       const image: string = req.body.image
-      console.log(twitterConfig)
-
       const T = new Twit(twitterConfig)
 
       const upload = (image64: string): Promise<any> =>

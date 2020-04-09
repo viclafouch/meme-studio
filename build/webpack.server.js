@@ -2,6 +2,7 @@ const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const WebpackShellPlugin = require('webpack-shell-plugin')
+const Dotenv = require('dotenv-webpack')
 
 module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
   cache: IS_DEV,
@@ -37,6 +38,7 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
     ]
   },
   plugins: [
+    new Dotenv(),
     new WebpackShellPlugin({
       onBuildEnd: IS_DEV ? ['npx nodemon ./dist/server/index.js'] : []
     })
