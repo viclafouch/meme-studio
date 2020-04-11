@@ -237,6 +237,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
     case RESET:
       draft.textIdSelected = null
       draft.memeSelected = null
+      draft.drawProperties = null
       draft.texts = []
       clearHistory(draft)
       break

@@ -51,12 +51,15 @@ function Studio(props: any): JSX.Element {
 
   const handleChooseMeme = async (meme: Meme): Promise<void> => {
     try {
+      if (meme.id === memeSelected.id) return
       const { texts } = await getMeme(meme.id)
       dispatchEditor({
         type: SET_MEME_SELECTED,
         memeSelected: meme,
         texts,
       })
+      setIsActiveRecoverBox(false)
+      setLastVersion(false)
     } catch (error) {
       console.error(error)
     }

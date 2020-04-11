@@ -35,7 +35,7 @@ const initialState: EditorState = {
   },
   history: {
     items: [],
-    currentIndex: 0,
+    currentIndex: -1,
   },
 }
 
