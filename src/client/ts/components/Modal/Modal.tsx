@@ -14,7 +14,7 @@ type ModalProps = {
 }
 export function Modal({ onClose, isLoading, children, id }: ModalProps): JSX.Element {
   const { t } = useTranslation()
-  const [{ modalRef }]: [DefaultState, Function] = useContext(DefaultContext)
+  const [{ modalRef }]: [DefaultState] = useContext(DefaultContext)
 
   return createPortal(
     <div className="modal ld ld-fade-in" id={id}>

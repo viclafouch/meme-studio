@@ -15,19 +15,20 @@ import Meme from '@client/ts/shared/models/Meme'
 import Tools from '@client/components/Tools/Tools'
 import Header from '@client/components/Header/Header'
 import { endWithExt, innerDimensions, debug } from '@client/utils/index'
-import { randomID, wait } from '@shared/utils'
+import { randomID } from '@shared/utils'
 import DragAndDrop from '@client/components/DragAndDrop/DragAndDrop'
 import { useWindowWidth, useEditor } from '@client/ts/shared/hooks'
-import { Modal } from '@client/components/Modal/Modal'
 import { getMeme } from '@client/ts/shared/api'
 import CanvasDebugger from '@client/components/CanvasDebugger/CanvasDebugger'
 import { IS_DEV } from '@shared/config'
+import { hasRecoverVersion, formatRelativeDate } from '@client/utils/helpers'
 
 function Studio(props: any): JSX.Element {
   const inputDrop: RefObject<HTMLInputElement> = useRef(null)
   const contentRef: RefObject<HTMLDivElement> = useRef(null)
-  const [isLoading, setIsLoading]: [boolean, Function] = useState<boolean>(false)
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const [lastVersion, setLastVersion]: [false | Date, Function] = useState<false | Date>(hasRecoverVersion())
+  const [isActiveRecoverBox, setIsActiveRecoverBox]: [boolean, Function] = useState<boolean>(lastVersion instanceof Date)
   const { width, isMinLgSize } = useWindowWidth()
   const [currentTab, setCurrentTab]: [string, Function] = useState<string>(TAB_GALLERY)
   const [{ memeSelected }, dispatchEditor]: [EditorState, Function] = useEditor()
@@ -60,6 +61,18 @@ function Studio(props: any): JSX.Element {
       console.error(error)
     }
   }
+
+  useEffect(() => {
+    if (hasRecoverVersion()) {
+      let timeout = setTimeout(() => {
+        setIsActiveRecoverBox(false)
+        timeout = setTimeout(() => {
+          setLastVersion(false)
+        }, 2000) // Wait for the animation end
+      }, 5000) // Show 5s for the user
+      return (): void => clearTimeout(timeout)
+    }
+  }, [])
 
   useEffect(() => {
     if (memeSelected) {
@@ -117,6 +130,12 @@ function Studio(props: any): JSX.Element {
             <Tools export={(): void => props.setIsModalExportOpen(true)} />
           </div>
           <div className={`studio-content ${memeSelected ? 'studio-content-active' : ''}`} ref={contentRef}>
+            {lastVersion && (
+              <div className={`recover-version-box ld ${isActiveRecoverBox ? 'ld-float-btt-in' : 'ld-fade-out'}`}>
+                {t('studio.lastBackup')} <br />
+                <p className="recover-version-box-date">{formatRelativeDate(lastVersion, new Date(), i18n.language)}</p>
+              </div>
+            )}
             {memeSelected && <WrapperCanvas changeTab={setCurrentTab} />}
             {IS_DEV && <CanvasDebugger />}
             {!memeSelected && (
@@ -191,7 +210,6 @@ function Studio(props: any): JSX.Element {
           </aside>
         </div>
       </div>
-      {isLoading && <Modal isLoading={isLoading} />}
     </>
   )
 }

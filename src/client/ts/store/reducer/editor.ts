@@ -18,7 +18,8 @@ import TextBox from '@client/ts/shared/models/TextBox'
 import { DrawProperties, HistoryInt } from '@client/ts/shared/validators'
 import { randomID } from '@shared/utils'
 import { INITIAL } from '@client/ts/shared/constants'
-import { debug } from '@client/utils/index'
+import { debug, setLocalStorage, removeLocalStorage } from '@client/utils/index'
+import Meme from '@client/ts/shared/models/Meme'
 
 export interface Actions extends EditorState {
   type: string
@@ -165,8 +166,40 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       })
       break
     case RESIZE_WINDOW:
+      const firstLoad = draft.innerDimensions.width === 0
       draft.innerDimensions = action.innerDimensions
-      if (draft.memeSelected) updateDrawing(draft)
+      if (firstLoad) {
+        let memeSelected: any | undefined = window.localStorage.getItem('memeSelected')
+        let history: any | undefined = window.localStorage.getItem('history')
+        let lastEditDate: any | undefined = window.localStorage.getItem('lastEditDate')
+
+        if (lastEditDate) {
+          const now = new Date()
+          lastEditDate = new Date(JSON.parse(lastEditDate))
+          const hourDifference = Math.abs(now.getTime() - lastEditDate.getTime()) / 36e5
+
+          if (hourDifference < 2) {
+            memeSelected = new Meme(JSON.parse(memeSelected)) as Meme
+            history = JSON.parse(history) as History
+
+            draft.memeSelected = memeSelected
+            draft.history = history
+            draft.history.items = draft.history.items.map((i) => {
+              i.drawProperties.image = memeSelected.image
+              return i
+            })
+
+            const currentVersion = history.items[history.currentIndex]
+            const texts = currentVersion.texts
+
+            updateDrawing(draft, texts)
+          } else {
+            removeLocalStorage(['memeSelected', 'history', 'lastEditDate', 'textIdSelected'])
+          }
+        }
+      } else {
+        if (draft.memeSelected) updateDrawing(draft)
+      }
       break
     case SET_SHOW_TEXT_AREAS:
       draft.showTextAreas = action.showTextAreas
@@ -207,6 +240,17 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       draft.texts = []
       clearHistory(draft)
       break
+  }
+
+  if ([UNDO_HISTORY, REDO_HISTORY, SET_HISTORY].includes(action.type)) {
+    setLocalStorage({
+      memeSelected: draft.memeSelected,
+      lastEditDate: Date.now(),
+      history: draft.history,
+      textIdSelected: draft.textIdSelected,
+    })
+  } else if ([RESET, ERASE_ALL].includes(action.type)) {
+    removeLocalStorage(['memeSelected', 'history', 'lastEditDate', 'textIdSelected'])
   }
 
   const stateUpdated: any = finishDraft(draft)

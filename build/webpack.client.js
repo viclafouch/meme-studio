@@ -1,10 +1,13 @@
 const path = require('path');
+const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries")
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+
+const supportedLocales = ['en-US', 'fr']
 
 module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
   cache: IS_DEV,
@@ -82,6 +85,10 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
   },
   plugins: [
     // new BundleAnalyzerPlugin(),
+    new webpack.ContextReplacementPlugin(
+      /date\-fns[\/\\]/,
+      new RegExp(`[/\\\\\](${supportedLocales.join('|')})[/\\\\\]`)
+    ),
     new CleanWebpackPlugin(),
     new FixStyleOnlyEntriesPlugin(),
     new HtmlWebpackPlugin({

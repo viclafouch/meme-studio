@@ -29,7 +29,7 @@ function Customization(): JSX.Element {
   const textsRef: Array<any> = useMemo(
     () =>
       Array.from({ length: texts.length }).map(() => ({
-        textarea: createRef(),
+        textarea: createRef<HTMLTextAreaElement>(),
         accordion: createRef(),
         colorPicker: createRef(),
       })),
@@ -73,6 +73,7 @@ function Customization(): JSX.Element {
       ...textDuplicated,
       id: randomID(),
     })
+    text.base = textDuplicated.base
     saveToEditor({ type: ADD_TEXT, text })
   }
 
@@ -111,7 +112,7 @@ function Customization(): JSX.Element {
               }
             }}
             afterOpening={(): void => {
-              const textarea: any = textsRef[textIndex].textarea.current
+              const textarea: HTMLTextAreaElement = textsRef[textIndex].textarea.current
               textarea.focus()
             }}
           >
@@ -122,11 +123,11 @@ function Customization(): JSX.Element {
                   ref={textsRef[textIndex].textarea}
                   placeholder={`${t('studio.text')} #${textIndex + 1}`}
                   value={value}
-                  onChange={(value: any): void =>
+                  onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
                     handleEdit({
                       textId: id,
                       type: 'value',
-                      value,
+                      value: event.target.value,
                     })
                   }
                 />

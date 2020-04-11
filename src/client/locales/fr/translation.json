@@ -23,6 +23,7 @@
     "getStarted": "Commencer maintenant"
   },
   "studio": {
+    "lastBackup": "Dernière sauvegarde",
     "selectMeme": "Veuillez sélectionner un mème de la galerie",
     "or": "ou",
     "importImage": "importez une image",

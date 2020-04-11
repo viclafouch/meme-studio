@@ -23,6 +23,7 @@
     "getStarted": "Get started"
   },
   "studio": {
+    "lastBackup": "Last backup",
     "selectMeme": "Please select a meme in the gallery",
     "or": "or",
     "importImage": "drop an image",

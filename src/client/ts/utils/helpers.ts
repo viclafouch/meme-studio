@@ -11,6 +11,7 @@ import {
   EDIT_VALUE,
 } from '@client/ts/shared/constants'
 import { typeString } from '@client/ts/shared/validators'
+import { formatRelative, format } from 'date-fns'
 
 export const toHistoryType = (type: typeString): string => {
   switch (type) {
@@ -38,3 +39,29 @@ export const toHistoryType = (type: typeString): string => {
       return type
   }
 }
+
+export const hasRecoverVersion = (): false | Date => {
+  let lastEditDate: string | Date | undefined = window.localStorage.getItem('lastEditDate')
+  if (lastEditDate !== undefined) {
+    const now = new Date()
+    lastEditDate = new Date(JSON.parse(lastEditDate))
+    const hourDifference = Math.abs(now.getTime() - lastEditDate.getTime()) / 36e5
+    return hourDifference < 2 ? lastEditDate : false
+  }
+  return false
+}
+
+const getLocale = (locale = window.localStorage.i18nextLng): object => {
+  if (!['fr', 'en-US'].includes(locale)) locale = 'en-US'
+  return require(`date-fns/locale/${locale}/index.js`)
+}
+
+export const formatDate = (date: Date, formatStyle: string, locale?: string): string =>
+  format(date, formatStyle, {
+    locale: getLocale(locale),
+  })
+
+export const formatRelativeDate = (date: Date, baseDate: Date, locale?: string): string =>
+  formatRelative(date, baseDate, {
+    locale: getLocale(locale),
+  })

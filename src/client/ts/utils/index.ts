@@ -2,7 +2,7 @@ import TextBox from '@client/ts/shared/models/TextBox'
 import { Line } from '@client/ts/shared/validators'
 import { API_URL, IS_DEV } from '@shared/config'
 
-export const debug = (text: string, ...args: any[]): void => IS_DEV && console.log(`%c ${text}\n`, 'font-weight: bold', args)
+export const debug = (text: string, args?: any): void => IS_DEV && console.log(`%c ${text}\n`, 'font-weight: bold', args)
 
 export const getDefaultLang = (availableLangs: Array<string>, defaultLang = 'en'): string =>
   navigator.languages.map((l) => l.substr(0, 2)).find((lang) => availableLangs.includes(lang)) || defaultLang
@@ -16,6 +16,22 @@ export const innerDimensions = (node: HTMLElement): { height: number; width: num
   height -= parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom)
   width -= parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight)
   return { height, width }
+}
+
+export const setLocalStorage = (dataObject: Record<string, any>): void => {
+  for (const key in dataObject) {
+    if (dataObject.hasOwnProperty(key)) {
+      window.localStorage.setItem(key, JSON.stringify(dataObject[key]))
+    }
+  }
+}
+
+export const removeLocalStorage = (keys: Array<string>): void => {
+  for (const key of keys) {
+    if (window.localStorage.hasOwnProperty(key)) {
+      window.localStorage.removeItem(key)
+    }
+  }
 }
 
 export const radToDegree = (rad: number): number => (rad * 180) / Math.PI
@@ -116,12 +132,6 @@ export const fetchApi = async (path = '', params = {}): Promise<object> => {
     },
     ...params,
   }).then((response: Response) => response.json())
-}
-
-export const parseSearchParams = (params: any): string => {
-  const searchParams = new URLSearchParams()
-  for (const iterator in params) searchParams.append(iterator, params[iterator])
-  return searchParams.toString()
 }
 
 export const debounce = (func: any, wait: number): any => {

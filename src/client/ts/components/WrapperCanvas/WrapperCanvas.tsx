@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useLayoutEffect } from 'react'
+import { useLayoutEffect, useEffect } from 'react'
 import { useWindowWidth, useEditor } from '@client/ts/shared/hooks'
 import { fillText } from '@client/utils/index'
 import TextBox from '@client/ts/shared/models/TextBox'
@@ -15,6 +15,16 @@ function WrapperCanvas(props: any): JSX.Element {
     UseEditorInt,
     Function
   ] = useEditor()
+
+  useEffect(() => {
+    const textIdSelected: string | undefined = window.localStorage.getItem('textIdSelected')
+    if (textIdSelected !== undefined) {
+      dispatchEditor({
+        type: SET_TEXT_ID_SELECTED,
+        textIdSelected: JSON.parse(textIdSelected),
+      })
+    }
+  }, [])
 
   useLayoutEffect(() => {
     const canvas: HTMLCanvasElement = canvasRef.current

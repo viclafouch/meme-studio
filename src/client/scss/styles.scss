@@ -214,6 +214,11 @@ body {
       background-size: cover;
       position: relative;
 
+      @include lg {
+        padding: 50px 100px;
+      }
+
+
       .canvas-debugger {
         position: absolute;
         right: 0;
@@ -221,8 +226,28 @@ body {
         z-index: 99;
       }
 
-      @include lg {
-        padding: 50px 100px;
+      .recover-version-box {
+        position: absolute;
+        left: 50%;
+        width: 170px;
+        margin-left: -85px;
+        bottom: 30px;
+        z-index: 991;
+        background-color: rgba(255,255,255,0.89);
+        box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+        color: #444444;
+        text-align: center;
+        line-height: 1.2rem;
+        border: 1px solid #e9ecef;
+        border-radius: 3px;
+        padding: 10px 20px;
+        font-size: 0.82rem;
+        animation-delay: 1s;
+        animation-duration: 0.3s;
+
+        &-date::first-letter {
+          text-transform: uppercase;;
+        }
       }
 
       &.studio-content-active {
