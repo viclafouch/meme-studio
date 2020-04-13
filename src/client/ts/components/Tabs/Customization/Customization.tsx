@@ -13,13 +13,14 @@ import TextBox from '@client/ts/shared/models/TextBox'
 import { fontsFamilyConfig, createText, fontSizeConfig, boxShadowConfig } from '@client/ts/shared/config-editor'
 import { EditorContext, EditorState } from '@client/store/EditorContext'
 import { CUSTOM_TEXT, ADD_TEXT, REMOVE_TEXT, SET_TEXT_ID_SELECTED } from '@client/store/reducer/constants'
-import { useEditor } from '@client/ts/shared/hooks'
+import { useEditor, useWindowWidth } from '@client/ts/shared/hooks'
 import { toHistoryType } from '@client/utils/helpers'
 import { wait, randomID } from '@shared/utils'
 import './customization.scss'
 
 function Customization(): JSX.Element {
   const { t } = useTranslation()
+  const { isMinLgSize } = useWindowWidth()
   const colorPicker = useRef<any>(null)
   const [{ textIdSelected, texts, drawProperties, memeSelected, saveToEditor }, dispatchEditor]: [
     UseEditorInt,
@@ -113,7 +114,7 @@ function Customization(): JSX.Element {
             }}
             afterOpening={(): void => {
               const textarea: HTMLTextAreaElement = textsRef[textIndex].textarea.current
-              textarea.focus()
+              if (isMinLgSize) textarea.focus()
             }}
           >
             <div className="customization-textbox-section">

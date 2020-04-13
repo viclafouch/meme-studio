@@ -32,7 +32,7 @@ const TextareaExtended = React.forwardRef(
     }
 
     useEffect(() => {
-      setTimeout(resize, 0)
+      if (props.value) setTimeout(resize, 0)
     }, [])
 
     return (

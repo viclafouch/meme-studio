@@ -41,6 +41,7 @@
 
     &:disabled {
       color: #dcdcdc !important;
+      cursor: not-allowed;
     }
 
     &[data-tooltip]::after,
