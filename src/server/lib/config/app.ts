@@ -2,6 +2,7 @@ import * as express from 'express'
 import * as cookieParser from 'cookie-parser'
 import * as helmet from 'helmet'
 import * as morgan from 'morgan'
+import * as path from 'path'
 import { Request, Response, NextFunction } from 'express'
 import * as cors from 'cors'
 import * as bodyParser from 'body-parser'
@@ -44,7 +45,6 @@ class App {
     this.app.use(bodyParser.json({ limit: '50mb' }))
     this.app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }))
     this.app.use(morgan('combined'))
-    if (!IS_DEV) this.app.use(express.static(process.cwd() + clientDir))
     this.app.use(cors())
   }
 
@@ -52,6 +52,12 @@ class App {
     this.app.route('/memes').post(this.memeController.index)
     this.app.route('/memes/:id').post(this.memeController.show)
     this.app.route('/share').post(this.memeController.share)
+    if (!IS_DEV) {
+      this.app.use(express.static(process.cwd() + clientDir))
+      this.app.get('*', (req, res) => {
+        res.sendFile(path.resolve(process.cwd() + clientDir, 'index.html'))
+      })
+    }
     this.app.route('*').all(function (req: Request, res: Response) {
       handleError(new HttpException(404, 'Not Found'), req, res)
     })
