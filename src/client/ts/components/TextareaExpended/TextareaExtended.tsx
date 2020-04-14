@@ -12,17 +12,19 @@ const TextareaExtended = React.forwardRef(
 
     const resize = (): void => {
       const textarea: HTMLTextAreaElement = textareaRef.current
-      textarea.style.height = 'inherit'
-      const computed: CSSStyleDeclaration = window.getComputedStyle(textarea)
+      if (textarea) {
+        textarea.style.height = 'inherit'
+        const computed: CSSStyleDeclaration = window.getComputedStyle(textarea)
 
-      const height: number =
-        parseInt(computed.getPropertyValue('border-top-width')) +
-        parseInt(computed.getPropertyValue('padding-top')) +
-        textarea.scrollHeight +
-        parseInt(computed.getPropertyValue('padding-bottom')) +
-        parseInt(computed.getPropertyValue('border-bottom-width'))
+        const height: number =
+          parseInt(computed.getPropertyValue('border-top-width')) +
+          parseInt(computed.getPropertyValue('padding-top')) +
+          textarea.scrollHeight +
+          parseInt(computed.getPropertyValue('padding-bottom')) +
+          parseInt(computed.getPropertyValue('border-bottom-width'))
 
-      textarea.style.height = height + 'px'
+        textarea.style.height = height + 'px'
+      }
     }
 
     const moveCaretAtEnd = (): void => {
