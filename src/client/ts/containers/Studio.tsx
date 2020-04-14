@@ -123,50 +123,29 @@ function Studio(props: any): JSX.Element {
   const closeTabModal = (): void => setCurrentTab(null)
 
   return (
-    <>
-      <div className="page page-studio">
-        <Header isAnimate export={(): void => props.setIsModalExportOpen(true)} />
-        <div className="ld ld-float-btt-in studio-body">
-          <div className="studio-tools">
-            <Tools export={(): void => props.setIsModalExportOpen(true)} />
-          </div>
-          <div className={`studio-content ${memeSelected ? 'studio-content-active' : ''}`} ref={contentRef}>
-            {lastVersion && (
-              <div className={`recover-version-box ld ${isActiveRecoverBox ? 'ld-float-btt-in' : 'ld-fade-out'}`}>
-                {t('studio.lastBackup')} <br />
-                <p className="recover-version-box-date">{formatRelativeDate(lastVersion, new Date(), i18n.language)}</p>
-              </div>
-            )}
-            {memeSelected && <WrapperCanvas changeTab={setCurrentTab} />}
-            {IS_DEV && <CanvasDebugger />}
-            {!memeSelected && (
-              <div className="empty-meme">
-                <ReactSVG src="images/choose-meme.svg" wrapper="span" className="choose-meme-svg" />
-                {isMinLgSize ? (
-                  <>
-                    <p>
-                      {t('studio.selectMeme')} <br />{' '}
-                      <label className="import-image-label" htmlFor="local-meme">
-                        <input
-                          type="file"
-                          ref={inputDrop}
-                          onChange={(): any => handleImportImage()}
-                          className="import-image-label-input"
-                          accept="image/png, image/jpeg"
-                          id="local-meme"
-                        />
-                        {t('studio.or')} <span className="import-image-label-text">{t('studio.importImage')}</span>.
-                      </label>
-                    </p>
-                    <DragAndDrop onDrop={handleImportImage} id="dragenter-root" />
-                  </>
-                ) : (
-                  <div className="empty-meme-buttons-container">
-                    <Button className={'button-select-gallery'} big onClick={(): void => setCurrentTab(TAB_GALLERY)}>
-                      Sélectionner un meme
-                    </Button>
-                    <label htmlFor="local-meme" className="import-image-label button button-big button-select-gallery">
-                      <span>Importer un meme</span>
+    <div className="page page-studio">
+      <Header isAnimate export={(): void => props.setIsModalExportOpen(true)} />
+      <div className="ld ld-float-btt-in studio-body">
+        <div className="studio-tools">
+          <Tools export={(): void => props.setIsModalExportOpen(true)} />
+        </div>
+        <div className={`studio-content ${memeSelected ? 'studio-content-active' : ''}`} ref={contentRef}>
+          {lastVersion && (
+            <div className={`recover-version-box ld ${isActiveRecoverBox ? 'ld-float-btt-in' : 'ld-fade-out'}`}>
+              {t('studio.lastBackup')} <br />
+              <p className="recover-version-box-date">{formatRelativeDate(lastVersion, new Date(), i18n.language)}</p>
+            </div>
+          )}
+          {memeSelected && <WrapperCanvas changeTab={setCurrentTab} />}
+          {IS_DEV && <CanvasDebugger />}
+          {!memeSelected && (
+            <div className="empty-meme">
+              <ReactSVG src="images/choose-meme.svg" wrapper="span" className="choose-meme-svg" />
+              {isMinLgSize ? (
+                <>
+                  <p>
+                    {t('studio.selectMeme')} <br />{' '}
+                    <label className="import-image-label" htmlFor="local-meme">
                       <input
                         type="file"
                         ref={inputDrop}
@@ -175,43 +154,60 @@ function Studio(props: any): JSX.Element {
                         accept="image/png, image/jpeg"
                         id="local-meme"
                       />
+                      {t('studio.or')} <span className="import-image-label-text">{t('studio.importImage')}</span>.
                     </label>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-          <aside className="studio-aside">
-            <header className="studio-aside-header">
-              <Button
-                className={`studio-aside-header-btn ${currentTab === TAB_GALLERY ? 'studio-aside-header-btn-active' : null}`}
-                onClick={(): void => setCurrentTab(TAB_GALLERY)}
-                id="tab-gallery-btn"
-              >
-                <FontAwesomeIcon className="icon-image" icon={['fas', 'image']} />
-              </Button>
-              <Button
-                className={`studio-aside-header-btn ${
-                  currentTab === TAB_CUSTOMIZATION ? 'studio-aside-header-btn-active' : null
-                }`}
-                onClick={(): void => setCurrentTab(TAB_CUSTOMIZATION)}
-                id="tab-customization-btn"
-              >
-                <FontAwesomeIcon className="icon-heading" icon={['fas', 'heading']} />
-              </Button>
-            </header>
-            <div className="studio-aside-content">
-              <Tab active={currentTab === TAB_GALLERY} id="gallery-tab" onCloseModal={closeTabModal}>
-                <Gallery onSelectMeme={handleChooseMeme} />
-              </Tab>
-              <Tab active={currentTab === TAB_CUSTOMIZATION} id="customization-tab" onCloseModal={closeTabModal}>
-                <Customization />
-              </Tab>
+                  </p>
+                  <DragAndDrop onDrop={handleImportImage} id="dragenter-root" />
+                </>
+              ) : (
+                <div className="empty-meme-buttons-container">
+                  <Button className={'button-select-gallery'} big onClick={(): void => setCurrentTab(TAB_GALLERY)}>
+                    Sélectionner un meme
+                  </Button>
+                  <label htmlFor="local-meme" className="import-image-label button button-big button-select-gallery">
+                    <span>Importer un meme</span>
+                    <input
+                      type="file"
+                      ref={inputDrop}
+                      onChange={(): any => handleImportImage()}
+                      className="import-image-label-input"
+                      accept="image/png, image/jpeg"
+                      id="local-meme"
+                    />
+                  </label>
+                </div>
+              )}
             </div>
-          </aside>
+          )}
         </div>
+        <aside className="studio-aside">
+          <header className="studio-aside-header">
+            <Button
+              className={`studio-aside-header-btn ${currentTab === TAB_GALLERY ? 'studio-aside-header-btn-active' : null}`}
+              onClick={(): void => setCurrentTab(TAB_GALLERY)}
+              id="tab-gallery-btn"
+            >
+              <FontAwesomeIcon className="icon-image" icon={['fas', 'image']} />
+            </Button>
+            <Button
+              className={`studio-aside-header-btn ${currentTab === TAB_CUSTOMIZATION ? 'studio-aside-header-btn-active' : null}`}
+              onClick={(): void => setCurrentTab(TAB_CUSTOMIZATION)}
+              id="tab-customization-btn"
+            >
+              <FontAwesomeIcon className="icon-heading" icon={['fas', 'heading']} />
+            </Button>
+          </header>
+          <div className="studio-aside-content">
+            <Tab active={currentTab === TAB_GALLERY} id="gallery-tab" onCloseModal={closeTabModal}>
+              <Gallery onSelectMeme={handleChooseMeme} />
+            </Tab>
+            <Tab active={currentTab === TAB_CUSTOMIZATION} id="customization-tab" onCloseModal={closeTabModal}>
+              <Customization />
+            </Tab>
+          </div>
+        </aside>
       </div>
-    </>
+    </div>
   )
 }
 
