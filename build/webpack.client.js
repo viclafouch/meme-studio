@@ -94,7 +94,8 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '..', 'src', 'client', 'html', 'index.html'),
       env: {
-        IS_DEV
+        IS_DEV,
+        GA_TRACKING_ID: 'UA-163474835-1'
       }
     }),
     new MiniCssExtractPlugin({

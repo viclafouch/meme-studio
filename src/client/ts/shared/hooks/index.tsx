@@ -18,6 +18,12 @@ import { debounce } from '@client/utils/index'
 import { TEXT_ADDED, TEXT_REMOVED } from '@client/ts/shared/constants'
 import { useLocation } from 'react-router-dom'
 
+declare global {
+  interface Window {
+    ga: any
+  }
+}
+
 export const useEditor = (): [UseEditorInt, Function] => {
   const [state, dispatch]: [EditorState, Function] = useContext(EditorContext)
 
@@ -104,8 +110,12 @@ export function useMemes(): {
 
 export function usePageViews(): void {
   const location = useLocation()
-  useEffect(() => {
-    console.log(location)
-    // ga.send(['pageview', location.pathname])
-  }, [location])
+  useEffect(
+    () =>
+      window.ga('send', {
+        hitType: 'pageview',
+        page: location.pathname,
+      }),
+    [location]
+  )
 }
