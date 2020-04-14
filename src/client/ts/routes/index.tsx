@@ -6,10 +6,12 @@ import About from '@client/containers/About'
 import Studio from '@client/containers/Studio'
 import Home from '@client/containers/Home'
 import NotFound from '@client/containers/404'
-import { usePageViews } from '../shared/hooks'
+import { usePageViews, useEditor } from '../shared/hooks'
+import { UseEditorInt } from '../shared/validators'
 
 function routes(): JSX.Element {
   const { t } = useTranslation()
+  const [{ memeSelected }]: [UseEditorInt, Function] = useEditor()
   usePageViews()
 
   return (
@@ -20,7 +22,7 @@ function routes(): JSX.Element {
       <Page path="/about" title={t('about')}>
         <About />
       </Page>
-      <Page path="/create" title={t('createAMeme')}>
+      <Page path="/create" title={!memeSelected ? t('createAMeme') : memeSelected.name}>
         <Studio />
       </Page>
       <Page path="*" title={t('notFound')}>

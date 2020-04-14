@@ -13,7 +13,7 @@ const Page = (props: PagePropsInt): JSX.Element => {
 
   useEffect(() => {
     if (props.title) {
-      document.title = 'Meme Studio | ' + props.title
+      document.title = `Meme Studio | ${props.title}`
     } else {
       document.title = 'Meme Studio'
     }

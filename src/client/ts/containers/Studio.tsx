@@ -9,7 +9,7 @@ import Button from '@client/components/Button/Button'
 import WrapperCanvas from '@client/components/WrapperCanvas/WrapperCanvas'
 import Tab from '@client/components/Tabs/Tab'
 import { EditorState } from '@client/store/EditorContext'
-import { SET_MEME_SELECTED, RESIZE_WINDOW } from '@client/store/reducer/constants'
+import { SET_MEME_SELECTED, RESIZE_WINDOW, SET_TEXT_ID_SELECTED } from '@client/store/reducer/constants'
 import { TAB_CUSTOMIZATION, TAB_GALLERY } from '@client/ts/shared/constants'
 import Meme from '@client/ts/shared/models/Meme'
 import Tools from '@client/components/Tools/Tools'
@@ -66,24 +66,28 @@ function Studio(props: any): JSX.Element {
   }
 
   useEffect(() => {
+    let timeout: any
     if (hasRecoverVersion()) {
-      let timeout = setTimeout(() => {
+      timeout = setTimeout(() => {
         setIsActiveRecoverBox(false)
         timeout = setTimeout(() => {
           setLastVersion(false)
         }, 2000) // Wait for the animation end
       }, 5000) // Show 5s for the user
-      return (): void => clearTimeout(timeout)
+    }
+    return (): void => {
+      clearTimeout(timeout)
+      dispatchEditor({
+        type: SET_TEXT_ID_SELECTED,
+        textIdSelected: null,
+      })
     }
   }, [])
 
   useEffect(() => {
     if (memeSelected) {
-      document.title = `Meme Studio - ${memeSelected.name}`
+      document.title = `Meme Studio | ${memeSelected.name}`
       setCurrentTab(isMinLgSize ? TAB_CUSTOMIZATION : null)
-    } else {
-      document.title = `Meme Studio`
-      setCurrentTab(isMinLgSize ? TAB_GALLERY : null)
     }
   }, [memeSelected])
 
