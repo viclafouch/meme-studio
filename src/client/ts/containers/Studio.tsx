@@ -125,9 +125,7 @@ function Studio(props: any): JSX.Element {
   return (
     <>
       <div className="page page-studio">
-        <div className="ld ld-fall-ttb-in studio-header">
-          <Header export={(): void => props.setIsModalExportOpen(true)} />
-        </div>
+        <Header isAnimate export={(): void => props.setIsModalExportOpen(true)} />
         <div className="ld ld-float-btt-in studio-body">
           <div className="studio-tools">
             <Tools export={(): void => props.setIsModalExportOpen(true)} />

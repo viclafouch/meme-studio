@@ -14,6 +14,7 @@ import './header.scss'
 
 type HeaderProps = {
   export?: Function
+  isAnimate: boolean
 }
 
 function Header(props: HeaderProps): JSX.Element {
@@ -33,7 +34,7 @@ function Header(props: HeaderProps): JSX.Element {
   }
 
   return (
-    <header className="header">
+    <header className={`header ${props.isAnimate ? 'ld ld-fall-ttb-in' : ''}`}>
       <div>
         <a
           target="_blank"
@@ -52,13 +53,19 @@ function Header(props: HeaderProps): JSX.Element {
       </div>
       <div>
         <LangSelector />
-        <Button className="button-export" disabled={!memeSelected} onClick={props.export}>
-          <FontAwesomeIcon icon={['fas', 'arrow-circle-down']} className="icon-arrow-circle-down" />
-          <span>{t('studio.export')}</span>
-        </Button>
+        {props.export && (
+          <Button className="button-export" disabled={!memeSelected} onClick={props.export}>
+            <FontAwesomeIcon icon={['fas', 'arrow-circle-down']} className="icon-arrow-circle-down" />
+            <span>{t('studio.export')}</span>
+          </Button>
+        )}
       </div>
     </header>
   )
 }
+
+Header.defaultProps = {
+  isAnimate: false,
+} as HeaderProps
 
 export default Header

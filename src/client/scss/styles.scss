@@ -28,6 +28,14 @@ body {
   }
 }
 
+.container {
+  max-width: 1170px;
+  padding-right: 40px;
+  padding-left: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .main-wrapper {
   flex: 1;
   display: flex;
@@ -149,13 +157,6 @@ body {
 }
 
 .page-studio {
-  .studio-header {
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.8);
-    z-index: 9999;
-    position: relative;
-    width: 100%;
-  }
-
   .studio-body {
     width: 100%;
     height: calc(100vh - var(--header-height));

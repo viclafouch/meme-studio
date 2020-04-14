@@ -7,6 +7,10 @@
   justify-content: space-between;
   background-color: var(--blue-light);
 
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  position: relative;
+
   & > div {
     flex: 3;
     display: flex;
