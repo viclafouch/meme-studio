@@ -1,10 +1,11 @@
 import * as React from 'react'
 import '@client/scss/pages/about.scss'
 import Header from '@client/components/Header/Header'
+import Footer from '@client/components/Footer/Footer'
 
 function About(): JSX.Element {
   return (
-    <div className="page">
+    <div className="page about">
       <Header />
       <div className="content-one">
         <section className="about-body container">
@@ -44,6 +45,7 @@ function About(): JSX.Element {
           ></iframe>
         </section>
       </div>
+      <Footer />
     </div>
   )
 }

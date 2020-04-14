@@ -46,5 +46,7 @@
     "middle": "Middle",
     "center": "Center",
     "dropImage": "Drop your image in PNG or JPG format here"
-  }
+  },
+  "about": "About",
+  "legal": "Legal Notice"
 }

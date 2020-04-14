@@ -40,6 +40,8 @@ body {
   flex: 1;
   display: flex;
   min-height: inherit;
+  flex-direction: column;
+  width: 100%;
 
   & > div.page {
     flex: 1;
@@ -71,18 +73,21 @@ body {
 }
 
 .intro {
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   text-align: center;
   align-items: center;
-  width: 100%;
   padding: 0 20px;
 
   .lang-selector {
     position: absolute;
     right: 10px;
     top: 10px;
+  }
+
+  .content-one {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .intro-title {
@@ -168,7 +173,6 @@ body {
     overflow: hidden;
 
     @include lg {
-      border-radius: 3px;
       grid-template-rows: auto;
       grid-template-columns: var(--tools-width) auto var(--aside-width);
     }
