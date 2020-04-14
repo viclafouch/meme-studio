@@ -1,25 +1,20 @@
 import * as React from 'react'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { ReactSVG } from 'react-svg'
 import { useTranslation } from 'react-i18next'
-import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
 import { FatalError } from '@client/components/ErrorBoundary/ErrorBoundary'
-import { UseEditorInt } from '../shared/validators'
 import { wait } from '@shared/utils'
 import { useMemes, useEditor } from '@client/ts/shared/hooks'
-import { Switch, Route } from 'react-router-dom'
-import About from './About'
-import Studio from './Studio'
-import Intro from './Intro'
+import { UseEditorInt } from '../shared/validators'
 import Export from './Export'
+import Router from '../routes'
 
 function Main(): JSX.Element {
   const { i18n } = useTranslation()
   const { fetchNextMemes } = useMemes()
-  const [{ onStudio }]: [DefaultState] = useContext(DefaultContext)
+  const [{ isExportModalActive }]: [UseEditorInt, Function] = useEditor()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isError, setIsError] = useState<boolean>(false)
-  const [isModalExportOpen, setIsModalExportOpen] = useState<boolean>(false)
 
   useEffect(() => {
     ;(async (): Promise<void> => {
@@ -48,14 +43,9 @@ function Main(): JSX.Element {
       ) : isError ? (
         <FatalError />
       ) : (
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/">{!onStudio ? <Intro /> : <Studio setIsModalExportOpen={setIsModalExportOpen} />}</Route>
-        </Switch>
+        <Router />
       )}
-      {isModalExportOpen && <Export onClose={(): void => setIsModalExportOpen(false)} />}
+      {isExportModalActive && <Export />}
     </main>
   )
 }

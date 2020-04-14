@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { DefaultProvider } from '@client/store/DefaultContext'
 import ErrorBoundary from '@client/components/ErrorBoundary/ErrorBoundary'
 import MainContainer from '@client/containers/Main'
@@ -50,13 +50,13 @@ library.add(
 function App(): JSX.Element {
   return (
     <ErrorBoundary>
-      <Router>
+      <BrowserRouter>
         <DefaultProvider>
           <EditorProvider>
             <MainContainer />
           </EditorProvider>
         </DefaultProvider>
-      </Router>
+      </BrowserRouter>
     </ErrorBoundary>
   )
 }

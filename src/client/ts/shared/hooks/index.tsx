@@ -16,6 +16,7 @@ import { EditorContext, EditorState } from '@client/store/EditorContext'
 import { UseEditorInt } from '@client/ts/shared/validators'
 import { debounce } from '@client/utils/index'
 import { TEXT_ADDED, TEXT_REMOVED } from '@client/ts/shared/constants'
+import { useLocation } from 'react-router-dom'
 
 export const useEditor = (): [UseEditorInt, Function] => {
   const [state, dispatch]: [EditorState, Function] = useContext(EditorContext)
@@ -99,4 +100,12 @@ export function useMemes(): {
     numPage,
     hasNextMemes,
   }
+}
+
+export function usePageViews(): void {
+  const location = useLocation()
+  useEffect(() => {
+    console.log(location)
+    // ga.send(['pageview', location.pathname])
+  }, [location])
 }

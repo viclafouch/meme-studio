@@ -1,24 +1,22 @@
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState } from 'react'
 import Modal from '@client/components/Modal/Modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { EditorContext, EditorState } from '@client/store/EditorContext'
 import { fillText } from '@client/utils/index'
 import { wait } from '@shared/utils'
 import Button from '@client/components/Button/Button'
 import TextBox from '@client/ts/shared/models/TextBox'
 import { postToTwitter } from '../shared/api'
+import { useEditor } from '../shared/hooks'
+import { TOGGLE_EXPORT_MODAL } from '@client/store/reducer/constants'
+import { UseEditorInt } from '../shared/validators'
 
-type ExportProps = {
-  onClose: Function
-}
-
-function Export(props: ExportProps): JSX.Element {
+function Export(): JSX.Element {
   const { t } = useTranslation()
   const [isLoading, setIsLoading]: [boolean, Function] = useState<boolean>(true)
   const [img, setImg]: [string, Function] = useState<string>('')
-  const [{ drawProperties, memeSelected, texts }]: [EditorState] = useContext(EditorContext)
+  const [{ drawProperties, memeSelected, texts }, dispatchEditor]: [UseEditorInt, Function] = useEditor()
 
   useEffect(() => {
     ;(async (): Promise<void> => {
@@ -66,8 +64,10 @@ function Export(props: ExportProps): JSX.Element {
   }
 
   const handleClose = (): void => {
-    props.onClose()
     setImg(null)
+    dispatchEditor({
+      type: TOGGLE_EXPORT_MODAL,
+    })
   }
 
   return (

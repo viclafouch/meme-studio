@@ -2,10 +2,8 @@ import * as React from 'react'
 import { createContext, useReducer, createRef, RefObject } from 'react'
 import DefaultReducer from './reducer/default'
 import Meme from '@client/ts/shared/models/Meme'
-import { hasRecoverVersion } from '@client/utils/helpers'
 
 export interface DefaultState {
-  onStudio: boolean
   modalRef: RefObject<HTMLDivElement>
   memes: Array<Meme>
   numPage: number
@@ -13,7 +11,6 @@ export interface DefaultState {
 }
 
 const initialState: DefaultState = {
-  onStudio: !!hasRecoverVersion(),
   modalRef: createRef(),
   memes: [],
   numPage: 0,

@@ -1,5 +1,4 @@
 // Default
-export const SET_ON_STUDIO = 'SET_ON_STUDIO'
 export const SET_MEMES = 'SET_MEMES'
 export const SET_HAS_NEXT_MEMES = 'SET_HAS_NEXT_MEMES'
 export const SET_NUM_PAGE = 'SET_NUM_PAGE'
@@ -17,3 +16,4 @@ export const REMOVE_TEXT = 'REMOVE_TEXT'
 export const ADD_TEXT = 'ADD_TEXT'
 export const RESET = 'RESET'
 export const SET_HISTORY = 'SET_HISTORY'
+export const TOGGLE_EXPORT_MODAL = 'TOGGLE_EXPORT_MODAL'

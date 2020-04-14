@@ -124,10 +124,10 @@ function Studio(props: any): JSX.Element {
 
   return (
     <div className="page page-studio">
-      <Header isAnimate export={(): void => props.setIsModalExportOpen(true)} />
+      <Header isAnimate />
       <div className="ld ld-float-btt-in studio-body">
         <div className="studio-tools">
-          <Tools export={(): void => props.setIsModalExportOpen(true)} />
+          <Tools />
         </div>
         <div className={`studio-content ${memeSelected ? 'studio-content-active' : ''}`} ref={contentRef}>
           {lastVersion && (

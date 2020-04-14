@@ -9,6 +9,7 @@ export interface EditorState {
   textIdSelected: string
   showTextAreas: boolean
   memeSelected: Meme
+  isExportModalActive: boolean
   canvasRef: RefObject<HTMLCanvasElement>
   texts: Array<TextBox>
   drawProperties: DrawProperties
@@ -26,6 +27,7 @@ const initialState: EditorState = {
   textIdSelected: null,
   showTextAreas: true,
   memeSelected: null,
+  isExportModalActive: false,
   canvasRef: createRef(),
   texts: [],
   drawProperties: null,

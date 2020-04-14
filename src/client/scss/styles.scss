@@ -115,7 +115,13 @@ body {
   div.intro-content {
     width: 100%;
 
-    & > button.intro-get-started-btn {
+    a {
+      text-decoration: none;
+      width: 100%;
+      display: block;
+    }
+
+    button.intro-get-started-btn {
       width: 100%;
       max-width: 650px;
       margin-left: auto;

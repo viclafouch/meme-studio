@@ -12,6 +12,7 @@ import {
   ERASE_ALL,
   RESET,
   SET_HISTORY,
+  TOGGLE_EXPORT_MODAL,
 } from './constants'
 import { EditorState } from '../EditorContext'
 import TextBox from '@client/ts/shared/models/TextBox'
@@ -156,6 +157,9 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
   const draft: Draft<EditorState> = createDraft(state)
   let textIndex: number
   switch (action.type) {
+    case TOGGLE_EXPORT_MODAL:
+      draft.isExportModalActive = !draft.isExportModalActive
+      break
     case SET_MEME_SELECTED:
       draft.memeSelected = action.memeSelected
       updateDrawing(draft, action.texts)

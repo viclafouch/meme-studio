@@ -2,17 +2,20 @@ import * as React from 'react'
 import { useRef, RefObject } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useTranslation } from 'react-i18next'
-import { SET_SHOW_TEXT_AREAS, UNDO_HISTORY, REDO_HISTORY, ERASE_ALL, RESET } from '@client/store/reducer/constants'
+import {
+  SET_SHOW_TEXT_AREAS,
+  UNDO_HISTORY,
+  REDO_HISTORY,
+  ERASE_ALL,
+  RESET,
+  TOGGLE_EXPORT_MODAL,
+} from '@client/store/reducer/constants'
 import Faq from '@client/components/Faq/Faq'
 import { useEditor, useWindowWidth } from '@client/ts/shared/hooks'
 import { UseEditorInt } from '@client/ts/shared/validators'
 import './tools.scss'
 
-type ToolsProps = {
-  export: Function
-}
-
-const Tools = (props: ToolsProps): JSX.Element => {
+const Tools = (): JSX.Element => {
   const faqModal: RefObject<any> = useRef(null)
   const { t } = useTranslation()
   const { isMinLgSize } = useWindowWidth()
@@ -83,7 +86,7 @@ const Tools = (props: ToolsProps): JSX.Element => {
               className="tools-list-btn"
               data-tooltip={t('studio.export')}
               disabled={!memeSelected}
-              onClick={(): void => memeSelected && props.export()}
+              onClick={(): void => memeSelected && dispatchEditor({ type: TOGGLE_EXPORT_MODAL })}
             >
               <FontAwesomeIcon icon={['fas', 'save']} />
             </button>
