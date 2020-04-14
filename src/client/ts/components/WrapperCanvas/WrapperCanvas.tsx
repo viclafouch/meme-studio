@@ -50,7 +50,7 @@ function WrapperCanvas(props: any): JSX.Element {
   }, [drawProperties, texts])
 
   return (
-    <div className="wrapper-canvas">
+    <div className="wrapper-canvas" onContextMenu={(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => e.preventDefault()}>
       <div
         className="wrapper-canvas-container"
         style={{
