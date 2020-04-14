@@ -50,5 +50,7 @@
   "about": "About",
   "legal": "Legal Notice",
   "notFound": "Page not found",
-  "createAMeme": "Create a meme"
+  "createAMeme": "Create a meme",
+  "backToHome": "Back to home",
+  "noMatch": "No match for"
 }

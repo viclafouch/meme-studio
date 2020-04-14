@@ -3,17 +3,18 @@ import { useState, useEffect } from 'react'
 import { ReactSVG } from 'react-svg'
 import { useTranslation } from 'react-i18next'
 import { FatalError } from '@client/components/ErrorBoundary/ErrorBoundary'
-import { wait } from '@shared/utils'
 import { useMemes, useEditor } from '@client/ts/shared/hooks'
 import { UseEditorInt } from '../shared/validators'
 import Export from './Export'
 import Router from '../routes'
+import { useLocation } from 'react-router-dom'
 
 function Main(): JSX.Element {
   const { i18n } = useTranslation()
+  const { pathname } = useLocation()
   const { fetchNextMemes } = useMemes()
   const [{ isExportModalActive }]: [UseEditorInt, Function] = useEditor()
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isLoading, setIsLoading] = useState<boolean>(pathname === '/' || pathname === '/create')
   const [isError, setIsError] = useState<boolean>(false)
 
   useEffect(() => {
@@ -24,7 +25,6 @@ function Main(): JSX.Element {
         if (error.name !== 'AbortError') console.warn(error)
         setIsError(true)
       } finally {
-        await wait(1000)
         setIsLoading(false)
       }
     })()

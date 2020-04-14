@@ -50,5 +50,7 @@
   "about": "À propos",
   "legal": "Mentions légales",
   "notFound": "Page non trouvée",
-  "createAMeme": "Créer un mème"
+  "createAMeme": "Créer un mème",
+  "backToHome": "Revenir à l'accueil",
+  "noMatch": "Aucun résultat pour"
 }
