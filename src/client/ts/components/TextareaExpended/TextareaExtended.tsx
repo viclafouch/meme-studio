@@ -46,6 +46,7 @@ const TextareaExtended = React.forwardRef(
         }}
         className="textarea-exdended"
         ref={textareaRef}
+        spellCheck="false"
         onFocus={moveCaretAtEnd}
       ></textarea>
     )

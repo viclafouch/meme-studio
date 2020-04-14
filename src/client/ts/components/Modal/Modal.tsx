@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useContext, memo } from 'react'
+import { useContext, useCallback, memo, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
@@ -15,6 +15,20 @@ type ModalProps = {
 export function Modal({ onClose, isLoading, children, id }: ModalProps): JSX.Element {
   const { t } = useTranslation()
   const [{ modalRef }]: [DefaultState] = useContext(DefaultContext)
+
+  const handleEscape = useCallback(
+    (event) => {
+      if (event.keyCode === 27) onClose()
+    },
+    [onClose]
+  )
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleEscape, false)
+    return (): void => {
+      document.removeEventListener('keydown', handleEscape, false)
+    }
+  }, [])
 
   return createPortal(
     <div className="modal ld ld-fade-in" id={id}>

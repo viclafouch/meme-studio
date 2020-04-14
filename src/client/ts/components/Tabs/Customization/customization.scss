@@ -29,9 +29,10 @@
 
     h2 {
       text-align: center;
-      font-size: 1.1em;
+      font-size: 1.1rem;
       margin: 20px 0;
-      padding: 0 1em;
+      padding: 0 1rem;
+      line-height: 1.2rem;
     }
 
     .customization-textbox-section {
@@ -46,6 +47,9 @@
       select {
         width: 100px;
         height: 2em;
+        border-radius: 5px;
+        border-width: 1px;
+        border-style: solid;
         background: transparent;
         border-color: var(--input-border-color);
         outline: none;

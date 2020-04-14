@@ -57,18 +57,16 @@ function Export(): JSX.Element {
       window.open(`https://twitter.com/intent/tweet?text=[${t('yourText')}] ${imageUrl}`, '_blank').focus()
     } catch (error) {
       // TODO
-      console.log(error)
+      console.error(error)
     } finally {
       setIsLoading(false)
     }
   }
 
-  const handleClose = (): void => {
-    setImg(null)
+  const handleClose = (): void =>
     dispatchEditor({
       type: TOGGLE_EXPORT_MODAL,
     })
-  }
 
   return (
     <Modal onClose={handleClose} isLoading={isLoading}>
