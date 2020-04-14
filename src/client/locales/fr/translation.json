@@ -18,7 +18,7 @@
   "preview": "Prévisualisation",
   "yourText": "Votre texte",
   "share": "Partager",
-  "intro": {
+  "home": {
     "description": "Créez un mème à partir d'images JPG, GIF ou PNG. Modifiez votre image et créez votre mème personnalisé !",
     "getStarted": "Commencer maintenant"
   },
@@ -48,5 +48,7 @@
     "dropImage": "Déposez votre image au format PNG ou JPG ici"
   },
   "about": "À propos",
-  "legal": "Mentions légales"
+  "legal": "Mentions légales",
+  "notFound": "Page non trouvée",
+  "createAMeme": "Créer un mème"
 }

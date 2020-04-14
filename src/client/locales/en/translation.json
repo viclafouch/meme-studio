@@ -18,7 +18,7 @@
   "preview": "Preview",
   "yourText": "Your text",
   "share": "Share",
-  "intro": {
+  "home": {
     "description": "Create a meme from JPG, GIF or PNG images. Edit your image and make your custom meme.",
     "getStarted": "Get started"
   },
@@ -48,5 +48,7 @@
     "dropImage": "Drop your image in PNG or JPG format here"
   },
   "about": "About",
-  "legal": "Legal Notice"
+  "legal": "Legal Notice",
+  "notFound": "Page not found",
+  "createAMeme": "Create a meme"
 }

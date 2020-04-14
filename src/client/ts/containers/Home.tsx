@@ -1,38 +1,35 @@
 import * as React from 'react'
-import { useContext } from 'react'
 import Button from '@client/components/Button/Button'
 import Meme from '@client/ts/shared/models/Meme'
-import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
 import { useMemes } from '@client/ts/shared/hooks'
 import { useTranslation } from 'react-i18next'
 import LangSelector from '@client/components/LangSelector/LangSelector'
 import Footer from '@client/components/Footer/Footer'
 import { Link } from 'react-router-dom'
+import '../../scss/pages/home.scss'
 
 function Intro(): JSX.Element {
   const { t } = useTranslation()
   const { memes } = useMemes()
-  const [, dispatch]: [DefaultState, Function] = useContext(DefaultContext)
 
   return (
-    <div className="page intro">
+    <div className="page home">
       <LangSelector />
       <div className="content-one">
-        <div className="intro-title">
+        <div className="home-title">
           <h1>Meme Studio</h1>
-          <p>{t('intro.description')}</p>
+          <p>{t('home.description')}</p>
         </div>
-        <div className="intro-content">
+        <div className="home-content">
           <Link to="/create">
-            <Button className="intro-get-started-btn ld ld-fall-ttb-in" big>
-              {t('intro.getStarted')}
+            <Button className="home-get-started-btn ld ld-fall-ttb-in" big>
+              {t('home.getStarted')}
             </Button>
           </Link>
-
-          <ul className="intro-last-memes">
+          <ul className="home-last-memes">
             {memes.slice(0, 3).map((meme: Meme, index: number) => (
               <li key={index}>
-                <article className="intro-last-memes-article">
+                <article className="home-last-memes-article">
                   <img src={meme.url()} alt={meme.name} />
                 </article>
               </li>

@@ -1,0 +1,94 @@
+.page.home {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  padding: 0 20px;
+
+  .lang-selector {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+
+  .content-one {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .home-title {
+    & > h1 {
+      font-size: 42px;
+      letter-spacing: 0;
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 46px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    & > p {
+      font-size: 18px;
+      line-height: 22px;
+      max-width: 600px;
+      text-align: center;
+      margin: 20px auto;
+    }
+  }
+
+  div.home-content {
+    width: 100%;
+
+    a {
+      text-decoration: none;
+      width: 100%;
+      display: block;
+    }
+
+    button.home-get-started-btn {
+      width: 100%;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+      transition-property: background-color;
+      transition-duration: 0.3s;
+
+      &:hover {
+        background-color: var(--blue-light);
+      }
+    }
+
+    & > ul.home-last-memes {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      margin-top: 2em;
+      list-style: none;
+
+      li {
+        &:not(:first-child) {
+          display: none;
+          @include md {
+            display: block;
+          }
+        }
+      }
+
+      .home-last-memes-article {
+        img {
+          border: 2px solid #444444;
+          width: 400px;
+          max-height: 400px;
+        }
+
+        @include md {
+          padding: 0 12px;
+          width: 200px;
+          max-height: none;
+        }
+      }
+    }
+  }
+}
