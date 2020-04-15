@@ -1,16 +1,14 @@
 import * as React from 'react'
 import { useState, useEffect } from 'react'
-import { ReactSVG } from 'react-svg'
-import { useTranslation } from 'react-i18next'
 import { FatalError } from '@client/components/ErrorBoundary/ErrorBoundary'
 import { useMemes, useEditor } from '@client/ts/shared/hooks'
 import { UseEditorInt } from '../shared/validators'
 import Export from './Export'
 import Router from '../routes'
 import { useLocation } from 'react-router-dom'
+import Loader from '@client/components/Loader/Loader'
 
 function Main(): JSX.Element {
-  const { i18n } = useTranslation()
   const { pathname } = useLocation()
   const { fetchNextMemes } = useMemes()
   const [{ isExportModalActive }]: [UseEditorInt, Function] = useEditor()
@@ -32,19 +30,7 @@ function Main(): JSX.Element {
 
   return (
     <main className="main-wrapper">
-      {isLoading ? (
-        <div className="is-loading-memes" aria-busy="true">
-          {i18n.language === 'fr' ? (
-            <ReactSVG src="images/dual-ball-fr.svg" wrapper="span" />
-          ) : (
-            <ReactSVG src="images/dual-ball-en.svg" wrapper="span" />
-          )}
-        </div>
-      ) : isError ? (
-        <FatalError />
-      ) : (
-        <Router />
-      )}
+      {isLoading ? <Loader /> : isError ? <FatalError /> : <Router />}
       {isExportModalActive && <Export />}
     </main>
   )

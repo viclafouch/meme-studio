@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as Loadable from 'react-loadable'
 import { useState, useRef, RefObject, useEffect } from 'react'
 import { ReactSVG } from 'react-svg'
 import { useTranslation } from 'react-i18next'
@@ -19,11 +20,15 @@ import { randomID } from '@shared/utils'
 import DragAndDrop from '@client/components/DragAndDrop/DragAndDrop'
 import { useWindowWidth, useEditor } from '@client/ts/shared/hooks'
 import { getMeme } from '@client/ts/shared/api'
-import CanvasDebugger from '@client/components/CanvasDebugger/CanvasDebugger'
 import { IS_DEV } from '@shared/config'
 import { hasRecoverVersion, formatRelativeDate } from '@client/utils/helpers'
 
-function Studio(props: any): JSX.Element {
+const CanvasDebuggerAsync = Loadable({
+  loader: async () => import('@client/components/CanvasDebugger/CanvasDebugger'),
+  loading: () => null,
+})
+
+function Studio(): JSX.Element {
   const inputDrop: RefObject<HTMLInputElement> = useRef(null)
   const contentRef: RefObject<HTMLDivElement> = useRef(null)
   const { t, i18n } = useTranslation()
@@ -141,7 +146,7 @@ function Studio(props: any): JSX.Element {
             </div>
           )}
           {memeSelected && <WrapperCanvas changeTab={setCurrentTab} />}
-          {IS_DEV && <CanvasDebugger />}
+          {IS_DEV && <CanvasDebuggerAsync />}
           {!memeSelected && (
             <div className="empty-meme">
               <ReactSVG src="images/choose-meme.svg" wrapper="span" className="choose-meme-svg" />

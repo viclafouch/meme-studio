@@ -1,6 +1,6 @@
 @import 'reset';
 @import './global/variables';
-@import url('https://fonts.googleapis.com/css?family=Alata&display=swap');
+@import "~nprogress/nprogress.css";
 
 html {
   font-size: 16px;
@@ -63,13 +63,6 @@ body {
       background-color: #ffffff;
     }
   }
-}
-
-.is-loading-memes {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .page-studio {
