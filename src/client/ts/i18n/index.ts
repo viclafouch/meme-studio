@@ -1,19 +1,17 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import { getDefaultLang } from '@client/utils/index'
-import * as translationFR from '@client/locales/fr/translation.json'
-import * as translationEN from '@client/locales/en/translation.json'
 
 export const languages = {
   fr: {
     name: 'Francais',
     flag: '/images/flag-fr.svg',
-    translation: translationFR,
+    translation: require('../../locales/fr/translation.json'),
   },
   en: {
     name: 'English',
     flag: '/images/flag-en.svg',
-    translation: translationEN,
+    translation: require('../../locales/en/translation.json'),
   },
 }
 

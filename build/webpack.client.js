@@ -53,7 +53,23 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
         exclude: /node_modules/,
         use: [
           {
-            loader: 'ts-loader'
+            loader: 'babel-loader',
+            options: {
+              "presets": [
+                "@babel/preset-env",
+                "@babel/preset-typescript",
+                "@babel/preset-react"
+              ],
+              "plugins": [
+                "@babel/proposal-class-properties",
+                "@babel/proposal-object-rest-spread",
+                ["@babel/plugin-transform-runtime",
+                  {
+                    "regenerator": true
+                  }
+                ]
+              ]
+            }
           }
         ]
       },
