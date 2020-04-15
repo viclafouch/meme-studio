@@ -40,7 +40,7 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
   plugins: [
     new Dotenv(),
     new WebpackShellPlugin({
-      onBuildEnd: IS_DEV ? ['npx nodemon ./dist/server/index.js'] : []
+      onBuildEnd: IS_DEV ? ['npx nodemon ./dist/server/index.js --watch dist/server --delay 2.5'] : []
     })
   ]
 })
