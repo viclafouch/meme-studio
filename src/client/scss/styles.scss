@@ -310,13 +310,24 @@ body {
     text-align: right;
     font-size: 12px;
     margin-bottom: 0;
+    opacity: 0.44;
   }
 
   .meme-actions-share {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    flex-direction: column;
+    padding: 0 20px;
+
+    & > .button-export {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    @include sm {
+      flex-direction: row;
+    }
 
     a {
       text-decoration: none;
@@ -324,7 +335,7 @@ body {
 
     .button-export {
       text-transform: uppercase;
-      margin-right: 10px;
+      margin: 10px;
       .icon-arrow-circle-down,
       .icon-twitter {
         margin-right: 7px;

@@ -50,13 +50,13 @@
     }
   }
   &.button-medium {
-    padding: 16px 21px;
-    font-size: 17px;
+    padding: 10px 18px;
+    font-size: 15px;
     line-height: 22px;
 
     @include sm {
-      padding: 14px 17px;
-      font-size: 18px;
+      padding: 10px 13px;
+      font-size: 16px;
       line-height: 22px;
     }
 
