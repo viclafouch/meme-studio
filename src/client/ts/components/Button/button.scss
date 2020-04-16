@@ -84,14 +84,14 @@
     }
 
     @include md {
-      padding: 12px 16px;
-      font-size: 17px;
+      padding: 14px 18px;
+      font-size: 16px;
       line-height: 22px;
     }
 
     @include lg {
-      padding: 21px 28px;
-      font-size: 26px;
+      padding: 19px 24px;
+      font-size: 23px;
       line-height: 29px;
     }
   }

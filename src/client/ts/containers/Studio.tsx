@@ -136,7 +136,7 @@ function Studio(): JSX.Element {
       <Header isAnimate />
       <div className="ld ld-float-btt-in studio-body">
         <div className="studio-tools">
-          <Tools />
+          <Tools changeTab={setCurrentTab} />
         </div>
         <div className={`studio-content ${memeSelected ? 'studio-content-active' : ''}`} ref={contentRef}>
           {lastVersion && (
