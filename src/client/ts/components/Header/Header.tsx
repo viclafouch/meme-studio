@@ -28,13 +28,14 @@ function Header(props: HeaderProps): JSX.Element {
           className="github-corner"
           aria-label={t('attr.viewSource')}
           title={t('attr.viewSource')}
+          rel="noreferrer noopener"
         >
           <ReactSVG src="images/github.svg" wrapper="div" className="github-svg" />
         </a>
       </div>
       <div className="center-column">
-        <Link to="/">
-          <h1>Meme Studio</h1>
+        <Link to="/" id="logo">
+          <img className="logo" src="images/logo.png" alt="Logo Meme Studio" />
         </Link>
       </div>
       <div>

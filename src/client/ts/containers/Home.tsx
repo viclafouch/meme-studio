@@ -17,7 +17,9 @@ function Home(): JSX.Element {
       <LangSelector />
       <div className="content-one">
         <div className="home-title">
-          <h1>Meme Studio</h1>
+          <Link to="/">
+            <img src="images/logo-colored-2.png" width={350} alt="Logo Meme Studio" />
+          </Link>
           <p>{t('home.description')}</p>
         </div>
         <div className="home-content">

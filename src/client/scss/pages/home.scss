@@ -19,16 +19,11 @@
   .home-title {
     margin-top: 4rem;
 
-    & > h1 {
-      font-size: 42px;
-      letter-spacing: 0;
-      font-weight: 600;
+    & > img {
       margin-bottom: 8px;
-      line-height: 46px;
-      max-width: 800px;
+      max-width: 300px;
       margin-left: auto;
       margin-right: auto;
-      text-align: center;
     }
 
     & > p {

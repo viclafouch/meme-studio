@@ -15,12 +15,28 @@
     flex: 3;
     display: flex;
     align-items: center;
+    position: relative;
+
     &.center-column {
       flex: 1;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      z-index: 2;
+
+      a {
+        display: block;
+        .logo {
+          width: 250px;
+        }
+      }
     }
+
     &:first-child {
       justify-content: flex-start;
     }
+
     &:last-child {
       justify-content: flex-end;
     }
