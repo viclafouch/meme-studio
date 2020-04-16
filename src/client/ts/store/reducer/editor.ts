@@ -173,9 +173,9 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       const firstLoad = draft.innerDimensions.width === 0
       draft.innerDimensions = action.innerDimensions
       if (firstLoad) {
-        let memeSelected: any | undefined = window.localStorage.getItem('memeSelected')
-        let history: any | undefined = window.localStorage.getItem('history')
-        let lastEditDate: any | undefined = window.localStorage.getItem('lastEditDate')
+        let memeSelected: any = window.localStorage.getItem('memeSelected')
+        let history: any = window.localStorage.getItem('history')
+        let lastEditDate: any = window.localStorage.getItem('lastEditDate')
 
         if (lastEditDate) {
           const now = new Date()

@@ -79,8 +79,10 @@
       .home-last-memes-article {
         img {
           border: 2px solid #444444;
-          width: 400px;
-          max-height: 400px;
+          @media (max-width: #{$screen-md-min}) {
+            height: auto;
+            width: 400px;
+          }
         }
 
         @include md {

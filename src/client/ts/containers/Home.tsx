@@ -8,7 +8,7 @@ import Footer from '@client/components/Footer/Footer'
 import { Link } from 'react-router-dom'
 import '../../scss/pages/home.scss'
 
-function Intro(): JSX.Element {
+function Home(): JSX.Element {
   const { t } = useTranslation()
   const { memes } = useMemes()
 
@@ -30,7 +30,13 @@ function Intro(): JSX.Element {
             {memes.slice(0, 3).map((meme: Meme, index: number) => (
               <li key={index}>
                 <article className="home-last-memes-article">
-                  <img src={meme.url()} alt={meme.name} />
+                  <img
+                    src={meme.url()}
+                    alt={meme.name}
+                    width={176}
+                    height={((176 / meme.width) * meme.height).toFixed(2)}
+                    loading="eager"
+                  />
                 </article>
               </li>
             ))}
@@ -42,4 +48,4 @@ function Intro(): JSX.Element {
   )
 }
 
-export default Intro
+export default Home
