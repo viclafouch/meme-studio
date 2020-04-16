@@ -53,6 +53,18 @@ class App {
     this.app.route('/memes/:id').post(this.memeController.show)
     this.app.route('/share').post(this.memeController.share)
     if (!IS_DEV) {
+      this.app.get('*.js', function (req, res, next) {
+        req.url = req.url + '.gz'
+        res.set('Content-Encoding', 'gzip')
+        res.set('Content-Type', 'text/javascript')
+        next()
+      })
+      this.app.get('*.css', function (req, res, next) {
+        req.url = req.url + '.gz'
+        res.set('Content-Encoding', 'gzip')
+        res.set('Content-Type', 'text/css')
+        next()
+      })
       this.app.use(express.static(process.cwd() + clientDir))
       this.app.get('*', (req, res) => {
         res.sendFile(path.resolve(process.cwd() + clientDir, 'index.html'))
