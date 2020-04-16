@@ -17,6 +17,7 @@ import { UseEditorInt } from '@client/ts/shared/validators'
 import { debounce } from '@client/utils/index'
 import { TEXT_ADDED, TEXT_REMOVED } from '@client/ts/shared/constants'
 import { useLocation } from 'react-router-dom'
+import { wait } from '@shared/utils'
 
 declare global {
   interface Window {
@@ -111,12 +112,16 @@ export function useMemes(): {
 
 export function usePageViews(): void {
   const location = useLocation()
-  useEffect(
-    () =>
+  useEffect(() => {
+    ;(async (): Promise<void> => {
+      while (typeof window.ga !== 'function') {
+        console.log('awaiting for window.ga')
+        await wait(50)
+      }
       window.ga('send', {
         hitType: 'pageview',
         page: location.pathname,
-      }),
-    [location]
-  )
+      })
+    })()
+  }, [location])
 }
