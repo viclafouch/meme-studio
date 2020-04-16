@@ -7,33 +7,18 @@ import Export from './Export'
 import Router from '../routes'
 import { useLocation } from 'react-router-dom'
 import Loader from '@client/components/Loader/Loader'
-import { wait } from '@shared/utils'
-import { setLocalStorage } from '../utils'
-import { hasRecoverVersion } from '@client/utils/helpers'
 
 function Main(): JSX.Element {
   const { pathname } = useLocation()
   const { fetchNextMemes } = useMemes()
   const [{ isExportModalActive }]: [UseEditorInt, Function] = useEditor()
-  const [isLoading, setIsLoading] = useState<boolean>(() => {
-    if (pathname === '/' || pathname === '/create') {
-      if ((pathname === '/' && window.localStorage.getItem('lastMemes')) || (pathname === '/create' && hasRecoverVersion())) {
-        return false
-      }
-      return true
-    }
-    return false
-  })
+  const [isLoading, setIsLoading] = useState<boolean>(pathname === '/' || pathname === '/create')
   const [isError, setIsError] = useState<boolean>(false)
 
   useEffect(() => {
     ;(async (): Promise<void> => {
       try {
-        const memes = await fetchNextMemes()
-        setLocalStorage({
-          lastMemes: memes.slice(0, 3),
-        })
-        await wait(1000)
+        await fetchNextMemes()
       } catch (error) {
         if (error.name !== 'AbortError') console.warn(error)
         setIsError(true)

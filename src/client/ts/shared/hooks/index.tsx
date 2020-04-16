@@ -86,7 +86,7 @@ export function useMemes(): {
 } {
   const [{ memes, numPage, hasNextMemes }, dispatch]: [DefaultState, Function] = useContext<any>(DefaultContext)
 
-  const fetchNextMemes = async (): Promise<Array<Meme>> => {
+  const fetchNextMemes = async (): Promise<void> => {
     const controller = new AbortController()
     const timeout: any = setTimeout(() => controller.abort(), 10000)
     const currentPage = numPage + 1
@@ -98,7 +98,6 @@ export function useMemes(): {
     clearTimeout(timeout)
     const newMemes = [...memes, ...response.memes]
     dispatch({ type: SET_MEMES, memes: newMemes })
-    return newMemes
   }
 
   return {

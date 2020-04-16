@@ -41,8 +41,8 @@ export const toHistoryType = (type: typeString): string => {
 }
 
 export const hasRecoverVersion = (): false | Date => {
-  let lastEditDate: string | Date = window.localStorage.getItem('lastEditDate')
-  if (lastEditDate) {
+  let lastEditDate: string | Date | undefined = window.localStorage.getItem('lastEditDate')
+  if (lastEditDate !== undefined) {
     const now = new Date()
     lastEditDate = new Date(JSON.parse(lastEditDate))
     const hourDifference = Math.abs(now.getTime() - lastEditDate.getTime()) / 36e5

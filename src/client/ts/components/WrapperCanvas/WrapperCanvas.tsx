@@ -17,8 +17,8 @@ function WrapperCanvas(props: any): JSX.Element {
   ] = useEditor()
 
   useEffect(() => {
-    const textIdSelected: string = window.localStorage.getItem('textIdSelected')
-    if (textIdSelected) {
+    const textIdSelected: string | undefined = window.localStorage.getItem('textIdSelected')
+    if (textIdSelected !== undefined) {
       dispatchEditor({
         type: SET_TEXT_ID_SELECTED,
         textIdSelected: JSON.parse(textIdSelected),
