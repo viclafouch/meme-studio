@@ -6,7 +6,8 @@ const CopyPlugin = require('copy-webpack-plugin')
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries")
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const PreloadWebpackPlugin = require('preload-webpack-plugin');
+const PreloadWebpackPlugin = require('preload-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 
 const supportedLocales = ['en-US', 'fr']
 
@@ -119,6 +120,7 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
     new MiniCssExtractPlugin({
       filename: '[name].[chunkhash:8].css'
     }),
+    new CompressionPlugin(),
     new CopyPlugin([ { from: path.join(__dirname, '..', 'src', 'client', 'img'), to: 'images' } ]),
     new CopyPlugin([ { from: 'static', to: 'static' } ])
   ]
