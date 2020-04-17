@@ -4,7 +4,7 @@ import { Route, RouteProps, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 interface PagePropsInt extends RouteProps {
-  title?: string
+  title: string
 }
 
 const Page = (props: PagePropsInt): JSX.Element => {
@@ -12,11 +12,7 @@ const Page = (props: PagePropsInt): JSX.Element => {
   const { i18n } = useTranslation()
 
   useEffect(() => {
-    if (props.title) {
-      document.title = `Meme Studio | ${props.title}`
-    } else {
-      document.title = 'Meme Studio'
-    }
+    document.title = `Meme Studio | ${props.title}`
   }, [location.key, i18n.language])
 
   const { title, ...rest } = props

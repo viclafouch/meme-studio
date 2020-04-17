@@ -63,7 +63,7 @@ function routes(): JSX.Element {
 
   return (
     <Switch>
-      <Page exact path="/">
+      <Page exact path="/" title={t('makeYourOwnMeme')}>
         <HomeAsync />
       </Page>
       <Page path="/about" title={t('about')}>
