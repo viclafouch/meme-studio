@@ -21,6 +21,7 @@ function Footer(): JSX.Element {
             href="https://github.com/viclafouch/meme-studio"
             aria-label={t('attr.viewSource')}
             title={t('attr.viewSource')}
+            rel="noreferrer noopener"
           >
             Github
           </a>
