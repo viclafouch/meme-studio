@@ -22,6 +22,7 @@ const ColorPicker = React.forwardRef((props: ColorPickerProps, ref: any) => {
   return (
     <div className="color-picker">
       <button
+        arial-label="color"
         className="color-picker-button"
         style={{
           backgroundColor: props.color,

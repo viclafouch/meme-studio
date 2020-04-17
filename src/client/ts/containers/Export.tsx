@@ -76,7 +76,7 @@ function Export(): JSX.Element {
           className="meme-wrapper-img"
           onContextMenu={(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => e.preventDefault()}
         >
-          <img src={img} className="meme-img" />
+          <img src={img} className="meme-img" alt={memeSelected.name} />
         </div>
         <span className="meme-info-size">
           {memeSelected.width} x {memeSelected.height}
