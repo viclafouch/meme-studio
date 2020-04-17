@@ -31,6 +31,7 @@ const Tools = (props: ToolsProps): JSX.Element => {
       <ul className="tools-list">
         <li>
           <button
+            aria-label={showTextAreas ? t('attr.hideTextboxes') : t('attr.showTextboxes')}
             className="tools-list-btn"
             id="show-text-areas"
             data-tooltip={showTextAreas ? t('attr.hideTextboxes') : t('attr.showTextboxes')}
@@ -47,6 +48,7 @@ const Tools = (props: ToolsProps): JSX.Element => {
         </li>
         <li>
           <button
+            aria-label={t('attr.undo')}
             className="tools-list-btn"
             data-tooltip={t('attr.undo')}
             disabled={!canUndo}
@@ -57,6 +59,7 @@ const Tools = (props: ToolsProps): JSX.Element => {
         </li>
         <li>
           <button
+            aria-label={t('attr.redo')}
             className="tools-list-btn"
             data-tooltip={t('attr.redo')}
             disabled={!canRedo}
@@ -67,6 +70,7 @@ const Tools = (props: ToolsProps): JSX.Element => {
         </li>
         <li>
           <button
+            aria-label={t('attr.eraseAll')}
             className="tools-list-btn"
             data-tooltip={t('attr.eraseAll')}
             disabled={!canUndo}
@@ -77,6 +81,7 @@ const Tools = (props: ToolsProps): JSX.Element => {
         </li>
         <li>
           <button
+            aria-label={t('attr.reset')}
             className="tools-list-btn"
             data-tooltip={t('attr.reset')}
             disabled={!memeSelected}
@@ -93,6 +98,7 @@ const Tools = (props: ToolsProps): JSX.Element => {
         {!isMinLgSize && (
           <li>
             <button
+              aria-label={t('studio.export')}
               className="tools-list-btn"
               data-tooltip={t('studio.export')}
               disabled={!memeSelected}
@@ -106,6 +112,7 @@ const Tools = (props: ToolsProps): JSX.Element => {
       <ul className="tools-list">
         <li>
           <button
+            aria-label={t('attr.faq')}
             className="tools-list-btn"
             data-tooltip={t('attr.faq')}
             disabled={false}

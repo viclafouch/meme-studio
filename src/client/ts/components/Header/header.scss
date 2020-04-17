@@ -34,6 +34,7 @@
     }
 
     &:first-child {
+      align-self: flex-start;
       justify-content: flex-start;
     }
 

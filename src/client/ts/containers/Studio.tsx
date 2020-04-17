@@ -192,6 +192,7 @@ function Studio(): JSX.Element {
         <aside className="studio-aside">
           <header className="studio-aside-header">
             <Button
+              aria-label="Gallery tab"
               className={`studio-aside-header-btn ${currentTab === TAB_GALLERY ? 'studio-aside-header-btn-active' : null}`}
               onClick={(): void => setCurrentTab(TAB_GALLERY)}
               id="tab-gallery-btn"
@@ -199,6 +200,7 @@ function Studio(): JSX.Element {
               <FontAwesomeIcon className="icon-image" icon={['fas', 'image']} />
             </Button>
             <Button
+              aria-label="Customization tab"
               className={`studio-aside-header-btn ${currentTab === TAB_CUSTOMIZATION ? 'studio-aside-header-btn-active' : null}`}
               onClick={(): void => setCurrentTab(TAB_CUSTOMIZATION)}
               id="tab-customization-btn"
