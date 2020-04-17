@@ -20,7 +20,7 @@ export default class Meme {
   }
 
   public url(): string {
-    return this.localImageUrl || `static/templates/${this.uuid}.${this.ext}`
+    return this.localImageUrl || `templates/${this.uuid}.${this.ext}`
   }
 
   get image(): Promise<HTMLImageElement> {
