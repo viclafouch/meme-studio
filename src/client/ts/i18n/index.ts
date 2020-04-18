@@ -6,13 +6,13 @@ export const languages = {
   fr: {
     name: 'Francais',
     flag: '/images/flag-fr.svg',
-    translation: require('../../locales/fr/translation.json'),
+    translation: require('../../locales/fr/translation.json')
   },
   en: {
     name: 'English',
     flag: '/images/flag-en.svg',
-    translation: require('../../locales/en/translation.json'),
-  },
+    translation: require('../../locales/en/translation.json')
+  }
 }
 
 const fallbackLng = 'en'
@@ -29,8 +29,8 @@ i18n
     fallbackLng,
     debug: process.env.NODE_ENV !== 'production',
     interpolation: {
-      escapeValue: false, // not needed for react as it escapes by default
-    },
+      escapeValue: false // not needed for react as it escapes by default
+    }
   })
 
 export default i18n

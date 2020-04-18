@@ -9,7 +9,7 @@ export const fontsFamily = [
   'Arial Black',
   'Times New Roman',
   'Courier New',
-  'Lucida Console',
+  'Lucida Console'
 ]
 
 export class TextBox extends Model {
@@ -36,82 +36,82 @@ TextBox.init(
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: true,
+      primaryKey: true
     },
     value: {
       type: new DataTypes.STRING(128),
       allowNull: false,
-      defaultValue: '',
+      defaultValue: ''
     },
     width: {
       type: new DataTypes.NUMBER(),
-      allowNull: false,
+      allowNull: false
     },
     height: {
       type: new DataTypes.NUMBER(),
-      allowNull: false,
+      allowNull: false
     },
     centerX: {
       type: new DataTypes.NUMBER(),
-      allowNull: false,
+      allowNull: false
     },
     centerY: {
       type: new DataTypes.NUMBER(),
-      allowNull: false,
+      allowNull: false
     },
     rotate: {
       type: new DataTypes.NUMBER(),
       allowNull: false,
       defaultValue: 0,
       validate: {
-        len: [0, 360],
-      },
+        len: [0, 360]
+      }
     },
     fontSize: {
       type: new DataTypes.NUMBER(),
-      allowNull: false,
+      allowNull: false
     },
     fontFamily: {
       type: new DataTypes.STRING(128),
       allowNull: false,
       validate: {
-        isIn: [fontsFamily],
-      },
+        isIn: [fontsFamily]
+      }
     },
     boxShadow: {
       type: new DataTypes.NUMBER(),
-      allowNull: false,
+      allowNull: false
     },
     color: {
       type: new DataTypes.STRING(128),
       allowNull: false,
       validate: {
-        is: /^(#[a-f0-9]{6}|black|green|silver|gray|olive|white|yellow|maroon|navy|red|blue|purple|teal|fuchsia|aqua)$/i,
-      },
+        is: /^(#[a-f0-9]{6}|black|green|silver|gray|olive|white|yellow|maroon|navy|red|blue|purple|teal|fuchsia|aqua)$/i
+      }
     },
     alignVertical: {
       type: new DataTypes.STRING(128),
       allowNull: false,
       validate: {
-        isIn: [['top', 'middle', 'bottom']],
-      },
+        isIn: [['top', 'middle', 'bottom']]
+      }
     },
     textAlign: {
       type: new DataTypes.STRING(128),
       allowNull: false,
       validate: {
-        isIn: [['left', 'center', 'right']],
-      },
+        isIn: [['left', 'center', 'right']]
+      }
     },
     isUppercase: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: true,
-    },
+      defaultValue: true
+    }
   },
   {
     tableName: 'textbox',
-    sequelize: database,
+    sequelize: database
   }
 )
 

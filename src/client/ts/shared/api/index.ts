@@ -14,10 +14,10 @@ export const getMemes = (page: number, params?: object): Promise<{ memes: Array<
   fetchApi(`/memes`, {
     method: 'POST',
     body: JSON.stringify({ page }),
-    ...params,
+    ...params
   }).then((response: ResultMemeIndex) => ({
     memes: response.data.memes.map((meme: object) => new Meme(meme)),
-    pages: response.data.pages,
+    pages: response.data.pages
   }))
 
 export interface ResultMemeShowInt {
@@ -31,7 +31,7 @@ export interface ResultMemeShowInt {
 export const getMeme = (id: string): Promise<{ texts: Array<TextBox>; meme: Meme }> =>
   fetchApi(`/memes/${id}`, { method: 'POST' }).then((response: ResultMemeShowInt) => ({
     texts: response.data.texts.map((text: object) => new TextBox(text)),
-    meme: new Meme(response.data.meme),
+    meme: new Meme(response.data.meme)
   }))
 
 export interface ResultPostToTwitter {
@@ -46,8 +46,8 @@ export const postToTwitter = (img64: string): any =>
   fetchApi(`/share`, {
     method: 'POST',
     body: JSON.stringify({
-      image: img64,
-    }),
+      image: img64
+    })
   }).then((response: ResultPostToTwitter) => {
     if (!response.success) throw new Error(response.message)
     else return response.data.url

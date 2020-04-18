@@ -5,9 +5,9 @@ import { API_URL, IS_DEV } from '@shared/config'
 export const debug = (text: string, args?: any): void => IS_DEV && console.log(`%c ${text}\n`, 'font-weight: bold', args)
 
 export const getDefaultLang = (availableLangs: Array<string>, defaultLang = 'en'): string =>
-  navigator.languages.map((l) => l.substr(0, 2)).find((lang) => availableLangs.includes(lang)) || defaultLang
+  navigator.languages.map(l => l.substr(0, 2)).find(lang => availableLangs.includes(lang)) || defaultLang
 
-export const endWithExt = (exts: Array<string>, filename: string): boolean => exts.some((x) => filename.toLowerCase().endsWith(x))
+export const endWithExt = (exts: Array<string>, filename: string): boolean => exts.some(x => filename.toLowerCase().endsWith(x))
 
 export const innerDimensions = (node: HTMLElement): { height: number; width: number } => {
   const computedStyle: CSSStyleDeclaration = getComputedStyle(node)
@@ -61,7 +61,7 @@ export function fillText(
       }
     },
     value: text.isUppercase ? str.toUpperCase() : str,
-    lineWidth: (): number => ctx.measureText(text.isUppercase ? str.toUpperCase() : str).width,
+    lineWidth: (): number => ctx.measureText(text.isUppercase ? str.toUpperCase() : str).width
   }))
 
   const paddingX = 4
@@ -128,9 +128,9 @@ export const fetchApi = async (path = '', params = {}): Promise<object> => {
   return fetch(url, {
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
-    ...params,
+    ...params
   }).then((response: Response) => response.json())
 }
 

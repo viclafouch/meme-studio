@@ -26,7 +26,7 @@ function Export(): JSX.Element {
         centerX: (text.centerX / oldWidth) * memeSelected.width,
         centerY: (text.centerY / oldHeight) * memeSelected.height,
         width: (text.width / oldWidth) * memeSelected.width,
-        height: (text.height / oldHeight) * memeSelected.height,
+        height: (text.height / oldHeight) * memeSelected.height
       }))
       const canvas = document.createElement('canvas')
       canvas.width = memeSelected.width
@@ -65,7 +65,7 @@ function Export(): JSX.Element {
 
   const handleClose = (): void =>
     dispatchEditor({
-      type: TOGGLE_EXPORT_MODAL,
+      type: TOGGLE_EXPORT_MODAL
     })
 
   return (

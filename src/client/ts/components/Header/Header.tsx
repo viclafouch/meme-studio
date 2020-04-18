@@ -46,7 +46,7 @@ function Header(props: HeaderProps): JSX.Element {
             disabled={!memeSelected}
             onClick={(): void =>
               dispatchEditor({
-                type: TOGGLE_EXPORT_MODAL,
+                type: TOGGLE_EXPORT_MODAL
               })
             }
           >
@@ -60,7 +60,7 @@ function Header(props: HeaderProps): JSX.Element {
 }
 
 Header.defaultProps = {
-  isAnimate: false,
+  isAnimate: false
 } as HeaderProps
 
 export default Header

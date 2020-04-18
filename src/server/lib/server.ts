@@ -14,12 +14,12 @@ async function start(resetDb: boolean): Promise<void> {
   await database.sync({ force: resetDb })
   if (resetDb) {
     await Promise.all(
-      memes.map(async (meme) => {
+      memes.map(async meme => {
         const { id } = await Meme.create<Meme>(meme)
         for (const text of meme.texts) {
           await TextBox.create({
             ...text,
-            memeId: id,
+            memeId: id
           })
         }
       })

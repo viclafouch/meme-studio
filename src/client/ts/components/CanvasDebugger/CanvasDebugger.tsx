@@ -31,13 +31,13 @@ function CanvasDebugger(): JSX.Element {
             centerY: Math.round((text.centerY / drawProperties.height) * memeSelected.height),
             width: Math.round((text.width / drawProperties.width) * memeSelected.width),
             height: Math.round((text.height / drawProperties.height) * memeSelected.height),
-            rotate: Math.round(text.rotate),
+            rotate: Math.round(text.rotate)
           }
           delete t.base
           delete t.id
           delete t.uuid
           return t
-        }),
+        })
       }
     : {}
 
@@ -67,7 +67,7 @@ function CanvasDebugger(): JSX.Element {
       <div
         className="canvas-debugger-body"
         style={{
-          ...(!isActive ? { display: 'none' } : null),
+          ...(!isActive ? { display: 'none' } : null)
         }}
       >
         <ReactJson src={object} enableClipboard displayObjectSize={false} displayDataTypes={false} />

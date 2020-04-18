@@ -8,7 +8,7 @@ import {
   EDIT_TEXT_ALIGN,
   EDIT_TEXT_VERTICAL,
   EDIT_UPPERCASE,
-  EDIT_VALUE,
+  EDIT_VALUE
 } from '@client/ts/shared/constants'
 import { typeString } from '@client/ts/shared/validators'
 import { formatRelative, format } from 'date-fns'
@@ -58,10 +58,10 @@ const getLocale = (locale = window.localStorage.i18nextLng): object => {
 
 export const formatDate = (date: Date, formatStyle: string, locale?: string): string =>
   format(date, formatStyle, {
-    locale: getLocale(locale),
+    locale: getLocale(locale)
   })
 
 export const formatRelativeDate = (date: Date, baseDate: Date, locale?: string): string =>
   formatRelative(date, baseDate, {
-    locale: getLocale(locale),
+    locale: getLocale(locale)
   })

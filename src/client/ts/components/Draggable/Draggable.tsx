@@ -63,7 +63,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
     top: props.position.y - props.height / 2,
     startX: null,
     startY: null,
-    isDragging: false,
+    isDragging: false
   }))
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
       top: props.position.y - props.height / 2,
       startX: null,
       startY: null,
-      isDragging: false,
+      isDragging: false
     })
   }, [props.drawProperties.scale, props.id])
 
@@ -148,7 +148,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
           centerX: (centerX / drawProperties.width) * props.memeWidth,
           centerY: (centerY / drawProperties.height) * props.memeHeight,
           width: (width / drawProperties.width) * props.memeWidth,
-          height: (height / drawProperties.height) * props.memeHeight,
+          height: (height / drawProperties.height) * props.memeHeight
         }
         text.rotate = rotate
         saveToEditor({ type: CUSTOM_TEXT, text, historyType: toHistoryType(type) })
@@ -167,7 +167,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
           ...positioning,
           startX: event.pageX - positioning.left,
           startY: event.pageY - positioning.top,
-          isDragging: true,
+          isDragging: true
         })
       } else if (type === 'rotate') {
         event.stopPropagation()
@@ -177,7 +177,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
           startOffsetTop: top + props.height / 2,
           lastAngle: degreeToRad(props.rotate),
           startEventX: event.pageX,
-          startEventY: event.pageY,
+          startEventY: event.pageY
         })
       } else if (type === 'resize') {
         event.stopPropagation()
@@ -189,7 +189,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
           height: props.height,
           width: props.width,
           top: positioning.top,
-          left: positioning.left,
+          left: positioning.left
         })
       }
     },
@@ -200,7 +200,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
     if (positioning.isDragging)
       setPositioning({
         ...positioning,
-        isDragging: false,
+        isDragging: false
       })
     else if (resizing) setResizing(null)
     else if (rotating) setRotating(null)
@@ -228,7 +228,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
         height: props.height,
         width: props.width,
         transform: `rotate(${props.rotate}deg)`,
-        ...(!showTextAreas ? { display: 'none' } : null),
+        ...(!showTextAreas ? { display: 'none' } : null)
       }}
       onMouseDown={handleMouseDown}
       onClick={(): void => props.onClick && props.onClick()}

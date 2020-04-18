@@ -16,7 +16,7 @@ const ColorPicker = React.forwardRef((props: ColorPickerProps, ref: any) => {
   const handleClose = (): void => setIsOpen(false)
 
   useImperativeHandle(ref, () => ({
-    open: handleClick,
+    open: handleClick
   }))
 
   return (
@@ -25,7 +25,7 @@ const ColorPicker = React.forwardRef((props: ColorPickerProps, ref: any) => {
         arial-label="color"
         className="color-picker-button"
         style={{
-          backgroundColor: props.color,
+          backgroundColor: props.color
         }}
         onClick={handleClick}
       ></button>

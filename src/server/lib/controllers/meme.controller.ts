@@ -10,7 +10,7 @@ import {
   ResultMemeIndex,
   ReqMemeIndex,
   ReqShareToTwitter,
-  ResultShareToTwitter,
+  ResultShareToTwitter
 } from '../interfaces/meme.interface'
 import twitterConfig from '@server/config/twitter'
 import { IS_DEV } from '@shared/config'
@@ -28,29 +28,29 @@ export class MemeController {
     const memes: Array<Meme> = await Meme.findAll<Meme>({ raw: true, limit, offset, order: [['id', 'ASC']] })
     const result: ResultMemeIndex = {
       memes,
-      pages,
+      pages
     }
     send(res, result)
   }
   public async show(req: ReqMemeShowInt, res: Response, next: NextFunction): Promise<void> {
     const id: string = req.params.id
     const meme: Meme | null = await Meme.findByPk<Meme>(id, {
-      raw: true,
+      raw: true
     })
     if (meme) {
       const texts: Array<TextBox> = await TextBox.findAll({
         raw: true,
         where: {
-          memeId: meme.id,
+          memeId: meme.id
         },
         attributes: {
-          exclude: ['memeId'],
-        },
+          exclude: ['memeId']
+        }
       })
 
       const result: ResultMemeShowInt = {
         meme,
-        texts,
+        texts
       }
 
       send(res, result)
@@ -100,7 +100,7 @@ export class MemeController {
       }
 
       const result: ResultShareToTwitter = {
-        url: imageUrl,
+        url: imageUrl
       }
       send(res, result)
     } catch (error) {

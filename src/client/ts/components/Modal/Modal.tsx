@@ -17,7 +17,7 @@ export function Modal({ onClose, isLoading, children, id }: ModalProps): JSX.Ele
   const [{ modalRef }]: [DefaultState] = useContext(DefaultContext)
 
   const handleEscape = useCallback(
-    (event) => {
+    event => {
       if (event.keyCode === 27) onClose()
     },
     [onClose]
@@ -49,7 +49,7 @@ export function Modal({ onClose, isLoading, children, id }: ModalProps): JSX.Ele
 
 Modal.defaultProps = {
   isLoading: false,
-  id: '',
+  id: ''
 } as ModalProps
 
 export default memo(Modal)

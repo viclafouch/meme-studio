@@ -11,7 +11,7 @@ const Faq = forwardRef(
       ref,
       () => ({
         open: (): void => setIsOpen(true),
-        close: (): void => setIsOpen(false),
+        close: (): void => setIsOpen(false)
       }),
       [setIsOpen]
     )

@@ -7,7 +7,7 @@ const TextareaExtended = React.forwardRef(
     const textareaRef = useRef<HTMLTextAreaElement>(null)
 
     useImperativeHandle(ref, () => ({
-      focus: (): void => textareaRef.current.focus(),
+      focus: (): void => textareaRef.current.focus()
     }))
 
     const resize = (): void => {

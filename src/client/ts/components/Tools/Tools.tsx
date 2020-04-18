@@ -8,7 +8,7 @@ import {
   REDO_HISTORY,
   ERASE_ALL,
   RESET,
-  TOGGLE_EXPORT_MODAL,
+  TOGGLE_EXPORT_MODAL
 } from '@client/store/reducer/constants'
 import Faq from '@client/components/Faq/Faq'
 import { useEditor, useWindowWidth } from '@client/ts/shared/hooks'
@@ -39,7 +39,7 @@ const Tools = (props: ToolsProps): JSX.Element => {
             onClick={(): void =>
               dispatchEditor({
                 type: SET_SHOW_TEXT_AREAS,
-                showTextAreas: !showTextAreas,
+                showTextAreas: !showTextAreas
               })
             }
           >

@@ -25,7 +25,7 @@ import { hasRecoverVersion, formatRelativeDate } from '@client/utils/helpers'
 
 const CanvasDebuggerAsync = Loadable({
   loader: async () => import('@client/components/CanvasDebugger/CanvasDebugger'),
-  loading: () => null,
+  loading: () => null
 })
 
 function Studio(): JSX.Element {
@@ -50,7 +50,7 @@ function Studio(): JSX.Element {
     const wrapper: HTMLElement = contentRef.current
     dispatchEditor({
       type: RESIZE_WINDOW,
-      innerDimensions: innerDimensions(wrapper),
+      innerDimensions: innerDimensions(wrapper)
     })
   }, [width])
 
@@ -61,7 +61,7 @@ function Studio(): JSX.Element {
       dispatchEditor({
         type: SET_MEME_SELECTED,
         memeSelected: meme,
-        texts,
+        texts
       })
       setIsActiveRecoverBox(false)
       setLastVersion(false)
@@ -84,7 +84,7 @@ function Studio(): JSX.Element {
       clearTimeout(timeout)
       dispatchEditor({
         type: SET_TEXT_ID_SELECTED,
-        textIdSelected: null,
+        textIdSelected: null
       })
     }
   }, [])
@@ -111,7 +111,7 @@ function Studio(): JSX.Element {
         boxCount: 0,
         name: files[0].name,
         ext: files[0].name.split('.').pop().toLowerCase(),
-        localImageUrl: window.URL.createObjectURL(files[0]),
+        localImageUrl: window.URL.createObjectURL(files[0])
       })
 
       const { width, height } = await meme.image
@@ -121,7 +121,7 @@ function Studio(): JSX.Element {
       dispatchEditor({
         type: SET_MEME_SELECTED,
         memeSelected: meme,
-        texts: [],
+        texts: []
       })
     } catch (error) {
       // TODO

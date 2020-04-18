@@ -21,7 +21,7 @@ function WrapperCanvas(props: any): JSX.Element {
     if (textIdSelected) {
       dispatchEditor({
         type: SET_TEXT_ID_SELECTED,
-        textIdSelected: JSON.parse(textIdSelected),
+        textIdSelected: JSON.parse(textIdSelected)
       })
     }
   }, [])
@@ -32,7 +32,7 @@ function WrapperCanvas(props: any): JSX.Element {
     if (drawProperties) {
       canvas.width = drawProperties.width
       canvas.height = drawProperties.height
-      drawProperties.image.then((image) => {
+      drawProperties.image.then(image => {
         ctx.drawImage(image, 0, 0, drawProperties.width, drawProperties.height)
         for (const text of texts) {
           const fontSize: number = text.fontSize * drawProperties.scale
@@ -56,7 +56,7 @@ function WrapperCanvas(props: any): JSX.Element {
         onContextMenu={(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => e.preventDefault()}
         style={{
           width: drawProperties.width,
-          height: drawProperties.height,
+          height: drawProperties.height
         }}
       >
         {isMinLgSize &&
@@ -66,13 +66,13 @@ function WrapperCanvas(props: any): JSX.Element {
               className="text-box"
               position={{
                 x: text.centerX,
-                y: text.centerY,
+                y: text.centerY
               }}
               onClick={(): void => {
                 if (textIdSelected !== text.id) {
                   dispatchEditor({
                     type: SET_TEXT_ID_SELECTED,
-                    textIdSelected: text.id,
+                    textIdSelected: text.id
                   })
                 }
                 props.changeTab(TAB_CUSTOMIZATION)

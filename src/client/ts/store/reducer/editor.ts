@@ -12,7 +12,7 @@ import {
   ERASE_ALL,
   RESET,
   SET_HISTORY,
-  TOGGLE_EXPORT_MODAL,
+  TOGGLE_EXPORT_MODAL
 } from './constants'
 import { EditorState } from '../EditorContext'
 import TextBox from '@client/ts/shared/models/TextBox'
@@ -60,14 +60,14 @@ const updateDrawing = (draft: Draft<EditorState>, texts: Array<TextBox> = draft.
     width: currentWidth,
     height: currentHeight,
     image: draft.memeSelected.image,
-    scale,
+    scale
   }
 }
 
 const checkSize = ({
   oldProperties,
   newProperties,
-  texts,
+  texts
 }: {
   oldProperties: DrawProperties
   newProperties: DrawProperties
@@ -86,7 +86,7 @@ const checkSize = ({
       height: (text.height / oldHeight) * drawProperties.height,
       width: (text.width / oldWidth) * drawProperties.width,
       centerX: (text.centerX / oldWidth) * drawProperties.width,
-      centerY: (text.centerY / oldHeight) * drawProperties.height,
+      centerY: (text.centerY / oldHeight) * drawProperties.height
     }))
   } else {
     drawProperties = oldProperties
@@ -117,7 +117,7 @@ const undoHistory = (draft: Draft<EditorState>, eraseAll = false): void => {
     const { drawProperties, texts } = checkSize({
       oldProperties: previousItem.drawProperties,
       newProperties: draft.drawProperties,
-      texts: previousItem.texts,
+      texts: previousItem.texts
     })
     draft.texts = texts.map((text: TextBox) => {
       text.id = randomID()
@@ -129,7 +129,7 @@ const undoHistory = (draft: Draft<EditorState>, eraseAll = false): void => {
       saveToHistory(draft, {
         drawProperties,
         texts: draft.texts,
-        type: INITIAL,
+        type: INITIAL
       })
     }
   }
@@ -142,7 +142,7 @@ const redoHistory = (draft: Draft<EditorState>): void => {
     const { drawProperties, texts } = checkSize({
       oldProperties: nextItem.drawProperties,
       newProperties: draft.drawProperties,
-      texts: nextItem.texts,
+      texts: nextItem.texts
     })
     draft.texts = texts.map((text: TextBox) => {
       text.id = randomID()
@@ -166,7 +166,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       saveToHistory(draft, {
         drawProperties: draft.drawProperties,
         texts: draft.texts,
-        type: INITIAL,
+        type: INITIAL
       })
       break
     case RESIZE_WINDOW:
@@ -188,7 +188,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
 
             draft.memeSelected = memeSelected
             draft.history = history
-            draft.history.items = draft.history.items.map((i) => {
+            draft.history.items = draft.history.items.map(i => {
               i.drawProperties.image = memeSelected.image
               return i
             })
@@ -212,14 +212,14 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       draft.textIdSelected = action.textIdSelected
       break
     case CUSTOM_TEXT:
-      textIndex = draft.texts.findIndex((text) => text.id === action.text.id)
+      textIndex = draft.texts.findIndex(text => text.id === action.text.id)
       draft.texts[textIndex] = action.text
       break
     case ADD_TEXT:
       draft.texts.push(action.text)
       break
     case REMOVE_TEXT:
-      textIndex = draft.texts.findIndex((text) => text.id === action.text.id)
+      textIndex = draft.texts.findIndex(text => text.id === action.text.id)
       draft.texts.splice(textIndex, 1)
       break
     case UNDO_HISTORY:
@@ -229,7 +229,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       saveToHistory(draft, {
         drawProperties: draft.drawProperties,
         texts: draft.texts,
-        type: action.historyType,
+        type: action.historyType
       })
       break
     case REDO_HISTORY:
@@ -252,7 +252,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       memeSelected: draft.memeSelected,
       lastEditDate: Date.now(),
       history: draft.history,
-      textIdSelected: draft.textIdSelected,
+      textIdSelected: draft.textIdSelected
     })
   } else if ([RESET, ERASE_ALL].includes(action.type)) {
     removeLocalStorage(['memeSelected', 'history', 'lastEditDate', 'textIdSelected'])

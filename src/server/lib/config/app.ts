@@ -18,14 +18,14 @@ const handleError = (err: HttpException, req: Request, res: Response, next?: Nex
   res.status(status).json({
     status,
     message,
-    success: false,
+    success: false
   })
 }
 
 export const send = (res: Response, data: object, status = 200): Response =>
   res.status(status).json({
     data,
-    success: true,
+    success: true
   })
 
 class App {

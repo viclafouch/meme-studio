@@ -17,7 +17,7 @@ function Tab(props: TabProps): JSX.Element {
       className="tab"
       id={props.id}
       style={{
-        ...(!props.active ? { display: 'none' } : null),
+        ...(!props.active ? { display: 'none' } : null)
       }}
     >
       {props.children}
@@ -31,7 +31,7 @@ function Tab(props: TabProps): JSX.Element {
 
 Tab.defaultProps = {
   active: false,
-  id: '',
+  id: ''
 } as TabProps
 
 export default Tab

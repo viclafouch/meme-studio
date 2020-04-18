@@ -51,7 +51,7 @@ function DragAndDrop({ onDrop, id }: DragAndDropProps): JSX.Element {
   return createPortal(
     <div
       className={`drag-and-drop ${isActive ? 'drag-and-drop-active' : ''}`}
-      onDragOver={(e: any): void => e.preventDefault()}
+      onDragOver={(e: React.DragEvent<HTMLDivElement>): void => e.preventDefault()}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
       aria-dropeffect="execute"

@@ -25,7 +25,7 @@ Meme.init(
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: true,
+      primaryKey: true
     },
     uuid: {
       type: new DataTypes.STRING(),
@@ -35,40 +35,40 @@ Meme.init(
           if (!shortid.isValid(value)) {
             throw new Error(`Uuid is not valid (${value})`)
           }
-        },
-      },
+        }
+      }
     },
     name: {
       type: DataTypes.TEXT,
       allowNull: false,
-      unique: true,
+      unique: true
     },
     width: {
       type: new DataTypes.NUMBER(),
-      allowNull: false,
+      allowNull: false
     },
     height: {
       type: new DataTypes.NUMBER(),
-      allowNull: false,
+      allowNull: false
     },
     boxCount: {
       type: new DataTypes.NUMBER(),
       allowNull: false,
       validate: {
-        len: [0, 10],
-      },
+        len: [0, 10]
+      }
     },
     ext: {
       type: new DataTypes.STRING(),
       allowNull: false,
       validate: {
-        isIn: [['jpeg', 'jpg', 'png']],
-      },
-    },
+        isIn: [['jpeg', 'jpg', 'png']]
+      }
+    }
   },
   {
     tableName: 'memes',
-    sequelize: database,
+    sequelize: database
   }
 )
 

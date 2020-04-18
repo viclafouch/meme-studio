@@ -29,7 +29,7 @@ const AboutAsync = Loadable({
   },
   loading: Loading,
   delay: 200,
-  timeout: 5000,
+  timeout: 5000
 })
 
 const HomeAsync = Loadable({
@@ -40,7 +40,7 @@ const HomeAsync = Loadable({
   },
   loading: Loading,
   delay: 200,
-  timeout: 5000,
+  timeout: 5000
 })
 
 const StudioAsync = Loadable({
@@ -51,7 +51,7 @@ const StudioAsync = Loadable({
   },
   loading: Loading,
   delay: 200,
-  timeout: 5000,
+  timeout: 5000
 })
 
 StudioAsync.preload()
