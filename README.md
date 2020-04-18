@@ -1,4 +1,4 @@
-# meme-studio
+# Meme Studio
 
 [![Meme Studio](https://github.com/viclafouch/meme-studio/blob/master/static/meme-studio.png)](https://www.meme-studio.io)
 
