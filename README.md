@@ -1,6 +1,6 @@
 # meme-studio
 
-![alt](https://github.com/viclafouch/meme-studio/blob/master/meme-studio.png)
+![alt](https://github.com/viclafouch/meme-studio/blob/master/static/meme-studio.png)
 
 The Meme Studio is designed to be insanely fast and provide powerful customization for your memes, while still being simple and easy to use.
 
