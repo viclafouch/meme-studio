@@ -24,9 +24,11 @@
   },
   "studio": {
     "lastBackup": "Dernière sauvegarde",
-    "selectMeme": "Veuillez sélectionner un mème de la galerie",
+    "selectMemeFrom": "Veuillez sélectionner un mème de la galerie",
+    "selectAMeme": "Sélectionner un mème",
     "or": "ou",
-    "importImage": "importez une image",
+    "dropAnImage": "importez une image",
+    "importAnImage": "Importer une image",
     "export": "Exporter",
     "noMemeSelected": "Aucun meme sélectionné",
     "text": "Texte",

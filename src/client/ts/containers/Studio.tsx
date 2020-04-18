@@ -153,7 +153,7 @@ function Studio(): JSX.Element {
               {isMinLgSize ? (
                 <>
                   <p>
-                    {t('studio.selectMeme')} <br />{' '}
+                    {t('studio.selectMemeFrom')} <br />{' '}
                     <label className="import-image-label" htmlFor="local-meme">
                       <input
                         type="file"
@@ -163,7 +163,7 @@ function Studio(): JSX.Element {
                         accept="image/png, image/jpeg"
                         id="local-meme"
                       />
-                      {t('studio.or')} <span className="import-image-label-text">{t('studio.importImage')}</span>.
+                      {t('studio.or')} <span className="import-image-label-text">{t('studio.dropAnImage')}</span>.
                     </label>
                   </p>
                   <DragAndDrop onDrop={handleImportImage} id="dragenter-root" />
@@ -171,10 +171,10 @@ function Studio(): JSX.Element {
               ) : (
                 <div className="empty-meme-buttons-container">
                   <Button className={'button-select-gallery'} big onClick={(): void => setCurrentTab(TAB_GALLERY)}>
-                    Sélectionner un meme
+                    {t('studio.selectAMeme')}
                   </Button>
                   <label htmlFor="local-meme" className="import-image-label button button-big button-select-gallery">
-                    <span>Importer un meme</span>
+                    <span>{t('studio.importAnImage')}</span>
                     <input
                       type="file"
                       ref={inputDrop}

@@ -24,9 +24,11 @@
   },
   "studio": {
     "lastBackup": "Last backup",
-    "selectMeme": "Please select a meme in the gallery",
+    "selectMemeFrom": "Please select a meme in the gallery",
+    "selectAMeme": "Select a Meme",
     "or": "or",
-    "importImage": "drop an image",
+    "dropAnImage": "drop an image",
+    "importAnImage": "Import an image",
     "export": "Export",
     "noMemeSelected": "No meme selected",
     "text": "Text",
