@@ -6,7 +6,7 @@ const { promisify } = require('util')
 const sizeOf = promisify(require('image-size'))
 
 const memeFile = path.resolve('src', 'server', 'memes.json')
-const templateDir = './templates'
+const templateDir = './static/templates'
 
 const download = (uri, filename) => new Promise((resolve, reject) => {
   request.head(uri, function(err, res, body) {
