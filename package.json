@@ -114,6 +114,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "helmet": "^3.22.0",
+    "heroku-ssl-redirect": "0.0.4",
     "morgan": "^1.10.0",
     "sequelize": "^5.21.6",
     "shortid": "^2.2.15",

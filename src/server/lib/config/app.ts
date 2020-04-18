@@ -3,6 +3,7 @@ import * as cookieParser from 'cookie-parser'
 import * as helmet from 'helmet'
 import * as morgan from 'morgan'
 import * as path from 'path'
+import sslRedirect from 'heroku-ssl-redirect'
 import { Request, Response, NextFunction } from 'express'
 import * as cors from 'cors'
 import * as bodyParser from 'body-parser'
@@ -49,6 +50,7 @@ class App {
   }
 
   private initializeRoutes(): void {
+    if (process.env.USE_SSL) this.app.use(sslRedirect())
     this.app.route('/memes').post(this.memeController.index)
     this.app.route('/memes/:id').post(this.memeController.show)
     this.app.route('/share').post(this.memeController.share)
