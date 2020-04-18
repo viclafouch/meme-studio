@@ -1,8 +1,5 @@
 # meme-studio
 
-![alt]()
-
-
 [![Meme Studio](https://github.com/viclafouch/meme-studio/blob/master/static/meme-studio.png)](https://www.meme-studio.io)
 
 
