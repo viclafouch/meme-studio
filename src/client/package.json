@@ -21,18 +21,16 @@
     "@types/react-router-dom": "5.1.4",
     "abort-controller": "3.0.0",
     "date-fns": "^2.12.0",
-    "i18next": "19.4.1",
-    "i18next-browser-languagedetector": "4.0.2",
-    "i18next-xhr-backend": "3.2.2",
+    "i18next": "19.4.2",
     "immer": "6.0.3",
     "nprogress": "^0.2.0",
     "react": "16.13.1",
     "react-color": "2.18.0",
     "react-dom": "16.13.1",
-    "react-i18next": "11.3.4",
+    "react-i18next": "11.3.5",
     "react-json-view": "1.19.1",
     "react-loadable": "^5.5.0",
     "react-router-dom": "5.1.2",
-    "react-svg": "11.0.18"
+    "react-svg": "11.0.19"
   }
 }
