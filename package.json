@@ -13,7 +13,8 @@
     "commit": "git-cz",
     "lint": "tsc --noEmit && eslint --ext .ts,.tsx src/",
     "ncu": "node tasks/ncu.js",
-    "postinstall": "(node tasks/download.js) && (cd src/client && npm install);"
+    "download": "node -r dotenv/config tasks/download.js",
+    "postinstall": "cd src/client && npm install"
   },
   "engines": {
     "node": "12.8.1",
@@ -86,6 +87,7 @@
     "sass-loader": "8.0.2",
     "source-map-loader": "0.2.4",
     "style-loader": "1.1.3",
+    "tinify": "1.6.0-beta.2",
     "ts-loader": "6.2.2",
     "tsconfig-paths-webpack-plugin": "3.2.0",
     "typescript": "3.8.3",
