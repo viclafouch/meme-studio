@@ -1,7 +1,7 @@
 import * as React from 'react'
-import '@client/scss/pages/about.scss'
 import Header from '@client/components/Header/Header'
 import Footer from '@client/components/Footer/Footer'
+import '@client/scss/pages/about.scss'
 
 function About(): JSX.Element {
   return (

@@ -1,0 +1,60 @@
+.page.terms {
+  background: url('/images/particles.svg') repeat-y;
+  background-position: center center;
+  background-size: 100%;
+
+  .terms-body {
+    padding-top: 80px;
+
+    h1 {
+      font-size: 2rem;
+      color: #000000;
+      margin-bottom: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    h2 {
+      padding-left: 1rem;
+      font-size: 1.5rem;
+      color: #000000;
+      margin-bottom: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    h3 {
+      padding-left: 2rem;
+      font-size: 1.2rem;
+      color: #000000;
+      margin-bottom: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    p {
+      margin-top: 0.75rem;
+      margin-bottom: 1rem;
+      line-height: 1.35rem;
+    }
+
+    ul {
+      margin-top: 2rem;
+      list-style: disc;
+      padding-left: 1rem;
+
+      li {
+        padding-left: 1rem;
+        margin: 0.75rem 0;
+      }
+    }
+
+    a {
+      color: inherit;
+      &:hover {
+        color: var(--blue);
+      }
+    }
+
+    iframe {
+      margin-top: 10px;
+    }
+  }
+}

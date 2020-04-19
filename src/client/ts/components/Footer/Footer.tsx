@@ -13,7 +13,7 @@ function Footer(): JSX.Element {
           <Link to="/about">{t('about')}</Link>
         </li>
         <li>
-          <Link to="/about">{t('legal')}</Link>
+          <Link to="/terms">{t('legal')}</Link>
         </li>
         <li>
           <a

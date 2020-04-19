@@ -50,7 +50,8 @@
     "dropImage": "Drop your image in PNG or JPG format here"
   },
   "about": "About",
-  "legal": "Legal Notice",
+  "legal": "Terms",
+  "contact": "Contact",
   "notFound": "Page not found",
   "createAMeme": "Create a Meme",
   "makeYourOwnMeme": "Make your own Meme",

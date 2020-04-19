@@ -32,6 +32,17 @@ const AboutAsync = Loadable({
   timeout: 5000
 })
 
+const TermsAsync = Loadable({
+  loader: async () => {
+    const container = await import('@client/containers/Terms')
+    nprogress.done()
+    return container
+  },
+  loading: Loading,
+  delay: 200,
+  timeout: 5000
+})
+
 const HomeAsync = Loadable({
   loader: async () => {
     const container = await import('@client/containers/Home')
@@ -68,6 +79,9 @@ function routes(): JSX.Element {
       </Page>
       <Page path="/about" title={t('about')}>
         <AboutAsync />
+      </Page>
+      <Page path="/terms" title={t('about')}>
+        <TermsAsync />
       </Page>
       <Page path="/create" title={!memeSelected ? t('createAMeme') : memeSelected.name}>
         <StudioAsync />
