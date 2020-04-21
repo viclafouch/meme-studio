@@ -1,10 +1,15 @@
 import * as React from 'react'
 import { useState, useImperativeHandle, forwardRef } from 'react'
+import * as ReactMarkdown from 'react-markdown'
+import { useTranslation } from 'react-i18next'
+import faqEnUS from '@client/md/en-US/faq.md'
+import faqFr from '@client/md/fr/faq.md'
 import Modal from '@client/components/Modal/Modal'
 import './faq.scss'
 
 const Faq = forwardRef(
   (props: any, ref): JSX.Element => {
+    const { i18n } = useTranslation()
     const [isOpen, setIsOpen] = useState(false)
 
     useImperativeHandle(
@@ -21,25 +26,7 @@ const Faq = forwardRef(
         <div className="faq">
           <h1>F.A.Q</h1>
           <div className="faq-body">
-            <h2>Comment personnaliser un meme ?</h2>
-            <p>
-              Pour personnaliser un mème, rien de plus simple : Sélectionner un mème parmis ceux proposés dans la liste, ou en
-              utilisant une image de votre appareil. Utilisez ensuite les zones de textes et les outils à votre gauche pour
-              personnaliser au mieux votre oeuvre !
-            </p>
-            <h2>Comment exporter un meme ?</h2>
-            <p>
-              Un bouton est disponible en haut à droite, vous permettant d'exporter votre oeuvre à sa taille originale au format
-              PNG.
-            </p>
-            <h2>Comment participer à l'amélioration du site ?</h2>
-            <p>
-              J'ai créé un formulaire Google vous permettant de partager vos idées et de me faire remonter les bugs identifiés :{' '}
-              <a href="https://forms.gle/KT2wHbobQwKLXDo1A" target="_blank">
-                https://forms.gle/KT2wHbobQwKLXDo1A
-              </a>
-              .
-            </p>
+            <ReactMarkdown source={i18n.language === 'fr' ? faqFr : faqEnUS} escapeHtml={false} />
           </div>
         </div>
       </Modal>

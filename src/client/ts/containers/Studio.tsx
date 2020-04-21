@@ -25,7 +25,7 @@ import { hasRecoverVersion, formatRelativeDate } from '@client/utils/helpers'
 
 const CanvasDebuggerAsync = Loadable({
   loader: async () => import('@client/components/CanvasDebugger/CanvasDebugger'),
-  loading: (): null => null
+  loading: () => null
 })
 
 function Studio(): JSX.Element {
