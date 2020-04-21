@@ -9,7 +9,7 @@ import './faq.scss'
 
 const Faq = forwardRef(
   (props: any, ref): JSX.Element => {
-    const { i18n } = useTranslation()
+    const { i18n, t } = useTranslation()
     const [isOpen, setIsOpen] = useState(false)
 
     useImperativeHandle(
@@ -24,7 +24,7 @@ const Faq = forwardRef(
     return isOpen ? (
       <Modal onClose={(): void => setIsOpen(false)}>
         <div className="faq">
-          <h1>F.A.Q</h1>
+          <h1>{t('faq')}</h1>
           <div className="faq-body">
             <ReactMarkdown source={i18n.language === 'fr' ? faqFr : faqEnUS} escapeHtml={false} />
           </div>
