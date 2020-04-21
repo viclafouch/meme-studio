@@ -2,7 +2,6 @@ import * as React from 'react'
 import { useRef, RefObject } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useTranslation } from 'react-i18next'
-import * as Loadable from 'react-loadable'
 import {
   SET_SHOW_TEXT_AREAS,
   UNDO_HISTORY,
@@ -11,15 +10,11 @@ import {
   RESET,
   TOGGLE_EXPORT_MODAL
 } from '@client/store/reducer/constants'
+import Faq from '@client/components/Faq/Faq'
 import { useEditor, useWindowWidth } from '@client/ts/shared/hooks'
 import { UseEditorInt } from '@client/ts/shared/validators'
 import { TAB_GALLERY } from '@client/ts/shared/constants'
 import './tools.scss'
-
-const FaqAsync = Loadable({
-  loader: async () => import('@client/components/Faq/Faq'),
-  loading: () => null
-})
 
 type ToolsProps = {
   changeTab: Function
@@ -127,7 +122,7 @@ const Tools = (props: ToolsProps): JSX.Element => {
           </button>
         </li>
       </ul>
-      <FaqAsync ref={faqModal} />
+      <Faq ref={faqModal} />
     </div>
   )
 }

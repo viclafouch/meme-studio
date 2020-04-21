@@ -87,6 +87,10 @@ body {
     .studio-aside {
       height: 100%;
       width: 100%;
+
+      @include lg {
+        height: calc(100vh - var(--header-height));
+      }
     }
 
     .studio-tools {
@@ -123,6 +127,9 @@ body {
       background-position: center center;
       background-size: cover;
       position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       @include lg {
         padding: 50px 100px;
@@ -165,8 +172,6 @@ body {
       }
 
       .empty-meme {
-        width: inherit;
-        height: inherit;
         display: flex;
         justify-content: center;
         align-items: center;
