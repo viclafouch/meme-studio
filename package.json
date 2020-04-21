@@ -1,6 +1,7 @@
 {
   "name": "meme-studio",
   "version": "1.0.0",
+  "private": true,
   "description": "A complete meme generator coded in React / Express / Typescript",
   "scripts": {
     "dev": "npm-run-all --parallel dev:server dev:client",

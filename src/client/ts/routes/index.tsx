@@ -77,10 +77,10 @@ function routes(): JSX.Element {
       <Page exact path="/" title={t('makeYourOwnMeme')}>
         <HomeAsync />
       </Page>
-      <Page path="/about" title={t('about')}>
+      <Page path="/about" title={t('about.title')}>
         <AboutAsync />
       </Page>
-      <Page path="/terms" title={t('about')}>
+      <Page path="/terms" title={t('about.title')}>
         <TermsAsync />
       </Page>
       <Page path="/create" title={!memeSelected ? t('createAMeme') : memeSelected.name}>

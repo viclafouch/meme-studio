@@ -49,12 +49,18 @@
     "center": "Center",
     "dropImage": "Drop your image in PNG or JPG format here"
   },
-  "about": "About",
   "legal": "Terms",
   "contact": "Contact",
   "notFound": "Page not found",
   "createAMeme": "Create a Meme",
   "makeYourOwnMeme": "Make your own Meme",
   "backToHome": "Back to home",
-  "noMatch": "No match for"
+  "noMatch": "No match for",
+  "about": {
+    "title": "About",
+    "text1": "Meme Studio is a simple and fast website to create and share memes. A list of memes is provided by default but you can also import your own image.",
+    "text2": "You have the option of downloading your personalized meme to your device or sharing it directly on your Twitter account. I do not save your meme in our database, so make sure you export your work.",
+    "contactMe": "If you have any suggestions, comments, or if you'd like to report a bug, please use the <1>feedback form</1>. If you want an image removed, please contact me:",
+    "openSource": "Meme Studio is an open source project that you are free to contribute :"
+  }
 }

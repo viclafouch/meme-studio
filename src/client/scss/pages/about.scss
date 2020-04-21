@@ -9,15 +9,16 @@
     }
 
     p {
+      max-width: 800px;
       margin-top: 0.75rem;
       margin-bottom: 1rem;
       line-height: 1.35rem;
     }
 
     a {
-      color: inherit;
+      color: var(--blue);
       &:hover {
-        color: var(--blue);
+        color: var(--blue-light);
       }
     }
 

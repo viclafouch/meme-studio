@@ -1,31 +1,36 @@
 import * as React from 'react'
 import Header from '@client/components/Header/Header'
 import Footer from '@client/components/Footer/Footer'
+import { useTranslation } from 'react-i18next'
+import { Trans } from 'react-i18next'
 import '@client/scss/pages/about.scss'
 
 function About(): JSX.Element {
+  const { t } = useTranslation()
+
   return (
     <div className="page about">
       <Header />
       <div className="content-one">
         <section className="about-body container">
-          <h1>About</h1>
+          <h1>{t('about.title')}</h1>
+          <p>{t('about.text1')}</p>
+          <p>{t('about.text2')}</p>
           <p>
-            <b>Imgflip is a simple and fast website for creating and sharing images. We specialize in memes and GIFs.</b>
+            <Trans i18nKey="about.contactMe">
+              If you have any suggestions, comments, or if you'd like to report a bug, please use the
+              <a rel="noreferrer noopener" href="https://forms.gle/KT2wHbobQwKLXDo1A" target="blank">
+                feedback form
+              </a>
+              . If you want an image removed, please contact me:
+            </Trans>{' '}
+            <a rel="noreferrer noopener" target="_blank" id="contact-me" href="mailto:contact@meme-studio.io">
+              contact@meme-studio.io
+            </a>
           </p>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum libero omnis vero corporis modi et, dicta, nulla quidem
-            saepe similique ab porro perferendis voluptatibus! Reiciendis ullam modi id adipisci eaque!
-          </p>
-          <p>
-            <b>Imgflip is a simple and fast website for creating and sharing images. We specialize in memes and GIFs.</b>
-          </p>
-          <p>
-            You can contact me at : <a href="mailto:email@email.fr">email@email.fr</a>
-          </p>
-          <p>
-            Meme Studio is an open source project :{' '}
-            <a href="https://github.com/viclafouch/meme-studio" target="_blank">
+            {t('about.openSource')}{' '}
+            <a rel="noreferrer noopener" href="https://github.com/viclafouch/meme-studio" target="_blank">
               https://github.com/viclafouch/meme-studio
             </a>
           </p>

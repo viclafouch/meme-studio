@@ -10,7 +10,7 @@ function Footer(): JSX.Element {
     <footer className="footer">
       <ul className="footer-links">
         <li>
-          <Link to="/about">{t('about')}</Link>
+          <Link to="/about">{t('about.title')}</Link>
         </li>
         <li>
           <Link to="/terms">{t('legal')}</Link>
