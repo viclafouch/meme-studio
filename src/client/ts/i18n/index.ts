@@ -11,7 +11,7 @@ export const languages = {
   en: {
     name: 'English',
     flag: '/images/flag-en.svg',
-    translation: require('../../locales/en/translation.json')
+    translation: require('../../locales/en-US/translation.json')
   }
 }
 

@@ -76,6 +76,18 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
         ]
       },
       {
+        test: /\.md$/,
+        use: [
+          {
+            loader: "html-loader"
+          },
+          {
+            loader: "markdown-loader",
+            options: {}
+          }
+        ]
+      },
+      {
         test: /\.scss$/,
         use: [
           {

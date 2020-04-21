@@ -49,7 +49,9 @@
     "center": "Center",
     "dropImage": "Drop your image in PNG or JPG format here"
   },
-  "legal": "Terms",
+  "legal": {
+    "title": "Terms"
+  },
   "contact": "Contact",
   "notFound": "Page not found",
   "createAMeme": "Create a Meme",
