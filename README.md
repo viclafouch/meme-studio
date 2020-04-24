@@ -1,22 +1,30 @@
-# Meme Studio
-
 [![Meme Studio](https://github.com/viclafouch/meme-studio/blob/master/static/meme-studio.png)](https://www.meme-studio.io)
 
 
 The Meme Studio is designed to be insanely fast and provide powerful customization for your memes, while still being simple and easy to use.
 
-Website : https://real-meme-studio.herokuapp.com/
+A list of memes is provided by default but you can also import your own image.
 
-#### Langs supported :
+You have the option of downloading your personalized meme to your device or sharing it directly on your Twitter account. I do not save your meme in our database, so make sure you export your work.
+
+Website : [meme-studio.io](https://www.meme-studio.io)
+
+#### Langs available (for now) :
 
 - Français
 - English
 
-### What I use:
+#### What I use:
 
-- [ReactJS](https://github.com/facebook/react) - Framework JS.
+- [ReactJS](https://github.com/facebook/react) - Framework JS
 - [Immer](https://immerjs.github.io/immer/docs/introduction) - Immutability library
-- [React-i18next](https://github.com/i18next/react-i18next) - Internationalization for React.
+- [React-i18next](https://github.com/i18next/react-i18next) - Internationalization
+- [ExpressJS](https://expressjs.com) - Server side
+- [Sequelize](https://sequelize.org) - Database
+
+### Contributing
+
+Any contributions and/or pull requests would be welcome.
 
 ### Installing from source
 
