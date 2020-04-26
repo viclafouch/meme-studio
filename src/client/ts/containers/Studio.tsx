@@ -146,7 +146,7 @@ function Studio(): JSX.Element {
             </div>
           )}
           {memeSelected && <WrapperCanvas changeTab={setCurrentTab} />}
-          {IS_DEV && <CanvasDebuggerAsync />}
+          {IS_DEV && memeSelected && <CanvasDebuggerAsync />}
           {!memeSelected && (
             <div className="empty-meme">
               <ReactSVG src="images/choose-meme.svg" wrapper="span" className="choose-meme-svg" />

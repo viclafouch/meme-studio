@@ -97,12 +97,33 @@
     }
   }
 
+  .button-loader {
+    margin-left: 7px;
+    background-color: transparent;
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: rotation 1s linear infinite;
+
+    @keyframes rotation {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
   &:not(:disabled):hover {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.22);
     opacity: 0.85;
   }
 
   &:disabled {
-    color: #dcdcdc !important;
+    border-color: #c9caca !important;
+    background-color: #c9caca !important;
+    color: #ffffff !important;
+    cursor: not-allowed;
   }
 }

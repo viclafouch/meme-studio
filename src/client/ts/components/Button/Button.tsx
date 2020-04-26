@@ -6,11 +6,12 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   medium?: boolean
   big?: boolean
   onClick?: any
+  isLoading: boolean
   disabled: boolean
 }
 
 function Button(props: ButtonProps): JSX.Element {
-  const { big, small, medium, ...rest } = props
+  const { big, small, medium, isLoading, ...rest } = props
   const className = ['button']
   if (small) className.push('button-small')
   else if (big) className.push('button-big')
@@ -18,9 +19,12 @@ function Button(props: ButtonProps): JSX.Element {
 
   className.push(props.className || '')
 
+  rest.disabled = isLoading
+
   return (
     <button {...rest} onClick={props.onClick} className={className.join(' ')}>
       {props.children}
+      {isLoading && <span className="button-loader" />}
     </button>
   )
 }

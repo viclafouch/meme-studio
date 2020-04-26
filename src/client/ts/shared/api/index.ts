@@ -34,6 +34,14 @@ export const getMeme = (id: string): Promise<{ texts: Array<TextBox>; meme: Meme
     meme: new Meme(response.data.meme)
   }))
 
+export const updateMeme = ({ meme, texts }: { meme: Meme; texts: Array<TextBox> }): Promise<object> =>
+  fetchApi(`/memes/${meme.id}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+      texts
+    })
+  })
+
 export interface ResultPostToTwitter {
   success: boolean
   message?: string
