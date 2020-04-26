@@ -1,4 +1,5 @@
 import * as express from 'express'
+import { param, body } from 'express-validator'
 import * as cookieParser from 'cookie-parser'
 import * as helmet from 'helmet'
 import * as morgan from 'morgan'
@@ -8,22 +9,24 @@ import { Request, Response, NextFunction } from 'express'
 import * as cors from 'cors'
 import * as bodyParser from 'body-parser'
 import { MemeController } from '@server/controllers/meme.controller'
+import { TextController } from '@server/controllers/text.controller'
 import HttpException from '@server/exceptions/HttpException'
 import { IS_DEV } from '@shared/config'
+import { validate } from '@server/vadidators'
+import Meme from '@server/models/meme.model'
 
 const clientDir = '/dist/client'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const handleError = (err: HttpException, req: Request, res: Response, next?: NextFunction): void => {
-  const { status, message } = err
-  res.status(status).json({
+export const handleError = (err: HttpException, req: Request, res: Response, next?: NextFunction): any => {
+  const { status = 500, message } = err
+  return res.status(status).json({
     status,
     message,
     success: false
   })
 }
 
-export const send = (res: Response, data: object, status = 200): Response =>
+export const send = (res: Response, data: object | null = null, status = 200): Response =>
   res.status(status).json({
     data,
     success: true
@@ -32,6 +35,7 @@ export const send = (res: Response, data: object, status = 200): Response =>
 class App {
   public app: express.Application
   public memeController: MemeController = new MemeController()
+  public textController: TextController = new TextController()
 
   constructor() {
     this.app = express()
@@ -51,10 +55,53 @@ class App {
 
   private initializeRoutes(): void {
     if (process.env.USE_SSL) this.app.use(sslRedirect())
-    this.app.route('/memes').post(this.memeController.index)
-    this.app.route('/memes/:id').post(this.memeController.show)
+    this.app.post(
+      '/memes',
+      validate([
+        body('page').isInt({
+          min: 0
+        })
+      ]),
+      this.memeController.index
+    )
+    this.app.post(
+      '/memes/:id',
+      validate([
+        param('id')
+          .exists()
+          .isNumeric()
+          .toInt()
+          .custom(
+            async (id: number): Promise<void> => {
+              const meme: Meme | null = await Meme.findByPk<Meme>(id)
+              if (meme) return Promise.resolve()
+              else return Promise.reject('Meme does not exist')
+            }
+          )
+      ]),
+      this.memeController.show
+    )
     this.app.route('/share').post(this.memeController.share)
-    if (!IS_DEV) {
+    if (IS_DEV) {
+      this.app.put(
+        '/memes/:id',
+        validate([
+          body('texts').isArray(),
+          param('id')
+            .exists()
+            .isNumeric()
+            .toInt()
+            .custom(
+              async (id: number): Promise<void> => {
+                const meme: Meme | null = await Meme.findByPk<Meme>(id)
+                if (meme) return Promise.resolve()
+                else return Promise.reject('Meme does not exist')
+              }
+            )
+        ]),
+        this.textController.update
+      )
+    } else {
       this.app.get('*.js', function (req, res, next) {
         req.url = req.url + '.gz'
         res.set('Content-Encoding', 'gzip')
