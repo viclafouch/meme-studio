@@ -59,7 +59,7 @@ class App {
       '/memes',
       validate([
         body('page').isInt({
-          min: 0
+          min: 1
         })
       ]),
       this.memeController.index

@@ -107,6 +107,10 @@ TextBox.init(
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: true
+    },
+    memeId: {
+      type: new DataTypes.NUMBER(),
+      allowNull: false
     }
   },
   {

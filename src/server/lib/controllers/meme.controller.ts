@@ -1,43 +1,46 @@
-import { Response, NextFunction } from 'express'
+/* eslint-disable @typescript-eslint/camelcase */
+import { Response, NextFunction, Request } from 'express'
 import Meme from '../models/meme.model'
 import TextBox from '../models/textbox.model'
-import MemeNotFoundException from '../exceptions/MemeNotFoundException'
 import { send } from '../config/app'
 import * as Twit from 'twit'
-import {
-  ReqMemeShowInt,
-  ResultMemeShowInt,
-  ResultMemeIndex,
-  ReqMemeIndex,
-  ReqShareToTwitter,
-  ResultShareToTwitter
-} from '../interfaces/meme.interface'
 import twitterConfig from '@server/config/twitter'
 import { IS_DEV } from '@shared/config'
 import HttpException from '@server/exceptions/HttpException'
 
 export class MemeController {
-  public async index(req: ReqMemeIndex, res: Response): Promise<void> {
-    const limit = 10
-    const { page } = req.body
-    let numPage: number = parseInt(page, 10)
-    numPage = !isNaN(numPage) ? numPage : 1
-    const { count } = await Meme.findAndCountAll()
-    const pages: number = Math.ceil(count / limit)
-    const offset: number = limit * (numPage - 1)
-    const memes: Array<Meme> = await Meme.findAll<Meme>({ raw: true, limit, offset, order: [['id', 'ASC']] })
-    const result: ResultMemeIndex = {
-      memes,
-      pages
+  public async index(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const body = req.body as Record<string, any>
+      const { page } = body
+      const { count } = await Meme.findAndCountAll()
+      const memesPerPage = 10
+      const pages = Math.ceil(count / memesPerPage)
+      const offset = memesPerPage * (page - 1)
+      const memes: Array<Meme> = await Meme.findAll<Meme>({
+        raw: true,
+        limit: memesPerPage,
+        offset,
+        order: [['id', 'ASC']]
+      })
+      send(
+        res,
+        {
+          pages,
+          memes
+        },
+        200
+      )
+    } catch (error) {
+      console.error(error)
+      next(new HttpException(500))
     }
-    send(res, result)
   }
-  public async show(req: ReqMemeShowInt, res: Response, next: NextFunction): Promise<void> {
-    const id: string = req.params.id
-    const meme: Meme | null = await Meme.findByPk<Meme>(id, {
-      raw: true
-    })
-    if (meme) {
+  public async show(req: Request, res: Response, next: NextFunction): Promise<void> {
+    try {
+      const params = req.params as Record<string, any>
+      const { id } = params
+      const meme: Meme = await Meme.findByPk<Meme>(id, { raw: true })
       const texts: Array<TextBox> = await TextBox.findAll({
         raw: true,
         where: {
@@ -47,25 +50,30 @@ export class MemeController {
           exclude: ['memeId']
         }
       })
-
-      const result: ResultMemeShowInt = {
-        meme,
-        texts
-      }
-
-      send(res, result)
-    } else next(new MemeNotFoundException(id))
+      send(
+        res,
+        {
+          meme,
+          texts
+        },
+        200
+      )
+    } catch (error) {
+      console.error(error)
+      next(new HttpException(500))
+    }
   }
 
-  public async share(req: ReqShareToTwitter, res: Response, next: NextFunction): Promise<void> {
+  public async share(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const image: string = req.body.image
+      const body = req.body as Record<string, any>
+      const { image } = body.image
+
       const T = new Twit(twitterConfig)
 
       const upload = (image64: string): Promise<any> =>
         new Promise((resolve: any, reject: any) =>
-          // eslint-disable-next-line @typescript-eslint/camelcase
-          T.post('media/upload', { media_data: image64 }, function (err, data: any) {
+          T.post('media/upload', { media_data: image64 }, function (err, data) {
             if (err) reject(err)
             else resolve(data)
           })
@@ -75,11 +83,9 @@ export class MemeController {
 
       const create = (mediaId: string): Promise<any> =>
         new Promise((resolve, reject) => {
-          // eslint-disable-next-line @typescript-eslint/camelcase
           T.post('media/metadata/create', { media_id: mediaId }, function (err) {
             if (err) reject(err)
             else {
-              // eslint-disable-next-line @typescript-eslint/camelcase
               const params = { media_ids: [mediaId] }
               T.post('statuses/update', params, function (err, data) {
                 if (err) reject(err)
@@ -99,10 +105,13 @@ export class MemeController {
         imageUrl = 'pic.twitter.com/zTI4JZoShU'
       }
 
-      const result: ResultShareToTwitter = {
-        url: imageUrl
-      }
-      send(res, result)
+      send(
+        res,
+        {
+          url: imageUrl
+        },
+        200
+      )
     } catch (error) {
       console.error(error)
       next(new HttpException(500))
