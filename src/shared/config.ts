@@ -6,4 +6,6 @@ const PORT_SERVER_PROD: number = JSON.parse(process.env.PORT || '3000')
 
 const API_URL = IS_DEV ? `http://localhost:${PORT_SERVER_DEV}` : ''
 
-export { IS_DEV, PORT_SERVER_PROD, PORT_CLIENT_DEV, PORT_SERVER_DEV, API_URL }
+const FONTS_FAMILY = ['Arial', 'Helvetica', 'Impact', 'Geneva', 'Arial Black', 'Times New Roman', 'Courier New', 'Lucida Console']
+
+export { IS_DEV, PORT_SERVER_PROD, PORT_CLIENT_DEV, PORT_SERVER_DEV, API_URL, FONTS_FAMILY }

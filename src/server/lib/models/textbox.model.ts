@@ -1,16 +1,6 @@
 import { Model, DataTypes } from 'sequelize'
 import { database } from '../config/database'
-
-export const fontsFamily = [
-  'Arial',
-  'Helvetica',
-  'Impact',
-  'Geneva',
-  'Arial Black',
-  'Times New Roman',
-  'Courier New',
-  'Lucida Console'
-]
+import { FONTS_FAMILY } from '@shared/config'
 
 export class TextBox extends Model {
   public id: number
@@ -36,8 +26,7 @@ export class TextBox extends Model {
 TextBox.init(
   {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
+      type: new DataTypes.STRING(),
       primaryKey: true
     },
     value: {
@@ -77,7 +66,7 @@ TextBox.init(
       type: new DataTypes.STRING(128),
       allowNull: false,
       validate: {
-        isIn: [fontsFamily]
+        isIn: [FONTS_FAMILY]
       }
     },
     boxShadow: {
@@ -114,7 +103,7 @@ TextBox.init(
       }
     },
     memeId: {
-      type: new DataTypes.NUMBER(),
+      type: new DataTypes.STRING(),
       allowNull: false
     }
   },

@@ -10,12 +10,13 @@ import TextareaExtended from '@client/components/TextareaExpended/TextareaExtend
 import ColorPicker from '@client/components/ColorPicker/ColorPicker'
 import InputRangeSlider from '@client/components/InputRangeSlider/InputRangeSlider'
 import TextBox from '@client/ts/shared/models/TextBox'
-import { fontsFamilyConfig, createText, fontSizeConfig, boxShadowConfig } from '@client/ts/shared/config-editor'
+import { createText, fontSizeConfig, boxShadowConfig } from '@client/ts/shared/config-editor'
 import { EditorContext, EditorState } from '@client/store/EditorContext'
 import { CUSTOM_TEXT, ADD_TEXT, REMOVE_TEXT, SET_TEXT_ID_SELECTED } from '@client/store/reducer/constants'
 import { useEditor, useWindowWidth } from '@client/ts/shared/hooks'
 import { toHistoryType } from '@client/utils/helpers'
 import { wait, randomID } from '@shared/utils'
+import { FONTS_FAMILY } from '@shared/config'
 import './customization.scss'
 
 function Customization(): JSX.Element {
@@ -197,7 +198,7 @@ function Customization(): JSX.Element {
                     })
                   }
                 >
-                  {fontsFamilyConfig.map((font: string) => (
+                  {FONTS_FAMILY.map((font: string) => (
                     <option value={font} key={font.replace(/ /g, '+')}>
                       {font}
                     </option>
