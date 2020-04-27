@@ -12,6 +12,8 @@ if (!process.env.TINY_KEY) {
 
 tinify.key = process.env.TINY_KEY
 
+const useCompression = true
+
 const memeFile = path.resolve('src', 'server', 'memes.json')
 const templateDir = './static/templates'
 
@@ -22,9 +24,11 @@ const downloadAndCompress = async (uri, filename) => {
     })
   })
 
-  const source = tinify.fromFile(filename);
-  console.log(`Compressing ${filename}...`);
-  await source.toFile(filename);
+  if (useCompression) {
+    const source = tinify.fromFile(filename);
+    console.log(`Compressing ${filename}...`);
+    await source.toFile(filename);
+  }
 }
 
 fs.existsSync(memeFile) || fs.writeFileSync(memeFile, JSON.stringify({ memes: [] }, null, 2))
@@ -44,9 +48,8 @@ fs.existsSync(templateDir) || fs.mkdirSync(templateDir)
       for (const meme of body.data.memes) {
         const index = jsonData.memes.findIndex(m => meme.name === m.name)
         if (index === -1) {
-          const uuid = shortid.generate()
           const ext = meme.url.split('.').pop()
-          const filename = `${uuid}.${ext}`
+          const filename = `${shortid.generate()}.${ext}`
           const templatePath = path.join(templateDir, filename)
           await downloadAndCompress(meme.url, templatePath)
           const dimensions = await sizeOf(templatePath)
@@ -55,14 +58,15 @@ fs.existsSync(templateDir) || fs.mkdirSync(templateDir)
             width: dimensions.width,
             height: dimensions.height,
             boxCount: meme.box_count,
-            uuid,
-            ext,
-            texts: []
+            filename,
+            id: shortid.generate(),
+            texts: [],
+            createdAt: new Date(),
+            updatedAt: new Date(),
           })
           nbNewMemes++
         } else {
-          const filename = `${jsonData.memes[index].uuid}.${jsonData.memes[index].ext}`
-          const templatePath = path.join(templateDir, filename)
+          const templatePath = path.join(templateDir, jsonData.memes[index].filename)
           if (!fs.existsSync(templatePath)) await downloadAndCompress(meme.url, templatePath)
           const dimensions = await sizeOf(templatePath)
           jsonData.memes[index].height = dimensions.height
