@@ -12,8 +12,7 @@ import { MemeController } from '@server/controllers/meme.controller'
 import { TextController } from '@server/controllers/text.controller'
 import HttpException from '@server/exceptions/HttpException'
 import { IS_DEV } from '@shared/config'
-import { validate } from '@server/vadidators'
-import Meme from '@server/models/meme.model'
+import { validate, isShortIdValid, isMemeExists } from '@server/vadidators'
 
 const clientDir = '/dist/client'
 
@@ -55,50 +54,17 @@ class App {
 
   private initializeRoutes(): void {
     if (process.env.USE_SSL) this.app.use(sslRedirect())
-    this.app.post(
-      '/memes',
-      validate([
-        body('page').isInt({
-          min: 1
-        })
-      ]),
-      this.memeController.index
-    )
+    this.app.post('/memes', validate([body('page').isInt({ min: 1 })]), this.memeController.index)
     this.app.post(
       '/memes/:id',
-      validate([
-        param('id')
-          .exists()
-          .isNumeric()
-          .toInt()
-          .custom(
-            async (id: number): Promise<void> => {
-              const meme: Meme | null = await Meme.findByPk<Meme>(id)
-              if (meme) return Promise.resolve()
-              else return Promise.reject('Meme does not exist')
-            }
-          )
-      ]),
+      validate([param('id').exists().isString().custom(isShortIdValid).custom(isMemeExists)]),
       this.memeController.show
     )
     this.app.route('/share').post(this.memeController.share)
     if (IS_DEV) {
       this.app.put(
         '/memes/:id',
-        validate([
-          body('texts').isArray(),
-          param('id')
-            .exists()
-            .isNumeric()
-            .toInt()
-            .custom(
-              async (id: number): Promise<void> => {
-                const meme: Meme | null = await Meme.findByPk<Meme>(id)
-                if (meme) return Promise.resolve()
-                else return Promise.reject('Meme does not exist')
-              }
-            )
-        ]),
+        validate([body('texts').isArray(), param('id').exists().isString().custom(isShortIdValid).custom(isMemeExists)]),
         this.textController.update
       )
     } else {
