@@ -105,7 +105,6 @@ function Studio(): JSX.Element {
     try {
       const meme = new Meme({
         id: randomID(),
-        uuid: randomID(),
         height: 0,
         width: 0,
         boxCount: 0,

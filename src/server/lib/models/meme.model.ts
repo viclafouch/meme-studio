@@ -5,43 +5,37 @@ import TextBox from './textbox.model'
 
 class Meme extends Model {
   public id!: number
-  public uuid!: string
   public name!: string
   public width!: number
   public height!: number
   public boxCount!: number
-  public ext!: string
+  public filename!: string
   public readonly createdAt!: Date
   public readonly updatedAt!: Date
   public texts: Array<TextBox>
-
-  static getUrl(baseUrl: string, uuid: string, ext: string): string {
-    return `${baseUrl}/templates/${uuid}.${ext}`
-  }
 }
 
 Meme.init(
   {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
+      type: DataTypes.STRING,
       primaryKey: true
     },
-    uuid: {
-      type: new DataTypes.STRING(),
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    filename: {
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         customValidator(value: string): void {
-          if (!shortid.isValid(value)) {
-            throw new Error(`Uuid is not valid (${value})`)
+          const [_, ext] = value.split('.')
+          if (!['jpeg', 'jpg', 'png'].includes(ext)) {
+            throw new Error(`filename has not a valid extension (${ext})`)
           }
         }
       }
-    },
-    name: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      unique: true
     },
     width: {
       type: new DataTypes.NUMBER(),
@@ -56,13 +50,6 @@ Meme.init(
       allowNull: false,
       validate: {
         len: [0, 10]
-      }
-    },
-    ext: {
-      type: new DataTypes.STRING(),
-      allowNull: false,
-      validate: {
-        isIn: [['jpeg', 'jpg', 'png']]
       }
     }
   },

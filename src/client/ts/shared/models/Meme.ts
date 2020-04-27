@@ -1,8 +1,7 @@
 export default class Meme {
   public id: string
-  public uuid: string
   public name: string
-  public ext: string
+  public filename: string
   public width: number
   public height: number
   public boxCount: number
@@ -10,9 +9,8 @@ export default class Meme {
 
   constructor(meme: any) {
     this.id = meme.id
-    this.uuid = meme.uuid
     this.name = meme.name
-    this.ext = meme.ext
+    this.filename = meme.filename
     this.width = meme.width
     this.height = meme.height
     this.boxCount = meme.boxCount
@@ -20,7 +18,7 @@ export default class Meme {
   }
 
   public url(): string {
-    return this.localImageUrl || `templates/${this.uuid}.${this.ext}`
+    return this.localImageUrl || `templates/${this.filename}`
   }
 
   get image(): Promise<HTMLImageElement> {

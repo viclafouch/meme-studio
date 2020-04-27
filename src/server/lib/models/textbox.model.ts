@@ -25,7 +25,9 @@ export class TextBox extends Model {
   public centerX: number
   public textAlign: string
   public alignVertical: string
+  public rotate: number
   public isUppercase: boolean
+  public memeId: number
   public readonly createdAt: Date
   public readonly updatedAt: Date
   static associate: (models: object) => void
@@ -106,7 +108,10 @@ TextBox.init(
     isUppercase: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: true
+      defaultValue: true,
+      get(): boolean {
+        return !!this.getDataValue('isUppercase')
+      }
     },
     memeId: {
       type: new DataTypes.NUMBER(),
