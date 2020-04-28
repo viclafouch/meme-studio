@@ -7,6 +7,7 @@ import LangSelector from '@client/components/LangSelector/LangSelector'
 import Footer from '@client/components/Footer/Footer'
 import { Link } from 'react-router-dom'
 import '../../scss/pages/home.scss'
+import { shuffle } from '@client/utils/helpers'
 
 function Home(): JSX.Element {
   const { t } = useTranslation()
@@ -29,19 +30,21 @@ function Home(): JSX.Element {
             </Button>
           </Link>
           <ul className="home-last-memes">
-            {memes.slice(0, 3).map((meme: Meme, index: number) => (
-              <li key={index}>
-                <article className="home-last-memes-article">
-                  <img
-                    src={meme.url()}
-                    alt={meme.name}
-                    width={176}
-                    height={((176 / meme.width) * meme.height).toFixed(2)}
-                    loading="eager"
-                  />
-                </article>
-              </li>
-            ))}
+            {shuffle(memes)
+              .slice(0, 3)
+              .map((meme: Meme, index: number) => (
+                <li key={index}>
+                  <article className="home-last-memes-article">
+                    <img
+                      src={meme.url()}
+                      alt={meme.name}
+                      width={176}
+                      height={((176 / meme.width) * meme.height).toFixed(2)}
+                      loading="eager"
+                    />
+                  </article>
+                </li>
+              ))}
           </ul>
         </div>
       </div>
