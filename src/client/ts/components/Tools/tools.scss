@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: #3f3f3f;
 
   &,
   .tools-list {
@@ -15,8 +16,14 @@
     }
   }
 
-  .tools-list > li {
-    border-bottom: 1px solid rgba(200, 200, 200, 0.397);
+  @include lg {
+    li {
+      border-bottom: 1px solid rgba(200, 200, 200, 0.397);
+    }
+
+    ul.tools-list:last-child li:last-child {
+      border-bottom: 0;
+    }
   }
 
   .tools-list-btn {
@@ -40,7 +47,7 @@
     }
 
     &:disabled {
-      color: #dcdcdc !important;
+      color: #6a6a6a;
       cursor: not-allowed;
     }
 
@@ -67,9 +74,9 @@
     }
 
     &:not(:disabled) {
-      color: #444444;
+      color: #fdfdfd;
       &:hover {
-        color:rgba(68, 68, 68, 0.644);
+        color:#ffffff;
       }
     }
   }

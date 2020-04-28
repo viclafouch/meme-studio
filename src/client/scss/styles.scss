@@ -131,6 +131,17 @@ body {
       justify-content: center;
       align-items: center;
 
+      & > div.studio-content-overley {
+        background-repeat: no-repeat;
+        background-size: cover;
+        filter: opacity(0.4) brightness(88%) blur(4px);
+        position: absolute;
+        left: -4px;
+        top: -4px;
+        bottom: -4px;
+        right: -4px;
+      }
+
       @include lg {
         padding: 50px 100px;
       }
@@ -230,6 +241,7 @@ body {
       display: flex;
       width: 100%;
       flex-direction: row;
+      z-index: 1;
 
       @include lg {
         flex-direction: column;
