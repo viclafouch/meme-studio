@@ -76,7 +76,6 @@
     .add-text-button {
       border-radius: 0;
       border: 0;
-      height: 40px;
       padding: 0;
       display: flex;
       justify-content: center;
@@ -87,6 +86,8 @@
       color: #ffffff;
       font-weight: 500;
       flex-shrink: 0;
+      box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.75);
+      height: 48px;
       &:hover {
         background-color: var(--blue-light);
       }
