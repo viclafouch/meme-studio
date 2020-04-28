@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useTranslation } from 'react-i18next'
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo, useEffect } from 'react'
 import ReactJson from 'react-json-view'
 import { UseEditorInt } from '@client/ts/shared/validators'
 import { useEditor } from '@client/ts/shared/hooks'
@@ -15,6 +15,7 @@ function CanvasDebugger(): JSX.Element {
   const { t } = useTranslation()
   const [isActive, setIsActive]: [boolean, Function] = useState<boolean>(false)
   const [isFetching, setIsFetching]: [boolean, Function] = useState<boolean>(false)
+  const [isUpdated, setIsUpdated]: [boolean, Function] = useState<boolean>(false)
   const [{ texts, drawProperties, memeSelected }]: [UseEditorInt, Function] = useEditor()
 
   const toggleActive = (): void => setIsActive(!isActive)
@@ -35,10 +36,21 @@ function CanvasDebugger(): JSX.Element {
     [texts, memeSelected]
   )
 
+  useEffect(() => {
+    let timeout: any
+    if (isUpdated) {
+      timeout = setTimeout(() => {
+        setIsUpdated(false)
+      }, 2000)
+    }
+    return (): void => clearTimeout(timeout)
+  }, [isUpdated, setIsUpdated])
+
   const fetchMeme = useCallback(async () => {
     try {
       setIsFetching(true)
       await updateMeme({ meme, texts: textbox })
+      setIsUpdated(true)
     } catch (error) {
       console.warn(error)
     } finally {
@@ -75,7 +87,7 @@ function CanvasDebugger(): JSX.Element {
           ...(!isActive ? { display: 'none' } : null)
         }}
       >
-        <Button onClick={fetchMeme} className="button-update" isLoading={isFetching}>
+        <Button isSuccess={isUpdated} onClick={fetchMeme} className="button-update">
           Mettre à jour
         </Button>
         <ReactJson src={{ ...meme, texts: textbox }} enableClipboard displayObjectSize={false} displayDataTypes={false} />

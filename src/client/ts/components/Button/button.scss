@@ -11,7 +11,7 @@
   cursor: pointer;
   border: 0;
   outline: none;
-  transition-property: opacity, box-shadow;
+  transition-property: opacity, box-shadow, background-color;
   transition-duration: 0.3s;
   letter-spacing: 0.5px;
   word-spacing: normal;
@@ -113,6 +113,11 @@
         transform: rotate(360deg);
       }
     }
+  }
+
+  &.button-success {
+    background-color: #4EAA05;
+    color: #ffffff;
   }
 
   &:not(:disabled):hover {
