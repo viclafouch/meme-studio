@@ -1,5 +1,4 @@
 import { Model, DataTypes } from 'sequelize'
-import * as shortid from 'shortid'
 import { database } from '../config/database'
 import TextBox from './textbox.model'
 

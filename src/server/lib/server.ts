@@ -1,7 +1,7 @@
 import { app } from './config/app'
 import { database } from './config/database'
 import Meme from './models/meme.model'
-import { TextBox } from './models/textbox.model'
+import TextBox from './models/textbox.model'
 import * as datas from '../memes.json'
 import { IS_DEV, PORT_SERVER_DEV, PORT_SERVER_PROD } from '../../shared/config'
 

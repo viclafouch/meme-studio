@@ -1,8 +1,7 @@
 import { Model, DataTypes } from 'sequelize'
 import { database } from '../config/database'
-import { FONTS_FAMILY } from '@shared/config'
 
-export class TextBox extends Model {
+class TextBox extends Model {
   public id: number
   public value: string
   public height: number
@@ -66,7 +65,7 @@ TextBox.init(
       type: new DataTypes.STRING(128),
       allowNull: false,
       validate: {
-        isIn: [FONTS_FAMILY]
+        isIn: [require('@shared/config').FONTS_FAMILY]
       }
     },
     boxShadow: {
