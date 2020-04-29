@@ -22,8 +22,6 @@ function Button(props: ButtonProps): JSX.Element {
 
   className.push(props.className || '')
 
-  rest.disabled = isLoading
-
   return (
     <button {...rest} onClick={props.onClick} className={className.join(' ')}>
       {props.children}
