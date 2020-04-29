@@ -12,7 +12,7 @@ import { MemeController } from '@server/controllers/meme.controller'
 import { TextController } from '@server/controllers/text.controller'
 import HttpException from '@server/exceptions/HttpException'
 import { IS_DEV } from '@shared/config'
-import { validate, isShortIdValid, isMemeExists } from '@server/vadidators'
+import { validate, isShortIdValid, isMemeExists, isB64 } from '@server/vadidators'
 
 const clientDir = '/dist/client'
 
@@ -60,7 +60,7 @@ class App {
       validate([param('id').exists().isString().custom(isShortIdValid).custom(isMemeExists)]),
       this.memeController.show
     )
-    this.app.route('/share').post(this.memeController.share)
+    this.app.post('/share', validate([body('image').custom(isB64)]), this.memeController.share)
     if (IS_DEV) {
       this.app.put(
         '/memes/:id',

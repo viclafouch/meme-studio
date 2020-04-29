@@ -67,37 +67,35 @@ export class MemeController {
   public async share(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const body = req.body as Record<string, any>
-      const { image } = body.image
+      const { image } = body
 
-      const T = new Twit(twitterConfig)
-
-      const upload = (image64: string): Promise<any> =>
-        new Promise((resolve: any, reject: any) =>
-          T.post('media/upload', { media_data: image64 }, function (err, data) {
-            if (err) reject(err)
-            else resolve(data)
-          })
-        )
-
-      const data = await upload(image.split(',')[1])
-
-      const create = (mediaId: string): Promise<any> =>
-        new Promise((resolve, reject) => {
-          T.post('media/metadata/create', { media_id: mediaId }, function (err) {
-            if (err) reject(err)
-            else {
-              const params = { media_ids: [mediaId] }
-              T.post('statuses/update', params, function (err, data) {
-                if (err) reject(err)
-                else resolve(data)
-              })
-            }
-          })
-        })
-
-      let imageUrl
+      let imageUrl: string
 
       if (!IS_DEV) {
+        const T = new Twit(twitterConfig)
+
+        const upload = (image64: string): Promise<any> =>
+          new Promise((resolve: any, reject: any) =>
+            T.post('media/upload', { media_data: image64 }, function (err, data) {
+              if (err) reject(err)
+              else resolve(data)
+            })
+          )
+
+        const create = (mediaId: string): Promise<any> =>
+          new Promise((resolve, reject) => {
+            T.post('media/metadata/create', { media_id: mediaId }, function (err) {
+              if (err) reject(err)
+              else {
+                const params = { media_ids: [mediaId] }
+                T.post('statuses/update', params, function (err, data) {
+                  if (err) reject(err)
+                  else resolve(data)
+                })
+              }
+            })
+          })
+        const data = await upload(image.split(',')[1])
         const mediaId = data.media_id_string
         const tweet = await create(mediaId)
         imageUrl = tweet.entities.media[0].display_url // pic.twitter.com/:id
