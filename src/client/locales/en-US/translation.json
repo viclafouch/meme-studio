@@ -17,6 +17,7 @@
   "download": "Download",
   "preview": "Preview",
   "yourText": "Your text",
+  "unknownError": "An unknown error has occurred",
   "share": "Share",
   "home": {
     "description": "Create a meme from JPG, GIF or PNG images. Edit your image and make your custom meme.",
@@ -29,6 +30,8 @@
     "or": "or",
     "dropAnImage": "drop an image",
     "importAnImage": "Import an image",
+    "errorMultipleFiles": "You can only import one image",
+    "errorExtensionFile": "The file must be in png, jpg or jpeg format",
     "export": "Export",
     "noMemeSelected": "No meme selected",
     "text": "Text",

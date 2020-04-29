@@ -232,6 +232,11 @@ body {
             }
           }
         }
+
+        .import-image-error {
+          color: var(--red);
+          font-size: 0.95rem;
+        }
       }
     }
 

@@ -17,6 +17,7 @@
   "download": "Télécharger",
   "preview": "Prévisualisation",
   "yourText": "Votre texte",
+  "unknownError": "Une erreur inconnue est survenue",
   "share": "Partager",
   "home": {
     "description": "Créez un mème à partir d'images JPG, GIF ou PNG. Modifiez votre image et créez votre mème personnalisé !",
@@ -29,6 +30,8 @@
     "or": "ou",
     "dropAnImage": "importez une image",
     "importAnImage": "Importer une image",
+    "errorMultipleFiles": "Vous ne pouvez importer qu'une seule image",
+    "errorExtensionFile": "Le fichier doit être au format png, jpg ou jpeg",
     "export": "Exporter",
     "noMemeSelected": "Aucun meme sélectionné",
     "text": "Texte",

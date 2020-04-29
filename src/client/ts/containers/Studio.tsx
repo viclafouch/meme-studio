@@ -37,6 +37,7 @@ function Studio(): JSX.Element {
   const { width, isMinLgSize } = useWindowWidth()
   const [currentTab, setCurrentTab]: [string, Function] = useState<string>(TAB_GALLERY)
   const [{ memeSelected }, dispatchEditor]: [EditorState, Function] = useEditor()
+  const [uploadError, setUploadError]: [string, Function] = useState<string | null>(null)
 
   useEffect(() => {
     if (isMinLgSize) {
@@ -65,6 +66,7 @@ function Studio(): JSX.Element {
       })
       setIsActiveRecoverBox(false)
       setLastVersion(false)
+      setUploadError(null)
     } catch (error) {
       console.error(error)
     }
@@ -98,9 +100,13 @@ function Studio(): JSX.Element {
 
   const handleImportImage = async (fileList?: FileList): Promise<void> => {
     const files = fileList || inputDrop.current.files
-    if (!files.length) return
-    else if (files.length > 1) return
-    else if (!endWithExt(['.jpg', '.png', 'jpeg'], files[0].name)) return debug('extension not valid') // TODO
+    if (files.length > 1) {
+      setUploadError('studio.errorMultipleFiles')
+      return
+    } else if (!endWithExt(['.jpg', '.png', 'jpeg'], files[0].name)) {
+      setUploadError('studio.errorExtensionFile')
+      return
+    }
 
     try {
       const meme = new Meme({
@@ -109,7 +115,7 @@ function Studio(): JSX.Element {
         width: 0,
         boxCount: 0,
         name: files[0].name,
-        ext: files[0].name.split('.').pop().toLowerCase(),
+        filename: files[0].name,
         localImageUrl: window.URL.createObjectURL(files[0])
       })
 
@@ -123,8 +129,8 @@ function Studio(): JSX.Element {
         texts: []
       })
     } catch (error) {
-      // TODO
       console.warn(error)
+      setUploadError('unknownError')
     }
   }
 
@@ -165,6 +171,14 @@ function Studio(): JSX.Element {
                       />
                       {t('studio.or')} <span className="import-image-label-text">{t('studio.dropAnImage')}</span>.
                     </label>
+                  </p>
+                  <p
+                    className="import-image-error"
+                    style={{
+                      ...(!uploadError ? { display: 'none' } : null)
+                    }}
+                  >
+                    {t(uploadError)}
                   </p>
                   <DragAndDrop onDrop={handleImportImage} id="dragenter-root" />
                 </>
