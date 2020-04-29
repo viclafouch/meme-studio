@@ -18,7 +18,7 @@
     "postinstall": "cd src/client && npm install"
   },
   "engines": {
-    "node": "12.8.x",
+    "node": "12.16.x",
     "npm": "6.13.x"
   },
   "repository": {
