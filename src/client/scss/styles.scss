@@ -435,16 +435,13 @@ body {
       max-height: 100%;
       max-width: none;
       margin: 0;
-      padding: 0 40px;
+      padding: 0 20px;
     }
   }
 }
 
 .modal#customization-tab {
   .modal-content {
-    padding-left: 20px;
-    padding-right: 20px;
-
     .customization-empty {
       padding: 30px;
     }
