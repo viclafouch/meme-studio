@@ -1,22 +1,29 @@
 import * as React from 'react'
-import { useEffect } from 'react'
-import { Route, RouteProps, useLocation } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
+import { Route, RouteProps, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 interface PagePropsInt extends RouteProps {
-  title: string
+  pageMeta: {
+    title: string
+    description: string
+  }
 }
 
 const Page = (props: PagePropsInt): JSX.Element => {
-  const location = useLocation()
   const { i18n } = useTranslation()
+  const { pageMeta, children, ...rest } = props
 
-  useEffect(() => {
-    document.title = `Meme Studio | ${props.title}`
-  }, [location.key, i18n.language])
-
-  const { title, ...rest } = props
-  return <Route {...rest} />
+  return (
+    <Route {...rest}>
+      <Helmet titleTemplate="Meme Studio | %s">
+        <html lang={i18n.language} />
+        <title lang={i18n.language}>{pageMeta.title}</title>
+        <meta name="description" content={pageMeta.description} />
+      </Helmet>
+      {children}
+    </Route>
+  )
 }
 
 export default Page

@@ -74,19 +74,50 @@ function routes(): JSX.Element {
 
   return (
     <Switch>
-      <Page exact path="/" title={t('makeYourOwnMeme')}>
+      <Page
+        exact
+        path="/"
+        pageMeta={{
+          title: t('home.meta.title'),
+          description: t('home.meta.description')
+        }}
+      >
         <HomeAsync />
       </Page>
-      <Page path="/about" title={t('about.title')}>
+      <Page
+        path="/about"
+        pageMeta={{
+          title: t('about.meta.title'),
+          description: t('about.meta.description')
+        }}
+      >
         <AboutAsync />
       </Page>
-      <Page path="/terms" title={t('legal.title')}>
+      <Page
+        path="/terms"
+        pageMeta={{
+          title: t('legal.meta.title'),
+          description: t('legal.meta.description')
+        }}
+      >
         <TermsAsync />
       </Page>
-      <Page path="/create" title={!memeSelected ? t('createAMeme') : memeSelected.name}>
+      <Page
+        path="/create"
+        pageMeta={{
+          title: !memeSelected ? t('studio.meta.title') : memeSelected.name,
+          description: t('studio.meta.description')
+        }}
+      >
         <StudioAsync />
       </Page>
-      <Page path="*" title={t('notFound')}>
+      <Page
+        path="*"
+        pageMeta={{
+          title: t('notFound.meta.title'),
+          description: t('notFound.meta.description')
+        }}
+      >
         <NotFound />
       </Page>
     </Switch>

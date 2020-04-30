@@ -24,7 +24,7 @@ function Home(): JSX.Element {
           <Link to="/">
             <img src="images/logo-colored-2.png" width={350} alt="Logo Meme Studio" />
           </Link>
-          <p>{t('home.description')}</p>
+          <p>{t('home.label')}</p>
         </div>
         <div className="home-content">
           <Link to="/create">

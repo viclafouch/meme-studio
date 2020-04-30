@@ -13,7 +13,7 @@ function About(): JSX.Element {
       <Header />
       <div className="content-one">
         <section className="about-body container">
-          <h1>{t('about.title')}</h1>
+          <h1>{t('about.meta.title')}</h1>
           <p>{t('about.text1')}</p>
           <p>{t('about.text2')}</p>
           <p>
