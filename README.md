@@ -17,6 +17,7 @@ Website : [meme-studio.io](https://www.meme-studio.io)
 #### What I use:
 
 - [ReactJS](https://github.com/facebook/react) - Framework JS
+- [React-Helmet](https://github.com/nfl/react-helmet) - SEO
 - [Immer](https://immerjs.github.io/immer/docs/introduction) - Immutability library
 - [React-i18next](https://github.com/i18next/react-i18next) - Internationalization
 - [ExpressJS](https://expressjs.com) - Server side
