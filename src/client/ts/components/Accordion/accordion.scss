@@ -5,7 +5,7 @@
 
   .accordion-trigger {
     color: #ffffff;
-    background-color: #ccc;
+    background-color: var(--grey-light);
     cursor: pointer;
     padding: 18px 20px;
     display: flex;
@@ -50,6 +50,6 @@
   }
 
   & + .accordion .accordion-trigger {
-    border-top: 1px solid #ffffff;
+    border-top: 1px solid rgba(255, 255, 255, 0.478);
   }
 }

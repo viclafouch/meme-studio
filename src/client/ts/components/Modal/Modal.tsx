@@ -11,8 +11,9 @@ type ModalProps = {
   children: React.ReactNode
   isLoading?: boolean
   id?: string
+  maxWidth?: number
 }
-export function Modal({ onClose, isLoading, children, id }: ModalProps): JSX.Element {
+export function Modal({ onClose, isLoading, children, id, maxWidth }: ModalProps): JSX.Element {
   const { t } = useTranslation()
   const [{ modalRef }]: [DefaultState] = useContext(DefaultContext)
 
@@ -33,13 +34,15 @@ export function Modal({ onClose, isLoading, children, id }: ModalProps): JSX.Ele
   return createPortal(
     <div className="modal ld ld-fade-in" id={id}>
       <div className="modal-overlay" onClick={(): void => !isLoading && onClose()} />
-      {isLoading && <div className="modal-content-loading">{t('loading')}</div>}
+      {isLoading && <div className="modal-loading">{t('loading')}</div>}
       {!isLoading && (
-        <div className="modal-content ld ld-float-ttb-in">
-          <span role="button" className="modal-close" aria-label={t('attr.close')} onClick={(): void => onClose()}>
-            <FontAwesomeIcon icon={['fas', 'times']} className="icon-times" />
-          </span>
-          <div className="modal-content-scrollable">{children}</div>
+        <span role="button" className="modal-close" aria-label={t('attr.close')} onClick={(): void => onClose()}>
+          <FontAwesomeIcon icon={['fas', 'times']} className="icon-times" />
+        </span>
+      )}
+      {!isLoading && (
+        <div className="modal-content ld ld-float-ttb-in" style={{ maxWidth }}>
+          {children}
         </div>
       )}
     </div>,
@@ -49,7 +52,8 @@ export function Modal({ onClose, isLoading, children, id }: ModalProps): JSX.Ele
 
 Modal.defaultProps = {
   isLoading: false,
-  id: ''
+  id: '',
+  maxWidth: 700
 } as ModalProps
 
 export default memo(Modal)

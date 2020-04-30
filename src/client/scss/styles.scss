@@ -120,7 +120,7 @@ body {
     }
 
     .studio-content {
-      border-right: 1px solid #e9ecef;
+      border-right: 2px solid var(--grey-light);
       background-color: #f2f3f8;
       padding: 50px 40px;
       background: url('/images/particles-studio.svg') no-repeat;
@@ -285,7 +285,6 @@ body {
 
       .studio-aside-content {
         width: 100%;
-        padding: 0 2px;
         height: calc(100% - 50px);
         overflow-y: auto;
         overflow-x: hidden;
@@ -311,12 +310,15 @@ body {
 
   .meme-wrapper-img {
     position: relative;
+    text-align: center;
+
     .meme-img {
       margin-top: 20px;
       max-width: 100%;
       max-height: 490px;
       box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
     }
+
     &::after {
       content: '';
       z-index: 2;
@@ -331,7 +333,7 @@ body {
   .meme-info-size {
     padding: 3px 1px;
     color: var(--grey-dark);
-    text-align: right;
+    text-align: center;
     font-size: 12px;
     margin-bottom: 0;
     opacity: 0.44;
@@ -342,7 +344,6 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 0 20px;
 
     & > .button-export {
       width: 100%;
@@ -425,23 +426,47 @@ body {
   }
 }
 
-.modal#customization-tab .modal-content {
-  width: 90%;
-  margin: 0 auto;
-  .customization-empty {
-    margin-top: 3px;
-    padding: 30px;
-  }
-
-  @include md {
-    max-width: 500px;
+.modal#gallery-tab {
+  .modal-content {
+    height: 100%;
+    overflow-y: hidden;
+    padding: 15px 0;
+    .gallery {
+      max-height: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0 40px;
+    }
   }
 }
-.modal#gallery-tab {
-  .modal-content-scrollable {
-    overflow-y: hidden;
-    .gallery {
-      max-height: inherit;
+
+.modal#customization-tab {
+  .modal-content {
+    padding-left: 20px;
+    padding-right: 20px;
+
+    .customization-empty {
+      padding: 30px;
+    }
+    .customization-not-empty {
+      min-height: 172px;
+
+      section.accordion:last-of-type {
+        margin-bottom: 15px;
+      }
+
+      .accordion-active + .accordion .accordion-trigger {
+        border-top-color: transparent;
+      }
+
+      .customization-textbox-section {
+        border: 1px solid rgba(204, 204, 204, 0.769);
+        padding: 17px 18px;
+      }
+
+      .add-text-button {
+        margin-top: auto;
+      }
     }
   }
 }

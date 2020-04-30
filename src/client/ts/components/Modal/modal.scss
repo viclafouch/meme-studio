@@ -19,44 +19,54 @@
   }
 
   & > .modal-overlay {
-    width: inherit;
-    height: inherit;
+    width: 100%;
+    height: 100%;
     position: absolute;
     top: 0;
     left: 0;
   }
 
-  & > .modal-content-loading {
+  & > .modal-loading {
     background-color: transparent;
-    color: white;
+    color: #ffffff;
+  }
+
+  & > .modal-close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color: #5e5e5e;
+    cursor: pointer;
+    font-size: 1.25em;
+    padding: 7px;
+    background: rgba(255, 255, 255, 0.749);
+    border: 1px solid #c3c0c0;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999;
+
+    @include md {
+      font-size: 1.25em;
+    }
   }
 
   & > .modal-content {
     z-index: 2;
     position: relative;
-    max-width: 700px;
-    max-height: 700px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 100%;
+    padding: 15px 40px;
+    width: 100%;
 
-    .modal-close {
-      position: absolute;
-      right: 15px;
-      top: 10px;
-      color: #000000;
-      cursor: pointer;
-      font-size: 1.25em;
-      padding: 7px;
-
-      @include md {
-        font-size: 1.25em;
-      }
-    }
-
-    .modal-content-scrollable {
-      background-color: #ffffff;
-      max-height: inherit;
-      overflow-x: hidden;
-      overflow-y: auto;
-      padding: 15px 7px;
+    @include md {
+      width: auto;
     }
   }
 }
