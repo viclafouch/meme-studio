@@ -1,5 +1,5 @@
 import { app } from './config/app'
-import { database } from './config/database'
+import database from './config/database'
 import Meme from './models/meme.model'
 import TextBox from './models/textbox.model'
 import * as datas from '../memes.json'

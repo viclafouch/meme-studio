@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize'
-import { database } from '../config/database'
+import database from '../config/database'
 import TextBox from './textbox.model'
 
 class Meme extends Model {
