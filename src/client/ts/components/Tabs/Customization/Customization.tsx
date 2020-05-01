@@ -92,7 +92,9 @@ function Customization(): JSX.Element {
 
   return (
     <div className="customization-not-empty">
-      <h2>{t('studio.editMeme', { name: memeSelected.name })}</h2>
+      <h2>
+        {t('studio.customization')} <br /> <span className="meme-name">{memeSelected.name}</span>
+      </h2>
       {texts.map(
         (
           { value, id, uuid, color, fontSize, alignVertical, textAlign, isUppercase, fontFamily, boxShadow },

@@ -43,7 +43,7 @@
     "export": "Export",
     "noMemeSelected": "No meme selected",
     "text": "Text",
-    "editMeme": "Edit {{name}}",
+    "customization": "Customization",
     "addText": "Add Text",
     "color": "Color",
     "textAlign": "Horizontal align",
