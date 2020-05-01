@@ -34,23 +34,23 @@ TextBox.init(
       defaultValue: ''
     },
     width: {
-      type: new DataTypes.NUMBER(),
+      type: new DataTypes.INTEGER(),
       allowNull: false
     },
     height: {
-      type: new DataTypes.NUMBER(),
+      type: new DataTypes.INTEGER(),
       allowNull: false
     },
     centerX: {
-      type: new DataTypes.NUMBER(),
+      type: new DataTypes.INTEGER(),
       allowNull: false
     },
     centerY: {
-      type: new DataTypes.NUMBER(),
+      type: new DataTypes.INTEGER(),
       allowNull: false
     },
     rotate: {
-      type: new DataTypes.NUMBER(),
+      type: new DataTypes.INTEGER(),
       allowNull: false,
       defaultValue: 0,
       validate: {
@@ -58,7 +58,7 @@ TextBox.init(
       }
     },
     fontSize: {
-      type: new DataTypes.NUMBER(),
+      type: new DataTypes.INTEGER(),
       allowNull: false
     },
     fontFamily: {
@@ -69,7 +69,7 @@ TextBox.init(
       }
     },
     boxShadow: {
-      type: new DataTypes.NUMBER(),
+      type: new DataTypes.INTEGER(),
       allowNull: false
     },
     color: {

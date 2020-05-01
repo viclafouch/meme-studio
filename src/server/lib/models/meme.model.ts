@@ -37,15 +37,15 @@ Meme.init(
       }
     },
     width: {
-      type: new DataTypes.NUMBER(),
+      type: new DataTypes.INTEGER(),
       allowNull: false
     },
     height: {
-      type: new DataTypes.NUMBER(),
+      type: new DataTypes.INTEGER(),
       allowNull: false
     },
     boxCount: {
-      type: new DataTypes.NUMBER(),
+      type: new DataTypes.INTEGER(),
       allowNull: false,
       validate: {
         len: [0, 10]
