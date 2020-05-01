@@ -9,7 +9,7 @@ export const createText = (base: TextBox['base']): TextBox =>
   new TextBox({
     rotate: 0,
     ...base,
-    fontSize: 22,
+    fontSize: 80,
     fontFamily: 'Impact',
     textAlign: 'center',
     alignVertical: 'middle',
@@ -17,9 +17,5 @@ export const createText = (base: TextBox['base']): TextBox =>
     value: '',
     id: randomID(),
     color: '#ffffff',
-    isUppercase: false,
-    refs: {
-      accordion: createRef(),
-      textarea: createRef()
-    }
+    isUppercase: false
   })

@@ -49,6 +49,10 @@
     justify-content: center;
     z-index: 999999;
 
+    &:hover {
+      background: rgba(255, 255, 255, 0.989);
+    }
+
     @include md {
       font-size: 1.25em;
     }
