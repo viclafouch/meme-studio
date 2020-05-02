@@ -15,7 +15,16 @@ if (process.env.NODE_ENV === 'test') {
     logging: false
   })
 } else {
-  database = new Sequelize(process.env.DATABASE_URL, {})
+  database = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    protocol: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    }
+  })
 }
 
 export default database

@@ -6,7 +6,10 @@ import start from './lib/server'
 //
 ;(async (): Promise<void> => {
   try {
+    console.log('Authentication to the database...')
+    await database.authenticate()
     const { memes } = await import('./memes.json')
+    console.log('Synchronisation with the database...')
     await database.sync()
 
     Promise.all(
@@ -19,11 +22,7 @@ import start from './lib/server'
           await Meme.update(meme, { where: { id: meme.id } })
           await Promise.all(
             meme.texts.map(async text => {
-              await TextBox.destroy({
-                where: {
-                  memeid: meme.id
-                }
-              })
+              await TextBox.destroy({ where: { memeId: meme.id } })
               await TextBox.create(text)
             })
           )
