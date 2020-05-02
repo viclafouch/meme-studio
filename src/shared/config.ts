@@ -8,4 +8,7 @@ const API_URL = IS_DEV ? `http://localhost:${PORT_SERVER_DEV}` : ''
 
 const FONTS_FAMILY = ['Arial', 'Helvetica', 'Impact', 'Geneva', 'Arial Black', 'Times New Roman', 'Courier New', 'Lucida Console']
 
-export { IS_DEV, PORT_SERVER_PROD, PORT_CLIENT_DEV, PORT_SERVER_DEV, API_URL, FONTS_FAMILY }
+const ALIGN_VERTICAL = ['top', 'middle', 'bottom']
+const TEXT_ALIGN = ['left', 'center', 'right']
+
+export { IS_DEV, PORT_SERVER_PROD, PORT_CLIENT_DEV, PORT_SERVER_DEV, API_URL, FONTS_FAMILY, ALIGN_VERTICAL, TEXT_ALIGN }

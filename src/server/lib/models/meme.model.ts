@@ -3,14 +3,14 @@ import database from '../config/database'
 import TextBox from './textbox.model'
 
 class Meme extends Model {
-  public id!: number
+  public id: string
   public name!: string
   public width!: number
   public height!: number
   public boxCount!: number
   public filename!: string
-  public readonly createdAt!: Date
-  public readonly updatedAt!: Date
+  public readonly createdAt: Date
+  public readonly updatedAt: Date
   public texts: Array<TextBox>
 }
 
@@ -37,15 +37,15 @@ Meme.init(
       }
     },
     width: {
-      type: new DataTypes.INTEGER(),
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     height: {
-      type: new DataTypes.INTEGER(),
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     boxCount: {
-      type: new DataTypes.INTEGER(),
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         len: [0, 10]
@@ -54,7 +54,8 @@ Meme.init(
   },
   {
     tableName: 'memes',
-    sequelize: database
+    sequelize: database,
+    timestamps: true
   }
 )
 

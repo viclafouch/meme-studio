@@ -2,107 +2,103 @@ import { Model, DataTypes } from 'sequelize'
 import database from '../config/database'
 
 class TextBox extends Model {
-  public id: number
+  public id: string
   public value: string
-  public height: number
-  public width: number
-  public fontSize: number
-  public fontFamily: string
-  public boxShadow: number
-  public color: string
-  public centerY: number
-  public centerX: number
-  public textAlign: string
-  public alignVertical: string
+  public height!: number
+  public width!: number
+  public fontSize!: number
+  public fontFamily!: string
+  public boxShadow!: number
+  public color!: string
+  public centerY!: number
+  public centerX!: number
+  public textAlign!: string
+  public alignVertical!: string
   public rotate: number
   public isUppercase: boolean
-  public memeId: number
+  public memeId!: string
   public readonly createdAt: Date
   public readonly updatedAt: Date
-  static associate: (models: object) => void
 }
 
 TextBox.init(
   {
     id: {
-      type: new DataTypes.STRING(),
+      type: DataTypes.STRING,
       primaryKey: true
     },
     value: {
       type: new DataTypes.STRING(128),
-      allowNull: false,
       defaultValue: ''
     },
     width: {
-      type: new DataTypes.INTEGER(),
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     height: {
-      type: new DataTypes.INTEGER(),
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     centerX: {
-      type: new DataTypes.INTEGER(),
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     centerY: {
-      type: new DataTypes.INTEGER(),
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     rotate: {
-      type: new DataTypes.INTEGER(),
-      allowNull: false,
+      type: DataTypes.INTEGER,
       defaultValue: 0,
       validate: {
         len: [0, 360]
       }
     },
     fontSize: {
-      type: new DataTypes.INTEGER(),
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     fontFamily: {
-      type: new DataTypes.STRING(128),
+      type: DataTypes.STRING(128),
       allowNull: false,
       validate: {
         isIn: [require('@shared/config').FONTS_FAMILY]
       }
     },
     boxShadow: {
-      type: new DataTypes.INTEGER(),
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     color: {
-      type: new DataTypes.STRING(128),
+      type: DataTypes.STRING(128),
       allowNull: false,
       validate: {
         is: /^(#[a-f0-9]{6}|black|green|silver|gray|olive|white|yellow|maroon|navy|red|blue|purple|teal|fuchsia|aqua)$/i
       }
     },
     alignVertical: {
-      type: new DataTypes.STRING(128),
+      type: DataTypes.STRING(128),
       allowNull: false,
       validate: {
-        isIn: [['top', 'middle', 'bottom']]
+        isIn: [require('@shared/config').ALIGN_VERTICAL]
       }
     },
     textAlign: {
-      type: new DataTypes.STRING(128),
+      type: DataTypes.STRING(128),
       allowNull: false,
       validate: {
-        isIn: [['left', 'center', 'right']]
+        isIn: [require('@shared/config').TEXT_ALIGN]
       }
     },
     isUppercase: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
       defaultValue: true,
       get(): boolean {
         return !!this.getDataValue('isUppercase')
       }
     },
     memeId: {
-      type: new DataTypes.STRING(),
+      type: DataTypes.STRING,
       allowNull: false
     }
   },

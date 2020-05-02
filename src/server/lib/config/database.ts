@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === 'test') {
 } else if (IS_DEV) {
   database = new Sequelize({
     dialect: 'sqlite',
-    storage: ':memory:',
+    storage: './db.development.sqlite',
     logging: false
   })
 } else {
