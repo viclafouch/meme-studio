@@ -16,7 +16,7 @@ import { CUSTOM_TEXT, ADD_TEXT, REMOVE_TEXT, SET_TEXT_ID_SELECTED } from '@clien
 import { useEditor, useWindowWidth } from '@client/ts/shared/hooks'
 import { toHistoryType } from '@client/utils/helpers'
 import { wait, randomID } from '@shared/utils'
-import { FONTS_FAMILY } from '@shared/config'
+import { FONTS_FAMILY, ALIGN_VERTICAL, TEXT_ALIGN } from '@shared/config'
 import './customization.scss'
 
 function Customization(): JSX.Element {
@@ -124,6 +124,7 @@ function Customization(): JSX.Element {
               <div className="field-customization">
                 <TextareaExtended
                   rows={1}
+                  name="value"
                   ref={textsRef[textIndex].textarea}
                   placeholder={`${t('studio.text')} #${textIndex + 1}`}
                   value={value}
@@ -145,11 +146,11 @@ function Customization(): JSX.Element {
                   min={fontSizeConfig.min}
                   step={1}
                   value={fontSize}
-                  onChange={(value: number): void =>
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
                     handleEdit({
                       textId: id,
                       type: 'fontSize',
-                      value
+                      value: parseInt(event.target.value)
                     })
                   }
                 />
@@ -163,11 +164,11 @@ function Customization(): JSX.Element {
                   min={boxShadowConfig.min}
                   step={1}
                   value={boxShadow}
-                  onChange={(value: number): void =>
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
                     handleEdit({
                       textId: id,
                       type: 'boxShadow',
-                      value
+                      value: parseInt(event.target.value)
                     })
                   }
                 />
@@ -192,6 +193,7 @@ function Customization(): JSX.Element {
                 <span>{t('studio.fontFamily')}</span>
                 <select
                   value={fontFamily}
+                  name="font-family"
                   onChange={(event: React.ChangeEvent<HTMLSelectElement>): void =>
                     handleEdit({
                       textId: id,
@@ -211,6 +213,7 @@ function Customization(): JSX.Element {
                 <span>{t('studio.alignVertical')}</span>
                 <select
                   value={alignVertical}
+                  name="align-vertical"
                   onChange={(event: React.ChangeEvent<HTMLSelectElement>): void =>
                     handleEdit({
                       textId: id,
@@ -219,15 +222,18 @@ function Customization(): JSX.Element {
                     })
                   }
                 >
-                  <option value="top">{t('studio.top')}</option>
-                  <option value="middle">{t('studio.middle')}</option>
-                  <option value="bottom">{t('studio.bottom')}</option>
+                  {ALIGN_VERTICAL.map(value => (
+                    <option key={value} value={value}>
+                      {t(`studio.${value}`)}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="field-customization">
                 <span>{t('studio.textAlign')}</span>
                 <select
                   value={textAlign}
+                  name="text-align"
                   onChange={(event: React.ChangeEvent<HTMLSelectElement>): void =>
                     handleEdit({
                       textId: id,
@@ -236,9 +242,11 @@ function Customization(): JSX.Element {
                     })
                   }
                 >
-                  <option value="left">{t('studio.left')}</option>
-                  <option value="center">{t('studio.center')}</option>
-                  <option value="right">{t('studio.right')}</option>
+                  {TEXT_ALIGN.map(value => (
+                    <option key={value} value={value}>
+                      {t(`studio.${value}`)}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="field-customization">
