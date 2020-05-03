@@ -22,6 +22,7 @@ function Home(): JSX.Element {
   return (
     <div className="page home">
       <div className="top-actions">
+        <LangSelector />
         <Button
           className="theme-button"
           color="white"
@@ -40,7 +41,6 @@ function Home(): JSX.Element {
             <FontAwesomeIcon fixedWidth icon={['fas', 'moon']} />
           )}
         </Button>
-        <LangSelector />
       </div>
       <div className="content-one">
         <div className="home-title">
