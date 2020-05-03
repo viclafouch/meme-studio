@@ -9,7 +9,7 @@ import { SET_TEXT_ID_SELECTED } from '@client/store/reducer/constants'
 import { TAB_CUSTOMIZATION } from '@client/ts/shared/constants'
 import './wrapper-canvas.scss'
 
-function WrapperCanvas(props: any): JSX.Element {
+function WrapperCanvas(): JSX.Element {
   const { isMinLgSize } = useWindowWidth()
   const [{ memeSelected, canvasRef, drawProperties, texts, textIdSelected }, dispatchEditor]: [
     UseEditorInt,
@@ -68,15 +68,12 @@ function WrapperCanvas(props: any): JSX.Element {
                 x: text.centerX,
                 y: text.centerY
               }}
-              onClick={(): void => {
-                if (textIdSelected !== text.id) {
-                  dispatchEditor({
-                    type: SET_TEXT_ID_SELECTED,
-                    textIdSelected: text.id
-                  })
-                }
-                props.changeTab(TAB_CUSTOMIZATION)
-              }}
+              onClick={(): void =>
+                dispatchEditor({
+                  type: SET_TEXT_ID_SELECTED,
+                  textIdSelected: text.id
+                })
+              }
               height={text.height}
               width={text.width}
               rotate={text.rotate}

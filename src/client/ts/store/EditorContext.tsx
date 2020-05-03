@@ -4,10 +4,12 @@ import Meme from '@client/ts/shared/models/Meme'
 import TextBox from '@client/ts/shared/models/TextBox'
 import { DrawProperties, HistoryInt } from '@client/ts/shared/validators'
 import EditorReducer from './reducer/editor'
+import { TAB_CUSTOMIZATION, TAB_GALLERY } from '@client/ts/shared/constants'
 
 export interface EditorState {
   textIdSelected: string
   showTextAreas: boolean
+  currentTab: 'TAB_GALLERY' | 'TAB_CUSTOMIZATION' | null
   memeSelected: Meme
   isExportModalActive: boolean
   canvasRef: RefObject<HTMLCanvasElement>
@@ -27,6 +29,7 @@ const initialState: EditorState = {
   textIdSelected: null,
   showTextAreas: true,
   memeSelected: null,
+  currentTab: TAB_GALLERY,
   isExportModalActive: false,
   canvasRef: createRef(),
   texts: [],

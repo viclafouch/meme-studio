@@ -15,14 +15,9 @@ import Faq from '@client/components/Faq/Faq'
 import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
 import { useEditor, useWindowWidth } from '@client/ts/shared/hooks'
 import { UseEditorInt } from '@client/ts/shared/validators'
-import { TAB_GALLERY } from '@client/ts/shared/constants'
 import './tools.scss'
 
-type ToolsProps = {
-  changeTab: Function
-}
-
-const Tools = (props: ToolsProps): JSX.Element => {
+const Tools = (): JSX.Element => {
   const faqModal: RefObject<any> = useRef(null)
   const { t } = useTranslation()
   const { isMinLgSize } = useWindowWidth()
@@ -89,10 +84,7 @@ const Tools = (props: ToolsProps): JSX.Element => {
             data-tooltip={t('attr.reset')}
             disabled={!memeSelected}
             onClick={(): void => {
-              if (memeSelected) {
-                dispatchEditor({ type: RESET })
-                props.changeTab(TAB_GALLERY)
-              }
+              if (memeSelected) dispatchEditor({ type: RESET })
             }}
           >
             <FontAwesomeIcon icon={['fas', 'trash-restore-alt']} />

@@ -12,13 +12,14 @@ import {
   ERASE_ALL,
   RESET,
   SET_HISTORY,
-  TOGGLE_EXPORT_MODAL
+  TOGGLE_EXPORT_MODAL,
+  SET_CURRENT_TAB
 } from './constants'
 import { EditorState } from '../EditorContext'
 import TextBox from '@client/ts/shared/models/TextBox'
 import { DrawProperties, HistoryInt } from '@client/ts/shared/validators'
 import { randomID } from '@shared/utils'
-import { INITIAL } from '@client/ts/shared/constants'
+import { INITIAL, TAB_GALLERY, TAB_CUSTOMIZATION } from '@client/ts/shared/constants'
 import { debug, setLocalStorage, removeLocalStorage } from '@client/utils/index'
 import Meme from '@client/ts/shared/models/Meme'
 
@@ -210,6 +211,10 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       break
     case SET_TEXT_ID_SELECTED:
       draft.textIdSelected = action.textIdSelected
+      draft.currentTab = TAB_CUSTOMIZATION
+      break
+    case SET_CURRENT_TAB:
+      draft.currentTab = action.currentTab
       break
     case CUSTOM_TEXT:
       textIndex = draft.texts.findIndex(text => text.id === action.text.id)
@@ -243,6 +248,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       draft.memeSelected = null
       draft.drawProperties = null
       draft.texts = []
+      draft.currentTab = TAB_GALLERY
       clearHistory(draft)
       break
   }

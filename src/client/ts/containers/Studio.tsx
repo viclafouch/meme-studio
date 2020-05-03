@@ -3,14 +3,10 @@ import * as Loadable from 'react-loadable'
 import { useState, useRef, RefObject, useEffect, useContext } from 'react'
 import { ReactSVG } from 'react-svg'
 import { useTranslation } from 'react-i18next'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Gallery from '@client/components/Tabs/Gallery/Gallery'
-import Customization from '@client/components/Tabs/Customization/Customization'
 import Button from '@client/components/Button/Button'
 import WrapperCanvas from '@client/components/WrapperCanvas/WrapperCanvas'
-import Tab from '@client/components/Tabs/Tab'
 import { EditorState } from '@client/store/EditorContext'
-import { SET_MEME_SELECTED, RESIZE_WINDOW, SET_TEXT_ID_SELECTED } from '@client/store/reducer/constants'
+import { SET_MEME_SELECTED, RESIZE_WINDOW, SET_TEXT_ID_SELECTED, SET_CURRENT_TAB } from '@client/store/reducer/constants'
 import { TAB_CUSTOMIZATION, TAB_GALLERY } from '@client/ts/shared/constants'
 import Meme from '@client/ts/shared/models/Meme'
 import Tools from '@client/components/Tools/Tools'
@@ -23,6 +19,8 @@ import { getMeme } from '@client/ts/shared/api'
 import { IS_DEV } from '@shared/config'
 import { hasRecoverVersion, formatRelativeDate } from '@client/utils/helpers'
 import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
+import Aside from '@client/components/Aside/Aside'
+import '../../scss/pages/studio.scss'
 
 const CanvasDebuggerAsync = Loadable({
   loader: async () => import('@client/components/CanvasDebugger/CanvasDebugger'),
@@ -37,17 +35,8 @@ function Studio(): JSX.Element {
   const [lastVersion, setLastVersion]: [false | Date, Function] = useState<false | Date>(hasRecoverVersion())
   const [isActiveRecoverBox, setIsActiveRecoverBox]: [boolean, Function] = useState<boolean>(lastVersion instanceof Date)
   const { width, isMinLgSize } = useWindowWidth()
-  const [currentTab, setCurrentTab]: [string, Function] = useState<string>(TAB_GALLERY)
   const [{ memeSelected }, dispatchEditor]: [EditorState, Function] = useEditor()
   const [uploadError, setUploadError]: [string, Function] = useState<string | null>(null)
-
-  useEffect(() => {
-    if (isMinLgSize) {
-      setCurrentTab(TAB_GALLERY)
-    } else {
-      setCurrentTab(null)
-    }
-  }, [isMinLgSize])
 
   useEffect(() => {
     const wrapper: HTMLElement = contentRef.current
@@ -96,7 +85,11 @@ function Studio(): JSX.Element {
   useEffect(() => {
     if (memeSelected) {
       document.title = `Meme Studio | ${memeSelected.name}`
-      setCurrentTab(isMinLgSize ? TAB_CUSTOMIZATION : null)
+      // Go on tab custom only on desktop
+      dispatchEditor({
+        type: SET_CURRENT_TAB,
+        currentTab: isMinLgSize ? TAB_CUSTOMIZATION : null
+      })
     }
   }, [memeSelected])
 
@@ -136,13 +129,11 @@ function Studio(): JSX.Element {
     }
   }
 
-  const closeTabModal = (): void => setCurrentTab(null)
-
   return (
-    <div className="page page-studio">
+    <div className="page studio">
       <Header isAnimate />
       <div className="ld ld-float-btt-in studio-body">
-        <Tools changeTab={setCurrentTab} />
+        <Tools />
         <div className={`studio-content ${memeSelected ? 'studio-content-active' : ''}`} ref={contentRef}>
           {memeSelected && <div className="studio-content-overley" style={{ backgroundImage: `url(${memeSelected.url()})` }} />}
           {lastVersion && (
@@ -151,7 +142,7 @@ function Studio(): JSX.Element {
               <p className="recover-version-box-date">{formatRelativeDate(lastVersion, new Date(), i18n.language)}</p>
             </div>
           )}
-          {memeSelected && <WrapperCanvas changeTab={setCurrentTab} />}
+          {memeSelected && <WrapperCanvas />}
           {IS_DEV && memeSelected && <CanvasDebuggerAsync theme={theme} />}
           {!memeSelected && (
             <div className="empty-meme">
@@ -184,7 +175,16 @@ function Studio(): JSX.Element {
                 </>
               ) : (
                 <div className="empty-meme-buttons-container">
-                  <Button className={'button-select-gallery'} big onClick={(): void => setCurrentTab(TAB_GALLERY)}>
+                  <Button
+                    className={'button-select-gallery'}
+                    big
+                    onClick={(): void =>
+                      dispatchEditor({
+                        type: SET_CURRENT_TAB,
+                        currentTab: TAB_GALLERY
+                      })
+                    }
+                  >
                     {t('studio.selectAMeme')}
                   </Button>
                   <label htmlFor="local-meme" className="import-image-label button button-big button-select-gallery">
@@ -203,34 +203,7 @@ function Studio(): JSX.Element {
             </div>
           )}
         </div>
-        <aside className="studio-aside">
-          <header className="studio-aside-header">
-            <Button
-              aria-label="Gallery tab"
-              className={`studio-aside-header-btn ${currentTab === TAB_GALLERY ? 'studio-aside-header-btn-active' : null}`}
-              onClick={(): void => setCurrentTab(TAB_GALLERY)}
-              id="tab-gallery-btn"
-            >
-              <FontAwesomeIcon className="icon-image" icon={['fas', 'image']} />
-            </Button>
-            <Button
-              aria-label="Customization tab"
-              className={`studio-aside-header-btn ${currentTab === TAB_CUSTOMIZATION ? 'studio-aside-header-btn-active' : null}`}
-              onClick={(): void => setCurrentTab(TAB_CUSTOMIZATION)}
-              id="tab-customization-btn"
-            >
-              <FontAwesomeIcon className="icon-heading" icon={['fas', 'heading']} />
-            </Button>
-          </header>
-          <div className="studio-aside-content">
-            <Tab active={currentTab === TAB_GALLERY} id="gallery-tab" onCloseModal={closeTabModal}>
-              <Gallery onSelectMeme={handleChooseMeme} />
-            </Tab>
-            <Tab active={currentTab === TAB_CUSTOMIZATION} id="customization-tab" onCloseModal={closeTabModal}>
-              <Customization />
-            </Tab>
-          </div>
-        </aside>
+        <Aside onSelectMeme={handleChooseMeme} />
       </div>
     </div>
   )
