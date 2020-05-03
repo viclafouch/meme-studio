@@ -29,19 +29,12 @@ function LangSelector(): JSX.Element {
 
   return (
     <div className={`lang-selector ${isActive ? 'lang-selector-active' : ''}`}>
-      <Button arial-label="lang" small={!isMinMdSize} className="lang-selector-btn" onClick={handleClick}>
-        {!isMinMdSize ? (
-          <img
-            src={i18n.options.resources[i18n.language].flag as string}
-            alt={i18n.options.resources[i18n.language].name as string}
-            className="lang-flag"
-          />
-        ) : (
-          <>
-            <FontAwesomeIcon icon={['fas', 'globe']} className="icon-globe" />
-            <span>{i18n.options.resources[i18n.language].name}</span>
-          </>
-        )}
+      <Button arial-label="lang" small className="lang-selector-btn" onClick={handleClick}>
+        <img
+          src={i18n.options.resources[i18n.language].flag as string}
+          alt={i18n.options.resources[i18n.language].name as string}
+          className="lang-flag"
+        />
       </Button>
       {isMinMdSize && (
         <div className="lang-selector-popup">

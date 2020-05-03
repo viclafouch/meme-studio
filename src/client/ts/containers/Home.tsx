@@ -27,6 +27,7 @@ function Home(): JSX.Element {
           color="white"
           aria-label={theme === 'dark' ? t('attr.darkTheme') : t('attr.lightTheme')}
           data-theme={theme}
+          small
           onClick={(): void =>
             dispatch({
               type: TOGGLE_THEME

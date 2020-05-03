@@ -12,8 +12,9 @@
 
     .theme-button {
       margin-right: 10px;
-      background: var(--background-primary);
-      border: 1px solid var(--input-border-color);
+      background: transparent;
+      box-shadow: none!important;
+      font-size: 1.05rem;
       &[data-theme="light"] {
         color: rgb(226, 189, 0);
       }
