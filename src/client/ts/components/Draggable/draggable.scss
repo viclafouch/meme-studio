@@ -7,7 +7,7 @@
   z-index: 1;
 
   &.draggable-active {
-    --draggable-color: var(--blue);
+    --draggable-color: var(--blue-primary);
     z-index: 2;
   }
 

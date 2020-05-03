@@ -1,5 +1,5 @@
 .button {
-  background-color: var(--blue);
+  background-color: var(--blue-primary);
   font-family: Alata, sans-serif;
   font-weight: 600;
   color: #ffffff;
@@ -126,9 +126,9 @@
   }
 
   &:disabled {
-    border-color: #c9caca !important;
-    background-color: #c9caca !important;
-    color: #ffffff !important;
+    border-color: var(--background-button-disabled) !important;
+    background-color: var(--background-button-disabled) !important;
+    color: #b3b0b0 !important;
     cursor: not-allowed;
   }
 }

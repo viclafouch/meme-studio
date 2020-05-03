@@ -1,3 +1,10 @@
+html[data-theme="light"] .textarea-exdended {
+  background-color: var(--white);
+}
+html[data-theme="dark"] .textarea-exdended {
+  background-color: var(--background-secondary);
+}
+
 .textarea-exdended {
   max-height: 250px;
   height: 70px;
@@ -9,6 +16,8 @@
   resize: none;
   border-radius: 2px;
   border: 2px solid var(--input-border-color);
+  background-color: var(--background-secondary);
+  color: var(--text-color-primary);
 
   &::placeholder {
     font-size: 12px;

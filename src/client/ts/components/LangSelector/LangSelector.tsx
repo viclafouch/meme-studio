@@ -57,7 +57,7 @@ function LangSelector(): JSX.Element {
         </div>
       )}
       {!isMinMdSize && isActive && (
-        <Modal onClose={(): void => setIsActive(false)} id="lang-selector-modal">
+        <Modal maxWidth={380} onClose={(): void => setIsActive(false)} id="lang-selector-modal">
           <ul className="lang-selector-list">
             {Object.keys(i18n.options.resources).map((key: string) => (
               <li key={key}>

@@ -1,3 +1,22 @@
+html[data-theme="light"] {
+  .lang-selector {
+    --background-button-lang-selector: #ffffff;
+    --text-color-button-lang-selector: var(--blue-secondary);
+  }
+}
+html[data-theme="dark"] {
+  .page.studio {
+    .lang-selector {
+      --background-button-lang-selector: #f0f0f0;
+      --text-color-button-lang-selector: var(--blue-secondary);
+    }
+  }
+  .lang-selector {
+    --background-button-lang-selector: var(--background-primary);
+    --text-color-button-lang-selector: var(--text-color-primary);
+  }
+}
+
 .lang-selector {
   position: relative;
   font-size: 12px;
@@ -14,10 +33,11 @@
     font-weight: 600;
     font-size: 1em;
     line-height: 16px;
-    background-color: #ffffff;
+    background: var(--background-button-lang-selector);
+    border: 1px solid var(--input-border-color);
+    color: var(--text-color-button-lang-selector);
     text-transform: uppercase;
     z-index: 9999999;
-    color: var(--blue-light);
 
     @include md {
       padding: 12px 14px;
@@ -29,7 +49,7 @@
   }
 
   &-popup {
-    background-color: #ffffff;
+    background: var(--background-button-lang-selector);
     position: absolute;
     box-shadow: 2px 8px 16px 2px rgba(0,0,0,.4);
     transform: rotate3d(1,1,0,15deg);
@@ -79,16 +99,8 @@
   }
 }
 
-.modal#lang-selector-modal .modal-content .modal-content-scrollable {
-  min-width: auto;
-  min-height: auto;
-
-  .lang-selector-list {
-    margin-top: 12px;
-    width: 200px;
-
-    .lang-selector-list-item {
+.modal#lang-selector-modal .modal-content {
+  .lang-selector-list .lang-selector-list-item {
       padding: 16px 11px;
-    }
   }
 }

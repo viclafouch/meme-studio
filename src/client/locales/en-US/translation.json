@@ -11,7 +11,9 @@
     "eraseAll": "Erase all",
     "openDebugger": "Open debugger",
     "reset": "Reset",
-    "faq": "Faq"
+    "faq": "Faq",
+    "lightTheme": "Light theme",
+    "darkTheme": "Dark theme"
   },
   "loading": "Loading",
   "download": "Download",

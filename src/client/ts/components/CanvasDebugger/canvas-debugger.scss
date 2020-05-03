@@ -1,16 +1,38 @@
+html[data-theme="light"] {
+  .canvas-debugger.canvas-debugger-active {
+    background-color: rgba(242, 242, 242, 0.959);
+  }
+}
+
+html[data-theme="dark"] {
+  .canvas-debugger.canvas-debugger-active {
+    background-color: rgba(109, 109, 109, 0.959);
+  }
+}
+
 .canvas-debugger {
   &.canvas-debugger-active {
-    background-color: rgba(242, 243, 248, 0.959);
     width: 100%;
     height: 100%;
-    overflow: scroll;
+    overflow: hidden;
 
     .canvas-debugger-body {
-      padding: 40px 45px;
-    }
+      padding: 40px 45px 20px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
 
-    .button-update {
-      margin-bottom: 1rem;
+      .button-update {
+        align-self: flex-start;
+        margin-bottom: 1rem;
+      }
+
+      .react-json-view {
+        padding: 20px;
+        flex: 1;
+        overflow: auto;
+        background-color: transparent!important;
+      }
     }
   }
 
@@ -20,7 +42,7 @@
     padding-right: 10px;
     cursor: pointer;
     font-size: 0.90em;
-    color: rgba(36, 36, 36, 0.473);
+    color: var(--text-color-primary);
   }
 
   .close-debugger {

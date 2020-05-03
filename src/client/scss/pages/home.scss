@@ -4,10 +4,23 @@
   align-items: center;
   padding: 0 20px;
 
-  .lang-selector {
+  .top-actions {
     position: absolute;
     right: 10px;
     top: 10px;
+    display: flex;
+
+    .theme-button {
+      margin-right: 10px;
+      background: var(--background-primary);
+      border: 1px solid var(--input-border-color);
+      &[data-theme="light"] {
+        color: rgb(226, 189, 0);
+      }
+      &[data-theme="dark"] {
+        color: rgb(255, 255, 0);
+      }
+    }
   }
 
   .content-one {
@@ -19,11 +32,18 @@
   .home-title {
     margin-top: 4rem;
 
-    & > img {
-      margin-bottom: 8px;
-      max-width: 300px;
-      margin-left: auto;
-      margin-right: auto;
+    & > a {
+      width: 350px;
+      height: 68px;
+      position: relative;
+      display: block;
+      margin: 0 auto 8px;
+
+      & > img {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
     }
 
     & > p {
@@ -51,9 +71,10 @@
       margin-right: auto;
       transition-property: background-color;
       transition-duration: 0.3s;
+      background-color: var(--blue-secondary);
 
       &:hover {
-        background-color: var(--blue-light);
+        background-color: var(--blue-primary);
       }
     }
 

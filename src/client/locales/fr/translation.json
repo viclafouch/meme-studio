@@ -11,7 +11,9 @@
     "eraseAll": "Écraser tout",
     "openDebugger": "Ouvrir le debugger",
     "reset": "Réinitialiser",
-    "faq": "Faq"
+    "faq": "Faq",
+    "lightTheme": "Thème clair",
+    "darkTheme": "Thème sombre"
   },
   "loading": "Chargement",
   "download": "Télécharger",

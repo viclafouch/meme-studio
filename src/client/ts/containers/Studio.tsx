@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as Loadable from 'react-loadable'
-import { useState, useRef, RefObject, useEffect } from 'react'
+import { useState, useRef, RefObject, useEffect, useContext } from 'react'
 import { ReactSVG } from 'react-svg'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,13 +15,14 @@ import { TAB_CUSTOMIZATION, TAB_GALLERY } from '@client/ts/shared/constants'
 import Meme from '@client/ts/shared/models/Meme'
 import Tools from '@client/components/Tools/Tools'
 import Header from '@client/components/Header/Header'
-import { endWithExt, innerDimensions, debug } from '@client/utils/index'
+import { endWithExt, innerDimensions } from '@client/utils/index'
 import { randomID } from '@shared/utils'
 import DragAndDrop from '@client/components/DragAndDrop/DragAndDrop'
 import { useWindowWidth, useEditor } from '@client/ts/shared/hooks'
 import { getMeme } from '@client/ts/shared/api'
 import { IS_DEV } from '@shared/config'
 import { hasRecoverVersion, formatRelativeDate } from '@client/utils/helpers'
+import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
 
 const CanvasDebuggerAsync = Loadable({
   loader: async () => import('@client/components/CanvasDebugger/CanvasDebugger'),
@@ -31,6 +32,7 @@ const CanvasDebuggerAsync = Loadable({
 function Studio(): JSX.Element {
   const inputDrop: RefObject<HTMLInputElement> = useRef(null)
   const contentRef: RefObject<HTMLDivElement> = useRef(null)
+  const [{ theme }]: [DefaultState] = useContext(DefaultContext)
   const { t, i18n } = useTranslation()
   const [lastVersion, setLastVersion]: [false | Date, Function] = useState<false | Date>(hasRecoverVersion())
   const [isActiveRecoverBox, setIsActiveRecoverBox]: [boolean, Function] = useState<boolean>(lastVersion instanceof Date)
@@ -140,9 +142,7 @@ function Studio(): JSX.Element {
     <div className="page page-studio">
       <Header isAnimate />
       <div className="ld ld-float-btt-in studio-body">
-        <div className="studio-tools">
-          <Tools changeTab={setCurrentTab} />
-        </div>
+        <Tools changeTab={setCurrentTab} />
         <div className={`studio-content ${memeSelected ? 'studio-content-active' : ''}`} ref={contentRef}>
           {memeSelected && <div className="studio-content-overley" style={{ backgroundImage: `url(${memeSelected.url()})` }} />}
           {lastVersion && (
@@ -152,7 +152,7 @@ function Studio(): JSX.Element {
             </div>
           )}
           {memeSelected && <WrapperCanvas changeTab={setCurrentTab} />}
-          {IS_DEV && memeSelected && <CanvasDebuggerAsync />}
+          {IS_DEV && memeSelected && <CanvasDebuggerAsync theme={theme} />}
           {!memeSelected && (
             <div className="empty-meme">
               <ReactSVG src="images/choose-meme.svg" wrapper="span" className="choose-meme-svg" />

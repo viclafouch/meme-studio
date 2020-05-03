@@ -8,14 +8,14 @@
 
     h1 {
       font-size: 2rem;
-      color: #000000;
+      color: var(--blackOrWhite);
       margin-bottom: 2.5rem;
     }
 
     h2 {
       padding-left: 1rem;
       font-size: 1.5rem;
-      color: #000000;
+      color: var(--blackOrWhite);
       margin-bottom: 2.5rem;
       margin-top: 2rem;
     }
@@ -23,7 +23,7 @@
     h3 {
       padding-left: 2rem;
       font-size: 1.2rem;
-      color: #000000;
+      color: var(--blackOrWhite);
       margin-bottom: 2.5rem;
       margin-top: 2rem;
     }
@@ -46,9 +46,9 @@
     }
 
     a {
-      color: var(--blue);
+      color: var(--text-color-link);
       &:hover {
-        color: var(--blue-light);
+        opacity: 0.87;
       }
     }
 

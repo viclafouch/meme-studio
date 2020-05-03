@@ -1,11 +1,21 @@
+html[data-theme="light"] .accordion {
+  --text-color-trigger: #ffffff;
+  --background-trigger-accordion: rgb(204, 204, 204);
+  --background-content-accordion: rgb(255, 255, 255);
+}
+html[data-theme="dark"] .accordion {
+  --text-color-trigger: rgb(212, 212, 212);
+  --background-trigger-accordion: rgb(88, 88, 88);
+  --background-content-accordion: rgb(68, 68, 68);
+}
+
 .accordion {
   display: flex;
   flex-direction: column;
   --accordion-duration: unset;
 
   .accordion-trigger {
-    color: #ffffff;
-    background-color: var(--grey-light);
+    background-color: var(--background-trigger-accordion);
     cursor: pointer;
     padding: 18px 20px;
     display: flex;
@@ -26,6 +36,7 @@
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
+      color: var(--text-color-trigger);
     }
 
     .accordion-remove-text {
@@ -42,7 +53,7 @@
   }
 
   .accordion-content {
-    background-color: white;
+    background-color: var(--background-content-accordion);
     overflow: hidden;
     transition-property: max-height;
     transition-timing-function: ease;

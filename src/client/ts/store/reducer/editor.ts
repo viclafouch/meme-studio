@@ -258,7 +258,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
     removeLocalStorage(['memeSelected', 'history', 'lastEditDate', 'textIdSelected'])
   }
 
-  const stateUpdated: any = finishDraft(draft)
+  const stateUpdated: EditorState = finishDraft(draft) as any
   debug(`EDITOR REDUCER: ${action.type}`, { stateUpdated })
   return stateUpdated
 }

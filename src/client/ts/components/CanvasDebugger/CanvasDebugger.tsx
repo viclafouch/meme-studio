@@ -9,12 +9,12 @@ import { updateMeme } from '../../shared/api'
 import TextBox from '@client/ts/shared/models/TextBox'
 import Meme from '@client/ts/shared/models/Meme'
 import Button from '../Button/Button'
+import { DefaultState } from '@client/store/DefaultContext'
 import './canvas-debugger.scss'
 
-function CanvasDebugger(): JSX.Element {
+function CanvasDebugger({ theme }: { theme: DefaultState['theme'] }): JSX.Element {
   const { t } = useTranslation()
   const [isActive, setIsActive]: [boolean, Function] = useState<boolean>(false)
-  const [isFetching, setIsFetching]: [boolean, Function] = useState<boolean>(false)
   const [isUpdated, setIsUpdated]: [boolean, Function] = useState<boolean>(false)
   const [{ texts, drawProperties, memeSelected }]: [UseEditorInt, Function] = useEditor()
 
@@ -48,15 +48,12 @@ function CanvasDebugger(): JSX.Element {
 
   const fetchMeme = useCallback(async () => {
     try {
-      setIsFetching(true)
       await updateMeme({ meme, texts: textbox })
       setIsUpdated(true)
     } catch (error) {
       console.warn(error)
-    } finally {
-      setIsFetching(false)
     }
-  }, [meme, textbox, setIsFetching])
+  }, [meme, textbox])
 
   return (
     <div className={`canvas-debugger ${isActive ? `canvas-debugger-active` : ``}`}>
@@ -90,7 +87,13 @@ function CanvasDebugger(): JSX.Element {
         <Button isSuccess={isUpdated} onClick={fetchMeme} className="button-update">
           Mettre à jour
         </Button>
-        <ReactJson src={{ ...meme, texts: textbox }} enableClipboard displayObjectSize={false} displayDataTypes={false} />
+        <ReactJson
+          src={{ ...meme, texts: textbox }}
+          enableClipboard
+          displayObjectSize={false}
+          displayDataTypes={false}
+          theme={theme === 'dark' ? 'eighties' : 'rjv-default'}
+        />
       </div>
     </div>
   )

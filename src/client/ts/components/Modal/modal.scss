@@ -1,3 +1,10 @@
+html[data-theme="light"] .modal {
+  --background-modal-content: rgb(255, 255, 255);
+}
+html[data-theme="dark"] .modal {
+  --background-modal-content: rgb(48, 48, 48);
+}
+
 .modal {
   position: fixed;
   overflow: hidden;
@@ -28,7 +35,7 @@
 
   & > .modal-loading {
     background-color: transparent;
-    color: #ffffff;
+    color: var(--white);
   }
 
   & > .modal-close {
@@ -62,7 +69,9 @@
     z-index: 2;
     position: relative;
     margin: 0 auto;
-    background-color: #ffffff;
+    background-color: var(--background-modal-content);
+    border: 1px solid rgba($color: #ffffff, $alpha: 0.25);
+    border-radius: 3px;
     overflow-x: hidden;
     overflow-y: auto;
     max-height: 100%;

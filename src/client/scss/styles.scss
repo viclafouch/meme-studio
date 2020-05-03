@@ -8,12 +8,9 @@ html {
 }
 
 body {
-  background-color: var(--azure);
   font-family: 'Alata', sans-serif;
-  color: var(--grey-dark);
-  background: url('/images/particles.svg') no-repeat;
-  background-position: center center;
-  background-size: cover;
+  color: var(--text-color-primary);
+  background-color: var(--background-primary);
 
   * {
     box-sizing: border-box;
@@ -25,7 +22,11 @@ body {
 
   #app-root {
     min-height: 100vh;
+    min-height: -webkit-fill-available;
     position: relative;
+    background: url('/images/particles.svg') no-repeat;
+    background-position: center center;
+    background-size: cover;
   }
 }
 
@@ -61,7 +62,6 @@ body {
       right: 0;
       bottom: 0;
       height: 100vh;
-      background-color: #ffffff;
     }
   }
 }
@@ -71,59 +71,38 @@ body {
     width: 100%;
     height: calc(100vh - var(--header-height));
     top: var(--header-height);
-    background-color: #ffffff;
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: 60px auto var(--tools-item-height);
     overflow: hidden;
+    background-color: var(--background-primary);
 
     @include lg {
       grid-template-rows: auto;
       grid-template-columns: var(--tools-width) auto var(--aside-width);
     }
 
-    .studio-tools,
     .studio-content,
     .studio-aside {
       height: 100%;
       width: 100%;
-
-      @include lg {
-        height: calc(100vh - var(--header-height));
-      }
     }
 
-    .studio-tools {
-      order: 3;
-      @include lg {
-        order: 1;
-      }
-    }
     .studio-aside {
       order: 1;
       @include lg {
         order: 3;
       }
     }
+
     .studio-content {
       order: 2;
     }
 
-    .studio-tools {
-      z-index: 2;
-      height: 100%;
-      box-shadow: 2px 0px 5px 0px rgba(0,0,0,0.29);
-
-      @include lg {
-        width: var(--tools-width);
-      }
-    }
-
     .studio-content {
-      border-right: 2px solid var(--grey-light);
-      background-color: #f2f3f8;
+      border-right: 2px solid var(--border-color-aside);
       padding: 50px 40px;
-      background: url('/images/particles-studio.svg') no-repeat;
+      background: url('/images/particles.svg') no-repeat;
       background-position: center center;
       background-size: cover;
       position: relative;
@@ -225,11 +204,8 @@ body {
 
           .import-image-label-text {
             text-decoration: underline;
-            color: var(--blue);
+            color: var(--blue-secondary);
             cursor: pointer;
-            &:hover {
-              color: var(--blue-light);
-            }
           }
         }
 
@@ -242,7 +218,7 @@ body {
 
     .studio-aside {
       overflow: hidden;
-      background-color: #f0f0f0;
+      background-color: var(--background-primary);
       display: flex;
       width: 100%;
       flex-direction: row;
@@ -261,7 +237,6 @@ body {
 
         @include lg {
           height: 50px;
-          margin-bottom: 2px;
         }
 
         .studio-aside-header-btn {
@@ -269,9 +244,10 @@ body {
           position: relative;
           border-radius: 0;
           font-size: 24px;
+          color: var(--white);
 
-          &.studio-aside-header-btn-active {
-            background-color: var(--blue-light);
+          &:not(.studio-aside-header-btn-active) {
+            background-color: var(--blue-secondary);
           }
 
           svg {
@@ -300,7 +276,6 @@ body {
 .export {
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
   width: 100%;
 
   .export-title {
@@ -332,7 +307,7 @@ body {
 
   .meme-info-size {
     padding: 3px 1px;
-    color: var(--grey-dark);
+    color: var(--text-color-primary);
     text-align: center;
     font-size: 12px;
     margin-bottom: 0;
@@ -457,7 +432,7 @@ body {
       }
 
       .customization-textbox-section {
-        border: 1px solid rgba(204, 204, 204, 0.769);
+        border: 1px solid var(--background-trigger-accordion);
         padding: 17px 18px;
       }
 

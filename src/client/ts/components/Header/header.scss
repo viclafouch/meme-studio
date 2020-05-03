@@ -1,3 +1,10 @@
+html[data-theme="light"] .header {
+  --text-color-button-export: var(--blue-secondary);
+}
+html[data-theme="dark"] .header {
+  --text-color-button-export: var(--text-color-primary);
+}
+
 .header {
   height: var(--header-height);
   width: 100%;
@@ -5,7 +12,7 @@
   align-items: center;
   padding: 0 10px;
   justify-content: space-between;
-  background-color: var(--blue-light);
+  background-color: var(--blue-secondary);
 
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.8);
   z-index: 9999;
@@ -52,7 +59,7 @@
     width: $size * 2;
     border-bottom-left-radius: $size * 2;
     border-bottom-right-radius: $size * 2;
-    background: #f6f8fa;
+    background: var(--white);
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
     overflow: hidden;
     display: none;
@@ -95,12 +102,13 @@
       transform:rotate(10deg)
     }
   }
+
   @media (max-width:500px) {
     .github-corner:hover .octo-arm {
-      animation:none
+      animation: none
     }
     .github-corner .octo-arm {
-      animation:octocat-wave 560ms ease-in-out
+      animation: octocat-wave 560ms ease-in-out
     }
   }
 
@@ -108,17 +116,10 @@
     text-decoration: none;
   }
 
-  h1 {
-    font-size: 32px;
-    letter-spacing: 0;
-    font-weight: 500;
-    color: #ffffff;
-    white-space: nowrap;
-  }
-
   .button-export {
-    background-color: #ffffff;
-    color: var(--blue);
+    background-color: var(--background-primary);
+    color: var(--text-color-button-export);
+    border: 1px solid var(--input-border-color);
     text-transform: uppercase;
     display: none;
     @include md {

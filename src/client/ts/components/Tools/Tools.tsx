@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useRef, RefObject } from 'react'
+import { useRef, RefObject, useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useTranslation } from 'react-i18next'
 import {
@@ -8,9 +8,11 @@ import {
   REDO_HISTORY,
   ERASE_ALL,
   RESET,
-  TOGGLE_EXPORT_MODAL
+  TOGGLE_EXPORT_MODAL,
+  TOGGLE_THEME
 } from '@client/store/reducer/constants'
 import Faq from '@client/components/Faq/Faq'
+import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
 import { useEditor, useWindowWidth } from '@client/ts/shared/hooks'
 import { UseEditorInt } from '@client/ts/shared/validators'
 import { TAB_GALLERY } from '@client/ts/shared/constants'
@@ -24,6 +26,7 @@ const Tools = (props: ToolsProps): JSX.Element => {
   const faqModal: RefObject<any> = useRef(null)
   const { t } = useTranslation()
   const { isMinLgSize } = useWindowWidth()
+  const [{ theme }, dispatch]: [DefaultState, Function] = useContext(DefaultContext)
   const [{ showTextAreas, memeSelected, canUndo, canRedo }, dispatchEditor]: [UseEditorInt, Function] = useEditor()
 
   return (
@@ -110,6 +113,26 @@ const Tools = (props: ToolsProps): JSX.Element => {
         )}
       </ul>
       <ul className="tools-list">
+        <li>
+          <button
+            className="tools-list-btn"
+            aria-label={theme === 'dark' ? t('attr.darkTheme') : t('attr.lightTheme')}
+            data-theme={theme}
+            data-tooltip={theme !== 'dark' ? t('attr.darkTheme') : t('attr.lightTheme')}
+            disabled={false}
+            onClick={(): void =>
+              dispatch({
+                type: TOGGLE_THEME
+              })
+            }
+          >
+            {theme === 'dark' ? (
+              <FontAwesomeIcon fixedWidth icon={['fas', 'sun']} />
+            ) : (
+              <FontAwesomeIcon fixedWidth icon={['fas', 'moon']} />
+            )}
+          </button>
+        </li>
         <li>
           <button
             aria-label={t('attr.faq')}

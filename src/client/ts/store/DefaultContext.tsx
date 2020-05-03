@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createContext, useReducer, createRef, RefObject } from 'react'
+import { createContext, useReducer, createRef, RefObject, useLayoutEffect } from 'react'
 import DefaultReducer from './reducer/default'
 import Meme from '@client/ts/shared/models/Meme'
 
@@ -8,19 +8,27 @@ export interface DefaultState {
   memes: Array<Meme>
   numPage: number
   hasNextMemes: boolean
+  theme: 'dark' | 'light'
 }
 
 const initialState: DefaultState = {
   modalRef: createRef(),
   memes: [],
   numPage: 0,
-  hasNextMemes: true
+  hasNextMemes: true,
+  theme: document.documentElement.getAttribute('data-theme') as 'dark' | 'light'
 }
 
 export const DefaultContext = createContext<DefaultState | any>(initialState)
 
 export function DefaultProvider({ children }: { children: React.ReactNode }): JSX.Element {
   const [state, updater] = useReducer(DefaultReducer, initialState)
+
+  useLayoutEffect(() => {
+    document.documentElement.setAttribute('data-theme', state.theme)
+    localStorage.setItem('theme', state.theme)
+  }, [state.theme])
+
   return (
     <>
       <div ref={state.modalRef} id="modal" />

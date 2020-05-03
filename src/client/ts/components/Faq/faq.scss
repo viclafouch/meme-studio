@@ -1,13 +1,13 @@
 .faq {
   padding-top: 20px;
   h1 {
-    color: black;
+    color: var(--blackOrWhite);
     padding-bottom: 30px;
     font-size: 1.55em;
   }
 
   h2 {
-    color: black;
+    color: var(--blackOrWhite);
     padding-bottom: 0.75em;
     font-size: 1.3em;
   }
@@ -19,7 +19,7 @@
     line-height: 1.3;
 
     a {
-      color: var(--blue-light);
+      color: var(--blue-secondary);
     }
   }
 }
