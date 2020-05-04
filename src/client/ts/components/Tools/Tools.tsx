@@ -127,9 +127,9 @@ const Tools = (): JSX.Element => {
         </li>
         <li>
           <button
-            aria-label={t('attr.faq')}
+            aria-label={t('attr.qa')}
             className="tools-list-btn"
-            data-tooltip={t('attr.faq')}
+            data-tooltip={t('attr.qa')}
             disabled={false}
             onClick={(): void => faqModal.current.open()}
           >

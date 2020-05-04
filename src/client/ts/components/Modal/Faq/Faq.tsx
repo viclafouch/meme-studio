@@ -28,8 +28,8 @@ const Faq = forwardRef(
 
     return isOpen ? (
       <Modal onClose={(): void => setIsOpen(false)}>
-        <div className="faq">
-          <h1>{t('faq')}</h1>
+        <div className="faq-modal">
+          <h1>{t('qa.title')}</h1>
           <div className="faq-body">
             <ReactMarkdownAsync source={i18n.language === 'fr' ? faqFr : faqEnUS} escapeHtml={false} />
           </div>

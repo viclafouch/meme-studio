@@ -11,7 +11,7 @@
     "eraseAll": "Écraser tout",
     "openDebugger": "Ouvrir le debugger",
     "reset": "Réinitialiser",
-    "faq": "Faq",
+    "qa": "Faq",
     "lightTheme": "Thème clair",
     "darkTheme": "Thème sombre"
   },
@@ -75,7 +75,13 @@
       "description": "La page que vous recherchez ne donne aucun résultat."
     }
   },
-  "faq": "F.A.Q",
+  "qa": {
+    "meta": {
+      "title": "Foire aux Questions",
+      "description": "Comment créer un mème, comment personnaliser votre image, .. ? Toutes les réponses sont sur cette page."
+    },
+    "title":  "F.A.Q"
+  },
   "backToHome": "Revenir à l'accueil",
   "noMatch": "Aucun résultat pour",
   "about": {

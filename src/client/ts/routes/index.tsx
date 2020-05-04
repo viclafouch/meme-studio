@@ -32,6 +32,17 @@ const AboutAsync = Loadable({
   timeout: 5000
 })
 
+const QaAsync = Loadable({
+  loader: async () => {
+    const container = await import('@client/containers/qa')
+    nprogress.done()
+    return container
+  },
+  loading: Loading,
+  delay: 200,
+  timeout: 5000
+})
+
 const TermsAsync = Loadable({
   loader: async () => {
     const container = await import('@client/containers/Terms')
@@ -101,6 +112,15 @@ function routes(): JSX.Element {
         }}
       >
         <TermsAsync />
+      </Page>
+      <Page
+        path="/qa"
+        pageMeta={{
+          title: t('qa.meta.title'),
+          description: t('qa.meta.description')
+        }}
+      >
+        <QaAsync />
       </Page>
       <Page
         path="/create"

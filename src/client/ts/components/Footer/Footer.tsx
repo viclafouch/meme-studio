@@ -16,6 +16,9 @@ function Footer(): JSX.Element {
           <Link to="/terms">{t('legal.meta.title')}</Link>
         </li>
         <li>
+          <Link to="/qa">{t('qa.title')}</Link>
+        </li>
+        <li>
           <a
             target="_blank"
             href="https://github.com/viclafouch/meme-studio"

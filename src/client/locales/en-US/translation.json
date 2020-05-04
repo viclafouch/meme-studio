@@ -11,7 +11,7 @@
     "eraseAll": "Erase all",
     "openDebugger": "Open debugger",
     "reset": "Reset",
-    "faq": "Q&A",
+    "qa": "Q&A",
     "lightTheme": "Light theme",
     "darkTheme": "Dark theme"
   },
@@ -75,7 +75,13 @@
       "description": "The page you are looking for does not give any results."
     }
   },
-  "faq": "Q&A",
+  "qa": {
+    "meta": {
+      "title": "Questions & Answers",
+      "description": "How to create a meme, how to personnalize your own image, .. ? All of the answers are on this page."
+    },
+    "title": "Q&A"
+  },
   "backToHome": "Back to home",
   "noMatch": "No match for",
   "about": {

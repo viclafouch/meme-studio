@@ -9,7 +9,7 @@ import Footer from '@client/components/Footer/Footer'
 import { TOGGLE_THEME } from '@client/store/reducer/constants'
 import { shuffle } from '@client/utils/helpers'
 import { DefaultState, DefaultContext } from '@client/store/DefaultContext'
-import '../../scss/pages/home.scss'
+import '@client/scss/pages/home.scss'
 
 interface MemeExample {
   width: number

@@ -20,7 +20,7 @@ import { IS_DEV } from '@shared/config'
 import { hasRecoverVersion, formatRelativeDate } from '@client/utils/helpers'
 import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
 import Aside from '@client/components/Aside/Aside'
-import '../../scss/pages/studio.scss'
+import '@client/scss/pages/studio.scss'
 
 const CanvasDebuggerAsync = Loadable({
   loader: async () => import('@client/components/CanvasDebugger/CanvasDebugger'),

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import '../../scss/pages/404.scss'
+import '@client/scss/pages/404.scss'
 
 function NotFound(): JSX.Element {
   const { t } = useTranslation()
