@@ -90,6 +90,11 @@ function Studio(): JSX.Element {
         type: SET_CURRENT_TAB,
         currentTab: isMinLgSize ? TAB_CUSTOMIZATION : null
       })
+    } else {
+      dispatchEditor({
+        type: SET_CURRENT_TAB,
+        currentTab: isMinLgSize ? TAB_GALLERY : null
+      })
     }
   }, [memeSelected])
 

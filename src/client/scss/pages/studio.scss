@@ -34,7 +34,6 @@
     }
 
     .studio-content {
-      border-right: 2px solid var(--border-color-aside);
       padding: 50px 40px;
       background: url('/images/particles.svg') no-repeat;
       background-position: center center;
@@ -43,6 +42,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
+      @include lg {
+        border-right: 2px solid var(--border-color-aside);
+      }
 
       & > div.studio-content-overley {
         background-repeat: no-repeat;
