@@ -44,7 +44,7 @@ export const useEditor = (): [UseEditorInt, Function] => {
   )
 
   const saveToEditor = useCallback(
-    (args: any) => {
+    ({ ...args }) => {
       dispatch(args)
       if (args.type === ADD_TEXT) setToHistoryDebounced(TEXT_ADDED)
       else if (args.type === CUSTOM_TEXT) setToHistoryDebounced(args.historyType)
@@ -85,7 +85,7 @@ export function useMemes(): {
   numPage: number
   hasNextMemes: boolean
 } {
-  const [{ memes, numPage, hasNextMemes }, dispatch]: [DefaultState, Function] = useContext<any>(DefaultContext)
+  const [{ memes, numPage, hasNextMemes }, dispatch]: [DefaultState, Function] = useContext(DefaultContext)
 
   const fetchNextMemes = async (): Promise<Array<Meme>> => {
     const controller = new AbortController()
