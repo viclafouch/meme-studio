@@ -11,7 +11,7 @@ import {
   TOGGLE_EXPORT_MODAL,
   TOGGLE_THEME
 } from '@client/store/reducer/constants'
-import Faq from '@client/components/Faq/Faq'
+import Faq from '@client/components/Modal/Faq/Faq'
 import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
 import { useEditor, useWindowWidth } from '@client/ts/shared/hooks'
 import { UseEditorInt } from '@client/ts/shared/validators'

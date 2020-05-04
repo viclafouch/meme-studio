@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { FatalError } from '@client/components/ErrorBoundary/ErrorBoundary'
 import { useMemes, useEditor } from '@client/ts/shared/hooks'
 import { UseEditorInt } from '../shared/validators'
-import Export from './Export'
+import Export from '../components/Modal/Export/Export'
 import Router from '../routes'
 
 function Main(): JSX.Element {

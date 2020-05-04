@@ -7,10 +7,11 @@ import { fillText } from '@client/utils/index'
 import { wait } from '@shared/utils'
 import Button from '@client/components/Button/Button'
 import TextBox from '@client/ts/shared/models/TextBox'
-import { postToTwitter } from '../shared/api'
-import { useEditor } from '../shared/hooks'
+import { postToTwitter } from '../../../shared/api'
+import { useEditor } from '../../../shared/hooks'
 import { TOGGLE_EXPORT_MODAL } from '@client/store/reducer/constants'
-import { UseEditorInt } from '../shared/validators'
+import { UseEditorInt } from '../../../shared/validators'
+import './export.scss'
 
 function Export(): JSX.Element {
   const { t } = useTranslation()
