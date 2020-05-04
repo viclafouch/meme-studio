@@ -253,7 +253,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       break
   }
 
-  if ([UNDO_HISTORY, REDO_HISTORY, SET_HISTORY].includes(action.type)) {
+  if ([UNDO_HISTORY, REDO_HISTORY, SET_HISTORY].includes(action.type) && !draft.memeSelected.localImageUrl) {
     setLocalStorage({
       memeSelected: draft.memeSelected,
       lastEditDate: Date.now(),
