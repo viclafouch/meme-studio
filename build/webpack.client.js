@@ -117,7 +117,7 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
     // new BundleAnalyzerPlugin(),
     new webpack.ContextReplacementPlugin(
       /date\-fns[\/\\]/,
-      new RegExp(`[/\\\\\](${supportedLocales.join('|')})[/\\\\\]`)
+      new RegExp(`[/\\\\\](${supportedLocales.join('|')})[/\\\\\]index\.js$`)
     ),
     new CleanWebpackPlugin(),
     new FixStyleOnlyEntriesPlugin(),
