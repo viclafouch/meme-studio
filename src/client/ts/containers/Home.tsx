@@ -1,11 +1,9 @@
 import * as React from 'react'
-import { useMemo, useContext } from 'react'
+import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 import Button from '@client/components/Button/Button'
-import Meme from '@client/ts/shared/models/Meme'
-import { useMemes } from '@client/ts/shared/hooks'
 import LangSelector from '@client/components/LangSelector/LangSelector'
 import Footer from '@client/components/Footer/Footer'
 import { TOGGLE_THEME } from '@client/store/reducer/constants'
@@ -13,11 +11,68 @@ import { shuffle } from '@client/utils/helpers'
 import { DefaultState, DefaultContext } from '@client/store/DefaultContext'
 import '../../scss/pages/home.scss'
 
+interface MemeExample {
+  width: number
+  height: number
+  filename: string
+}
+
+export const lastExamples: Array<MemeExample> = shuffle([
+  {
+    height: 480,
+    width: 640,
+    filename: 'meme-0.png'
+  },
+  {
+    height: 700,
+    width: 568,
+    filename: 'meme-1.png'
+  },
+  {
+    height: 410,
+    width: 500,
+    filename: 'meme-2.png'
+  },
+  {
+    height: 353,
+    width: 502,
+    filename: 'meme-3.png'
+  },
+  {
+    height: 601,
+    width: 480,
+    filename: 'meme-4.png'
+  },
+  {
+    height: 494,
+    width: 500,
+    filename: 'meme-5.png'
+  },
+  {
+    height: 400,
+    width: 600,
+    filename: 'meme-6.png'
+  },
+  {
+    height: 600,
+    width: 600,
+    filename: 'meme-7.png'
+  },
+  {
+    height: 446,
+    width: 600,
+    filename: 'meme-8.png'
+  },
+  {
+    height: 499,
+    width: 600,
+    filename: 'meme-9.png'
+  }
+]).slice(0, 3)
+
 function Home(): JSX.Element {
   const { t } = useTranslation()
-  const { memes } = useMemes()
   const [{ theme }, dispatch]: [DefaultState, Function] = useContext(DefaultContext)
-  const lastMemes = useMemo(() => shuffle(memes).slice(0, 3), memes)
 
   return (
     <div className="page home">
@@ -57,14 +112,14 @@ function Home(): JSX.Element {
             </Button>
           </Link>
           <ul className="home-last-memes">
-            {lastMemes.map((meme: Meme, index: number) => (
+            {lastExamples.map(({ width, height, filename }: MemeExample, index: number) => (
               <li key={index}>
                 <article className="home-last-memes-article">
                   <img
-                    src={meme.url()}
-                    alt={meme.name}
+                    src={`images/examples/${filename}`}
+                    alt={`Meme ${index}`}
                     width={176}
-                    height={((176 / meme.width) * meme.height).toFixed(2)}
+                    height={((176 / width) * height).toFixed(2)}
                     loading="eager"
                   />
                 </article>
