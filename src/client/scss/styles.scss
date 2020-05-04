@@ -24,9 +24,15 @@ body {
     min-height: 100vh;
     min-height: -webkit-fill-available;
     position: relative;
-    background: url('/images/particles.svg') no-repeat;
-    background-position: center center;
-    background-size: cover;
+    background-image: url('/images/particles.svg');
+    background-attachment: scroll;
+    background-repeat: repeat-y;
+    background-size: auto;
+
+    @include sm {
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
   }
 }
 
