@@ -60,5 +60,36 @@
       <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
       <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
     <% } %>
+    <noscript>
+      <style>
+        .block-noscript {
+          border: 7px solid rgb(71, 121, 201);
+          padding: 20px 40px;
+          margin-top: 20px;
+        }
+
+        .block-noscript h1 {
+          color: #000000;
+          font-size: 24px;
+          margin-bottom: 20px;
+        }
+
+        .block-noscript p {
+          color: #1d1d1d;
+          margin-top: 20px;
+        }
+
+        .block-noscript a {
+          color: rgb(71, 121, 201);
+        }
+      </style>
+      <div class="container" style="max-width: 600px;">
+        <div class="block-noscript">
+          <h1>Meme Studio doesn't work very well without JavaScript.</h1>
+          <p>We're all for progressive enhancement, but Meme Studio needs JavaScript. It's required to use most of the features of Meme Studio.</p>
+          <p>Need help to enable javascript ? <a rel="noreferrer noopener" target="_blank" href="https://www.enable-javascript.com/">Click here</a></p>
+        </div>
+      </div>
+    </noscript>
   </body>
 </html>
