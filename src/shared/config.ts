@@ -6,7 +6,20 @@ const PORT_SERVER_PROD: number = JSON.parse(process.env.PORT || '3000')
 
 const API_URL = IS_DEV ? `http://localhost:${PORT_SERVER_DEV}` : ''
 
-const FONTS_FAMILY = ['Arial', 'Helvetica', 'Impact', 'Geneva', 'Arial Black', 'Times New Roman', 'Courier New', 'Lucida Console']
+const FONTS_FAMILY = [
+  'Arial',
+  'Helvetica',
+  'Impact',
+  'Geneva',
+  'Arial Black',
+  'Times New Roman',
+  'Courier New',
+  'Lucida Console',
+  'Comic Sans MS',
+  'Times',
+  'Verdana',
+  'Courier'
+]
 
 const ALIGN_VERTICAL = ['top', 'middle', 'bottom']
 const TEXT_ALIGN = ['left', 'center', 'right']
