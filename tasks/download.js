@@ -13,6 +13,8 @@ if (!process.env.TINY_KEY) {
 tinify.key = process.env.TINY_KEY
 
 const useCompression = true
+const maxHeight = 800
+const maxWidth = 800
 
 const memeFile = path.resolve('src', 'server', 'memes.json')
 const templateDir = './static/templates'
@@ -24,8 +26,20 @@ const downloadAndCompress = async (uri, filename) => {
     })
   })
 
+  const { height, width } = await sizeOf(filename)
+
   if (useCompression) {
-    const source = tinify.fromFile(filename);
+    let source = tinify.fromFile(filename);
+    if (height > maxHeight)
+      source = source.resize({
+        method: "scale",
+        height: maxHeight
+      });
+    if (width > maxWidth)
+      source = source.resize({
+        method: "scale",
+        width: maxWidth
+      });
     console.log(`Compressing ${filename}...`);
     await source.toFile(filename);
   }
