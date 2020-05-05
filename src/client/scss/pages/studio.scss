@@ -105,11 +105,12 @@
         flex-direction: column;
         text-align: center;
 
-        .choose-meme-svg,
-        .choose-meme-svg svg {
-          width: 100%;
-          height: auto;
-          max-width: 360px;
+        .choose-meme-img {
+          max-width: 100%;
+          pointer-events: none;
+          @media (max-width: #{$screen-sm-min}) {
+            height: auto;
+          }
         }
 
         p {

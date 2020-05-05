@@ -2,7 +2,6 @@ import * as React from 'react'
 import AbortController from 'abort-controller'
 import * as Loadable from 'react-loadable'
 import { useState, useRef, RefObject, useEffect, useContext } from 'react'
-import { ReactSVG } from 'react-svg'
 import { RouteComponentProps } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Button from '@client/components/Button/Button'
@@ -171,7 +170,7 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
           {IS_DEV && memeSelected && <CanvasDebuggerAsync theme={theme} />}
           {!memeSelected && (
             <div className="empty-meme">
-              <ReactSVG src="/images/choose-meme.svg" wrapper="span" className="choose-meme-svg" />
+              <img src="/images/choose-meme.svg" width="360" height="308" className="choose-meme-img" />
               {isMinLgSize ? (
                 <>
                   <p>
