@@ -43,30 +43,30 @@ function Header(props: HeaderProps): JSX.Element {
       </div>
       <div>
         <LangSelector />
-        {!location.pathname.startsWith('/create') && (
-          <Button
-            className="theme-button"
-            color="white"
-            aria-label={theme === 'dark' ? t('attr.darkTheme') : t('attr.lightTheme')}
-            data-theme={theme}
-            small
-            onClick={(): void =>
-              dispatch({
-                type: TOGGLE_THEME
-              })
-            }
-          >
-            {theme === 'dark' ? (
-              <FontAwesomeIcon fixedWidth icon={['fas', 'sun']} />
-            ) : (
-              <FontAwesomeIcon fixedWidth icon={['fas', 'moon']} />
-            )}
-          </Button>
-        )}
+        <Button
+          className="theme-button"
+          color="white"
+          aria-label={theme === 'dark' ? t('attr.darkTheme') : t('attr.lightTheme')}
+          data-theme={theme}
+          small
+          transparent
+          onClick={(): void =>
+            dispatch({
+              type: TOGGLE_THEME
+            })
+          }
+        >
+          {theme === 'dark' ? (
+            <FontAwesomeIcon fixedWidth icon={['fas', 'sun']} />
+          ) : (
+            <FontAwesomeIcon fixedWidth icon={['fas', 'moon']} />
+          )}
+        </Button>
         {location.pathname.startsWith('/create') && (
           <Button
             className="button-export"
             disabled={!memeSelected}
+            color={theme === 'dark' ? 'grey' : 'white'}
             onClick={(): void =>
               dispatchEditor({
                 type: TOGGLE_EXPORT_MODAL

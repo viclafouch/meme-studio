@@ -29,7 +29,7 @@ function LangSelector(): JSX.Element {
 
   return (
     <div className={`lang-selector ${isActive ? 'lang-selector-active' : ''}`}>
-      <Button arial-label="lang" small className="lang-selector-btn" onClick={handleClick}>
+      <Button arial-label="lang" transparent small className="lang-selector-btn" onClick={handleClick}>
         <img
           src={i18n.options.resources[i18n.language].flag as string}
           alt={i18n.options.resources[i18n.language].name as string}

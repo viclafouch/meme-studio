@@ -11,8 +11,6 @@
     display: flex;
 
     .theme-button {
-      background: transparent;
-      box-shadow: none!important;
       font-size: 1.05rem;
       &[data-theme="light"] {
         color: rgb(226, 189, 0);

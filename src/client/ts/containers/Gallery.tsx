@@ -61,7 +61,7 @@ function Gallery(): JSX.Element {
             <div className="cta-end container">
               <h2> {t('titles.titleA')}</h2>
               <Link to="/create">
-                <Button big tabIndex={-1}>
+                <Button color="blue" big tabIndex={-1}>
                   {t('makeMyMeme')}
                 </Button>
               </Link>

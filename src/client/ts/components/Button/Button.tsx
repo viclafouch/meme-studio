@@ -9,16 +9,21 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   isLoading: boolean
   disabled: boolean
   isSuccess: boolean
+  transparent?: boolean
+  color?: 'blue' | 'grey' | 'white'
 }
 
 function Button(props: ButtonProps): JSX.Element {
-  const { big, small, medium, isLoading, isSuccess, ...rest } = props
+  const { big, small, medium, isLoading, isSuccess, transparent, color, ...rest } = props
   const className = ['button']
   if (small) className.push('button-small')
   else if (big) className.push('button-big')
   else className.push('button-medium')
 
-  if (isSuccess) className.push('button-success')
+  if (color) className.push(`button-${color}`)
+
+  if (transparent) className.push('button-transparent')
+  else if (isSuccess) className.push('button-success')
 
   className.push(props.className || '')
 
@@ -33,7 +38,8 @@ function Button(props: ButtonProps): JSX.Element {
 Button.defaultProps = {
   small: false,
   medium: true,
-  big: false
+  big: false,
+  transparent: false
 } as ButtonProps
 
 export default Button

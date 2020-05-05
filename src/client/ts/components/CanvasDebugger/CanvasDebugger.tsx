@@ -84,7 +84,7 @@ function CanvasDebugger({ theme }: { theme: DefaultState['theme'] }): JSX.Elemen
           ...(!isActive ? { display: 'none' } : null)
         }}
       >
-        <Button isSuccess={isUpdated} onClick={fetchMeme} className="button-update">
+        <Button color="blue" isSuccess={isUpdated} onClick={fetchMeme} className="button-update">
           Mettre à jour
         </Button>
         <ReactJson

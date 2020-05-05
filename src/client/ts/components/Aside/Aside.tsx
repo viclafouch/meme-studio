@@ -18,6 +18,7 @@ function Aside(): JSX.Element {
       <header className="studio-aside-header">
         <Button
           aria-label="Gallery tab"
+          color="blue"
           className={`studio-aside-header-btn ${currentTab === TAB_GALLERY ? 'studio-aside-header-btn-active' : null}`}
           onClick={(): void =>
             dispatchEditor({
@@ -31,6 +32,7 @@ function Aside(): JSX.Element {
         </Button>
         <Button
           aria-label="Customization tab"
+          color="blue"
           className={`studio-aside-header-btn ${currentTab === TAB_CUSTOMIZATION ? 'studio-aside-header-btn-active' : null}`}
           onClick={(): void =>
             dispatchEditor({
