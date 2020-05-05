@@ -238,7 +238,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
       <div className="draggable-resize" data-type="resize" data-side="se" onMouseDown={handleMouseDown} />
       <div className="draggable-resize" data-type="resize" data-side="sw" onMouseDown={handleMouseDown} />
       <div className="draggable-rotate" data-type="rotate" onMouseDown={handleMouseDown}>
-        <ReactSVG src="images/rotation.svg" wrapper="span" className="wrapper-rotate-svg" />
+        <ReactSVG src="/images/rotation.svg" wrapper="span" className="wrapper-rotate-svg" />
       </div>
       {props.children}
     </div>

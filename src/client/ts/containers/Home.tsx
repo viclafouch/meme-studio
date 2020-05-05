@@ -100,8 +100,8 @@ function Home(): JSX.Element {
       <div className="content-one">
         <div className="home-title">
           <Link to="/">
-            <img src="images/logo-meme-studio.png" hidden={theme === 'dark'} width={350} alt="Logo Meme Studio" />
-            <img src="images/logo-meme-studio-dark.png" hidden={theme === 'light'} width={350} alt="Logo Meme Studio" />
+            <img src="/images/logo-meme-studio.png" hidden={theme === 'dark'} width={350} alt="Logo Meme Studio" />
+            <img src="/images/logo-meme-studio-dark.png" hidden={theme === 'light'} width={350} alt="Logo Meme Studio" />
           </Link>
           <p>{t('home.label')}</p>
         </div>
@@ -116,7 +116,7 @@ function Home(): JSX.Element {
               <li key={index}>
                 <article className="home-last-memes-article">
                   <img
-                    src={`images/examples/${filename}`}
+                    src={`/images/examples/${filename}`}
                     alt={`Meme ${index}`}
                     width={176}
                     height={((176 / width) * height).toFixed(2)}

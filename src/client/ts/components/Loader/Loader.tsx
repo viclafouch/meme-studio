@@ -13,12 +13,12 @@ function Loader(): JSX.Element {
   if (!isSafari) {
     loader =
       i18n.language === 'fr' ? (
-        <ReactSVG src="images/dual-ball-fr.svg" wrapper="span" />
+        <ReactSVG src="/images/dual-ball-fr.svg" wrapper="span" />
       ) : (
-        <ReactSVG src="images/dual-ball-en.svg" wrapper="span" />
+        <ReactSVG src="/images/dual-ball-en.svg" wrapper="span" />
       )
   } else {
-    loader = <img src="images/loading.gif" alt="Loading" />
+    loader = <img src="/images/loading.gif" alt="Loading" />
   }
 
   return (

@@ -286,7 +286,7 @@ export default memo(
               <Customization {...props} />
             ) : (
               <div className="customization-empty">
-                <ReactSVG src="images/sad.svg" wrapper="span" className="wrapper-sad-svg" />
+                <ReactSVG src="/images/sad.svg" wrapper="span" className="wrapper-sad-svg" />
                 <Translation>{(t): any => <h3>{t('studio.noMemeSelected')}</h3>}</Translation>
               </div>
             )}

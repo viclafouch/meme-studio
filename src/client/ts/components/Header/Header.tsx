@@ -30,17 +30,17 @@ function Header(props: HeaderProps): JSX.Element {
           title={t('attr.viewSource')}
           rel="noreferrer noopener"
         >
-          <ReactSVG src="images/github.svg" wrapper="div" className="github-svg" />
+          <ReactSVG src="/images/github.svg" wrapper="div" className="github-svg" />
         </a>
       </div>
       <div className="center-column">
         <Link to="/" id="logo">
-          <img className="logo" src="images/logo.png" alt="Logo Meme Studio" />
+          <img className="logo" src="/images/logo.png" alt="Logo Meme Studio" />
         </Link>
       </div>
       <div>
         <LangSelector />
-        {location.pathname === '/create' && (
+        {location.pathname.startsWith('/create') && (
           <Button
             className="button-export"
             disabled={!memeSelected}

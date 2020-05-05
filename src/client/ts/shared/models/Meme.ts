@@ -18,7 +18,7 @@ export default class Meme {
   }
 
   public url(): string {
-    return this.localImageUrl || `templates/${this.filename}`
+    return this.localImageUrl || `/templates/${this.filename}`
   }
 
   get image(): Promise<HTMLImageElement> {
