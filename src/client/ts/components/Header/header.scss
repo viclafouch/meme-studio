@@ -127,8 +127,21 @@ html[data-theme="dark"] .header {
     }
   }
 
-  .lang-selector {
+  .lang-selector,
+  .theme-button {
     margin-right: 10px;
+  }
+
+  .theme-button {
+    background: transparent;
+    box-shadow: none!important;
+    font-size: 1.05rem;
+    &[data-theme="light"] {
+      color: rgb(226, 189, 0);
+    }
+    &[data-theme="dark"] {
+      color: rgb(255, 255, 0);
+    }
   }
 
   .button-export svg + span,

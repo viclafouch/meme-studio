@@ -1,13 +1,15 @@
 import * as React from 'react'
+import { useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { ReactSVG } from 'react-svg'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { TOGGLE_EXPORT_MODAL } from '@client/store/reducer/constants'
+import { TOGGLE_EXPORT_MODAL, TOGGLE_THEME } from '@client/store/reducer/constants'
 import Button from '@client/components/Button/Button'
 import LangSelector from '@client/components/LangSelector/LangSelector'
 import { useEditor } from '@client/ts/shared/hooks'
 import { UseEditorInt } from '@client/ts/shared/validators'
+import { DefaultState, DefaultContext } from '@client/store/DefaultContext'
 import './header.scss'
 
 type HeaderProps = {
@@ -17,6 +19,7 @@ type HeaderProps = {
 function Header(props: HeaderProps): JSX.Element {
   const { t } = useTranslation()
   const { location } = useHistory()
+  const [{ theme }, dispatch]: [DefaultState, Function] = useContext(DefaultContext)
   const [{ memeSelected }, dispatchEditor]: [UseEditorInt, Function] = useEditor()
 
   return (
@@ -40,6 +43,26 @@ function Header(props: HeaderProps): JSX.Element {
       </div>
       <div>
         <LangSelector />
+        {!location.pathname.startsWith('/create') && (
+          <Button
+            className="theme-button"
+            color="white"
+            aria-label={theme === 'dark' ? t('attr.darkTheme') : t('attr.lightTheme')}
+            data-theme={theme}
+            small
+            onClick={(): void =>
+              dispatch({
+                type: TOGGLE_THEME
+              })
+            }
+          >
+            {theme === 'dark' ? (
+              <FontAwesomeIcon fixedWidth icon={['fas', 'sun']} />
+            ) : (
+              <FontAwesomeIcon fixedWidth icon={['fas', 'moon']} />
+            )}
+          </Button>
+        )}
         {location.pathname.startsWith('/create') && (
           <Button
             className="button-export"
