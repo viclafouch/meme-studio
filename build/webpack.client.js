@@ -21,7 +21,8 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
   output: {
     filename: `[name]-[hash:8]-bundle.js`,
     chunkFilename: '[name]-[hash:8]-bundle.js',
-    path: path.join(__dirname, '..', 'dist', 'client')
+    path: path.join(__dirname, '..', 'dist', 'client'),
+    publicPath: '/'
   },
   resolve: {
     alias: {
