@@ -25,12 +25,11 @@ body {
     min-height: -webkit-fill-available;
     position: relative;
     background-image: url('/images/particles.svg');
-    background-attachment: scroll;
+    background-attachment: fixed;
     background-repeat: repeat-y;
     background-size: auto;
 
     @include sm {
-      background-repeat: no-repeat;
       background-position: center center;
     }
   }
