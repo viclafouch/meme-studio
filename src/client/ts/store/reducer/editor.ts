@@ -260,7 +260,10 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       history: draft.history,
       textIdSelected: draft.textIdSelected
     })
-  } else if ([RESET, ERASE_ALL].includes(action.type)) {
+  } else if (
+    [RESET, ERASE_ALL].includes(action.type) ||
+    (action.memeSelected && draft.memeSelected && action.type === SET_MEME_SELECTED)
+  ) {
     removeLocalStorage(['memeSelected', 'history', 'lastEditDate', 'textIdSelected'])
   }
 

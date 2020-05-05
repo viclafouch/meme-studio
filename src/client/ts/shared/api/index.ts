@@ -28,8 +28,8 @@ export interface ResultMemeShowInt {
   }
 }
 
-export const getMeme = (id: string): Promise<{ texts: Array<TextBox>; meme: Meme }> =>
-  fetchApi(`/memes/${id}`, { method: 'POST' }).then((response: ResultMemeShowInt) => ({
+export const getMeme = (id: string, params?: object): Promise<{ texts: Array<TextBox>; meme: Meme }> =>
+  fetchApi(`/memes/${id}`, { method: 'POST', ...params }).then((response: ResultMemeShowInt) => ({
     texts: response.data.texts.map((text: object) => new TextBox(text)),
     meme: new Meme(response.data.meme)
   }))

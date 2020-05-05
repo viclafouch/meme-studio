@@ -48,7 +48,7 @@ function Gallery(): JSX.Element {
             {memes.map(
               (meme: Meme): React.ReactNode => (
                 <li key={meme.id} data-id={meme.id} className="gallery-item">
-                  <Link to="/">
+                  <Link to={`/create/${meme.id}`}>
                     <img loading="lazy" width={meme.width} height={meme.height} src={meme.url()} alt={meme.name} />
                     <h3>{meme.name}</h3>
                   </Link>

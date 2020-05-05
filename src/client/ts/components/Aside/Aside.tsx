@@ -10,11 +10,7 @@ import Gallery from './Tabs/Gallery/Gallery'
 import Customization from './Tabs/Customization/Customization'
 import './aside.scss'
 
-type asideProps = {
-  onSelectMeme: Function
-}
-
-function Aside({ onSelectMeme }: asideProps): JSX.Element {
+function Aside(): JSX.Element {
   const [{ currentTab }, dispatchEditor]: [EditorState, Function] = useEditor()
 
   return (
@@ -58,7 +54,7 @@ function Aside({ onSelectMeme }: asideProps): JSX.Element {
             })
           }
         >
-          <Gallery onSelectMeme={onSelectMeme} />
+          <Gallery />
         </Tab>
         <Tab
           active={currentTab === TAB_CUSTOMIZATION}

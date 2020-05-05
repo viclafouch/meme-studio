@@ -2,6 +2,7 @@ import * as React from 'react'
 import { useRef, RefObject, useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom'
 import {
   SET_SHOW_TEXT_AREAS,
   UNDO_HISTORY,
@@ -18,6 +19,7 @@ import { UseEditorInt } from '@client/ts/shared/validators'
 import './tools.scss'
 
 const Tools = (): JSX.Element => {
+  const history = useHistory()
   const faqModal: RefObject<any> = useRef(null)
   const { t } = useTranslation()
   const { isMinLgSize } = useWindowWidth()
@@ -84,7 +86,10 @@ const Tools = (): JSX.Element => {
             data-tooltip={t('attr.reset')}
             disabled={!memeSelected}
             onClick={(): void => {
-              if (memeSelected) dispatchEditor({ type: RESET })
+              if (memeSelected) {
+                dispatchEditor({ type: RESET })
+                history.replace({ pathname: '/create' })
+              }
             }}
           >
             <FontAwesomeIcon icon={['fas', 'trash-restore-alt']} />

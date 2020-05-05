@@ -1,7 +1,9 @@
 import * as React from 'react'
+import AbortController from 'abort-controller'
 import * as Loadable from 'react-loadable'
 import { useState, useRef, RefObject, useEffect, useContext } from 'react'
 import { ReactSVG } from 'react-svg'
+import { RouteComponentProps } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Button from '@client/components/Button/Button'
 import WrapperCanvas from '@client/components/WrapperCanvas/WrapperCanvas'
@@ -27,7 +29,7 @@ const CanvasDebuggerAsync = Loadable({
   loading: () => null
 })
 
-function Studio(): JSX.Element {
+function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
   const inputDrop: RefObject<HTMLInputElement> = useRef(null)
   const contentRef: RefObject<HTMLDivElement> = useRef(null)
   const [{ theme }]: [DefaultState] = useContext(DefaultContext)
@@ -46,22 +48,40 @@ function Studio(): JSX.Element {
     })
   }, [width])
 
-  const handleChooseMeme = async (meme: Meme): Promise<void> => {
-    try {
-      if (memeSelected && meme.id === memeSelected.id) return
-      const { texts } = await getMeme(meme.id)
-      dispatchEditor({
-        type: SET_MEME_SELECTED,
-        memeSelected: meme,
-        texts
-      })
-      setIsActiveRecoverBox(false)
-      setLastVersion(false)
-      setUploadError(null)
-    } catch (error) {
-      console.error(error)
+  useEffect(() => {
+    const memeIdParams = props.match.params.memeId
+    const handleChooseMeme = async (memeId: string, controller: AbortController): Promise<void> => {
+      try {
+        const { texts, meme } = await getMeme(memeId, {
+          signal: controller.signal
+        })
+        dispatchEditor({
+          type: SET_MEME_SELECTED,
+          memeSelected: meme,
+          texts
+        })
+        setIsActiveRecoverBox(false)
+        setLastVersion(false)
+        setUploadError(null)
+      } catch (error) {
+        if (error.name !== 'AbortError') console.error(error)
+        else console.error('Too short')
+      }
     }
-  }
+    const controller = new AbortController()
+    let memeSaved: any = window.localStorage.getItem('memeSelected')
+    if (memeIdParams) {
+      if (hasRecoverVersion()) {
+        memeSaved = new Meme(JSON.parse(memeSaved)) as Meme
+        if (memeSaved.id !== memeIdParams) handleChooseMeme(memeIdParams, controller)
+      } else {
+        handleChooseMeme(memeIdParams, controller)
+      }
+    }
+    return (): void => {
+      controller.abort()
+    }
+  }, [props.match.params.memeId, dispatchEditor, setIsActiveRecoverBox, setLastVersion, setUploadError])
 
   useEffect(() => {
     let timeout: any
@@ -151,7 +171,7 @@ function Studio(): JSX.Element {
           {IS_DEV && memeSelected && <CanvasDebuggerAsync theme={theme} />}
           {!memeSelected && (
             <div className="empty-meme">
-              <ReactSVG src="images/choose-meme.svg" wrapper="span" className="choose-meme-svg" />
+              <ReactSVG src="/images/choose-meme.svg" wrapper="span" className="choose-meme-svg" />
               {isMinLgSize ? (
                 <>
                   <p>
@@ -208,7 +228,7 @@ function Studio(): JSX.Element {
             </div>
           )}
         </div>
-        <Aside onSelectMeme={handleChooseMeme} />
+        <Aside />
       </div>
     </div>
   )

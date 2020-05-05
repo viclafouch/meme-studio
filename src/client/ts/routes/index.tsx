@@ -6,8 +6,7 @@ import { Switch } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Page from '@client/components/Page/Page'
 import NotFound from '@client/containers/404'
-import { usePageViews, useEditor } from '../shared/hooks'
-import { UseEditorInt } from '../shared/validators'
+import { usePageViews } from '../shared/hooks'
 import { FatalError } from '@client/components/ErrorBoundary/ErrorBoundary'
 
 function Loading(props: LoadingComponentProps): JSX.Element {
@@ -91,7 +90,6 @@ StudioAsync.preload()
 
 function routes(): JSX.Element {
   const { t } = useTranslation()
-  const [{ memeSelected }]: [UseEditorInt, Function] = useEditor()
   usePageViews()
 
   return (
@@ -103,63 +101,65 @@ function routes(): JSX.Element {
           title: t('home.meta.title'),
           description: t('home.meta.description')
         }}
-      >
-        <HomeAsync />
-      </Page>
+        component={HomeAsync}
+      />
       <Page
         path="/about"
         pageMeta={{
           title: t('about.meta.title'),
           description: t('about.meta.description')
         }}
-      >
-        <AboutAsync />
-      </Page>
+        component={AboutAsync}
+      />
       <Page
         path="/terms"
         pageMeta={{
           title: t('legal.meta.title'),
           description: t('legal.meta.description')
         }}
-      >
-        <TermsAsync />
-      </Page>
+        component={TermsAsync}
+      />
       <Page
         path="/qa"
         pageMeta={{
           title: t('qa.meta.title'),
           description: t('qa.meta.description')
         }}
-      >
-        <QaAsync />
-      </Page>
+        component={QaAsync}
+      />
       <Page
+        exact
         path="/create"
         pageMeta={{
-          title: !memeSelected ? t('studio.meta.title') : memeSelected.name,
+          title: t('studio.meta.title'),
           description: t('studio.meta.description')
         }}
-      >
-        <StudioAsync />
-      </Page>
+        component={StudioAsync}
+      />
+      <Page
+        path="/create/:memeId"
+        pageMeta={{
+          title: t('studio.meta.title'),
+          description: t('studio.meta.description')
+        }}
+        component={StudioAsync}
+      />
       <Page
         path="/gallery"
         pageMeta={{
           title: t('gallery.meta.title'),
           description: t('gallery.meta.description')
         }}
-      >
-        <GalleryAsync />
-      </Page>
+        component={GalleryAsync}
+      />
       <Page
         path="*"
         pageMeta={{
           title: t('notFound.meta.title'),
           description: t('notFound.meta.description')
         }}
-      >
-        <NotFound />
-      </Page>
+        component={NotFound}
+      />
     </Switch>
   )
 }

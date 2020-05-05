@@ -131,7 +131,17 @@ export const fetchApi = async (path = '', params = {}): Promise<object> => {
       'Content-Type': 'application/json'
     },
     ...params
-  }).then((response: Response) => response.json())
+  }).then(async (response: Response) => {
+    if (response.status !== 200) {
+      try {
+        const error = await response.json()
+        throw error
+      } catch (error) {
+        throw error
+      }
+    }
+    return response.json()
+  })
 }
 
 export const debounce = (func: any, wait: number): any => {
