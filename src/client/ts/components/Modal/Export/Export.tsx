@@ -84,7 +84,7 @@ function Export(): JSX.Element {
         </span>
         <div className="meme-actions-share">
           <a
-            className="button button-medium button-export"
+            className="button button-medium button-export button-blue"
             id="share-local"
             download="meme.png"
             href={img.replace(/^data:image\/png/, 'data:application/octet-stream')}

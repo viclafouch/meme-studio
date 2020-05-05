@@ -67,6 +67,10 @@
       }
       &#export-twitter {
         background-color: #1DA1F2;
+        color: #ffffff;
+        &:hover {
+          background-color: rgb(79, 174, 233);
+        }
       }
     }
   }
