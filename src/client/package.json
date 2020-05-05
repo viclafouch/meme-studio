@@ -22,7 +22,7 @@
     "abort-controller": "3.0.0",
     "date-fns": "2.12.0",
     "i18next": "19.4.4",
-    "immer": "6.0.3",
+    "immer": "6.0.5",
     "nprogress": "0.2.0",
     "react": "16.13.1",
     "react-color": "2.18.1",
