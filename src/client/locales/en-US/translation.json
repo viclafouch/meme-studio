@@ -90,6 +90,10 @@
     "title": "Meme gallery",
     "minTitle": "Gallery"
   },
+  "titles": {
+    "titleA": "Your own meme with Meme Studio"
+  },
+  "makeMyMeme": "Make my meme",
   "backToHome": "Back to home",
   "noMatch": "No match for",
   "about": {

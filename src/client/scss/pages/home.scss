@@ -69,13 +69,6 @@
       max-width: 650px;
       margin-left: auto;
       margin-right: auto;
-      transition-property: background-color;
-      transition-duration: 0.3s;
-      background-color: var(--blue-secondary);
-
-      &:hover {
-        background-color: var(--blue-primary);
-      }
     }
 
     & > ul.home-last-memes {

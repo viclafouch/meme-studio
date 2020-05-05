@@ -90,6 +90,10 @@
     "title": "Galerie de mèmes",
     "minTitle": "Galerie"
   },
+  "titles": {
+    "titleA": "Votre propre mème avec Meme Studio"
+  },
+  "makeMyMeme": "Créer mon mème",
   "backToHome": "Revenir à l'accueil",
   "noMatch": "Aucun résultat pour",
   "about": {

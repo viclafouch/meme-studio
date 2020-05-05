@@ -107,7 +107,7 @@ function Home(): JSX.Element {
         </div>
         <div className="home-content">
           <Link to="/create">
-            <Button className="home-get-started-btn ld ld-fall-ttb-in" big>
+            <Button tabIndex={-1} className="home-get-started-btn ld ld-fall-ttb-in" big>
               {t('home.getStarted')}
             </Button>
           </Link>

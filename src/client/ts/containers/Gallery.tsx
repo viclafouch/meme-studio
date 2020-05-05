@@ -3,6 +3,7 @@ import { useState, useCallback, RefObject, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Header from '@client/components/Header/Header'
+import Button from '@client/components/Button/Button'
 import Footer from '@client/components/Footer/Footer'
 import { useMemes } from '../shared/hooks'
 import Meme from '../shared/models/Meme'
@@ -56,6 +57,16 @@ function Gallery(): JSX.Element {
               )
             )}
           </ul>
+          {!hasNextMemes && (
+            <div className="cta-end container">
+              <h2> {t('titles.titleA')}</h2>
+              <Link to="/create">
+                <Button big tabIndex={-1}>
+                  {t('makeMyMeme')}
+                </Button>
+              </Link>
+            </div>
+          )}
         </section>
       </div>
       <Footer />

@@ -76,5 +76,28 @@
         }
       }
     }
+
+    .cta-end {
+      margin: 50px auto 10px;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      a {
+        max-width: 500px;
+        margin: 20px auto;
+        width: 100%;
+        text-decoration: none;
+        display: block;
+
+        button {
+          width: 100%;
+        }
+      }
+    }
   }
 }
