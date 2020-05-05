@@ -184,7 +184,7 @@
           font-size: 24px;
           color: var(--white);
 
-          &:not(.studio-aside-header-btn-active) {
+          &.studio-aside-header-btn-active {
             background-color: var(--blue-secondary);
           }
 
