@@ -51,11 +51,6 @@
     pointer-events: none;
     opacity: 0;
     visibility: hidden;
-
-    @include md {
-      right: auto;
-      left: 0;
-    }
   }
 
 
