@@ -50,6 +50,7 @@ class App {
     this.app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }))
     if (!IS_DEV) this.app.use(morgan('combined'))
     this.app.use(cors())
+    if (process.env.PRERENDER_TOKEN) this.app.use(require('prerender-node').set('prerenderToken', process.env.PRERENDER_TOKEN))
   }
 
   private initializeRoutes(): void {
