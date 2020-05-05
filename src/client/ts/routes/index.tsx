@@ -75,7 +75,7 @@ const GalleryAsync = Loadable({
   timeout: 5000
 })
 
-const StudioAsync = Loadable({
+export const StudioAsync = Loadable({
   loader: async () => {
     const container = await import('@client/containers/Studio')
     nprogress.done()
@@ -85,8 +85,6 @@ const StudioAsync = Loadable({
   delay: 200,
   timeout: 5000
 })
-
-StudioAsync.preload()
 
 function routes(): JSX.Element {
   const { t } = useTranslation()

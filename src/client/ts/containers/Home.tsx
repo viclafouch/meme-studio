@@ -9,6 +9,7 @@ import Footer from '@client/components/Footer/Footer'
 import { TOGGLE_THEME } from '@client/store/reducer/constants'
 import { shuffle } from '@client/utils/helpers'
 import { DefaultState, DefaultContext } from '@client/store/DefaultContext'
+import { StudioAsync } from '../routes'
 import '@client/scss/pages/home.scss'
 
 interface MemeExample {
@@ -108,7 +109,13 @@ function Home(): JSX.Element {
         </div>
         <div className="home-content">
           <Link to="/create">
-            <Button tabIndex={-1} color="blue" className="home-get-started-btn ld ld-fall-ttb-in" big>
+            <Button
+              tabIndex={-1}
+              onMouseOver={(): void => StudioAsync.preload()}
+              color="blue"
+              className="home-get-started-btn ld ld-fall-ttb-in"
+              big
+            >
               {t('home.getStarted')}
             </Button>
           </Link>
