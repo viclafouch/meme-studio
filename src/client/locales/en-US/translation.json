@@ -82,6 +82,14 @@
     },
     "title": "Q&A"
   },
+  "gallery": {
+    "meta": {
+      "title": "Meme gallery",
+      "description": "Create your own meme by choosing one of the available memes, just select the meme you want to customize et add your texts."
+    },
+    "title": "Meme gallery",
+    "minTitle": "Gallery"
+  },
   "backToHome": "Back to home",
   "noMatch": "No match for",
   "about": {

@@ -65,6 +65,17 @@ const HomeAsync = Loadable({
   timeout: 5000
 })
 
+const GalleryAsync = Loadable({
+  loader: async () => {
+    const container = await import('@client/containers/Gallery')
+    nprogress.done()
+    return container
+  },
+  loading: Loading,
+  delay: 200,
+  timeout: 5000
+})
+
 const StudioAsync = Loadable({
   loader: async () => {
     const container = await import('@client/containers/Studio')
@@ -130,6 +141,15 @@ function routes(): JSX.Element {
         }}
       >
         <StudioAsync />
+      </Page>
+      <Page
+        path="/gallery"
+        pageMeta={{
+          title: t('gallery.meta.title'),
+          description: t('gallery.meta.description')
+        }}
+      >
+        <GalleryAsync />
       </Page>
       <Page
         path="*"
