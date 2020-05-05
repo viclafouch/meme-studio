@@ -43,7 +43,7 @@ function Gallery(): JSX.Element {
       <div className="content-one">
         <section className="gallery-body" ref={scrollerRef}>
           <div className="container">
-            <h1>{t('gallery.title')}</h1>
+            <h1>{t('gallery.minTitle')}</h1>
           </div>
           <ul className="container">
             {memes.map(
