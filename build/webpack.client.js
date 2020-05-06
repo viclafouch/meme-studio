@@ -135,6 +135,7 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
     }),
     new CompressionPlugin(),
     new CopyPlugin([ { from: path.join(__dirname, '..', 'src', 'client', 'img'), to: 'images' } ]),
+    new CopyPlugin([ { from: path.join(__dirname, '..', 'src', 'client', 'fonts'), to: 'fonts' } ]),
     new CopyPlugin([ { from: 'static', to: '.' } ])
   ]
 })
