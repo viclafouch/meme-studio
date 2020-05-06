@@ -4,7 +4,7 @@
 
   h1 {
     font-size: 2rem;
-    color: #000000;
+    color: var(--whiteOrBlack);
     margin-bottom: 2rem;
   }
 
@@ -14,6 +14,6 @@
 
   a {
     margin-top: 30px;
-    color: var(--blue-primary);
+    color: var(--blue-secondary);
   }
 }
