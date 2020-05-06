@@ -8,6 +8,9 @@ html {
 }
 
 body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-family: 'Alata', sans-serif;
   color: var(--text-color-primary);
   background-color: var(--background-primary);
