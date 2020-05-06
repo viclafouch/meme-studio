@@ -37,11 +37,11 @@ function Export(): JSX.Element {
       ctx.drawImage(image, 0, 0, memeSelected.width, memeSelected.height)
       for (const text of textBox) {
         const fontSize: number = text.fontSize
-        const top: number = text.centerY
-        const left: number = text.centerX
-        const height: number = text.height
-        const width: number = text.width
-        fillText(text, ctx, width, height, fontSize, left, top)
+        const y: number = text.centerY
+        const x: number = text.centerX
+        const maxHeight: number = text.height
+        const maxWidth: number = text.width
+        fillText({ text, ctx, maxWidth, maxHeight, fontSize, x, y })
       }
       const dataUrl: string = canvas.toDataURL()
       setImg(dataUrl)

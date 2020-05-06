@@ -38,15 +38,17 @@ export const radToDegree = (rad: number): number => (rad * 180) / Math.PI
 
 export const degreeToRad = (degree: number): number => (degree * Math.PI) / 180
 
-export function fillText(
-  text: TextBox,
-  ctx: CanvasRenderingContext2D,
-  maxWidth: number,
-  maxHeight: number,
-  fontSize: number,
-  x: number,
+interface IntFill {
+  text: TextBox
+  ctx: CanvasRenderingContext2D
+  maxWidth: number
+  maxHeight: number
+  fontSize: number
+  x: number
   y: number
-): void {
+}
+
+export function fillText({ text, ctx, maxWidth, maxHeight, fontSize, x, y }: IntFill): void {
   ctx.save()
   const str = text.value.replace(/\r/g, '')
   const lines: Array<Line> = str.split('\n').map((str: string, index: number, arr: Array<string>) => ({

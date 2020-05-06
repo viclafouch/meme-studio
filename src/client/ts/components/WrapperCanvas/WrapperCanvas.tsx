@@ -6,7 +6,6 @@ import TextBox from '@client/ts/shared/models/TextBox'
 import Draggable from '@client/components/Draggable/Draggable'
 import { UseEditorInt } from '@client/ts/shared/validators'
 import { SET_TEXT_ID_SELECTED } from '@client/store/reducer/constants'
-import { TAB_CUSTOMIZATION } from '@client/ts/shared/constants'
 import './wrapper-canvas.scss'
 
 function WrapperCanvas(): JSX.Element {
@@ -36,11 +35,11 @@ function WrapperCanvas(): JSX.Element {
         ctx.drawImage(image, 0, 0, drawProperties.width, drawProperties.height)
         for (const text of texts) {
           const fontSize: number = text.fontSize * drawProperties.scale
-          const top: number = text.centerY
-          const left: number = text.centerX
-          const height: number = text.height
-          const width: number = text.width
-          fillText(text, ctx, width, height, fontSize, left, top)
+          const y: number = text.centerY
+          const x: number = text.centerX
+          const maxHeight: number = text.height
+          const maxWidth: number = text.width
+          fillText({ text, ctx, maxWidth, maxHeight, fontSize, x, y })
         }
       })
     }
