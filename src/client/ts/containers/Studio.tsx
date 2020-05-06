@@ -202,6 +202,7 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
                   <Button
                     className={'button-select-gallery'}
                     big
+                    color="blue"
                     onClick={(): void =>
                       dispatchEditor({
                         type: SET_CURRENT_TAB,
@@ -211,7 +212,7 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
                   >
                     {t('studio.selectAMeme')}
                   </Button>
-                  <label htmlFor="local-meme" className="import-image-label button button-big button-select-gallery">
+                  <label htmlFor="local-meme" className="import-image-label button button-big button-select-gallery button-blue">
                     <span>{t('studio.importAnImage')}</span>
                     <input
                       type="file"

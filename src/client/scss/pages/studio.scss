@@ -3,6 +3,13 @@
   --height-body: calc(100vh - var(--header-height));
   --aside-width: 320px;
 
+  .header .theme-button {
+    display: none;
+    @include md {
+      display: block;
+    }
+  }
+
   .studio-body {
     width: 100%;
     height: var(--height-body);
