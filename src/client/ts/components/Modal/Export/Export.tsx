@@ -43,7 +43,19 @@ function Export(): JSX.Element {
         const maxWidth: number = text.width
         fillText({ text, ctx, maxWidth, maxHeight, fontSize, x, y })
       }
-      const dataUrl: string = canvas.toDataURL()
+      ctx.save()
+      const watermark = 'meme-studio.io'
+      const fontSize = 9
+      ctx.font = `${fontSize}px Arial`
+      const metrics = ctx.measureText(watermark)
+      ctx.fillStyle = '#cccccc'
+      ctx.textBaseline = 'top'
+      ctx.strokeStyle = 'black'
+      ctx.lineJoin = 'round'
+      const padding = 10
+      ctx.fillText(watermark, memeSelected.width - metrics.width - padding, memeSelected.height - fontSize - padding / 2)
+      ctx.restore()
+      const dataUrl: string = canvas.toDataURL('image/jpg', 1.0)
       setImg(dataUrl)
       await wait()
       setIsLoading(false)
