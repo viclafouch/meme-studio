@@ -67,12 +67,14 @@ function WrapperCanvas(): JSX.Element {
                 x: text.centerX,
                 y: text.centerY
               }}
-              onClick={(): void =>
-                dispatchEditor({
-                  type: SET_TEXT_ID_SELECTED,
-                  textIdSelected: text.id
-                })
-              }
+              onClick={(): void => {
+                if (text.id !== textIdSelected) {
+                  dispatchEditor({
+                    type: SET_TEXT_ID_SELECTED,
+                    textIdSelected: text.id
+                  })
+                }
+              }}
               height={text.height}
               width={text.width}
               rotate={text.rotate}
