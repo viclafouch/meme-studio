@@ -2,7 +2,7 @@ import * as React from 'react'
 import { ColorResult } from 'react-color'
 import { ReactSVG } from 'react-svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useRef, memo, useMemo, createRef, useLayoutEffect } from 'react'
+import { useRef, memo, useMemo, createRef, useLayoutEffect, useEffect, useCallback } from 'react'
 import { TextCustomization, UseEditorInt } from '@client/ts/shared/validators'
 import { Translation, useTranslation } from 'react-i18next'
 import Accordion from '@client/components/Accordion/Accordion'
@@ -15,7 +15,7 @@ import { EditorContext, EditorState } from '@client/store/EditorContext'
 import { CUSTOM_TEXT, ADD_TEXT, REMOVE_TEXT, SET_TEXT_ID_SELECTED } from '@client/store/reducer/constants'
 import { useEditor, useWindowWidth } from '@client/ts/shared/hooks'
 import { toHistoryType } from '@client/utils/helpers'
-import { wait, randomID } from '@shared/utils'
+import { randomID } from '@shared/utils'
 import { FONTS_FAMILY, ALIGN_VERTICAL, TEXT_ALIGN } from '@shared/config'
 import './customization.scss'
 
@@ -72,6 +72,18 @@ function Customization(): JSX.Element {
     text.base = textDuplicated.base
     saveToEditor({ type: ADD_TEXT, text })
   }
+
+  const handleKeyPress = useCallback(() => {
+    const textIndex = texts.findIndex(text => text.id === textIdSelected)
+    if (textIndex !== -1) textsRef[textIndex].textarea.current.focus()
+  }, [textIdSelected])
+
+  useEffect(() => {
+    window.addEventListener('keypress', handleKeyPress)
+    return (): void => {
+      window.removeEventListener('keypress', handleKeyPress)
+    }
+  }, [handleKeyPress])
 
   useLayoutEffect(() => {
     if (textIdSelected) {

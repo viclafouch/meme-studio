@@ -160,7 +160,7 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
         <Tools />
         <div className={`studio-content ${memeSelected ? 'studio-content-active' : ''}`} ref={contentRef}>
           {memeSelected && <div className="studio-content-overley" style={{ backgroundImage: `url(${memeSelected.url()})` }} />}
-          {lastVersion && (
+          {memeSelected && lastVersion && (
             <div className={`recover-version-box ld ${isActiveRecoverBox ? 'ld-float-btt-in' : 'ld-fade-out'}`}>
               {t('studio.lastBackup')} <br />
               <p className="recover-version-box-date">{formatRelativeDate(lastVersion, new Date(), i18n.language)}</p>

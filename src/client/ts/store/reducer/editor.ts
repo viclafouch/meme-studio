@@ -226,6 +226,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       break
     case REMOVE_TEXT:
       textIndex = draft.texts.findIndex(text => text.id === action.text.id)
+      if (action.text.id === draft.textIdSelected) draft.textIdSelected = null
       draft.texts.splice(textIndex, 1)
       break
     case UNDO_HISTORY:
