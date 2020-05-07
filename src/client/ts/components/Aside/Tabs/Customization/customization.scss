@@ -32,7 +32,10 @@
 
       .meme-name {
         font-size: 0.7em;
-        color: #8d8d8d
+        color: #8d8d8d;
+        display: inline-block;
+        margin: 0 auto;
+        @include truncate(200px);
       }
     }
 
