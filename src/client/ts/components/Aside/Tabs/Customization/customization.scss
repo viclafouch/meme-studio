@@ -61,6 +61,10 @@
         &:focus {
           border-color: var(--blue-secondary);
         }
+
+        option {
+          color: #000000;
+        }
       }
 
       .color-picker button {

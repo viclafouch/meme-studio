@@ -15,7 +15,7 @@ import { EditorContext, EditorState } from '@client/store/EditorContext'
 import { CUSTOM_TEXT, ADD_TEXT, REMOVE_TEXT, SET_TEXT_ID_SELECTED } from '@client/store/reducer/constants'
 import { useEditor, useWindowWidth } from '@client/ts/shared/hooks'
 import { toHistoryType } from '@client/utils/helpers'
-import { randomID } from '@shared/utils'
+import { randomID, wait } from '@shared/utils'
 import { FONTS_FAMILY, ALIGN_VERTICAL, TEXT_ALIGN } from '@shared/config'
 import './customization.scss'
 
@@ -56,6 +56,12 @@ function Customization(): JSX.Element {
     text.centerY = text.base.centerY * drawProperties.scale
     text.centerX = text.base.centerX * drawProperties.scale
     saveToEditor({ type: ADD_TEXT, text })
+    wait(0).then(() =>
+      dispatchEditor({
+        type: SET_TEXT_ID_SELECTED,
+        textIdSelected: text.id
+      })
+    )
   }
 
   const removeText = (textId: string): void => {
@@ -67,7 +73,8 @@ function Customization(): JSX.Element {
     const textDuplicated = texts.find(t => t.id === textId)
     const text = new TextBox({
       ...textDuplicated,
-      id: randomID()
+      id: randomID(),
+      version: `${Date.now()}-${textDuplicated.id}`
     })
     text.base = textDuplicated.base
     saveToEditor({ type: ADD_TEXT, text })
@@ -113,15 +120,17 @@ function Customization(): JSX.Element {
             key={version}
             duplicateText={(): void => duplicateText(id)}
             removeText={(): void => removeText(id)}
-            afterOpening={(): void => {
-              const textarea: HTMLTextAreaElement = textsRef[textIndex].textarea.current
-              if (isMinLgSize) textarea.focus()
+            afterImmediateOpening={(): void => {
               if (id !== textIdSelected) {
                 dispatchEditor({
                   type: SET_TEXT_ID_SELECTED,
                   textIdSelected: id
                 })
               }
+            }}
+            afterOpening={(): void => {
+              const textarea: HTMLTextAreaElement = textsRef[textIndex].textarea.current
+              if (isMinLgSize) textarea.focus()
             }}
           >
             <div className="customization-textbox-section">
