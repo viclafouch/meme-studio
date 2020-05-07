@@ -222,6 +222,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       break
     case ADD_TEXT:
       draft.texts.push(action.text)
+      draft.textIdSelected = action.text.id
       break
     case REMOVE_TEXT:
       textIndex = draft.texts.findIndex(text => text.id === action.text.id)

@@ -56,12 +56,6 @@ function Customization(): JSX.Element {
     text.centerY = text.base.centerY * drawProperties.scale
     text.centerX = text.base.centerX * drawProperties.scale
     saveToEditor({ type: ADD_TEXT, text })
-    wait(0).then(() =>
-      dispatchEditor({
-        type: SET_TEXT_ID_SELECTED,
-        textIdSelected: text.id
-      })
-    )
   }
 
   const removeText = (textId: string): void => {
@@ -107,17 +101,15 @@ function Customization(): JSX.Element {
             key={uuid}
             duplicateText={(): void => duplicateText(id)}
             removeText={(): void => removeText(id)}
-            afterImmediateOpening={(): void => {
+            afterOpening={(): void => {
+              const textarea: HTMLTextAreaElement = textsRef[textIndex].textarea.current
+              if (isMinLgSize) textarea.focus()
               if (id !== textIdSelected) {
                 dispatchEditor({
                   type: SET_TEXT_ID_SELECTED,
                   textIdSelected: id
                 })
               }
-            }}
-            afterOpening={(): void => {
-              const textarea: HTMLTextAreaElement = textsRef[textIndex].textarea.current
-              if (isMinLgSize) textarea.focus()
             }}
           >
             <div className="customization-textbox-section">

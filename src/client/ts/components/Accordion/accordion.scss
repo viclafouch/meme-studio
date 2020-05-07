@@ -12,7 +12,6 @@ html[data-theme="dark"] .accordion {
 .accordion {
   display: flex;
   flex-direction: column;
-  --accordion-duration: unset;
 
   .accordion-trigger {
     background-color: var(--background-trigger-accordion);
@@ -24,9 +23,6 @@ html[data-theme="dark"] .accordion {
     border: none;
     outline: none;
     transition: background-color 0.6s ease;
-    transition-property: background-color;
-    transition-timing-function: ease;
-    transition-duration: var(--accordion-duration);
     width: 100%;
 
     .accordion-title {
@@ -55,9 +51,6 @@ html[data-theme="dark"] .accordion {
   .accordion-content {
     background-color: var(--background-content-accordion);
     overflow: hidden;
-    transition-property: max-height;
-    transition-timing-function: ease;
-    transition-duration: var(--accordion-duration);
   }
 
   & + .accordion .accordion-trigger {
