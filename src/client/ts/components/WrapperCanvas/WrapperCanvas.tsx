@@ -61,7 +61,7 @@ function WrapperCanvas(): JSX.Element {
         {isMinLgSize &&
           texts.map((text: TextBox) => (
             <Draggable
-              key={text.id}
+              key={text.version}
               className="text-box"
               position={{
                 x: text.centerX,

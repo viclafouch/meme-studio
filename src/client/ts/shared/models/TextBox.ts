@@ -1,8 +1,6 @@
-import { randomID } from '@shared/utils'
-
 export default class TextBox {
-  readonly uuid: string
-  public id: string
+  readonly id: string
+  public version: string
   public value: string
   public width: number
   public height: number
@@ -24,8 +22,8 @@ export default class TextBox {
   }
 
   constructor(text: any) {
-    this.uuid = randomID()
     this.id = text.id
+    this.version = text.version || `${Date.now()}-${this.id}`
     this.value = text.value
     this.width = text.width
     this.height = text.height
@@ -39,7 +37,7 @@ export default class TextBox {
     this.alignVertical = text.alignVertical
     this.textAlign = text.textAlign
     this.isUppercase = !!text.isUppercase
-    this.base = {
+    this.base = text.base || {
       width: this.width,
       height: this.height,
       centerX: this.centerX,

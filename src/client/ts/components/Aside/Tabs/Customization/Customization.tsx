@@ -103,14 +103,14 @@ function Customization(): JSX.Element {
       </h2>
       {texts.map(
         (
-          { value, id, uuid, color, fontSize, alignVertical, textAlign, isUppercase, fontFamily, boxShadow },
+          { value, id, version, color, fontSize, alignVertical, textAlign, isUppercase, fontFamily, boxShadow },
           textIndex
         ): React.ReactNode => (
           <Accordion
             defaultOpened={id === textIdSelected}
             ref={textsRef[textIndex].accordion}
             title={value.trim() || `${t('studio.text')} #${textIndex + 1}`}
-            key={uuid}
+            key={version}
             duplicateText={(): void => duplicateText(id)}
             removeText={(): void => removeText(id)}
             afterOpening={(): void => {

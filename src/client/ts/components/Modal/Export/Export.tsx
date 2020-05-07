@@ -22,13 +22,16 @@ function Export(): JSX.Element {
   useEffect(() => {
     ;(async (): Promise<void> => {
       const { width: oldWidth, height: oldHeight } = drawProperties
-      const textBox = texts.map((text: TextBox) => ({
-        ...text,
-        centerX: (text.centerX / oldWidth) * memeSelected.width,
-        centerY: (text.centerY / oldHeight) * memeSelected.height,
-        width: (text.width / oldWidth) * memeSelected.width,
-        height: (text.height / oldHeight) * memeSelected.height
-      }))
+      const textBox = texts.map(
+        (text: TextBox) =>
+          new TextBox({
+            ...text,
+            centerX: (text.centerX / oldWidth) * memeSelected.width,
+            centerY: (text.centerY / oldHeight) * memeSelected.height,
+            width: (text.width / oldWidth) * memeSelected.width,
+            height: (text.height / oldHeight) * memeSelected.height
+          })
+      )
       const canvas = document.createElement('canvas')
       canvas.width = memeSelected.width
       canvas.height = memeSelected.height

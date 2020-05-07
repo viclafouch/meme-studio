@@ -18,7 +18,6 @@ import {
 import { EditorState } from '../EditorContext'
 import TextBox from '@client/ts/shared/models/TextBox'
 import { DrawProperties, HistoryInt } from '@client/ts/shared/validators'
-import { randomID } from '@shared/utils'
 import { INITIAL, TAB_GALLERY, TAB_CUSTOMIZATION } from '@client/ts/shared/constants'
 import { debug, setLocalStorage, removeLocalStorage } from '@client/utils/index'
 import Meme from '@client/ts/shared/models/Meme'
@@ -82,13 +81,15 @@ const checkSize = ({
     drawProperties = newProperties
     const oldWidth = oldProperties.width
     const oldHeight = oldProperties.height
-    texts = texts.map((text: TextBox) => ({
-      ...text,
-      height: (text.height / oldHeight) * drawProperties.height,
-      width: (text.width / oldWidth) * drawProperties.width,
-      centerX: (text.centerX / oldWidth) * drawProperties.width,
-      centerY: (text.centerY / oldHeight) * drawProperties.height
-    }))
+    texts = texts.map(
+      (text: TextBox) =>
+        new TextBox({
+          height: (text.height / oldHeight) * drawProperties.height,
+          width: (text.width / oldWidth) * drawProperties.width,
+          centerX: (text.centerX / oldWidth) * drawProperties.width,
+          centerY: (text.centerY / oldHeight) * drawProperties.height
+        })
+    )
   } else {
     drawProperties = oldProperties
   }
@@ -120,16 +121,21 @@ const undoHistory = (draft: Draft<EditorState>, eraseAll = false): void => {
       newProperties: draft.drawProperties,
       texts: previousItem.texts
     })
+
     draft.texts = texts.map((text: TextBox) => {
-      text.id = randomID()
+      text.version = `${Date.now()}-${text.id}`
       return text
     })
+
+    draft.textIdSelected = previousItem.textIdSelected
+
     draft.drawProperties = drawProperties
     draft.history.currentIndex = index
     if (eraseAll) {
       saveToHistory(draft, {
         drawProperties,
         texts: draft.texts,
+        textIdSelected: draft.textIdSelected,
         type: INITIAL
       })
     }
@@ -146,9 +152,12 @@ const redoHistory = (draft: Draft<EditorState>): void => {
       texts: nextItem.texts
     })
     draft.texts = texts.map((text: TextBox) => {
-      text.id = randomID()
+      text.version = `${Date.now()}-${text.id}`
       return text
     })
+
+    draft.textIdSelected = nextItem.textIdSelected
+
     draft.drawProperties = drawProperties
     draft.history.currentIndex = index
   }
@@ -167,6 +176,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       saveToHistory(draft, {
         drawProperties: draft.drawProperties,
         texts: draft.texts,
+        textIdSelected: draft.textIdSelected,
         type: INITIAL
       })
       break
@@ -236,7 +246,8 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       saveToHistory(draft, {
         drawProperties: draft.drawProperties,
         texts: draft.texts,
-        type: action.historyType
+        type: action.historyType,
+        textIdSelected: draft.textIdSelected
       })
       break
     case REDO_HISTORY:

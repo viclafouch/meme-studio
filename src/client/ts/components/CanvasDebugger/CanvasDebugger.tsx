@@ -23,15 +23,18 @@ function CanvasDebugger({ theme }: { theme: DefaultState['theme'] }): JSX.Elemen
   const { meme, textbox } = useMemo(
     () => ({
       meme: new Meme(memeSelected),
-      textbox: texts.map((text: TextBox) => ({
-        ...text,
-        value: '',
-        centerX: Math.round((text.centerX / drawProperties.width) * memeSelected.width),
-        centerY: Math.round((text.centerY / drawProperties.height) * memeSelected.height),
-        width: Math.round((text.width / drawProperties.width) * memeSelected.width),
-        height: Math.round((text.height / drawProperties.height) * memeSelected.height),
-        rotate: Math.round(text.rotate)
-      }))
+      textbox: texts.map(
+        (text: TextBox) =>
+          new TextBox({
+            ...text,
+            value: '',
+            centerX: Math.round((text.centerX / drawProperties.width) * memeSelected.width),
+            centerY: Math.round((text.centerY / drawProperties.height) * memeSelected.height),
+            width: Math.round((text.width / drawProperties.width) * memeSelected.width),
+            height: Math.round((text.height / drawProperties.height) * memeSelected.height),
+            rotate: Math.round(text.rotate)
+          })
+      )
     }),
     [texts, memeSelected]
   )
