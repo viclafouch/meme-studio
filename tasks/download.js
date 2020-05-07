@@ -5,6 +5,7 @@ const request = require('request')
 const { promisify } = require('util')
 const sizeOf = promisify(require('image-size'))
 const tinify = require('tinify')
+const webp = require('webp-converter')
 
 if (!process.env.TINY_KEY) {
   throw new Error('Please provide a TINY_KEY from https://tinypng.com/developers')
@@ -18,6 +19,11 @@ const maxWidth = 800
 
 const memeFile = path.resolve('src', 'server', 'memes.json')
 const templateDir = './static/templates'
+
+const convertToWebP = (input, output) => new Promise((resolve, reject) => webp.cwebp(input, output,"-q 80", function(status,error) {
+  if (status == 100) resolve()
+  else reject(error)
+}))
 
 const downloadAndCompress = async (uri, filename) => {
   await new Promise((resolve, reject) => {
@@ -92,4 +98,14 @@ fs.existsSync(templateDir) || fs.mkdirSync(templateDir)
       console.log(`${nbNewMemes} memes have been added`)
     }
   )
+
+
+  for (const meme of jsonData.memes) {
+    const filePath = path.join(templateDir, meme.filename)
+    const webpFile = filePath.replace('.jpg', '.webp')
+    if (!fs.existsSync(webpFile)) {
+      console.log('Convertion to WebP...')
+      await convertToWebP(filePath, webpFile)
+    }
+  }
 })()

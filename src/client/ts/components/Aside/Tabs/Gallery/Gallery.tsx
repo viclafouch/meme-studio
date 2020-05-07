@@ -32,7 +32,11 @@ function Gallery(): JSX.Element {
         (meme: Meme): React.ReactNode => (
           <li key={meme.id} data-id={meme.id} className="gallery-item">
             <Link to={`/create/${meme.id}`} replace>
-              <img loading="lazy" width={meme.width} height={meme.height} src={meme.url()} alt={meme.name} />
+              <picture>
+                <source srcSet={meme.url('.webp')} type="image/webp" />
+                <source srcSet={meme.url()} type="image/jpeg" />
+                <img loading="lazy" width={meme.width} height={meme.height} src={meme.url()} alt={meme.name} />
+              </picture>
             </Link>
           </li>
         )
@@ -42,3 +46,7 @@ function Gallery(): JSX.Element {
 }
 
 export default memo(Gallery)
+
+{
+  /* <img   /> */
+}

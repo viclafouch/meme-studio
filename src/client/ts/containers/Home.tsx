@@ -102,8 +102,22 @@ function Home(): JSX.Element {
       <div className="content-one">
         <div className="home-title">
           <Link to="/">
-            <img src="/images/logo-meme-studio.png" hidden={theme === 'dark'} width={350} alt="Logo Meme Studio" />
-            <img src="/images/logo-meme-studio-dark.png" hidden={theme === 'light'} width={350} alt="Logo Meme Studio" />
+            <picture>
+              <source
+                srcSet={theme === 'dark' ? '/images/logo-meme-studio-dark.webp' : '/images/logo-meme-studio.webp'}
+                type="image/webp"
+              />
+              <source
+                srcSet={theme === 'dark' ? '/images/logo-meme-studio-dark.png' : '/images/logo-meme-studio.png'}
+                type="image/png"
+              />
+              <img
+                loading="eager"
+                width={350}
+                src={theme === 'dark' ? '/images/logo-meme-studio-dark.png' : '/images/logo-meme-studio.png'}
+                alt="Logo Meme Studio"
+              />
+            </picture>
           </Link>
           <p>{t('home.label')}</p>
         </div>
@@ -123,13 +137,17 @@ function Home(): JSX.Element {
             {lastExamples.map(({ width, height, filename }: MemeExample, index: number) => (
               <li key={index}>
                 <article className="home-last-memes-article">
-                  <img
-                    src={`/images/examples/${filename}`}
-                    alt={`Meme ${index}`}
-                    width={176}
-                    height={((176 / width) * height).toFixed(2)}
-                    loading="eager"
-                  />
+                  <picture>
+                    <source srcSet={`/images/examples/${filename}`.replace('.png', '.webp')} type="image/webp" />
+                    <source srcSet={`/images/examples/${filename}`} type="image/png" />
+                    <img
+                      loading="eager"
+                      width={176}
+                      height={((176 / width) * height).toFixed(2)}
+                      src={`/images/examples/${filename}`}
+                      alt={`Meme ${index + 1}`}
+                    />
+                  </picture>
                 </article>
               </li>
             ))}
