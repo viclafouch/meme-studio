@@ -1,4 +1,6 @@
 import * as React from 'react'
+import { useContext } from 'react'
+import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
 import './button.scss'
 
 interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
@@ -14,6 +16,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 }
 
 function Button(props: ButtonProps): JSX.Element {
+  const [{ theme }]: [DefaultState] = useContext(DefaultContext)
   const { big, small, medium, isLoading, isSuccess, transparent, color, ...rest } = props
   const className = ['button']
   if (small) className.push('button-small')
@@ -28,7 +31,7 @@ function Button(props: ButtonProps): JSX.Element {
   className.push(props.className || '')
 
   return (
-    <button {...rest} onClick={props.onClick} className={className.join(' ')}>
+    <button {...rest} data-theme={theme} onClick={props.onClick} className={className.join(' ')}>
       {props.children}
       {isLoading && <span className="button-loader" />}
     </button>

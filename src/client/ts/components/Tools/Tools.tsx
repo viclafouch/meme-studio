@@ -114,7 +114,6 @@ const Tools = (): JSX.Element => {
           <button
             className="tools-list-btn"
             aria-label={theme === 'dark' ? t('attr.darkTheme') : t('attr.lightTheme')}
-            data-theme={theme}
             data-tooltip={theme !== 'dark' ? t('attr.darkTheme') : t('attr.lightTheme')}
             disabled={false}
             onClick={(): void =>

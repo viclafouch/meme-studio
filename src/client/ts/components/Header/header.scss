@@ -137,6 +137,10 @@
     }
   }
 
+  .button-export[data-theme="light"] {
+    color: var(--blue-primary);
+  }
+
   .button-export svg + span,
   .lang-selector svg + span {
     display: none;

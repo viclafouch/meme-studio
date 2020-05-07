@@ -83,7 +83,6 @@ function Home(): JSX.Element {
           className="theme-button"
           color="white"
           aria-label={theme === 'dark' ? t('attr.darkTheme') : t('attr.lightTheme')}
-          data-theme={theme}
           small
           transparent
           onClick={(): void =>
