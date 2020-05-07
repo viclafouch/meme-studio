@@ -102,21 +102,15 @@ function Home(): JSX.Element {
       <div className="content-one">
         <div className="home-title">
           <Link to="/">
-            <picture>
-              <source
-                srcSet={theme === 'dark' ? '/images/logo-meme-studio-dark.webp' : '/images/logo-meme-studio.webp'}
-                type="image/webp"
-              />
-              <source
-                srcSet={theme === 'dark' ? '/images/logo-meme-studio-dark.png' : '/images/logo-meme-studio.png'}
-                type="image/png"
-              />
-              <img
-                loading="eager"
-                width={350}
-                src={theme === 'dark' ? '/images/logo-meme-studio-dark.png' : '/images/logo-meme-studio.png'}
-                alt="Logo Meme Studio"
-              />
+            <picture hidden={theme === 'dark'}>
+              <source srcSet="/images/logo-meme-studio.webp" type="image/webp" />
+              <source srcSet="/images/logo-meme-studio.png" type="image/png" />
+              <img loading="eager" width={350} src="/images/logo-meme-studio.png" alt="Logo Meme Studio" />
+            </picture>
+            <picture hidden={theme === 'light'}>
+              <source srcSet="/images/logo-meme-studio-dark.webp" type="image/webp" />
+              <source srcSet="/images/logo-meme-studio-dark.png" type="image/png" />
+              <img loading="eager" width={350} src="/images/logo-meme-studio-dark.png" alt="Logo Meme Studio" />
             </picture>
           </Link>
           <p>{t('home.label')}</p>
