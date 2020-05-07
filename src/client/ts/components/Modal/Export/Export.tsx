@@ -45,7 +45,7 @@ function Export(): JSX.Element {
       }
       ctx.save()
       const watermark = 'meme-studio.io'
-      const fontSize = 9
+      const fontSize = 11
       ctx.font = `${fontSize}px Arial`
       const metrics = ctx.measureText(watermark)
       ctx.fillStyle = '#cccccc'
