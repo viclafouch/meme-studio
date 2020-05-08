@@ -6,13 +6,13 @@ import Header from '@client/components/Header/Header'
 import Button from '@client/components/Button/Button'
 import Footer from '@client/components/Footer/Footer'
 import Meme from '../shared/models/Meme'
-import { DefaultContext } from '@client/store/DefaultContext'
+import { DefaultContext, DefaultInt } from '@client/store/DefaultContext'
 import { StudioAsync } from '../routes'
 import '@client/scss/pages/gallery.scss'
 
 function Gallery(): JSX.Element {
   const { t } = useTranslation()
-  const { memes, fetchNextMemes, hasNextMemes } = useContext(DefaultContext)
+  const [{ memes, fetchNextMemes, hasNextMemes }]: [DefaultInt] = useContext(DefaultContext)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const handleScroll = useCallback(async () => {
@@ -38,7 +38,7 @@ function Gallery(): JSX.Element {
   }, [handleScroll])
 
   return (
-    <div className="page gallery" id="test">
+    <div className="page gallery">
       <Header />
       <div className="content-one">
         <section className="gallery-body">
