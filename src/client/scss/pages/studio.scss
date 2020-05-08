@@ -1,7 +1,7 @@
 .page.studio {
   height: 100vh;
   --height-body: calc(100vh - var(--header-height));
-  --aside-width: 320px;
+  --width-aside: 320px;
 
   .header .theme-button {
     display: none;
@@ -20,28 +20,16 @@
 
     @include lg {
       grid-template-rows: auto;
-      grid-template-columns: var(--tools-width) auto var(--aside-width);
+      grid-template-columns: var(--tools-width) auto var(--width-aside);
     }
 
-    .studio-content,
-    .studio-aside {
+    .studio-content {
       width: 100%;
       height: 100%;
 
       @include lg {
         height: var(--height-body);
       }
-    }
-
-    .studio-aside {
-      order: 1;
-      @include lg {
-        order: 3;
-      }
-    }
-
-    .studio-content {
-      order: 2;
     }
 
     .studio-content {
@@ -53,6 +41,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      order: 2;
 
       @include lg {
         border-right: 2px solid var(--border-color-aside);
@@ -161,61 +150,6 @@
         .import-image-error {
           color: var(--red);
           font-size: 0.95rem;
-        }
-      }
-    }
-
-    .studio-aside {
-      overflow: hidden;
-      background-color: var(--background-primary);
-      display: flex;
-      width: 100%;
-      flex-direction: row;
-      z-index: 1;
-
-      @include lg {
-        flex-direction: column;
-        width: var(--aside-width);
-      }
-
-      .studio-aside-header {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        flex-shrink: 0;
-
-        @include lg {
-          height: 50px;
-        }
-
-        .studio-aside-header-btn {
-          flex: 1;
-          position: relative;
-          border-radius: 0;
-          font-size: 24px;
-          color: var(--white);
-
-          &.studio-aside-header-btn-active {
-            background-color: var(--blue-secondary);
-          }
-
-          svg {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-          }
-        }
-      }
-
-      .studio-aside-content {
-        width: 100%;
-        height: calc(100% - 50px);
-        overflow-y: auto;
-        overflow-x: hidden;
-
-        .tab {
-          height: 100%;
         }
       }
     }
