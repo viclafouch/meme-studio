@@ -111,12 +111,18 @@
 
   .button-export {
     background-color: var(--background-primary);
-    color: var(--text-color-button-export);
     border: 1px solid var(--input-border-color);
     text-transform: uppercase;
     display: none;
     @include md {
       display: block;
+    }
+
+    &[data-theme="light"] {
+      color: var(--blue-primary);
+    }
+    &[data-theme="dark"] {
+      color: var(--white);
     }
   }
 
@@ -135,10 +141,6 @@
     &[data-theme="dark"] {
       color: rgb(255, 255, 0);
     }
-  }
-
-  .button-export[data-theme="light"] {
-    color: var(--blue-primary);
   }
 
   .button-export svg + span,
