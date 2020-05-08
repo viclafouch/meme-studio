@@ -1,29 +1,18 @@
 import * as React from 'react'
-import { useLayoutEffect, useEffect } from 'react'
-import { useWindowWidth, useEditor } from '@client/ts/shared/hooks'
+import { useLayoutEffect, useContext } from 'react'
+import { useWindowWidth } from '@client/ts/shared/hooks'
 import { fillText } from '@client/utils/index'
 import TextBox from '@client/ts/shared/models/TextBox'
 import Draggable from '@client/components/Draggable/Draggable'
-import { UseEditorInt } from '@client/ts/shared/validators'
 import { SET_TEXT_ID_SELECTED } from '@client/store/reducer/constants'
+import { EditorInt, EditorContext } from '@client/store/EditorContext'
 import './wrapper-canvas.scss'
 
 function WrapperCanvas(): JSX.Element {
   const { isMinLgSize } = useWindowWidth()
-  const [{ memeSelected, canvasRef, drawProperties, texts, textIdSelected }, dispatchEditor]: [
-    UseEditorInt,
-    Function
-  ] = useEditor()
-
-  useEffect(() => {
-    const textIdSelected: string = window.localStorage.getItem('textIdSelected')
-    if (textIdSelected) {
-      dispatchEditor({
-        type: SET_TEXT_ID_SELECTED,
-        textIdSelected: JSON.parse(textIdSelected)
-      })
-    }
-  }, [])
+  const [{ memeSelected, canvasRef, drawProperties, texts, textIdSelected }, dispatchEditor]: [EditorInt, Function] = useContext(
+    EditorContext
+  )
 
   useLayoutEffect(() => {
     const canvas: HTMLCanvasElement = canvasRef.current

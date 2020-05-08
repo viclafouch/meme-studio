@@ -1,13 +1,13 @@
 import * as React from 'react'
-import { memo, useState, useCallback, useRef, RefObject } from 'react'
+import { useState, useCallback, useRef, RefObject, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Meme from '@client/ts/shared/models/Meme'
-import { useMemes } from '@client/ts/shared/hooks'
+import { DefaultContext, DefaultInt } from '@client/store/DefaultContext'
 import { wait } from '@shared/utils'
 import './gallery.scss'
 
 function Gallery(): JSX.Element {
-  const { memes, fetchNextMemes, hasNextMemes } = useMemes()
+  const [{ memes, fetchNextMemes, hasNextMemes }]: [DefaultInt] = useContext(DefaultContext)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const scrollerRef: RefObject<HTMLUListElement> = useRef(null)
 
@@ -45,8 +45,4 @@ function Gallery(): JSX.Element {
   )
 }
 
-export default memo(Gallery)
-
-{
-  /* <img   /> */
-}
+export default Gallery

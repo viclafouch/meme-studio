@@ -6,16 +6,16 @@ import { RouteComponentProps } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Button from '@client/components/Button/Button'
 import WrapperCanvas from '@client/components/WrapperCanvas/WrapperCanvas'
-import { EditorState } from '@client/store/EditorContext'
+import { EditorContext, EditorInt } from '@client/store/EditorContext'
 import { SET_MEME_SELECTED, RESIZE_WINDOW, SET_TEXT_ID_SELECTED, SET_CURRENT_TAB } from '@client/store/reducer/constants'
-import { TAB_CUSTOMIZATION, TAB_GALLERY } from '@client/ts/shared/constants'
+import { TAB_GALLERY, TAB_CUSTOMIZATION } from '@client/ts/shared/constants'
 import Meme from '@client/ts/shared/models/Meme'
 import Tools from '@client/components/Tools/Tools'
 import Header from '@client/components/Header/Header'
 import { endWithExt, innerDimensions } from '@client/utils/index'
 import { randomID } from '@shared/utils'
 import DragAndDrop from '@client/components/DragAndDrop/DragAndDrop'
-import { useWindowWidth, useEditor } from '@client/ts/shared/hooks'
+import { useWindowWidth } from '@client/ts/shared/hooks'
 import { getMeme } from '@client/ts/shared/api'
 import { IS_DEV } from '@shared/config'
 import { hasRecoverVersion, formatRelativeDate } from '@client/utils/helpers'
@@ -28,15 +28,21 @@ const CanvasDebuggerAsync = Loadable({
   loading: () => null
 })
 
+const lastEditDate = (): false | Date => {
+  const version = hasRecoverVersion()
+  if (version) return version.lastEditDate
+  else return false
+}
+
 function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
   const inputDrop: RefObject<HTMLInputElement> = useRef(null)
   const contentRef: RefObject<HTMLDivElement> = useRef(null)
   const [{ theme }]: [DefaultState] = useContext(DefaultContext)
   const { t, i18n } = useTranslation()
-  const [lastVersion, setLastVersion]: [false | Date, Function] = useState<false | Date>(hasRecoverVersion())
+  const [lastVersion, setLastVersion]: [false | Date, Function] = useState<false | Date>(lastEditDate())
   const [isActiveRecoverBox, setIsActiveRecoverBox]: [boolean, Function] = useState<boolean>(lastVersion instanceof Date)
   const { width, isMinLgSize } = useWindowWidth()
-  const [{ memeSelected }, dispatchEditor]: [EditorState, Function] = useEditor()
+  const [{ memeSelected, currentTab }, dispatchEditor]: [EditorInt, Function] = useContext(EditorContext)
   const [uploadError, setUploadError]: [string, Function] = useState<string | null>(null)
 
   useEffect(() => {
@@ -115,7 +121,7 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
         currentTab: isMinLgSize ? TAB_GALLERY : null
       })
     }
-  }, [memeSelected])
+  }, [memeSelected, isMinLgSize])
 
   const handleImportImage = async (fileList?: FileList): Promise<void> => {
     const files = fileList || inputDrop.current.files
@@ -228,7 +234,7 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
             </div>
           )}
         </div>
-        <Aside />
+        <Aside currentTab={currentTab} dispatchEditor={dispatchEditor} />
       </div>
     </div>
   )

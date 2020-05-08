@@ -29,12 +29,6 @@ export interface HistoryInt {
   type: string
 }
 
-export interface UseEditorInt extends EditorState {
-  canUndo: boolean
-  canRedo: boolean
-  saveToEditor: Function
-}
-
 export type typeString =
   | 'initial'
   | 'resize'
@@ -48,3 +42,9 @@ export type typeString =
   | 'isUppercase'
   | 'alignVertical'
   | 'boxShadow'
+
+export interface RecoverVersionInt {
+  memeSelected: EditorState['memeSelected']
+  history: EditorState['history']
+  lastEditDate: Date
+}

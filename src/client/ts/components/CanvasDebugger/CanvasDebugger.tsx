@@ -1,22 +1,21 @@
 import * as React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useTranslation } from 'react-i18next'
-import { useState, useCallback, useMemo, useEffect } from 'react'
+import { useState, useCallback, useMemo, useEffect, useContext } from 'react'
 import ReactJson from 'react-json-view'
-import { UseEditorInt } from '@client/ts/shared/validators'
-import { useEditor } from '@client/ts/shared/hooks'
 import { updateMeme } from '../../shared/api'
 import TextBox from '@client/ts/shared/models/TextBox'
 import Meme from '@client/ts/shared/models/Meme'
 import Button from '../Button/Button'
 import { DefaultState } from '@client/store/DefaultContext'
+import { EditorInt, EditorContext } from '@client/store/EditorContext'
 import './canvas-debugger.scss'
 
 function CanvasDebugger({ theme }: { theme: DefaultState['theme'] }): JSX.Element {
   const { t } = useTranslation()
   const [isActive, setIsActive]: [boolean, Function] = useState<boolean>(false)
   const [isUpdated, setIsUpdated]: [boolean, Function] = useState<boolean>(false)
-  const [{ texts, drawProperties, memeSelected }]: [UseEditorInt, Function] = useEditor()
+  const [{ texts, drawProperties, memeSelected }]: [EditorInt, Function] = useContext(EditorContext)
 
   const toggleActive = (): void => setIsActive(!isActive)
 

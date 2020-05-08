@@ -1,20 +1,19 @@
 import * as React from 'react'
-import { useState, useCallback, RefObject, useRef, useEffect } from 'react'
+import { useState, useCallback, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Header from '@client/components/Header/Header'
 import Button from '@client/components/Button/Button'
 import Footer from '@client/components/Footer/Footer'
-import { useMemes } from '../shared/hooks'
 import Meme from '../shared/models/Meme'
+import { DefaultContext } from '@client/store/DefaultContext'
 import { StudioAsync } from '../routes'
 import '@client/scss/pages/gallery.scss'
 
 function Gallery(): JSX.Element {
   const { t } = useTranslation()
-  const { memes, fetchNextMemes, hasNextMemes } = useMemes()
+  const { memes, fetchNextMemes, hasNextMemes } = useContext(DefaultContext)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const scrollerRef: RefObject<HTMLElement> = useRef(null)
 
   const handleScroll = useCallback(async () => {
     const isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100
@@ -42,7 +41,7 @@ function Gallery(): JSX.Element {
     <div className="page gallery" id="test">
       <Header />
       <div className="content-one">
-        <section className="gallery-body" ref={scrollerRef}>
+        <section className="gallery-body">
           <div className="container">
             <h1>{t('gallery.minTitle')}</h1>
           </div>

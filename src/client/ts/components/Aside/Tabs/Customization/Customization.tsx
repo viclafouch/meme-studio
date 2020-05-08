@@ -1,9 +1,10 @@
 import * as React from 'react'
+import { TFunctionResult } from 'i18next'
 import { ColorResult } from 'react-color'
 import { ReactSVG } from 'react-svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useRef, memo, useMemo, createRef, useLayoutEffect, useEffect, useCallback } from 'react'
-import { TextCustomization, UseEditorInt } from '@client/ts/shared/validators'
+import { useRef, memo, useMemo, createRef, useLayoutEffect, useEffect, useCallback, useContext } from 'react'
+import { TextCustomization } from '@client/ts/shared/validators'
 import { Translation, useTranslation } from 'react-i18next'
 import Accordion from '@client/components/Accordion/Accordion'
 import TextareaExtended from '@client/components/TextareaExpended/TextareaExtended'
@@ -11,9 +12,9 @@ import ColorPicker from '@client/components/ColorPicker/ColorPicker'
 import InputRangeSlider from '@client/components/InputRangeSlider/InputRangeSlider'
 import TextBox from '@client/ts/shared/models/TextBox'
 import { createText, fontSizeConfig, boxShadowConfig } from '@client/ts/shared/config-editor'
-import { EditorContext, EditorState } from '@client/store/EditorContext'
+import { EditorContext, EditorState, EditorInt } from '@client/store/EditorContext'
 import { CUSTOM_TEXT, ADD_TEXT, REMOVE_TEXT, SET_TEXT_ID_SELECTED } from '@client/store/reducer/constants'
-import { useEditor, useWindowWidth } from '@client/ts/shared/hooks'
+import { useWindowWidth } from '@client/ts/shared/hooks'
 import { toHistoryType } from '@client/utils/helpers'
 import { randomID, wait } from '@shared/utils'
 import { FONTS_FAMILY, ALIGN_VERTICAL, TEXT_ALIGN } from '@shared/config'
@@ -24,9 +25,9 @@ function Customization(): JSX.Element {
   const { isMinLgSize } = useWindowWidth()
   const colorPicker = useRef<any>(null)
   const [{ textIdSelected, texts, drawProperties, memeSelected, saveToEditor }, dispatchEditor]: [
-    UseEditorInt,
+    EditorInt,
     Function
-  ] = useEditor()
+  ] = useContext(EditorContext)
 
   const textsRef: Array<any> = useMemo(
     () =>
@@ -110,14 +111,14 @@ function Customization(): JSX.Element {
       </h2>
       {texts.map(
         (
-          { value, id, version, color, fontSize, alignVertical, textAlign, isUppercase, fontFamily, boxShadow },
+          { value, id, color, fontSize, alignVertical, textAlign, isUppercase, fontFamily, boxShadow },
           textIndex
         ): React.ReactNode => (
           <Accordion
             defaultOpened={id === textIdSelected}
             ref={textsRef[textIndex].accordion}
             title={value.trim() || `${t('studio.text')} #${textIndex + 1}`}
-            key={version}
+            key={id}
             duplicateText={(): void => duplicateText(id)}
             removeText={(): void => removeText(id)}
             afterImmediateOpening={(): void => {
@@ -290,17 +291,17 @@ function Customization(): JSX.Element {
 }
 
 export default memo(
-  (props: any): JSX.Element => {
+  (): JSX.Element => {
     return (
       <EditorContext.Consumer>
         {([{ memeSelected }]: [EditorState]): JSX.Element => (
           <div className="customization">
             {memeSelected ? (
-              <Customization {...props} />
+              <Customization />
             ) : (
               <div className="customization-empty">
                 <ReactSVG src="/images/sad.svg" wrapper="span" className="wrapper-sad-svg" />
-                <Translation>{(t): any => <h3>{t('studio.noMemeSelected')}</h3>}</Translation>
+                <Translation>{(t): TFunctionResult => <h3>{t('studio.noMemeSelected')}</h3>}</Translation>
               </div>
             )}
           </div>

@@ -20,12 +20,12 @@ import TextBox from '@client/ts/shared/models/TextBox'
 import { DrawProperties, HistoryInt } from '@client/ts/shared/validators'
 import { INITIAL, TAB_GALLERY, TAB_CUSTOMIZATION } from '@client/ts/shared/constants'
 import { debug, setLocalStorage, removeLocalStorage } from '@client/utils/index'
-import Meme from '@client/ts/shared/models/Meme'
+import { hasRecoverVersion } from '@client/utils/helpers'
 
-export interface Actions extends EditorState {
+export interface Actions extends Partial<EditorState> {
   type: string
   historyType: string
-  text: TextBox
+  text?: TextBox
 }
 
 const updateDrawing = (draft: Draft<EditorState>, texts: Array<TextBox> = draft.texts): void => {
@@ -184,37 +184,25 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       const firstLoad = draft.innerDimensions.width === 0
       draft.innerDimensions = action.innerDimensions
       if (firstLoad) {
-        let memeSelected: any = window.localStorage.getItem('memeSelected')
-        let history: any = window.localStorage.getItem('history')
-        let lastEditDate: any = window.localStorage.getItem('lastEditDate')
+        const lastVersion = hasRecoverVersion()
+        if (lastVersion) {
+          const { memeSelected, history } = lastVersion
+          draft.memeSelected = memeSelected
+          draft.history = history
+          draft.history.items = draft.history.items.map(i => {
+            i.drawProperties.image = memeSelected.image
+            return i
+          })
 
-        if (lastEditDate) {
-          const now = new Date()
-          lastEditDate = new Date(JSON.parse(lastEditDate))
-          const hourDifference = Math.abs(now.getTime() - lastEditDate.getTime()) / 36e5
+          const currentVersion = history.items[history.currentIndex]
 
-          if (hourDifference < 2) {
-            memeSelected = new Meme(JSON.parse(memeSelected)) as Meme
-            history = JSON.parse(history) as History
+          draft.textIdSelected = currentVersion.textIdSelected
 
-            draft.memeSelected = memeSelected
-            draft.history = history
-            draft.history.items = draft.history.items.map(i => {
-              i.drawProperties.image = memeSelected.image
-              return i
-            })
+          const texts = currentVersion.texts
 
-            const currentVersion = history.items[history.currentIndex]
-            const texts = currentVersion.texts
-
-            updateDrawing(draft, texts)
-          } else {
-            removeLocalStorage(['memeSelected', 'history', 'lastEditDate', 'textIdSelected'])
-          }
+          updateDrawing(draft, texts)
         }
-      } else {
-        if (draft.memeSelected) updateDrawing(draft)
-      }
+      } else if (draft.memeSelected) updateDrawing(draft)
       break
     case SET_SHOW_TEXT_AREAS:
       draft.showTextAreas = action.showTextAreas
@@ -269,11 +257,10 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
     setLocalStorage({
       memeSelected: draft.memeSelected,
       lastEditDate: Date.now(),
-      history: draft.history,
-      textIdSelected: draft.textIdSelected
+      history: draft.history
     })
   } else if ([RESET, ERASE_ALL].includes(action.type)) {
-    removeLocalStorage(['memeSelected', 'history', 'lastEditDate', 'textIdSelected'])
+    removeLocalStorage(['memeSelected', 'history', 'lastEditDate'])
   }
 
   const stateUpdated: EditorState = finishDraft(draft) as any

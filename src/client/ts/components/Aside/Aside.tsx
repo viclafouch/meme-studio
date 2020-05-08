@@ -1,8 +1,8 @@
 import * as React from 'react'
+import { memo } from 'react'
 import Button from '@client/components/Button/Button'
 import { TAB_CUSTOMIZATION, TAB_GALLERY } from '@client/ts/shared/constants'
 import { EditorState } from '@client/store/EditorContext'
-import { useEditor } from '@client/ts/shared/hooks'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { SET_CURRENT_TAB } from '@client/store/reducer/constants'
 import Tab from './Tabs/Tab'
@@ -10,9 +10,12 @@ import Gallery from './Tabs/Gallery/Gallery'
 import Customization from './Tabs/Customization/Customization'
 import './aside.scss'
 
-function Aside(): JSX.Element {
-  const [{ currentTab }, dispatchEditor]: [EditorState, Function] = useEditor()
+type AsideProps = {
+  currentTab: EditorState['currentTab']
+  dispatchEditor: Function
+}
 
+function Aside({ currentTab, dispatchEditor }: AsideProps): JSX.Element {
   return (
     <aside className="studio-aside">
       <header className="studio-aside-header">
@@ -75,4 +78,4 @@ function Aside(): JSX.Element {
   )
 }
 
-export default Aside
+export default memo(Aside)

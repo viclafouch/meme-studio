@@ -1,9 +1,9 @@
 import { createDraft, Draft, finishDraft } from 'immer'
-import { SET_MEMES, SET_HAS_NEXT_MEMES, SET_NUM_PAGE, TOGGLE_THEME } from './constants'
+import { SET_MEMES, TOGGLE_THEME } from './constants'
 import { DefaultState } from '../DefaultContext'
 import { debug } from '@client/utils/index'
 
-export interface Actions extends DefaultState {
+export interface Actions extends Partial<DefaultState> {
   type: string
 }
 
@@ -12,11 +12,7 @@ const DefaultReducer = (state: DefaultState, action: Actions): DefaultState => {
   switch (action.type) {
     case SET_MEMES:
       draft.memes = action.memes
-      break
-    case SET_HAS_NEXT_MEMES:
       draft.hasNextMemes = action.hasNextMemes
-      break
-    case SET_NUM_PAGE:
       draft.numPage = action.numPage
       break
     case TOGGLE_THEME:

@@ -14,8 +14,8 @@ import {
 } from '@client/store/reducer/constants'
 import Faq from '@client/components/Modal/Faq/Faq'
 import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
-import { useEditor, useWindowWidth } from '@client/ts/shared/hooks'
-import { UseEditorInt } from '@client/ts/shared/validators'
+import { useWindowWidth } from '@client/ts/shared/hooks'
+import { EditorContext, EditorInt } from '@client/store/EditorContext'
 import './tools.scss'
 
 const Tools = (): JSX.Element => {
@@ -24,7 +24,7 @@ const Tools = (): JSX.Element => {
   const { t } = useTranslation()
   const { isMinLgSize } = useWindowWidth()
   const [{ theme }, dispatch]: [DefaultState, Function] = useContext(DefaultContext)
-  const [{ showTextAreas, memeSelected, canUndo, canRedo }, dispatchEditor]: [UseEditorInt, Function] = useEditor()
+  const [{ showTextAreas, memeSelected, canUndo, canRedo }, dispatchEditor]: [EditorInt, Function] = useContext(EditorContext)
 
   return (
     <div className="tools">

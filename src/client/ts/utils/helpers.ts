@@ -1,3 +1,4 @@
+import { formatRelative, format } from 'date-fns'
 import {
   RESIZE,
   MOVE,
@@ -10,8 +11,8 @@ import {
   EDIT_UPPERCASE,
   EDIT_VALUE
 } from '@client/ts/shared/constants'
-import { typeString } from '@client/ts/shared/validators'
-import { formatRelative, format } from 'date-fns'
+import { typeString, RecoverVersionInt, HistoryInt } from '@client/ts/shared/validators'
+import Meme from '../shared/models/Meme'
 
 export const shuffle = ([...array]: Array<any>): Array<any> => {
   let currentIndex = array.length,
@@ -56,13 +57,27 @@ export const toHistoryType = (type: typeString): string => {
   }
 }
 
-export const hasRecoverVersion = (): false | Date => {
+export const hasRecoverVersion = (): false | RecoverVersionInt => {
   let lastEditDate: string | Date = window.localStorage.getItem('lastEditDate')
   if (lastEditDate) {
     const now = new Date()
-    lastEditDate = new Date(JSON.parse(lastEditDate))
-    const hourDifference = Math.abs(now.getTime() - lastEditDate.getTime()) / 36e5
-    return hourDifference < 2 ? lastEditDate : false
+    try {
+      lastEditDate = new Date(JSON.parse(lastEditDate))
+      const hourDifference = Math.abs(now.getTime() - lastEditDate.getTime()) / 36e5
+      if (hourDifference > 2) return false
+      let memeSelected: string | Meme = window.localStorage.getItem('memeSelected')
+      let history: string | any = window.localStorage.getItem('history')
+      memeSelected = new Meme(JSON.parse(memeSelected)) as Meme
+      history = JSON.parse(history) as {
+        items: Array<HistoryInt>
+        currentIndex: number
+      }
+
+      return { memeSelected, history, lastEditDate }
+    } catch (error) {
+      console.warn(error)
+      return false
+    }
   }
   return false
 }

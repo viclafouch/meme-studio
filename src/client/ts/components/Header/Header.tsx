@@ -7,9 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { TOGGLE_EXPORT_MODAL, TOGGLE_THEME } from '@client/store/reducer/constants'
 import Button from '@client/components/Button/Button'
 import LangSelector from '@client/components/LangSelector/LangSelector'
-import { useEditor } from '@client/ts/shared/hooks'
-import { UseEditorInt } from '@client/ts/shared/validators'
 import { DefaultState, DefaultContext } from '@client/store/DefaultContext'
+import { EditorContext, EditorInt } from '@client/store/EditorContext'
 import './header.scss'
 
 type HeaderProps = {
@@ -20,7 +19,7 @@ function Header(props: HeaderProps): JSX.Element {
   const { t } = useTranslation()
   const { location } = useHistory()
   const [{ theme }, dispatch]: [DefaultState, Function] = useContext(DefaultContext)
-  const [{ memeSelected }, dispatchEditor]: [UseEditorInt, Function] = useEditor()
+  const [{ memeSelected }, dispatchEditor]: [EditorInt, Function] = useContext(EditorContext)
 
   return (
     <header className={`header ${props.isAnimate ? 'ld ld-fall-ttb-in' : ''}`}>

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import Modal from '@client/components/Modal/Modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fillText } from '@client/utils/index'
@@ -8,16 +8,15 @@ import { wait } from '@shared/utils'
 import Button from '@client/components/Button/Button'
 import TextBox from '@client/ts/shared/models/TextBox'
 import { postToTwitter } from '../../../shared/api'
-import { useEditor } from '../../../shared/hooks'
 import { TOGGLE_EXPORT_MODAL } from '@client/store/reducer/constants'
-import { UseEditorInt } from '../../../shared/validators'
+import { EditorContext, EditorInt } from '@client/store/EditorContext'
 import './export.scss'
 
 function Export(): JSX.Element {
   const { t } = useTranslation()
   const [isLoading, setIsLoading]: [boolean, Function] = useState<boolean>(true)
   const [img, setImg]: [string, Function] = useState<string>('')
-  const [{ drawProperties, memeSelected, texts }, dispatchEditor]: [UseEditorInt, Function] = useEditor()
+  const [{ drawProperties, memeSelected, texts }, dispatchEditor]: [EditorInt, Function] = useContext(EditorContext)
 
   useEffect(() => {
     ;(async (): Promise<void> => {

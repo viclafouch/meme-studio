@@ -1,12 +1,12 @@
 import * as React from 'react'
-import { useState, useLayoutEffect, useCallback, useRef, useMemo, RefObject, useEffect } from 'react'
+import { useState, useLayoutEffect, useCallback, useRef, useMemo, RefObject, useEffect, useContext } from 'react'
 import { ReactSVG } from 'react-svg'
-import { DrawProperties, typeString, UseEditorInt } from '@client/ts/shared/validators'
+import { DrawProperties, typeString } from '@client/ts/shared/validators'
 import TextBox from '@client/ts/shared/models/TextBox'
 import { radToDegree, degreeToRad } from '@client/utils/index'
-import { useEditor } from '@client/ts/shared/hooks'
 import { CUSTOM_TEXT } from '@client/store/reducer/constants'
 import { toHistoryType } from '@client/utils/helpers'
+import { EditorInt, EditorContext } from '@client/store/EditorContext'
 import './draggable.scss'
 
 const isKeyArrow = (keyCode: number): string | false => {
@@ -63,7 +63,7 @@ interface RotatingInt {
 
 export function Draggable(props: DraggableProps): JSX.Element {
   const draggableRef: RefObject<HTMLDivElement> = useRef(null)
-  const [{ showTextAreas, texts, saveToEditor }]: [UseEditorInt, Function] = useEditor()
+  const [{ showTextAreas, texts, saveToEditor }]: [EditorInt, Function] = useContext(EditorContext)
   const [resizing, setResizing]: [ResizingInt, Function] = useState<ResizingInt | null>(null)
   const [rotating, setRotating]: [RotatingInt, Function] = useState<RotatingInt | null>(null)
   const [positioning, setPositioning]: [PositionInt, Function] = useState<PositionInt>(() => ({
@@ -214,40 +214,37 @@ export function Draggable(props: DraggableProps): JSX.Element {
     else if (rotating) setRotating(null)
   }, [positioning, resizing, rotating])
 
-  const handleKeyDown = useCallback(
-    e => {
-      const arrow = isKeyArrow(e.keyCode)
-      if (!arrow) return
-      e.preventDefault()
+  const handleKeyDown = (e: KeyboardEvent): void => {
+    const arrow = isKeyArrow(e.keyCode)
+    if (!arrow) return
+    e.preventDefault()
 
-      const drawProperties = props.drawProperties
-      const textSelected = { ...texts.find((t: TextBox) => t.id === props.id) }
-      let { top, left } = positioning
+    const drawProperties = props.drawProperties
+    const textSelected = { ...texts.find((t: TextBox) => t.id === props.id) }
+    let { top, left } = positioning
 
-      if (arrow && textSelected && drawProperties) {
-        if (arrow === 'up' && top >= 1) {
-          if (top > 1) top--
-          else top = 0
-          textSelected.centerY = top + textSelected.height / 2
-        } else if (arrow === 'left') {
-          if (left > 1) left--
-          else left = 0
-          textSelected.centerX = left + textSelected.width / 2
-        } else if (arrow === 'down') {
-          if (drawProperties.height - top - textSelected.height > 1) top++
-          else top = drawProperties.height - textSelected.height
-          textSelected.centerY = top + textSelected.height / 2
-        } else if (arrow === 'right') {
-          if (drawProperties.width - left - textSelected.width > 1) left++
-          else left = drawProperties.width - textSelected.width
-          textSelected.centerX = left + textSelected.width / 2
-        }
-        saveToEditor({ type: CUSTOM_TEXT, text: textSelected, historyType: toHistoryType('move') })
-        setPositioning({ ...positioning, top, left })
+    if (arrow && textSelected && drawProperties) {
+      if (arrow === 'up' && top >= 1) {
+        if (top > 1) top--
+        else top = 0
+        textSelected.centerY = top + textSelected.height / 2
+      } else if (arrow === 'left') {
+        if (left > 1) left--
+        else left = 0
+        textSelected.centerX = left + textSelected.width / 2
+      } else if (arrow === 'down') {
+        if (drawProperties.height - top - textSelected.height > 1) top++
+        else top = drawProperties.height - textSelected.height
+        textSelected.centerY = top + textSelected.height / 2
+      } else if (arrow === 'right') {
+        if (drawProperties.width - left - textSelected.width > 1) left++
+        else left = drawProperties.width - textSelected.width
+        textSelected.centerX = left + textSelected.width / 2
       }
-    },
-    [props.drawProperties, props.id, positioning]
-  )
+      saveToEditor({ type: CUSTOM_TEXT, text: textSelected, historyType: toHistoryType('move') })
+      setPositioning({ ...positioning, top, left })
+    }
+  }
 
   useLayoutEffect(() => {
     if (props.active) window.addEventListener('keydown', handleKeyDown)
