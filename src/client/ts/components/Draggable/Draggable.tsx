@@ -9,6 +9,14 @@ import { CUSTOM_TEXT } from '@client/store/reducer/constants'
 import { toHistoryType } from '@client/utils/helpers'
 import './draggable.scss'
 
+const isKeyArrow = (keyCode: number): string | false => {
+  if (keyCode === 38) return 'up'
+  else if (keyCode === 39) return 'right'
+  else if (keyCode === 40) return 'down'
+  else if (keyCode === 37) return 'left'
+  return false
+}
+
 type DraggableProps = {
   position: {
     x: number
@@ -206,6 +214,46 @@ export function Draggable(props: DraggableProps): JSX.Element {
     else if (rotating) setRotating(null)
   }, [positioning, resizing, rotating])
 
+  const handleKeyDown = useCallback(
+    e => {
+      const arrow = isKeyArrow(e.keyCode)
+      if (!arrow) return
+      e.preventDefault()
+
+      const drawProperties = props.drawProperties
+      const textSelected = { ...texts.find((t: TextBox) => t.id === props.id) }
+      let { top, left } = positioning
+
+      if (arrow && textSelected && drawProperties) {
+        if (arrow === 'up' && top >= 1) {
+          if (top > 1) top--
+          else top = 0
+          textSelected.centerY = top + textSelected.height / 2
+        } else if (arrow === 'left') {
+          if (left > 1) left--
+          else left = 0
+          textSelected.centerX = left + textSelected.width / 2
+        } else if (arrow === 'down') {
+          if (drawProperties.height - top - textSelected.height > 1) top++
+          else top = drawProperties.height - textSelected.height
+          textSelected.centerY = top + textSelected.height / 2
+        } else if (arrow === 'right') {
+          if (drawProperties.width - left - textSelected.width > 1) left++
+          else left = drawProperties.width - textSelected.width
+          textSelected.centerX = left + textSelected.width / 2
+        }
+        saveToEditor({ type: CUSTOM_TEXT, text: textSelected, historyType: toHistoryType('move') })
+        setPositioning({ ...positioning, top, left })
+      }
+    },
+    [props.drawProperties, props.id, positioning]
+  )
+
+  useLayoutEffect(() => {
+    if (props.active) window.addEventListener('keydown', handleKeyDown)
+    return (): void => window.removeEventListener('keydown', handleKeyDown)
+  }, [props.active, handleKeyDown])
+
   useLayoutEffect(() => {
     window.addEventListener('mousemove', handleMouseMove)
     window.addEventListener('mouseup', handleMouseUp)
@@ -213,7 +261,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('mouseup', handleMouseUp)
     }
-  }, [handleMouseMove])
+  }, [handleMouseMove, handleMouseUp])
 
   return (
     <div
