@@ -10,10 +10,11 @@ export class TextController {
   public async update(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const memeId = req.params.id
+      const texts = req.body.texts
       await TextBox.destroy({ where: { memeId } })
 
       await Promise.all(
-        req.body.texts.map((text: any) =>
+        texts.map((text: any) =>
           TextBox.create({
             ...text,
             memeId

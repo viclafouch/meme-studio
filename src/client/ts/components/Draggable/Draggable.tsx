@@ -33,6 +33,7 @@ type DraggableProps = {
   active?: boolean
   memeWidth: number
   memeHeight: number
+  zIndex: number
 }
 
 interface ResizingInt {
@@ -272,6 +273,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
         top: positioning.top,
         height: props.height,
         width: props.width,
+        zIndex: props.zIndex,
         transform: `rotate(${props.rotate}deg)`,
         ...(!showTextAreas ? { display: 'none' } : null)
       }}

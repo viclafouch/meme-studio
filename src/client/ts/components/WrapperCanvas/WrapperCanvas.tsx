@@ -48,7 +48,7 @@ function WrapperCanvas(): JSX.Element {
         }}
       >
         {isMinLgSize &&
-          texts.map((text: TextBox) => (
+          texts.map((text: TextBox, index: number) => (
             <Draggable
               key={text.version}
               className="text-box"
@@ -71,6 +71,7 @@ function WrapperCanvas(): JSX.Element {
               memeHeight={memeSelected.height}
               drawProperties={drawProperties}
               id={text.id}
+              zIndex={index}
               active={text.id === textIdSelected}
             />
           ))}

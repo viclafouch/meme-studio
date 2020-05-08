@@ -20,12 +20,8 @@ import start from './lib/server'
           await Promise.all(meme.texts.map(text => TextBox.create(text)))
         } else {
           await Meme.update(meme, { where: { id: meme.id } })
-          await Promise.all(
-            meme.texts.map(async text => {
-              await TextBox.destroy({ where: { memeId: meme.id } })
-              await TextBox.create(text)
-            })
-          )
+          await TextBox.destroy({ where: { memeId: meme.id } })
+          await Promise.all(meme.texts.map(async text => TextBox.create(text)))
         }
       })
     ).then(start)
