@@ -10,7 +10,7 @@ import './wrapper-canvas.scss'
 
 function WrapperCanvas(): JSX.Element {
   const { isMinLgSize } = useWindowWidth()
-  const [{ memeSelected, canvasRef, drawProperties, texts, textIdSelected }, dispatchEditor]: [EditorInt, Function] = useContext(
+  const [{ memeSelected, canvasRef, drawProperties, texts, textIdSelected, saveToEditor }]: [EditorInt, Function] = useContext(
     EditorContext
   )
 
@@ -51,28 +51,12 @@ function WrapperCanvas(): JSX.Element {
           texts.map((text: TextBox, index: number) => (
             <Draggable
               key={text.version}
-              className="text-box"
-              position={{
-                x: text.centerX,
-                y: text.centerY
-              }}
-              onClick={(): void => {
-                if (text.id !== textIdSelected) {
-                  dispatchEditor({
-                    type: SET_TEXT_ID_SELECTED,
-                    textIdSelected: text.id
-                  })
-                }
-              }}
-              height={text.height}
-              width={text.width}
-              rotate={text.rotate}
-              memeWidth={memeSelected.width}
-              memeHeight={memeSelected.height}
+              text={text}
+              memeSelected={memeSelected}
               drawProperties={drawProperties}
-              id={text.id}
               zIndex={index}
-              active={text.id === textIdSelected}
+              saveToEditor={saveToEditor}
+              isSelected={text.id === textIdSelected}
             />
           ))}
       </div>
