@@ -34,8 +34,8 @@ function Gallery(): JSX.Element {
             <Link to={`/create/${meme.id}`} replace>
               <picture>
                 <source srcSet={meme.url('.webp')} type="image/webp" />
-                <source srcSet={meme.url()} type="image/jpeg" />
-                <img loading="lazy" width={meme.width} height={meme.height} src={meme.url()} alt={meme.name} />
+                <source srcSet={meme.url('.jpg')} type="image/jpeg" />
+                <img loading="lazy" width={meme.width} height={meme.height} src={meme.url('.jpg')} alt={meme.name} />
               </picture>
             </Link>
           </li>

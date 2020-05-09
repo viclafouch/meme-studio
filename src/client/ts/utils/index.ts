@@ -159,3 +159,10 @@ export const debounce = (func: any, wait: number): any => {
     timeout = setTimeout(later, wait)
   }
 }
+
+export const isSafari =
+  navigator.vendor &&
+  navigator.vendor.indexOf('Apple') > -1 &&
+  navigator.userAgent &&
+  navigator.userAgent.indexOf('CriOS') == -1 &&
+  navigator.userAgent.indexOf('FxiOS') == -1

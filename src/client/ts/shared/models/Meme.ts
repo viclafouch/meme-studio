@@ -1,3 +1,5 @@
+import { isSafari } from '@client/utils/index'
+
 export default class Meme {
   public id: string
   public name: string
@@ -17,7 +19,7 @@ export default class Meme {
     this.localImageUrl = meme.localImageUrl || null
   }
 
-  public url(format = '.jpg'): string {
+  public url(format: '.jpg' | '.webp' = isSafari ? '.jpg' : '.webp'): string {
     return this.localImageUrl || `/templates/${this.filename}`.replace('.jpg', format)
   }
 
