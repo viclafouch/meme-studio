@@ -65,6 +65,21 @@
         z-index: 99;
       }
 
+      .studio-spinner {
+        position: absolute;
+        right: 10px;
+        bottom: 6px;
+        opacity: 0;
+        z-index: 99;
+
+        &.studio-spinner-active {
+          opacity: 1;
+          transition-delay: 0.1s;
+          transition-duration: 0.3s;
+          transition-property: opacity;
+        }
+      }
+
       .recover-version-box {
         position: absolute;
         left: 50%;

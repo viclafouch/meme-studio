@@ -20,6 +20,7 @@ import { getMeme } from '@client/ts/shared/api'
 import { IS_DEV } from '@shared/config'
 import { hasRecoverVersion, formatRelativeDate } from '@client/utils/helpers'
 import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
+import Loader from '@client/components/Loader/Loader'
 import Aside from '@client/components/Aside/Aside'
 import '@client/scss/pages/studio.scss'
 
@@ -44,6 +45,7 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
   const { width, isMinLgSize } = useWindowWidth()
   const [{ memeSelected, currentTab }, dispatchEditor]: [EditorInt, Function] = useContext(EditorContext)
   const [uploadError, setUploadError]: [string, Function] = useState<string | null>(null)
+  const [isLoading, setIsLoading]: [boolean, Function] = useState<boolean>(false)
 
   useEffect(() => {
     const wrapper: HTMLElement = contentRef.current
@@ -57,6 +59,7 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
     const memeIdParams = props.match.params.memeId
     const handleChooseMeme = async (memeId: string, controller: AbortController): Promise<void> => {
       try {
+        setIsLoading(true)
         const { texts, meme } = await getMeme(memeId, {
           signal: controller.signal
         })
@@ -71,6 +74,8 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
       } catch (error) {
         if (error.name !== 'AbortError') console.error(error)
         else console.error('Too short')
+      } finally {
+        setIsLoading(false)
       }
     }
     const controller = new AbortController()
@@ -86,7 +91,7 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
     return (): void => {
       controller.abort()
     }
-  }, [props.match.params.memeId, dispatchEditor, setIsActiveRecoverBox, setLastVersion, setUploadError])
+  }, [props.match.params.memeId, dispatchEditor, setIsActiveRecoverBox, setLastVersion, setUploadError, setIsLoading])
 
   useEffect(() => {
     let timeout: any
@@ -173,6 +178,9 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
             </div>
           )}
           {memeSelected && <WrapperCanvas />}
+          <div className={`studio-spinner ${isLoading ? 'studio-spinner-active' : ''}`}>
+            <Loader />
+          </div>
           {IS_DEV && memeSelected && <CanvasDebuggerAsync theme={theme} />}
           {!memeSelected && (
             <div className="empty-meme">
