@@ -31,7 +31,7 @@ html[data-theme="dark"] .accordion {
       font-size: 14px;
       max-width: 60%;
       text-overflow: ellipsis;
-      overflow-x: hidden;
+      overflow: hidden;
       white-space: nowrap;
       color: var(--text-color-trigger);
     }

@@ -54,7 +54,9 @@
         border-radius: 5px;
         border-width: 1px;
         border-style: solid;
-        color: var(--text-color-base);
+        color: var(--blackOrWhite);
+        padding-left: 5px;
+        padding-right: 5px;
         background: transparent;
         border-color: var(--input-border-color);
         outline: none;

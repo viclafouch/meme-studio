@@ -10,7 +10,7 @@ import './wrapper-canvas.scss'
 
 function WrapperCanvas(): JSX.Element {
   const { isMinLgSize } = useWindowWidth()
-  const [{ memeSelected, canvasRef, drawProperties, texts, textIdSelected, saveToEditor }, dispatchEditor]: [
+  const [{ memeSelected, canvasRef, drawProperties, texts, textIdSelected, saveToEditor, showTextAreas }, dispatchEditor]: [
     EditorInt,
     Function
   ] = useContext(EditorContext)
@@ -59,6 +59,7 @@ function WrapperCanvas(): JSX.Element {
         }}
       >
         {isMinLgSize &&
+          showTextAreas &&
           texts.map((text: TextBox, index: number) => (
             <Draggable
               key={text.version}
