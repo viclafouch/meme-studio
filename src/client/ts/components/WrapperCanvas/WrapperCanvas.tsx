@@ -20,8 +20,8 @@ function WrapperCanvas(): JSX.Element {
       const canvas: HTMLCanvasElement = canvasRef.current
       const ctx: CanvasRenderingContext2D = canvas.getContext('2d', { alpha: true })
       if (drawProperties) {
-        canvas.width = drawProperties.width
-        canvas.height = drawProperties.height
+        canvas.width = Math.round(drawProperties.width)
+        canvas.height = Math.round(drawProperties.height)
         for (const text of texts) {
           const fontSize: number = text.fontSize * drawProperties.scale
           const y: number = text.centerY
@@ -53,8 +53,8 @@ function WrapperCanvas(): JSX.Element {
         className="wrapper-canvas-container"
         onContextMenu={(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => e.preventDefault()}
         style={{
-          width: drawProperties.width,
-          height: drawProperties.height,
+          width: Math.round(drawProperties.width),
+          height: Math.round(drawProperties.height),
           backgroundImage: `url('${memeSelected.url()}')`
         }}
       >
@@ -71,7 +71,13 @@ function WrapperCanvas(): JSX.Element {
               setTextSelected={setTextSelected}
             />
           ))}
-        <canvas className="canvas" ref={canvasRef} width={memeSelected.width} height={memeSelected.height} id="meme-canvas" />
+        <canvas
+          className="canvas"
+          ref={canvasRef}
+          width={Math.round(memeSelected.width)}
+          height={Math.round(memeSelected.height)}
+          id="meme-canvas"
+        />
       </div>
     </div>
   )

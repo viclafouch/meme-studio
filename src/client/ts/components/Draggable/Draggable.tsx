@@ -272,10 +272,10 @@ export function Draggable(props: DraggableProps): JSX.Element {
       data-type="drag"
       className={`draggable text-box ${props.isSelected ? 'draggable-active' : ''}`}
       style={{
-        left: state.left,
-        top: state.top,
-        height: props.text.height,
-        width: props.text.width,
+        left: Math.round(state.left),
+        top: Math.round(state.top),
+        height: Math.round(props.text.height),
+        width: Math.round(props.text.width),
         zIndex: props.zIndex,
         transform: `rotate(${props.text.rotate}deg)`
       }}
