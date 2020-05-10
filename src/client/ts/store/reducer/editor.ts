@@ -111,8 +111,8 @@ const clearHistory = (draft: Draft<EditorState>): void => {
   draft.history.currentIndex = -1
 }
 
-const undoHistory = (draft: Draft<EditorState>, eraseAll = false): void => {
-  const index: number = eraseAll ? 0 : draft.history.currentIndex - 1
+const undoHistory = (draft: Draft<EditorState>): void => {
+  const index = draft.history.currentIndex - 1
   const previousItem = draft.history.items[index]
 
   if (previousItem) {
@@ -128,17 +128,8 @@ const undoHistory = (draft: Draft<EditorState>, eraseAll = false): void => {
     })
 
     draft.textIdSelected = previousItem.textIdSelected
-
     draft.drawProperties = drawProperties
     draft.history.currentIndex = index
-    if (eraseAll) {
-      saveToHistory(draft, {
-        drawProperties,
-        texts: draft.texts,
-        textIdSelected: draft.textIdSelected,
-        type: INITIAL
-      })
-    }
   }
 }
 
@@ -241,7 +232,9 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       redoHistory(draft)
       break
     case ERASE_ALL:
-      undoHistory(draft, true)
+      draft.textIdSelected = null
+      draft.texts = []
+      clearHistory(draft)
       break
     case RESET:
       draft.textIdSelected = null

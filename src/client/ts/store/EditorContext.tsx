@@ -60,12 +60,12 @@ export function EditorProvider({ children }: { children: ReactNode }): JSX.Eleme
 
   const canUndo = useMemo(() => {
     const index: number = state.history.currentIndex - 1
-    return !!state.history.items[index] && state.history.items.length > 1
+    return !!state.history.items[index] && state.history.items.length > 0
   }, [state.history.items, state.history.currentIndex])
 
   const canRedo = useMemo(() => {
     const index: number = state.history.currentIndex + 1
-    return !!state.history.items[index] && state.history.items.length > 1
+    return !!state.history.items[index] && state.history.items.length > 0
   }, [state.history.items, state.history.currentIndex])
 
   const setToHistoryDebounced = useCallback(
