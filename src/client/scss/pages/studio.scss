@@ -33,7 +33,7 @@
     }
 
     .studio-content {
-      padding: 50px 40px;
+      padding: 7px;
       background: url('/images/particles.svg') no-repeat;
       background-position: center center;
       background-size: cover;
@@ -44,6 +44,7 @@
       order: 2;
 
       @include lg {
+        padding: 50px 40px;
         border-right: 2px solid var(--border-color-aside);
       }
 
