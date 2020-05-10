@@ -272,12 +272,10 @@ export function Draggable(props: DraggableProps): JSX.Element {
       data-type="drag"
       className={`draggable text-box ${props.isSelected ? 'draggable-active' : ''}`}
       style={{
-        left: Math.round(state.left),
-        top: Math.round(state.top),
+        transform: `translate3d(${Math.round(state.left)}px, ${Math.round(state.top)}px, 0) rotate(${props.text.rotate}deg)`,
         height: Math.round(props.text.height),
         width: Math.round(props.text.width),
-        zIndex: props.zIndex,
-        transform: `rotate(${props.text.rotate}deg)`
+        zIndex: props.zIndex
       }}
       onMouseDown={handleMouseDown}
       onClick={(): void => !props.isSelected && props.setTextSelected(props.text.id)}
