@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useRef, useImperativeHandle, useEffect } from 'react'
+import { useRef, useImperativeHandle } from 'react'
 import './textarea-extended.scss'
 
 const TextareaExtended = React.forwardRef(
@@ -10,40 +10,16 @@ const TextareaExtended = React.forwardRef(
       focus: (): void => textareaRef.current.focus()
     }))
 
-    const resize = (): void => {
-      const textarea: HTMLTextAreaElement = textareaRef.current
-      if (textarea) {
-        textarea.style.height = 'inherit'
-        const computed: CSSStyleDeclaration = window.getComputedStyle(textarea)
-
-        const height: number =
-          parseInt(computed.getPropertyValue('border-top-width')) +
-          parseInt(computed.getPropertyValue('padding-top')) +
-          textarea.scrollHeight +
-          parseInt(computed.getPropertyValue('padding-bottom')) +
-          parseInt(computed.getPropertyValue('border-bottom-width'))
-
-        textarea.style.height = height + 'px'
-      }
-    }
-
     const moveCaretAtEnd = (): void => {
       const value = textareaRef.current.value
       textareaRef.current.value = ''
       textareaRef.current.value = value
     }
 
-    useEffect(() => {
-      if (props.value) setTimeout(resize, 0)
-    }, [])
-
     return (
       <textarea
         {...props}
-        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>): void => {
-          props.onChange(e)
-          resize()
-        }}
+        onChange={props.onChange}
         className="textarea-exdended"
         ref={textareaRef}
         spellCheck="false"
