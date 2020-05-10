@@ -6,8 +6,8 @@ import TextBox from '@client/ts/shared/models/TextBox'
 import { radToDegree, degreeToRad } from '@client/utils/index'
 import { CUSTOM_TEXT } from '@client/store/reducer/constants'
 import { toHistoryType } from '@client/utils/helpers'
-import './draggable.scss'
 import Meme from '@client/ts/shared/models/Meme'
+import './draggable.scss'
 
 const isKeyArrow = (keyCode: number): string | false => {
   if (keyCode === 38) return 'up'
@@ -26,47 +26,53 @@ type DraggableProps = {
   saveToEditor: Function
 }
 
-interface ResizingInt {
-  side: 'ne' | 'se' | 'sw' | 'nw'
-  mouseX: number
-  mouseY: number
-  height: number
-  width: number
-  top: number
-  left: number
-}
-
-interface PositionInt {
-  left: number
-  top: number
-  startX: number
-  startY: number
+interface StateInt {
   isDragging: boolean
-}
-
-interface RotatingInt {
+  isRotating: boolean
+  isResinzing: boolean
+  lastAngle: number
+  lastWidth: TextBox['width']
+  lastHeight: TextBox['height']
+  left: number
+  top: number
+  side: 'ne' | 'se' | 'sw' | 'nw' | null
+  downPageX: number
+  downPageY: number
+  downStartX: number
+  downStartY: number
   startOffsetLeft: number
   startOffsetTop: number
-  lastAngle: number
-  startEventX: number
-  startEventY: number
+  lastTop: number
+  lastLeft: number
 }
 
-const initialPosition = (text: TextBox): PositionInt => ({
+const initalState = (text: TextBox): StateInt => ({
   left: text.centerX - text.width / 2,
   top: text.centerY - text.height / 2,
-  startX: null,
-  startY: null,
-  isDragging: false
+  lastLeft: text.centerX - text.width / 2,
+  lastTop: text.centerY - text.height / 2,
+  downStartX: 0,
+  downStartY: 0,
+  downPageY: 0,
+  downPageX: 0,
+  isDragging: false,
+  isRotating: false,
+  isResinzing: false,
+  side: null,
+  lastAngle: degreeToRad(text.rotate),
+  lastWidth: text.width,
+  lastHeight: text.height,
+  startOffsetLeft: 0,
+  startOffsetTop: 0
 })
 
 export function Draggable(props: DraggableProps): JSX.Element {
   const draggableRef: RefObject<HTMLDivElement> = useRef(null)
-  const [resizing, setResizing]: [ResizingInt, Function] = useState<ResizingInt | null>(null)
-  const [rotating, setRotating]: [RotatingInt, Function] = useState<RotatingInt | null>(null)
-  const [positioning, setPositioning]: [PositionInt, Function] = useState<PositionInt>(() => initialPosition(props.text))
+  const [state, setState]: [StateInt, Function] = useState(() => initalState(props.text))
 
-  useEffect(() => setPositioning(initialPosition(props.text)), [props.drawProperties.scale, props.text.id])
+  useEffect(() => {
+    setState(initalState(props.text))
+  }, [props.drawProperties.scale, setState])
 
   const minimalSize: number = useMemo(() => props.drawProperties.scale * 40, [props.drawProperties.scale])
 
@@ -77,58 +83,59 @@ export function Draggable(props: DraggableProps): JSX.Element {
         memeSelected,
         text: { ...text }
       } = props
-      let { top, left } = positioning
+      let { top, left } = state
+      const { downStartX, downStartY, downPageY, downPageX } = state
       let { centerX, centerY, height, width, rotate } = text
 
       let type: typeString
 
       if (event instanceof MouseEvent) {
-        if (positioning.isDragging) {
+        if (state.isDragging) {
           type = 'move'
-          top = event.pageY - positioning.startY
-          left = event.pageX - positioning.startX
+          top = event.pageY - downStartY
+          left = event.pageX - downStartX
           if (top < 0) top = 0
           else if (top + height >= drawProperties.height) top = drawProperties.height - height
           if (left < 0) left = 0
           else if (left + width >= drawProperties.width) left = drawProperties.width - width
           centerY = top + height / 2
           centerX = left + width / 2
-        } else if (resizing) {
+        } else if (state.isResinzing) {
           type = 'resize'
-          if (resizing.side === 'sw' || resizing.side === 'se') {
-            if (resizing.height + (event.pageY - resizing.mouseY) > minimalSize) {
-              height = resizing.height + (event.pageY - resizing.mouseY)
+          if (state.side === 'sw' || state.side === 'se') {
+            if (state.lastHeight + (event.pageY - downPageY) > minimalSize) {
+              height = state.lastHeight + (event.pageY - downPageY)
               if (top + height >= drawProperties.height) height = drawProperties.height - top
             } else height = minimalSize
             centerY = top + height / 2
-          } else if (resizing.side === 'nw' || resizing.side === 'ne') {
-            if (resizing.height - (event.pageY - resizing.mouseY) > minimalSize) {
-              top = resizing.top + (event.pageY - resizing.mouseY)
+          } else if (state.side === 'nw' || state.side === 'ne') {
+            if (state.lastHeight - (event.pageY - downPageY) > minimalSize) {
+              top = state.lastTop + (event.pageY - downPageY)
               if (top < 0) top = 0
-              else height = resizing.height - (event.pageY - resizing.mouseY)
+              else height = state.lastHeight - (event.pageY - downPageY)
             } else height = minimalSize
             centerY = top + height / 2
           }
-          if (resizing.side === 'ne' || resizing.side === 'se') {
-            if (resizing.width + (event.pageX - resizing.mouseX) > minimalSize) {
-              width = resizing.width + (event.pageX - resizing.mouseX)
+          if (state.side === 'ne' || state.side === 'se') {
+            if (state.lastWidth + (event.pageX - downPageX) > minimalSize) {
+              width = state.lastWidth + (event.pageX - downPageX)
               if (left + width >= drawProperties.width) width = drawProperties.width - left
             } else width = minimalSize
             centerX = left + width / 2
-          } else if (resizing.side === 'nw' || resizing.side === 'sw') {
-            if (resizing.width - (event.pageX - resizing.mouseX) > minimalSize) {
-              left = resizing.left + (event.pageX - resizing.mouseX)
+          } else if (state.side === 'nw' || state.side === 'sw') {
+            if (state.lastWidth - (event.pageX - downPageX) > minimalSize) {
+              left = state.lastLeft + (event.pageX - downPageX)
               if (left <= 0) left = 0
-              else width = resizing.width - (event.pageX - resizing.mouseX)
+              else width = state.lastWidth - (event.pageX - downPageX)
             } else width = minimalSize
             centerX = left + width / 2
           }
-        } else if (rotating) {
-          if (rotating.startOffsetLeft !== event.pageX && rotating.startOffsetTop !== event.pageY) {
+        } else if (state.isRotating) {
+          if (state.startOffsetLeft !== event.pageX && state.startOffsetTop !== event.pageY) {
             type = 'rotate'
-            let radian = Math.atan2(event.pageY - rotating.startOffsetTop, event.pageX - rotating.startOffsetLeft)
-            radian -= Math.atan2(rotating.startEventY - rotating.startOffsetTop, rotating.startEventX - rotating.startOffsetLeft)
-            radian += rotating.lastAngle
+            let radian = Math.atan2(event.pageY - state.startOffsetTop, event.pageX - state.startOffsetLeft)
+            radian -= Math.atan2(downPageY - state.startOffsetTop, downPageX - state.startOffsetLeft)
+            radian += state.lastAngle
             const degree = radToDegree(radian)
             rotate = degree
           }
@@ -156,6 +163,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
           }
         } else return
       }
+
       if (type) {
         text.centerX = centerX
         text.centerY = centerY
@@ -169,69 +177,83 @@ export function Draggable(props: DraggableProps): JSX.Element {
           height: (height / drawProperties.height) * memeSelected.height
         }
         props.saveToEditor({ type: CUSTOM_TEXT, text, historyType: toHistoryType(type) })
-        setPositioning({ ...positioning, top, left })
+        setState({ ...state, top, left })
       }
     },
-    [props.drawProperties, resizing, rotating, minimalSize, positioning, props.memeSelected, props.text, props.saveToEditor]
+    [props.drawProperties, state, minimalSize, props.memeSelected, props.text, props.saveToEditor, setState]
   )
 
   const handleMouseDown = useCallback(
     (event: React.MouseEvent) => {
       event.preventDefault()
-      const type = (event.currentTarget as HTMLElement).getAttribute('data-type')
+      event.stopPropagation()
+      event.persist()
+      const type = event.currentTarget.getAttribute('data-type')
+      const side = event.currentTarget.getAttribute('data-side') as StateInt['side']
+      const { left, top } = draggableRef.current.getBoundingClientRect()
       const { width, height, rotate } = props.text
       if (type === 'drag') {
-        setPositioning({
-          ...positioning,
-          startX: event.pageX - positioning.left,
-          startY: event.pageY - positioning.top,
-          isDragging: true
-        })
+        setState(
+          (state: StateInt): StateInt => ({
+            ...state,
+            downStartX: event.pageX - state.left,
+            downStartY: event.pageY - state.top,
+            isDragging: true
+          })
+        )
       } else if (type === 'rotate') {
-        event.stopPropagation()
-        const { left, top } = draggableRef.current.getBoundingClientRect()
-        setRotating({
-          startOffsetLeft: left + width / 2,
-          startOffsetTop: top + height / 2,
-          lastAngle: degreeToRad(rotate),
-          startEventX: event.pageX,
-          startEventY: event.pageY
-        })
+        setState(
+          (state: StateInt): StateInt => ({
+            ...state,
+            startOffsetLeft: left + width / 2,
+            startOffsetTop: top + height / 2,
+            downPageX: event.pageX,
+            downPageY: event.pageY,
+            lastAngle: degreeToRad(rotate),
+            isRotating: true
+          })
+        )
       } else if (type === 'resize') {
-        event.stopPropagation()
-        const side = (event.target as HTMLDivElement).getAttribute('data-side')
-        setResizing({
-          side: side as ResizingInt['side'],
-          mouseX: event.pageX,
-          mouseY: event.pageY,
-          height: height,
-          width: width,
-          top: positioning.top,
-          left: positioning.left
-        })
+        setState(
+          (state: StateInt): StateInt => ({
+            ...state,
+            side,
+            downPageX: event.pageX,
+            downPageY: event.pageY,
+            lastHeight: height,
+            lastWidth: width,
+            lastLeft: state.left,
+            lastTop: state.top,
+            isResinzing: true
+          })
+        )
       }
     },
-    [positioning.left, positioning.top, props.text]
+    [props.text, setState]
   )
 
   const handleMouseUp = useCallback(() => {
-    if (positioning.isDragging)
-      setPositioning({
-        ...positioning,
-        isDragging: false
-      })
-    else if (resizing) setResizing(null)
-    else if (rotating) setRotating(null)
-  }, [positioning, resizing, rotating])
+    if (state.isDragging || state.isRotating || state.isResinzing)
+      setState(
+        (state: StateInt): StateInt => ({
+          ...state,
+          isDragging: false,
+          isResinzing: false,
+          isRotating: false
+        })
+      )
+  }, [state.isDragging, state.isResinzing, state.isRotating, setState])
 
   useLayoutEffect(() => {
-    window.addEventListener('mousemove', handleMove)
-    window.addEventListener('mouseup', handleMouseUp)
+    if (state.isRotating || state.isResinzing || state.isDragging) {
+      window.addEventListener('mousemove', handleMove)
+      window.addEventListener('mouseup', handleMouseUp)
+    }
     return (): void => {
       window.removeEventListener('mousemove', handleMove)
       window.removeEventListener('mouseup', handleMouseUp)
     }
-  }, [handleMove, handleMouseUp])
+  }, [handleMove, handleMouseUp, state.isRotating, state.isResinzing, state.isDragging])
 
   useLayoutEffect(() => {
     if (props.isSelected) window.addEventListener('keydown', handleMove)
@@ -240,21 +262,17 @@ export function Draggable(props: DraggableProps): JSX.Element {
     }
   }, [handleMove, props.isSelected])
 
-  if (props.text.id === 'pBg48UiNS') {
-    console.log('render')
-  }
-
   return (
     <div
-      aria-grabbed={positioning.isDragging}
+      aria-grabbed={state.isDragging}
       draggable={true}
       ref={draggableRef}
       id={props.text.id}
       data-type="drag"
       className={`draggable text-box ${props.isSelected ? 'draggable-isSelected' : ''}`}
       style={{
-        left: positioning.left,
-        top: positioning.top,
+        left: state.left,
+        top: state.top,
         height: props.text.height,
         width: props.text.width,
         zIndex: props.zIndex,
