@@ -16,20 +16,25 @@ function WrapperCanvas(): JSX.Element {
   ] = useContext(EditorContext)
 
   useLayoutEffect(() => {
-    const canvas: HTMLCanvasElement = canvasRef.current
-    const ctx: CanvasRenderingContext2D = canvas.getContext('2d', { alpha: true })
-    if (drawProperties) {
-      canvas.width = drawProperties.width
-      canvas.height = drawProperties.height
-      for (const text of texts) {
-        const fontSize: number = text.fontSize * drawProperties.scale
-        const y: number = text.centerY
-        const x: number = text.centerX
-        const maxHeight: number = text.height
-        const maxWidth: number = text.width
-        fillText({ text, ctx, maxWidth, maxHeight, fontSize, x, y })
+    const draw = (): void => {
+      const canvas: HTMLCanvasElement = canvasRef.current
+      const ctx: CanvasRenderingContext2D = canvas.getContext('2d', { alpha: true })
+      if (drawProperties) {
+        canvas.width = drawProperties.width
+        canvas.height = drawProperties.height
+        for (const text of texts) {
+          const fontSize: number = text.fontSize * drawProperties.scale
+          const y: number = text.centerY
+          const x: number = text.centerX
+          const maxHeight: number = text.height
+          const maxWidth: number = text.width
+          fillText({ text, ctx, maxWidth, maxHeight, fontSize, x, y })
+        }
       }
     }
+
+    const currentDraw = requestAnimationFrame(draw)
+    return (): void => cancelAnimationFrame(currentDraw)
   }, [drawProperties, texts])
 
   const setTextSelected = useCallback(

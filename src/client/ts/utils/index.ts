@@ -121,8 +121,8 @@ export function fillText({ text, ctx, maxWidth, maxHeight, fontSize, x, y }: Int
       else line.y = lines[index - 1].y + previousLineHeight
     }
 
-    ctx.fillText(line.value, parseFloat(line.x.toFixed(2)), parseFloat(line.y.toFixed(2)))
-    if (text.boxShadow > 0) ctx.strokeText(line.value, parseFloat(line.x.toFixed(2)), parseFloat(line.y.toFixed(2)))
+    ctx.fillText(line.value, Math.round(line.x), Math.round(line.y))
+    if (text.boxShadow > 0) ctx.strokeText(line.value, Math.round(line.x), Math.round(line.y))
   }
   ctx.restore()
 }
