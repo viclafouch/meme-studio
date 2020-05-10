@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useLayoutEffect, useContext } from 'react'
+import { useLayoutEffect, useContext, useCallback } from 'react'
 import { useWindowWidth } from '@client/ts/shared/hooks'
 import { fillText } from '@client/utils/index'
 import TextBox from '@client/ts/shared/models/TextBox'
@@ -10,9 +10,10 @@ import './wrapper-canvas.scss'
 
 function WrapperCanvas(): JSX.Element {
   const { isMinLgSize } = useWindowWidth()
-  const [{ memeSelected, canvasRef, drawProperties, texts, textIdSelected, saveToEditor }]: [EditorInt, Function] = useContext(
-    EditorContext
-  )
+  const [{ memeSelected, canvasRef, drawProperties, texts, textIdSelected, saveToEditor }, dispatchEditor]: [
+    EditorInt,
+    Function
+  ] = useContext(EditorContext)
 
   useLayoutEffect(() => {
     const canvas: HTMLCanvasElement = canvasRef.current
@@ -37,6 +38,16 @@ function WrapperCanvas(): JSX.Element {
     }
   }, [drawProperties, texts])
 
+  const setTextSelected = useCallback(
+    (id: TextBox['id']) => {
+      dispatchEditor({
+        type: SET_TEXT_ID_SELECTED,
+        textIdSelected: id
+      })
+    },
+    [dispatchEditor]
+  )
+
   return (
     <div className="wrapper-canvas">
       <div
@@ -57,6 +68,7 @@ function WrapperCanvas(): JSX.Element {
               zIndex={index}
               saveToEditor={saveToEditor}
               isSelected={text.id === textIdSelected}
+              setTextSelected={setTextSelected}
             />
           ))}
       </div>

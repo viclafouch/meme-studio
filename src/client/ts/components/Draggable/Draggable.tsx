@@ -24,6 +24,7 @@ type DraggableProps = {
   zIndex: number
   text: TextBox
   saveToEditor: Function
+  setTextSelected: Function
 }
 
 interface StateInt {
@@ -269,7 +270,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
       ref={draggableRef}
       id={props.text.id}
       data-type="drag"
-      className={`draggable text-box ${props.isSelected ? 'draggable-isSelected' : ''}`}
+      className={`draggable text-box ${props.isSelected ? 'draggable-active' : ''}`}
       style={{
         left: state.left,
         top: state.top,
@@ -279,6 +280,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
         transform: `rotate(${props.text.rotate}deg)`
       }}
       onMouseDown={handleMouseDown}
+      onClick={(): void => !props.isSelected && props.setTextSelected(props.text.id)}
     >
       <div className="draggable-resize" data-type="resize" data-side="ne" onMouseDown={handleMouseDown} />
       <div className="draggable-resize" data-type="resize" data-side="nw" onMouseDown={handleMouseDown} />
