@@ -91,9 +91,11 @@ export function fillText({ text, ctx, maxWidth, maxHeight, fontSize, x, y }: Int
     ctx.font = `${fontSize}px ${text.fontFamily}`
   }
 
-  ctx.translate(x, y)
-  ctx.rotate(degreeToRad(text.rotate))
-  ctx.translate(-x, -y)
+  if (text.rotate !== 0) {
+    ctx.translate(x, y)
+    ctx.rotate(degreeToRad(text.rotate))
+    ctx.translate(-x, -y)
+  }
 
   for (let index = 0; index < lines.length; index++) {
     const line: Line = lines[index]
@@ -119,8 +121,8 @@ export function fillText({ text, ctx, maxWidth, maxHeight, fontSize, x, y }: Int
       else line.y = lines[index - 1].y + previousLineHeight
     }
 
-    ctx.fillText(line.value, line.x, line.y)
-    if (text.boxShadow > 0) ctx.strokeText(line.value, line.x, line.y)
+    ctx.fillText(line.value, parseFloat(line.x.toFixed(2)), parseFloat(line.y.toFixed(2)))
+    if (text.boxShadow > 0) ctx.strokeText(line.value, parseFloat(line.x.toFixed(2)), parseFloat(line.y.toFixed(2)))
   }
   ctx.restore()
 }

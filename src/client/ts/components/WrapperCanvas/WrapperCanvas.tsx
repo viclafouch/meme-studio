@@ -17,24 +17,18 @@ function WrapperCanvas(): JSX.Element {
 
   useLayoutEffect(() => {
     const canvas: HTMLCanvasElement = canvasRef.current
-    const ctx: CanvasRenderingContext2D = canvas.getContext('2d')
+    const ctx: CanvasRenderingContext2D = canvas.getContext('2d', { alpha: true })
     if (drawProperties) {
       canvas.width = drawProperties.width
       canvas.height = drawProperties.height
-      drawProperties.image.then(image => {
-        ctx.drawImage(image, 0, 0, drawProperties.width, drawProperties.height)
-        for (const text of texts) {
-          const fontSize: number = text.fontSize * drawProperties.scale
-          const y: number = text.centerY
-          const x: number = text.centerX
-          const maxHeight: number = text.height
-          const maxWidth: number = text.width
-          fillText({ text, ctx, maxWidth, maxHeight, fontSize, x, y })
-        }
-      })
-    }
-    return (): void => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      for (const text of texts) {
+        const fontSize: number = text.fontSize * drawProperties.scale
+        const y: number = text.centerY
+        const x: number = text.centerX
+        const maxHeight: number = text.height
+        const maxWidth: number = text.width
+        fillText({ text, ctx, maxWidth, maxHeight, fontSize, x, y })
+      }
     }
   }, [drawProperties, texts])
 
@@ -55,7 +49,8 @@ function WrapperCanvas(): JSX.Element {
         onContextMenu={(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => e.preventDefault()}
         style={{
           width: drawProperties.width,
-          height: drawProperties.height
+          height: drawProperties.height,
+          backgroundImage: `url('${memeSelected.url()}')`
         }}
       >
         {isMinLgSize &&
@@ -71,8 +66,8 @@ function WrapperCanvas(): JSX.Element {
               setTextSelected={setTextSelected}
             />
           ))}
+        <canvas className="canvas" ref={canvasRef} width={memeSelected.width} height={memeSelected.height} id="meme-canvas" />
       </div>
-      <canvas className="canvas" ref={canvasRef} width={memeSelected.width} height={memeSelected.height} id="meme-canvas" />
     </div>
   )
 }

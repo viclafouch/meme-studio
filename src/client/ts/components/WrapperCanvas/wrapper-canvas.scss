@@ -3,7 +3,6 @@
   width: 100%;
   position: relative;
 
-  .canvas,
   .wrapper-canvas-container {
     position: absolute;
     left: 50%;
@@ -15,5 +14,12 @@
   .wrapper-canvas-container {
     z-index: 2;
     box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+
+  .canvas {
+    z-index: -1;
   }
 }
