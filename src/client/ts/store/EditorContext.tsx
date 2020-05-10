@@ -69,7 +69,7 @@ export function EditorProvider({ children }: { children: ReactNode }): JSX.Eleme
   }, [state.history.items, state.history.currentIndex])
 
   const setToHistoryDebounced = useCallback(
-    debounce((historyType: string) => updater({ type: SET_HISTORY, historyType }), 300),
+    debounce((historyType: string) => updater({ type: SET_HISTORY, historyType }), 1000),
     [updater]
   )
 
