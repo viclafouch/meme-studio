@@ -14,7 +14,7 @@
     "@fortawesome/free-solid-svg-icons": "5.13.0",
     "@fortawesome/react-fontawesome": "0.1.9",
     "@types/nprogress": "0.2.0",
-    "@types/react": "16.9.34",
+    "@types/react": "16.9.35",
     "@types/react-color": "3.0.1",
     "@types/react-dom": "16.9.7",
     "@types/react-loadable": "5.5.3",
