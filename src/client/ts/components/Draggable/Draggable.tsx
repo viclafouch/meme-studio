@@ -282,9 +282,9 @@ export function Draggable(props: DraggableProps): JSX.Element {
         height: Math.round(props.item.height),
         width: Math.round(props.item.width),
         zIndex: props.zIndex,
-        ...(props.item.src
+        ...(props.type === 'image'
           ? {
-              background: `url(${props.item.src}) center center/100% no-repeat`
+              background: `url(${props.item.src}) center center/100% 100% no-repeat`
             }
           : null)
       }}

@@ -22,7 +22,7 @@ import TextBox from '@client/ts/shared/models/TextBox'
 import { DrawProperties, HistoryInt } from '@client/ts/shared/validators'
 import { INITIAL, TAB_GALLERY, TAB_CUSTOMIZATION } from '@client/ts/shared/constants'
 import { debug, setLocalStorage, removeLocalStorage } from '@client/utils/index'
-import { hasRecoverVersion } from '@client/utils/helpers'
+import { hasRecoverVersion, calculateAspectRatioFit } from '@client/utils/helpers'
 import ImageBox from '@client/ts/shared/models/ImageBox'
 import { createText } from '@client/ts/shared/config-editor'
 import { randomID } from '@shared/utils'
@@ -31,43 +31,42 @@ export interface Actions extends Partial<EditorState> {
   type: string
   historyType: string
   text?: TextBox
-  image?: any
+  image?: ImageBox
+  img?: HTMLImageElement
   itemId?: TextBox['id'] | ImageBox['id']
   itemType?: 'text' | 'image'
 }
 
-const updateDrawing = (draft: Draft<EditorState>, texts: Array<TextBox> = draft.texts): void => {
-  let currentWidth: number = draft.memeSelected.width
-  let currentHeight: number = draft.memeSelected.height
-  let ratioW = 1
-  let ratioH = 1
+const updateDrawing = (draft: Draft<EditorState>): void => {
+  const { width, height } = calculateAspectRatioFit(
+    draft.memeSelected.width,
+    draft.memeSelected.height,
+    draft.innerDimensions.width,
+    draft.innerDimensions.height
+  )
 
-  if (currentWidth > draft.innerDimensions.width) {
-    ratioW = draft.innerDimensions.width / currentWidth
-    currentWidth = draft.innerDimensions.width
-    currentHeight = draft.memeSelected.height * ratioW
-  }
+  const scale: number = Math.min(width / draft.memeSelected.width, height / draft.memeSelected.height)
 
-  if (currentHeight > draft.innerDimensions.height) {
-    ratioH = draft.innerDimensions.height / currentHeight
-    currentWidth = currentWidth * ratioH
-    currentHeight = currentHeight * ratioH
-  }
+  draft.texts = draft.texts.map((text: TextBox) => {
+    text.height = text.base.height * scale
+    text.width = text.base.width * scale
+    text.centerY = text.base.centerY * scale
+    text.centerX = text.base.centerX * scale
+    return text
+  })
 
-  const scale: number = Math.min(currentWidth / draft.memeSelected.width, currentHeight / draft.memeSelected.height)
-
-  draft.texts = texts.map((t: TextBox) => {
-    t.height = t.base.height * scale
-    t.width = t.base.width * scale
-    t.centerY = t.base.centerY * scale
-    t.centerX = t.base.centerX * scale
-    return t
+  draft.images = draft.images.map((image: ImageBox) => {
+    image.height = image.base.height * scale
+    image.width = image.base.width * scale
+    image.centerY = image.base.centerY * scale
+    image.centerX = image.base.centerX * scale
+    return image
   })
 
   draft.drawProperties = {
-    width: currentWidth,
-    height: currentHeight,
     image: draft.memeSelected.image,
+    width,
+    height,
     scale
   }
 }
@@ -172,7 +171,9 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       break
     case SET_MEME_SELECTED:
       draft.memeSelected = action.memeSelected
-      updateDrawing(draft, action.texts)
+      draft.texts = action.texts
+      draft.images = []
+      updateDrawing(draft)
       saveToHistory(draft, {
         drawProperties: draft.drawProperties,
         texts: draft.texts,
@@ -200,7 +201,8 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
 
           const texts = currentVersion.texts
 
-          updateDrawing(draft, texts)
+          draft.texts = texts
+          updateDrawing(draft)
         }
       } else if (draft.memeSelected) updateDrawing(draft)
       break
@@ -227,8 +229,8 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
         const text = createText({
           centerY: draft.memeSelected.height / 2,
           centerX: draft.memeSelected.width / 2,
-          height: draft.memeSelected.height * (33 / 100),
-          width: draft.memeSelected.width * (33 / 100)
+          height: draft.memeSelected.height * 0.33,
+          width: draft.memeSelected.width * 0.33
         })
         text.height = text.base.height * draft.drawProperties.scale
         text.width = text.base.width * draft.drawProperties.scale
@@ -237,6 +239,25 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
 
         draft.itemIdSelected = text.id
         draft.texts.push(text)
+      } else {
+        const img = action.img
+        const { width, height } = calculateAspectRatioFit(
+          img.width,
+          img.height,
+          draft.drawProperties.width * 0.9,
+          draft.drawProperties.height * 0.9
+        )
+
+        const image = new ImageBox({
+          id: randomID(),
+          rotate: 0,
+          centerY: draft.drawProperties.height / 2,
+          centerX: draft.drawProperties.width / 2,
+          width,
+          height,
+          src: img.src
+        })
+        draft.images.push(image)
       }
       break
     case DUPLICATE_ITEM:
@@ -265,7 +286,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
         draft.texts.splice(textIndex, 1)
       } else {
         imageIndex = draft.images.findIndex(image => image.id === action.itemId)
-        draft.texts.splice(imageIndex, 1)
+        draft.images.splice(imageIndex, 1)
       }
       if (action.itemId === draft.itemIdSelected) draft.itemIdSelected = null
       break
@@ -286,6 +307,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
     case ERASE_ALL:
       draft.itemIdSelected = null
       draft.texts = []
+      draft.images = []
       clearHistory(draft)
       break
     case RESET:
@@ -293,6 +315,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       draft.memeSelected = null
       draft.drawProperties = null
       draft.texts = []
+      draft.images = []
       draft.currentTab = TAB_GALLERY
       clearHistory(draft)
       break

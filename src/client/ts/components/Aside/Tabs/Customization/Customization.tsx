@@ -34,7 +34,7 @@ function Customization(): JSX.Element {
       }
     }
     return refs
-  }, [texts.length])
+  }, [memeSelected.id, texts.length])
 
   const handleEdit = ({ textId, type, value }: TextCustomization): void => {
     const text: any = { ...texts.find((t: TextBox) => t.id === textId) }
@@ -47,8 +47,8 @@ function Customization(): JSX.Element {
   }, [saveToEditor])
 
   const removeItem = useCallback(
-    (itemId: TextBox['id'] | ImageBox['id']): void => {
-      saveToEditor({ type: REMOVE_ITEM, textId: itemId })
+    (itemType: 'text' | 'image', itemId: TextBox['id'] | ImageBox['id']): void => {
+      saveToEditor({ type: REMOVE_ITEM, itemId, itemType })
     },
     [saveToEditor]
   )
@@ -83,6 +83,8 @@ function Customization(): JSX.Element {
     }
   }, [itemIdSelected, textsRefs])
 
+  console.log(textsRefs)
+
   return (
     <div className="customization-not-empty">
       <h2>
@@ -95,6 +97,7 @@ function Customization(): JSX.Element {
         ): React.ReactNode => (
           <Accordion
             id={id}
+            type="text"
             defaultOpened={id === itemIdSelected}
             title={value.trim() || `${t('studio.text')} #${textIndex + 1}`}
             key={id}
@@ -254,6 +257,9 @@ function Customization(): JSX.Element {
         (image: ImageBox, index: number): React.ReactNode => (
           <Accordion
             id={image.id}
+            type="image"
+            onDuplicate={duplicateItem}
+            onRemove={removeItem}
             defaultOpened={image.id === itemIdSelected}
             onToggle={selectItem}
             title={'Image' + index}

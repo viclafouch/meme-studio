@@ -70,8 +70,15 @@ html[data-theme="dark"] .tools {
     outline: none;
     border: 0;
     background-color: transparent;
-    font-size: 13px;
     color: inherit;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    padding: 1px 7px 2px;
+    font-size: 13px;
+    font-family: 'Alata', sans-serif;
+    font-weight: 400;
 
     &#show-text-areas {
       display: none;
@@ -115,6 +122,14 @@ html[data-theme="dark"] .tools {
 
     &:not(:disabled):hover {
       color: var(--text-hover-tools);
+    }
+
+    & + .upload-imagebox-input {
+      position: absolute;
+      width: 0;
+      height: 0;
+      opacity: 0;
+      z-index: -1;
     }
   }
 }

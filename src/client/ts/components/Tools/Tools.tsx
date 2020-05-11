@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useRef, RefObject, useContext } from 'react'
+import { useRef, RefObject, useContext, useCallback } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
@@ -10,56 +10,45 @@ import {
   ERASE_ALL,
   RESET,
   TOGGLE_EXPORT_MODAL,
-  TOGGLE_THEME
+  TOGGLE_THEME,
+  ADD_ITEM
 } from '@client/store/reducer/constants'
 import Faq from '@client/components/Modal/Faq/Faq'
 import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
 import { useWindowWidth } from '@client/ts/shared/hooks'
 import { EditorContext, EditorInt } from '@client/store/EditorContext'
-import ImageBox from '@client/ts/shared/models/ImageBox'
-import { randomID } from '@shared/utils'
 import { toBase64 } from '@client/utils/index'
-import { calculateAspectRatioFit } from '@client/utils/helpers'
 import './tools.scss'
 
 const Tools = (): JSX.Element => {
   const history = useHistory()
   const faqModal: RefObject<any> = useRef(null)
+  const uploadInput: RefObject<HTMLInputElement> = useRef(null)
   const { t } = useTranslation()
   const { isMinLgSize } = useWindowWidth()
   const [{ theme }, dispatch]: [DefaultState, Function] = useContext(DefaultContext)
-  const [{ showTextAreas, memeSelected, canUndo, canRedo, texts, drawProperties }, dispatchEditor]: [
-    EditorInt,
-    Function
-  ] = useContext(EditorContext)
+  const [{ showTextAreas, memeSelected, canUndo, canRedo, texts }, dispatchEditor]: [EditorInt, Function] = useContext(
+    EditorContext
+  )
 
-  const handleUploadImagebox = async (e: any): Promise<void> => {
-    const file = e.currentTarget.files[0]
-
-    // CHECK
-
-    const img = await toBase64(file)
-
-    const { width, height } = calculateAspectRatioFit(
-      img.width,
-      img.height,
-      drawProperties.width * 0.9,
-      drawProperties.height * 0.9
-    )
-
-    const imageBox = new ImageBox({
-      id: randomID(),
-      rotate: 0,
-      centerY: drawProperties.height / 2,
-      centerX: drawProperties.width / 2,
-      height,
-      width,
-      src: img.src,
-      img
-    })
-
-    console.log(imageBox)
-  }
+  const handleUploadImagebox = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
+      const file = e.currentTarget.files[0]
+      try {
+        const img = await toBase64(file)
+        dispatchEditor({
+          type: ADD_ITEM,
+          itemType: 'image',
+          img
+        })
+      } catch (error) {
+        console.error(error)
+      } finally {
+        uploadInput.current.value = ''
+      }
+    },
+    [dispatchEditor]
+  )
 
   return (
     <div className="tools">
@@ -116,21 +105,16 @@ const Tools = (): JSX.Element => {
         </li>
         <li>
           <label htmlFor="upload-imagebox">
-            <button
-              aria-label={t('attr.eraseAll')}
-              className="tools-list-btn"
-              data-tooltip={t('attr.eraseAll')}
-              disabled={texts.length === 0}
-              onClick={(): void => texts.length > 0 && dispatchEditor({ type: ERASE_ALL })}
-            >
-              Img
-            </button>
+            <span role="button" aria-label={t('attr.eraseAll')} className="tools-list-btn" data-tooltip={t('attr.eraseAll')}>
+              <FontAwesomeIcon icon={['fas', 'chart-area']} />
+            </span>
             <input
               type="file"
+              ref={uploadInput}
               onChange={handleUploadImagebox}
               className="upload-imagebox-input"
               accept="image/png, image/jpeg"
-              id="local-meme"
+              id="upload-imagebox"
             />
           </label>
         </li>

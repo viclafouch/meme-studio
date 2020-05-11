@@ -193,7 +193,7 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
                       <input
                         type="file"
                         ref={inputDrop}
-                        onChange={(): any => handleImportImage()}
+                        onChange={(): Promise<void> => handleImportImage()}
                         className="import-image-label-input"
                         accept="image/png, image/jpeg"
                         id="local-meme"

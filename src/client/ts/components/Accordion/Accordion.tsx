@@ -9,6 +9,7 @@ const cssVar = { '--accordion-duration': durationAccordion + 'ms' } as React.CSS
 
 type AccordionProps = {
   id: string
+  type: 'text' | 'image'
   title: string
   defaultOpened: boolean
   children: React.ReactNode
@@ -29,17 +30,17 @@ const Accordion = (props: AccordionProps): JSX.Element => {
   const handleRemove = useCallback(
     (e: React.MouseEvent): void => {
       e.stopPropagation()
-      props.onRemove && props.onRemove(props.id)
+      props.onRemove && props.onRemove(props.type, props.id)
     },
-    [props.onRemove, props.id]
+    [props.onRemove, props.type, props.id]
   )
 
   const handleDuplicate = useCallback(
     (e: React.MouseEvent): void => {
       e.stopPropagation()
-      props.onDuplicate && props.onDuplicate('text', props.id)
+      props.onDuplicate && props.onDuplicate(props.type, props.id)
     },
-    [props.onDuplicate, props.id]
+    [props.onDuplicate, props.type, props.id]
   )
 
   return (
@@ -47,7 +48,7 @@ const Accordion = (props: AccordionProps): JSX.Element => {
       <div className="accordion-trigger" onClick={(): void => props.onToggle(props.id, !props.defaultOpened)}>
         <p className="accordion-title">{props.title}</p>
         <div>
-          {handleDuplicate && (
+          {props.onDuplicate && (
             <button
               data-tooltip={t('attr.duplicate')}
               aria-label={t('attr.duplicate')}

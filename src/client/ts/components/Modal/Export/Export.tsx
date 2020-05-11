@@ -10,13 +10,14 @@ import TextBox from '@client/ts/shared/models/TextBox'
 import { postToTwitter } from '../../../shared/api'
 import { TOGGLE_EXPORT_MODAL } from '@client/store/reducer/constants'
 import { EditorContext, EditorInt } from '@client/store/EditorContext'
+import ImageBox from '@client/ts/shared/models/ImageBox'
 import './export.scss'
 
 function Export(): JSX.Element {
   const { t } = useTranslation()
   const [isLoading, setIsLoading]: [boolean, Function] = useState<boolean>(true)
   const [img, setImg]: [string, Function] = useState<string>('')
-  const [{ drawProperties, memeSelected, texts }, dispatchEditor]: [EditorInt, Function] = useContext(EditorContext)
+  const [{ drawProperties, memeSelected, texts, images }, dispatchEditor]: [EditorInt, Function] = useContext(EditorContext)
 
   useEffect(() => {
     ;(async (): Promise<void> => {
@@ -25,18 +26,37 @@ function Export(): JSX.Element {
         (text: TextBox) =>
           new TextBox({
             ...text,
-            centerX: (text.centerX / oldWidth) * memeSelected.width,
-            centerY: (text.centerY / oldHeight) * memeSelected.height,
-            width: (text.width / oldWidth) * memeSelected.width,
-            height: (text.height / oldHeight) * memeSelected.height
+            centerX: Math.round((text.centerX / oldWidth) * memeSelected.width),
+            centerY: Math.round((text.centerY / oldHeight) * memeSelected.height),
+            width: Math.round((text.width / oldWidth) * memeSelected.width),
+            height: Math.round((text.height / oldHeight) * memeSelected.height)
           })
       )
+
+      const imageBox = images.map(
+        (image: ImageBox) =>
+          new ImageBox({
+            ...image,
+            centerX: Math.round((image.centerX / oldWidth) * memeSelected.width),
+            centerY: Math.round((image.centerY / oldHeight) * memeSelected.height),
+            width: Math.round((image.width / oldWidth) * memeSelected.width),
+            height: Math.round((image.height / oldHeight) * memeSelected.height)
+          })
+      )
+
       const canvas = document.createElement('canvas')
       canvas.width = memeSelected.width
       canvas.height = memeSelected.height
       const ctx: CanvasRenderingContext2D = canvas.getContext('2d')
       const image = await drawProperties.image
       ctx.drawImage(image, 0, 0, memeSelected.width, memeSelected.height)
+      for (const image of imageBox) {
+        const dx = Math.round(image.centerX - image.width / 2)
+        const dy = Math.round(image.centerY - image.height / 2)
+        const img = new Image()
+        img.src = image.src
+        ctx.drawImage(img, dx, dy, image.width, image.height)
+      }
       for (const text of textBox) {
         const fontSize: number = text.fontSize
         const y: number = text.centerY
