@@ -6,17 +6,19 @@ import { DrawProperties, HistoryInt } from '@client/ts/shared/validators'
 import EditorReducer from './reducer/editor'
 import { TAB_GALLERY, TEXT_ADDED, TEXT_REMOVED, TAB_CUSTOMIZATION } from '@client/ts/shared/constants'
 import { debounce } from '../utils'
-import { SET_HISTORY, ADD_TEXT, CUSTOM_TEXT, REMOVE_TEXT } from './reducer/constants'
+import { SET_HISTORY, ADD_ITEM, CUSTOM_TEXT, REMOVE_ITEM } from './reducer/constants'
 import { hasRecoverVersion } from '@client/utils/helpers'
+import ImageBox from '../shared/models/ImageBox'
 
 export interface EditorState {
-  textIdSelected: string
+  itemIdSelected: string
   showTextAreas: boolean
   currentTab: 'TAB_GALLERY' | 'TAB_CUSTOMIZATION' | null
   memeSelected: Meme
   isExportModalActive: boolean
   canvasRef: RefObject<HTMLCanvasElement>
   texts: Array<TextBox>
+  images: Array<ImageBox>
   drawProperties: DrawProperties
   innerDimensions: {
     width: number
@@ -29,13 +31,14 @@ export interface EditorState {
 }
 
 const initialState: EditorState = {
-  textIdSelected: null,
+  itemIdSelected: null,
   showTextAreas: true,
   memeSelected: null,
   currentTab: !!hasRecoverVersion() ? TAB_CUSTOMIZATION : TAB_GALLERY,
   isExportModalActive: false,
   canvasRef: createRef(),
   texts: [],
+  images: [],
   drawProperties: null,
   innerDimensions: {
     width: 0,
@@ -76,9 +79,9 @@ export function EditorProvider({ children }: { children: ReactNode }): JSX.Eleme
   const saveToEditor = useCallback(
     ({ ...args }) => {
       updater(args)
-      if (args.type === ADD_TEXT) setToHistoryDebounced(TEXT_ADDED)
+      if (args.type === ADD_ITEM) setToHistoryDebounced(TEXT_ADDED)
       else if (args.type === CUSTOM_TEXT) setToHistoryDebounced(args.historyType)
-      else if (args.type === REMOVE_TEXT) setToHistoryDebounced(TEXT_REMOVED)
+      else if (args.type === REMOVE_ITEM) setToHistoryDebounced(TEXT_REMOVED)
     },
     [setToHistoryDebounced, updater]
   )

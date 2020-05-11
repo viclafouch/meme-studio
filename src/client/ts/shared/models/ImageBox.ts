@@ -1,0 +1,33 @@
+export default class ImageBox {
+  readonly id: string
+  public version: string
+  public src: string
+  public width: number
+  public height: number
+  public centerX: number
+  public centerY: number
+  public rotate: number
+  public base: {
+    width: number
+    height: number
+    centerX: number
+    centerY: number
+  }
+
+  constructor(image: any) {
+    this.id = image.id
+    this.version = image.version || `${Date.now()}-${this.id}`
+    this.src = image.src
+    this.width = image.width
+    this.height = image.height
+    this.centerX = image.centerX
+    this.centerY = image.centerY
+    this.rotate = image.rotate
+    this.base = image.base || {
+      width: this.width,
+      height: this.height,
+      centerX: this.centerX,
+      centerY: this.centerY
+    }
+  }
+}

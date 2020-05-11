@@ -30,6 +30,16 @@ export const shuffle = ([...array]: Array<any>): Array<any> => {
   return array
 }
 
+export const calculateAspectRatioFit = (
+  srcWidth: number,
+  srcHeight: number,
+  maxWidth: number,
+  maxHeight: number
+): { width: number; height: number } => {
+  const ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight)
+  return { width: srcWidth * ratio, height: srcHeight * ratio }
+}
+
 export const toHistoryType = (type: typeString): string => {
   switch (type) {
     case 'resize':

@@ -3,7 +3,7 @@ import { TFunctionResult } from 'i18next'
 import { ColorResult } from 'react-color'
 import { ReactSVG } from 'react-svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useRef, memo, useMemo, createRef, useLayoutEffect, useEffect, useCallback, useContext } from 'react'
+import { memo, useMemo, createRef, useEffect, useCallback, useContext } from 'react'
 import { TextCustomization } from '@client/ts/shared/validators'
 import { Translation, useTranslation } from 'react-i18next'
 import Accordion from '@client/components/Accordion/Accordion'
@@ -11,33 +11,30 @@ import TextareaExtended from '@client/components/TextareaExpended/TextareaExtend
 import ColorPicker from '@client/components/ColorPicker/ColorPicker'
 import InputRangeSlider from '@client/components/InputRangeSlider/InputRangeSlider'
 import TextBox from '@client/ts/shared/models/TextBox'
-import { createText, fontSizeConfig, boxShadowConfig } from '@client/ts/shared/config-editor'
+import { fontSizeConfig, boxShadowConfig } from '@client/ts/shared/config-editor'
 import { EditorContext, EditorState, EditorInt } from '@client/store/EditorContext'
-import { CUSTOM_TEXT, ADD_TEXT, REMOVE_TEXT, SET_TEXT_ID_SELECTED } from '@client/store/reducer/constants'
-import { useWindowWidth } from '@client/ts/shared/hooks'
+import { CUSTOM_TEXT, ADD_ITEM, REMOVE_ITEM, DUPLICATE_ITEM, SET_ITEM_ID_SELECTED } from '@client/store/reducer/constants'
 import { toHistoryType } from '@client/utils/helpers'
-import { randomID, wait } from '@shared/utils'
 import { FONTS_FAMILY, ALIGN_VERTICAL, TEXT_ALIGN } from '@shared/config'
+import ImageBox from '@client/ts/shared/models/ImageBox'
 import './customization.scss'
 
 function Customization(): JSX.Element {
   const { t } = useTranslation()
-  const { isMinLgSize } = useWindowWidth()
-  const colorPicker = useRef<any>(null)
-  const [{ textIdSelected, texts, drawProperties, memeSelected, saveToEditor }, dispatchEditor]: [
-    EditorInt,
-    Function
-  ] = useContext(EditorContext)
-
-  const textsRef: Array<any> = useMemo(
-    () =>
-      Array.from({ length: texts.length }).map(() => ({
-        textarea: createRef<HTMLTextAreaElement>(),
-        accordion: createRef(),
-        colorPicker: createRef()
-      })),
-    [texts.length]
+  const [{ itemIdSelected, texts, images, memeSelected, saveToEditor }, dispatchEditor]: [EditorInt, Function] = useContext(
+    EditorContext
   )
+
+  const textsRefs: Record<string, any> = useMemo(() => {
+    const refs: Record<string, any> = {}
+    for (const text of texts) {
+      refs[text.id] = {
+        textarea: createRef<HTMLTextAreaElement>(),
+        colorPicker: createRef<any>()
+      }
+    }
+    return refs
+  }, [texts.length])
 
   const handleEdit = ({ textId, type, value }: TextCustomization): void => {
     const text: any = { ...texts.find((t: TextBox) => t.id === textId) }
@@ -45,64 +42,46 @@ function Customization(): JSX.Element {
     saveToEditor({ type: CUSTOM_TEXT, text, historyType: toHistoryType(type) })
   }
 
-  const addText = (): void => {
-    const text = createText({
-      centerY: memeSelected.height / 2,
-      centerX: memeSelected.width / 2,
-      height: memeSelected.height * (33 / 100),
-      width: memeSelected.width * (33 / 100)
-    })
-    text.height = text.base.height * drawProperties.scale
-    text.width = text.base.width * drawProperties.scale
-    text.centerY = text.base.centerY * drawProperties.scale
-    text.centerX = text.base.centerX * drawProperties.scale
-    saveToEditor({ type: ADD_TEXT, text })
-    wait(0).then(() =>
+  const addItem = useCallback((): void => {
+    saveToEditor({ type: ADD_ITEM, itemType: 'text' })
+  }, [saveToEditor])
+
+  const removeItem = useCallback(
+    (itemId: TextBox['id'] | ImageBox['id']): void => {
+      saveToEditor({ type: REMOVE_ITEM, textId: itemId })
+    },
+    [saveToEditor]
+  )
+
+  const duplicateItem = useCallback(
+    (itemType: 'text' | 'image', itemId: TextBox['id'] | ImageBox['id']): void => {
+      saveToEditor({ type: DUPLICATE_ITEM, itemId, itemType })
+    },
+    [saveToEditor]
+  )
+
+  const selectItem = useCallback(
+    (itemId: TextBox['id'] | ImageBox['id'], opened: boolean): void => {
       dispatchEditor({
-        type: SET_TEXT_ID_SELECTED,
-        textIdSelected: text.id
+        type: SET_ITEM_ID_SELECTED,
+        itemIdSelected: opened ? itemId : null
       })
-    )
-  }
-
-  const removeText = (textId: string): void => {
-    const text = texts.find(t => t.id === textId)
-    saveToEditor({ type: REMOVE_TEXT, text })
-  }
-
-  const duplicateText = (textId: string): void => {
-    const textDuplicated = texts.find(t => t.id === textId)
-    const text = new TextBox({
-      ...textDuplicated,
-      id: randomID(),
-      version: `${Date.now()}-${textDuplicated.id}`
-    })
-    text.base = textDuplicated.base
-    saveToEditor({ type: ADD_TEXT, text })
-  }
-
-  const handleKeyPress = useCallback(() => {
-    const textIndex = texts.findIndex(text => text.id === textIdSelected)
-    if (textIndex !== -1) textsRef[textIndex].textarea.current.focus()
-  }, [textIdSelected])
+    },
+    [dispatchEditor]
+  )
 
   useEffect(() => {
-    window.addEventListener('keypress', handleKeyPress)
-    return (): void => {
-      window.removeEventListener('keypress', handleKeyPress)
-    }
-  }, [handleKeyPress])
-
-  useLayoutEffect(() => {
-    if (textIdSelected) {
-      const textIndex = texts.findIndex(text => text.id === textIdSelected)
-      for (let index = 0; index < textsRef.length; index++) {
-        const accordion: any = textsRef[index].accordion.current
-        if (index === textIndex) accordion.open()
-        else accordion.close()
+    if (itemIdSelected) {
+      const item = textsRefs[itemIdSelected]
+      const handleKeyPress = (): void => item.textarea.current.focus()
+      if (item && item.textarea) {
+        window.addEventListener('keypress', handleKeyPress)
+        return (): void => {
+          window.removeEventListener('keypress', handleKeyPress)
+        }
       }
     }
-  }, [textIdSelected, texts, textsRef])
+  }, [itemIdSelected, textsRefs])
 
   return (
     <div className="customization-not-empty">
@@ -115,31 +94,20 @@ function Customization(): JSX.Element {
           textIndex
         ): React.ReactNode => (
           <Accordion
-            defaultOpened={id === textIdSelected}
-            ref={textsRef[textIndex].accordion}
+            id={id}
+            defaultOpened={id === itemIdSelected}
             title={value.trim() || `${t('studio.text')} #${textIndex + 1}`}
             key={id}
-            duplicateText={(): void => duplicateText(id)}
-            removeText={(): void => removeText(id)}
-            afterImmediateOpening={(): void => {
-              if (id !== textIdSelected) {
-                dispatchEditor({
-                  type: SET_TEXT_ID_SELECTED,
-                  textIdSelected: id
-                })
-              }
-            }}
-            afterOpening={(): void => {
-              const textarea: HTMLTextAreaElement = textsRef[textIndex].textarea.current
-              if (isMinLgSize) textarea.focus()
-            }}
+            onToggle={selectItem}
+            onDuplicate={duplicateItem}
+            onRemove={removeItem}
           >
             <div className="customization-textbox-section">
               <div className="field-customization">
                 <TextareaExtended
                   rows={1}
                   name="value"
-                  ref={textsRef[textIndex].textarea}
+                  ref={textsRefs[id].textarea}
                   placeholder={`${t('studio.text')} #${textIndex + 1}`}
                   value={value}
                   onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
@@ -188,11 +156,11 @@ function Customization(): JSX.Element {
                 />
               </div>
               <div className="field-customization">
-                <label htmlFor="color" onClick={(): void => colorPicker.current.open()}>
+                <label htmlFor="color" onClick={(): void => textsRefs[id].current.open()}>
                   {t('studio.color')}
                 </label>
                 <ColorPicker
-                  ref={textsRef[textIndex].colorPicker}
+                  ref={textsRefs[id].colorPicker}
                   color={color}
                   setColor={({ hex }: ColorResult): void =>
                     handleEdit({
@@ -282,7 +250,20 @@ function Customization(): JSX.Element {
           </Accordion>
         )
       )}
-      <button className="add-text-button" onClick={(): void => addText()}>
+      {images.map(
+        (image: ImageBox, index: number): React.ReactNode => (
+          <Accordion
+            id={image.id}
+            defaultOpened={image.id === itemIdSelected}
+            onToggle={selectItem}
+            title={'Image' + index}
+            key={image.id}
+          >
+            <p>Hello</p>
+          </Accordion>
+        )
+      )}
+      <button className="add-text-button" onClick={addItem}>
         <FontAwesomeIcon className="icon-plus" icon={['fas', 'plus']} />
         <span>{t('studio.addText')}</span>
       </button>

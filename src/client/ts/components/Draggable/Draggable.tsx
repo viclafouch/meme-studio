@@ -4,7 +4,7 @@ import { ReactSVG } from 'react-svg'
 import { DrawProperties, typeString } from '@client/ts/shared/validators'
 import TextBox from '@client/ts/shared/models/TextBox'
 import { radToDegree, degreeToRad } from '@client/utils/index'
-import { CUSTOM_TEXT } from '@client/store/reducer/constants'
+import { CUSTOM_TEXT, CUSTOM_IMAGE } from '@client/store/reducer/constants'
 import { toHistoryType } from '@client/utils/helpers'
 import Meme from '@client/ts/shared/models/Meme'
 import './draggable.scss'
@@ -21,8 +21,9 @@ type DraggableProps = {
   drawProperties: DrawProperties
   isSelected: boolean
   memeSelected: Meme
+  type: 'image' | 'text'
   zIndex: number
-  text: TextBox
+  item: any
   saveToEditor: Function
   setTextSelected: Function
 }
@@ -47,11 +48,11 @@ interface StateInt {
   lastLeft: number
 }
 
-const initalState = (text: TextBox): StateInt => ({
-  left: text.centerX - text.width / 2,
-  top: text.centerY - text.height / 2,
-  lastLeft: text.centerX - text.width / 2,
-  lastTop: text.centerY - text.height / 2,
+const initalState = (item: DraggableProps['item']): StateInt => ({
+  left: item.centerX - item.width / 2,
+  top: item.centerY - item.height / 2,
+  lastLeft: item.centerX - item.width / 2,
+  lastTop: item.centerY - item.height / 2,
   downStartX: 0,
   downStartY: 0,
   downPageY: 0,
@@ -60,19 +61,19 @@ const initalState = (text: TextBox): StateInt => ({
   isRotating: false,
   isResinzing: false,
   side: null,
-  lastAngle: degreeToRad(text.rotate),
-  lastWidth: text.width,
-  lastHeight: text.height,
+  lastAngle: degreeToRad(item.rotate),
+  lastWidth: item.width,
+  lastHeight: item.height,
   startOffsetLeft: 0,
   startOffsetTop: 0
 })
 
 export function Draggable(props: DraggableProps): JSX.Element {
   const draggableRef: RefObject<HTMLDivElement> = useRef(null)
-  const [state, setState]: [StateInt, Function] = useState(() => initalState(props.text))
+  const [state, setState]: [StateInt, Function] = useState(() => initalState(props.item))
 
   useEffect(() => {
-    setState(initalState(props.text))
+    setState(initalState(props.item))
   }, [props.drawProperties.scale, setState])
 
   const minimalSize: number = useMemo(() => props.drawProperties.scale * 40, [props.drawProperties.scale])
@@ -82,11 +83,11 @@ export function Draggable(props: DraggableProps): JSX.Element {
       const {
         drawProperties,
         memeSelected,
-        text: { ...text }
+        item: { ...item }
       } = props
       let { top, left } = state
       const { downStartX, downStartY, downPageY, downPageX } = state
-      let { centerX, centerY, height, width, rotate } = text
+      let { centerX, centerY, height, width, rotate } = item
 
       let type: typeString
 
@@ -166,22 +167,27 @@ export function Draggable(props: DraggableProps): JSX.Element {
       }
 
       if (type) {
-        text.centerX = centerX
-        text.centerY = centerY
-        text.width = width
-        text.height = height
-        text.rotate = rotate
-        text.base = {
+        item.centerX = centerX
+        item.centerY = centerY
+        item.width = width
+        item.height = height
+        item.rotate = rotate
+        item.base = {
           centerX: (centerX / drawProperties.width) * memeSelected.width,
           centerY: (centerY / drawProperties.height) * memeSelected.height,
           width: (width / drawProperties.width) * memeSelected.width,
           height: (height / drawProperties.height) * memeSelected.height
         }
-        props.saveToEditor({ type: CUSTOM_TEXT, text, historyType: toHistoryType(type) })
+        if (props.type === 'text') {
+          props.saveToEditor({ type: CUSTOM_TEXT, text: item, historyType: toHistoryType(type) })
+        } else {
+          props.saveToEditor({ type: CUSTOM_IMAGE, image: item, historyType: toHistoryType(type) })
+        }
+
         setState({ ...state, top, left })
       }
     },
-    [props.drawProperties, state, minimalSize, props.memeSelected, props.text, props.saveToEditor, setState]
+    [props.drawProperties, state, minimalSize, props.memeSelected, props.item, props.saveToEditor, setState, props.type]
   )
 
   const handleMouseDown = useCallback(
@@ -192,7 +198,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
       const type = event.currentTarget.getAttribute('data-type')
       const side = event.currentTarget.getAttribute('data-side') as StateInt['side']
       const { left, top } = draggableRef.current.getBoundingClientRect()
-      const { width, height, rotate } = props.text
+      const { width, height, rotate } = props.item
       if (type === 'drag') {
         setState(
           (state: StateInt): StateInt => ({
@@ -230,7 +236,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
         )
       }
     },
-    [props.text, setState]
+    [props.item, setState]
   )
 
   const handleMouseUp = useCallback(() => {
@@ -268,17 +274,22 @@ export function Draggable(props: DraggableProps): JSX.Element {
       aria-grabbed={state.isDragging}
       draggable={true}
       ref={draggableRef}
-      id={props.text.id}
+      id={props.item.id}
       data-type="drag"
       className={`draggable text-box ${props.isSelected ? 'draggable-active' : ''}`}
       style={{
-        transform: `translate3d(${Math.round(state.left)}px, ${Math.round(state.top)}px, 0) rotate(${props.text.rotate}deg)`,
-        height: Math.round(props.text.height),
-        width: Math.round(props.text.width),
-        zIndex: props.zIndex
+        transform: `translate3d(${Math.round(state.left)}px, ${Math.round(state.top)}px, 0) rotate(${props.item.rotate}deg)`,
+        height: Math.round(props.item.height),
+        width: Math.round(props.item.width),
+        zIndex: props.zIndex,
+        ...(props.item.src
+          ? {
+              background: `url(${props.item.src}) center center/100% no-repeat`
+            }
+          : null)
       }}
       onMouseDown={handleMouseDown}
-      onClick={(): void => !props.isSelected && props.setTextSelected(props.text.id)}
+      onClick={(): void => !props.isSelected && props.setTextSelected(props.item.id)}
     >
       <div className="draggable-resize" data-type="resize" data-side="ne" onMouseDown={handleMouseDown} />
       <div className="draggable-resize" data-type="resize" data-side="nw" onMouseDown={handleMouseDown} />

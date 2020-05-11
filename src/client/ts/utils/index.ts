@@ -168,3 +168,11 @@ export const isSafari =
   navigator.userAgent &&
   navigator.userAgent.indexOf('CriOS') == -1 &&
   navigator.userAgent.indexOf('FxiOS') == -1
+
+export const toBase64 = (file: File): Promise<HTMLImageElement> =>
+  new Promise((resolve, reject) => {
+    const img = new Image()
+    img.src = window.URL.createObjectURL(file)
+    img.onload = (): void => resolve(img)
+    img.onerror = (error: ProgressEvent<FileReader>): void => reject(error)
+  })

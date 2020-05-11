@@ -24,7 +24,7 @@ export interface Line {
 
 export interface HistoryInt {
   drawProperties: DrawProperties
-  textIdSelected: TextBox['id']
+  itemIdSelected: TextBox['id']
   texts: Array<TextBox>
   type: string
 }
