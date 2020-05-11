@@ -82,9 +82,9 @@ function WrapperCanvas(): JSX.Element {
               type="image"
               memeSelected={memeSelected}
               drawProperties={drawProperties}
-              zIndex={index}
+              zIndex={texts.length + index + 1}
               saveToEditor={saveToEditor}
-              isSelected={false}
+              isSelected={image.id === itemIdSelected}
               setTextSelected={setTextSelected}
             />
           ))}

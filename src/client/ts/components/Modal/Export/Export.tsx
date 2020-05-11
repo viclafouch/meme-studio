@@ -50,13 +50,6 @@ function Export(): JSX.Element {
       const ctx: CanvasRenderingContext2D = canvas.getContext('2d')
       const image = await drawProperties.image
       ctx.drawImage(image, 0, 0, memeSelected.width, memeSelected.height)
-      for (const image of imageBox) {
-        const dx = Math.round(image.centerX - image.width / 2)
-        const dy = Math.round(image.centerY - image.height / 2)
-        const img = new Image()
-        img.src = image.src
-        ctx.drawImage(img, dx, dy, image.width, image.height)
-      }
       for (const text of textBox) {
         const fontSize: number = text.fontSize
         const y: number = text.centerY
@@ -64,6 +57,13 @@ function Export(): JSX.Element {
         const maxHeight: number = text.height
         const maxWidth: number = text.width
         fillText({ text, ctx, maxWidth, maxHeight, fontSize, x, y })
+      }
+      for (const image of imageBox) {
+        const dx = Math.round(image.centerX - image.width / 2)
+        const dy = Math.round(image.centerY - image.height / 2)
+        const img = new Image()
+        img.src = image.src
+        ctx.drawImage(img, dx, dy, image.width, image.height)
       }
       ctx.save()
       const watermark = 'meme-studio.io'
