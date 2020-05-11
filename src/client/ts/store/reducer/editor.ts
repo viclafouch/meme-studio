@@ -234,6 +234,8 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
         text.width = text.base.width * draft.drawProperties.scale
         text.centerY = text.base.centerY * draft.drawProperties.scale
         text.centerX = text.base.centerX * draft.drawProperties.scale
+
+        draft.itemIdSelected = text.id
         draft.texts.push(text)
       }
       break
@@ -242,6 +244,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
         const textDuplicated = draft.texts.find(text => text.id === action.itemId)
         const text = new TextBox({
           ...textDuplicated,
+          base: { ...textDuplicated.base },
           id: randomID()
         })
         text.version = `${Date.now()}-${text.id}`
