@@ -90,8 +90,8 @@ body {
   }
 
   @include lg {
-    &:not(:disabled):hover::before,
-    &:not(:disabled):hover::after {
+    &:not(:disabled):not(.tools-list-btn-disabled):hover::before,
+    &:not(:disabled):not(.tools-list-btn-disabled):hover::after {
       opacity: 1;
       visibility: visible;
     }

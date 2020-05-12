@@ -88,7 +88,8 @@ html[data-theme="dark"] .tools {
       }
     }
 
-    &:disabled {
+    &:disabled,
+    &.tools-list-btn-disabled {
       color: var(--text-disabled);
       cursor: not-allowed;
     }
@@ -120,7 +121,7 @@ html[data-theme="dark"] .tools {
       border-left: 0;
     }
 
-    &:not(:disabled):hover {
+    &:not(.tools-list-btn-disabled):hover {
       color: var(--text-hover-tools);
     }
 

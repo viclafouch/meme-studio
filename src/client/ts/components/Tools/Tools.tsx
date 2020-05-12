@@ -56,7 +56,7 @@ const Tools = (): JSX.Element => {
         <li>
           <button
             aria-label={showTextAreas ? t('attr.hideTextboxes') : t('attr.showTextboxes')}
-            className="tools-list-btn"
+            className={`tools-list-btn ${!memeSelected ? 'tools-list-btn-disabled' : ''}`}
             id="show-text-areas"
             data-tooltip={showTextAreas ? t('attr.hideTextboxes') : t('attr.showTextboxes')}
             disabled={!memeSelected}
@@ -73,7 +73,7 @@ const Tools = (): JSX.Element => {
         <li>
           <button
             aria-label={t('attr.undo')}
-            className="tools-list-btn"
+            className={`tools-list-btn ${!canUndo ? 'tools-list-btn-disabled' : ''}`}
             data-tooltip={t('attr.undo')}
             disabled={!canUndo}
             onClick={(): void => canUndo && dispatchEditor({ type: UNDO_HISTORY })}
@@ -84,7 +84,7 @@ const Tools = (): JSX.Element => {
         <li>
           <button
             aria-label={t('attr.redo')}
-            className="tools-list-btn"
+            className={`tools-list-btn ${!canRedo ? 'tools-list-btn-disabled' : ''}`}
             data-tooltip={t('attr.redo')}
             disabled={!canRedo}
             onClick={(): void => canRedo && dispatchEditor({ type: REDO_HISTORY })}
@@ -95,7 +95,7 @@ const Tools = (): JSX.Element => {
         <li>
           <button
             aria-label={t('attr.eraseAll')}
-            className="tools-list-btn"
+            className={`tools-list-btn ${texts.length === 0 ? 'tools-list-btn-disabled' : ''}`}
             data-tooltip={t('attr.eraseAll')}
             disabled={texts.length === 0}
             onClick={(): void => texts.length > 0 && dispatchEditor({ type: ERASE_ALL })}
@@ -105,12 +105,18 @@ const Tools = (): JSX.Element => {
         </li>
         <li>
           <label htmlFor="upload-imagebox">
-            <span role="button" aria-label={t('attr.eraseAll')} className="tools-list-btn" data-tooltip={t('attr.eraseAll')}>
+            <span
+              role="button"
+              aria-label={t('attr.addImage')}
+              className={`tools-list-btn ${!memeSelected ? 'tools-list-btn-disabled' : ''}`}
+              data-tooltip={t('attr.addImage')}
+            >
               <FontAwesomeIcon icon={['fas', 'chart-area']} />
             </span>
             <input
               type="file"
               ref={uploadInput}
+              disabled={!memeSelected}
               onChange={handleUploadImagebox}
               className="upload-imagebox-input"
               accept="image/png, image/jpeg"
@@ -121,7 +127,7 @@ const Tools = (): JSX.Element => {
         <li>
           <button
             aria-label={t('attr.reset')}
-            className="tools-list-btn"
+            className={`tools-list-btn ${!memeSelected ? 'tools-list-btn-disabled' : ''}`}
             data-tooltip={t('attr.reset')}
             disabled={!memeSelected}
             onClick={(): void => {
@@ -138,7 +144,7 @@ const Tools = (): JSX.Element => {
           <li>
             <button
               aria-label={t('studio.export')}
-              className="tools-list-btn"
+              className={`tools-list-btn ${!memeSelected ? 'tools-list-btn-disabled' : ''}`}
               data-tooltip={t('studio.export')}
               disabled={!memeSelected}
               onClick={(): void => memeSelected && dispatchEditor({ type: TOGGLE_EXPORT_MODAL })}
