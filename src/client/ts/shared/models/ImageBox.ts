@@ -7,6 +7,7 @@ export default class ImageBox {
   public centerX: number
   public centerY: number
   public rotate: number
+  public keepRatio: boolean
   public base: {
     width: number
     height: number
@@ -23,6 +24,7 @@ export default class ImageBox {
     this.centerX = image.centerX
     this.centerY = image.centerY
     this.rotate = image.rotate
+    this.keepRatio = image.keepRatio
     this.base = image.base || {
       width: this.width,
       height: this.height,

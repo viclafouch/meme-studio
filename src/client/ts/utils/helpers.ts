@@ -106,3 +106,58 @@ export const formatRelativeDate = (date: Date, baseDate: Date, locale?: string):
   formatRelative(date, baseDate, {
     locale: getLocale(locale)
   })
+
+export const resize = ({
+  side,
+  maxWidth,
+  maxHeight,
+  previousHeight,
+  previousWidth,
+  spacingHeight,
+  spacingWidth,
+  previousTop,
+  previousLeft
+}: {
+  keepRatio: boolean
+  side: 'ne' | 'se' | 'sw' | 'nw'
+  maxWidth: number
+  maxHeight: number
+  spacingHeight: number
+  spacingWidth: number
+  previousHeight: number
+  previousWidth: number
+  previousTop: number
+  previousLeft: number
+}): { height: number; width: number; top: number; left: number } => {
+  let height: number
+  let width: number
+  let top: number
+  let left: number
+
+  if (side === 'sw' || side === 'se') {
+    if (previousHeight + spacingHeight > 100) {
+      height = previousHeight + spacingHeight
+      if (top + height >= maxHeight) height = maxHeight - top
+    } else height = 100
+  } else if (side === 'nw' || side === 'ne') {
+    if (previousHeight - spacingHeight > 100) {
+      top = previousTop + spacingHeight
+      if (top < 0) top = 0
+      else height = previousHeight - spacingHeight
+    } else height = 100
+  }
+  if (side === 'ne' || side === 'se') {
+    if (previousWidth + spacingWidth > 100) {
+      width = previousWidth + spacingWidth
+      if (left + width >= maxWidth) width = maxWidth - left
+    } else width = 100
+  } else if (side === 'nw' || side === 'sw') {
+    if (previousWidth - spacingWidth > 100) {
+      left = previousLeft + spacingWidth
+      if (left <= 0) left = 0
+      else width = previousWidth - spacingWidth
+    } else width = 100
+  }
+
+  return { height, width, top, left }
+}

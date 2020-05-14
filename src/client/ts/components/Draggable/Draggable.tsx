@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useState, useLayoutEffect, useCallback, useRef, useMemo, RefObject, useEffect, memo } from 'react'
 import { ReactSVG } from 'react-svg'
+import { resize } from '../../utils/helpers'
 import { DrawProperties, typeString } from '@client/ts/shared/validators'
 import TextBox from '@client/ts/shared/models/TextBox'
 import { radToDegree, degreeToRad } from '@client/utils/index'
@@ -104,34 +105,26 @@ export function Draggable(props: DraggableProps): JSX.Element {
           centerX = left + width / 2
         } else if (state.isResinzing) {
           type = 'resize'
-          if (state.side === 'sw' || state.side === 'se') {
-            if (state.lastHeight + (event.pageY - downPageY) > minimalSize) {
-              height = state.lastHeight + (event.pageY - downPageY)
-              if (top + height >= drawProperties.height) height = drawProperties.height - top
-            } else height = minimalSize
-            centerY = top + height / 2
-          } else if (state.side === 'nw' || state.side === 'ne') {
-            if (state.lastHeight - (event.pageY - downPageY) > minimalSize) {
-              top = state.lastTop + (event.pageY - downPageY)
-              if (top < 0) top = 0
-              else height = state.lastHeight - (event.pageY - downPageY)
-            } else height = minimalSize
-            centerY = top + height / 2
-          }
-          if (state.side === 'ne' || state.side === 'se') {
-            if (state.lastWidth + (event.pageX - downPageX) > minimalSize) {
-              width = state.lastWidth + (event.pageX - downPageX)
-              if (left + width >= drawProperties.width) width = drawProperties.width - left
-            } else width = minimalSize
-            centerX = left + width / 2
-          } else if (state.side === 'nw' || state.side === 'sw') {
-            if (state.lastWidth - (event.pageX - downPageX) > minimalSize) {
-              left = state.lastLeft + (event.pageX - downPageX)
-              if (left <= 0) left = 0
-              else width = state.lastWidth - (event.pageX - downPageX)
-            } else width = minimalSize
-            centerX = left + width / 2
-          }
+          const resation = resize({
+            maxWidth: drawProperties.width,
+            maxHeight: drawProperties.height,
+            previousHeight: state.lastHeight,
+            previousWidth: state.lastWidth,
+            previousTop: state.lastTop,
+            previousLeft: state.lastLeft,
+            spacingHeight: event.pageY - downPageY,
+            spacingWidth: event.pageX - downPageX,
+            keepRatio: !!item.keepRatio,
+            side: state.side
+          })
+
+          width = resation.width || width
+          height = resation.height || height
+          top = resation.top || top
+          left = resation.left || left
+
+          centerY = top + height / 2
+          centerX = left + width / 2
         } else if (state.isRotating) {
           if (state.startOffsetLeft !== event.pageX && state.startOffsetTop !== event.pageY) {
             type = 'rotate'

@@ -254,9 +254,11 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
           centerY: draft.drawProperties.height / 2,
           centerX: draft.drawProperties.width / 2,
           width,
+          keepRatio: true,
           height,
           src: img.src
         })
+
         draft.images.push(image)
       }
       break
