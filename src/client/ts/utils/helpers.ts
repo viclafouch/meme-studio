@@ -111,53 +111,72 @@ export const resize = ({
   side,
   maxWidth,
   maxHeight,
+  minWidth,
+  minHeight,
   previousHeight,
   previousWidth,
   spacingHeight,
   spacingWidth,
   previousTop,
-  previousLeft
+  previousLeft,
+  currentTop,
+  currentLeft
 }: {
   keepRatio: boolean
   side: 'ne' | 'se' | 'sw' | 'nw'
   maxWidth: number
   maxHeight: number
+  minWidth: number
+  minHeight: number
   spacingHeight: number
   spacingWidth: number
   previousHeight: number
   previousWidth: number
   previousTop: number
   previousLeft: number
+  currentTop: number
+  currentLeft: number
 }): { height: number; width: number; top: number; left: number } => {
   let height: number
   let width: number
-  let top: number
-  let left: number
+
+  const right = maxWidth - (previousLeft + previousWidth)
+  const bottom = maxHeight - (previousTop + previousHeight)
 
   if (side === 'sw' || side === 'se') {
-    if (previousHeight + spacingHeight > 100) {
+    if (previousHeight + spacingHeight > minHeight) {
       height = previousHeight + spacingHeight
-      if (top + height >= maxHeight) height = maxHeight - top
-    } else height = 100
+      if (currentTop + height >= maxHeight) height = maxHeight - currentTop
+    } else height = minHeight
   } else if (side === 'nw' || side === 'ne') {
-    if (previousHeight - spacingHeight > 100) {
-      top = previousTop + spacingHeight
-      if (top < 0) top = 0
-      else height = previousHeight - spacingHeight
-    } else height = 100
+    if (previousHeight - spacingHeight > minHeight) {
+      currentTop = previousTop + spacingHeight
+      if (currentTop < 0) {
+        currentTop = 0
+        height = maxHeight - bottom
+      } else height = previousHeight - spacingHeight
+    } else {
+      height = minHeight
+      currentTop = maxHeight - bottom - height
+    }
   }
   if (side === 'ne' || side === 'se') {
-    if (previousWidth + spacingWidth > 100) {
+    if (previousWidth + spacingWidth > minWidth) {
       width = previousWidth + spacingWidth
-      if (left + width >= maxWidth) width = maxWidth - left
-    } else width = 100
+      if (currentLeft + width >= maxWidth) width = maxWidth - currentLeft
+    } else width = minWidth
   } else if (side === 'nw' || side === 'sw') {
-    if (previousWidth - spacingWidth > 100) {
-      left = previousLeft + spacingWidth
-      if (left <= 0) left = 0
-      else width = previousWidth - spacingWidth
-    } else width = 100
+    if (previousWidth - spacingWidth > minWidth) {
+      currentLeft = previousLeft + spacingWidth
+      if (currentLeft <= 0) {
+        currentLeft = 0
+        width = maxWidth - right
+      } else width = previousWidth - spacingWidth
+    } else {
+      width = minWidth
+      currentLeft = maxWidth - right - width
+    }
   }
 
-  return { height, width, top, left }
+  return { height, width, top: currentTop, left: currentLeft }
 }

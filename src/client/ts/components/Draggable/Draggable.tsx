@@ -106,8 +106,12 @@ export function Draggable(props: DraggableProps): JSX.Element {
         } else if (state.isResinzing) {
           type = 'resize'
           const resation = resize({
-            maxWidth: drawProperties.width,
-            maxHeight: drawProperties.height,
+            currentLeft: left,
+            currentTop: top,
+            maxWidth: props.drawProperties.width,
+            maxHeight: props.drawProperties.height,
+            minWidth: 300,
+            minHeight: 300,
             previousHeight: state.lastHeight,
             previousWidth: state.lastWidth,
             previousTop: state.lastTop,
@@ -120,8 +124,8 @@ export function Draggable(props: DraggableProps): JSX.Element {
 
           width = resation.width || width
           height = resation.height || height
-          top = resation.top || top
-          left = resation.left || left
+          top = resation.top
+          left = resation.left
 
           centerY = top + height / 2
           centerX = left + width / 2
