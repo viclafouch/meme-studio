@@ -108,6 +108,7 @@ export const formatRelativeDate = (date: Date, baseDate: Date, locale?: string):
   })
 
 export const resize = ({
+  keepRatio,
   side,
   maxWidth,
   maxHeight,
@@ -143,6 +144,9 @@ export const resize = ({
   const right = maxWidth - (previousLeft + previousWidth)
   const bottom = maxHeight - (previousTop + previousHeight)
 
+  const widthOnePercent = previousWidth / 100
+  const heightOnePercent = previousHeight / 100
+
   if (side === 'sw' || side === 'se') {
     if (previousHeight + spacingHeight > minHeight) {
       height = previousHeight + spacingHeight
@@ -160,6 +164,7 @@ export const resize = ({
       currentTop = maxHeight - bottom - height
     }
   }
+
   if (side === 'ne' || side === 'se') {
     if (previousWidth + spacingWidth > minWidth) {
       width = previousWidth + spacingWidth
@@ -175,6 +180,39 @@ export const resize = ({
     } else {
       width = minWidth
       currentLeft = maxWidth - right - width
+    }
+  }
+
+  if (keepRatio) {
+    if (side === 'se') {
+      let relativeWidthPercent = width / widthOnePercent
+      const relativeHeight = heightOnePercent * relativeWidthPercent
+      if (relativeHeight >= minHeight) {
+        height = relativeHeight
+        if (currentTop + height > maxHeight) {
+          height = maxHeight - currentTop
+          relativeWidthPercent = height / heightOnePercent
+          const relativeWidth = widthOnePercent * relativeWidthPercent
+          width = relativeWidth
+        }
+      }
+    } else if (side === 'ne') {
+      // let relativeWidthPercent = width / widthOnePercent
+      // const relativeHeight = heightOnePercent * relativeWidthPercent
+      // if (maxHeight - bottom - relativeHeight > 0) {
+      //   height = relativeHeight
+      //   currentTop = maxHeight - bottom - height
+      //   if (currentTop + height > maxHeight) {
+      //     height = maxHeight - currentTop
+      //     relativeWidthPercent = height / heightOnePercent
+      //     const relativeWidth = widthOnePercent * relativeWidthPercent
+      //     width = relativeWidth
+      //   }
+      // } else {
+      //   relativeWidthPercent = height / heightOnePercent
+      //   const relativeWidth = widthOnePercent * relativeWidthPercent
+      //   width = relativeWidth
+      // }
     }
   }
 
