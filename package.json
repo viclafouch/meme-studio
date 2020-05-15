@@ -58,7 +58,7 @@
     "@types/helmet": "0.0.47",
     "@types/morgan": "1.9.0",
     "@types/node": "14.0.1",
-    "@types/sequelize": "4.28.8",
+    "@types/sequelize": "4.28.9",
     "@types/shortid": "0.0.29",
     "@types/twit": "2.2.24",
     "@types/validator": "13.0.0",
