@@ -34,8 +34,8 @@ interface StateInt {
   isRotating: boolean
   isResinzing: boolean
   lastAngle: number
-  lastWidth: TextBox['width']
-  lastHeight: TextBox['height']
+  previousWidth: TextBox['width']
+  previousHeight: TextBox['height']
   left: number
   top: number
   side: 'ne' | 'se' | 'sw' | 'nw' | null
@@ -47,6 +47,8 @@ interface StateInt {
   startOffsetTop: number
   lastTop: number
   lastLeft: number
+  widthOnePercent: number
+  heightOnePercent: number
 }
 
 const initalState = (item: DraggableProps['item']): StateInt => ({
@@ -63,10 +65,12 @@ const initalState = (item: DraggableProps['item']): StateInt => ({
   isResinzing: false,
   side: null,
   lastAngle: degreeToRad(item.rotate),
-  lastWidth: item.width,
-  lastHeight: item.height,
+  previousWidth: item.width,
+  previousHeight: item.height,
   startOffsetLeft: 0,
-  startOffsetTop: 0
+  startOffsetTop: 0,
+  widthOnePercent: 0,
+  heightOnePercent: 0
 })
 
 export function Draggable(props: DraggableProps): JSX.Element {
@@ -110,16 +114,18 @@ export function Draggable(props: DraggableProps): JSX.Element {
             currentTop: top,
             maxWidth: props.drawProperties.width,
             maxHeight: props.drawProperties.height,
-            minWidth: 300,
-            minHeight: 300,
-            previousHeight: state.lastHeight,
-            previousWidth: state.lastWidth,
+            minWidth: 10,
+            minHeight: 10,
+            previousHeight: state.previousHeight,
+            previousWidth: state.previousWidth,
             previousTop: state.lastTop,
             previousLeft: state.lastLeft,
             spacingHeight: event.pageY - downPageY,
             spacingWidth: event.pageX - downPageX,
             keepRatio: true,
-            side: state.side
+            side: state.side,
+            widthOnePercent: state.widthOnePercent,
+            heightOnePercent: state.heightOnePercent
           })
 
           width = resation.width || width
@@ -224,11 +230,13 @@ export function Draggable(props: DraggableProps): JSX.Element {
             side,
             downPageX: event.pageX,
             downPageY: event.pageY,
-            lastHeight: height,
-            lastWidth: width,
+            previousHeight: height,
+            previousWidth: width,
             lastLeft: state.left,
             lastTop: state.top,
-            isResinzing: true
+            isResinzing: true,
+            widthOnePercent: width / 100,
+            heightOnePercent: height / 100
           })
         )
       }

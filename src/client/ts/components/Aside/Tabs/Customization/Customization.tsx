@@ -83,8 +83,6 @@ function Customization(): JSX.Element {
     }
   }, [itemIdSelected, textsRefs])
 
-  console.log(textsRefs)
-
   return (
     <div className="customization-not-empty">
       <h2>
