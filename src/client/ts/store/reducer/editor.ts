@@ -325,7 +325,16 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       draft.itemIdSelected = null
       draft.texts = []
       draft.images = []
-      clearHistory(draft)
+      draft.history.items = [
+        {
+          drawProperties: draft.drawProperties,
+          texts: [],
+          images: [],
+          itemIdSelected: null,
+          type: INITIAL
+        }
+      ]
+      draft.history.currentIndex = 0
       break
     case RESET:
       draft.itemIdSelected = null
@@ -338,18 +347,37 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       break
   }
 
-  if (
-    [UNDO_HISTORY, REDO_HISTORY, SET_HISTORY, SET_MEME_SELECTED, ERASE_ALL].includes(action.type) &&
-    draft.memeSelected &&
-    !draft.memeSelected.localImageUrl
-  ) {
-    setLocalStorage({
-      memeSelected: draft.memeSelected,
-      lastEditDate: Date.now(),
-      history: draft.history
-    })
-  } else if ([RESET].includes(action.type)) {
+  if (action.type === RESET) {
     removeLocalStorage(['memeSelected', 'history', 'lastEditDate'])
+  } else if (
+    [UNDO_HISTORY, REDO_HISTORY, SET_HISTORY, SET_MEME_SELECTED, ERASE_ALL].includes(action.type) &&
+    draft.memeSelected
+  ) {
+    const isIncludesImages = draft.history.items.some(item => item.images.length > 0) || draft.memeSelected.localImageUrl
+    if (isIncludesImages) {
+      setLocalStorage({
+        memeSelected: draft.memeSelected,
+        lastEditDate: Date.now(),
+        history: {
+          items: [
+            {
+              drawProperties: draft.drawProperties,
+              texts: [],
+              images: [],
+              itemIdSelected: null,
+              type: INITIAL
+            }
+          ],
+          currentIndex: 0
+        }
+      })
+    } else {
+      setLocalStorage({
+        memeSelected: draft.memeSelected,
+        lastEditDate: Date.now(),
+        history: draft.history
+      })
+    }
   }
 
   const stateUpdated: EditorState = finishDraft(draft) as any

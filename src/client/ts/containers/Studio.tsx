@@ -1,7 +1,7 @@
 import * as React from 'react'
 import AbortController from 'abort-controller'
 import * as Loadable from 'react-loadable'
-import { useState, useRef, RefObject, useEffect, useContext } from 'react'
+import { useState, useRef, RefObject, useEffect, useContext, useCallback } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Button from '@client/components/Button/Button'
@@ -127,6 +127,22 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
       })
     }
   }, [memeSelected, isMinLgSize])
+
+  const showPrompt = useCallback(e => {
+    e = e || window.event
+    if (e) {
+      const confirmationMessage = 'Are you sure to leave ?'
+      e.returnValue = confirmationMessage
+      return confirmationMessage
+    }
+  }, [])
+
+  useEffect(() => {
+    if (memeSelected) window.addEventListener('beforeunload', showPrompt)
+    return (): void => {
+      window.removeEventListener('beforeunload', showPrompt)
+    }
+  }, [memeSelected, showPrompt])
 
   const handleImportImage = async (fileList?: FileList): Promise<void> => {
     const files = fileList || inputDrop.current.files

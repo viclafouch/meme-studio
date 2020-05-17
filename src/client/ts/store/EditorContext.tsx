@@ -72,7 +72,7 @@ export function EditorProvider({ children }: { children: ReactNode }): JSX.Eleme
     return !!state.history.items[index] && state.history.items.length > 0
   }, [state.history.items, state.history.currentIndex])
 
-  const canErazeAll = state.texts.length > 0 || state.images.length > 0
+  const canErazeAll = canUndo || canRedo || state.texts.length > 0 || state.images.length > 0
 
   const setToHistoryDebounced = useCallback(
     debounce((historyType: string) => updater({ type: SET_HISTORY, historyType }), 1000),
