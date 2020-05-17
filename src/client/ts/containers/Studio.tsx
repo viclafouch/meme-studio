@@ -31,7 +31,7 @@ const CanvasDebuggerAsync = Loadable({
 
 const lastEditDate = (): false | Date => {
   const version = hasRecoverVersion()
-  if (version) return version.lastEditDate
+  if (version && version.history.items.length > 1) return version.lastEditDate
   else return false
 }
 
@@ -40,12 +40,12 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
   const contentRef: RefObject<HTMLDivElement> = useRef(null)
   const [{ theme }]: [DefaultState] = useContext(DefaultContext)
   const { t, i18n } = useTranslation()
-  const [lastVersion, setLastVersion]: [false | Date, Function] = useState<false | Date>(lastEditDate())
-  const [isActiveRecoverBox, setIsActiveRecoverBox]: [boolean, Function] = useState<boolean>(lastVersion instanceof Date)
   const { width, isMinLgSize } = useWindowWidth()
-  const [{ memeSelected, currentTab }, dispatchEditor]: [EditorInt, Function] = useContext(EditorContext)
+  const [{ memeSelected, currentTab, texts, images }, dispatchEditor]: [EditorInt, Function] = useContext(EditorContext)
   const [uploadError, setUploadError]: [string, Function] = useState<string | null>(null)
   const [isLoading, setIsLoading]: [boolean, Function] = useState<boolean>(false)
+  const [lastVersion, setLastVersion]: [false | Date, Function] = useState<false | Date>(() => lastEditDate())
+  const [isActiveRecoverBox, setIsActiveRecoverBox]: [boolean, Function] = useState<boolean>(!!lastVersion)
 
   useEffect(() => {
     const wrapper: HTMLElement = contentRef.current
@@ -95,7 +95,7 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
 
   useEffect(() => {
     let timeout: any
-    if (hasRecoverVersion()) {
+    if (lastVersion && (images.length > 0 || texts.length > 0)) {
       timeout = setTimeout(() => {
         setIsActiveRecoverBox(false)
         timeout = setTimeout(() => {
@@ -138,7 +138,7 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
   }, [])
 
   useEffect(() => {
-    if (memeSelected) window.addEventListener('beforeunload', showPrompt)
+    if (memeSelected && !IS_DEV) window.addEventListener('beforeunload', showPrompt)
     return (): void => {
       window.removeEventListener('beforeunload', showPrompt)
     }

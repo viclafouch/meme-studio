@@ -21,12 +21,13 @@ const isKeyArrow = (keyCode: number): string | false => {
 type DraggableProps = {
   drawProperties: DrawProperties
   isSelected: boolean
+  isShowing: boolean
   memeSelected: Meme
   type: 'image' | 'text'
   zIndex: number
   item: any
   saveToEditor: Function
-  setTextSelected: Function
+  setItemSelected: Function
 }
 
 interface StateInt {
@@ -282,12 +283,13 @@ export function Draggable(props: DraggableProps): JSX.Element {
       ref={draggableRef}
       id={props.item.id}
       data-type="drag"
-      className={`draggable text-box ${props.isSelected ? 'draggable-active' : ''}`}
+      className={`draggable text-box ${props.isShowing ? 'draggable-show' : ''} ${props.isSelected ? 'draggable-active' : ''}`}
       style={{
         transform: `translate3d(${Math.round(state.left)}px, ${Math.round(state.top)}px, 0) rotate(${props.item.rotate}deg)`,
         height: Math.round(props.item.height),
         width: Math.round(props.item.width),
         zIndex: props.zIndex,
+        pointerEvents: props.isShowing ? 'all' : 'none',
         ...(props.type === 'image'
           ? {
               background: `url(${props.item.src}) center center/100% 100% no-repeat`
@@ -295,7 +297,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
           : null)
       }}
       onMouseDown={handleMouseDown}
-      onClick={(): void => !props.isSelected && props.setTextSelected(props.item.id)}
+      onClick={(): void => !props.isSelected && props.setItemSelected(props.item.id)}
     >
       <div className="draggable-resize" data-type="resize" data-side="ne" onMouseDown={handleMouseDown} />
       <div className="draggable-resize" data-type="resize" data-side="nw" onMouseDown={handleMouseDown} />

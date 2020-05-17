@@ -267,6 +267,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
           centerY: draft.drawProperties.height / 2,
           centerX: draft.drawProperties.width / 2,
           width,
+          name: img.name,
           keepRatio: true,
           height,
           src: img.src

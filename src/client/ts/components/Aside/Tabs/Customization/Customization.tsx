@@ -266,7 +266,7 @@ function Customization(): JSX.Element {
         )
       )}
       {images.map(
-        (image: ImageBox, index: number): React.ReactNode => (
+        (image: ImageBox): React.ReactNode => (
           <Accordion
             id={image.id}
             type="image"
@@ -274,7 +274,7 @@ function Customization(): JSX.Element {
             onRemove={removeItem}
             defaultOpened={image.id === itemIdSelected}
             onToggle={selectItem}
-            title={'Image' + index}
+            title={image.name}
             key={image.id}
           >
             <div className="customization-textbox-section">

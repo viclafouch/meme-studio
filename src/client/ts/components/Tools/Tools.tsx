@@ -38,6 +38,8 @@ const Tools = (): JSX.Element => {
       const file = e.currentTarget.files[0]
       try {
         const img = await toBase64(file)
+        img.name = file.name
+
         saveToEditor({
           type: ADD_ITEM,
           historyType: IMAGE_ADDED,
@@ -106,27 +108,29 @@ const Tools = (): JSX.Element => {
             <FontAwesomeIcon icon={['fas', 'eraser']} />
           </button>
         </li>
-        <li>
-          <label htmlFor="upload-imagebox">
-            <span
-              role="button"
-              aria-label={t('attr.addImage')}
-              className={`tools-list-btn ${!memeSelected ? 'tools-list-btn-disabled' : ''}`}
-              data-tooltip={t('attr.addImage')}
-            >
-              <FontAwesomeIcon icon={['fas', 'chart-area']} />
-            </span>
-            <input
-              type="file"
-              ref={uploadInput}
-              disabled={!memeSelected}
-              onChange={handleUploadImagebox}
-              className="upload-imagebox-input"
-              accept="image/png, image/jpeg"
-              id="upload-imagebox"
-            />
-          </label>
-        </li>
+        {isMinLgSize && (
+          <li>
+            <label htmlFor="upload-imagebox">
+              <span
+                role="button"
+                aria-label={t('attr.addImage')}
+                className={`tools-list-btn ${!memeSelected ? 'tools-list-btn-disabled' : ''}`}
+                data-tooltip={t('attr.addImage')}
+              >
+                <FontAwesomeIcon icon={['fas', 'chart-area']} />
+              </span>
+              <input
+                type="file"
+                ref={uploadInput}
+                disabled={!memeSelected}
+                onChange={handleUploadImagebox}
+                className="upload-imagebox-input"
+                accept="image/png, image/jpeg"
+                id="upload-imagebox"
+              />
+            </label>
+          </li>
+        )}
         <li>
           <button
             aria-label={t('attr.reset')}

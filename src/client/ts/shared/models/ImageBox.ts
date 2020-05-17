@@ -2,6 +2,7 @@ export default class ImageBox {
   readonly id: string
   public version: string
   public src: string
+  public name: string
   public width: number
   public height: number
   public centerX: number
@@ -19,6 +20,7 @@ export default class ImageBox {
     this.id = image.id
     this.version = image.version || `${Date.now()}-${this.id}`
     this.src = image.src
+    this.name = image.name
     this.width = image.width
     this.height = image.height
     this.centerX = image.centerX

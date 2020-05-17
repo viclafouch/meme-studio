@@ -38,7 +38,7 @@ function WrapperCanvas(): JSX.Element {
     return (): void => cancelAnimationFrame(currentDraw)
   }, [drawProperties, texts])
 
-  const setTextSelected = useCallback(
+  const setItemSelected = useCallback(
     (id: TextBox['id']) => {
       dispatchEditor({
         type: SET_ITEM_ID_SELECTED,
@@ -59,35 +59,38 @@ function WrapperCanvas(): JSX.Element {
           backgroundImage: `url('${memeSelected.url()}')`
         }}
       >
-        {isMinLgSize &&
-          showTextAreas &&
-          texts.map((text: TextBox, index: number) => (
-            <Draggable
-              key={text.version}
-              item={text}
-              type="text"
-              memeSelected={memeSelected}
-              drawProperties={drawProperties}
-              zIndex={index}
-              saveToEditor={saveToEditor}
-              isSelected={text.id === itemIdSelected}
-              setTextSelected={setTextSelected}
-            />
-          ))}
-        {isMinLgSize &&
-          images.map((image: ImageBox, index: number) => (
-            <Draggable
-              key={image.version}
-              item={image}
-              type="image"
-              memeSelected={memeSelected}
-              drawProperties={drawProperties}
-              zIndex={texts.length + index + 1}
-              saveToEditor={saveToEditor}
-              isSelected={image.id === itemIdSelected}
-              setTextSelected={setTextSelected}
-            />
-          ))}
+        {isMinLgSize && (
+          <>
+            {texts.map((text: TextBox, index: number) => (
+              <Draggable
+                key={text.version}
+                item={text}
+                type="text"
+                memeSelected={memeSelected}
+                drawProperties={drawProperties}
+                zIndex={index}
+                saveToEditor={saveToEditor}
+                isSelected={text.id === itemIdSelected}
+                isShowing={showTextAreas}
+                setItemSelected={setItemSelected}
+              />
+            ))}
+            {images.map((image: ImageBox, index: number) => (
+              <Draggable
+                key={image.version}
+                item={image}
+                type="image"
+                memeSelected={memeSelected}
+                drawProperties={drawProperties}
+                zIndex={texts.length + index + 1}
+                saveToEditor={saveToEditor}
+                isSelected={image.id === itemIdSelected}
+                isShowing={showTextAreas}
+                setItemSelected={setItemSelected}
+              />
+            ))}
+          </>
+        )}
         <canvas
           className="canvas"
           ref={canvasRef}
