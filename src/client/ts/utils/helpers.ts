@@ -9,7 +9,8 @@ import {
   EDIT_TEXT_ALIGN,
   EDIT_TEXT_VERTICAL,
   EDIT_UPPERCASE,
-  EDIT_VALUE
+  EDIT_VALUE,
+  EDIT_KEEP_RATIO
 } from '@client/ts/shared/constants'
 import { typeString, RecoverVersionInt, HistoryInt } from '@client/ts/shared/validators'
 import Meme from '../shared/models/Meme'
@@ -62,6 +63,8 @@ export const toHistoryType = (type: typeString): string => {
       return EDIT_UPPERCASE
     case 'value':
       return EDIT_VALUE
+    case 'keepRatio':
+      return EDIT_KEEP_RATIO
     default:
       return type
   }

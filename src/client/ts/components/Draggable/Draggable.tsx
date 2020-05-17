@@ -122,7 +122,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
             previousLeft: state.lastLeft,
             spacingHeight: event.pageY - downPageY,
             spacingWidth: event.pageX - downPageX,
-            keepRatio: true,
+            keepRatio: !!item.keepRatio,
             side: state.side,
             widthOnePercent: state.widthOnePercent,
             heightOnePercent: state.heightOnePercent

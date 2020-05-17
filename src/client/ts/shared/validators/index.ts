@@ -14,6 +14,12 @@ export interface TextCustomization {
   type: typeString
 }
 
+export interface ImageCustomization {
+  value: any
+  imageId: string
+  type: typeString
+}
+
 export interface Line {
   x: number
   y: number
@@ -42,6 +48,7 @@ export type typeString =
   | 'isUppercase'
   | 'alignVertical'
   | 'boxShadow'
+  | 'keepRatio'
 
 export interface RecoverVersionInt {
   memeSelected: EditorState['memeSelected']

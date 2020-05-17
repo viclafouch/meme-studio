@@ -4,7 +4,7 @@ import { ColorResult } from 'react-color'
 import { ReactSVG } from 'react-svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { memo, useMemo, createRef, useEffect, useCallback, useContext } from 'react'
-import { TextCustomization } from '@client/ts/shared/validators'
+import { TextCustomization, ImageCustomization } from '@client/ts/shared/validators'
 import { Translation, useTranslation } from 'react-i18next'
 import Accordion from '@client/components/Accordion/Accordion'
 import TextareaExtended from '@client/components/TextareaExpended/TextareaExtended'
@@ -13,7 +13,14 @@ import InputRangeSlider from '@client/components/InputRangeSlider/InputRangeSlid
 import TextBox from '@client/ts/shared/models/TextBox'
 import { fontSizeConfig, boxShadowConfig } from '@client/ts/shared/config-editor'
 import { EditorContext, EditorState, EditorInt } from '@client/store/EditorContext'
-import { CUSTOM_TEXT, ADD_ITEM, REMOVE_ITEM, DUPLICATE_ITEM, SET_ITEM_ID_SELECTED } from '@client/store/reducer/constants'
+import {
+  CUSTOM_TEXT,
+  ADD_ITEM,
+  REMOVE_ITEM,
+  DUPLICATE_ITEM,
+  SET_ITEM_ID_SELECTED,
+  CUSTOM_IMAGE
+} from '@client/store/reducer/constants'
 import { toHistoryType } from '@client/utils/helpers'
 import { FONTS_FAMILY, ALIGN_VERTICAL, TEXT_ALIGN } from '@shared/config'
 import ImageBox from '@client/ts/shared/models/ImageBox'
@@ -36,10 +43,16 @@ function Customization(): JSX.Element {
     return refs
   }, [memeSelected.id, texts.length])
 
-  const handleEdit = ({ textId, type, value }: TextCustomization): void => {
+  const handleEditText = ({ textId, type, value }: TextCustomization): void => {
     const text: any = { ...texts.find((t: TextBox) => t.id === textId) }
     if (type in text) text[type] = value
     saveToEditor({ type: CUSTOM_TEXT, text, historyType: toHistoryType(type) })
+  }
+
+  const handleEditImage = ({ imageId, type, value }: ImageCustomization): void => {
+    const image: any = { ...images.find((i: ImageBox) => i.id === imageId) }
+    if (type in image) image[type] = value
+    saveToEditor({ type: CUSTOM_IMAGE, image, historyType: toHistoryType(type) })
   }
 
   const addItem = useCallback((): void => {
@@ -112,7 +125,7 @@ function Customization(): JSX.Element {
                   placeholder={`${t('studio.text')} #${textIndex + 1}`}
                   value={value}
                   onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
-                    handleEdit({
+                    handleEditText({
                       textId: id,
                       type: 'value',
                       value: event.target.value
@@ -130,7 +143,7 @@ function Customization(): JSX.Element {
                   step={1}
                   value={fontSize}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
-                    handleEdit({
+                    handleEditText({
                       textId: id,
                       type: 'fontSize',
                       value: parseInt(event.target.value)
@@ -148,7 +161,7 @@ function Customization(): JSX.Element {
                   step={1}
                   value={boxShadow}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
-                    handleEdit({
+                    handleEditText({
                       textId: id,
                       type: 'boxShadow',
                       value: parseInt(event.target.value)
@@ -164,7 +177,7 @@ function Customization(): JSX.Element {
                   ref={textsRefs[id].colorPicker}
                   color={color}
                   setColor={({ hex }: ColorResult): void =>
-                    handleEdit({
+                    handleEditText({
                       textId: id,
                       type: 'color',
                       value: hex
@@ -178,7 +191,7 @@ function Customization(): JSX.Element {
                   value={fontFamily}
                   name="font-family"
                   onChange={(event: React.ChangeEvent<HTMLSelectElement>): void =>
-                    handleEdit({
+                    handleEditText({
                       textId: id,
                       type: 'fontFamily',
                       value: event.target.value
@@ -198,7 +211,7 @@ function Customization(): JSX.Element {
                   value={alignVertical}
                   name="align-vertical"
                   onChange={(event: React.ChangeEvent<HTMLSelectElement>): void =>
-                    handleEdit({
+                    handleEditText({
                       textId: id,
                       type: 'alignVertical',
                       value: event.target.value
@@ -218,7 +231,7 @@ function Customization(): JSX.Element {
                   value={textAlign}
                   name="text-align"
                   onChange={(event: React.ChangeEvent<HTMLSelectElement>): void =>
-                    handleEdit({
+                    handleEditText({
                       textId: id,
                       type: 'textAlign',
                       value: event.target.value
@@ -239,7 +252,7 @@ function Customization(): JSX.Element {
                   name="uppercase"
                   checked={isUppercase}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
-                    handleEdit({
+                    handleEditText({
                       textId: id,
                       type: 'isUppercase',
                       value: event.target.checked
@@ -263,7 +276,23 @@ function Customization(): JSX.Element {
             title={'Image' + index}
             key={image.id}
           >
-            <p>Hello</p>
+            <div className="customization-textbox-section">
+              <div className="field-customization">
+                <span>{t('studio.textUppercase')}</span>
+                <input
+                  type="checkbox"
+                  name="uppercase"
+                  checked={image.keepRatio}
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
+                    handleEditImage({
+                      imageId: image.id,
+                      type: 'keepRatio',
+                      value: event.target.checked
+                    })
+                  }
+                />
+              </div>
+            </div>
           </Accordion>
         )
       )}
