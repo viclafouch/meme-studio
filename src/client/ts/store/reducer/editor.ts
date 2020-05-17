@@ -38,14 +38,21 @@ export interface Actions extends Partial<EditorState> {
 }
 
 const updateDrawing = (draft: Draft<EditorState>): void => {
-  const { width, height } = calculateAspectRatioFit(
-    draft.memeSelected.width,
-    draft.memeSelected.height,
-    draft.innerDimensions.width,
-    draft.innerDimensions.height
-  )
+  let canvasWidth = draft.memeSelected.width
+  let canvasHeight = draft.memeSelected.height
 
-  const scale: number = Math.min(width / draft.memeSelected.width, height / draft.memeSelected.height)
+  if (canvasWidth > draft.innerDimensions.width || canvasHeight > draft.innerDimensions.height) {
+    const { width, height } = calculateAspectRatioFit(
+      draft.memeSelected.width,
+      draft.memeSelected.height,
+      draft.innerDimensions.width,
+      draft.innerDimensions.height
+    )
+    canvasWidth = width
+    canvasHeight = height
+  }
+
+  const scale = Math.min(canvasWidth / draft.memeSelected.width, canvasHeight / draft.memeSelected.height)
 
   draft.texts = draft.texts.map((text: TextBox) => {
     text.height = text.base.height * scale
@@ -65,8 +72,8 @@ const updateDrawing = (draft: Draft<EditorState>): void => {
 
   draft.drawProperties = {
     image: draft.memeSelected.image,
-    width,
-    height,
+    width: canvasWidth,
+    height: canvasHeight,
     scale
   }
 }

@@ -6,8 +6,8 @@ import TextBox from '@client/ts/shared/models/TextBox'
 import Draggable from '@client/components/Draggable/Draggable'
 import { SET_ITEM_ID_SELECTED } from '@client/store/reducer/constants'
 import { EditorInt, EditorContext } from '@client/store/EditorContext'
-import './wrapper-canvas.scss'
 import ImageBox from '@client/ts/shared/models/ImageBox'
+import './wrapper-canvas.scss'
 
 function WrapperCanvas(): JSX.Element {
   const { isMinLgSize } = useWindowWidth()
@@ -91,13 +91,7 @@ function WrapperCanvas(): JSX.Element {
             ))}
           </>
         )}
-        <canvas
-          className="canvas"
-          ref={canvasRef}
-          width={Math.round(memeSelected.width)}
-          height={Math.round(memeSelected.height)}
-          id="meme-canvas"
-        />
+        <canvas className="canvas" ref={canvasRef} width={drawProperties.width} height={drawProperties.height} id="meme-canvas" />
       </div>
     </div>
   )
