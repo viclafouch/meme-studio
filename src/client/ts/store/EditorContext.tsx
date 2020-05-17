@@ -53,6 +53,7 @@ const initialState: EditorState = {
 export interface EditorInt extends EditorState {
   canUndo: boolean
   canRedo: boolean
+  canErazeAll: boolean
   saveToEditor: Function
 }
 
@@ -71,6 +72,8 @@ export function EditorProvider({ children }: { children: ReactNode }): JSX.Eleme
     return !!state.history.items[index] && state.history.items.length > 0
   }, [state.history.items, state.history.currentIndex])
 
+  const canErazeAll = state.texts.length > 0 || state.images.length > 0
+
   const setToHistoryDebounced = useCallback(
     debounce((historyType: string) => updater({ type: SET_HISTORY, historyType }), 1000),
     [updater]
@@ -87,6 +90,8 @@ export function EditorProvider({ children }: { children: ReactNode }): JSX.Eleme
   )
 
   return (
-    <EditorContext.Provider value={[{ ...state, canRedo, canUndo, saveToEditor }, updater]}>{children}</EditorContext.Provider>
+    <EditorContext.Provider value={[{ ...state, canRedo, canUndo, canErazeAll, saveToEditor }, updater]}>
+      {children}
+    </EditorContext.Provider>
   )
 }

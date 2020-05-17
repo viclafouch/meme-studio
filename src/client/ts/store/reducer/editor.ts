@@ -272,6 +272,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
           src: img.src
         })
 
+        draft.itemIdSelected = image.id
         draft.images.push(image)
       }
       break

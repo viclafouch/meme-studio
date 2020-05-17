@@ -28,7 +28,7 @@ const Tools = (): JSX.Element => {
   const { t } = useTranslation()
   const { isMinLgSize } = useWindowWidth()
   const [{ theme }, dispatch]: [DefaultState, Function] = useContext(DefaultContext)
-  const [{ showTextAreas, memeSelected, canUndo, canRedo, texts, saveToEditor }, dispatchEditor]: [
+  const [{ showTextAreas, memeSelected, canUndo, canRedo, canErazeAll, saveToEditor }, dispatchEditor]: [
     EditorInt,
     Function
   ] = useContext(EditorContext)
@@ -98,10 +98,10 @@ const Tools = (): JSX.Element => {
         <li>
           <button
             aria-label={t('attr.eraseAll')}
-            className={`tools-list-btn ${texts.length === 0 ? 'tools-list-btn-disabled' : ''}`}
+            className={`tools-list-btn ${!canErazeAll ? 'tools-list-btn-disabled' : ''}`}
             data-tooltip={t('attr.eraseAll')}
-            disabled={texts.length === 0}
-            onClick={(): void => texts.length > 0 && dispatchEditor({ type: ERASE_ALL })}
+            disabled={!canErazeAll}
+            onClick={(): void => canErazeAll && dispatchEditor({ type: ERASE_ALL })}
           >
             <FontAwesomeIcon icon={['fas', 'eraser']} />
           </button>
