@@ -202,6 +202,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
           const { memeSelected, history } = lastVersion
           draft.memeSelected = memeSelected
           draft.history = history
+
           draft.history.items = draft.history.items.map(i => {
             i.drawProperties.image = memeSelected.image
             return i
@@ -209,11 +210,11 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
 
           const currentVersion = history.items[history.currentIndex]
 
-          draft.itemIdSelected = currentVersion.itemIdSelected
+          if (history.currentIndex !== -1) {
+            draft.itemIdSelected = currentVersion.itemIdSelected
+            draft.texts = currentVersion.texts
+          }
 
-          const texts = currentVersion.texts
-
-          draft.texts = texts
           updateDrawing(draft)
         }
       } else if (draft.memeSelected) updateDrawing(draft)
@@ -337,7 +338,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
   }
 
   if (
-    [UNDO_HISTORY, REDO_HISTORY, SET_HISTORY, SET_MEME_SELECTED].includes(action.type) &&
+    [UNDO_HISTORY, REDO_HISTORY, SET_HISTORY, SET_MEME_SELECTED, ERASE_ALL].includes(action.type) &&
     draft.memeSelected &&
     !draft.memeSelected.localImageUrl
   ) {
@@ -346,7 +347,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       lastEditDate: Date.now(),
       history: draft.history
     })
-  } else if ([RESET, ERASE_ALL].includes(action.type)) {
+  } else if ([RESET].includes(action.type)) {
     removeLocalStorage(['memeSelected', 'history', 'lastEditDate'])
   }
 
