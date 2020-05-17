@@ -13,6 +13,7 @@ import {
   TOGGLE_THEME,
   ADD_ITEM
 } from '@client/store/reducer/constants'
+import { IMAGE_ADDED } from '../../shared/constants'
 import Faq from '@client/components/Modal/Faq/Faq'
 import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
 import { useWindowWidth } from '@client/ts/shared/hooks'
@@ -27,17 +28,19 @@ const Tools = (): JSX.Element => {
   const { t } = useTranslation()
   const { isMinLgSize } = useWindowWidth()
   const [{ theme }, dispatch]: [DefaultState, Function] = useContext(DefaultContext)
-  const [{ showTextAreas, memeSelected, canUndo, canRedo, texts }, dispatchEditor]: [EditorInt, Function] = useContext(
-    EditorContext
-  )
+  const [{ showTextAreas, memeSelected, canUndo, canRedo, texts, saveToEditor }, dispatchEditor]: [
+    EditorInt,
+    Function
+  ] = useContext(EditorContext)
 
   const handleUploadImagebox = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
       const file = e.currentTarget.files[0]
       try {
         const img = await toBase64(file)
-        dispatchEditor({
+        saveToEditor({
           type: ADD_ITEM,
+          historyType: IMAGE_ADDED,
           itemType: 'image',
           img
         })
@@ -47,7 +50,7 @@ const Tools = (): JSX.Element => {
         uploadInput.current.value = ''
       }
     },
-    [dispatchEditor]
+    [saveToEditor]
   )
 
   return (

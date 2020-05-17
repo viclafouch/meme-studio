@@ -1,4 +1,5 @@
-import TextBox from '@client/ts/shared/models/TextBox'
+import TextBox from '../models/TextBox'
+import ImageBox from '../models/ImageBox'
 import { EditorState } from '@client/store/EditorContext'
 
 export interface DrawProperties {
@@ -32,6 +33,7 @@ export interface HistoryInt {
   drawProperties: DrawProperties
   itemIdSelected: TextBox['id']
   texts: Array<TextBox>
+  images: Array<ImageBox>
   type: string
 }
 

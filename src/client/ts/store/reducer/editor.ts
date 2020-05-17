@@ -120,7 +120,7 @@ const clearHistory = (draft: Draft<EditorState>): void => {
 
 const undoHistory = (draft: Draft<EditorState>): void => {
   const index = draft.history.currentIndex - 1
-  const previousItem = draft.history.items[index]
+  const previousItem: HistoryInt = draft.history.items[index]
 
   if (previousItem) {
     const { drawProperties, texts } = checkSize({
@@ -134,6 +134,11 @@ const undoHistory = (draft: Draft<EditorState>): void => {
       return text
     })
 
+    draft.images = previousItem.images.map((image: ImageBox) => {
+      image.version = `${Date.now()}-${image.id}`
+      return image
+    })
+
     draft.itemIdSelected = previousItem.itemIdSelected
     draft.drawProperties = drawProperties
     draft.history.currentIndex = index
@@ -142,20 +147,26 @@ const undoHistory = (draft: Draft<EditorState>): void => {
 
 const redoHistory = (draft: Draft<EditorState>): void => {
   const index: number = draft.history.currentIndex + 1
-  const nextItem = draft.history.items[index]
+  const nextItem: HistoryInt = draft.history.items[index]
   if (nextItem) {
     const { drawProperties, texts } = checkSize({
       oldProperties: nextItem.drawProperties,
       newProperties: draft.drawProperties,
       texts: nextItem.texts
     })
+
     draft.texts = texts.map((text: TextBox) => {
       text.version = `${Date.now()}-${text.id}`
       return text
     })
 
-    draft.itemIdSelected = nextItem.itemIdSelected
+    draft.images = nextItem.images.map((image: ImageBox) => {
+      image.version = `${Date.now()}-${image.id}`
+      return image
+    })
 
+    draft.itemIdSelected = nextItem.itemIdSelected
+    draft.images = nextItem.images
     draft.drawProperties = drawProperties
     draft.history.currentIndex = index
   }
@@ -177,6 +188,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       saveToHistory(draft, {
         drawProperties: draft.drawProperties,
         texts: draft.texts,
+        images: [],
         itemIdSelected: draft.itemIdSelected,
         type: INITIAL
       })
@@ -299,6 +311,7 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       saveToHistory(draft, {
         drawProperties: draft.drawProperties,
         texts: draft.texts,
+        images: draft.images,
         type: action.historyType,
         itemIdSelected: draft.itemIdSelected
       })

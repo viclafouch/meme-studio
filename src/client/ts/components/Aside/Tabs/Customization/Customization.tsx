@@ -24,6 +24,7 @@ import {
 import { toHistoryType } from '@client/utils/helpers'
 import { FONTS_FAMILY, ALIGN_VERTICAL, TEXT_ALIGN } from '@shared/config'
 import ImageBox from '@client/ts/shared/models/ImageBox'
+import { TEXT_ADDED, IMAGE_REMOVED, TEXT_REMOVED } from '@client/ts/shared/constants'
 import './customization.scss'
 
 function Customization(): JSX.Element {
@@ -56,12 +57,12 @@ function Customization(): JSX.Element {
   }
 
   const addItem = useCallback((): void => {
-    saveToEditor({ type: ADD_ITEM, itemType: 'text' })
+    saveToEditor({ type: ADD_ITEM, itemType: 'text', historyType: TEXT_ADDED })
   }, [saveToEditor])
 
   const removeItem = useCallback(
     (itemType: 'text' | 'image', itemId: TextBox['id'] | ImageBox['id']): void => {
-      saveToEditor({ type: REMOVE_ITEM, itemId, itemType })
+      saveToEditor({ type: REMOVE_ITEM, itemId, itemType, historyType: itemType === 'image' ? IMAGE_REMOVED : TEXT_REMOVED })
     },
     [saveToEditor]
   )

@@ -4,9 +4,9 @@ import Meme from '@client/ts/shared/models/Meme'
 import TextBox from '@client/ts/shared/models/TextBox'
 import { DrawProperties, HistoryInt } from '@client/ts/shared/validators'
 import EditorReducer from './reducer/editor'
-import { TAB_GALLERY, TEXT_ADDED, TEXT_REMOVED, TAB_CUSTOMIZATION } from '@client/ts/shared/constants'
+import { TAB_GALLERY, TEXT_REMOVED, TAB_CUSTOMIZATION } from '@client/ts/shared/constants'
 import { debounce } from '../utils'
-import { SET_HISTORY, ADD_ITEM, CUSTOM_TEXT, REMOVE_ITEM } from './reducer/constants'
+import { SET_HISTORY, ADD_ITEM, CUSTOM_TEXT, REMOVE_ITEM, CUSTOM_IMAGE } from './reducer/constants'
 import { hasRecoverVersion } from '@client/utils/helpers'
 import ImageBox from '../shared/models/ImageBox'
 
@@ -79,9 +79,9 @@ export function EditorProvider({ children }: { children: ReactNode }): JSX.Eleme
   const saveToEditor = useCallback(
     ({ ...args }) => {
       updater(args)
-      if (args.type === ADD_ITEM) setToHistoryDebounced(TEXT_ADDED)
-      else if (args.type === CUSTOM_TEXT) setToHistoryDebounced(args.historyType)
-      else if (args.type === REMOVE_ITEM) setToHistoryDebounced(TEXT_REMOVED)
+      if ([ADD_ITEM, CUSTOM_TEXT, CUSTOM_IMAGE, REMOVE_ITEM].includes(args.type)) {
+        setToHistoryDebounced(args.historyType)
+      }
     },
     [setToHistoryDebounced, updater]
   )
