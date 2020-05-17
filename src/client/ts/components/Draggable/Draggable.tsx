@@ -141,7 +141,8 @@ export function Draggable(props: DraggableProps): JSX.Element {
             let radian = Math.atan2(event.pageY - state.startOffsetTop, event.pageX - state.startOffsetLeft)
             radian -= Math.atan2(downPageY - state.startOffsetTop, downPageX - state.startOffsetLeft)
             radian += state.lastAngle
-            const degree = radToDegree(radian)
+            let degree = radToDegree(radian)
+            if (degree > -3.2 && degree < 3.2) degree = 0
             rotate = degree
           }
         }
