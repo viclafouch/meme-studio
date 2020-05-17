@@ -12,7 +12,7 @@ function Gallery(): JSX.Element {
   const scrollerRef: RefObject<HTMLUListElement> = useRef(null)
 
   const handleScroll = useCallback(async () => {
-    const isAtBottom = scrollerRef.current.offsetHeight + scrollerRef.current.scrollTop >= scrollerRef.current.scrollHeight - 150
+    const isAtBottom = scrollerRef.current.offsetHeight + scrollerRef.current.scrollTop >= scrollerRef.current.scrollHeight - 450
     if (isAtBottom && !isLoading && hasNextMemes) {
       try {
         setIsLoading(true)

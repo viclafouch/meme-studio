@@ -76,7 +76,7 @@ function Home(): JSX.Element {
   const [{ theme }, dispatch]: [DefaultState, Function] = useContext(DefaultContext)
 
   return (
-    <div className="page home">
+    <div className="page home live-background">
       <div className="top-actions">
         <LangSelector />
         <Button
@@ -118,7 +118,7 @@ function Home(): JSX.Element {
           <Link to="/create">
             <Button
               tabIndex={-1}
-              onMouseOver={(): void => StudioAsync.preload()}
+              onMouseOver={StudioAsync.preload}
               color="blue"
               className="home-get-started-btn ld ld-fall-ttb-in"
               big

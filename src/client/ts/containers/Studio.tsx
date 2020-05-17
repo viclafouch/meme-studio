@@ -194,9 +194,11 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
             </div>
           )}
           {memeSelected && <WrapperCanvas />}
-          <div className={`studio-spinner ${isLoading ? 'studio-spinner-active' : ''}`}>
-            <Loader />
-          </div>
+          {isLoading && (
+            <div className="studio-spinner studio-spinner-active">
+              <Loader />
+            </div>
+          )}
           {IS_DEV && memeSelected && <CanvasDebuggerAsync theme={theme} />}
           {!memeSelected && (
             <div className="empty-meme">

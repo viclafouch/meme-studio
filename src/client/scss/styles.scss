@@ -36,14 +36,17 @@ body {
     min-height: 100vh;
     min-height: -webkit-fill-available;
     position: relative;
-    background-image: url('/images/particles.svg');
-    background-attachment: fixed;
-    background-repeat: repeat-y;
-    background-size: auto;
+  }
+}
 
-    @include sm {
-      background-position: center center;
-    }
+.live-background {
+  background-image: url('/images/particles.svg');
+  background-attachment: fixed;
+  background-repeat: repeat-y;
+  background-size: auto;
+
+  @include sm {
+    background-position: center center;
   }
 }
 
