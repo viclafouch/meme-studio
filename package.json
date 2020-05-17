@@ -120,7 +120,7 @@
     "cookie-parser": "1.4.5",
     "cors": "2.8.5",
     "express": "4.17.1",
-    "express-validator": "6.4.1",
+    "express-validator": "6.5.0",
     "helmet": "3.22.0",
     "heroku-ssl-redirect": "0.0.4",
     "is-base64": "1.1.0",
