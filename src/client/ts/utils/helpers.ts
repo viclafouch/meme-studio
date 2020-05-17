@@ -187,32 +187,98 @@ export const resize = ({
   } else {
     if (side === 'se') {
       let newWidth = previousWidth + spacingWidth
-      if (currentLeft + newWidth >= maxWidth) newWidth = maxWidth - currentLeft
-      const relativeWidthPercent = newWidth / widthOnePercent
-      const newHeight = heightOnePercent * relativeWidthPercent
+      if (currentLeft + newWidth >= maxWidth) {
+        newWidth = maxWidth - currentLeft
+      }
 
-      if (newWidth > minWidth && newHeight > minHeight && currentLeft + newWidth <= maxWidth) {
+      const relativeWidthPercent = newWidth / widthOnePercent
+      let newHeight = heightOnePercent * relativeWidthPercent
+
+      if (currentTop + newHeight > maxHeight) {
+        newHeight = maxHeight - currentTop
+        const relativeHeightPercent = newHeight / heightOnePercent
+        newWidth = widthOnePercent * relativeHeightPercent
+      }
+
+      if (newWidth > minWidth && newHeight > minHeight) {
         width = newWidth
         height = newHeight
       }
     } else if (side === 'ne') {
       let newWidth = previousWidth + spacingWidth
-      if (currentLeft + newWidth >= maxWidth) newWidth = maxWidth - currentLeft
+      if (currentLeft + newWidth >= maxWidth) {
+        newWidth = maxWidth - currentLeft
+      }
+
       const relativeWidthPercent = newWidth / widthOnePercent
-      const newHeight = heightOnePercent * relativeWidthPercent
+      let newHeight = heightOnePercent * relativeWidthPercent
       let newTop = maxHeight - bottom - newHeight
-      if (newTop < 0) newTop = 0
-      if (
-        newWidth > minWidth &&
-        newHeight > minHeight &&
-        currentLeft + newWidth <= maxWidth &&
-        (currentTop !== 0 || newTop > 0)
-      ) {
+
+      if (newTop < 0) {
+        newTop = 0
+        newHeight = maxHeight - bottom
+        const relativeHeightPercent = newHeight / heightOnePercent
+        newWidth = widthOnePercent * relativeHeightPercent
+      }
+
+      if (newWidth > minWidth && newHeight > minHeight) {
         width = newWidth
         height = newHeight
         currentTop = newTop
       }
     } else if (side === 'sw') {
+      let newWidth = previousWidth - spacingWidth
+      let newLeft = maxWidth - right - newWidth
+
+      if (newLeft < 0) {
+        newWidth = maxWidth - right
+        newLeft = 0
+      }
+
+      const relativeWidthPercent = newWidth / widthOnePercent
+      let newHeight = heightOnePercent * relativeWidthPercent
+
+      if (currentTop + newHeight > maxHeight) {
+        newHeight = maxHeight - currentTop
+        const relativeHeightPercent = newHeight / heightOnePercent
+        newWidth = widthOnePercent * relativeHeightPercent
+        newLeft = maxWidth - right - newWidth
+      }
+
+      if (newWidth > minWidth && newHeight > minHeight) {
+        width = newWidth
+        height = newHeight
+        currentLeft = newLeft
+      }
+    } else {
+      let newWidth = previousWidth - spacingWidth
+      let newLeft = maxWidth - right - newWidth
+      let relativeWidthPercent = newWidth / widthOnePercent
+      let newHeight = heightOnePercent * relativeWidthPercent
+      let newTop = maxHeight - bottom - newHeight
+
+      if (newLeft < 0) {
+        newWidth = previousWidth - spacingWidth + newLeft
+        newLeft = 0
+        relativeWidthPercent = newWidth / widthOnePercent
+        newHeight = heightOnePercent * relativeWidthPercent
+        newTop = maxHeight - bottom - newHeight
+      }
+
+      if (newTop < 0) {
+        newHeight = maxHeight - bottom
+        newTop = 0
+        const relativeHeightPercent = newHeight / heightOnePercent
+        newWidth = widthOnePercent * relativeHeightPercent
+        newLeft = maxWidth - right - newWidth
+      }
+
+      if (newWidth > minWidth && newHeight > minHeight) {
+        width = newWidth
+        height = newHeight
+        currentLeft = newLeft
+        currentTop = newTop
+      }
     }
   }
 
