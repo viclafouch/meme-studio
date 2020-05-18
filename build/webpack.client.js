@@ -133,9 +133,16 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
     new MiniCssExtractPlugin({
       filename: '[name].[chunkhash:8].css'
     }),
-    new CompressionPlugin(),
-    new CopyPlugin([ { from: path.join(__dirname, '..', 'src', 'client', 'img'), to: 'images' } ]),
-    new CopyPlugin([ { from: path.join(__dirname, '..', 'src', 'client', 'fonts'), to: 'fonts' } ]),
-    new CopyPlugin([ { from: 'static', to: '.' } ])
+    new CompressionPlugin({
+      algorithm: "gzip",
+      test: /\.(js|css)$/,
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: path.join(__dirname, '..', 'src', 'client', 'img'), to: 'images'  },
+        { from: path.join(__dirname, '..', 'src', 'client', 'fonts'), to: 'fonts' },
+        { from: 'static', to: '.' }
+      ]
+    })
   ]
 })
