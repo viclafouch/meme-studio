@@ -21,7 +21,7 @@
     "@types/react-router-dom": "5.1.5",
     "@types/react-helmet": "6.0.0",
     "abort-controller": "3.0.0",
-    "date-fns": "2.13.0",
+    "date-fns": "2.14.0",
     "i18next": "19.4.4",
     "immer": "6.0.5",
     "nprogress": "0.2.0",
