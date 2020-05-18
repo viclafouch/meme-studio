@@ -148,20 +148,6 @@ export const fetchApi = async (path = '', params = {}): Promise<object> => {
   })
 }
 
-export const debounce = (func: any, wait: number): any => {
-  let timeout: any
-  return function (...args: any): void {
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const context = this
-    const later = (): void => {
-      timeout = null
-      func.apply(context, args)
-    }
-    clearTimeout(timeout)
-    timeout = setTimeout(later, wait)
-  }
-}
-
 export const isSafari =
   navigator.vendor &&
   navigator.vendor.indexOf('Apple') > -1 &&

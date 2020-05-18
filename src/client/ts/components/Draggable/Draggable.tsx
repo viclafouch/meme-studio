@@ -75,31 +75,30 @@ const initalState = (item: DraggableProps['item']): StateInt => ({
 })
 
 export function Draggable(props: DraggableProps): JSX.Element {
+  const { drawProperties, item, memeSelected, saveToEditor, type } = props
   const draggableRef: RefObject<HTMLDivElement> = useRef(null)
-  const [state, setState]: [StateInt, Function] = useState(() => initalState(props.item))
+  const [state, setState]: [StateInt, Function] = useState(() => initalState(item))
+  const currentScale = useRef<number>(drawProperties.scale)
 
   useEffect(() => {
-    setState(initalState(props.item))
-  }, [props.drawProperties.scale, setState])
-
-  const minimalSize: number = useMemo(() => props.drawProperties.scale * 40, [props.drawProperties.scale])
+    if (drawProperties && currentScale.current !== drawProperties.scale) {
+      currentScale.current = drawProperties.scale
+      setState(initalState(item))
+    }
+  }, [drawProperties, setState, item])
 
   const handleMove = useCallback(
     (event: MouseEvent | KeyboardEvent): void => {
-      const {
-        drawProperties,
-        memeSelected,
-        item: { ...item }
-      } = props
+      const newItem = { ...item }
       let { top, left } = state
       const { downStartX, downStartY, downPageY, downPageX } = state
-      let { centerX, centerY, height, width, rotate } = item
+      let { centerX, centerY, height, width, rotate } = newItem
 
-      let type: typeString
+      let movement: typeString
 
       if (event instanceof MouseEvent) {
         if (state.isDragging) {
-          type = 'move'
+          movement = 'move'
           top = event.pageY - downStartY
           left = event.pageX - downStartX
           if (top < 0) top = 0
@@ -109,12 +108,12 @@ export function Draggable(props: DraggableProps): JSX.Element {
           centerY = top + height / 2
           centerX = left + width / 2
         } else if (state.isResinzing) {
-          type = 'resize'
+          movement = 'resize'
           const resation = resize({
             currentLeft: left,
             currentTop: top,
-            maxWidth: props.drawProperties.width,
-            maxHeight: props.drawProperties.height,
+            maxWidth: drawProperties.width,
+            maxHeight: drawProperties.height,
             minWidth: 10,
             minHeight: 10,
             previousHeight: state.previousHeight,
@@ -123,7 +122,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
             previousLeft: state.lastLeft,
             spacingHeight: event.pageY - downPageY,
             spacingWidth: event.pageX - downPageX,
-            keepRatio: !!item.keepRatio,
+            keepRatio: !!newItem.keepRatio,
             side: state.side,
             widthOnePercent: state.widthOnePercent,
             heightOnePercent: state.heightOnePercent
@@ -138,7 +137,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
           centerX = left + width / 2
         } else if (state.isRotating) {
           if (state.startOffsetLeft !== event.pageX && state.startOffsetTop !== event.pageY) {
-            type = 'rotate'
+            movement = 'rotate'
             let radian = Math.atan2(event.pageY - state.startOffsetTop, event.pageX - state.startOffsetLeft)
             radian -= Math.atan2(downPageY - state.startOffsetTop, downPageX - state.startOffsetLeft)
             radian += state.lastAngle
@@ -150,7 +149,7 @@ export function Draggable(props: DraggableProps): JSX.Element {
       } else {
         const arrow = isKeyArrow(event.keyCode)
         if (arrow) {
-          type = 'move'
+          movement = 'move'
           if (arrow === 'up' && top >= 1) {
             if (top > 1) top--
             else top = 0
@@ -171,28 +170,28 @@ export function Draggable(props: DraggableProps): JSX.Element {
         } else return
       }
 
-      if (type) {
-        item.centerX = centerX
-        item.centerY = centerY
-        item.width = width
-        item.height = height
-        item.rotate = rotate
-        item.base = {
+      if (movement) {
+        newItem.centerX = centerX
+        newItem.centerY = centerY
+        newItem.width = width
+        newItem.height = height
+        newItem.rotate = rotate
+        newItem.base = {
           centerX: (centerX / drawProperties.width) * memeSelected.width,
           centerY: (centerY / drawProperties.height) * memeSelected.height,
           width: (width / drawProperties.width) * memeSelected.width,
           height: (height / drawProperties.height) * memeSelected.height
         }
-        if (props.type === 'text') {
-          props.saveToEditor({ type: CUSTOM_TEXT, text: item, historyType: toHistoryType(type) })
+        if (type === 'text') {
+          saveToEditor({ type: CUSTOM_TEXT, text: newItem, historyType: toHistoryType(movement) })
         } else {
-          props.saveToEditor({ type: CUSTOM_IMAGE, image: item, historyType: toHistoryType(type) })
+          saveToEditor({ type: CUSTOM_IMAGE, image: newItem, historyType: toHistoryType(movement) })
         }
 
         setState({ ...state, top, left })
       }
     },
-    [props.drawProperties, state, minimalSize, props.memeSelected, props.item, props.saveToEditor, setState, props.type]
+    [drawProperties, state, memeSelected, item, saveToEditor, setState, type]
   )
 
   const handleMouseDown = useCallback(

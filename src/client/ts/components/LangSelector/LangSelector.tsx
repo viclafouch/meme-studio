@@ -1,27 +1,29 @@
 import * as React from 'react'
-import { useState, useEffect } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useState, useEffect, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import Button from '@client/components/Button/Button'
-import './lang-selector.scss'
 import { TFunction } from 'i18next'
 import { Modal } from '@client/components/Modal/Modal'
 import { useWindowWidth } from '@client/ts/shared/hooks'
+import './lang-selector.scss'
 
 function LangSelector(): JSX.Element {
   const [isActive, setIsActive]: [boolean, Function] = useState(false)
   const { isMinMdSize } = useWindowWidth()
   const { i18n } = useTranslation()
 
-  const handleClick = (e: MouseEvent): void => {
-    e.preventDefault()
-    setIsActive(!isActive)
-  }
+  const handleClick = useCallback(
+    (e: MouseEvent): void => {
+      e.preventDefault()
+      setIsActive((isActive: boolean) => !isActive)
+    },
+    [setIsActive]
+  )
 
   useEffect(() => {
     if (isActive) document.addEventListener('click', handleClick, false)
     return (): void => document.removeEventListener('click', handleClick, false)
-  }, [isActive])
+  }, [isActive, handleClick])
 
   useEffect(() => {
     window.localStorage.setItem('i18nextLng', i18n.language)

@@ -22,6 +22,7 @@ import { hasRecoverVersion, formatRelativeDate } from '@client/utils/helpers'
 import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
 import Loader from '@client/components/Loader/Loader'
 import Aside from '@client/components/Aside/Aside'
+import { RecoverVersionInt } from '../shared/validators'
 import '@client/scss/pages/studio.scss'
 
 const CanvasDebuggerAsync = Loadable({
@@ -29,22 +30,18 @@ const CanvasDebuggerAsync = Loadable({
   loading: () => null
 })
 
-const lastEditDate = (): false | Date => {
-  const version = hasRecoverVersion()
-  if (version && version.history.items.length > 1) return version.lastEditDate
-  else return false
-}
-
 function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
   const inputDrop: RefObject<HTMLInputElement> = useRef(null)
   const contentRef: RefObject<HTMLDivElement> = useRef(null)
   const [{ theme }]: [DefaultState] = useContext(DefaultContext)
   const { t, i18n } = useTranslation()
   const { width, isMinLgSize } = useWindowWidth()
-  const [{ memeSelected, currentTab, texts, images }, dispatchEditor]: [EditorInt, Function] = useContext(EditorContext)
+  const [{ memeSelected, currentTab }, dispatchEditor]: [EditorInt, Function] = useContext(EditorContext)
   const [uploadError, setUploadError]: [string, Function] = useState<string | null>(null)
   const [isLoading, setIsLoading]: [boolean, Function] = useState<boolean>(false)
-  const [lastVersion, setLastVersion]: [false | Date, Function] = useState<false | Date>(() => lastEditDate())
+  const [lastVersion, setLastVersion]: [false | RecoverVersionInt, Function] = useState<false | RecoverVersionInt>(() =>
+    hasRecoverVersion()
+  )
   const [isActiveRecoverBox, setIsActiveRecoverBox]: [boolean, Function] = useState<boolean>(!!lastVersion)
 
   useEffect(() => {
@@ -53,7 +50,7 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
       type: RESIZE_WINDOW,
       innerDimensions: innerDimensions(wrapper)
     })
-  }, [width])
+  }, [width, dispatchEditor])
 
   useEffect(() => {
     const memeIdParams = props.match.params.memeId
@@ -94,8 +91,8 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
   }, [props.match.params.memeId, dispatchEditor, setIsActiveRecoverBox, setLastVersion, setUploadError, setIsLoading])
 
   useEffect(() => {
-    let timeout: any
-    if (lastVersion && (images.length > 0 || texts.length > 0)) {
+    let timeout: ReturnType<typeof setTimeout>
+    if (lastVersion) {
       timeout = setTimeout(() => {
         setIsActiveRecoverBox(false)
         timeout = setTimeout(() => {
@@ -105,12 +102,8 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
     }
     return (): void => {
       clearTimeout(timeout)
-      dispatchEditor({
-        type: SET_ITEM_ID_SELECTED,
-        itemIdSelected: null
-      })
     }
-  }, [])
+  }, [lastVersion])
 
   useEffect(() => {
     if (memeSelected) {
@@ -126,7 +119,7 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
         currentTab: isMinLgSize ? TAB_GALLERY : null
       })
     }
-  }, [memeSelected, isMinLgSize])
+  }, [memeSelected, isMinLgSize, dispatchEditor])
 
   const showPrompt = useCallback(e => {
     e = e || window.event
@@ -190,7 +183,9 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
           {memeSelected && lastVersion && (
             <div className={`recover-version-box ld ${isActiveRecoverBox ? 'ld-float-btt-in' : 'ld-fade-out'}`}>
               {t('studio.lastBackup')} <br />
-              <p className="recover-version-box-date">{formatRelativeDate(lastVersion, new Date(), i18n.language)}</p>
+              <p className="recover-version-box-date">
+                {formatRelativeDate(lastVersion.lastEditDate, new Date(), i18n.language)}
+              </p>
             </div>
           )}
           {memeSelected && <WrapperCanvas />}

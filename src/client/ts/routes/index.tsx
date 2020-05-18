@@ -86,7 +86,7 @@ export const StudioAsync = Loadable({
   timeout: 5000
 })
 
-function routes(): JSX.Element {
+function Routes(): JSX.Element {
   const { t } = useTranslation()
   usePageViews()
 
@@ -162,4 +162,4 @@ function routes(): JSX.Element {
   )
 }
 
-export default routes
+export default Routes

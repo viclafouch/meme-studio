@@ -29,7 +29,7 @@ export function Modal({ onClose, isLoading, children, id, maxWidth }: ModalProps
     return (): void => {
       document.removeEventListener('keydown', handleEscape, false)
     }
-  }, [])
+  }, [handleEscape])
 
   return createPortal(
     <div className="modal ld ld-fade-in" id={id}>

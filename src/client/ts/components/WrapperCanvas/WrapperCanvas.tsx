@@ -36,7 +36,7 @@ function WrapperCanvas(): JSX.Element {
 
     const currentDraw = requestAnimationFrame(draw)
     return (): void => cancelAnimationFrame(currentDraw)
-  }, [drawProperties, texts])
+  }, [drawProperties, texts, canvasRef])
 
   const setItemSelected = useCallback(
     (id: TextBox['id']) => {

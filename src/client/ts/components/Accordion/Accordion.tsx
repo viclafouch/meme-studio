@@ -23,6 +23,8 @@ const Accordion = (props: AccordionProps): JSX.Element => {
   const [currentHeight, setCurrentHeight]: [number, Function] = useState<number>(0)
   const content = useRef<HTMLDivElement>(null)
 
+  const { onRemove, onDuplicate, type, id } = props
+
   useLayoutEffect(() => {
     setCurrentHeight(props.defaultOpened ? content.current.scrollHeight : 0)
   }, [props.defaultOpened, setCurrentHeight])
@@ -30,17 +32,17 @@ const Accordion = (props: AccordionProps): JSX.Element => {
   const handleRemove = useCallback(
     (e: React.MouseEvent): void => {
       e.stopPropagation()
-      props.onRemove && props.onRemove(props.type, props.id)
+      onRemove && onRemove(type, id)
     },
-    [props.onRemove, props.type, props.id]
+    [onRemove, id, type]
   )
 
   const handleDuplicate = useCallback(
     (e: React.MouseEvent): void => {
       e.stopPropagation()
-      props.onDuplicate && props.onDuplicate(props.type, props.id)
+      onDuplicate && onDuplicate(type, id)
     },
-    [props.onDuplicate, props.type, props.id]
+    [onDuplicate, type, id]
   )
 
   return (

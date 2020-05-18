@@ -35,7 +35,7 @@ function CanvasDebugger({ theme }: { theme: DefaultState['theme'] }): JSX.Elemen
           })
       )
     }),
-    [texts, memeSelected]
+    [texts, memeSelected, drawProperties]
   )
 
   useEffect(() => {

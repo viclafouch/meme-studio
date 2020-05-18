@@ -46,7 +46,7 @@ function DragAndDrop({ onDrop, id }: DragAndDropProps): JSX.Element {
       dragAndDropRoot.removeChild(containerEl)
       document.removeEventListener('dragenter', handleDragEnter)
     }
-  }, [])
+  }, [containerEl, id])
 
   return createPortal(
     <div

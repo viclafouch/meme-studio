@@ -20,69 +20,71 @@ function Export(): JSX.Element {
   const [{ drawProperties, memeSelected, texts, images }, dispatchEditor]: [EditorInt, Function] = useContext(EditorContext)
 
   useEffect(() => {
-    ;(async (): Promise<void> => {
-      const { width: oldWidth, height: oldHeight } = drawProperties
-      const textBox = texts.map(
-        (text: TextBox) =>
-          new TextBox({
-            ...text,
-            centerX: Math.round((text.centerX / oldWidth) * memeSelected.width),
-            centerY: Math.round((text.centerY / oldHeight) * memeSelected.height),
-            width: Math.round((text.width / oldWidth) * memeSelected.width),
-            height: Math.round((text.height / oldHeight) * memeSelected.height)
-          })
-      )
+    if (img === '') {
+      ;(async (): Promise<void> => {
+        const { width: oldWidth, height: oldHeight } = drawProperties
+        const textBox = texts.map(
+          (text: TextBox) =>
+            new TextBox({
+              ...text,
+              centerX: Math.round((text.centerX / oldWidth) * memeSelected.width),
+              centerY: Math.round((text.centerY / oldHeight) * memeSelected.height),
+              width: Math.round((text.width / oldWidth) * memeSelected.width),
+              height: Math.round((text.height / oldHeight) * memeSelected.height)
+            })
+        )
 
-      const imageBox = images.map(
-        (image: ImageBox) =>
-          new ImageBox({
-            ...image,
-            centerX: Math.round((image.centerX / oldWidth) * memeSelected.width),
-            centerY: Math.round((image.centerY / oldHeight) * memeSelected.height),
-            width: Math.round((image.width / oldWidth) * memeSelected.width),
-            height: Math.round((image.height / oldHeight) * memeSelected.height)
-          })
-      )
+        const imageBox = images.map(
+          (image: ImageBox) =>
+            new ImageBox({
+              ...image,
+              centerX: Math.round((image.centerX / oldWidth) * memeSelected.width),
+              centerY: Math.round((image.centerY / oldHeight) * memeSelected.height),
+              width: Math.round((image.width / oldWidth) * memeSelected.width),
+              height: Math.round((image.height / oldHeight) * memeSelected.height)
+            })
+        )
 
-      const canvas = document.createElement('canvas')
-      canvas.width = memeSelected.width
-      canvas.height = memeSelected.height
-      const ctx: CanvasRenderingContext2D = canvas.getContext('2d')
-      const image = await drawProperties.image
-      ctx.drawImage(image, 0, 0, memeSelected.width, memeSelected.height)
-      for (const text of textBox) {
-        const fontSize: number = text.fontSize
-        const y: number = text.centerY
-        const x: number = text.centerX
-        const maxHeight: number = text.height
-        const maxWidth: number = text.width
-        fillText({ text, ctx, maxWidth, maxHeight, fontSize, x, y })
-      }
-      for (const image of imageBox) {
-        const dx = Math.round(image.centerX - image.width / 2)
-        const dy = Math.round(image.centerY - image.height / 2)
-        const img = new Image()
-        img.src = image.src
-        ctx.drawImage(img, dx, dy, image.width, image.height)
-      }
-      ctx.save()
-      const watermark = 'meme-studio.io'
-      const fontSize = 11
-      ctx.font = `${fontSize}px Arial`
-      const metrics = ctx.measureText(watermark)
-      ctx.fillStyle = '#cccccc'
-      ctx.textBaseline = 'top'
-      ctx.strokeStyle = 'black'
-      ctx.lineJoin = 'round'
-      const padding = 10
-      ctx.fillText(watermark, memeSelected.width - metrics.width - padding, memeSelected.height - fontSize - padding / 2)
-      ctx.restore()
-      const dataUrl: string = canvas.toDataURL('image/jpg', 1.0)
-      setImg(dataUrl)
-      await wait()
-      setIsLoading(false)
-    })()
-  }, [])
+        const canvas = document.createElement('canvas')
+        canvas.width = memeSelected.width
+        canvas.height = memeSelected.height
+        const ctx: CanvasRenderingContext2D = canvas.getContext('2d')
+        const image = await drawProperties.image
+        ctx.drawImage(image, 0, 0, memeSelected.width, memeSelected.height)
+        for (const text of textBox) {
+          const fontSize: number = text.fontSize
+          const y: number = text.centerY
+          const x: number = text.centerX
+          const maxHeight: number = text.height
+          const maxWidth: number = text.width
+          fillText({ text, ctx, maxWidth, maxHeight, fontSize, x, y })
+        }
+        for (const image of imageBox) {
+          const dx = Math.round(image.centerX - image.width / 2)
+          const dy = Math.round(image.centerY - image.height / 2)
+          const img = new Image()
+          img.src = image.src
+          ctx.drawImage(img, dx, dy, image.width, image.height)
+        }
+        ctx.save()
+        const watermark = 'meme-studio.io'
+        const fontSize = 11
+        ctx.font = `${fontSize}px Arial`
+        const metrics = ctx.measureText(watermark)
+        ctx.fillStyle = '#cccccc'
+        ctx.textBaseline = 'top'
+        ctx.strokeStyle = 'black'
+        ctx.lineJoin = 'round'
+        const padding = 10
+        ctx.fillText(watermark, memeSelected.width - metrics.width - padding, memeSelected.height - fontSize - padding / 2)
+        ctx.restore()
+        const dataUrl: string = canvas.toDataURL('image/jpg', 1.0)
+        setImg(dataUrl)
+        await wait()
+        setIsLoading(false)
+      })()
+    }
+  }, [setIsLoading, setImg, drawProperties, texts, images, memeSelected, img])
 
   const shareToTwitter = async (e: Event): Promise<void> => {
     e.preventDefault()

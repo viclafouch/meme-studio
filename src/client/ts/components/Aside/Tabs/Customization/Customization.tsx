@@ -3,7 +3,7 @@ import { TFunctionResult } from 'i18next'
 import { ColorResult } from 'react-color'
 import { ReactSVG } from 'react-svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { memo, useMemo, createRef, useEffect, useCallback, useContext } from 'react'
+import { memo, createRef, useEffect, useCallback, useContext } from 'react'
 import { TextCustomization, ImageCustomization } from '@client/ts/shared/validators'
 import { Translation, useTranslation } from 'react-i18next'
 import Accordion from '@client/components/Accordion/Accordion'
@@ -27,22 +27,23 @@ import ImageBox from '@client/ts/shared/models/ImageBox'
 import { TEXT_ADDED, IMAGE_REMOVED, TEXT_REMOVED } from '@client/ts/shared/constants'
 import './customization.scss'
 
+const map = new Map<string, React.RefObject<unknown>>()
+
+const setRef = (key: string): React.RefObject<unknown> => {
+  const ref = createRef()
+  map.set(key, ref)
+  return ref
+}
+
+const getRef = (key: string): React.RefObject<unknown> | null => {
+  return map.get(key)
+}
+
 function Customization(): JSX.Element {
   const { t } = useTranslation()
   const [{ itemIdSelected, texts, images, memeSelected, saveToEditor }, dispatchEditor]: [EditorInt, Function] = useContext(
     EditorContext
   )
-
-  const textsRefs: Record<string, any> = useMemo(() => {
-    const refs: Record<string, any> = {}
-    for (const text of texts) {
-      refs[text.id] = {
-        textarea: createRef<HTMLTextAreaElement>(),
-        colorPicker: createRef<any>()
-      }
-    }
-    return refs
-  }, [memeSelected.id, texts.length])
 
   const handleEditText = ({ textId, type, value }: TextCustomization): void => {
     const text: any = { ...texts.find((t: TextBox) => t.id === textId) }
@@ -84,18 +85,19 @@ function Customization(): JSX.Element {
     [dispatchEditor]
   )
 
+  const handleKeyPress = useCallback((): void => {
+    const textarea = getRef(`textarea-${itemIdSelected}`) as React.RefObject<HTMLTextAreaElement>
+    textarea.current.focus()
+  }, [itemIdSelected])
+
   useEffect(() => {
     if (itemIdSelected) {
-      const item = textsRefs[itemIdSelected]
-      const handleKeyPress = (): void => item.textarea.current.focus()
-      if (item && item.textarea) {
-        window.addEventListener('keypress', handleKeyPress)
-        return (): void => {
-          window.removeEventListener('keypress', handleKeyPress)
-        }
-      }
+      window.addEventListener('keypress', handleKeyPress)
     }
-  }, [itemIdSelected, textsRefs])
+    return (): void => {
+      window.removeEventListener('keypress', handleKeyPress)
+    }
+  }, [handleKeyPress, itemIdSelected])
 
   return (
     <div className="customization-not-empty">
@@ -122,7 +124,7 @@ function Customization(): JSX.Element {
                 <TextareaExtended
                   rows={1}
                   name="value"
-                  ref={textsRefs[id].textarea}
+                  ref={setRef(`textarea-${id}`)}
                   placeholder={`${t('studio.text')} #${textIndex + 1}`}
                   value={value}
                   onChange={(event: React.ChangeEvent<HTMLTextAreaElement>): void =>
@@ -171,11 +173,8 @@ function Customization(): JSX.Element {
                 />
               </div>
               <div className="field-customization">
-                <label htmlFor="color" onClick={(): void => textsRefs[id].current.open()}>
-                  {t('studio.color')}
-                </label>
+                <label htmlFor="color">{t('studio.color')}</label>
                 <ColorPicker
-                  ref={textsRefs[id].colorPicker}
                   color={color}
                   setColor={({ hex }: ColorResult): void =>
                     handleEditText({
