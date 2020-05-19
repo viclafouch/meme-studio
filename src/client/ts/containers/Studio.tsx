@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import Button from '@client/components/Button/Button'
 import WrapperCanvas from '@client/components/WrapperCanvas/WrapperCanvas'
 import { EditorContext, EditorInt } from '@client/store/EditorContext'
-import { SET_MEME_SELECTED, RESIZE_WINDOW, SET_ITEM_ID_SELECTED, SET_CURRENT_TAB } from '@client/store/reducer/constants'
+import { SET_MEME_SELECTED, RESIZE_WINDOW, SET_CURRENT_TAB } from '@client/store/reducer/constants'
 import { TAB_GALLERY, TAB_CUSTOMIZATION } from '@client/ts/shared/constants'
 import Meme from '@client/ts/shared/models/Meme'
 import Tools from '@client/components/Tools/Tools'
@@ -107,8 +107,6 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
 
   useEffect(() => {
     if (memeSelected) {
-      document.title = `Meme Studio | ${memeSelected.name}`
-      // Go on tab custom only on desktop
       dispatchEditor({
         type: SET_CURRENT_TAB,
         currentTab: isMinLgSize ? TAB_CUSTOMIZATION : null

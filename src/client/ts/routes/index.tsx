@@ -162,4 +162,4 @@ function Routes(): JSX.Element {
   )
 }
 
-export default Routes
+export default React.memo(Routes)
