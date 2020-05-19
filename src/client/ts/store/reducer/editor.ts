@@ -355,30 +355,35 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
       break
   }
 
-  if (action.type === RESET) {
+  if (action.type === RESET || (draft.memeSelected && draft.memeSelected.localImageUrl)) {
     removeLocalStorage(['memeSelected', 'history', 'lastEditDate'])
   } else if (
     [UNDO_HISTORY, REDO_HISTORY, SET_HISTORY, SET_MEME_SELECTED, ERASE_ALL].includes(action.type) &&
     draft.memeSelected
   ) {
-    const isIncludesImages = draft.history.items.some(item => item.images.length > 0) || draft.memeSelected.localImageUrl
+    const isIncludesImages = draft.history.items.some(item => item.images.length > 0)
     if (isIncludesImages) {
-      setLocalStorage({
-        memeSelected: draft.memeSelected,
-        lastEditDate: Date.now(),
-        history: {
-          items: [
-            {
-              drawProperties: draft.drawProperties,
-              texts: [],
-              images: [],
-              itemIdSelected: null,
-              type: INITIAL
-            }
-          ],
-          currentIndex: 0
-        }
-      })
+      const initalItem = draft.history.items.find(item => item.type === INITIAL)
+      if (initalItem) {
+        removeLocalStorage(['memeSelected', 'history', 'lastEditDate'])
+      } else {
+        setLocalStorage({
+          memeSelected: draft.memeSelected,
+          lastEditDate: Date.now(),
+          history: {
+            items: [
+              {
+                drawProperties: draft.drawProperties,
+                texts: [],
+                images: [],
+                itemIdSelected: null,
+                type: INITIAL
+              }
+            ],
+            currentIndex: 0
+          }
+        })
+      }
     } else {
       setLocalStorage({
         memeSelected: draft.memeSelected,
