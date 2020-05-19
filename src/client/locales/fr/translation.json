@@ -44,6 +44,7 @@
     "errorMultipleFiles": "Vous ne pouvez importer qu'une seule image",
     "errorExtensionFile": "Le fichier doit être au format png, jpg ou jpeg",
     "export": "Exporter",
+    "fullSize": "Taille réelle :",
     "noMemeSelected": "Aucun meme sélectionné",
     "text": "Texte",
     "customization": "Personnalisation",

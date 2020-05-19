@@ -116,7 +116,7 @@ function Export(): JSX.Element {
           <img src={img} className="meme-img" alt={memeSelected.name} />
         </div>
         <span className="meme-info-size">
-          {memeSelected.width} x {memeSelected.height}
+          {t('studio.fullSize')} {memeSelected.width} x {memeSelected.height}
         </span>
         <div className="meme-actions-share">
           <a
