@@ -91,7 +91,9 @@ function Export(): JSX.Element {
     try {
       setIsLoading(true)
       const imageUrl = await postToTwitter(img)
-      window.open(`https://twitter.com/intent/tweet?text=[${t('yourText')}] ${imageUrl}`, '_blank').focus()
+      window
+        .open(`https://twitter.com/intent/tweet?text=[${t('yourText')}] ${imageUrl}`, '_blank', 'toolbar=0,location=0,menubar=0')
+        .focus()
     } catch (error) {
       // TODO
       console.error(error)
