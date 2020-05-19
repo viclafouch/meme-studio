@@ -278,10 +278,10 @@ function Customization(): JSX.Element {
           >
             <div className="customization-textbox-section">
               <div className="field-customization">
-                <span>{t('studio.textUppercase')}</span>
+                <span>{t('studio.keepRatio')}</span>
                 <input
                   type="checkbox"
-                  name="uppercase"
+                  name="keep-ratio"
                   checked={image.keepRatio}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
                     handleEditImage({

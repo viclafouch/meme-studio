@@ -62,6 +62,7 @@
     "bottom": "Bas",
     "middle": "Milieu",
     "center": "Centre",
+    "keepRatio": "Conserver les proportions",
     "dropImage": "Déposez votre image au format PNG ou JPG ici"
   },
   "legal": {

@@ -62,6 +62,7 @@
     "bottom": "Bottom",
     "middle": "Middle",
     "center": "Center",
+    "keepRatio": "Keep aspect ratio",
     "dropImage": "Drop your image in PNG or JPG format here"
   },
   "legal": {
