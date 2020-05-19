@@ -49,15 +49,19 @@ function DragAndDrop({ onDrop, id }: DragAndDropProps): JSX.Element {
   }, [containerEl, id])
 
   return createPortal(
-    <div
-      className={`drag-and-drop ${isActive ? 'drag-and-drop-active' : ''}`}
-      onDragOver={(e: React.DragEvent<HTMLDivElement>): void => e.preventDefault()}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
-      aria-dropeffect="execute"
-    >
-      <span className="drag-and-drop-text">{t('studio.dropImage')}</span>
-    </div>,
+    isActive ? (
+      <div
+        className={`drag-and-drop ${isActive ? 'drag-and-drop-active' : ''}`}
+        onDragOver={(e: React.DragEvent<HTMLDivElement>): void => e.preventDefault()}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        aria-dropeffect="execute"
+      >
+        <span className="drag-and-drop-text">{t('studio.dropImage')}</span>
+      </div>
+    ) : (
+      <div></div>
+    ),
     containerEl
   )
 }

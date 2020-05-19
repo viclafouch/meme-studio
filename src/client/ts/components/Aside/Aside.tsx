@@ -22,7 +22,7 @@ function Aside({ currentTab, dispatchEditor }: AsideProps): JSX.Element {
         <Button
           aria-label="Gallery tab"
           color="blue"
-          className={`studio-aside-header-btn ${currentTab === TAB_GALLERY ? 'studio-aside-header-btn-active' : null}`}
+          className={`studio-aside-header-btn ${currentTab === TAB_GALLERY ? 'studio-aside-header-btn-active' : ''}`}
           onClick={(): void =>
             dispatchEditor({
               type: SET_CURRENT_TAB,
@@ -36,7 +36,7 @@ function Aside({ currentTab, dispatchEditor }: AsideProps): JSX.Element {
         <Button
           aria-label="Customization tab"
           color="blue"
-          className={`studio-aside-header-btn ${currentTab === TAB_CUSTOMIZATION ? 'studio-aside-header-btn-active' : null}`}
+          className={`studio-aside-header-btn ${currentTab === TAB_CUSTOMIZATION ? 'studio-aside-header-btn-active' : ''}`}
           onClick={(): void =>
             dispatchEditor({
               type: SET_CURRENT_TAB,
