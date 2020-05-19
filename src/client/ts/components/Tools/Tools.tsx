@@ -18,7 +18,7 @@ import Faq from '@client/components/Modal/Faq/Faq'
 import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
 import { useWindowWidth } from '@client/ts/shared/hooks'
 import { EditorContext, EditorInt } from '@client/store/EditorContext'
-import { toBase64 } from '@client/utils/index'
+import { toBase64, endWithExt } from '@client/utils/index'
 import './tools.scss'
 
 const Tools = (): JSX.Element => {
@@ -35,7 +35,15 @@ const Tools = (): JSX.Element => {
 
   const handleUploadImagebox = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
-      const file = e.currentTarget.files[0]
+      const files = e.currentTarget.files
+
+      if (files.length > 1 || !endWithExt(['.jpg', '.png', 'jpeg'], files[0].name)) {
+        uploadInput.current.value = ''
+        return
+      }
+
+      const file = files[0]
+
       try {
         const img = await toBase64(file)
         img.name = file.name
