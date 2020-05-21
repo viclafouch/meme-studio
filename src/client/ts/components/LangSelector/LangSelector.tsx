@@ -8,7 +8,7 @@ import { useWindowWidth } from '@client/ts/shared/hooks'
 import './lang-selector.scss'
 
 function LangSelector(): JSX.Element {
-  const [isActive, setIsActive]: [boolean, Function] = useState(false)
+  const [isActive, setIsActive] = useState<boolean>(false)
   const { isMinMdSize } = useWindowWidth()
   const { i18n } = useTranslation()
 

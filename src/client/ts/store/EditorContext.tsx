@@ -3,7 +3,7 @@ import { useReducer, createContext, RefObject, createRef, ReactNode, useMemo, us
 import Meme from '@client/ts/shared/models/Meme'
 import TextBox from '@client/ts/shared/models/TextBox'
 import { DrawProperties, HistoryInt } from '@client/ts/shared/validators'
-import EditorReducer from './reducer/editor'
+import EditorReducer, { Actions } from './reducer/editor'
 import { TAB_GALLERY, TAB_CUSTOMIZATION } from '@client/ts/shared/constants'
 import { SET_HISTORY, ADD_ITEM, CUSTOM_TEXT, REMOVE_ITEM, CUSTOM_IMAGE } from './reducer/constants'
 import { hasRecoverVersion } from '@client/utils/helpers'
@@ -54,8 +54,10 @@ export interface EditorInt extends EditorState {
   canUndo: boolean
   canRedo: boolean
   canErazeAll: boolean
-  saveToEditor: Function
+  saveToEditor: (args: Actions) => void
 }
+
+export type EditorDispatch = React.Dispatch<Actions>
 
 export const EditorContext = createContext<EditorState | any>(initialState)
 
@@ -74,7 +76,7 @@ export function EditorProvider({ children }: { children: ReactNode }): JSX.Eleme
 
   const canErazeAll = canUndo || canRedo || state.texts.length > 0 || state.images.length > 0
 
-  const saveToHistory = useDebouncedCallback(historyType => {
+  const saveToHistory = useDebouncedCallback((historyType: any) => {
     updater({ type: SET_HISTORY, historyType })
   }, 800)
 

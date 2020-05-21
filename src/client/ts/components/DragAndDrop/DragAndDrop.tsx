@@ -5,14 +5,14 @@ import { useTranslation } from 'react-i18next'
 import './drag-and-drop.scss'
 
 type DragAndDropProps = {
-  onDrop: Function
+  onDrop: (files: FileList) => void
   id: string
 }
 
 function DragAndDrop({ onDrop, id }: DragAndDropProps): JSX.Element {
   const { t } = useTranslation()
   const [containerEl] = useState(document.createElement('div'))
-  const [isActive, setIsActive]: [boolean, Function] = useState(false)
+  const [isActive, setIsActive] = useState(false)
 
   const handleDragEnter = (e: MouseEvent): void => {
     e.preventDefault()

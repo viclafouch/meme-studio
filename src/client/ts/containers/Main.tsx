@@ -3,12 +3,12 @@ import { useState, useEffect, useContext } from 'react'
 import { FatalError } from '@client/components/ErrorBoundary/ErrorBoundary'
 import Export from '../components/Modal/Export/Export'
 import { DefaultInt, DefaultContext } from '@client/store/DefaultContext'
-import { EditorInt, EditorContext } from '@client/store/EditorContext'
+import { EditorInt, EditorContext, EditorDispatch } from '@client/store/EditorContext'
 import Router from '../routes'
 
 function Main(): JSX.Element {
   const [{ fetchNextMemes, numPage }]: [DefaultInt] = useContext(DefaultContext)
-  const [{ isExportModalActive }]: [EditorInt, Function] = useContext(EditorContext)
+  const [{ isExportModalActive }]: [EditorInt, EditorDispatch] = useContext(EditorContext)
   const [isError, setIsError] = useState<boolean>(false)
 
   useEffect(() => {

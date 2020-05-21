@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { createContext, useReducer, createRef, RefObject, useLayoutEffect, useCallback } from 'react'
-import DefaultReducer from './reducer/default'
+import { DefaultReducer, Actions } from './reducer/default'
 import Meme from '@client/ts/shared/models/Meme'
 import { getMemes } from '../shared/api'
 import { SET_MEMES } from './reducer/constants'
@@ -21,10 +21,12 @@ const initialState: DefaultState = {
   theme: document.documentElement.getAttribute('data-theme') as 'dark' | 'light'
 }
 
+export type DefaultDispatch = React.Dispatch<Actions>
+
 export const DefaultContext = createContext<DefaultState | any>(initialState)
 
 export interface DefaultInt extends DefaultState {
-  fetchNextMemes: Function
+  fetchNextMemes: () => void
 }
 
 export function DefaultProvider({ children }: { children: React.ReactNode }): JSX.Element {

@@ -95,7 +95,7 @@ export const hasRecoverVersion = (): false | RecoverVersionInt => {
   return false
 }
 
-const getLocale = (locale = window.localStorage.i18nextLng): object => {
+const getLocale = (locale = window.localStorage.i18nextLng): dateFns => {
   if (!['fr', 'en-US'].includes(locale)) locale = 'en-US'
   return require(`date-fns/locale/${locale}/index.js`)
 }

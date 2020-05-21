@@ -2,6 +2,7 @@ import TextBox from '@client/ts/shared/models/TextBox'
 import { Line } from '@client/ts/shared/validators'
 import { API_URL, IS_DEV } from '@shared/config'
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const debug = (text: string, args?: any): void => IS_DEV && console.log(`%c ${text}\n`, 'font-weight: bold', args)
 
 export const getDefaultLang = (availableLangs: Array<string>, defaultLang = 'en'): string =>
@@ -127,7 +128,7 @@ export function fillText({ text, ctx, maxWidth, maxHeight, fontSize, x, y }: Int
   ctx.restore()
 }
 
-export const fetchApi = async (path = '', params = {}): Promise<object> => {
+export const fetchApi = async (path = '', params = {}): Promise<Response> => {
   const url: string = API_URL + path
   return fetch(url, {
     headers: {

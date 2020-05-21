@@ -6,7 +6,7 @@ import { RouteComponentProps } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Button from '@client/components/Button/Button'
 import WrapperCanvas from '@client/components/WrapperCanvas/WrapperCanvas'
-import { EditorContext, EditorInt } from '@client/store/EditorContext'
+import { EditorContext, EditorInt, EditorDispatch } from '@client/store/EditorContext'
 import { SET_MEME_SELECTED, RESIZE_WINDOW, SET_CURRENT_TAB } from '@client/store/reducer/constants'
 import { TAB_GALLERY, TAB_CUSTOMIZATION } from '@client/ts/shared/constants'
 import Meme from '@client/ts/shared/models/Meme'
@@ -36,13 +36,11 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
   const [{ theme }]: [DefaultState] = useContext(DefaultContext)
   const { t, i18n } = useTranslation()
   const { width, isMinLgSize } = useWindowWidth()
-  const [{ memeSelected, currentTab }, dispatchEditor]: [EditorInt, Function] = useContext(EditorContext)
-  const [uploadError, setUploadError]: [string, Function] = useState<string | null>(null)
-  const [isLoading, setIsLoading]: [boolean, Function] = useState<boolean>(false)
-  const [lastVersion, setLastVersion]: [false | RecoverVersionInt, Function] = useState<false | RecoverVersionInt>(() =>
-    hasRecoverVersion()
-  )
-  const [isActiveRecoverBox, setIsActiveRecoverBox]: [boolean, Function] = useState<boolean>(!!lastVersion)
+  const [{ memeSelected, currentTab }, dispatchEditor]: [EditorInt, EditorDispatch] = useContext(EditorContext)
+  const [uploadError, setUploadError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [lastVersion, setLastVersion] = useState<false | RecoverVersionInt>(() => hasRecoverVersion())
+  const [isActiveRecoverBox, setIsActiveRecoverBox] = useState<boolean>(!!lastVersion)
 
   useEffect(() => {
     const wrapper: HTMLElement = contentRef.current

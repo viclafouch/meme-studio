@@ -12,7 +12,7 @@ import ColorPicker from '@client/components/ColorPicker/ColorPicker'
 import InputRangeSlider from '@client/components/InputRangeSlider/InputRangeSlider'
 import TextBox from '@client/ts/shared/models/TextBox'
 import { fontSizeConfig, boxShadowConfig } from '@client/ts/shared/config-editor'
-import { EditorContext, EditorState, EditorInt } from '@client/store/EditorContext'
+import { EditorContext, EditorState, EditorInt, EditorDispatch } from '@client/store/EditorContext'
 import {
   CUSTOM_TEXT,
   ADD_ITEM,
@@ -41,7 +41,7 @@ const getRef = (key: string): React.RefObject<unknown> | null => {
 
 function Customization(): JSX.Element {
   const { t } = useTranslation()
-  const [{ itemIdSelected, texts, images, memeSelected, saveToEditor }, dispatchEditor]: [EditorInt, Function] = useContext(
+  const [{ itemIdSelected, texts, images, memeSelected, saveToEditor }, dispatchEditor]: [EditorInt, EditorDispatch] = useContext(
     EditorContext
   )
 

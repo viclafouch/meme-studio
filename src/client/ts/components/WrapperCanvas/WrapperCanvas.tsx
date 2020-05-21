@@ -5,7 +5,7 @@ import { fillText } from '@client/utils/index'
 import TextBox from '@client/ts/shared/models/TextBox'
 import Draggable from '@client/components/Draggable/Draggable'
 import { SET_ITEM_ID_SELECTED } from '@client/store/reducer/constants'
-import { EditorInt, EditorContext } from '@client/store/EditorContext'
+import { EditorInt, EditorContext, EditorDispatch } from '@client/store/EditorContext'
 import ImageBox from '@client/ts/shared/models/ImageBox'
 import './wrapper-canvas.scss'
 
@@ -14,7 +14,7 @@ function WrapperCanvas(): JSX.Element {
   const [
     { memeSelected, images, canvasRef, drawProperties, texts, itemIdSelected, saveToEditor, showTextAreas },
     dispatchEditor
-  ]: [EditorInt, Function] = useContext(EditorContext)
+  ]: [EditorInt, EditorDispatch] = useContext(EditorContext)
 
   useLayoutEffect(() => {
     const draw = (): void => {

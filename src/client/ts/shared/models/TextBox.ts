@@ -21,7 +21,7 @@ export default class TextBox {
     centerY: number
   }
 
-  constructor(text: any) {
+  constructor(text: Record<string, any>) {
     this.id = text.id
     this.version = text.version || `${Date.now()}-${this.id}`
     this.value = text.value

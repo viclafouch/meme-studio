@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import { Response, NextFunction, Request } from 'express'
 import Meme from '../models/meme.model'
 import TextBox from '../models/textbox.model'

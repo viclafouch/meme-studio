@@ -14,7 +14,7 @@ export const validate = (validations: Array<ValidationChain>) => async (
 
   if (errors.isEmpty()) return next()
 
-  const extractedErrors: Array<object> = []
+  const extractedErrors: Array<Record<string, any>> = []
   errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }))
 
   const status = 422

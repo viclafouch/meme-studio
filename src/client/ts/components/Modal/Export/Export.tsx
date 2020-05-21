@@ -9,15 +9,15 @@ import Button from '@client/components/Button/Button'
 import TextBox from '@client/ts/shared/models/TextBox'
 import { postToTwitter } from '../../../shared/api'
 import { TOGGLE_EXPORT_MODAL } from '@client/store/reducer/constants'
-import { EditorContext, EditorInt } from '@client/store/EditorContext'
+import { EditorContext, EditorInt, EditorDispatch } from '@client/store/EditorContext'
 import ImageBox from '@client/ts/shared/models/ImageBox'
 import './export.scss'
 
 function Export(): JSX.Element {
   const { t } = useTranslation()
-  const [isLoading, setIsLoading]: [boolean, Function] = useState<boolean>(true)
-  const [img, setImg]: [string, Function] = useState<string>('')
-  const [{ drawProperties, memeSelected, texts, images }, dispatchEditor]: [EditorInt, Function] = useContext(EditorContext)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [img, setImg] = useState<string>('')
+  const [{ drawProperties, memeSelected, texts, images }, dispatchEditor]: [EditorInt, EditorDispatch] = useContext(EditorContext)
 
   useEffect(() => {
     if (img === '') {

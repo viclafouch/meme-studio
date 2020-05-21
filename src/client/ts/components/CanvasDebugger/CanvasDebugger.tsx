@@ -8,14 +8,14 @@ import TextBox from '@client/ts/shared/models/TextBox'
 import Meme from '@client/ts/shared/models/Meme'
 import Button from '../Button/Button'
 import { DefaultState } from '@client/store/DefaultContext'
-import { EditorInt, EditorContext } from '@client/store/EditorContext'
+import { EditorInt, EditorContext, EditorDispatch } from '@client/store/EditorContext'
 import './canvas-debugger.scss'
 
 function CanvasDebugger({ theme }: { theme: DefaultState['theme'] }): JSX.Element {
   const { t } = useTranslation()
-  const [isActive, setIsActive]: [boolean, Function] = useState<boolean>(false)
-  const [isUpdated, setIsUpdated]: [boolean, Function] = useState<boolean>(false)
-  const [{ texts, drawProperties, memeSelected }]: [EditorInt, Function] = useContext(EditorContext)
+  const [isActive, setIsActive] = useState<boolean>(false)
+  const [isUpdated, setIsUpdated] = useState<boolean>(false)
+  const [{ texts, drawProperties, memeSelected }]: [EditorInt, EditorDispatch] = useContext(EditorContext)
 
   const toggleActive = (): void => setIsActive(!isActive)
 

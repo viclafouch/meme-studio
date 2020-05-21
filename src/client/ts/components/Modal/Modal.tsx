@@ -7,7 +7,7 @@ import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
 import './modal.scss'
 
 type ModalProps = {
-  onClose: Function
+  onClose: () => void
   children: React.ReactNode
   isLoading?: boolean
   id?: string

@@ -47,7 +47,7 @@ export function usePageViews(): void {
   }, [location.pathname])
 }
 
-export function useDebouncedCallback<A extends any[]>(callback: (...args: A) => void, wait: number): Function {
+export function useDebouncedCallback<A extends any[]>(callback: (...args: A) => void, wait: number): (...args: A) => void {
   // track args & timeout handle between calls
   const argsRef = useRef<A>()
   const timeout = useRef<ReturnType<typeof setTimeout>>()

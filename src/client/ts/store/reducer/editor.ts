@@ -29,7 +29,7 @@ import { randomID } from '@shared/utils'
 
 export interface Actions extends Partial<EditorState> {
   type: string
-  historyType: string
+  historyType?: string
   text?: TextBox
   image?: ImageBox
   img?: HTMLImageElement

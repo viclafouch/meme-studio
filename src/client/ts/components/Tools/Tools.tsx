@@ -15,9 +15,9 @@ import {
 } from '@client/store/reducer/constants'
 import { IMAGE_ADDED } from '../../shared/constants'
 import Faq from '@client/components/Modal/Faq/Faq'
-import { DefaultContext, DefaultState } from '@client/store/DefaultContext'
+import { DefaultContext, DefaultState, DefaultDispatch } from '@client/store/DefaultContext'
 import { useWindowWidth } from '@client/ts/shared/hooks'
-import { EditorContext, EditorInt } from '@client/store/EditorContext'
+import { EditorContext, EditorInt, EditorDispatch } from '@client/store/EditorContext'
 import { toBase64, endWithExt } from '@client/utils/index'
 import './tools.scss'
 
@@ -27,10 +27,10 @@ const Tools = (): JSX.Element => {
   const uploadInput: RefObject<HTMLInputElement> = useRef(null)
   const { t } = useTranslation()
   const { isMinLgSize } = useWindowWidth()
-  const [{ theme }, dispatch]: [DefaultState, Function] = useContext(DefaultContext)
+  const [{ theme }, dispatch]: [DefaultState, DefaultDispatch] = useContext(DefaultContext)
   const [{ showTextAreas, memeSelected, canUndo, canRedo, canErazeAll, saveToEditor }, dispatchEditor]: [
     EditorInt,
-    Function
+    EditorDispatch
   ] = useContext(EditorContext)
 
   const handleUploadImagebox = useCallback(

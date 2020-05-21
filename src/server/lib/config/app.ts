@@ -25,7 +25,7 @@ export const handleError = (err: HttpException, req: Request, res: Response, nex
   })
 }
 
-export const send = (res: Response, data: object | null = null, status = 200): Response =>
+export const send = (res: Response, data: Record<string, any> | null = null, status = 200): Response =>
   res.status(status).json({
     ...(data && { data }),
     success: true

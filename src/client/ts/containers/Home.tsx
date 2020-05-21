@@ -8,7 +8,7 @@ import LangSelector from '@client/components/LangSelector/LangSelector'
 import Footer from '@client/components/Footer/Footer'
 import { TOGGLE_THEME } from '@client/store/reducer/constants'
 import { shuffle } from '@client/utils/helpers'
-import { DefaultState, DefaultContext } from '@client/store/DefaultContext'
+import { DefaultState, DefaultContext, DefaultDispatch } from '@client/store/DefaultContext'
 import { StudioAsync } from '../routes'
 import '@client/scss/pages/home.scss'
 
@@ -73,7 +73,7 @@ export const lastExamples: Array<MemeExample> = shuffle([
 
 function Home(): JSX.Element {
   const { t } = useTranslation()
-  const [{ theme }, dispatch]: [DefaultState, Function] = useContext(DefaultContext)
+  const [{ theme }, dispatch]: [DefaultState, DefaultDispatch] = useContext(DefaultContext)
 
   return (
     <div className="page home live-background">

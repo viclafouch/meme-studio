@@ -9,7 +9,7 @@ export default class Meme {
   public boxCount: number
   public localImageUrl: string
 
-  constructor(meme: any) {
+  constructor(meme: Record<string, any>) {
     this.id = meme.id
     this.name = meme.name
     this.filename = meme.filename

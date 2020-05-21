@@ -7,7 +7,7 @@ export interface Actions extends Partial<DefaultState> {
   type: string
 }
 
-const DefaultReducer = (state: DefaultState, action: Actions): DefaultState => {
+export const DefaultReducer = (state: DefaultState, action: Actions): DefaultState => {
   const draft: Draft<DefaultState> = createDraft(state)
   switch (action.type) {
     case SET_MEMES:

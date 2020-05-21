@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useState, useLayoutEffect, useCallback, useRef, useMemo, RefObject, useEffect, memo } from 'react'
+import { useState, useLayoutEffect, useCallback, useRef, RefObject, useEffect, memo } from 'react'
 import { ReactSVG } from 'react-svg'
 import { resize } from '../../utils/helpers'
 import { DrawProperties, typeString } from '@client/ts/shared/validators'
@@ -8,6 +8,7 @@ import { radToDegree, degreeToRad } from '@client/utils/index'
 import { CUSTOM_TEXT, CUSTOM_IMAGE } from '@client/store/reducer/constants'
 import { toHistoryType } from '@client/utils/helpers'
 import Meme from '@client/ts/shared/models/Meme'
+import { Actions } from '@client/store/reducer/editor'
 import './draggable.scss'
 
 const isKeyArrow = (keyCode: number): string | false => {
@@ -26,8 +27,8 @@ type DraggableProps = {
   type: 'image' | 'text'
   zIndex: number
   item: any
-  saveToEditor: Function
-  setItemSelected: Function
+  saveToEditor: (args: Actions) => void
+  setItemSelected: (id: TextBox['id'] | Meme['id']) => void
 }
 
 interface StateInt {
@@ -77,7 +78,7 @@ const initalState = (item: DraggableProps['item']): StateInt => ({
 export function Draggable(props: DraggableProps): JSX.Element {
   const { drawProperties, item, memeSelected, saveToEditor, type } = props
   const draggableRef: RefObject<HTMLDivElement> = useRef(null)
-  const [state, setState]: [StateInt, Function] = useState(() => initalState(item))
+  const [state, setState]: [StateInt, React.Dispatch<React.SetStateAction<StateInt>>] = useState(() => initalState(item))
   const currentScale = useRef<number>(drawProperties.scale)
 
   useEffect(() => {

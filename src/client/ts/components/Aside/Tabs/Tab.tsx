@@ -4,7 +4,7 @@ import { Modal } from '@client/components/Modal/Modal'
 
 type TabProps = {
   children?: React.ReactNode
-  onCloseModal: Function
+  onCloseModal: () => void
   active: boolean
   id?: string
 }

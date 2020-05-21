@@ -25,8 +25,8 @@ export interface Line {
   x: number
   y: number
   value: string
-  lineHeight: Function
-  lineWidth: Function
+  lineHeight: () => number
+  lineWidth: () => number
 }
 
 export interface HistoryInt {

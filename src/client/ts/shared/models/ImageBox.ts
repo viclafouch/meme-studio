@@ -16,7 +16,7 @@ export default class ImageBox {
     centerY: number
   }
 
-  constructor(image: any) {
+  constructor(image: Record<string, any>) {
     this.id = image.id
     this.version = image.version || `${Date.now()}-${this.id}`
     this.src = image.src

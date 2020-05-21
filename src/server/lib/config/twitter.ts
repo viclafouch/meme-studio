@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import { ConfigKeys } from 'twit'
 
 export default {

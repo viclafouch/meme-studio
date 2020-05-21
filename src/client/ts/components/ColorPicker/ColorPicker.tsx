@@ -5,7 +5,7 @@ import './color-picker.scss'
 
 type ColorPickerProps = {
   color: string
-  setColor: Function
+  setColor: (color: ColorResult) => void
 }
 
 const ColorPicker = React.forwardRef((props: ColorPickerProps, ref: any) => {

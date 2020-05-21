@@ -13,14 +13,14 @@ type AccordionProps = {
   title: string
   defaultOpened: boolean
   children: React.ReactNode
-  onToggle: Function
-  onRemove?: Function
-  onDuplicate?: Function
+  onToggle: (id: string, opened: boolean) => void
+  onRemove?: (type: 'text' | 'image', id: string) => void
+  onDuplicate?: (type: 'text' | 'image', id: string) => void
 }
 
 const Accordion = (props: AccordionProps): JSX.Element => {
   const { t } = useTranslation()
-  const [currentHeight, setCurrentHeight]: [number, Function] = useState<number>(0)
+  const [currentHeight, setCurrentHeight] = useState<number>(0)
   const content = useRef<HTMLDivElement>(null)
 
   const { onRemove, onDuplicate, type, id } = props
