@@ -43,7 +43,7 @@ body {
   background-image: url('/images/particles.svg');
   background-attachment: fixed;
   background-repeat: repeat-y;
-  background-size: auto;
+  background-size: cover;
 
   @include sm {
     background-position: center center;
