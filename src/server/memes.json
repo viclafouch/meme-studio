@@ -5344,6 +5344,37 @@
       ],
       "createdAt": "2020-05-22T12:50:26.025Z",
       "updatedAt": "2020-05-22T12:50:26.025Z"
+    },
+    {
+      "name": "Alexandra vote Koh Lanta",
+      "width": 800,
+      "height": 448,
+      "boxCount": 0,
+      "filename": "bvsxtsOh5.jpg",
+      "id": "G4gK5xJHX",
+      "texts": [
+        {
+          "isUppercase": true,
+          "id": "ysSw1G-MT",
+          "value": "",
+          "width": 236,
+          "height": 79,
+          "centerX": 393,
+          "centerY": 332,
+          "rotate": -1,
+          "fontSize": 36,
+          "fontFamily": "Comic Sans MS",
+          "boxShadow": 0,
+          "color": "#1e1e1e",
+          "alignVertical": "middle",
+          "textAlign": "center",
+          "memeId": "G4gK5xJHX",
+          "createdAt": "2020-05-22T14:15:36.715Z",
+          "updatedAt": "2020-05-22T14:15:36.715Z"
+        }
+      ],
+      "createdAt": "2020-05-22T14:08:44.782Z",
+      "updatedAt": "2020-05-22T14:08:44.782Z"
     }
   ]
 }
