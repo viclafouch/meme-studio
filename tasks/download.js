@@ -20,7 +20,7 @@ const { getCurrentMemes, setCurrentMemes, createMeme, downloadAndCompress, conve
         if (index === -1) {
           const createdMeme = await createMeme({
             url: meme.url,
-            name: meme.name,
+            memeName: meme.name,
             boxCount: meme.box_count
           })
           jsonData.memes.push(createdMeme)

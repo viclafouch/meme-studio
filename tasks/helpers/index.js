@@ -34,18 +34,25 @@ const setCurrentMemes = async (jsonData) => {
   await fs.promises.writeFile(memeFile, textData)
 }
 
-const createMeme = async ({ url, name, boxCount }) => {
+const createMeme = async ({ url, memeName, boxCount }) => {
+  let filename
   const ext = url.split('.').pop()
-  const filename = `${shortid.generate()}.${ext}`
-  const templatePath = path.join(templateDir, filename)
-  await downloadAndCompress(url, templatePath)
-  const dimensions = await sizeOf(templatePath)
+  const name = `${shortid.generate()}.${ext}`
+  if (url.startsWith('http')) {
+    filename = path.join(templateDir, name)
+    await downloadAndCompress(url, filename)
+  } else {
+    filename = path.join(templateDir, name)
+    fs.renameSync(url, filename)
+    await compressFile(filename)
+  }
+  const dimensions = await sizeOf(filename)
   return {
-    name: name,
+    name: memeName,
     width: dimensions.width,
     height: dimensions.height,
     boxCount: boxCount,
-    filename,
+    filename: name,
     id: shortid.generate(),
     texts: [],
     createdAt: new Date(),
@@ -61,30 +68,30 @@ const convertToWebP = (input, output) =>
     })
   )
 
+const compressFile = async (filename) => {
+  let source = tinify.fromFile(filename)
+  const { height, width } = await sizeOf(filename)
+  if (height > maxHeight)
+    source = source.resize({
+      method: 'scale',
+      height: maxHeight
+    })
+  if (width > maxWidth)
+    source = source.resize({
+      method: 'scale',
+      width: maxWidth
+    })
+  console.log(`Compressing ${filename}...`)
+  await source.toFile(filename)
+}
+
 const downloadAndCompress = async (uri, filename) => {
   await new Promise((resolve, reject) => {
     request.head(uri, function (err, res, body) {
       request(uri).pipe(fs.createWriteStream(filename)).on('close', resolve)
     })
   })
-
-  const { height, width } = await sizeOf(filename)
-
-  if (useCompression) {
-    let source = tinify.fromFile(filename)
-    if (height > maxHeight)
-      source = source.resize({
-        method: 'scale',
-        height: maxHeight
-      })
-    if (width > maxWidth)
-      source = source.resize({
-        method: 'scale',
-        width: maxWidth
-      })
-    console.log(`Compressing ${filename}...`)
-    await source.toFile(filename)
-  }
+  if (useCompression) await compressFile(filename)
 }
 
 module.exports = {

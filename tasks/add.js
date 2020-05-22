@@ -1,5 +1,6 @@
 const yargs = require('yargs')
 const path = require('path')
+const fs = require('fs')
 const { getCurrentMemes, setCurrentMemes, createMeme, convertToWebP, templateDir } = require('./helpers')
 
 let args = yargs
@@ -18,7 +19,13 @@ let args = yargs
     try {
       url = new URL(argv.u)
     } catch (_) {
-      throw new Error('Url argument must be a valid URL')
+      try {
+        fs.existsSync(argv.v)
+        url = argv.v
+        return true
+      } catch (error) {
+        throw new Error('Url argument must be a valid URL')
+      }
     }
     if (!url.href.endsWith('.jpg')) throw new Error("url must ends with '.jpg'")
     return true
@@ -28,7 +35,7 @@ async function insertMeme({ name, url }) {
   const jsonData = await getCurrentMemes()
   const createdMeme = await createMeme({
     url,
-    name,
+    memeName: name,
     boxCount: 0
   })
   jsonData.memes.push(createdMeme)
