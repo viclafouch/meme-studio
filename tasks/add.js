@@ -1,0 +1,46 @@
+const yargs = require('yargs')
+const path = require('path')
+const { getCurrentMemes, setCurrentMemes, createMeme, convertToWebP, templateDir } = require('./helpers')
+
+let args = yargs
+  .option('url', {
+    alias: 'u',
+    description: 'Path or link of the image meme',
+    demand: true
+  })
+  .option('name', {
+    alias: 'n',
+    description: 'Name of the meme',
+    demand: true
+  })
+  .check(argv => {
+    let url
+    try {
+      url = new URL(argv.u)
+    } catch (_) {
+      throw new Error('Url argument must be a valid URL')
+    }
+    if (!url.href.endsWith('.jpg')) throw new Error("url must ends with '.jpg'")
+    return true
+  }).argv
+
+async function insertMeme({ name, url }) {
+  const jsonData = await getCurrentMemes()
+  const createdMeme = await createMeme({
+    url,
+    name,
+    boxCount: 0
+  })
+  jsonData.memes.push(createdMeme)
+  const filePath = path.join(templateDir, createdMeme.filename)
+  const webpFile = filePath.replace('.jpg', '.webp')
+  console.log('Convertion to WebP...')
+  await convertToWebP(filePath, webpFile)
+  console.info('A meme has been created : \n', createdMeme)
+  await setCurrentMemes(jsonData)
+}
+
+insertMeme({
+  name: args.name,
+  url: args.url
+})

@@ -14,7 +14,7 @@
     "commit": "git-cz",
     "lint": "tsc --noEmit && eslint --ext .ts,.tsx src/",
     "ncu": "node tasks/ncu.js",
-    "download": "node -r dotenv/config tasks/download.js",
+    "download": "node tasks/download.js",
     "postinstall": "cd src/client && npm install"
   },
   "engines": {
@@ -131,6 +131,7 @@
     "sequelize": "5.21.10",
     "shortid": "2.2.15",
     "sqlite3": "4.2.0",
-    "twit": "2.2.11"
+    "twit": "2.2.11",
+    "yargs": "15.3.1"
   }
 }
