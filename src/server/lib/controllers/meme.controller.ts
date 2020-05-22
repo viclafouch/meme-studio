@@ -20,7 +20,7 @@ export class MemeController {
         raw: true,
         limit: memesPerPage,
         offset,
-        order: [['id', 'ASC']]
+        order: [['createdAt', 'DESC']]
       })
       send(
         res,

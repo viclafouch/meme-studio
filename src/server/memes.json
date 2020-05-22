@@ -5294,6 +5294,56 @@
       ],
       "createdAt": "2020-05-20T11:21:17.070Z",
       "updatedAt": "2020-05-20T11:21:17.070Z"
+    },
+    {
+      "name": "Koh Lanta Ahmad seul ",
+      "width": 800,
+      "height": 419,
+      "boxCount": 0,
+      "filename": "qo4y-I1vG.jpg",
+      "id": "sYA4CuG3i8",
+      "texts": [
+        {
+          "isUppercase": true,
+          "id": "yuObp2hF9",
+          "value": "",
+          "width": 230,
+          "height": 82,
+          "centerX": 666,
+          "centerY": 338,
+          "rotate": 0,
+          "fontSize": 37,
+          "fontFamily": "Impact",
+          "boxShadow": 2,
+          "color": "#ffffff",
+          "alignVertical": "middle",
+          "textAlign": "center",
+          "memeId": "sYA4CuG3i8",
+          "createdAt": "2020-05-22T13:02:38.579Z",
+          "updatedAt": "2020-05-22T13:02:38.579Z"
+        },
+        {
+          "isUppercase": true,
+          "id": "Hp2K4cPqa",
+          "value": "",
+          "width": 230,
+          "height": 82,
+          "centerX": 183,
+          "centerY": 230,
+          "rotate": 0,
+          "fontSize": 37,
+          "fontFamily": "Impact",
+          "boxShadow": 2,
+          "color": "#ffffff",
+          "alignVertical": "middle",
+          "textAlign": "center",
+          "memeId": "sYA4CuG3i8",
+          "createdAt": "2020-05-22T13:02:38.579Z",
+          "updatedAt": "2020-05-22T13:02:38.579Z"
+        }
+      ],
+      "createdAt": "2020-05-22T12:50:26.025Z",
+      "updatedAt": "2020-05-22T12:50:26.025Z"
     }
   ]
 }
