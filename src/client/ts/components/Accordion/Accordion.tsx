@@ -20,14 +20,16 @@ type AccordionProps = {
 
 const Accordion = (props: AccordionProps): JSX.Element => {
   const { t } = useTranslation()
-  const [currentHeight, setCurrentHeight] = useState<number>(0)
+  const [currentHeight, setCurrentHeight] = useState<number | 'none'>(props.defaultOpened ? 'none' : 0)
   const content = useRef<HTMLDivElement>(null)
 
   const { onRemove, onDuplicate, type, id } = props
 
   useLayoutEffect(() => {
-    setCurrentHeight(props.defaultOpened ? content.current.scrollHeight : 0)
-  }, [props.defaultOpened, setCurrentHeight])
+    if (currentHeight === 'none' || content.current.scrollHeight) {
+      setCurrentHeight(props.defaultOpened ? content.current.scrollHeight : 0)
+    }
+  }, [props.defaultOpened, setCurrentHeight, currentHeight])
 
   const handleRemove = useCallback(
     (e: React.MouseEvent): void => {
@@ -79,4 +81,4 @@ const Accordion = (props: AccordionProps): JSX.Element => {
   )
 }
 
-export default React.memo(Accordion)
+export default Accordion

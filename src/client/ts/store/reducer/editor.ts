@@ -190,6 +190,9 @@ const EditorReducer = (state: EditorState, action: Actions): EditorState => {
     case SET_MEME_SELECTED:
       draft.memeSelected = action.memeSelected
       draft.texts = action.texts
+      if (draft.texts.length > 0) {
+        draft.itemIdSelected = draft.texts[0].id
+      }
       draft.images = []
       updateDrawing(draft)
       saveToHistory(draft, {
