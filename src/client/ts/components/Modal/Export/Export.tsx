@@ -86,14 +86,17 @@ function Export(): JSX.Element {
     }
   }, [setIsLoading, setImg, drawProperties, texts, images, memeSelected, img])
 
-  const shareToTwitter = async (e: Event): Promise<void> => {
+  const shareToTwitter = (e: Event): void => {
     e.preventDefault()
     try {
       setIsLoading(true)
-      const imageUrl = await postToTwitter(img)
-      window
-        .open(`https://twitter.com/intent/tweet?text=[${t('yourText')}] ${imageUrl}`, '_blank', 'toolbar=0,location=0,menubar=0')
-        .focus()
+      postToTwitter(img).then((imageUrl: string) =>
+        window.open(
+          `https://twitter.com/intent/tweet?text=[${t('yourText')}] ${imageUrl}`,
+          '_blank',
+          'toolbar=0,location=0,menubar=0,width=750,height=750'
+        )
+      )
     } catch (error) {
       // TODO
       console.error(error)
