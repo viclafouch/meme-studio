@@ -5,6 +5,7 @@
 </div>
 <br />
 
+# Meme Studio
 
 The Meme Studio is designed to be insanely fast and provide powerful customization for your memes, while still being simple and easy to use.
 
