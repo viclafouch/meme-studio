@@ -34,16 +34,12 @@ export function useWindowWidth(): {
 export function usePageViews(): void {
   const location = useLocation()
   useEffect(() => {
-    ;(async (): Promise<void> => {
-      while (typeof window.ga !== 'function') {
-        console.log('awaiting for window.ga')
-        await wait(50)
-      }
+    if (window.ga) {
       window.ga('send', {
         hitType: 'pageview',
         page: location.pathname
       })
-    })()
+    }
   }, [location.pathname])
 }
 
