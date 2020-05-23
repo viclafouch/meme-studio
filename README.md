@@ -1,10 +1,9 @@
-# Meme Studio (Version 1.0.0)
-
 <div align="center">
   <a href="https://www.meme-studio.io" target="_blank" title="Meme Studio">
     <img alt="Meme Studio" src="https://github.com/viclafouch/meme-studio/blob/master/meme-studio.gif" />
   </a>
 </div>
+<br />
 
 
 The Meme Studio is designed to be insanely fast and provide powerful customization for your memes, while still being simple and easy to use.
