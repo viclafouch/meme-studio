@@ -287,3 +287,13 @@ export const resize = ({
 
   return { height, width, top: currentTop, left: currentLeft }
 }
+
+declare global {
+  interface Document {
+    fonts: any
+  }
+
+  interface Window {
+    FontFace: any
+  }
+}
