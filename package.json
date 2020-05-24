@@ -93,7 +93,7 @@
     "source-map-loader": "0.2.4",
     "style-loader": "1.2.1",
     "tinify": "1.6.0-beta.2",
-    "ts-loader": "7.0.4",
+    "ts-loader": "7.0.5",
     "tsconfig-paths-webpack-plugin": "3.2.0",
     "typescript": "3.9.3",
     "webp-converter": "2.2.3",
