@@ -10,15 +10,11 @@ const FONTS_FAMILY = [
   'Arial',
   'Helvetica',
   'Impact',
-  'Geneva',
   'Arial Black',
   'Times New Roman',
-  'Courier New',
-  'Lucida Console',
+  'Trebuchet MS',
   'Comic Sans MS',
-  'Times',
-  'Verdana',
-  'Courier'
+  'Andale Mono'
 ]
 
 const ALIGN_VERTICAL = ['top', 'middle', 'bottom']

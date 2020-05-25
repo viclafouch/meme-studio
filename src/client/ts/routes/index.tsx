@@ -8,6 +8,7 @@ import Page from '@client/components/Page/Page'
 import NotFound from '@client/containers/404'
 import { usePageViews } from '../shared/hooks'
 import { FatalError } from '@client/components/ErrorBoundary/ErrorBoundary'
+import { loadFonts } from '@client/components/WrapperCanvas/WrapperCanvas'
 
 function Loading(props: LoadingComponentProps): JSX.Element {
   if (props.error) {
@@ -77,6 +78,7 @@ const GalleryAsync = Loadable({
 
 export const StudioAsync = Loadable({
   loader: async () => {
+    await loadFonts
     const container = await import('@client/containers/Studio')
     nprogress.done()
     return container

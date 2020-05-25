@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as WebFont from 'webfontloader'
 import { useLayoutEffect, useContext, useCallback } from 'react'
 import { useWindowWidth } from '@client/ts/shared/hooks'
 import { fillText } from '@client/utils/index'
@@ -7,7 +8,18 @@ import Draggable from '@client/components/Draggable/Draggable'
 import { SET_ITEM_ID_SELECTED } from '@client/store/reducer/constants'
 import { EditorInt, EditorContext, EditorDispatch } from '@client/store/EditorContext'
 import ImageBox from '@client/ts/shared/models/ImageBox'
+import { FONTS_FAMILY } from '@shared/config'
 import './wrapper-canvas.scss'
+
+export const loadFonts = new Promise(resolve => {
+  WebFont.load({
+    custom: {
+      families: FONTS_FAMILY,
+      urls: ['/fonts.css']
+    },
+    active: resolve
+  })
+})
 
 function WrapperCanvas(): JSX.Element {
   const { isMinLgSize } = useWindowWidth()
@@ -15,6 +27,28 @@ function WrapperCanvas(): JSX.Element {
     { memeSelected, images, canvasRef, drawProperties, texts, itemIdSelected, saveToEditor, showTextAreas },
     dispatchEditor
   ]: [EditorInt, EditorDispatch] = useContext(EditorContext)
+
+  React.useEffect(() => {
+    if ('fonts' in document) {
+      async function test() {
+        // try {
+        //   const t = await WebFont.load({
+        //     custom: {
+        //       families: ['Impact'],
+        //       urls: ['/fonts.css']
+        //     },
+        //     active: function () {
+        //       console.log('go')
+        //     }
+        //   })
+        //   console.log(t)
+        // } catch (error) {
+        //   console.log(error)
+        // }
+      }
+      test()
+    }
+  }, [])
 
   useLayoutEffect(() => {
     const draw = (): void => {
