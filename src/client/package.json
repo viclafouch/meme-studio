@@ -17,9 +17,10 @@
     "@types/react": "16.9.35",
     "@types/react-color": "3.0.1",
     "@types/react-dom": "16.9.8",
+    "@types/react-helmet": "6.0.0",
     "@types/react-loadable": "5.5.3",
     "@types/react-router-dom": "5.1.5",
-    "@types/react-helmet": "6.0.0",
+    "@types/webfontloader": "^1.6.31",
     "abort-controller": "3.0.0",
     "date-fns": "2.14.0",
     "i18next": "19.4.4",
@@ -34,6 +35,7 @@
     "react-loadable": "5.5.0",
     "react-markdown": "4.3.1",
     "react-router-dom": "5.2.0",
-    "react-svg": "11.0.22"
+    "react-svg": "11.0.22",
+    "webfontloader": "^1.6.28"
   }
 }

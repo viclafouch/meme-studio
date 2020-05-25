@@ -99,20 +99,6 @@ function Customization(): JSX.Element {
     }
   }, [handleKeyPress, itemIdSelected])
 
-  useEffect(() => {
-    if ('fonts' in document) {
-      for (const font of FONTS_FAMILY) {
-        if (!document.fonts.check(`12px ${font}`)) {
-          console.log(`Load ${font} font`)
-          if (font === 'Impact') {
-            const impact = new window.FontFace('Impact', "url(/fonts/impact.ttf) format('ttf')")
-            impact.load().then(() => document.fonts.add(impact))
-          }
-        }
-      }
-    }
-  }, [])
-
   return (
     <div className="customization-not-empty">
       <h2>
