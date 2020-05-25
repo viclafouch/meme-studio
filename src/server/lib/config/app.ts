@@ -82,7 +82,11 @@ class App {
         res.set('Content-Type', 'text/css')
         next()
       })
-      this.app.use(express.static(process.cwd() + clientDir))
+      this.app.use(
+        express.static(process.cwd() + clientDir, {
+          maxAge: 31536000
+        })
+      )
       this.app.get('*', (req, res) => {
         res.sendFile(path.resolve(process.cwd() + clientDir, 'index.html'))
       })
