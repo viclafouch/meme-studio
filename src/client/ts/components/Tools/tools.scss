@@ -124,13 +124,5 @@ html[data-theme="dark"] .tools {
     &:not(.tools-list-btn-disabled):hover {
       color: var(--text-hover-tools);
     }
-
-    & + .upload-imagebox-input {
-      position: absolute;
-      width: 0;
-      height: 0;
-      opacity: 0;
-      z-index: -1;
-    }
   }
 }
