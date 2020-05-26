@@ -110,6 +110,11 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
       }
     ]
   },
+  performance: {
+    assetFilter: function(assetFilename) {
+      return !assetFilename.startsWith('fonts');
+    }
+  },
   externals: {
     'react': 'React',
     'react-dom': 'ReactDOM'
