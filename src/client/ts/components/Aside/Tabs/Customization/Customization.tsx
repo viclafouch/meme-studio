@@ -3,7 +3,7 @@ import { TFunctionResult } from 'i18next'
 import { ColorResult } from 'react-color'
 import { ReactSVG } from 'react-svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { memo, createRef, useEffect, useCallback, useContext } from 'react'
+import { memo, createRef, useEffect, useCallback, useContext, useRef, RefObject } from 'react'
 import { TextCustomization, ImageCustomization } from '@client/ts/shared/validators'
 import { Translation, useTranslation } from 'react-i18next'
 import Accordion from '@client/components/Accordion/Accordion'
@@ -24,7 +24,8 @@ import {
 import { toHistoryType } from '@client/utils/helpers'
 import { FONTS_FAMILY, ALIGN_VERTICAL, TEXT_ALIGN } from '@shared/config'
 import ImageBox from '@client/ts/shared/models/ImageBox'
-import { TEXT_ADDED, IMAGE_REMOVED, TEXT_REMOVED } from '@client/ts/shared/constants'
+import { TEXT_ADDED, IMAGE_REMOVED, TEXT_REMOVED, IMAGE_ADDED } from '@client/ts/shared/constants'
+import { endWithExt, toBase64 } from '@client/utils/index'
 import './customization.scss'
 
 const map = new Map<string, React.RefObject<unknown>>()
@@ -41,6 +42,7 @@ const getRef = (key: string): React.RefObject<unknown> | null => {
 
 function Customization(): JSX.Element {
   const { t } = useTranslation()
+  const uploadInput: RefObject<HTMLInputElement> = useRef(null)
   const [{ itemIdSelected, texts, images, memeSelected, saveToEditor }, dispatchEditor]: [EditorInt, EditorDispatch] = useContext(
     EditorContext
   )
@@ -98,6 +100,36 @@ function Customization(): JSX.Element {
       window.removeEventListener('keypress', handleKeyPress)
     }
   }, [handleKeyPress, itemIdSelected])
+
+  const handleUploadImagebox = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
+      const files = e.currentTarget.files
+
+      if (files.length > 1 || !endWithExt(['.jpg', '.png', 'jpeg'], files[0].name)) {
+        uploadInput.current.value = ''
+        return
+      }
+
+      const file = files[0]
+
+      try {
+        const img = await toBase64(file)
+        img.name = file.name
+
+        saveToEditor({
+          type: ADD_ITEM,
+          historyType: IMAGE_ADDED,
+          itemType: 'image',
+          img
+        })
+      } catch (error) {
+        console.error(error)
+      } finally {
+        uploadInput.current.value = ''
+      }
+    },
+    [saveToEditor]
+  )
 
   return (
     <div className="customization-not-empty">
@@ -296,10 +328,21 @@ function Customization(): JSX.Element {
           </Accordion>
         )
       )}
-      <button className="add-text-button" onClick={addItem}>
+      <span role="button" className="add-item-button" onClick={addItem}>
         <FontAwesomeIcon className="icon-plus" icon={['fas', 'plus']} />
         <span>{t('studio.addText')}</span>
-      </button>
+      </span>
+      <label htmlFor="upload-imagebox" className="add-item-button" role="button">
+        <FontAwesomeIcon className="icon-plus" icon={['fas', 'plus']} />
+        <span>{t('studio.addImage')}</span>
+        <input
+          ref={uploadInput}
+          onChange={handleUploadImagebox}
+          type="file"
+          accept="image/png, image/jpeg"
+          id="upload-imagebox"
+        />
+      </label>
     </div>
   )
 }
