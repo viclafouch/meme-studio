@@ -17,10 +17,12 @@
   },
   "loading": "Loading",
   "download": "Download",
+  "imageCopied": "Image copied!",
   "preview": "Preview",
   "yourText": "Your text",
   "unknownError": "An unknown error has occurred",
   "oops": "Oops something went wrong",
+  "browserNotSupported": "Your browser does not support this feature",
   "share": "Share",
   "home": {
     "meta": {

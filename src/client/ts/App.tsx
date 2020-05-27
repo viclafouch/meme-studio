@@ -26,6 +26,8 @@ import { faChartArea } from '@fortawesome/free-solid-svg-icons/faChartArea'
 import { faClone } from '@fortawesome/free-solid-svg-icons/faClone'
 import { faMoon } from '@fortawesome/free-solid-svg-icons/faMoon'
 import { faSun } from '@fortawesome/free-solid-svg-icons/faSun'
+import { faFlask } from '@fortawesome/free-solid-svg-icons/faFlask'
+import { faClipboard } from '@fortawesome/free-solid-svg-icons/faClipboard'
 import { EditorProvider } from '@client/store/EditorContext'
 
 library.add(
@@ -50,7 +52,9 @@ library.add(
   faClone,
   faMoon,
   faSun,
-  faChartArea
+  faChartArea,
+  faClipboard,
+  faFlask
 )
 
 function App(): JSX.Element {

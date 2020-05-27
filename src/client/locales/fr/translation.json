@@ -17,10 +17,12 @@
   },
   "loading": "Chargement",
   "download": "Télécharger",
+  "imageCopied": "Image copiée !",
   "preview": "Prévisualisation",
   "yourText": "Votre texte",
   "unknownError": "Une erreur inconnue est survenue",
   "oops": "Oops une erreur est survenue",
+  "browserNotSupported": "Votre navigateur ne supporte pas cette fonctionnalité",
   "share": "Partager",
   "home": {
     "meta": {

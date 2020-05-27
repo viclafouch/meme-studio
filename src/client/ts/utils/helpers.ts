@@ -12,8 +12,11 @@ import {
   EDIT_VALUE,
   EDIT_KEEP_RATIO
 } from '@client/ts/shared/constants'
-import { typeString, RecoverVersionInt, HistoryInt } from '@client/ts/shared/validators'
+import { typeString, RecoverVersionInt, HistoryInt, DrawProperties } from '@client/ts/shared/validators'
 import Meme from '../shared/models/Meme'
+import ImageBox from '../shared/models/ImageBox'
+import { fillText } from '.'
+import TextBox from '../shared/models/TextBox'
 
 export const shuffle = ([...array]: Array<any>): Array<any> => {
   let currentIndex = array.length,
@@ -286,6 +289,56 @@ export const resize = ({
   }
 
   return { height, width, top: currentTop, left: currentLeft }
+}
+
+interface CanvasDrawing {
+  texts: Array<TextBox>
+  images: Array<ImageBox>
+  memeSelected: Meme
+  drawProperties: DrawProperties
+}
+
+export const exportMeme = async (drawerParams: CanvasDrawing): Promise<Blob> => {
+  const canvas = document.createElement('canvas')
+  canvas.width = drawerParams.memeSelected.width
+  canvas.height = drawerParams.memeSelected.height
+  const ctx: CanvasRenderingContext2D = canvas.getContext('2d')
+  const image = await drawerParams.drawProperties.image
+  ctx.drawImage(image, 0, 0, drawerParams.memeSelected.width, drawerParams.memeSelected.height)
+  for (const text of drawerParams.texts) {
+    const fontSize: number = text.fontSize
+    const y: number = text.centerY
+    const x: number = text.centerX
+    const maxHeight: number = text.height
+    const maxWidth: number = text.width
+    fillText({ text, ctx, maxWidth, maxHeight, fontSize, x, y })
+  }
+  for (const image of drawerParams.images) {
+    const dx = Math.round(image.centerX - image.width / 2)
+    const dy = Math.round(image.centerY - image.height / 2)
+    const img = new Image()
+    img.src = image.src
+    ctx.drawImage(img, dx, dy, image.width, image.height)
+  }
+  ctx.save()
+  const watermarkValue = 'meme-studio.io'
+  const fontSize = 11
+  ctx.font = `${fontSize}px Arial`
+  const metrics = ctx.measureText(watermarkValue)
+  ctx.fillStyle = '#cccccc'
+  ctx.textBaseline = 'top'
+  ctx.strokeStyle = 'black'
+  ctx.lineJoin = 'round'
+  const padding = 10
+  ctx.fillText(
+    watermarkValue,
+    drawerParams.memeSelected.width - metrics.width - padding,
+    drawerParams.memeSelected.height - fontSize - padding / 2
+  )
+  ctx.restore()
+  return new Promise(function (resolve, reject) {
+    canvas.toBlob(resolve, 'image/png')
+  })
 }
 
 declare global {
