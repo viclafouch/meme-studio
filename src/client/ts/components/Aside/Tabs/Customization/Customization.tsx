@@ -42,7 +42,7 @@ const getRef = (key: string): React.RefObject<unknown> | null => {
 }
 
 function Customization(): JSX.Element {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { isMinLgSize } = useWindowWidth()
   const uploadInput: RefObject<HTMLInputElement> = useRef(null)
   const [{ itemIdSelected, texts, images, memeSelected, saveToEditor }, dispatchEditor]: [EditorInt, EditorDispatch] = useContext(
@@ -136,7 +136,7 @@ function Customization(): JSX.Element {
   return (
     <div className="customization-not-empty">
       <h2>
-        {t('studio.customization')} <br /> <span className="meme-name">{memeSelected.name}</span>
+        {t('studio.customization')} <br /> <span className="meme-name">{memeSelected.name(i18n.language)}</span>
       </h2>
       {texts.map(
         (

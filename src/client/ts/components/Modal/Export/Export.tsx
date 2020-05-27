@@ -29,7 +29,7 @@ declare global {
 const isBrowserCanCopyImg = 'ClipboardItem' in window
 
 function Export(): JSX.Element {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isError, setIsError] = useState<boolean>(false)
   const [isTweeting, setIsTweeting] = useState<boolean>(false)
@@ -166,7 +166,7 @@ function Export(): JSX.Element {
           className="meme-wrapper-img"
           onContextMenu={(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => e.preventDefault()}
         >
-          <img src={imageSrc} className="meme-img" alt={memeSelected.name} />
+          <img src={imageSrc} className="meme-img" alt={memeSelected.name(i18n.language)} />
         </div>
         <span className="meme-info-size">
           {t('studio.fullSize')} {memeSelected.width} x {memeSelected.height}

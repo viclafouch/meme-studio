@@ -11,7 +11,7 @@ import { StudioAsync } from '../routes'
 import '@client/scss/pages/gallery.scss'
 
 function Gallery(): JSX.Element {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [{ memes, fetchNextMemes, hasNextMemes }]: [DefaultInt] = useContext(DefaultContext)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -53,9 +53,15 @@ function Gallery(): JSX.Element {
                     <picture>
                       <source srcSet={meme.url('.webp')} type="image/webp" />
                       <source srcSet={meme.url('.jpg')} type="image/jpeg" />
-                      <img loading="lazy" width={meme.width} height={meme.height} src={meme.url('.jpg')} alt={meme.name} />
+                      <img
+                        loading="lazy"
+                        width={meme.width}
+                        height={meme.height}
+                        src={meme.url('.jpg')}
+                        alt={meme.name(i18n.language)}
+                      />
                     </picture>
-                    <h3>{meme.name}</h3>
+                    <h3>{meme.name(i18n.language)}</h3>
                   </Link>
                 </li>
               )

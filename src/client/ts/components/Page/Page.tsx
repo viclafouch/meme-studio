@@ -33,7 +33,7 @@ const Page = (props: PagePropsInt): JSX.Element => {
           <Helmet titleTemplate="Meme Studio | %s">
             <html lang={i18n.language} />
             <title lang={i18n.language}>
-              {memeSelected && pathname.startsWith('/create') ? memeSelected.name : pageMeta.title}
+              {memeSelected && pathname.startsWith('/create') ? memeSelected.name(i18n.language) : pageMeta.title}
             </title>
             <meta name="description" content={pageMeta.description} />
             <link rel="canonical" href={`${SITE_URL}${pathname}`} />

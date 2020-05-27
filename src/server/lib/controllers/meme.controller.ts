@@ -6,6 +6,7 @@ import { send } from '../config/app'
 import twitterConfig from '@server/config/twitter'
 import { IS_DEV } from '@shared/config'
 import HttpException from '@server/exceptions/HttpException'
+import Translation from '@server/models/translation.model'
 
 export class MemeController {
   public async index(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -17,11 +18,17 @@ export class MemeController {
       const pages = Math.ceil(count / memesPerPage)
       const offset = memesPerPage * (page - 1)
       const memes: Array<Meme> = await Meme.findAll<Meme>({
-        raw: true,
         limit: memesPerPage,
+        include: [
+          {
+            model: Translation,
+            as: 'translations'
+          }
+        ],
         offset,
         order: [['createdAt', 'DESC']]
       })
+
       send(
         res,
         {
@@ -39,9 +46,15 @@ export class MemeController {
     try {
       const params = req.params as Record<string, any>
       const { id } = params
-      const meme: Meme = await Meme.findByPk<Meme>(id, { raw: true })
+      const meme: Meme = await Meme.findByPk<Meme>(id, {
+        include: [
+          {
+            model: Translation,
+            as: 'translations'
+          }
+        ]
+      })
       const texts: Array<TextBox> = await TextBox.findAll({
-        raw: true,
         where: {
           memeId: meme.id
         },

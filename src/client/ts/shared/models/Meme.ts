@@ -2,21 +2,32 @@ import { isSafari } from '@client/utils/index'
 
 export default class Meme {
   public id: string
-  public name: string
   public filename: string
   public width: number
   public height: number
   public boxCount: number
   public localImageUrl: string
+  public translations: Array<{
+    lang: string
+    keyword: string
+    id: number
+    name: string
+  }>
 
   constructor(meme: Record<string, any>) {
     this.id = meme.id
-    this.name = meme.name
     this.filename = meme.filename
     this.width = meme.width
     this.height = meme.height
     this.boxCount = meme.boxCount
     this.localImageUrl = meme.localImageUrl || null
+    this.translations = meme.translations
+  }
+
+  name(lang: string): string {
+    const currentTranslation = this.translations.find(t => t.lang === lang)
+    if (currentTranslation) return currentTranslation.name
+    return ''
   }
 
   public url(format: '.jpg' | '.webp' = isSafari ? '.jpg' : '.webp'): string {

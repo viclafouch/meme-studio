@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom'
 import Meme from '@client/ts/shared/models/Meme'
 import { DefaultContext, DefaultInt } from '@client/store/DefaultContext'
 import { wait } from '@shared/utils'
+import { useTranslation } from 'react-i18next'
 import './gallery.scss'
 
 function Gallery(): JSX.Element {
+  const { i18n } = useTranslation()
   const [{ memes, fetchNextMemes, hasNextMemes }]: [DefaultInt] = useContext(DefaultContext)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const scrollerRef: RefObject<HTMLUListElement> = useRef(null)
@@ -35,7 +37,13 @@ function Gallery(): JSX.Element {
               <picture>
                 <source srcSet={meme.url('.webp')} type="image/webp" />
                 <source srcSet={meme.url('.jpg')} type="image/jpeg" />
-                <img loading="lazy" width={meme.width} height={meme.height} src={meme.url('.jpg')} alt={meme.name} />
+                <img
+                  loading="lazy"
+                  width={meme.width}
+                  height={meme.height}
+                  src={meme.url('.jpg')}
+                  alt={meme.name(i18n.language)}
+                />
               </picture>
             </Link>
           </li>
