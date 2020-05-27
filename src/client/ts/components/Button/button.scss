@@ -156,5 +156,10 @@
     background-color: var(--background-button-disabled) !important;
     color: #b3b0b0 !important;
     cursor: not-allowed;
+
+    .button-loader {
+      border-color: #b3b0b0;
+      border-top-color: transparent;
+    }
   }
 }

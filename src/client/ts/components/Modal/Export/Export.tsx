@@ -11,6 +11,7 @@ import { EditorContext, EditorInt, EditorDispatch } from '@client/store/EditorCo
 import ImageBox from '@client/ts/shared/models/ImageBox'
 import { exportMeme } from '@client/utils/helpers'
 import { useWindowWidth } from '@client/ts/shared/hooks'
+import { wait } from '@shared/utils'
 import './export.scss'
 
 declare global {
@@ -31,6 +32,7 @@ function Export(): JSX.Element {
   const { t } = useTranslation()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isError, setIsError] = useState<boolean>(false)
+  const [isTweeting, setIsTweeting] = useState<boolean>(false)
   const [isCopied, setIsCopied] = useState<boolean>(false)
   const [imageTweet, setImageTweet] = useState<string>('')
   const [blob, setBlob] = useState<Blob>(null)
@@ -86,7 +88,6 @@ function Export(): JSX.Element {
       if (blob) {
         try {
           setIsError(false)
-          setIsLoading(true)
           if (imageTweet) {
             window.open(
               `https://twitter.com/intent/tweet?text=[${t('yourText')}] ${imageTweet}`,
@@ -94,6 +95,8 @@ function Export(): JSX.Element {
               'toolbar=0,location=0,menubar=0,width=750,height=750'
             )
           } else {
+            setIsTweeting(true)
+            await wait()
             const base64: string = await new Promise((resolve, reject) => {
               const reader = new window.FileReader()
               reader.readAsDataURL(blob)
@@ -114,11 +117,11 @@ function Export(): JSX.Element {
           setIsError(true)
           console.error(error)
         } finally {
-          setIsLoading(false)
+          setIsTweeting(false)
         }
       }
     },
-    [setIsLoading, t, imageTweet, blob]
+    [t, imageTweet, blob]
   )
 
   const copy = useCallback(async () => {
@@ -188,7 +191,13 @@ function Export(): JSX.Element {
               Copier
             </Button>
           )}
-          <Button className="button-export" id="export-twitter" onClick={shareToTwitter}>
+          <Button
+            className="button-export"
+            id="export-twitter"
+            onClick={shareToTwitter}
+            isLoading={isTweeting}
+            disabled={isTweeting}
+          >
             <FontAwesomeIcon icon={['fab', 'twitter']} className="icon-twitter" />
             {t('share')}
           </Button>
