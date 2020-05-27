@@ -58,7 +58,7 @@ class App {
     if (process.env.USE_SSL) this.app.use(sslRedirect())
     this.app.post(
       '/memes',
-      validate([body('page').isInt({ min: 1 }), body('search').optional().isString()]),
+      validate([body('page').isInt({ min: 1 }), body('search').optional().isString(), body('lang').optional().isString()]),
       this.memeController.index
     )
     this.app.post(

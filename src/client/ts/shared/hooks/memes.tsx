@@ -2,8 +2,9 @@ import { useState, useEffect, useRef, useCallback, RefObject } from 'react'
 import AbortController from 'abort-controller'
 import Meme from '../models/Meme'
 import { getMemes } from '../api'
-import { useDebouncedCallback } from '.'
 import { wait } from '@shared/utils'
+import { useTranslation } from 'react-i18next'
+import { useDebounce } from 'use-debounce'
 
 interface InfinityMemesInt {
   query: string
@@ -17,32 +18,32 @@ interface InfinityMemesInt {
 }
 
 export function useInfinityMemes({ debounceTime = 800, threshold = 450 } = {}): InfinityMemesInt {
+  const { i18n } = useTranslation()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isError, setIsError] = useState<boolean>(false)
   const [memes, setMemes] = useState<Array<Meme>>([])
   const [query, setQuery] = useState<string>('')
-  const [searchValue, setSearchValue] = useState<string>('')
+  const [searchValue] = useDebounce(query, debounceTime)
 
   const [hasMore, setHasMore] = useState<boolean>(false)
   const currentPage = useRef(1)
   const ref: RefObject<HTMLElement> = useRef(null)
 
-  const setSearchValueDebounced = useDebouncedCallback((query: string) => {
-    if (!isLoading || !isError) setSearchValue(query)
-  }, debounceTime)
-
   useEffect(() => {
-    setSearchValueDebounced(query)
-  }, [query, setSearchValueDebounced])
+    setMemes([])
+    setIsLoading(true)
+  }, [query])
 
   const fetchMemes = useCallback(async (params = {}, controller?: AbortController) => {
     try {
       setIsLoading(true)
       const page = params.page || currentPage.current
+      await wait(200)
       const response = await getMemes(
         {
           page,
-          search: params.searchValue || ''
+          search: params.searchValue || '',
+          lang: params.lang || 'en'
         },
         {
           ...(controller ? { signal: controller.signal } : null)
@@ -66,10 +67,10 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450 } = {}): 
       if (isAtBottom && !isLoading && hasMore) {
         try {
           setIsLoading(true)
-          await wait(200)
           await fetchMemes({
             page: currentPage.current,
-            searchValue
+            searchValue,
+            lang: i18n.language
           })
         } catch (error) {
           console.warn(error)
@@ -78,22 +79,22 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450 } = {}): 
         }
       }
     }
-  }, [fetchMemes, isLoading, threshold, hasMore, searchValue])
+  }, [fetchMemes, isLoading, threshold, hasMore, searchValue, i18n.language])
 
   useEffect(() => {
     const controller = new AbortController()
-    setMemes([])
     fetchMemes(
       {
         searchValue,
-        page: 1
+        page: 1,
+        lang: i18n.language
       },
       controller
     )
     return () => {
       controller.abort()
     }
-  }, [searchValue, fetchMemes])
+  }, [searchValue, fetchMemes, i18n.language])
 
   return { query, setQuery, memes, hasMore, isLoading, isError, handleScroll, ref }
 }

@@ -12,7 +12,7 @@ export class MemeController {
   public async index(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const body = req.body as Record<string, any>
-      const { page } = body
+      const { page, search, lang } = body
       const { count } = await Meme.findAndCountAll()
       const memesPerPage = 10
       const pages = Math.ceil(count / memesPerPage)
@@ -24,12 +24,13 @@ export class MemeController {
           {
             model: Translation,
             as: 'translations',
-            ...(body.search
+            ...(search
               ? {
                   where: {
                     name: {
-                      [op]: `%${body.search}%`
-                    }
+                      [op]: `%${search}%`
+                    },
+                    lang: lang || 'en'
                   }
                 }
               : null)

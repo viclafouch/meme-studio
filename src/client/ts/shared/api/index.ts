@@ -9,12 +9,12 @@ interface ResponseAPI extends Response {
 }
 
 export const getMemes = (
-  { page, search }: { page: number; search: string },
+  { page, search, lang }: { page: number; search: string; lang: string },
   params?: RequestInit
 ): Promise<{ memes: Array<Meme>; pages: number }> =>
   fetchApi(`/memes`, {
     method: 'POST',
-    body: JSON.stringify({ page, search }),
+    body: JSON.stringify({ page, search, lang }),
     ...params
   }).then((response: ResponseAPI) => ({
     memes: response.data.memes.map((meme: Meme) => new Meme(meme)),

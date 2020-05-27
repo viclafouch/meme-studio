@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useReducer, createContext, RefObject, createRef, ReactNode, useMemo, useCallback } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
 import Meme from '@client/ts/shared/models/Meme'
 import TextBox from '@client/ts/shared/models/TextBox'
 import { DrawProperties, HistoryInt } from '@client/ts/shared/validators'
@@ -8,7 +9,6 @@ import { TAB_GALLERY, TAB_CUSTOMIZATION } from '@client/ts/shared/constants'
 import { SET_HISTORY, ADD_ITEM, CUSTOM_TEXT, REMOVE_ITEM, CUSTOM_IMAGE } from './reducer/constants'
 import { hasRecoverVersion } from '@client/utils/helpers'
 import ImageBox from '../shared/models/ImageBox'
-import { useDebouncedCallback } from '../shared/hooks'
 
 export interface EditorState {
   itemIdSelected: string
@@ -76,7 +76,7 @@ export function EditorProvider({ children }: { children: ReactNode }): JSX.Eleme
 
   const canErazeAll = canUndo || canRedo || state.texts.length > 0 || state.images.length > 0
 
-  const saveToHistory = useDebouncedCallback((historyType: any) => {
+  const [saveToHistory] = useDebouncedCallback((historyType: any) => {
     updater({ type: SET_HISTORY, historyType })
   }, 800)
 
