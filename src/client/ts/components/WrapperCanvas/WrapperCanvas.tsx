@@ -28,28 +28,6 @@ function WrapperCanvas(): JSX.Element {
     dispatchEditor
   ]: [EditorInt, EditorDispatch] = useContext(EditorContext)
 
-  React.useEffect(() => {
-    if ('fonts' in document) {
-      async function test() {
-        // try {
-        //   const t = await WebFont.load({
-        //     custom: {
-        //       families: ['Impact'],
-        //       urls: ['/fonts.css']
-        //     },
-        //     active: function () {
-        //       console.log('go')
-        //     }
-        //   })
-        //   console.log(t)
-        // } catch (error) {
-        //   console.log(error)
-        // }
-      }
-      test()
-    }
-  }, [])
-
   useLayoutEffect(() => {
     const draw = (): void => {
       const canvas: HTMLCanvasElement = canvasRef.current

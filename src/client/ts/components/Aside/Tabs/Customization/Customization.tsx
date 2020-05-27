@@ -26,6 +26,7 @@ import { FONTS_FAMILY, ALIGN_VERTICAL, TEXT_ALIGN } from '@shared/config'
 import ImageBox from '@client/ts/shared/models/ImageBox'
 import { TEXT_ADDED, IMAGE_REMOVED, TEXT_REMOVED, IMAGE_ADDED } from '@client/ts/shared/constants'
 import { endWithExt, toBase64 } from '@client/utils/index'
+import { useWindowWidth } from '@client/ts/shared/hooks'
 import './customization.scss'
 
 const map = new Map<string, React.RefObject<unknown>>()
@@ -42,6 +43,7 @@ const getRef = (key: string): React.RefObject<unknown> | null => {
 
 function Customization(): JSX.Element {
   const { t } = useTranslation()
+  const { isMinLgSize } = useWindowWidth()
   const uploadInput: RefObject<HTMLInputElement> = useRef(null)
   const [{ itemIdSelected, texts, images, memeSelected, saveToEditor }, dispatchEditor]: [EditorInt, EditorDispatch] = useContext(
     EditorContext
@@ -332,17 +334,19 @@ function Customization(): JSX.Element {
         <FontAwesomeIcon className="icon-plus" icon={['fas', 'plus']} />
         <span>{t('studio.addText')}</span>
       </span>
-      <label htmlFor="upload-imagebox" className="add-item-button" role="button">
-        <FontAwesomeIcon className="icon-plus" icon={['fas', 'plus']} />
-        <span>{t('studio.addImage')}</span>
-        <input
-          ref={uploadInput}
-          onChange={handleUploadImagebox}
-          type="file"
-          accept="image/png, image/jpeg"
-          id="upload-imagebox"
-        />
-      </label>
+      {isMinLgSize && (
+        <label htmlFor="upload-imagebox" className="add-item-button" role="button">
+          <FontAwesomeIcon className="icon-plus" icon={['fas', 'plus']} />
+          <span>{t('studio.addImage')}</span>
+          <input
+            ref={uploadInput}
+            onChange={handleUploadImagebox}
+            type="file"
+            accept="image/png, image/jpeg"
+            id="upload-imagebox"
+          />
+        </label>
+      )}
     </div>
   )
 }

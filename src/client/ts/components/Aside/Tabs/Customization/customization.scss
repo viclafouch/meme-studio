@@ -98,10 +98,17 @@
       outline: none;
       background-color: var(--blue-primary);
       flex-shrink: 0;
-      height: 36px;
+      height: 54px;
       position: relative;
       color: #ffffff;
-      font-size: 0.77rem;
+      font-size: 0.90rem;
+      box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.65);
+
+      @include md {
+        height: 36px;
+        font-size: 0.77rem;
+        box-shadow: none;
+      }
 
       & + .add-item-button {
         border-top: 1px solid rgba(255,255,255,0.15);
