@@ -1,10 +1,10 @@
 import { Model, DataTypes } from 'sequelize'
 import database from '../config/database'
 import TextBox from './textbox.model'
+import Translation from './translation.model'
 
 class Meme extends Model {
   public id: string
-  public name!: string
   public width!: number
   public height!: number
   public boxCount!: number
@@ -19,10 +19,6 @@ Meme.init(
     id: {
       type: DataTypes.STRING,
       primaryKey: true
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
     },
     filename: {
       type: DataTypes.STRING,
@@ -60,5 +56,6 @@ Meme.init(
 )
 
 Meme.hasMany(TextBox, { as: 'texts', foreignKey: 'memeId' })
+Meme.hasMany(Translation, { as: 'translations', foreignKey: 'memeId' })
 
 export default Meme
