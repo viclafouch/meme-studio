@@ -25,10 +25,6 @@ export type DefaultDispatch = React.Dispatch<Actions>
 
 export const DefaultContext = createContext<DefaultState | any>(initialState)
 
-export interface DefaultInt extends DefaultState {
-  fetchNextMemes: () => void
-}
-
 export function DefaultProvider({ children }: { children: React.ReactNode }): JSX.Element {
   const [state, updater] = useReducer(DefaultReducer, initialState)
 
@@ -37,28 +33,10 @@ export function DefaultProvider({ children }: { children: React.ReactNode }): JS
     localStorage.setItem('theme', state.theme)
   }, [state.theme])
 
-  const fetchNextMemes = useCallback(async (): Promise<Array<Meme>> => {
-    const controller = new AbortController()
-    const timeout: any = setTimeout(() => controller.abort(), 10000)
-    const currentPage = state.numPage + 1
-    const response = await getMemes(currentPage, {
-      signal: controller.signal
-    })
-    clearTimeout(timeout)
-    const newMemes = [...state.memes, ...response.memes]
-    updater({
-      type: SET_MEMES,
-      memes: newMemes,
-      numPage: currentPage,
-      hasNextMemes: currentPage < response.pages
-    })
-    return newMemes
-  }, [state.numPage, updater, state.memes])
-
   return (
     <>
       <div ref={state.modalRef} id="modal" />
-      <DefaultContext.Provider value={[{ ...state, fetchNextMemes }, updater]}>{children}</DefaultContext.Provider>
+      <DefaultContext.Provider value={[state, updater]}>{children}</DefaultContext.Provider>
     </>
   )
 }

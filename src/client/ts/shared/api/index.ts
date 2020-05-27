@@ -8,10 +8,13 @@ interface ResponseAPI extends Response {
   message?: string
 }
 
-export const getMemes = (page: number, params?: RequestInit): Promise<{ memes: Array<Meme>; pages: number }> =>
+export const getMemes = (
+  { page, search }: { page: number; search: string },
+  params?: RequestInit
+): Promise<{ memes: Array<Meme>; pages: number }> =>
   fetchApi(`/memes`, {
     method: 'POST',
-    body: JSON.stringify({ page }),
+    body: JSON.stringify({ page, search }),
     ...params
   }).then((response: ResponseAPI) => ({
     memes: response.data.memes.map((meme: Meme) => new Meme(meme)),

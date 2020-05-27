@@ -1,5 +1,6 @@
 import { Response, NextFunction, Request } from 'express'
 import * as Twit from 'twit'
+import { Op } from 'sequelize'
 import Meme from '../models/meme.model'
 import TextBox from '../models/textbox.model'
 import { send } from '../config/app'
@@ -7,7 +8,6 @@ import twitterConfig from '@server/config/twitter'
 import { IS_DEV } from '@shared/config'
 import HttpException from '@server/exceptions/HttpException'
 import Translation from '@server/models/translation.model'
-
 export class MemeController {
   public async index(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
@@ -17,12 +17,22 @@ export class MemeController {
       const memesPerPage = 10
       const pages = Math.ceil(count / memesPerPage)
       const offset = memesPerPage * (page - 1)
+      const op = !IS_DEV ? Op.iLike : Op.like
       const memes: Array<Meme> = await Meme.findAll<Meme>({
         limit: memesPerPage,
         include: [
           {
             model: Translation,
-            as: 'translations'
+            as: 'translations',
+            ...(body.search
+              ? {
+                  where: {
+                    name: {
+                      [op]: `%${body.search}%`
+                    }
+                  }
+                }
+              : null)
           }
         ],
         offset,

@@ -56,7 +56,11 @@ class App {
 
   private initializeRoutes(): void {
     if (process.env.USE_SSL) this.app.use(sslRedirect())
-    this.app.post('/memes', validate([body('page').isInt({ min: 1 })]), this.memeController.index)
+    this.app.post(
+      '/memes',
+      validate([body('page').isInt({ min: 1 }), body('search').optional().isString()]),
+      this.memeController.index
+    )
     this.app.post(
       '/memes/:id',
       validate([param('id').exists().isString().custom(isShortIdValid).custom(isMemeExists)]),
