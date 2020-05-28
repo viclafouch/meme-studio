@@ -8,39 +8,51 @@ import twitterConfig from '@server/config/twitter'
 import { IS_DEV } from '@shared/config'
 import HttpException from '@server/exceptions/HttpException'
 import Translation from '@server/models/translation.model'
+
 export class MemeController {
   public async index(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const body = req.body as Record<string, any>
       const { page, search, lang } = body
-      const { count } = await Meme.findAndCountAll()
+      const likely = !IS_DEV ? Op.iLike : Op.like
+
+      const where = search
+        ? {
+            [Op.or]: [
+              {
+                name: {
+                  [likely]: `%${search}%`
+                }
+              },
+              {
+                keywords: {
+                  [likely]: `%${search}%`
+                }
+              }
+            ],
+            lang: lang || 'en'
+          }
+        : {}
+
+      const { count } = await Meme.findAndCountAll({
+        include: [
+          {
+            model: Translation,
+            as: 'translations',
+            where
+          }
+        ]
+      })
       const memesPerPage = 10
       const pages = Math.ceil(count / memesPerPage)
       const offset = memesPerPage * (page - 1)
-      const op = !IS_DEV ? Op.iLike : Op.like
       const memes: Array<Meme> = await Meme.findAll<Meme>({
         limit: memesPerPage,
         include: [
           {
             model: Translation,
             as: 'translations',
-            ...(search
-              ? {
-                  where: {
-                    [Op.or]: [
-                      {
-                        name: {
-                          [op]: `%${search}%`
-                        },
-                        keywords: {
-                          [op]: `%${search}%`
-                        }
-                      }
-                    ],
-                    lang: lang || 'en'
-                  }
-                }
-              : null)
+            where
           }
         ],
         offset,
