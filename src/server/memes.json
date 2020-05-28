@@ -8,8 +8,8 @@
       "id": "RRyXaF0_8",
       "translations": {
         "fr": {
-          "name": "Distracted Boyfriend",
-          "keywords": "distracted, boyfriend"
+          "name": "Petit ami distrait",
+          "keywords": "distrait, ami"
         },
         "en": {
           "name": "Distracted Boyfriend",
@@ -140,8 +140,8 @@
       "id": "1Usvbz3Fa",
       "translations": {
         "fr": {
-          "name": "Two Buttons",
-          "keywords": "two, buttons"
+          "name": "Deux boutons",
+          "keywords": "deux, boutons"
         },
         "en": {
           "name": "Two Buttons",
@@ -197,8 +197,8 @@
       "id": "m7FbHXQIs",
       "translations": {
         "fr": {
-          "name": "Batman Slapping Robin",
-          "keywords": "batman, slapping, robin"
+          "name": "Batman gifle Robin",
+          "keywords": "batman, giffle, robin"
         },
         "en": {
           "name": "Batman Slapping Robin",
@@ -254,12 +254,12 @@
       "id": "uQVRzRpAh",
       "translations": {
         "fr": {
-          "name": "Change My Mind",
-          "keywords": "change, my, mind"
+          "name": "Changer d'avis",
+          "keywords": "changer, avis"
         },
         "en": {
           "name": "Change My Mind",
-          "keywords": "change, my, mind"
+          "keywords": "change, mind"
         }
       },
       "texts": [
@@ -293,8 +293,8 @@
       "id": "F5yLlirq0",
       "translations": {
         "fr": {
-          "name": "Expanding Brain",
-          "keywords": "expanding, brain"
+          "name": "Cerveau en expansion",
+          "keywords": "cerveau"
         },
         "en": {
           "name": "Expanding Brain",
@@ -386,12 +386,12 @@
       "id": "4t3PMOfvc",
       "translations": {
         "fr": {
-          "name": "UNO Draw 25 Cards",
-          "keywords": "uno, draw, 25, cards"
+          "name": "UNO 25 cartes",
+          "keywords": "uno, cartes, jeu"
         },
         "en": {
           "name": "UNO Draw 25 Cards",
-          "keywords": "uno, draw, 25, cards"
+          "keywords": "uno, cards, game"
         }
       },
       "texts": [
@@ -443,8 +443,8 @@
       "id": "U2LCgkeV4",
       "translations": {
         "fr": {
-          "name": "Running Away Balloon",
-          "keywords": "running, away, balloon"
+          "name": "Ballon s'envole",
+          "keywords": "Running Away Balloon, ballon, envoler"
         },
         "en": {
           "name": "Running Away Balloon",
@@ -611,12 +611,12 @@
       "id": "t_sMJcnXj",
       "translations": {
         "fr": {
-          "name": "Left Exit 12 Off Ramp",
-          "keywords": "left, exit, 12, off, ramp"
+          "name": "Virage d'une voiture",
+          "keywords": "Left Exit 12 Off Ramp, voiture, route, rampe, virage"
         },
         "en": {
           "name": "Left Exit 12 Off Ramp",
-          "keywords": "left, exit, 12, off, ramp"
+          "keywords": "car, road, ramp, turn"
         }
       },
       "texts": [
@@ -686,12 +686,12 @@
       "id": "jTQImQLXW",
       "translations": {
         "fr": {
-          "name": "Is This A Pigeon",
-          "keywords": "is, this, a, pigeon"
+          "name": "Est-ce un pigeon ?",
+          "keywords": "piegon, curieux, question"
         },
         "en": {
-          "name": "Is This A Pigeon",
-          "keywords": "is, this, a, pigeon"
+          "name": "Is This A Pigeon?",
+          "keywords": "piegon, curious, question"
         }
       },
       "texts": [
@@ -761,12 +761,12 @@
       "id": "ck18xyMvp",
       "translations": {
         "fr": {
-          "name": "Inhaling Seagull",
-          "keywords": "inhaling, seagull"
+          "name": "Inhaler une mouette",
+          "keywords": "mouette"
         },
         "en": {
           "name": "Inhaling Seagull",
-          "keywords": "inhaling, seagull"
+          "keywords": "seagull"
         }
       },
       "texts": [
@@ -854,11 +854,11 @@
       "id": "ChRn1RkZ6",
       "translations": {
         "fr": {
-          "name": "Woman Yelling At Cat",
-          "keywords": "woman, yelling, at, cat"
+          "name": "Femme criant sur un chat",
+          "keywords": "femme, crier, chat"
         },
         "en": {
-          "name": "Woman Yelling At Cat",
+          "name": "Woman yelling at cat",
           "keywords": "woman, yelling, at, cat"
         }
       },
@@ -911,12 +911,12 @@
       "id": "DEHS6337Q",
       "translations": {
         "fr": {
-          "name": "American Chopper Argument",
-          "keywords": "american, chopper, argument"
+          "name": "L'argument de l'hélicoptère américain",
+          "keywords": "américain, hélicoptère, argument, hommes"
         },
         "en": {
           "name": "American Chopper Argument",
-          "keywords": "american, chopper, argument"
+          "keywords": "american, chopper, argument, mans"
         }
       },
       "texts": [
@@ -1022,12 +1022,12 @@
       "id": "6T5rrezEb",
       "translations": {
         "fr": {
-          "name": "Epic Handshake",
-          "keywords": "epic, handshake"
+          "name": "Poignée de main épique",
+          "keywords": "poignée, check, bras"
         },
         "en": {
           "name": "Epic Handshake",
-          "keywords": "epic, handshake"
+          "keywords": "handle, check, arm"
         }
       },
       "texts": [
@@ -1098,11 +1098,11 @@
       "translations": {
         "fr": {
           "name": "Hide the Pain Harold",
-          "keywords": "hide, the, pain, harold"
+          "keywords": "András Arató"
         },
         "en": {
           "name": "Hide the Pain Harold",
-          "keywords": "hide, the, pain, harold"
+          "keywords": "András Arató"
         }
       },
       "texts": [
@@ -1155,11 +1155,11 @@
       "translations": {
         "fr": {
           "name": "Tuxedo Winnie The Pooh",
-          "keywords": "tuxedo, winnie, the, pooh"
+          "keywords": "winnie l'ourson, gentleman"
         },
         "en": {
           "name": "Tuxedo Winnie The Pooh",
-          "keywords": "tuxedo, winnie, the, pooh"
+          "keywords": "winnie, the, pooh, gentleman"
         }
       },
       "texts": [
@@ -1211,12 +1211,12 @@
       "id": "tQFas1wQc",
       "translations": {
         "fr": {
-          "name": "Unsettled Tom",
-          "keywords": "unsettled, tom"
+          "name": "Tom l'instable",
+          "keywords": "tom, jerry"
         },
         "en": {
           "name": "Unsettled Tom",
-          "keywords": "unsettled, tom"
+          "keywords": "tom, jerry"
         }
       },
       "texts": [
@@ -1268,12 +1268,12 @@
       "id": "DzdD3DaLs",
       "translations": {
         "fr": {
-          "name": "Blank Nut Button",
-          "keywords": "blank, nut, button"
+          "name": "Bouton de noix vierge",
+          "keywords": "bouton, bleu, vide"
         },
         "en": {
           "name": "Blank Nut Button",
-          "keywords": "blank, nut, button"
+          "keywords": "blank, button, blue"
         }
       },
       "texts": [
@@ -1325,8 +1325,8 @@
       "id": "uFhaGUxdN",
       "translations": {
         "fr": {
-          "name": "Boardroom Meeting Suggestion",
-          "keywords": "boardroom, meeting, suggestion"
+          "name": "Suggestion de réunion en salle de conférence",
+          "keywords": "suggestion, réunion, meeting"
         },
         "en": {
           "name": "Boardroom Meeting Suggestion",
@@ -1418,12 +1418,12 @@
       "id": "ZGjiOoRXn",
       "translations": {
         "fr": {
-          "name": "One Does Not Simply",
-          "keywords": "one, does, not, simply"
+          "name": "On ne fait pas simplement",
+          "keywords": "One does not simply, mordor, Boromir, Seigneur des Anneaux "
         },
         "en": {
-          "name": "One Does Not Simply",
-          "keywords": "one, does, not, simply"
+          "name": "One does not simply",
+          "keywords": "mordor, Boromir, Lord of the Rings"
         }
       },
       "texts": [
@@ -1475,12 +1475,12 @@
       "id": "W6PRyQNJ1",
       "translations": {
         "fr": {
-          "name": "Surprised Pikachu",
-          "keywords": "surprised, pikachu"
+          "name": "Pikachu surpris",
+          "keywords": "Surprised Pikachu, pokemon"
         },
         "en": {
           "name": "Surprised Pikachu",
-          "keywords": "surprised, pikachu"
+          "keywords": "pokemon"
         }
       },
       "texts": [
@@ -1532,12 +1532,12 @@
       "id": "KC4IJxpDD",
       "translations": {
         "fr": {
-          "name": "Roll Safe Think About It",
-          "keywords": "roll, safe, think, about, it"
+          "name": "Roll Safe",
+          "keywords": "homme, taper, tête, genie, penser"
         },
         "en": {
-          "name": "Roll Safe Think About It",
-          "keywords": "roll, safe, think, about, it"
+          "name": "Roll Safe",
+          "keywords": "guy, tapping, head, genious, think"
         }
       },
       "texts": [
@@ -1589,12 +1589,12 @@
       "id": "duLVSBYZ7",
       "translations": {
         "fr": {
-          "name": "Who Killed Hannibal",
-          "keywords": "who, killed, hannibal"
+          "name": "Qui a tué Hannibal",
+          "keywords": "Who Killed Hannibal, Eric Andre"
         },
         "en": {
           "name": "Who Killed Hannibal",
-          "keywords": "who, killed, hannibal"
+          "keywords": "Eric Andre, show"
         }
       },
       "texts": [
@@ -1665,11 +1665,11 @@
       "translations": {
         "fr": {
           "name": "The Scroll Of Truth",
-          "keywords": "the, scroll, of, truth"
+          "keywords": "Tate Parker, comic"
         },
         "en": {
           "name": "The Scroll Of Truth",
-          "keywords": "the, scroll, of, truth"
+          "keywords": "Tate Parker, comic"
         }
       },
       "texts": [
@@ -1721,12 +1721,12 @@
       "id": "lzcsDngwC",
       "translations": {
         "fr": {
-          "name": "Waiting Skeleton",
-          "keywords": "waiting, skeleton"
+          "name": "Squelette en attente",
+          "keywords": "attendre, squelette, patience"
         },
         "en": {
           "name": "Waiting Skeleton",
-          "keywords": "waiting, skeleton"
+          "keywords": "waiting, skeleton, patience"
         }
       },
       "texts": [
@@ -1778,12 +1778,12 @@
       "id": "BhY0rG6lE",
       "translations": {
         "fr": {
-          "name": "Hard To Swallow Pills",
-          "keywords": "hard, to, swallow, pills"
+          "name": "Pilules difficiles à avaler",
+          "keywords": "Hard To Swallow Pills, médicament, avaler, soin"
         },
         "en": {
           "name": "Hard To Swallow Pills",
-          "keywords": "hard, to, swallow, pills"
+          "keywords": "medicine, swallowing, care"
         }
       },
       "texts": [
@@ -1817,12 +1817,12 @@
       "id": "LAMeA7C-c",
       "translations": {
         "fr": {
-          "name": "Trump Bill Signing",
-          "keywords": "trump, bill, signing"
+          "name": "Signature de document par Trump",
+          "keywords": "Trump Bill Signing, document, signer, officiel, Donald Trump"
         },
         "en": {
           "name": "Trump Bill Signing",
-          "keywords": "trump, bill, signing"
+          "keywords": "document, signed, official, Donald Trump"
         }
       },
       "texts": [
@@ -1875,11 +1875,11 @@
       "translations": {
         "fr": {
           "name": "The Rock Driving",
-          "keywords": "the, rock, driving"
+          "keywords": "The Rock Driving, Race to witch mountain, La Montagne ensorcelée, fille, voiture, surpris"
         },
         "en": {
           "name": "The Rock Driving",
-          "keywords": "the, rock, driving"
+          "keywords": "Race to witch mountain, girl, car, surprised"
         }
       },
       "texts": [
@@ -1932,11 +1932,11 @@
       "translations": {
         "fr": {
           "name": "Disaster Girl",
-          "keywords": "disaster, girl"
+          "keywords": "fille, gamine, sourire, feu, maison, Zoe Roth"
         },
         "en": {
           "name": "Disaster Girl",
-          "keywords": "disaster, girl"
+          "keywords": "girl, smiling, fire, house, Zoe Roth"
         }
       },
       "texts": [
@@ -1988,12 +1988,12 @@
       "id": "Jgw03XeSN",
       "translations": {
         "fr": {
-          "name": "Bernie I Am Once Again Asking For Your Support",
-          "keywords": "bernie, i, am, once, again, asking, for, your, support"
+          "name": "Bernie, je vous demande une fois de plus votre soutien",
+          "keywords": "Bernie Sanders, aide, politicien"
         },
         "en": {
           "name": "Bernie I Am Once Again Asking For Your Support",
-          "keywords": "bernie, i, am, once, again, asking, for, your, support"
+          "keywords": "Bernie Sanders, help, politician"
         }
       },
       "texts": [
@@ -2046,11 +2046,11 @@
       "translations": {
         "fr": {
           "name": "Monkey Puppet",
-          "keywords": "monkey, puppet"
+          "keywords": "singe"
         },
         "en": {
           "name": "Monkey Puppet",
-          "keywords": "monkey, puppet"
+          "keywords": "monkey"
         }
       },
       "texts": [
@@ -2102,12 +2102,12 @@
       "id": "u0H3y8h5R",
       "translations": {
         "fr": {
-          "name": "Spongebob Ight Imma Head Out",
-          "keywords": "spongebob, ight, imma, head, out"
+          "name": "Bob l'éponge a fait sortir Imma",
+          "keywords": "Spongebob Ight Imma Head Out, bob, éponge, dessin animé"
         },
         "en": {
           "name": "Spongebob Ight Imma Head Out",
-          "keywords": "spongebob, ight, imma, head, out"
+          "keywords": "bob, animated movie"
         }
       },
       "texts": [],
@@ -2122,12 +2122,12 @@
       "id": "UnV__JhYl",
       "translations": {
         "fr": {
-          "name": "X, X Everywhere",
-          "keywords": "x,, x, everywhere"
+          "name": "X, X partout",
+          "keywords": "X, X Everywhere, toy story, woody, buzz l'éclair"
         },
         "en": {
           "name": "X, X Everywhere",
-          "keywords": "x,, x, everywhere"
+          "keywords": "toy story, woody, buzz lightyear"
         }
       },
       "texts": [
@@ -2179,12 +2179,12 @@
       "id": "vtO5evAuY",
       "translations": {
         "fr": {
-          "name": "Y'all Got Any More Of That",
-          "keywords": "y'all, got, any, more, of, that"
+          "name": "Vous en avez d'autres...",
+          "keywords": "Y'all Got Any More Of.., Dave Chappelle, Tyrone Biggums"
         },
         "en": {
-          "name": "Y'all Got Any More Of That",
-          "keywords": "y'all, got, any, more, of, that"
+          "name": "Y'all Got Any More Of..",
+          "keywords": "Dave Chappelle, Tyrone Biggums"
         }
       },
       "texts": [
@@ -2236,12 +2236,12 @@
       "id": "1EdSDJclb",
       "translations": {
         "fr": {
-          "name": "Futurama Fry",
-          "keywords": "futurama, fry"
+          "name": "Futurama Fry / Je ne sais pas si",
+          "keywords": "Not Sure If, incertain, sûr, Futurama"
         },
         "en": {
-          "name": "Futurama Fry",
-          "keywords": "futurama, fry"
+          "name": "Futurama Fry / Not Sure If",
+          "keywords": "uncertain, sure, Futurama"
         }
       },
       "texts": [
@@ -2294,11 +2294,11 @@
       "translations": {
         "fr": {
           "name": "Ancient Aliens",
-          "keywords": "ancient, aliens"
+          "keywords": "explication, alien, homme, Giorgio A. Tsoukalos"
         },
         "en": {
           "name": "Ancient Aliens",
-          "keywords": "ancient, aliens"
+          "keywords": "explanation, alien, guy, Giorgio A. Tsoukalos"
         }
       },
       "texts": [
@@ -2350,12 +2350,12 @@
       "id": "Z-mTrNtL4",
       "translations": {
         "fr": {
-          "name": "Oprah You Get A",
-          "keywords": "oprah, you, get, a"
+          "name": "Oprah Tu gagnes une voiture",
+          "keywords": "Oprah You get a, gagner, L'émission d'Oprah Winfrey"
         },
         "en": {
-          "name": "Oprah You Get A",
-          "keywords": "oprah, you, get, a"
+          "name": "Oprah You get a car",
+          "keywords": "win, The Oprah Winfrey Show"
         }
       },
       "texts": [
