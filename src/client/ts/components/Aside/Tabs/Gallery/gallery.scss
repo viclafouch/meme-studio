@@ -62,6 +62,12 @@ html[data-theme="dark"] .gallery:not(.page) {
         animation-delay: $i * 0.2s;
       }
     }
+
+    &.gallery-error {
+      p {
+        margin-bottom: 15px;
+      }
+    }
   }
 }
 

@@ -41,24 +41,24 @@
   }
 
   &.button-small {
-    padding: 13px 18px;
+    padding: 9px 13px;
     font-size: 13px;
-    line-height: 19px;
+    line-height: 1.2;
 
     @include sm {
-      padding: 14px 20px;
-      font-size: 19px;
-      line-height: 21px;
+      padding: 10px 14px;
+      font-size: 13px;
+      line-height: 1.2;
     }
 
     @include md {
-      padding: 15px 22px;
-      font-size: 20px;
-      line-height: 23px;
+      padding: 11px 18px;
+      font-size: 13px;
+      line-height: 1.2;
     }
 
     @include lg {
-      padding: 10px 15px;
+      padding: 8px 15px;
       font-size: 12px;
       line-height: 15px;
     }

@@ -15,6 +15,7 @@ interface InfinityMemesInt {
   hasMore: boolean
   handleScroll: () => Promise<void>
   ref: RefObject<any>
+  retry: () => void
 }
 
 export function useInfinityMemes({ debounceTime = 800, threshold = 450 } = {}): InfinityMemesInt {
@@ -32,6 +33,7 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450 } = {}): 
   const fetchMemes = useCallback(async (params = {}, controller?: AbortController) => {
     try {
       setIsLoading(true)
+      setIsError(false)
       const page = params.page || currentPage.current
       const response = await getMemes(
         {
@@ -49,6 +51,7 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450 } = {}): 
     } catch (error) {
       if (error.name !== 'AbortError') {
         setIsError(true)
+        console.warn(error)
       }
     } finally {
       setIsLoading(false)
@@ -58,7 +61,7 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450 } = {}): 
   const handleScroll = useCallback(async () => {
     if (ref.current) {
       const isAtBottom = ref.current.offsetHeight + ref.current.scrollTop >= ref.current.scrollHeight - threshold
-      if (isAtBottom && !isLoading && hasMore) {
+      if (isAtBottom && !isLoading && hasMore && !isError) {
         await fetchMemes({
           page: currentPage.current,
           searchValue,
@@ -66,7 +69,7 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450 } = {}): 
         })
       }
     }
-  }, [fetchMemes, isLoading, threshold, hasMore, searchValue, i18n.language])
+  }, [fetchMemes, isLoading, threshold, hasMore, searchValue, i18n.language, isError])
 
   useEffect(() => {
     setMemes([])
@@ -84,5 +87,13 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450 } = {}): 
     }
   }, [searchValue, fetchMemes, i18n.language])
 
-  return { query, setQuery, memes, hasMore, isLoading, isError, handleScroll, ref }
+  const retry = useCallback(() => {
+    fetchMemes({
+      searchValue,
+      page: currentPage.current,
+      lang: i18n.language
+    })
+  }, [searchValue, i18n.language, fetchMemes])
+
+  return { query, setQuery, memes, hasMore, isLoading, isError, handleScroll, ref, retry }
 }

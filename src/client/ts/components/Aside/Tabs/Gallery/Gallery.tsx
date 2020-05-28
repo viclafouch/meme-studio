@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom'
 import Meme from '@client/ts/shared/models/Meme'
 import { useTranslation } from 'react-i18next'
 import { useInfinityMemes } from '@client/ts/shared/hooks/memes'
+import Button from '@client/components/Button/Button'
 import './gallery.scss'
 
 function Gallery(): JSX.Element {
   const { t, i18n } = useTranslation()
-  const { setQuery, query, memes, ref, handleScroll, isLoading } = useInfinityMemes()
+  const { setQuery, query, memes, ref, handleScroll, isLoading, isError, retry } = useInfinityMemes()
   const [showLoader, setShowLoader] = useState<boolean>(true)
 
   useEffect(() => {
@@ -67,7 +68,17 @@ function Gallery(): JSX.Element {
           <span className="dot">.</span>
         </div>
       )}
-      {!isLoading && memes.length === 0 && <div className="gallery-not-result gallery-text-bottom">{t('noResult')}</div>}
+      {!isLoading && !isError && memes.length === 0 && (
+        <div className="gallery-not-result gallery-text-bottom">{t('noResult')}</div>
+      )}
+      {isError && (
+        <div className="gallery-error gallery-text-bottom">
+          <p>{t('oops')}</p>
+          <Button small onClick={retry}>
+            {t('retry')}
+          </Button>
+        </div>
+      )}
     </div>
   )
 }
