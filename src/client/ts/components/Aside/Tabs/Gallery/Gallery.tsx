@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Meme from '@client/ts/shared/models/Meme'
 import { useTranslation } from 'react-i18next'
@@ -6,8 +7,23 @@ import { useInfinityMemes } from '@client/ts/shared/hooks/memes'
 import './gallery.scss'
 
 function Gallery(): JSX.Element {
-  const { i18n } = useTranslation()
-  const { setQuery, query, memes, ref, handleScroll } = useInfinityMemes()
+  const { t, i18n } = useTranslation()
+  const { setQuery, query, memes, ref, handleScroll, isLoading } = useInfinityMemes()
+  const [showLoader, setShowLoader] = useState<boolean>(true)
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>
+    if (isLoading) {
+      timeout = setTimeout(() => {
+        setShowLoader(true)
+      }, 1000)
+    } else {
+      setShowLoader(false)
+    }
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [isLoading])
 
   return (
     <div className="gallery">
@@ -16,8 +32,9 @@ function Gallery(): JSX.Element {
           type="text"
           spellCheck="false"
           autoComplete="off"
-          placeholder="Rechercher un meme"
+          placeholder={t('searchForAMeme')}
           value={query}
+          onKeyDown={e => e.stopPropagation()}
           onChange={e => setQuery(e.target.value)}
         />
       </div>
@@ -42,6 +59,15 @@ function Gallery(): JSX.Element {
           )
         )}
       </ul>
+      {showLoader && (
+        <div className="gallery-loading gallery-text-bottom">
+          {t('loading')}
+          <span className="dot">.</span>
+          <span className="dot">.</span>
+          <span className="dot">.</span>
+        </div>
+      )}
+      {!isLoading && memes.length === 0 && <div className="gallery-not-result gallery-text-bottom">{t('noResult')}</div>}
     </div>
   )
 }

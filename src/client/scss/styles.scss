@@ -142,13 +142,36 @@ body {
     height: 100%;
     overflow-y: hidden;
     padding: 15px 0;
-    background-color: #f3f1f1;
 
     .gallery {
       max-height: 100%;
       max-width: none;
       margin: 0;
-      padding: 0 20px;
+
+      .gallery-search-field,
+      .gallery-list {
+        padding: 0 20px;
+      }
+
+      .gallery-search-field input {
+        border: 1px solid var(--input-border-color);
+      }
+
+      .gallery-list {
+        background-color: transparent;
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+
+        .gallery-item {
+          width: 50%;
+
+          img {
+            border: 1px solid var(--blackOrWhite);
+            height: 100%;
+          }
+        }
+      }
     }
   }
 }

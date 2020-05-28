@@ -29,16 +29,10 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450 } = {}): 
   const currentPage = useRef(1)
   const ref: RefObject<HTMLElement> = useRef(null)
 
-  useEffect(() => {
-    setMemes([])
-    setIsLoading(true)
-  }, [query])
-
   const fetchMemes = useCallback(async (params = {}, controller?: AbortController) => {
     try {
       setIsLoading(true)
       const page = params.page || currentPage.current
-      await wait(200)
       const response = await getMemes(
         {
           page,
@@ -65,23 +59,17 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450 } = {}): 
     if (ref.current) {
       const isAtBottom = ref.current.offsetHeight + ref.current.scrollTop >= ref.current.scrollHeight - threshold
       if (isAtBottom && !isLoading && hasMore) {
-        try {
-          setIsLoading(true)
-          await fetchMemes({
-            page: currentPage.current,
-            searchValue,
-            lang: i18n.language
-          })
-        } catch (error) {
-          console.warn(error)
-        } finally {
-          setIsLoading(false)
-        }
+        await fetchMemes({
+          page: currentPage.current,
+          searchValue,
+          lang: i18n.language
+        })
       }
     }
   }, [fetchMemes, isLoading, threshold, hasMore, searchValue, i18n.language])
 
   useEffect(() => {
+    setMemes([])
     const controller = new AbortController()
     fetchMemes(
       {

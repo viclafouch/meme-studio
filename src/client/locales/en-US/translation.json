@@ -16,6 +16,8 @@
     "darkTheme": "Dark theme"
   },
   "loading": "Loading",
+  "noResult": "No result.",
+  "searchForAMeme": "Search for a meme",
   "download": "Download",
   "imageCopied": "Image copied!",
   "preview": "Preview",
