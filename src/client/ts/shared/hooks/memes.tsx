@@ -18,7 +18,7 @@ interface InfinityMemesInt {
   retry: () => void
 }
 
-export function useInfinityMemes({ debounceTime = 800, threshold = 450 } = {}): InfinityMemesInt {
+export function useInfinityMemes({ debounceTime = 800, threshold = 450, isWindow = false } = {}): InfinityMemesInt {
   const { i18n } = useTranslation()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [isError, setIsError] = useState<boolean>(false)
@@ -28,7 +28,7 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450 } = {}): 
 
   const [hasMore, setHasMore] = useState<boolean>(false)
   const currentPage = useRef(1)
-  const ref: RefObject<HTMLElement> = useRef(null)
+  const ref: RefObject<HTMLElement | Window> = useRef(isWindow ? window : null)
 
   const fetchMemes = useCallback(async (params = {}, controller?: AbortController) => {
     try {
@@ -60,7 +60,14 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450 } = {}): 
 
   const handleScroll = useCallback(async () => {
     if (ref.current) {
-      const isAtBottom = ref.current.offsetHeight + ref.current.scrollTop >= ref.current.scrollHeight - threshold
+      let isAtBottom: boolean
+
+      if (ref.current instanceof Window) {
+        isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - threshold
+      } else {
+        isAtBottom = ref.current.offsetHeight + ref.current.scrollTop >= ref.current.scrollHeight - threshold
+      }
+
       if (isAtBottom && !isLoading && hasMore && !isError) {
         await fetchMemes({
           page: currentPage.current,
@@ -94,6 +101,21 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450 } = {}): 
       lang: i18n.language
     })
   }, [searchValue, i18n.language, fetchMemes])
+
+  useEffect(() => {
+    if (ref.current instanceof Window) {
+      if (window.innerHeight === document.body.offsetHeight) {
+        function scrollAuto() {
+          handleScroll()
+        }
+        scrollAuto() // There is no scroll, so make a fake scroll
+      }
+      window.addEventListener('scroll', handleScroll, false)
+      return (): void => {
+        window.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [handleScroll])
 
   return { query, setQuery, memes, hasMore, isLoading, isError, handleScroll, ref, retry }
 }

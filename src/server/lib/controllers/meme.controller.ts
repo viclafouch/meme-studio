@@ -32,7 +32,9 @@ export class MemeController {
             ],
             lang: lang || 'en'
           }
-        : {}
+        : {
+            lang: lang || 'en'
+          }
 
       const { count } = await Meme.findAndCountAll({
         include: [

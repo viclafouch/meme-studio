@@ -11,10 +11,12 @@ import '@client/scss/pages/gallery.scss'
 
 function Gallery(): JSX.Element {
   const { t, i18n } = useTranslation()
-  const { memes, ref, handleScroll, hasMore } = useInfinityMemes()
+  const { memes, hasMore, isLoading } = useInfinityMemes({
+    isWindow: true
+  })
 
   return (
-    <div className="page gallery" ref={ref} onScroll={handleScroll}>
+    <div className="page gallery">
       <Header />
       <div className="content-one">
         <section className="gallery-body">
@@ -43,7 +45,7 @@ function Gallery(): JSX.Element {
               )
             )}
           </ul>
-          {!hasMore && (
+          {!hasMore && !isLoading && (
             <div className="cta-end container">
               <h2> {t('titles.titleA')}</h2>
               <Link to="/create">
