@@ -35,13 +35,27 @@ async function insertTranslations(meme: Record<string, any>) {
         const existedMeme = await Meme.findByPk(meme.id)
         if (!existedMeme) {
           await Meme.create<Meme>(meme)
-          await Promise.all(meme.texts.map(text => TextBox.create(text)))
+          await Promise.all(
+            meme.texts.map((text: Record<string, any>) =>
+              TextBox.create({
+                ...text,
+                memeId: meme.id
+              })
+            )
+          )
           await insertTranslations(meme)
         } else {
           await Meme.update(meme, { where: { id: meme.id } })
           await TextBox.destroy({ where: { memeId: meme.id } })
           await Translation.destroy({ where: { memeId: meme.id } })
-          await Promise.all(meme.texts.map(async text => TextBox.create(text)))
+          await Promise.all(
+            meme.texts.map((text: Record<string, any>) =>
+              TextBox.create({
+                ...text,
+                memeId: meme.id
+              })
+            )
+          )
           await insertTranslations(meme)
         }
       })
