@@ -27,9 +27,16 @@ export class MemeController {
             ...(search
               ? {
                   where: {
-                    name: {
-                      [op]: `%${search}%`
-                    },
+                    [Op.or]: [
+                      {
+                        name: {
+                          [op]: `%${search}%`
+                        },
+                        keywords: {
+                          [op]: `%${search}%`
+                        }
+                      }
+                    ],
                     lang: lang || 'en'
                   }
                 }

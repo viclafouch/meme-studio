@@ -6415,12 +6415,12 @@
       "id": "KzzK2CnPD",
       "translations": {
         "fr": {
-          "name": "Distracted Boyfriend FR",
-          "keywords": "test, hello, world"
+          "name": "testfr",
+          "keywords": "test, hello, world, koh lanta"
         },
         "en": {
-          "name": "Distracted Boyfriend EN",
-          "keywords": "test, hello, world"
+          "name": "testen",
+          "keywords": "test, hello, world, koh lanta"
         }
       },
       "texts": [
