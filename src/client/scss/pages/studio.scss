@@ -120,6 +120,7 @@
           pointer-events: none;
           @media (max-width: #{$screen-sm-min}) {
             height: auto;
+            width: 300px;
           }
         }
 

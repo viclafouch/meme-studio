@@ -2,7 +2,6 @@ import { useState, useEffect, useRef, useCallback, RefObject } from 'react'
 import AbortController from 'abort-controller'
 import Meme from '../models/Meme'
 import { getMemes } from '../api'
-import { wait } from '@shared/utils'
 import { useTranslation } from 'react-i18next'
 import { useDebounce } from 'use-debounce'
 
@@ -18,6 +17,12 @@ interface InfinityMemesInt {
   retry: () => void
 }
 
+interface Params {
+  page: number
+  searchValue: string
+  lang: string
+}
+
 export function useInfinityMemes({ debounceTime = 800, threshold = 450, isWindow = false } = {}): InfinityMemesInt {
   const { i18n } = useTranslation()
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -27,7 +32,11 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450, isWindow
   const [searchValue] = useDebounce(query, debounceTime)
 
   const [hasMore, setHasMore] = useState<boolean>(false)
-  const currentPage = useRef(1)
+  const currentParams = useRef<Params>({
+    page: 1,
+    searchValue: '',
+    lang: i18n.language
+  })
   const unmounted = useRef(false)
   const ref: RefObject<HTMLElement | Window> = useRef(isWindow ? window : null)
 
@@ -36,19 +45,25 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450, isWindow
       if (controller && controller.signal.aborted) return
       setIsLoading(true)
       setIsError(false)
-      const page = params.page || currentPage.current
+      const page = params.page || currentParams.current.page
+
       const response = await getMemes(
         {
           page,
-          search: params.searchValue || '',
+          search: params.searchValue,
           lang: params.lang || 'en'
         },
         {
           ...(controller ? { signal: controller.signal } : null)
         }
       )
-      currentPage.current = page + 1
-      setHasMore(currentPage.current <= response.pages)
+      const newParams = {
+        page: page + 1,
+        lang: params.lang,
+        searchValue: params.searchValue
+      }
+      setHasMore(newParams.page <= response.pages)
+      currentParams.current = newParams
       setMemes(previousMemes => [...previousMemes, ...response.memes])
     } catch (error) {
       if (error.name !== 'AbortError' && !unmounted.current) {
@@ -73,14 +88,10 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450, isWindow
       }
 
       if (isAtBottom && !isLoading && hasMore && !isError) {
-        await fetchMemes({
-          page: currentPage.current,
-          searchValue,
-          lang: i18n.language
-        })
+        await fetchMemes(currentParams.current)
       }
     }
-  }, [fetchMemes, isLoading, threshold, hasMore, searchValue, i18n.language, isError])
+  }, [fetchMemes, isLoading, threshold, hasMore, isError])
 
   useEffect(() => {
     setMemes([])
@@ -99,27 +110,43 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450, isWindow
   }, [searchValue, fetchMemes, i18n.language])
 
   useEffect(() => {
+    if (memes.length > 0 && hasMore) {
+      if (ref.current instanceof Window) {
+        if (window.innerHeight === document.body.offsetHeight) {
+          fetchMemes({
+            ...currentParams.current,
+            page: currentParams.current.page
+          })
+        }
+      } else {
+        const parentHeight = ref.current.parentElement.offsetHeight
+        const childsHeight = Array.from(ref.current.parentNode.children).reduce(
+          (previousValue, currentValue: HTMLElement) => previousValue + currentValue.offsetHeight,
+          0
+        )
+
+        if (childsHeight < parentHeight) {
+          fetchMemes({
+            ...currentParams.current,
+            page: currentParams.current.page
+          })
+        }
+      }
+    }
+  }, [memes.length, fetchMemes, hasMore])
+
+  useEffect(() => {
     return () => {
       unmounted.current = true
     }
   }, [])
 
   const retry = useCallback(() => {
-    fetchMemes({
-      searchValue,
-      page: currentPage.current,
-      lang: i18n.language
-    })
-  }, [searchValue, i18n.language, fetchMemes])
+    fetchMemes(currentParams.current)
+  }, [fetchMemes])
 
   useEffect(() => {
     if (ref.current instanceof Window) {
-      if (window.innerHeight === document.body.offsetHeight) {
-        function scrollAuto() {
-          handleScroll()
-        }
-        scrollAuto() // There is no scroll, so make a fake scroll
-      }
       window.addEventListener('scroll', handleScroll, false)
       return (): void => {
         window.removeEventListener('scroll', handleScroll)

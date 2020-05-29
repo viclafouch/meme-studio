@@ -28,6 +28,10 @@ html[data-theme="dark"] .gallery:not(.page) {
     }
   }
 
+  .gallery-list-scrollable {
+    overflow-y: auto;
+  }
+
   ul.gallery-list {
     list-style: none;
     width: 100%;

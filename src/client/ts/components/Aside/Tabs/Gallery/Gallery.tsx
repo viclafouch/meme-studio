@@ -39,46 +39,48 @@ function Gallery(): JSX.Element {
           onChange={e => setQuery(e.target.value)}
         />
       </div>
-      <ul className="gallery-list" onScroll={handleScroll} ref={ref}>
-        {memes.map(
-          (meme: Meme): React.ReactNode => (
-            <li key={meme.id} data-id={meme.id} className="gallery-item">
-              <Link to={`/create/${meme.id}`} replace>
-                <picture>
-                  <source srcSet={meme.url('.webp')} type="image/webp" />
-                  <source srcSet={meme.url('.jpg')} type="image/jpeg" />
-                  <img
-                    loading="lazy"
-                    width={meme.width}
-                    height={meme.height}
-                    src={meme.url('.jpg')}
-                    alt={meme.name(i18n.language)}
-                  />
-                </picture>
-              </Link>
-            </li>
-          )
+      <div className="gallery-list-scrollable" onScroll={handleScroll} ref={ref}>
+        <ul className="gallery-list">
+          {memes.map(
+            (meme: Meme): React.ReactNode => (
+              <li key={meme.id} data-id={meme.id} className="gallery-item">
+                <Link to={`/create/${meme.id}`} replace>
+                  <picture>
+                    <source srcSet={meme.url('.webp')} type="image/webp" />
+                    <source srcSet={meme.url('.jpg')} type="image/jpeg" />
+                    <img
+                      loading="lazy"
+                      width={meme.width}
+                      height={meme.height}
+                      src={meme.url('.jpg')}
+                      alt={meme.name(i18n.language)}
+                    />
+                  </picture>
+                </Link>
+              </li>
+            )
+          )}
+        </ul>
+        {showLoader && (
+          <div className="gallery-loading gallery-text-bottom">
+            {t('loading')}
+            <span className="dot">.</span>
+            <span className="dot">.</span>
+            <span className="dot">.</span>
+          </div>
         )}
-      </ul>
-      {showLoader && (
-        <div className="gallery-loading gallery-text-bottom">
-          {t('loading')}
-          <span className="dot">.</span>
-          <span className="dot">.</span>
-          <span className="dot">.</span>
-        </div>
-      )}
-      {!isLoading && !isError && memes.length === 0 && (
-        <div className="gallery-not-result gallery-text-bottom">{t('noResult')}</div>
-      )}
-      {isError && (
-        <div className="gallery-error gallery-text-bottom">
-          <p>{t('oops')}</p>
-          <Button small onClick={retry}>
-            {t('retry')}
-          </Button>
-        </div>
-      )}
+        {!isLoading && !isError && memes.length === 0 && (
+          <div className="gallery-not-result gallery-text-bottom">{t('noResult')}</div>
+        )}
+        {isError && (
+          <div className="gallery-error gallery-text-bottom">
+            <p>{t('oops')}</p>
+            <Button small onClick={retry}>
+              {t('retry')}
+            </Button>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
