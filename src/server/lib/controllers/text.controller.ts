@@ -26,11 +26,15 @@ export class TextController {
       const index = memes.findIndex(meme => meme.id === memeId)
 
       if (index !== -1) {
-        const meme = datas.memes[index]
+        const meme: Record<string, any> = datas.memes[index]
         const texts = await TextBox.findAll({
           where: { memeId }
         })
-        meme.texts = texts.map(text => text.get({ plain: true }) as any)
+        meme.texts = texts.map(text => {
+          const t = text.get({ plain: true }) as Record<string, any>
+          delete t.memeId
+          return t
+        })
       }
 
       const textResult = JSON.stringify(datas, null, 2)
