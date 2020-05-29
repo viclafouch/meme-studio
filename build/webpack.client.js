@@ -1,9 +1,9 @@
-const path = require('path');
+const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
-const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries")
+const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const PreloadWebpackPlugin = require('preload-webpack-plugin')
@@ -14,7 +14,7 @@ const supportedLocales = ['en-US', 'fr']
 module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
   cache: IS_DEV,
   stats: 'minimal',
-  target: "web",
+  target: 'web',
   watch: IS_DEV,
   mode: argv.mode,
   devtool: IS_DEV ? 'inline-source-map' : false,
@@ -35,7 +35,7 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
       '@shared': path.resolve(__dirname, '../src/shared'),
       '@src': path.resolve(__dirname, '../src')
     },
-    extensions: ['.tsx', '.scss', ".ts", ".js", ".json"]
+    extensions: ['.tsx', '.scss', '.ts', '.js', '.json']
   },
   entry: {
     main: path.join(__dirname, '..', 'src', 'client', 'ts', 'index.tsx'),
@@ -58,17 +58,15 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
           {
             loader: 'babel-loader',
             options: {
-              "presets": [
-                "@babel/preset-typescript",
-                "@babel/preset-react"
-              ],
-              "plugins": [
-                "@babel/plugin-syntax-dynamic-import",
-                "@babel/proposal-class-properties",
-                "@babel/proposal-object-rest-spread",
-                ["@babel/plugin-transform-runtime",
+              presets: ['@babel/preset-typescript', '@babel/preset-react'],
+              plugins: [
+                '@babel/plugin-syntax-dynamic-import',
+                '@babel/proposal-class-properties',
+                '@babel/proposal-object-rest-spread',
+                [
+                  '@babel/plugin-transform-runtime',
                   {
-                    "regenerator": true
+                    regenerator: true
                   }
                 ]
               ]
@@ -80,10 +78,10 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
         test: /\.md$/,
         use: [
           {
-            loader: "html-loader"
+            loader: 'html-loader'
           },
           {
-            loader: "markdown-loader",
+            loader: 'markdown-loader',
             options: {}
           }
         ]
@@ -111,12 +109,12 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
     ]
   },
   performance: {
-    assetFilter: function(assetFilename) {
-      return !assetFilename.startsWith('fonts');
+    assetFilter: function (assetFilename) {
+      return !assetFilename.startsWith('fonts')
     }
   },
   externals: {
-    'react': 'React',
+    react: 'React',
     'react-dom': 'ReactDOM'
   },
   plugins: [
@@ -139,12 +137,12 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
       filename: '[name].[chunkhash:8].css'
     }),
     new CompressionPlugin({
-      algorithm: "gzip",
-      test: /\.(js|css)$/,
+      algorithm: 'gzip',
+      test: /\.(js|css)$/
     }),
     new CopyPlugin({
       patterns: [
-        { from: path.join(__dirname, '..', 'src', 'client', 'img'), to: 'images'  },
+        { from: path.join(__dirname, '..', 'src', 'client', 'img'), to: 'images' },
         { from: path.join(__dirname, '..', 'src', 'client', 'fonts'), to: 'fonts' },
         { from: 'static', to: '.' }
       ]
