@@ -6162,6 +6162,162 @@
       ],
       "createdAt": "2020-05-22T17:41:39.420Z",
       "updatedAt": "2020-05-22T17:41:39.420Z"
+    },
+    {
+      "width": 800,
+      "height": 453,
+      "boxCount": 0,
+      "filename": "7HAREEhrC.jpg",
+      "id": "hsISZMN9-L",
+      "texts": [
+        {
+          "isUppercase": true,
+          "id": "pIX8s7zaT",
+          "value": "",
+          "width": 800,
+          "height": 108,
+          "centerX": 400,
+          "centerY": 399,
+          "rotate": 0,
+          "fontSize": 43,
+          "fontFamily": "Impact",
+          "boxShadow": 2,
+          "color": "#ffffff",
+          "alignVertical": "bottom",
+          "textAlign": "center",
+          "createdAt": "2020-05-29T17:51:18.704Z",
+          "updatedAt": "2020-05-29T17:51:18.704Z"
+        }
+      ],
+      "createdAt": "2020-05-29T17:10:05.786Z",
+      "updatedAt": "2020-05-29T17:10:05.786Z",
+      "translations": {
+        "fr": {
+          "name": "Mister V NBA",
+          "keywords": "basket, nba, mister, youtube, 2k20"
+        },
+        "en": {
+          "name": "Mister V NBA",
+          "keywords": "basket, nba, mister, youtube, 2k20"
+        }
+      }
+    },
+    {
+      "width": 600,
+      "height": 800,
+      "boxCount": 0,
+      "filename": "9CgqZFT75.jpg",
+      "id": "_Le3Qgb6R",
+      "texts": [
+        {
+          "isUppercase": true,
+          "id": "dk6XIeed8",
+          "value": "",
+          "width": 600,
+          "height": 146,
+          "centerX": 300,
+          "centerY": 727,
+          "rotate": 0,
+          "fontSize": 58,
+          "fontFamily": "Impact",
+          "boxShadow": 2,
+          "color": "#ffffff",
+          "alignVertical": "bottom",
+          "textAlign": "center",
+          "createdAt": "2020-05-29T17:50:48.232Z",
+          "updatedAt": "2020-05-29T17:50:48.232Z"
+        }
+      ],
+      "createdAt": "2020-05-29T17:12:45.276Z",
+      "updatedAt": "2020-05-29T17:12:45.276Z",
+      "translations": {
+        "fr": {
+          "name": "Mister V comme ca",
+          "keywords": "youtube, assis, attendre, patience"
+        },
+        "en": {
+          "name": "Mister V like that",
+          "keywords": "youtube, sit, waiting, patience"
+        }
+      }
+    },
+    {
+      "width": 665,
+      "height": 499,
+      "boxCount": 0,
+      "filename": "DiGDaylDU.jpg",
+      "id": "ErUgDTB2Y",
+      "texts": [
+        {
+          "isUppercase": false,
+          "id": "QCroSZirb",
+          "value": "",
+          "width": 302,
+          "height": 160,
+          "centerX": 166,
+          "centerY": 89,
+          "rotate": 0,
+          "fontSize": 37,
+          "fontFamily": "Impact",
+          "boxShadow": 1,
+          "color": "#ffffff",
+          "alignVertical": "middle",
+          "textAlign": "center",
+          "createdAt": "2020-05-29T17:50:10.385Z",
+          "updatedAt": "2020-05-29T17:50:10.385Z"
+        }
+      ],
+      "createdAt": "2020-05-29T17:34:38.268Z",
+      "updatedAt": "2020-05-29T17:34:38.268Z",
+      "translations": {
+        "fr": {
+          "name": "Mister V fume",
+          "keywords": "fumer, cigarette, youtube"
+        },
+        "en": {
+          "name": "Mister V smoking",
+          "keywords": "smoke, cigarette, youtube "
+        }
+      }
+    },
+    {
+      "width": 1032,
+      "height": 800,
+      "boxCount": 0,
+      "filename": "-0degoA5V.jpg",
+      "id": "83VR_PFSe",
+      "texts": [
+        {
+          "isUppercase": false,
+          "id": "Dk4rSG80K",
+          "value": "",
+          "width": 1032,
+          "height": 119,
+          "centerX": 516,
+          "centerY": 61,
+          "rotate": 0,
+          "fontSize": 55,
+          "fontFamily": "Arial",
+          "boxShadow": 0,
+          "color": "#000000",
+          "alignVertical": "middle",
+          "textAlign": "center",
+          "createdAt": "2020-05-29T17:46:41.895Z",
+          "updatedAt": "2020-05-29T17:46:41.895Z"
+        }
+      ],
+      "createdAt": "2020-05-29T17:44:51.587Z",
+      "updatedAt": "2020-05-29T17:44:51.587Z",
+      "translations": {
+        "fr": {
+          "name": "Palmashow nouvelle règle",
+          "keywords": "denis, koh lanta, épreuve, attention"
+        },
+        "en": {
+          "name": "Palmashow new rule",
+          "keywords": "denis, koh lanta, test, watch out"
+        }
+      }
     }
   ]
 }
