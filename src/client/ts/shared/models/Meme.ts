@@ -21,13 +21,13 @@ export default class Meme {
     this.height = meme.height
     this.boxCount = meme.boxCount
     this.localImageUrl = meme.localImageUrl || null
-    this.translations = meme.translations
+    this.translations = meme.translations || []
   }
 
   name(lang: string): string {
     const currentTranslation = this.translations.find(t => t.lang === lang)
     if (currentTranslation) return currentTranslation.name
-    return ''
+    return this.filename || ''
   }
 
   public url(format: '.jpg' | '.webp' = isSafari ? '.jpg' : '.webp'): string {

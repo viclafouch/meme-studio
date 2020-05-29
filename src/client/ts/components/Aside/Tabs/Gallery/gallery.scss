@@ -29,9 +29,6 @@ html[data-theme="dark"] .gallery:not(.page) {
   }
 
   ul.gallery-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 8px;
     list-style: none;
     width: 100%;
     overflow-y: auto;
@@ -43,11 +40,20 @@ html[data-theme="dark"] .gallery:not(.page) {
     }
 
     .gallery-item {
+      & + .gallery-item {
+        margin-top: 8px;
+      }
       cursor: pointer;
+      a,
+      picture {
+        display: block;
+      }
+
       img {
         width: 100%;
         object-fit: cover;
         height: auto;
+        min-height: 1px;
       }
     }
   }

@@ -149,7 +149,6 @@ function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
         height: 0,
         width: 0,
         boxCount: 0,
-        name: files[0].name,
         filename: files[0].name,
         localImageUrl: window.URL.createObjectURL(files[0])
       })
