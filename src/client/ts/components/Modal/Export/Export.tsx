@@ -188,7 +188,7 @@ function Export(): JSX.Element {
                 <FontAwesomeIcon icon={['fas', 'flask']} className="icon-flask" />
               </i>
               <FontAwesomeIcon icon={['fas', 'clipboard']} className="icon-twitter" />
-              Copier
+              {t('copy')}
             </Button>
           )}
           <Button
