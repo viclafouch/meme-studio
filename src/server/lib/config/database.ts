@@ -22,6 +22,7 @@ if (process.env.NODE_ENV === 'test') {
   database = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
     protocol: 'postgres',
+    logging: false,
     dialectOptions: {
       ssl: {
         require: true,
