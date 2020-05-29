@@ -1,9 +1,7 @@
 import * as React from 'react'
-import { createContext, useReducer, createRef, RefObject, useLayoutEffect, useCallback } from 'react'
+import { createContext, useReducer, createRef, RefObject, useLayoutEffect } from 'react'
 import { DefaultReducer, Actions } from './reducer/default'
 import Meme from '@client/ts/shared/models/Meme'
-import { getMemes } from '../shared/api'
-import { SET_MEMES } from './reducer/constants'
 
 export interface DefaultState {
   modalRef: RefObject<HTMLDivElement>

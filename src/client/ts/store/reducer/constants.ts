@@ -1,5 +1,4 @@
 // Default
-export const SET_MEMES = 'SET_MEMES'
 export const TOGGLE_THEME = 'TOGGLE_THEME'
 
 // Editor
