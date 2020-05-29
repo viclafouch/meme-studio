@@ -28,10 +28,12 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450, isWindow
 
   const [hasMore, setHasMore] = useState<boolean>(false)
   const currentPage = useRef(1)
+  const unmounted = useRef(false)
   const ref: RefObject<HTMLElement | Window> = useRef(isWindow ? window : null)
 
   const fetchMemes = useCallback(async (params = {}, controller?: AbortController) => {
     try {
+      if (controller && controller.signal.aborted) return
       setIsLoading(true)
       setIsError(false)
       const page = params.page || currentPage.current
@@ -49,12 +51,14 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450, isWindow
       setHasMore(currentPage.current <= response.pages)
       setMemes(previousMemes => [...previousMemes, ...response.memes])
     } catch (error) {
-      if (error.name !== 'AbortError') {
+      if (error.name !== 'AbortError' && !unmounted.current) {
         setIsError(true)
         console.warn(error)
       }
     } finally {
-      setIsLoading(false)
+      if (!unmounted.current) {
+        setIsLoading(false)
+      }
     }
   }, [])
 
@@ -93,6 +97,12 @@ export function useInfinityMemes({ debounceTime = 800, threshold = 450, isWindow
       controller.abort()
     }
   }, [searchValue, fetchMemes, i18n.language])
+
+  useEffect(() => {
+    return () => {
+      unmounted.current = true
+    }
+  }, [])
 
   const retry = useCallback(() => {
     fetchMemes({
