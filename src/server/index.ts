@@ -28,7 +28,7 @@ async function insertTranslations(meme: Record<string, any>) {
     await database.authenticate()
     const { memes } = await import('./memes.json')
     console.log('Synchronisation with the database...')
-    await database.sync()
+    await database.sync({ force: true })
 
     Promise.all(
       memes.map(async meme => {
