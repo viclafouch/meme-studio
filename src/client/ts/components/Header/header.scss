@@ -128,7 +128,9 @@
 
   .lang-selector,
   .theme-button {
-    margin-right: 10px;
+    @include sm {
+      margin-right: 10px;
+    }
   }
 
   .theme-button {
@@ -143,7 +145,7 @@
     }
 
     position: absolute;
-    left: 0;
+    left: 10px;
 
     @include sm {
       position: static;
