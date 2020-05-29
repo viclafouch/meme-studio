@@ -1,7 +1,7 @@
+import Translation from './translation.model'
+import TextBox from './textbox.model'
 import { Model, DataTypes } from 'sequelize'
 import database from '../config/database'
-import TextBox from './textbox.model'
-import Translation from './translation.model'
 
 class Meme extends Model {
   public id: string

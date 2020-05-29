@@ -1,7 +1,7 @@
 import database from './lib/config/database'
 import Meme from './lib/models/meme.model'
-import TextBox from './lib/models/textbox.model'
 import Translation from './lib/models/translation.model'
+import TextBox from './lib/models/textbox.model'
 import start from './lib/server'
 
 async function insertTranslations(meme: Record<string, any>) {
