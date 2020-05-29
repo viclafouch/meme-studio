@@ -40,13 +40,9 @@ html[data-theme="dark"] .gallery:not(.page) {
     }
 
     .gallery-item {
+      cursor: pointer;
       & + .gallery-item {
         margin-top: 8px;
-      }
-      cursor: pointer;
-      a,
-      picture {
-        display: block;
       }
 
       img {
