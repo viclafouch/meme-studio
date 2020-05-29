@@ -14,6 +14,12 @@ let args = yargs
     description: 'Name of the meme',
     demand: true
   })
+  .option('keywords', {
+    alias: 'k',
+    description: 'Keywords EN of the meme',
+    default: '',
+    demand: false
+  })
   .check(argv => {
     let url
     try {
@@ -27,14 +33,15 @@ let args = yargs
         throw new Error('Url argument must be a valid URL')
       }
     }
-    if (!url.href.endsWith('.jpg')) throw new Error("url must ends with '.jpg'")
+    if (!url.href.endsWith('.jpg') || !url.href.endsWith('.png')) throw new Error("url must ends with '.jpg' or 'png'")
     return true
   }).argv
 
-async function insertMeme({ name, url }) {
+async function insertMeme({ name, url, keywords }) {
   const jsonData = await getCurrentMemes()
   const createdMeme = await createMeme({
     url,
+    keywords,
     memeName: name,
     boxCount: 0
   })
@@ -49,5 +56,6 @@ async function insertMeme({ name, url }) {
 
 insertMeme({
   name: args.name,
-  url: args.url
+  url: args.url,
+  keywords: args.keywords
 })

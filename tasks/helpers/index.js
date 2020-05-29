@@ -1,5 +1,6 @@
 require('dotenv').config()
 const fs = require('fs')
+const pngToJpeg = require('png-to-jpeg')
 const shortid = require('shortid')
 const path = require('path')
 const request = require('request')
@@ -29,26 +30,34 @@ const getCurrentMemes = async () => {
   return JSON.parse(textData)
 }
 
-const setCurrentMemes = async (jsonData) => {
+const setCurrentMemes = async jsonData => {
   const textData = JSON.stringify(jsonData, null, 2)
   await fs.promises.writeFile(memeFile, textData)
 }
 
-const createMeme = async ({ url, memeName, boxCount }) => {
+const createMeme = async ({ url, memeName, boxCount, keywords }) => {
   let filename
-  const ext = url.split('.').pop()
-  const name = `${shortid.generate()}.${ext}`
+  const name = `${shortid.generate()}.jpg`
   if (url.startsWith('http')) {
     filename = path.join(templateDir, name)
     await downloadAndCompress(url, filename)
   } else {
+    if (!fs.existsSync(url)) {
+      throw new Error('File does not exist.')
+    }
+    if (url.endsWith('.png')) {
+      const buffer = fs.readFileSync(url)
+      const jpgFile = await pngToJpeg({ quality: 90 })(buffer)
+      fs.writeFileSync(url.replace('.png', '.jpg'), jpgFile)
+      fs.unlinkSync(url)
+      url = url.replace('.png', '.jpg')
+    }
     filename = path.join(templateDir, name)
     fs.renameSync(url, filename)
     await compressFile(filename)
   }
   const dimensions = await sizeOf(filename)
   return {
-    name: memeName,
     width: dimensions.width,
     height: dimensions.height,
     boxCount: boxCount,
@@ -57,6 +66,16 @@ const createMeme = async ({ url, memeName, boxCount }) => {
     texts: [],
     createdAt: new Date(),
     updatedAt: new Date(),
+    translations: {
+      fr: {
+        name: memeName,
+        keywords: keywords
+      },
+      en: {
+        name: memeName,
+        keywords: keywords
+      }
+    }
   }
 }
 
@@ -68,7 +87,7 @@ const convertToWebP = (input, output) =>
     })
   )
 
-const compressFile = async (filename) => {
+const compressFile = async filename => {
   let source = tinify.fromFile(filename)
   const { height, width } = await sizeOf(filename)
   if (height > maxHeight)
@@ -91,6 +110,13 @@ const downloadAndCompress = async (uri, filename) => {
       request(uri).pipe(fs.createWriteStream(filename)).on('close', resolve)
     })
   })
+  if (filename.endsWith('.png')) {
+    const buffer = fs.readFileSync(filename)
+    await pngToJpeg({ quality: 90 })(buffer).then(output => {
+      fs.writeFileSync(filename.replace('.png', '.jpg'), output)
+      fs.unlinkSync(filename)
+    })
+  }
   if (useCompression) await compressFile(filename)
 }
 
