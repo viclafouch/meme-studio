@@ -57,7 +57,7 @@
     "@types/express": "4.17.6",
     "@types/helmet": "0.0.47",
     "@types/morgan": "1.9.0",
-    "@types/node": "14.0.5",
+    "@types/node": "14.0.6",
     "@types/sequelize": "4.28.9",
     "@types/shortid": "0.0.29",
     "@types/twit": "2.2.24",
