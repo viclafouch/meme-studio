@@ -29,6 +29,12 @@ function About(): JSX.Element {
             </a>
           </p>
           <p>
+            {t('about.contactTwitter')}{' '}
+            <a rel="noreferrer noopener" href="https://twitter.com/TrustedSheriff" target="_blank" title="@TrustedSheriff">
+              https://twitter.com/TrustedSheriff
+            </a>
+          </p>
+          <p>
             {t('about.openSource')}{' '}
             <a rel="noreferrer noopener" href="https://github.com/viclafouch/meme-studio" target="_blank">
               https://github.com/viclafouch/meme-studio

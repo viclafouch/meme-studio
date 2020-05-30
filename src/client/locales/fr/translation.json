@@ -114,6 +114,7 @@
     "text1": "Meme Studio est un site web simple et rapide pour créer et partager des mèmes. Une liste de mèmes vous est proposé par défaut mais vous pouvez également importer votre propre image.",
     "text2": "Vous avez la possibilité de télécharger votre mème personnalisé sur votre appareil ou de le partager directement sur votre compte Twitter. Nous ne sauvegardons pas votre mème dans notre base de donnée, donc assurez-vous d'exporter votre oeuvre.",
     "contactMe": "Si vous avez des suggestions, des commentaires ou si vous souhaitez signaler un bug, veuillez utiliser le <1>formulaire de feedback</1>. Si vous souhaitez qu'une image soit retirée, veuillez me contacter :",
-    "openSource": "Meme Studio est un projet open source dont vous êtes libre de contribuer :"
+    "openSource": "Meme Studio est un projet open source dont vous êtes libre de contribuer :",
+    "contactTwitter": "Contactez-moi sur Twitter :"
   }
 }
