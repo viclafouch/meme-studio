@@ -9,7 +9,7 @@ export default class Meme {
   public localImageUrl: string
   public translations: Array<{
     lang: string
-    keyword: string
+    keywords: string
     id: number
     name: string
   }>
@@ -28,6 +28,12 @@ export default class Meme {
     const currentTranslation = this.translations.find(t => t.lang === lang)
     if (currentTranslation) return currentTranslation.name
     return this.filename || ''
+  }
+
+  keywords(lang: string): string {
+    const currentTranslation = this.translations.find(t => t.lang === lang)
+    if (currentTranslation) return currentTranslation.keywords
+    return ''
   }
 
   public url(format: '.jpg' | '.webp' = isSafari ? '.jpg' : '.webp'): string {

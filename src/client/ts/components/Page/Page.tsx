@@ -35,6 +35,9 @@ const Page = (props: PagePropsInt): JSX.Element => {
             <title lang={i18n.language}>
               {memeSelected && pathname.startsWith('/create') ? memeSelected.name(i18n.language) : pageMeta.title}
             </title>
+            {memeSelected && pathname.startsWith('/create') && (
+              <meta name="keywords" content={memeSelected.keywords(i18n.language)} />
+            )}
             <meta name="description" content={pageMeta.description} />
             <link rel="canonical" href={`${SITE_URL}${pathname}`} />
             <base target="_blank" href={SITE_URL} />
