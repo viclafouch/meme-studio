@@ -6357,6 +6357,63 @@
           "keywords": "sweat, black men, hot, key and peele"
         }
       }
+    },
+    {
+      "width": 979,
+      "height": 800,
+      "boxCount": 0,
+      "filename": "KaGI9deuz.jpg",
+      "id": "L34s-GvHv",
+      "texts": [
+        {
+          "isUppercase": false,
+          "id": "xTIDpQf3q",
+          "value": "",
+          "width": 979,
+          "height": 143,
+          "centerX": 490,
+          "centerY": 71,
+          "rotate": 0,
+          "fontSize": 66,
+          "fontFamily": "Arial",
+          "boxShadow": 0,
+          "color": "#000000",
+          "alignVertical": "middle",
+          "textAlign": "center",
+          "createdAt": "2020-05-31T10:37:08.635Z",
+          "updatedAt": "2020-05-31T10:37:08.635Z"
+        },
+        {
+          "isUppercase": false,
+          "id": "N8gcsw6kt",
+          "value": "",
+          "width": 947,
+          "height": 132,
+          "centerX": 505,
+          "centerY": 211,
+          "rotate": 0,
+          "fontSize": 52,
+          "fontFamily": "Arial",
+          "boxShadow": 0,
+          "color": "#000000",
+          "alignVertical": "middle",
+          "textAlign": "left",
+          "createdAt": "2020-05-31T10:37:08.636Z",
+          "updatedAt": "2020-05-31T10:37:08.636Z"
+        }
+      ],
+      "createdAt": "2020-05-31T10:35:25.124Z",
+      "updatedAt": "2020-05-31T10:35:25.124Z",
+      "translations": {
+        "fr": {
+          "name": "Palmashow je sais voler",
+          "keywords": "palmashow, helmut, kruger, chocolatine"
+        },
+        "en": {
+          "name": "Palmashow je sais voler",
+          "keywords": "palmashow, helmut, kruger, chocolatine"
+        }
+      }
     }
   ]
 }
