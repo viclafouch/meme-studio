@@ -35,7 +35,7 @@
     "react-loadable": "5.5.0",
     "react-markdown": "4.3.1",
     "react-router-dom": "5.2.0",
-    "react-svg": "11.0.23",
+    "react-svg": "11.0.24",
     "use-debounce": "^3.4.2",
     "webfontloader": "^1.6.28"
   }
