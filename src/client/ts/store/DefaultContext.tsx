@@ -1,21 +1,14 @@
 import * as React from 'react'
 import { createContext, useReducer, createRef, RefObject, useLayoutEffect } from 'react'
 import { DefaultReducer, Actions } from './reducer/default'
-import Meme from '@client/ts/shared/models/Meme'
 
 export interface DefaultState {
   modalRef: RefObject<HTMLDivElement>
-  memes: Array<Meme>
-  numPage: number
-  hasNextMemes: boolean
   theme: 'dark' | 'light'
 }
 
 const initialState: DefaultState = {
   modalRef: createRef(),
-  memes: [],
-  numPage: 0,
-  hasNextMemes: true,
   theme: document.documentElement.getAttribute('data-theme') as 'dark' | 'light'
 }
 

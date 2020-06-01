@@ -1,6 +1,8 @@
 import { Model, DataTypes } from 'sequelize'
 import database from '../config/database'
 
+import { FONTS_FAMILY, ALIGN_VERTICAL, TEXT_ALIGN } from '@shared/config'
+
 class TextBox extends Model {
   public id: string
   public value: string
@@ -62,7 +64,7 @@ TextBox.init(
       type: DataTypes.STRING(128),
       allowNull: false,
       validate: {
-        isIn: [require('@shared/config').FONTS_FAMILY]
+        isIn: [FONTS_FAMILY]
       }
     },
     boxShadow: {
@@ -80,14 +82,14 @@ TextBox.init(
       type: DataTypes.STRING(128),
       allowNull: false,
       validate: {
-        isIn: [require('@shared/config').ALIGN_VERTICAL]
+        isIn: [ALIGN_VERTICAL]
       }
     },
     textAlign: {
       type: DataTypes.STRING(128),
       allowNull: false,
       validate: {
-        isIn: [require('@shared/config').TEXT_ALIGN]
+        isIn: [TEXT_ALIGN]
       }
     },
     isUppercase: {

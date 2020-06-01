@@ -4,6 +4,7 @@ import * as cookieParser from 'cookie-parser'
 import * as helmet from 'helmet'
 import * as morgan from 'morgan'
 import * as path from 'path'
+import * as prerender from 'prerender-node'
 import * as sslRedirect from 'heroku-ssl-redirect'
 import { Request, Response, NextFunction } from 'express'
 import * as cors from 'cors'
@@ -51,7 +52,7 @@ class App {
     if (!IS_DEV) this.app.use(morgan('combined'))
     this.app.use(cors())
     if (process.env.PRERENDER_TOKEN)
-      this.app.use(require('prerender-node').set('prerenderToken', process.env.PRERENDER_TOKEN).blacklisted(['.webp']))
+      this.app.use(prerender.set('prerenderToken', process.env.PRERENDER_TOKEN).blacklisted(['.webp']))
   }
 
   private initializeRoutes(): void {

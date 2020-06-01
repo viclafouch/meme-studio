@@ -20,11 +20,11 @@
     "@types/react-helmet": "6.0.0",
     "@types/react-loadable": "5.5.3",
     "@types/react-router-dom": "5.1.5",
-    "@types/webfontloader": "^1.6.31",
+    "@types/webfontloader": "^1.6.32",
     "abort-controller": "3.0.0",
     "date-fns": "2.14.0",
     "i18next": "19.4.5",
-    "immer": "6.0.8",
+    "immer": "6.0.9",
     "nprogress": "0.2.0",
     "react": "16.13.1",
     "react-color": "2.18.1",
@@ -35,7 +35,7 @@
     "react-loadable": "5.5.0",
     "react-markdown": "4.3.1",
     "react-router-dom": "5.2.0",
-    "react-svg": "11.0.23",
+    "react-svg": "11.0.24",
     "use-debounce": "^3.4.2",
     "webfontloader": "^1.6.28"
   }
