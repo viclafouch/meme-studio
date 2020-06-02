@@ -6414,6 +6414,63 @@
           "keywords": "palmashow, helmut, kruger, chocolatine"
         }
       }
+    },
+    {
+      "width": 914,
+      "height": 800,
+      "boxCount": 0,
+      "filename": "jFOLzN2tb.jpg",
+      "id": "kODx8VABG",
+      "texts": [
+        {
+          "isUppercase": false,
+          "id": "o13O2Z-Py",
+          "value": "",
+          "width": 439,
+          "height": 400,
+          "centerX": 220,
+          "centerY": 200,
+          "rotate": 0,
+          "fontSize": 59,
+          "fontFamily": "Arial",
+          "boxShadow": 0,
+          "color": "#000000",
+          "alignVertical": "middle",
+          "textAlign": "center",
+          "createdAt": "2020-06-02T09:04:41.045Z",
+          "updatedAt": "2020-06-02T09:04:41.045Z"
+        },
+        {
+          "isUppercase": false,
+          "id": "izSbWfCpF",
+          "value": "",
+          "width": 439,
+          "height": 400,
+          "centerX": 220,
+          "centerY": 600,
+          "rotate": 0,
+          "fontSize": 59,
+          "fontFamily": "Arial",
+          "boxShadow": 0,
+          "color": "#000000",
+          "alignVertical": "middle",
+          "textAlign": "center",
+          "createdAt": "2020-06-02T09:04:41.045Z",
+          "updatedAt": "2020-06-02T09:04:41.045Z"
+        }
+      ],
+      "createdAt": "2020-06-02T09:02:53.664Z",
+      "updatedAt": "2020-06-02T09:02:53.664Z",
+      "translations": {
+        "fr": {
+          "name": "Homme black déçu",
+          "keywords": "black, ordinateur, surpris, mec"
+        },
+        "en": {
+          "name": "Disappointed Black Guy",
+          "keywords": "black, computer, suprised, guy"
+        }
+      }
     }
   ]
 }
