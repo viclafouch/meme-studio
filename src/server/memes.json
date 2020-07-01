@@ -6471,6 +6471,26 @@
           "keywords": "black, computer, suprised, guy"
         }
       }
+    },
+    {
+      "width": 780,
+      "height": 800,
+      "boxCount": 0,
+      "filename": "ORDOs0xg2.jpg",
+      "id": "OQ-vl2c8V",
+      "texts": [],
+      "createdAt": "2020-07-01T09:26:30.871Z",
+      "updatedAt": "2020-07-01T09:26:30.871Z",
+      "translations": {
+        "fr": {
+          "name": "Vince McMahon Reaction",
+          "keywords": "WWE, performance, surpris"
+        },
+        "en": {
+          "name": "Vince McMahon Reaction",
+          "keywords": "WWE, performance, suprised"
+        }
+      }
     }
   ]
 }
