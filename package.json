@@ -131,7 +131,7 @@
     "prerender-node": "3.2.5",
     "sequelize": "6.2.3",
     "shortid": "2.2.15",
-    "sqlite3": "4.2.0",
+    "sqlite3": "5.0.0",
     "twit": "2.2.11",
     "yargs": "15.3.1"
   }
