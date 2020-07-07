@@ -90,7 +90,7 @@
     "png-to-jpeg": "1.0.1",
     "preload-webpack-plugin": "3.0.0-beta.4",
     "prettier": "2.0.5",
-    "sass-loader": "8.0.2",
+    "sass-loader": "9.0.2",
     "source-map-loader": "1.0.0",
     "style-loader": "1.2.1",
     "tinify": "1.6.0-beta.2",
