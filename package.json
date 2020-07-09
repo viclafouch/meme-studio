@@ -127,7 +127,7 @@
     "heroku-ssl-redirect": "0.0.4",
     "is-base64": "1.1.0",
     "morgan": "1.10.0",
-    "pg": "8.2.1",
+    "pg": "8.3.0",
     "prerender-node": "3.2.5",
     "sequelize": "6.2.3",
     "shortid": "2.2.15",
