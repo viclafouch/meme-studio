@@ -100,7 +100,7 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
           {
             loader: 'sass-loader',
             options: {
-              prependData: "@import './src/client/scss/global/mixins';"
+              additionalData: "@import './src/client/scss/global/mixins';"
             }
           }
         ],
