@@ -23,7 +23,7 @@
     "@types/webfontloader": "1.6.32",
     "abort-controller": "3.0.0",
     "date-fns": "2.14.0",
-    "i18next": "19.5.1",
+    "i18next": "19.6.1",
     "immer": "6.0.9",
     "nprogress": "0.2.0",
     "react": "16.13.1",
