@@ -60,7 +60,7 @@
     "@types/node": "14.0.23",
     "@types/sequelize": "4.28.9",
     "@types/shortid": "0.0.29",
-    "@types/twit": "2.2.24",
+    "@types/twit": "2.2.25",
     "@types/validator": "13.1.0",
     "@typescript-eslint/eslint-plugin": "3.6.1",
     "@typescript-eslint/parser": "3.6.1",
