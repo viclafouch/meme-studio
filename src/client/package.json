@@ -9,12 +9,12 @@
     "url": "git+https://github.com/viclafouch/meme-studio.git"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "1.2.29",
-    "@fortawesome/free-brands-svg-icons": "5.13.1",
-    "@fortawesome/free-solid-svg-icons": "5.13.1",
+    "@fortawesome/fontawesome-svg-core": "1.2.30",
+    "@fortawesome/free-brands-svg-icons": "5.14.0",
+    "@fortawesome/free-solid-svg-icons": "5.14.0",
     "@fortawesome/react-fontawesome": "0.1.11",
     "@types/nprogress": "0.2.0",
-    "@types/react": "16.9.41",
+    "@types/react": "16.9.43",
     "@types/react-color": "3.0.4",
     "@types/react-dom": "16.9.8",
     "@types/react-helmet": "6.0.0",
@@ -22,8 +22,8 @@
     "@types/react-router-dom": "5.1.5",
     "@types/webfontloader": "1.6.32",
     "abort-controller": "3.0.0",
-    "date-fns": "2.14.0",
-    "i18next": "19.6.1",
+    "date-fns": "2.15.0",
+    "i18next": "19.6.2",
     "immer": "6.0.9",
     "nprogress": "0.2.0",
     "react": "16.13.1",
@@ -35,8 +35,8 @@
     "react-loadable": "5.5.0",
     "react-markdown": "4.3.1",
     "react-router-dom": "5.2.0",
-    "react-svg": "11.0.28",
-    "use-debounce": "3.4.2",
+    "react-svg": "11.0.31",
+    "use-debounce": "3.4.3",
     "webfontloader": "1.6.28"
   }
 }
