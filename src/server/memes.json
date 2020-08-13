@@ -6491,6 +6491,26 @@
           "keywords": "WWE, performance, suprised"
         }
       }
+    },
+    {
+      "width": 1002,
+      "height": 800,
+      "boxCount": 0,
+      "filename": "1nlDvghM2.jpg",
+      "id": "Wjz6lPGhrM",
+      "texts": [],
+      "createdAt": "2020-08-13T14:06:13.027Z",
+      "updatedAt": "2020-08-13T14:06:13.027Z",
+      "translations": {
+        "fr": {
+          "name": "interview Donald Trump",
+          "keywords": "interview, Trump, confus"
+        },
+        "en": {
+          "name": "interview Donald Trump",
+          "keywords": "interview, Trump, confused"
+        }
+      }
     }
   ]
 }
