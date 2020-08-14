@@ -96,7 +96,12 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
               reloadAll: IS_DEV
             }
           },
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              url: false
+            }
+          },
           {
             loader: 'sass-loader',
             options: {
