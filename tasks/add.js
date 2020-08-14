@@ -51,6 +51,7 @@ async function insertMeme({ name, url, keywords }) {
   console.log('Convertion to WebP...')
   await convertToWebP(filePath, webpFile)
   console.info('A meme has been created : \n', createdMeme)
+  console.info('Do not forget to add the position of the texts!')
   await setCurrentMemes(jsonData)
 }
 

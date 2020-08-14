@@ -9,6 +9,9 @@ const sizeOf = promisify(require('image-size'))
 const tinify = require('tinify')
 const webp = require('webp-converter')
 
+// this will grant 755 permission to webp executables
+webp.grant_permission()
+
 if (!process.env.TINY_KEY) {
   throw new Error('Please provide a TINY_KEY from https://tinypng.com/developers')
 }
@@ -79,13 +82,7 @@ const createMeme = async ({ url, memeName, boxCount, keywords }) => {
   }
 }
 
-const convertToWebP = (input, output) =>
-  new Promise((resolve, reject) =>
-    webp.cwebp(input, output, '-q 80', function (status, error) {
-      if (status == 100) resolve()
-      else reject(error)
-    })
-  )
+const convertToWebP = (input, output) => webp.cwebp(input, output, '-q 80')
 
 const compressFile = async filename => {
   let source = tinify.fromFile(filename)
