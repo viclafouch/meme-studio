@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useState, useImperativeHandle, forwardRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import * as Loadable from 'react-loadable'
+import Loadable from 'react-loadable'
 import faqEnUS from '@client/md/en-US/faq.md'
 import faqFr from '@client/md/fr/faq.md'
 import Modal from '@client/components/Modal/Modal'

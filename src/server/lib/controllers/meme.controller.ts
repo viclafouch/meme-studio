@@ -1,5 +1,5 @@
 import { Response, NextFunction, Request } from 'express'
-import * as Twit from 'twit'
+import Twit from 'twit'
 import { Op } from 'sequelize'
 import Meme from '../models/meme.model'
 import TextBox from '../models/textbox.model'

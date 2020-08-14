@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useTranslation } from 'react-i18next'
-import * as ReactMarkdown from 'react-markdown'
+import ReactMarkdown from 'react-markdown'
 import TermsEnUS from '@client/md/en-US/legale-notices.md'
 import TermsFr from '@client/md/fr/legale-notices.md'
 import Header from '@client/components/Header/Header'

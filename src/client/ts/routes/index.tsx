@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as nprogress from 'nprogress'
-import * as Loadable from 'react-loadable'
+import Loadable from 'react-loadable'
 import { LoadingComponentProps } from 'react-loadable'
 import { Switch } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'

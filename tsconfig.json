@@ -5,6 +5,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "esModuleInterop": true,
     "target": "es6",
     "jsx": "react",
     "baseUrl": "./src",

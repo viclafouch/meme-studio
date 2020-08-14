@@ -1,6 +1,6 @@
 import * as React from 'react'
 import AbortController from 'abort-controller'
-import * as Loadable from 'react-loadable'
+import Loadable from 'react-loadable'
 import { useState, useRef, RefObject, useEffect, useContext, useCallback } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'

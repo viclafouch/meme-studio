@@ -1,5 +1,5 @@
 import * as React from 'react'
-import * as ReactMarkdown from 'react-markdown'
+import ReactMarkdown from 'react-markdown'
 import Header from '@client/components/Header/Header'
 import Footer from '@client/components/Footer/Footer'
 import qaEnUS from '@client/md/en-US/faq.md'
