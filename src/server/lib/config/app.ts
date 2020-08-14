@@ -3,12 +3,12 @@ import { param, body } from 'express-validator'
 import helmet from 'helmet'
 import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
-import * as path from 'path'
-import * as prerender from 'prerender-node'
-import * as sslRedirect from 'heroku-ssl-redirect'
+import path from 'path'
+import prerender from 'prerender-node'
+import sslRedirect from 'heroku-ssl-redirect'
 import { Request, Response, NextFunction } from 'express'
 import cors from 'cors'
-import * as bodyParser from 'body-parser'
+import bodyParser from 'body-parser'
 import { MemeController } from '@server/controllers/meme.controller'
 import { TextController } from '@server/controllers/text.controller'
 import HttpException from '@server/exceptions/HttpException'
@@ -46,9 +46,7 @@ class App {
 
   private initializeMiddlewares(): void {
     this.app.use(
-      helmet({
-        contentSecurityPolicy: false // TODO
-      })
+      helmet({ contentSecurityPolicy: false }) // TODO
     )
     this.app.use(cookieParser())
     this.app.use(bodyParser.json({ limit: '50mb' }))

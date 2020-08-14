@@ -1,5 +1,5 @@
-import * as fs from 'fs'
-import * as path from 'path'
+import fs from 'fs'
+import path from 'path'
 import { Request, Response, NextFunction } from 'express'
 import HttpException from '@server/exceptions/HttpException'
 import TextBox from '@server/models/textbox.model'

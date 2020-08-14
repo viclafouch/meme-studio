@@ -1,5 +1,5 @@
-import * as isBase64 from 'is-base64'
-import * as shortid from 'shortid'
+import isBase64 from 'is-base64'
+import shortid from 'shortid'
 import { validationResult, Result, ValidationError, ValidationChain } from 'express-validator'
 import { Request, Response, NextFunction } from 'express'
 import Meme from '@server/models/meme.model'
