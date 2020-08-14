@@ -45,7 +45,7 @@ class App {
   }
 
   private initializeMiddlewares(): void {
-    this.app.use(helmet())
+    // this.app.use(helmet())
     this.app.use(cookieParser())
     this.app.use(bodyParser.json({ limit: '50mb' }))
     this.app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }))
