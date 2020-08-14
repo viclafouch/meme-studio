@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as WebFont from 'webfontloader'
-import { useLayoutEffect, useContext, useCallback } from 'react'
+import { useLayoutEffect, useContext, useCallback, useRef } from 'react'
 import { useWindowWidth } from '@client/ts/shared/hooks'
 import { fillText } from '@client/utils/index'
 import TextBox from '@client/ts/shared/models/TextBox'
@@ -23,10 +23,11 @@ export const loadFonts = new Promise(resolve => {
 
 function WrapperCanvas(): JSX.Element {
   const { isMinLgSize } = useWindowWidth()
-  const [
-    { memeSelected, images, canvasRef, drawProperties, texts, itemIdSelected, saveToEditor, showTextAreas },
-    dispatchEditor
-  ]: [EditorInt, EditorDispatch] = useContext(EditorContext)
+  const canvasRef = useRef(null)
+  const [{ memeSelected, images, drawProperties, texts, itemIdSelected, saveToEditor, showTextAreas }, dispatchEditor]: [
+    EditorInt,
+    EditorDispatch
+  ] = useContext(EditorContext)
 
   useLayoutEffect(() => {
     const draw = (): void => {

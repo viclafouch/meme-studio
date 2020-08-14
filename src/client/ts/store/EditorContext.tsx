@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useReducer, createContext, RefObject, createRef, ReactNode, useMemo, useCallback } from 'react'
+import { useReducer, createContext, ReactNode, useMemo, useCallback } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import Meme from '@client/ts/shared/models/Meme'
 import TextBox from '@client/ts/shared/models/TextBox'
@@ -16,7 +16,6 @@ export interface EditorState {
   currentTab: 'TAB_GALLERY' | 'TAB_CUSTOMIZATION' | null
   memeSelected: Meme
   isExportModalActive: boolean
-  canvasRef: RefObject<HTMLCanvasElement>
   texts: Array<TextBox>
   images: Array<ImageBox>
   drawProperties: DrawProperties
@@ -36,7 +35,6 @@ const initialState: EditorState = {
   memeSelected: null,
   currentTab: !!hasRecoverVersion() ? TAB_CUSTOMIZATION : TAB_GALLERY,
   isExportModalActive: false,
-  canvasRef: createRef(),
   texts: [],
   images: [],
   drawProperties: null,
