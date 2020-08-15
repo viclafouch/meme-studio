@@ -1,4 +1,4 @@
-import * as shortid from 'shortid'
+import shortid from 'shortid'
 
 export const wait = (timeout = 1000): Promise<unknown> => new Promise(resolve => setTimeout(resolve, timeout))
 

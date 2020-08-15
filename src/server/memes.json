@@ -6621,6 +6621,45 @@
           "keywords": "interview, Trump, confused"
         }
       }
+    },
+    {
+      "width": 847,
+      "height": 800,
+      "boxCount": 0,
+      "filename": "L0a71kiDY.jpg",
+      "id": "8zW5LzgYG",
+      "texts": [
+        {
+          "isUppercase": false,
+          "id": "zaxaquMU5",
+          "value": "",
+          "width": 846,
+          "height": 213,
+          "centerX": 423,
+          "centerY": 106,
+          "rotate": 0,
+          "fontSize": 59,
+          "fontFamily": "Helvetica",
+          "boxShadow": 0,
+          "color": "#000000",
+          "alignVertical": "middle",
+          "textAlign": "center",
+          "createdAt": "2020-08-15T08:44:03.962Z",
+          "updatedAt": "2020-08-15T08:44:03.962Z"
+        }
+      ],
+      "createdAt": "2020-08-15T08:40:27.145Z",
+      "updatedAt": "2020-08-15T08:40:27.145Z",
+      "translations": {
+        "fr": {
+          "name": "Jonathan Swan confus",
+          "keywords": "trump, donald, interview"
+        },
+        "en": {
+          "name": "Jonathan Swan confused",
+          "keywords": "trump, donald, interview"
+        }
+      }
     }
   ]
 }
