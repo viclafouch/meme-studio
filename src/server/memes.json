@@ -6825,6 +6825,63 @@
           "keywords": "teach, friends, understand"
         }
       }
+    },
+    {
+      "width": 542,
+      "height": 600,
+      "boxCount": 0,
+      "filename": "v9aQPkuBh.jpg",
+      "id": "WL1JRkbjw",
+      "texts": [
+        {
+          "isUppercase": false,
+          "id": "KXsp6O-dd",
+          "value": "",
+          "width": 542,
+          "height": 102,
+          "centerX": 271,
+          "centerY": 51,
+          "rotate": 0,
+          "fontSize": 48,
+          "fontFamily": "Arial",
+          "boxShadow": 0,
+          "color": "#000000",
+          "alignVertical": "middle",
+          "textAlign": "left",
+          "createdAt": "2020-08-30T11:23:18.787Z",
+          "updatedAt": "2020-08-30T11:23:18.787Z"
+        },
+        {
+          "isUppercase": false,
+          "id": "voLNS7u52",
+          "value": "",
+          "width": 542,
+          "height": 102,
+          "centerX": 271,
+          "centerY": 158,
+          "rotate": 0,
+          "fontSize": 48,
+          "fontFamily": "Arial",
+          "boxShadow": 0,
+          "color": "#000000",
+          "alignVertical": "middle",
+          "textAlign": "left",
+          "createdAt": "2020-08-30T11:23:18.787Z",
+          "updatedAt": "2020-08-30T11:23:18.787Z"
+        }
+      ],
+      "createdAt": "2020-08-30T11:18:13.617Z",
+      "updatedAt": "2020-08-30T11:18:13.618Z",
+      "translations": {
+        "fr": {
+          "name": "Échange de visages Monsters, Inc",
+          "keywords": "monstre, Mike Wazowski, deux yeux"
+        },
+        "en": {
+          "name": "Face-Swapping Monsters, Inc",
+          "keywords": "monster, Mike Wazowski, two eyes"
+        }
+      }
     }
   ]
 }
