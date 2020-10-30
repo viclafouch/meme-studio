@@ -74,7 +74,7 @@ export function EditorProvider({ children }: { children: ReactNode }): JSX.Eleme
 
   const canErazeAll = canUndo || canRedo || state.texts.length > 0 || state.images.length > 0
 
-  const [saveToHistory] = useDebouncedCallback((historyType: any) => {
+  const { callback: saveToHistory } = useDebouncedCallback((historyType: any) => {
     updater({ type: SET_HISTORY, historyType })
   }, 800)
 
