@@ -6882,6 +6882,45 @@
           "keywords": "monster, Mike Wazowski, two eyes"
         }
       }
+    },
+    {
+      "width": 815,
+      "height": 800,
+      "boxCount": 0,
+      "filename": "AJ06FX-r2.jpg",
+      "id": "xrSh3AfNA",
+      "texts": [
+        {
+          "isUppercase": false,
+          "id": "OqbW8Yj0q",
+          "value": "",
+          "width": 326,
+          "height": 211,
+          "centerX": 288,
+          "centerY": 242,
+          "rotate": -39,
+          "fontSize": 80,
+          "fontFamily": "Comic Sans MS",
+          "boxShadow": 2,
+          "color": "#ffffff",
+          "alignVertical": "middle",
+          "textAlign": "center",
+          "createdAt": "2020-10-30T10:35:18.183Z",
+          "updatedAt": "2020-10-30T10:35:18.183Z"
+        }
+      ],
+      "createdAt": "2020-10-30T10:29:13.716Z",
+      "updatedAt": "2020-10-30T10:29:13.716Z",
+      "translations": {
+        "fr": {
+          "name": "FC",
+          "keywords": "FC, sardoche"
+        },
+        "en": {
+          "name": "FC",
+          "keywords": "FC, sardoche"
+        }
+      }
     }
   ]
 }
