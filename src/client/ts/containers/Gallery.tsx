@@ -5,7 +5,7 @@ import Header from '@client/components/Header/Header'
 import Button from '@client/components/Button/Button'
 import Footer from '@client/components/Footer/Footer'
 import Meme from '../shared/models/Meme'
-import { StudioAsync } from '../routes'
+import { routes } from '../routes'
 import { useInfinityMemes } from '../shared/hooks/memes'
 import '@client/scss/pages/gallery.scss'
 
@@ -58,8 +58,8 @@ function Gallery(): JSX.Element {
             {!hasMore && !isError && !isLoading && (
               <div className="cta-end container">
                 <h2> {t('titles.titleA')}</h2>
-                <Link to="/create">
-                  <Button color="blue" onMouseOver={StudioAsync.preload} big tabIndex={-1}>
+                <Link to="/create" onMouseOver={() => routes.create.Component.preload()}>
+                  <Button color="blue" big tabIndex={-1}>
                     {t('makeMyMeme')}
                   </Button>
                 </Link>

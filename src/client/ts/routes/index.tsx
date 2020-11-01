@@ -1,92 +1,95 @@
 import * as React from 'react'
-import * as nprogress from 'nprogress'
-import Loadable from 'react-loadable'
-import { LoadingComponentProps } from 'react-loadable'
+import loadable from '@loadable/component'
 import { Switch } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import * as nprogress from 'nprogress'
+import { TFunction } from 'i18next'
 import Page from '@client/components/Page/Page'
 import NotFound from '@client/containers/404'
 import { usePageViews } from '../shared/hooks'
-import { FatalError } from '@client/components/ErrorBoundary/ErrorBoundary'
 import { loadFonts } from '@client/components/WrapperCanvas/WrapperCanvas'
 
-function Loading(props: LoadingComponentProps): JSX.Element {
-  if (props.error) {
-    return <FatalError />
-  } else if (props.pastDelay) {
-    nprogress.start()
-    return null
-  } else {
-    return null
-  }
+nprogress.start()
+
+const resolveComponent = (components: any): React.ComponentType => {
+  nprogress.done()
+  return components.default
 }
 
-const AboutAsync = Loadable({
-  loader: async () => {
-    const container = await import('@client/containers/About')
-    nprogress.done()
-    return container
+export const routes = {
+  home: {
+    path: '/',
+    Component: loadable(() => import('@client/containers/Home'), {
+      resolveComponent: resolveComponent
+    }),
+    exact: true,
+    metas: {
+      title: (t: TFunction): string => t('about.meta.title'),
+      description: (t: TFunction): string => t('about.meta.description')
+    }
   },
-  loading: Loading,
-  delay: 200,
-  timeout: 5000
-})
-
-const QaAsync = Loadable({
-  loader: async () => {
-    const container = await import('@client/containers/qa')
-    nprogress.done()
-    return container
+  about: {
+    path: '/about',
+    Component: loadable(() => import('@client/containers/About'), {
+      resolveComponent: resolveComponent
+    }),
+    exact: true,
+    metas: {
+      title: (t: TFunction): string => t('about.meta.title'),
+      description: (t: TFunction): string => t('about.meta.description')
+    }
   },
-  loading: Loading,
-  delay: 200,
-  timeout: 5000
-})
-
-const TermsAsync = Loadable({
-  loader: async () => {
-    const container = await import('@client/containers/Terms')
-    nprogress.done()
-    return container
+  qa: {
+    path: '/qa',
+    Component: loadable(() => import('@client/containers/qa'), {
+      resolveComponent: resolveComponent
+    }),
+    exact: true,
+    metas: {
+      title: (t: TFunction): string => t('qa.meta.title'),
+      description: (t: TFunction): string => t('qa.meta.description')
+    }
   },
-  loading: Loading,
-  delay: 200,
-  timeout: 5000
-})
-
-const HomeAsync = Loadable({
-  loader: async () => {
-    const container = await import('@client/containers/Home')
-    nprogress.done()
-    return container
+  terms: {
+    path: '/terms',
+    Component: loadable(() => import('@client/containers/Terms'), {
+      resolveComponent: resolveComponent
+    }),
+    exact: true,
+    metas: {
+      title: (t: TFunction): string => t('legal.meta.title'),
+      description: (t: TFunction): string => t('legal.meta.description')
+    }
   },
-  loading: Loading,
-  delay: 200,
-  timeout: 5000
-})
-
-const GalleryAsync = Loadable({
-  loader: async () => {
-    const container = await import('@client/containers/Gallery')
-    nprogress.done()
-    return container
+  gallery: {
+    path: '/gallery',
+    Component: loadable(() => import('@client/containers/Gallery'), {
+      resolveComponent: resolveComponent
+    }),
+    exact: true,
+    metas: {
+      title: (t: TFunction): string => t('gallery.meta.title'),
+      description: (t: TFunction): string => t('gallery.meta.description')
+    }
   },
-  loading: Loading,
-  delay: 200,
-  timeout: 5000
-})
-
-export const StudioAsync = Loadable({
-  loader: async () => {
-    await loadFonts
-    const container = await import('@client/containers/Studio')
-    nprogress.done()
-    return container
-  },
-  loading: Loading,
-  delay: 200,
-  timeout: 5000
-})
+  create: {
+    path: '/create',
+    Component: loadable(
+      async () => {
+        await loadFonts
+        return import('@client/containers/Studio')
+      },
+      {
+        resolveComponent: resolveComponent
+      }
+    ),
+    exact: true,
+    metas: {
+      title: (t: TFunction): string => t('studio.meta.title'),
+      description: (t: TFunction): string => t('studio.meta.description')
+    }
+  }
+}
 
 function Routes(): JSX.Element {
   const { t } = useTranslation()
@@ -94,63 +97,28 @@ function Routes(): JSX.Element {
 
   return (
     <Switch>
-      <Page
-        exact
-        path="/"
-        pageMeta={{
-          title: t('home.meta.title'),
-          description: t('home.meta.description')
-        }}
-        component={HomeAsync}
-      />
-      <Page
-        path="/about"
-        pageMeta={{
-          title: t('about.meta.title'),
-          description: t('about.meta.description')
-        }}
-        component={AboutAsync}
-      />
-      <Page
-        path="/terms"
-        pageMeta={{
-          title: t('legal.meta.title'),
-          description: t('legal.meta.description')
-        }}
-        component={TermsAsync}
-      />
-      <Page
-        path="/qa"
-        pageMeta={{
-          title: t('qa.meta.title'),
-          description: t('qa.meta.description')
-        }}
-        component={QaAsync}
-      />
-      <Page
-        exact
-        path="/create"
-        pageMeta={{
-          title: t('studio.meta.title'),
-          description: t('studio.meta.description')
-        }}
-        component={StudioAsync}
-      />
+      {(Object.keys(routes) as Array<keyof typeof routes>).map(name => {
+        const route = routes[name] as any
+        return (
+          <Page
+            key={route.path}
+            exact={route.exact}
+            path={route.path}
+            pageMeta={{
+              title: route.metas.title(t),
+              description: route.metas.description(t)
+            }}
+            component={route.Component}
+          />
+        )
+      })}
       <Page
         path="/create/:memeId"
         pageMeta={{
           title: t('studio.meta.title'),
           description: t('studio.meta.description')
         }}
-        component={StudioAsync}
-      />
-      <Page
-        path="/gallery"
-        pageMeta={{
-          title: t('gallery.meta.title'),
-          description: t('gallery.meta.description')
-        }}
-        component={GalleryAsync}
+        component={routes.create.Component}
       />
       <Page
         path="*"

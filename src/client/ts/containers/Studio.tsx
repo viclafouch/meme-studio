@@ -1,6 +1,6 @@
 import * as React from 'react'
 import AbortController from 'abort-controller'
-import Loadable from 'react-loadable'
+import loadable from '@loadable/component'
 import { useState, useRef, RefObject, useEffect, useContext, useCallback } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -25,10 +25,7 @@ import Aside from '@client/components/Aside/Aside'
 import { RecoverVersionInt } from '../shared/validators'
 import '@client/scss/pages/studio.scss'
 
-const CanvasDebuggerAsync = Loadable({
-  loader: async () => import('@client/components/CanvasDebugger/CanvasDebugger'),
-  loading: () => null
-})
+const CanvasDebuggerAsync = loadable(() => import('@client/components/CanvasDebugger/CanvasDebugger'))
 
 function Studio(props: RouteComponentProps<{ memeId?: string }>): JSX.Element {
   const inputDrop: RefObject<HTMLInputElement> = useRef(null)

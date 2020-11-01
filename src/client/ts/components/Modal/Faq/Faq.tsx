@@ -1,16 +1,13 @@
 import * as React from 'react'
 import { useState, useImperativeHandle, forwardRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import Loadable from 'react-loadable'
+import loadable from '@loadable/component'
 import faqEnUS from '@client/md/en-US/faq.md'
 import faqFr from '@client/md/fr/faq.md'
 import Modal from '@client/components/Modal/Modal'
 import './faq.scss'
 
-const ReactMarkdownAsync = Loadable({
-  loader: () => import('react-markdown'),
-  loading: () => null
-})
+const ReactMarkdownAsync = loadable(() => import('react-markdown'))
 
 const Faq = forwardRef(
   (props: any, ref): JSX.Element => {

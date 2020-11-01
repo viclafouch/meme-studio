@@ -9,8 +9,8 @@ import Footer from '@client/components/Footer/Footer'
 import { TOGGLE_THEME } from '@client/store/reducer/constants'
 import { shuffle } from '@client/utils/helpers'
 import { DefaultState, DefaultContext, DefaultDispatch } from '@client/store/DefaultContext'
-import { StudioAsync } from '../routes'
 import '@client/scss/pages/home.scss'
+import { routes } from '../routes'
 
 interface MemeExample {
   width: number
@@ -118,7 +118,7 @@ function Home(): JSX.Element {
           <Link to="/create">
             <Button
               tabIndex={-1}
-              onMouseOver={StudioAsync.preload}
+              onMouseOver={() => routes.create.Component.preload()}
               color="blue"
               className="home-get-started-btn ld ld-fall-ttb-in"
               big

@@ -137,7 +137,7 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
         GA_TRACKING_ID: 'UA-163474835-1'
       }
     }),
-    new PreloadWebpackPlugin(),
+    // new PreloadWebpackPlugin(), // try without,
     new MiniCssExtractPlugin({
       filename: '[name].[chunkhash:8].css'
     }),
