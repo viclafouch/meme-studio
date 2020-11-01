@@ -71,25 +71,18 @@ export const routes = {
       title: (t: TFunction): string => t('gallery.meta.title'),
       description: (t: TFunction): string => t('gallery.meta.description')
     }
-  },
-  create: {
-    path: '/create',
-    Component: loadable(
-      async () => {
-        await loadFonts
-        return import('@client/containers/Studio')
-      },
-      {
-        resolveComponent: resolveComponent
-      }
-    ),
-    exact: true,
-    metas: {
-      title: (t: TFunction): string => t('studio.meta.title'),
-      description: (t: TFunction): string => t('studio.meta.description')
-    }
   }
 }
+
+export const StudioAsync = loadable(
+  async () => {
+    await loadFonts
+    return import('@client/containers/Studio')
+  },
+  {
+    resolveComponent: resolveComponent
+  }
+)
 
 function Routes(): JSX.Element {
   const { t } = useTranslation()
@@ -113,12 +106,21 @@ function Routes(): JSX.Element {
         )
       })}
       <Page
+        path="/create"
+        exact
+        pageMeta={{
+          title: t('studio.meta.title'),
+          description: t('studio.meta.description')
+        }}
+        component={StudioAsync}
+      />
+      <Page
         path="/create/:memeId"
         pageMeta={{
           title: t('studio.meta.title'),
           description: t('studio.meta.description')
         }}
-        component={routes.create.Component}
+        component={StudioAsync}
       />
       <Page
         path="*"
