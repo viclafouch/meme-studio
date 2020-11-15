@@ -90,11 +90,7 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
         test: /\.scss$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: IS_DEV,
-              reloadAll: IS_DEV
-            }
+            loader: MiniCssExtractPlugin.loader
           },
           {
             loader: 'css-loader',
