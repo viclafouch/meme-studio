@@ -5,6 +5,8 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const WebpackShellPlugin = require('webpack-shell-plugin')
 const Dotenv = require('dotenv-webpack')
 
+console.log('process.env.PORT', process.env.PORT);
+
 module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
   cache: IS_DEV,
   entry: './src/server/index.ts',
