@@ -47,7 +47,6 @@ module.exports = (env, argv, IS_DEV = argv.mode !== 'production') => ({
       'process.env.TWITTER_CONSUMER_SECRET': JSON.stringify(process.env.TWITTER_CONSUMER_SECRET),
       'process.env.TWITTER_ACCESS_TOKEN': JSON.stringify(process.env.TWITTER_ACCESS_TOKEN),
       'process.env.TWITTER_ACCESS_TOKEN_SECRET': JSON.stringify(process.env.TWITTER_ACCESS_TOKEN_SECRET),
-      'process.env.PORT': JSON.stringify(process.env.PORT || 5000),
       'process.env.PRERENDER_TOKEN': JSON.stringify(process.env.PRERENDER_TOKEN),
       'process.env.USE_SSL': JSON.stringify(process.env.USE_SSL)
     }),
