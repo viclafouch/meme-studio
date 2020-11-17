@@ -2,7 +2,6 @@ const IS_DEV = process.env.NODE_ENV !== 'production'
 
 const PORT_CLIENT_DEV = 3000
 const PORT_SERVER_DEV = 8080
-console.log('process.env.PORT', process.env.PORT)
 
 const PORT_SERVER_PROD: number = JSON.parse(process.env.PORT || '3000')
 
