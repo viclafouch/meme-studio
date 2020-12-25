@@ -17,7 +17,7 @@ export const loadFonts = new Promise(resolve => {
       families: FONTS_FAMILY,
       urls: ['/fonts.css']
     },
-    active: resolve
+    active: () => resolve(null)
   })
 })
 
