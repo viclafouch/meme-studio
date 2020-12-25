@@ -59,7 +59,9 @@ async function insertTranslations(meme: Record<string, any>) {
           await insertTranslations(meme)
         }
       })
-    ).then(start)
+    ).then(() => {
+      start()
+    })
   } catch (error) {
     console.error(error)
     process.exit(1)
