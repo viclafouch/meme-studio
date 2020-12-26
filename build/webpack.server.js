@@ -50,7 +50,7 @@ module.exports = (env, argv) => {
       })
     )
   } else {
-    config.plugins.push(new Dotenv())
+    // config.plugins.push(new Dotenv())
   }
 
   return config
