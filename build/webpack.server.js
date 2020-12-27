@@ -17,6 +17,9 @@ module.exports = (env, argv) => {
       path: path.join(__dirname, '..', 'dist', 'server'),
       filename: 'index.js'
     },
+    node: {
+      global: true
+    },
     resolve: {
       extensions: ['.ts', '.json'],
       plugins: [
@@ -50,7 +53,11 @@ module.exports = (env, argv) => {
       })
     )
   } else {
-    // config.plugins.push(new Dotenv())
+    config.plugins.push(
+      new Dotenv({
+        path: path.resolve(process.cwd(), '.env')
+      })
+    )
   }
 
   return config
