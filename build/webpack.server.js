@@ -55,6 +55,7 @@ module.exports = (env, argv) => {
   } else {
     config.plugins.push(
       new Dotenv({
+        systemvars: true,
         path: path.resolve(process.cwd(), '.env')
       })
     )
