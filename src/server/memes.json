@@ -6960,6 +6960,45 @@
           "keywords": "JNR, intern, rapper, greg, guillotin"
         }
       }
+    },
+    {
+      "width": 800,
+      "height": 567,
+      "boxCount": 0,
+      "filename": "BNsktQ8Zz.jpg",
+      "id": "CIzDoo7fK",
+      "texts": [
+        {
+          "isUppercase": false,
+          "id": "cH5ZnsCqL",
+          "value": "",
+          "width": 800,
+          "height": 152,
+          "centerX": 400,
+          "centerY": 76,
+          "rotate": 0,
+          "fontSize": 54,
+          "fontFamily": "Arial",
+          "boxShadow": 0,
+          "color": "#000000",
+          "alignVertical": "middle",
+          "textAlign": "center",
+          "createdAt": "2021-02-04T15:36:27.567Z",
+          "updatedAt": "2021-02-04T15:36:27.567Z"
+        }
+      ],
+      "createdAt": "2021-02-04T15:31:24.792Z",
+      "updatedAt": "2021-02-04T15:31:24.792Z",
+      "translations": {
+        "fr": {
+          "name": "Un homme qui cligne des yeux",
+          "keywords": "confus, étonné, Drew Scanlon"
+        },
+        "en": {
+          "name": "Blinking guy",
+          "keywords": "confused, suprised, Drew Scanlon"
+        }
+      }
     }
   ]
 }
