@@ -1,0 +1,21 @@
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Alata', sans-serif;
+  color: var(--text-color-primary);
+  background-color: var(--background-primary);
+
+  * {
+    box-sizing: border-box;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  #app-root {
+    min-height: 100vh;
+    position: relative;
+  }
+}
