@@ -1,31 +1,20 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
-    "noImplicitAny": true,
-    "module": "commonjs",
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "target": "es6",
-    "jsx": "react",
-    "baseUrl": "./src",
-    "paths": {
-      "@client/components/*": ["client/ts/components/*"],
-      "@client/containers/*": ["client/ts/containers/*"],
-      "@client/store/*": ["client/ts/store/*"],
-      "@client/utils/*": ["client/ts/utils/*"],
-      "@client/*": ["client/*"],
-      "@server/*": ["server/lib/*"],
-      "@shared/*": ["shared/*"],
-      "@src/*": ["*"]
-    }
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "src/client/node_modules/**/*",
-    "**/*.spec.ts"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

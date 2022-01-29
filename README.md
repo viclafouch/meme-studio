@@ -1,40 +1,34 @@
-<div align="center">
-  <a href="https://www.meme-studio.io" target="_blank" title="Meme Studio">
-    <img alt="Meme Studio" src="https://github.com/viclafouch/meme-studio/blob/master/meme-studio.gif" />
-  </a>
-</div>
-<br />
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-# Meme Studio
+## Getting Started
 
-The Meme Studio is designed to be insanely fast and provide powerful customization for your memes, while still being simple and easy to use.
+First, run the development server:
 
-A list of memes is provided by default but you can also import your own image.
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-You have the option of downloading your personalized meme to your device or sharing it directly on your Twitter account. I do not save your meme in our database, so make sure you export your work.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Website : [meme-studio.io](https://www.meme-studio.io)
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-#### Langs available (for now) :
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-- Français
-- English
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-#### What I use:
+## Learn More
 
-- [ReactJS](https://github.com/facebook/react) - Framework JS
-- [React-Helmet](https://github.com/nfl/react-helmet) - SEO
-- [Immer](https://immerjs.github.io/immer/docs/introduction) - Immutability library
-- [React-i18next](https://github.com/i18next/react-i18next) - Internationalization
-- [ExpressJS](https://expressjs.com) - Server side
-- [Sequelize](https://sequelize.org) - Database
+To learn more about Next.js, take a look at the following resources:
 
-### Contributing
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-Any contributions and/or pull requests would be welcome.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-### Installing from source
+## Deploy on Vercel
 
-1. Clone the repository: `git clone https://github.com/viclafouch/meme-studio.git`
-2. Install the npm dependencies `npm install`
-3. Start server: `npm run dev`
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
