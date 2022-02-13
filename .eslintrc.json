@@ -6,6 +6,14 @@
   },
   "rules": {
     "import/no-anonymous-default-export": "off",
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["hrefLeft", "hrefRight"],
+        "aspects": ["invalidHref", "preferButton"]
+      }
+    ],
     // For immer.js
     "no-param-reassign": [
       "error",
