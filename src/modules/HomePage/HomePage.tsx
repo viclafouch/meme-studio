@@ -5,11 +5,15 @@ import Page from '@components/Page/Page'
 
 import Styled from './home-page.styled'
 
-const HomePage = (props: any) => {
+type HomePageProps = {
+  memes: Meme[]
+}
+
+const HomePage = (props: HomePageProps) => {
   const { memes } = props
 
   return (
-    <Page>
+    <Page animatedBackground>
       <Styled.ContentBlock>
         <Image
           alt="Meme Studio logo"
@@ -26,7 +30,7 @@ const HomePage = (props: any) => {
           <Styled.Link forwardedAs="a">Get started</Styled.Link>
         </Link>
         <Styled.MemesList>
-          {memes.map((meme: any) => {
+          {memes.map((meme) => {
             return (
               <li key={meme.id}>
                 <Styled.MemeArticle>
@@ -42,7 +46,6 @@ const HomePage = (props: any) => {
           })}
         </Styled.MemesList>
       </Styled.ContentBlock>
-
       <Footer />
     </Page>
   )

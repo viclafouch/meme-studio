@@ -1,11 +1,20 @@
 import Styled from './page.styled'
 
-type PageProps = {
+interface PageProps extends React.ButtonHTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
+  animatedBackground?: boolean
 }
 
-const Page = ({ children, ...rest }: PageProps) => {
-  return <Styled.Container {...rest}>{children}</Styled.Container>
+const Page = ({ children, animatedBackground, ...rest }: PageProps) => {
+  return (
+    <Styled.Container {...rest} $animatedBackground={animatedBackground}>
+      {children}
+    </Styled.Container>
+  )
+}
+
+Page.defaultProps = {
+  animatedBackground: false
 }
 
 export default Page

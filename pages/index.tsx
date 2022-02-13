@@ -1,8 +1,4 @@
-import type {
-  GetServerSideProps,
-  InferGetServerSidePropsType,
-  NextPage
-} from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import HomePage from 'modules/HomePage/HomePage'
 
 import memesData from './api/meme.json'
@@ -15,9 +11,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 }
 
-const Home: NextPage = (
-  props: InferGetServerSidePropsType<typeof getServerSideProps>
-) => {
+const Home: NextPage<{ memes: Meme[] }> = (props) => {
   return <HomePage {...props} />
 }
 
