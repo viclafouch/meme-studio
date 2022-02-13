@@ -5,6 +5,7 @@
     "project": ["./tsconfig.json"]
   },
   "rules": {
+    "import/no-anonymous-default-export": "off",
     // For immer.js
     "no-param-reassign": [
       "error",
