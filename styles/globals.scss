@@ -1,19 +1,19 @@
 @import 'reset';
 
+html {
+  font-size: 16px;
+}
+
 body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Alata', sans-serif;
-  color: var(--text-color-primary);
-  background-color: var(--background-primary);
+  color: rgb(68, 68, 68);
+  background-color: rgb(255, 255, 255);
 
   * {
     box-sizing: border-box;
-  }
-
-  img {
-    max-width: 100%;
   }
 
   #app-root {

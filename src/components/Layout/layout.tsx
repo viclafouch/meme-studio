@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from './layout.module.scss'
+import Styled from './layout.styled'
 
 type LayoutProps = {
   children: React.ReactNode
@@ -8,7 +8,7 @@ type LayoutProps = {
 
 const Layout = (props: LayoutProps) => {
   const { children } = props
-  return <div className={styles.main__wrapper}>{children}</div>
+  return <Styled.Wrapper>{children}</Styled.Wrapper>
 }
 
 export default Layout
