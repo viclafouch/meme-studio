@@ -15,6 +15,7 @@ const Header = () => {
               width={250}
               height={67}
               layout="fixed"
+              priority
               src="/images/logo-meme-studio-light.png"
             />
           </a>

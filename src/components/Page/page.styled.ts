@@ -1,15 +1,9 @@
-import styled, { css } from 'styled-components'
+import { PARTICLES_BACKGROUND } from '@styles/utils'
+import styled from 'styled-components'
 
 type ContainerProps = Partial<{
   $animatedBackground: boolean
 }>
-
-const animatedBackgroundCss = css`
-  background-image: url('https://www.meme-studio.io/images/particles.svg');
-  background-attachment: fixed;
-  background-repeat: repeat-y;
-  background-size: cover;
-`
 
 const Styled = {
   Container: styled.div<ContainerProps>`
@@ -19,7 +13,7 @@ const Styled = {
     flex-direction: column;
 
     ${(props) => {
-      return props.$animatedBackground ? animatedBackgroundCss : ''
+      return props.$animatedBackground ? PARTICLES_BACKGROUND : ''
     }}
   `
 }
