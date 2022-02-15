@@ -11,6 +11,7 @@ const EmptyMeme = () => {
         alt="Choose meme"
         width={360}
         height={308}
+        priority
         src="/images/choose-meme.svg"
       />
       <Styled.ChooseTypography>
