@@ -5,6 +5,7 @@
     "project": ["./tsconfig.json"]
   },
   "rules": {
+    "react/no-unused-prop-types": "off",
     "import/no-anonymous-default-export": "off",
     "jsx-a11y/anchor-is-valid": [
       "error",

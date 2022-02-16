@@ -2,9 +2,9 @@
 import React from 'react'
 import Image from 'next/image'
 
-import Styled from './empty-meme.styled'
+import Styled from './empty-container.styled'
 
-const EmptyMeme = () => {
+const EmptyContainer = () => {
   return (
     <Styled.Container>
       <Image
@@ -29,4 +29,4 @@ const EmptyMeme = () => {
   )
 }
 
-export default EmptyMeme
+export default EmptyContainer

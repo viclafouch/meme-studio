@@ -1,7 +1,10 @@
-import { PARTICLES_BACKGROUND } from '@styles/utils'
+import Page from '@components/Page/Page'
 import styled from 'styled-components'
 
 export default {
+  Page: styled(Page)`
+    height: 100vh;
+  `,
   Studio: styled.div`
     width: 100%;
     height: calc(100vh - 5rem);

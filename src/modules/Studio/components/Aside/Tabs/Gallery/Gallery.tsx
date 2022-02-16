@@ -18,7 +18,7 @@ const Gallery = () => {
           {data?.map((meme) => {
             return (
               <Styled.GalleryListItem key={meme.id}>
-                <Link href={`/create/${meme.id}`} passHref>
+                <Link href={`/create/${meme.id}`} passHref shallow>
                   <Styled.ItemLink>
                     <Image
                       alt={meme.translations.en.name}

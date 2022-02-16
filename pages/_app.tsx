@@ -1,9 +1,10 @@
 import * as React from 'react'
-import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
+import { Hydrate, QueryClientProvider } from 'react-query'
 import type { AppProps } from 'next/app'
 import Layout from '@components/Layout/layout'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import { DefaultProvider } from '@stores/Default.provider'
+import { getQueryClient } from 'queries'
 
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import '../styles/globals.scss'
@@ -12,7 +13,7 @@ config.autoAddCss = false
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const [queryClient] = React.useState(() => {
-    return new QueryClient()
+    return getQueryClient()
   })
 
   return (

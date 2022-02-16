@@ -3,7 +3,7 @@ import React from 'react'
 import Styled from './aside.styled'
 import Gallery from './Tabs/Gallery/Gallery'
 
-const Aisde = () => {
+const Aside = () => {
   return (
     <Styled.Aside>
       <Gallery />
@@ -11,4 +11,4 @@ const Aisde = () => {
   )
 }
 
-export default Aisde
+export default Aside
