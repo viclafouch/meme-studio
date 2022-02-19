@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export default {
   Container: styled.div`
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;

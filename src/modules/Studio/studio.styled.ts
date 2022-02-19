@@ -16,5 +16,7 @@ export default {
   DefaultContainer: styled.div`
     height: 100%;
     width: 100%;
+    padding: 3.125rem 6.25rem;
+    position: relative;
   `
 }

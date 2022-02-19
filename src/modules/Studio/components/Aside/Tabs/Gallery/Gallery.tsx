@@ -9,8 +9,6 @@ import Styled from './gallery.styled'
 const Gallery = () => {
   const { data } = useQuery('memes', getMemes)
 
-  console.log(data)
-
   return (
     <Styled.GalleryContainer>
       <Styled.GalleryScrollable>
