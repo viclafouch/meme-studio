@@ -1,5 +1,6 @@
 import React from 'react'
 import { getAspectRatio } from '@shared/helpers/dom'
+import { useDimensionsStore } from '@stores/Editor/dimensions.store'
 import * as R from 'ramda'
 
 import Draggable from '../Draggable/Draggable'
@@ -8,11 +9,13 @@ import Styled from './canvas.styled'
 
 type CanvasProps = {
   meme: Meme
-  dimensions: Dimensions
 }
 
 const Canvas = (props: CanvasProps) => {
-  const { meme, dimensions } = props
+  const { meme } = props
+  const dimensions = useDimensionsStore((state) => {
+    return state.dimensions
+  })
 
   const ratio = React.useMemo(() => {
     const aspectRatio = getAspectRatio(
@@ -50,6 +53,7 @@ const Canvas = (props: CanvasProps) => {
               x={ratio(text.centerX) - R.divide(boxWidth, 2)}
               y={ratio(text.centerY) - R.divide(boxHeight, 2)}
               rotate={text.rotate}
+              ratio={ratio}
             >
               <TextBox text={text} />
             </Draggable>

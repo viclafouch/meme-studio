@@ -3,7 +3,9 @@ import { useQuery } from 'react-query'
 import { useRouter } from 'next/router'
 import Header from '@components/Header/Header'
 import { getMeme } from '@shared/api/memes'
-import { useResizeObserver } from '@shared/hooks/useResizeObserver'
+import { useResizeObserverCallback } from '@shared/hooks/useResizeObserver'
+import { useDimensionsStore } from '@stores/Editor/dimensions.store'
+import { EditorProvider } from '@stores/Editor/editor.store'
 
 import Aside from './components/Aside/Aside'
 import Canvas from './components/Canvas/Canvas'
@@ -14,7 +16,10 @@ import Styled from './studio.styled'
 
 const CreatePage = () => {
   const containerRef = React.useRef<HTMLDivElement>(null)
-  const dimensions = useResizeObserver(containerRef)
+  const resize = useDimensionsStore((state) => {
+    return state.resize
+  })
+
   const router = useRouter()
   const { data: meme } = useQuery(
     ['memes', router.query.memeId],
@@ -26,24 +31,26 @@ const CreatePage = () => {
     }
   )
 
+  useResizeObserverCallback(containerRef, resize)
+
   return (
     <Styled.Page title={meme?.translations.en.name}>
-      <Header />
-      <Styled.Studio>
-        <Tools />
-        <Styled.DefaultContainer ref={containerRef}>
-          {meme ? (
-            <MemeContainer meme={meme}>
-              {dimensions.height && dimensions.width ? (
-                <Canvas meme={meme} dimensions={dimensions} />
-              ) : null}
-            </MemeContainer>
-          ) : (
-            <EmptyContainer />
-          )}
-        </Styled.DefaultContainer>
-        <Aside />
-      </Styled.Studio>
+      <EditorProvider key={meme?.id} meme={meme || null}>
+        <Header />
+        <Styled.Studio>
+          <Tools />
+          <Styled.DefaultContainer ref={containerRef}>
+            {meme ? (
+              <MemeContainer meme={meme}>
+                <Canvas meme={meme} />
+              </MemeContainer>
+            ) : (
+              <EmptyContainer />
+            )}
+          </Styled.DefaultContainer>
+          <Aside />
+        </Styled.Studio>
+      </EditorProvider>
     </Styled.Page>
   )
 }

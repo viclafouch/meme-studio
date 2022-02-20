@@ -18,5 +18,6 @@ export default {
     width: 100%;
     padding: 3.125rem 6.25rem;
     position: relative;
+    border-right: 0.125rem solid rgb(88, 88, 88);
   `
 }

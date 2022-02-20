@@ -1,14 +1,21 @@
 import React from 'react'
+import { useDimensionsStore } from '@stores/Editor/dimensions.store'
+import { useEditorStore } from '@stores/Editor/editor.store'
 
 import Styled from './meme-container.styled'
 
 type MemeContainerProps = {
-  meme: Meme
   children: React.ReactNode
 }
 
 const MemeContainer = (props: MemeContainerProps) => {
-  const { meme, children } = props
+  const { children } = props
+  const meme = useEditorStore((state) => {
+    return state.meme as Meme
+  })
+  const dimensions = useDimensionsStore((state) => {
+    return state.dimensions
+  })
 
   return (
     <Styled.Container>
@@ -17,7 +24,7 @@ const MemeContainer = (props: MemeContainerProps) => {
           backgroundImage: `url(https://www.meme-studio.io/templates/${meme.filename})`
         }}
       />
-      {children}
+      {dimensions.width && dimensions.height ? children : null}
     </Styled.Container>
   )
 }

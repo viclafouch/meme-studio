@@ -1,16 +1,14 @@
 import React from 'react'
 
-export function useResizeObserver(ref: React.RefObject<Element>) {
-  const [dimensions, setDimensions] = React.useState<Dimensions>({
-    width: 0,
-    height: 0
-  })
-
+export function useResizeObserverCallback(
+  ref: React.RefObject<Element>,
+  callback: (dimensions: Dimensions) => void
+) {
   React.useEffect(() => {
     const element = ref.current
     const resizeObserver = new ResizeObserver(([event]) => {
       const { inlineSize, blockSize } = event.contentBoxSize[0]
-      setDimensions({
+      callback({
         width: inlineSize,
         height: blockSize
       })
@@ -22,7 +20,5 @@ export function useResizeObserver(ref: React.RefObject<Element>) {
       }
     }
     return () => {}
-  }, [ref])
-
-  return dimensions
+  }, [ref, callback])
 }

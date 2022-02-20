@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import Styled from './draggable.styled'
 
@@ -11,6 +11,7 @@ type DraggableProps = {
   x: number
   y: number
   rotate: number
+  ratio: (size: number) => number
 }
 
 type State = {
@@ -27,8 +28,17 @@ type Type = 'drag' | 'resize'
 type Side = 'ne' | 'nw' | 'se' | 'sw'
 
 const Draggable = (props: DraggableProps) => {
-  const { children, width, height, x, y, rotate, canvasHeight, canvasWidth } =
-    props
+  const {
+    children,
+    width,
+    height,
+    x,
+    y,
+    rotate,
+    canvasHeight,
+    canvasWidth,
+    ratio
+  } = props
   const [state, setState] = React.useState<State>({
     mode: false,
     downStartX: null,
@@ -38,6 +48,19 @@ const Draggable = (props: DraggableProps) => {
     x,
     y
   })
+
+  // React.useEffect(() => {
+  //   if (ratio !== currentScale.current)
+  //     setState((prevState) => {
+  //       return {
+  //         ...prevState,
+  //         x: ratio(prevState.x),
+  //         y: ratio(prevState.y),
+  //         height: ratio(prevState.height),
+  //         width: ratio(prevState.width)
+  //       }
+  //     })
+  // }, [ratio])
 
   const handleMouseDown = (event: React.MouseEvent) => {
     event.preventDefault()
@@ -82,6 +105,7 @@ const Draggable = (props: DraggableProps) => {
         } else if (left + prevState.width >= canvasWidth) {
           left = canvasWidth - prevState.width
         }
+
         return {
           ...prevState,
           x: left,
