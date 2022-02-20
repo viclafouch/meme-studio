@@ -34,7 +34,9 @@ const CreatePage = () => {
         <Styled.DefaultContainer ref={containerRef}>
           {meme ? (
             <MemeContainer meme={meme}>
-              <Canvas meme={meme} dimensions={dimensions} />
+              {dimensions.height && dimensions.width ? (
+                <Canvas meme={meme} dimensions={dimensions} />
+              ) : null}
             </MemeContainer>
           ) : (
             <EmptyContainer />

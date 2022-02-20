@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import {
   faCrop,
   faEraser,
@@ -37,9 +38,13 @@ const Tools = () => {
           </Styled.ToolsButton>
         </Styled.ToolsListItem>
         <Styled.ToolsListItem>
-          <Styled.ToolsButton type="button">
-            <FontAwesomeIcon icon={faTrashRestore} />
-          </Styled.ToolsButton>
+          <Link href="/create" passHref>
+            <a>
+              <Styled.ToolsButton type="button">
+                <FontAwesomeIcon icon={faTrashRestore} />
+              </Styled.ToolsButton>
+            </a>
+          </Link>
         </Styled.ToolsListItem>
       </Styled.ToolsList>
       <Styled.ToolsList>

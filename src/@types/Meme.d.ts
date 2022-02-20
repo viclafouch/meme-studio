@@ -1,4 +1,4 @@
-interface MemeBoxText {
+interface MemeText {
   isUppercase: boolean
   id: string
   value: string
@@ -31,7 +31,7 @@ interface Meme {
       keywords: string
     }
   }
-  texts: MemeBoxText[]
+  texts: MemeText[]
   createdAt: string
   updatedAt: string
 }
