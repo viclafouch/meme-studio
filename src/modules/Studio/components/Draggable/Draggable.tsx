@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 
 import Styled from './draggable.styled'
 
@@ -127,8 +127,6 @@ const Draggable = (props: DraggableProps) => {
     }
     return () => {}
   }, [state.mode, handleMouseUp, handleMouseMove])
-
-  console.log(state)
 
   return (
     <Styled.Draggable

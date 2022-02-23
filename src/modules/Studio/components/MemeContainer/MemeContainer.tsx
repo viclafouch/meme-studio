@@ -2,6 +2,7 @@ import React from 'react'
 import { useDimensionsStore } from '@stores/Editor/dimensions.store'
 import { useEditorStore } from '@stores/Editor/editor.store'
 
+import EmptyContainer from '../EmptyContainer/EmptyContainer'
 import Styled from './meme-container.styled'
 
 type MemeContainerProps = {
@@ -16,6 +17,10 @@ const MemeContainer = (props: MemeContainerProps) => {
   const dimensions = useDimensionsStore((state) => {
     return state.dimensions
   })
+
+  if (!meme) {
+    return <EmptyContainer />
+  }
 
   return (
     <Styled.Container>

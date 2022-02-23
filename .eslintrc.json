@@ -20,7 +20,7 @@
       "error",
       {
         "props": true,
-        "ignorePropertyModificationsFor": ["draft"]
+        "ignorePropertyModificationsFor": ["draft", "ctx"]
       }
     ]
   }

@@ -9,7 +9,6 @@ import { EditorProvider } from '@stores/Editor/editor.store'
 
 import Aside from './components/Aside/Aside'
 import Canvas from './components/Canvas/Canvas'
-import EmptyContainer from './components/EmptyContainer/EmptyContainer'
 import MemeContainer from './components/MemeContainer/MemeContainer'
 import Tools from './components/Tools/Tools'
 import Styled from './studio.styled'
@@ -40,13 +39,9 @@ const CreatePage = () => {
         <Styled.Studio>
           <Tools />
           <Styled.DefaultContainer ref={containerRef}>
-            {meme ? (
-              <MemeContainer meme={meme}>
-                <Canvas meme={meme} />
-              </MemeContainer>
-            ) : (
-              <EmptyContainer />
-            )}
+            <MemeContainer>
+              <Canvas />
+            </MemeContainer>
           </Styled.DefaultContainer>
           <Aside />
         </Styled.Studio>
