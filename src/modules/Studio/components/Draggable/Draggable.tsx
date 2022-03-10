@@ -1,66 +1,60 @@
 import React from 'react'
+import { useMeme } from '@stores/Editor/hooks/useMeme'
+import { useText } from '@stores/Editor/hooks/useTexts'
+import * as R from 'ramda'
 
 import Styled from './draggable.styled'
+import { State } from './draggable.types'
+import { move } from './draggable.utils'
 
 type DraggableProps = {
+  textId: MemeText['id']
   children: React.ReactNode
-  height: number
-  width: number
   canvasHeight: number
   canvasWidth: number
-  x: number
-  y: number
-  rotate: number
   ratio: (size: number) => number
-}
-
-type State = {
-  x: DraggableProps['x']
-  y: DraggableProps['y']
-  height: DraggableProps['height']
-  width: DraggableProps['width']
-  mode: false | 'dragging'
-  downStartX: Nullable<number>
-  downStartY: Nullable<number>
 }
 
 type Type = 'drag' | 'resize'
 type Side = 'ne' | 'nw' | 'se' | 'sw'
 
 const Draggable = (props: DraggableProps) => {
-  const {
-    children,
-    width,
-    height,
-    x,
-    y,
-    rotate,
-    canvasHeight,
-    canvasWidth,
-    ratio
-  } = props
-  const [state, setState] = React.useState<State>({
-    mode: false,
-    downStartX: null,
-    downStartY: null,
-    height,
-    width,
-    x,
-    y
+  const { children, canvasHeight, canvasWidth, ratio, textId } = props
+  const meme = useMeme() as Meme
+  const [text, updater] = useText(textId)
+  const currentRatio = React.useRef(ratio)
+  const [state, setState] = React.useState<State>(() => {
+    const height = ratio(text.height)
+    const width = ratio(text.width)
+    return {
+      mode: false,
+      downStartX: null,
+      downStartY: null,
+      left: ratio(text.centerX) - R.divide(width, 2),
+      top: ratio(text.centerY) - R.divide(height, 2),
+      width,
+      height
+    }
   })
 
-  // React.useEffect(() => {
-  //   if (ratio !== currentScale.current)
-  //     setState((prevState) => {
-  //       return {
-  //         ...prevState,
-  //         x: ratio(prevState.x),
-  //         y: ratio(prevState.y),
-  //         height: ratio(prevState.height),
-  //         width: ratio(prevState.width)
-  //       }
-  //     })
-  // }, [ratio])
+  console.log({ left: state.left, centerX: text.centerX, width: state.width })
+
+  React.useEffect(() => {
+    if (ratio && currentRatio.current !== ratio) {
+      const height = ratio(text.height)
+      const width = ratio(text.width)
+      currentRatio.current = ratio
+      setState((prevState) => {
+        return {
+          ...prevState,
+          left: ratio(text.centerX) - R.divide(width, 2),
+          top: ratio(text.centerY) - R.divide(height, 2),
+          width,
+          height
+        }
+      })
+    }
+  }, [ratio, text])
 
   const handleMouseDown = (event: React.MouseEvent) => {
     event.preventDefault()
@@ -70,8 +64,8 @@ const Draggable = (props: DraggableProps) => {
       setState((prevState) => {
         return {
           ...prevState,
-          downStartX: event.pageX - prevState.x,
-          downStartY: event.pageY - prevState.y,
+          downStartX: event.pageX - prevState.left,
+          downStartY: event.pageY - prevState.top,
           mode: 'dragging'
         }
       })
@@ -91,29 +85,26 @@ const Draggable = (props: DraggableProps) => {
 
   const handleMouseMove = React.useCallback(
     (event: MouseEvent) => {
-      const { pageY, pageX } = event
-      setState((prevState) => {
-        let top = pageY - (prevState.downStartY as number)
-        let left = pageX - (prevState.downStartX as number)
-        if (top < 0) {
-          top = 0
-        } else if (top + prevState.height >= canvasHeight) {
-          top = canvasHeight - prevState.height
-        }
-        if (left < 0) {
-          left = 0
-        } else if (left + prevState.width >= canvasWidth) {
-          left = canvasWidth - prevState.width
-        }
+      const { left, top } = move(event, state, {
+        width: canvasWidth,
+        height: canvasHeight
+      })
 
+      const centerY = top + state.height / 2
+      const centerX = left + state.width / 2
+      updater({
+        centerX: Math.round((centerX / canvasWidth) * meme.width),
+        centerY: Math.round((centerY / canvasHeight) * meme.height)
+      })
+      setState((prevState) => {
         return {
           ...prevState,
-          x: left,
-          y: top
+          top,
+          left
         }
       })
     },
-    [canvasWidth, canvasHeight]
+    [canvasWidth, canvasHeight, state, updater, meme]
   )
 
   React.useEffect(() => {
@@ -128,14 +119,16 @@ const Draggable = (props: DraggableProps) => {
     return () => {}
   }, [state.mode, handleMouseUp, handleMouseMove])
 
+  const { height, width, left, top } = state
+
   return (
     <Styled.Draggable
       onMouseDown={handleMouseDown}
       data-type="drag"
       style={{
-        height: state.height,
-        width: state.width,
-        transform: `translate3d(${state.x}px, ${state.y}px, 0) rotate(${rotate}deg)`
+        height,
+        width,
+        transform: `translate3d(${left}px, ${top}px, 0) rotate(${text.rotate}deg)`
       }}
     >
       {children}

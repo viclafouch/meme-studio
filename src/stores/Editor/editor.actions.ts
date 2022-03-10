@@ -1,0 +1,43 @@
+import { Draft, produce } from 'immer'
+import * as R from 'ramda'
+import { SetState } from 'zustand'
+
+function getCanvasDimensions(windowSizes: Dimensions) {
+  return {
+    width: windowSizes.width - 54 - 320 - 198,
+    height: windowSizes.height - 80 - 100
+  }
+}
+
+export function setCurrentTab(set: SetState<EditorState>) {
+  return (newTab: Tab) => {
+    return set(
+      produce((draft: Draft<EditorState>) => {
+        draft.currentTab = newTab
+      })
+    )
+  }
+}
+
+export function setResize(set: SetState<EditorState>) {
+  return (windowSizes: Dimensions) => {
+    return set(
+      produce((draft: Draft<EditorState>) => {
+        draft.canvasDimensions = getCanvasDimensions(windowSizes)
+      })
+    )
+  }
+}
+
+export function setText(set: SetState<EditorState>) {
+  return (textId: MemeText['id'], text: MemeText) => {
+    return set(
+      produce((draft: Draft<EditorState>) => {
+        const textIndex = R.findIndex((memeText) => {
+          return textId === memeText.id
+        }, draft.texts)
+        draft.texts[textIndex] = text
+      })
+    )
+  }
+}

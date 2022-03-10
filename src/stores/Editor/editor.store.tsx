@@ -1,8 +1,11 @@
 import React from 'react'
+import { useWindowSize } from '@shared/hooks/useWindowSize'
 import produce, { Draft } from 'immer'
 import * as R from 'ramda'
 import create from 'zustand'
 import createContext from 'zustand/context'
+
+import { setCurrentTab, setResize, setText } from './editor.actions'
 
 type EditorProviderProps = {
   meme: Nullable<Meme>
@@ -11,34 +14,42 @@ type EditorProviderProps = {
 
 const { Provider, useStore } = createContext<EditorState>()
 
+function getCanvasDimensions(windowSizes: Dimensions) {
+  return {
+    width: windowSizes.width - 54 - 320 - 198,
+    height: windowSizes.height - 80 - 100
+  }
+}
+
+const createInitialStore = (
+  initialMeme: Nullable<Meme>,
+  initialWindowSizes: Dimensions
+) => {
+  return create<EditorState>((set, get) => {
+    return {
+      meme: initialMeme ? {
+        ...initialMeme,
+        height: 
+      } : null,
+      ratio: (value) => {
+        return value * get().canvasDimensions.height
+      },
+      canvasDimensions: getCanvasDimensions(initialWindowSizes),
+      texts: initialMeme ? initialMeme.texts : [],
+      currentTab: initialMeme ? 'customization' : 'gallery',
+      setCurrentTab: setCurrentTab(set),
+      resize: setResize(set),
+      updateText: setText(set)
+    }
+  })
+}
+
 const EditorProvider = (props: EditorProviderProps) => {
   const { children, meme } = props
+  const windowSize = useWindowSize()
   const [createStore] = React.useState(() => {
     return () => {
-      return create<EditorState>((set) => {
-        return {
-          meme,
-          texts: meme ? meme.texts : [],
-          currentTab: meme ? 'customization' : 'gallery',
-          setCurrentTab: (newTab: Tab) => {
-            return set(
-              produce((draft: Draft<EditorState>) => {
-                draft.currentTab = newTab
-              })
-            )
-          },
-          updateText: (textId: MemeText['id'], text: MemeText) => {
-            return set(
-              produce((draft: Draft<EditorState>) => {
-                const textIndex = R.findIndex((memeText) => {
-                  return textId === memeText.id
-                }, draft.texts)
-                draft.texts[textIndex] = text
-              })
-            )
-          }
-        }
-      })
+      return createInitialStore(meme, windowSize)
     }
   })
 

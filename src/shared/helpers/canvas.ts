@@ -109,7 +109,6 @@ export function drawText(text: MemeText, ctx: CanvasRenderingContext2D) {
 
     const x = Math.round(line.x)
     const y = Math.round(line.y)
-    console.log(text.value, x, y)
     ctx.fillText(line.value, x, y)
     if (text.boxShadow > 0) {
       ctx.strokeText(line.value, x, y)

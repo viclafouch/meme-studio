@@ -1,6 +1,7 @@
 import React from 'react'
-import { useDimensionsStore } from '@stores/Editor/dimensions.store'
-import { useEditorStore } from '@stores/Editor/editor.store'
+import { useWindowSizeCallback } from '@shared/hooks/useWindowSizeCallback'
+import { useCanvasDimensions } from '@stores/Editor/hooks/useCanvasDimensions'
+import { useMeme } from '@stores/Editor/hooks/useMeme'
 
 import EmptyContainer from '../EmptyContainer/EmptyContainer'
 import Styled from './meme-container.styled'
@@ -11,12 +12,9 @@ type MemeContainerProps = {
 
 const MemeContainer = (props: MemeContainerProps) => {
   const { children } = props
-  const meme = useEditorStore((state) => {
-    return state.meme as Meme
-  })
-  const dimensions = useDimensionsStore((state) => {
-    return state.dimensions
-  })
+  const meme = useMeme()
+  const [, resize] = useCanvasDimensions()
+  useWindowSizeCallback(resize)
 
   if (!meme) {
     return <EmptyContainer />
@@ -29,7 +27,7 @@ const MemeContainer = (props: MemeContainerProps) => {
           backgroundImage: `url(https://www.meme-studio.io/templates/${meme.filename})`
         }}
       />
-      {dimensions.width && dimensions.height ? children : null}
+      {children}
     </Styled.Container>
   )
 }

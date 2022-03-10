@@ -1,7 +1,7 @@
 import React from 'react'
 import { drawText } from '@shared/helpers/canvas'
 import { getAspectRatio } from '@shared/helpers/dom'
-import { useDimensionsStore } from '@stores/Editor/dimensions.store'
+import { useCanvasDimensions } from '@stores/Editor/hooks/useCanvasDimensions'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useTexts } from '@stores/Editor/hooks/useTexts'
 import * as R from 'ramda'
@@ -14,9 +14,7 @@ const Canvas = () => {
   const meme = useMeme() as Meme
   const canvasElRef = React.useRef<HTMLCanvasElement>(null)
   const [texts] = useTexts()
-  const dimensions = useDimensionsStore((state) => {
-    return state.dimensions
-  })
+  const [dimensions] = useCanvasDimensions()
 
   const ratio = React.useMemo(() => {
     const aspectRatio = getAspectRatio(
@@ -72,19 +70,12 @@ const Canvas = () => {
         }}
       >
         {meme.texts.map((text) => {
-          const boxHeight = ratio(text.height)
-          const boxWidth = ratio(text.width)
-
           return (
             <Draggable
               key={text.id}
-              height={boxHeight}
-              width={boxWidth}
+              textId={text.id}
               canvasHeight={height}
               canvasWidth={width}
-              x={ratio(text.centerX) - R.divide(boxWidth, 2)}
-              y={ratio(text.centerY) - R.divide(boxHeight, 2)}
-              rotate={text.rotate}
               ratio={ratio}
             >
               <TextBox text={text} />
