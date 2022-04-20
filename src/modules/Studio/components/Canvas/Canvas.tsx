@@ -1,4 +1,5 @@
 import React from 'react'
+import { Meme } from '@models/Meme'
 import { drawText } from '@shared/helpers/canvas'
 import { getAspectRatio } from '@shared/helpers/dom'
 import { useCanvasDimensions } from '@stores/Editor/hooks/useCanvasDimensions'
@@ -6,8 +7,6 @@ import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useTexts } from '@stores/Editor/hooks/useTexts'
 import * as R from 'ramda'
 
-import Draggable from '../Draggable/Draggable'
-import TextBox from '../TextBox/TextBox'
 import Styled from './canvas.styled'
 
 const Canvas = () => {
@@ -69,19 +68,6 @@ const Canvas = () => {
           backgroundImage: `url('https://www.meme-studio.io/templates/${meme.filename}')`
         }}
       >
-        {meme.texts.map((text) => {
-          return (
-            <Draggable
-              key={text.id}
-              textId={text.id}
-              canvasHeight={height}
-              canvasWidth={width}
-              ratio={ratio}
-            >
-              <TextBox text={text} />
-            </Draggable>
-          )
-        })}
         <Styled.Canvas ref={canvasElRef} width={width} height={height} />
       </Styled.WrapperCanvas>
     </Styled.Container>

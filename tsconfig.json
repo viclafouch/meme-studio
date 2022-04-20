@@ -21,6 +21,7 @@
       "@components/*": ["components/*"],
       "@styles/*": ["styles/*"],
       "@studio/*": ["modules/Studio/*"],
+      "@models/*": ["models/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

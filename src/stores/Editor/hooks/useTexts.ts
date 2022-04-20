@@ -1,3 +1,4 @@
+import { TextBox } from '@models/TextBox'
 import { useEditorStore } from '@stores/Editor/editor.store'
 import * as R from 'ramda'
 import shallow from 'zustand/shallow'
@@ -10,17 +11,17 @@ export function useTexts(): UseTextsReturn {
   }, shallow)
 }
 
-type UpdaterFn = (old: MemeText) => Partial<MemeText>
+type UpdaterFn = (old: TextBox) => Partial<TextBox>
 
 export type SetValues = (values: UpdaterFn | ReturnType<UpdaterFn>) => void
 
-type UseTextReturn = [MemeText, SetValues]
+type UseTextReturn = [TextBox, SetValues]
 
-export function useText(textId: MemeText['id']): UseTextReturn {
+export function useText(textId: TextBox['id']): UseTextReturn {
   return useEditorStore((state) => {
-    const text = R.find((memeText) => {
-      return memeText.id === textId
-    }, state.texts) as MemeText
+    const text = R.find((textBox) => {
+      return textBox.id === textId
+    }, state.texts) as TextBox
 
     const matchIsUpdaterFunction = (input: unknown): input is UpdaterFn => {
       return typeof input === 'function'

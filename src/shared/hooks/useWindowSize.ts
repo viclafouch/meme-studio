@@ -1,10 +1,14 @@
 import React from 'react'
-import { matchIsClientSide } from '@shared/helpers/dom'
+
+type WindowSize = {
+  width: undefined | number
+  height: undefined | number
+}
 
 export function useWindowSize() {
-  const [windowSize, setWindowSize] = React.useState({
-    width: matchIsClientSide() ? window.innerWidth : 0,
-    height: matchIsClientSide() ? window.innerHeight : 0
+  const [windowSize, setWindowSize] = React.useState<WindowSize>({
+    width: undefined,
+    height: undefined
   })
 
   React.useEffect(() => {

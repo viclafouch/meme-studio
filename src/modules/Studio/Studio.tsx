@@ -2,8 +2,10 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { useRouter } from 'next/router'
 import Header from '@components/Header/Header'
+import { Meme } from '@models/Meme'
+import { TextBox } from '@models/TextBox'
 import { getMeme } from '@shared/api/memes'
-import { useResizeObserverCallback } from '@shared/hooks/useResizeObserver'
+import { useWindowSize } from '@shared/hooks/useWindowSize'
 import { EditorProvider } from '@stores/Editor/editor.store'
 
 import Aside from './components/Aside/Aside'
@@ -14,6 +16,7 @@ import Styled from './studio.styled'
 
 const CreatePage = () => {
   const containerRef = React.useRef<HTMLDivElement>(null)
+  const windowSize = useWindowSize()
 
   const router = useRouter()
   const { data: meme } = useQuery(
@@ -26,20 +29,34 @@ const CreatePage = () => {
     }
   )
 
+  const textboxes = meme
+    ? meme.texts.map((text) => {
+        return new TextBox(text)
+      })
+    : []
+
   return (
-    <Styled.Page title={meme?.translations.en.name}>
-      <EditorProvider key={meme?.id} meme={meme || null}>
-        <Header />
-        <Styled.Studio>
-          <Tools />
-          <Styled.DefaultContainer ref={containerRef}>
-            <MemeContainer>
-              <Canvas />
-            </MemeContainer>
-          </Styled.DefaultContainer>
-          <Aside />
-        </Styled.Studio>
-      </EditorProvider>
+    <Styled.Page>
+      {windowSize.height && windowSize.width ? (
+        <EditorProvider
+          windowHeight={windowSize.height}
+          windowWidth={windowSize.width}
+          key={meme?.id}
+          textBoxes={textboxes}
+          meme={meme ? new Meme(meme) : null}
+        >
+          <Header />
+          <Styled.Studio>
+            <Tools />
+            <Styled.DefaultContainer ref={containerRef}>
+              <MemeContainer>
+                <Canvas />
+              </MemeContainer>
+            </Styled.DefaultContainer>
+            <Aside />
+          </Styled.Studio>
+        </EditorProvider>
+      ) : null}
     </Styled.Page>
   )
 }

@@ -20,7 +20,7 @@ type Side = 'ne' | 'nw' | 'se' | 'sw'
 
 const Draggable = (props: DraggableProps) => {
   const { children, canvasHeight, canvasWidth, ratio, textId } = props
-  const meme = useMeme() as Meme
+  const meme = useMeme()
   const [text, updater] = useText(textId)
   const currentRatio = React.useRef(ratio)
   const [state, setState] = React.useState<State>(() => {

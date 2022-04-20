@@ -1,7 +1,6 @@
 import React from 'react'
-import { useWindowSize } from '@shared/hooks/useWindowSize'
-import produce, { Draft } from 'immer'
-import * as R from 'ramda'
+import { TextBox } from '@models/TextBox'
+import { Meme } from 'models/Meme'
 import create from 'zustand'
 import createContext from 'zustand/context'
 
@@ -9,6 +8,9 @@ import { setCurrentTab, setResize, setText } from './editor.actions'
 
 type EditorProviderProps = {
   meme: Nullable<Meme>
+  textBoxes: TextBox[]
+  windowWidth: number
+  windowHeight: number
   children: React.ReactNode
 }
 
@@ -23,20 +25,15 @@ function getCanvasDimensions(windowSizes: Dimensions) {
 
 const createInitialStore = (
   initialMeme: Nullable<Meme>,
+  initialTextboxes: TextBox[],
   initialWindowSizes: Dimensions
 ) => {
-  return create<EditorState>((set, get) => {
+  return create<EditorState>((set) => {
     return {
-      meme: initialMeme ? {
-        ...initialMeme,
-        height: 
-      } : null,
-      ratio: (value) => {
-        return value * get().canvasDimensions.height
-      },
+      meme: initialMeme ? new Meme(initialMeme) : null,
       canvasDimensions: getCanvasDimensions(initialWindowSizes),
-      texts: initialMeme ? initialMeme.texts : [],
-      currentTab: initialMeme ? 'customization' : 'gallery',
+      texts: initialTextboxes,
+      currentTab: 'customization',
       setCurrentTab: setCurrentTab(set),
       resize: setResize(set),
       updateText: setText(set)
@@ -45,11 +42,14 @@ const createInitialStore = (
 }
 
 const EditorProvider = (props: EditorProviderProps) => {
-  const { children, meme } = props
-  const windowSize = useWindowSize()
+  const { children, meme, windowWidth, windowHeight, textBoxes } = props
+
   const [createStore] = React.useState(() => {
     return () => {
-      return createInitialStore(meme, windowSize)
+      return createInitialStore(meme, textBoxes, {
+        height: windowHeight,
+        width: windowWidth
+      })
     }
   })
 
