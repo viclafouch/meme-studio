@@ -6,7 +6,7 @@ type EditorState = {
   currentTab: Tab
   setCurrentTab: (newTab: Tab) => void
   updateText: (textId: MemeText['id'], text: MemeText) => void
-  resize: (windowSizes: Dimensions) => void
+  ratio: (value: number) => number
   canvasDimensions: {
     width: number
     height: number

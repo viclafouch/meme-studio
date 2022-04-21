@@ -18,11 +18,7 @@ export function useWindowSize() {
         height: window.innerHeight
       })
     }
-    window.addEventListener('resize', handleResize)
     handleResize()
-    return () => {
-      return window.removeEventListener('resize', handleResize)
-    }
   }, [])
 
   return windowSize

@@ -8,7 +8,7 @@ import { State } from './draggable.types'
 import { move } from './draggable.utils'
 
 type DraggableProps = {
-  textId: MemeText['id']
+  textId: TextBox['id']
   children: React.ReactNode
   canvasHeight: number
   canvasWidth: number
@@ -16,45 +16,23 @@ type DraggableProps = {
 }
 
 type Type = 'drag' | 'resize'
-type Side = 'ne' | 'nw' | 'se' | 'sw'
+// type Side = 'ne' | 'nw' | 'se' | 'sw'
 
 const Draggable = (props: DraggableProps) => {
   const { children, canvasHeight, canvasWidth, ratio, textId } = props
   const meme = useMeme()
   const [text, updater] = useText(textId)
-  const currentRatio = React.useRef(ratio)
   const [state, setState] = React.useState<State>(() => {
-    const height = ratio(text.height)
-    const width = ratio(text.width)
     return {
       mode: false,
       downStartX: null,
       downStartY: null,
-      left: ratio(text.centerX) - R.divide(width, 2),
-      top: ratio(text.centerY) - R.divide(height, 2),
-      width,
-      height
+      left: text.centerX - R.divide(text.width, 2),
+      top: text.centerY - R.divide(text.height, 2),
+      width: text.width,
+      height: text.height
     }
   })
-
-  console.log({ left: state.left, centerX: text.centerX, width: state.width })
-
-  React.useEffect(() => {
-    if (ratio && currentRatio.current !== ratio) {
-      const height = ratio(text.height)
-      const width = ratio(text.width)
-      currentRatio.current = ratio
-      setState((prevState) => {
-        return {
-          ...prevState,
-          left: ratio(text.centerX) - R.divide(width, 2),
-          top: ratio(text.centerY) - R.divide(height, 2),
-          width,
-          height
-        }
-      })
-    }
-  }, [ratio, text])
 
   const handleMouseDown = (event: React.MouseEvent) => {
     event.preventDefault()

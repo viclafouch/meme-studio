@@ -1,12 +1,14 @@
 import React from 'react'
 import { Meme } from '@models/Meme'
 import { drawText } from '@shared/helpers/canvas'
-import { getAspectRatio } from '@shared/helpers/dom'
+import { useEditorStore } from '@stores/Editor/editor.store'
 import { useCanvasDimensions } from '@stores/Editor/hooks/useCanvasDimensions'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useTexts } from '@stores/Editor/hooks/useTexts'
 import * as R from 'ramda'
 
+import Draggable from '../Draggable/Draggable'
+import TextBox from '../TextBox/TextBox'
 import Styled from './canvas.styled'
 
 const Canvas = () => {
@@ -14,16 +16,7 @@ const Canvas = () => {
   const canvasElRef = React.useRef<HTMLCanvasElement>(null)
   const [texts] = useTexts()
   const [dimensions] = useCanvasDimensions()
-
-  const ratio = React.useMemo(() => {
-    const aspectRatio = getAspectRatio(
-      meme.width,
-      meme.height,
-      dimensions.width,
-      dimensions.height
-    )
-    return R.pipe(R.multiply(aspectRatio), Math.round)
-  }, [meme, dimensions])
+  const { ratio } = useEditorStore()
 
   React.useLayoutEffect(() => {
     const canvasElement = canvasElRef.current
@@ -32,20 +25,19 @@ const Canvas = () => {
     }
 
     const draw = (): void => {
-      const ctx = canvasElement.getContext('2d', {
+      const context2D = canvasElement.getContext('2d', {
         alpha: true
       }) as CanvasRenderingContext2D
-      canvasElement.width = ratio(meme.width)
-      canvasElement.height = ratio(meme.height)
+      canvasElement.width = dimensions.width
+      canvasElement.height = dimensions.height
       for (let index = 0; index < texts.length; index += 1) {
         const text = texts[index]
         drawText(
           {
             ...text,
-            fontSize: ratio(text.fontSize),
             value: text.isUppercase ? R.toUpper(text.value) : text.value
           },
-          ctx
+          context2D
         )
       }
     }
@@ -54,21 +46,35 @@ const Canvas = () => {
     return () => {
       cancelAnimationFrame(frame)
     }
-  }, [texts, canvasElRef, ratio, meme])
-
-  const height = ratio(meme.height)
-  const width = ratio(meme.width)
+  }, [texts, canvasElRef, ratio, meme, dimensions])
 
   return (
     <Styled.Container>
       <Styled.WrapperCanvas
         style={{
-          height,
-          width,
+          height: dimensions.height,
+          width: dimensions.width,
           backgroundImage: `url('https://www.meme-studio.io/templates/${meme.filename}')`
         }}
       >
-        <Styled.Canvas ref={canvasElRef} width={width} height={height} />
+        {texts.map((textbox) => {
+          return (
+            <Draggable
+              key={textbox.id}
+              textId={textbox.id}
+              canvasHeight={dimensions.height}
+              canvasWidth={dimensions.width}
+              ratio={ratio}
+            >
+              <TextBox text={textbox} />
+            </Draggable>
+          )
+        })}
+        <Styled.Canvas
+          ref={canvasElRef}
+          width={dimensions.width}
+          height={dimensions.height}
+        />
       </Styled.WrapperCanvas>
     </Styled.Container>
   )

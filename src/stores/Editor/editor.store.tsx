@@ -1,6 +1,7 @@
 import React from 'react'
-import { TextBox } from '@models/TextBox'
+import { getAspectRatio } from '@shared/helpers/dom'
 import { Meme } from 'models/Meme'
+import * as R from 'ramda'
 import create from 'zustand'
 import createContext from 'zustand/context'
 
@@ -23,17 +24,45 @@ function getCanvasDimensions(windowSizes: Dimensions) {
   }
 }
 
+function getRatio(meme: Nullable<Meme>, dimensions: Dimensions) {
+  if (!meme) {
+    return (val: number) => {
+      return val
+    }
+  }
+  const aspectRatio = getAspectRatio(
+    meme.width,
+    meme.height,
+    dimensions.width,
+    dimensions.height
+  )
+  return R.pipe(R.multiply(aspectRatio), Math.round)
+}
+
 const createInitialStore = (
   initialMeme: Nullable<Meme>,
   initialTextboxes: TextBox[],
   initialWindowSizes: Dimensions
 ) => {
   return create<EditorState>((set) => {
+    const ratio = getRatio(initialMeme, initialWindowSizes)
     return {
       meme: initialMeme ? new Meme(initialMeme) : null,
-      canvasDimensions: getCanvasDimensions(initialWindowSizes),
-      texts: initialTextboxes,
-      currentTab: 'customization',
+      texts: initialTextboxes.map((textbox) => {
+        return {
+          ...textbox,
+          height: ratio(textbox.height),
+          width: ratio(textbox.width),
+          centerY: ratio(textbox.centerY),
+          centerX: ratio(textbox.centerX)
+        }
+      }),
+      ratio,
+      currentTab: initialMeme ? 'customization' : 'gallery',
+      canvasDimensions: {
+        height: initialMeme ? ratio(initialMeme.height) : 0,
+        width: initialMeme ? ratio(initialMeme.width) : 0
+      },
       setCurrentTab: setCurrentTab(set),
       resize: setResize(set),
       updateText: setText(set)
@@ -43,13 +72,14 @@ const createInitialStore = (
 
 const EditorProvider = (props: EditorProviderProps) => {
   const { children, meme, windowWidth, windowHeight, textBoxes } = props
+  const wrapperDimensions = getCanvasDimensions({
+    height: windowHeight,
+    width: windowWidth
+  })
 
   const [createStore] = React.useState(() => {
     return () => {
-      return createInitialStore(meme, textBoxes, {
-        height: windowHeight,
-        width: windowWidth
-      })
+      return createInitialStore(meme, textBoxes, wrapperDimensions)
     }
   })
 

@@ -20,7 +20,7 @@
       "error",
       {
         "props": true,
-        "ignorePropertyModificationsFor": ["draft", "ctx"]
+        "ignorePropertyModificationsFor": ["draft", "context2D"]
       }
     ]
   }

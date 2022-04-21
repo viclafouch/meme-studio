@@ -1,6 +1,4 @@
 import React from 'react'
-import { useWindowSizeCallback } from '@shared/hooks/useWindowSizeCallback'
-import { useCanvasDimensions } from '@stores/Editor/hooks/useCanvasDimensions'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
 
 import EmptyContainer from '../EmptyContainer/EmptyContainer'
@@ -13,8 +11,6 @@ type MemeContainerProps = {
 const MemeContainer = (props: MemeContainerProps) => {
   const { children } = props
   const meme = useMeme()
-  const [, resize] = useCanvasDimensions()
-  useWindowSizeCallback(resize)
 
   if (!meme) {
     return <EmptyContainer />

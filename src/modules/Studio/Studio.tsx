@@ -3,7 +3,6 @@ import { useQuery } from 'react-query'
 import { useRouter } from 'next/router'
 import Header from '@components/Header/Header'
 import { Meme } from '@models/Meme'
-import { TextBox } from '@models/TextBox'
 import { getMeme } from '@shared/api/memes'
 import { useWindowSize } from '@shared/hooks/useWindowSize'
 import { EditorProvider } from '@stores/Editor/editor.store'
@@ -29,12 +28,6 @@ const CreatePage = () => {
     }
   )
 
-  const textboxes = meme
-    ? meme.texts.map((text) => {
-        return new TextBox(text)
-      })
-    : []
-
   return (
     <Styled.Page>
       {windowSize.height && windowSize.width ? (
@@ -42,7 +35,7 @@ const CreatePage = () => {
           windowHeight={windowSize.height}
           windowWidth={windowSize.width}
           key={meme?.id}
-          textBoxes={textboxes}
+          textBoxes={meme ? meme.texts : []}
           meme={meme ? new Meme(meme) : null}
         >
           <Header />
