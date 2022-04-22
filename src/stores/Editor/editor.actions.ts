@@ -1,3 +1,4 @@
+import TextBox from '@shared/models/TextBox'
 import { Draft, produce } from 'immer'
 import * as R from 'ramda'
 import { SetState } from 'zustand'
@@ -30,13 +31,16 @@ export function setResize(set: SetState<EditorState>) {
 }
 
 export function setText(set: SetState<EditorState>) {
-  return (textId: MemeText['id'], text: MemeText) => {
+  return (textId: TextBox['id'], values: Partial<TextBox>) => {
     return set(
       produce((draft: Draft<EditorState>) => {
         const textIndex = R.findIndex((memeText) => {
           return textId === memeText.id
         }, draft.texts)
-        draft.texts[textIndex] = text
+        draft.texts[textIndex] = {
+          ...draft.texts[textIndex],
+          ...values
+        }
       })
     )
   }

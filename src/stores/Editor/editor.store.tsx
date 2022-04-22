@@ -19,7 +19,7 @@ const { Provider, useStore } = createContext<EditorState>()
 
 function getCanvasDimensions(windowSizes: Dimensions) {
   return {
-    width: windowSizes.width - 54 - 320 - 198,
+    width: windowSizes.width - 54 - 320 - 198 - 4,
     height: windowSizes.height - 80 - 100
   }
 }
