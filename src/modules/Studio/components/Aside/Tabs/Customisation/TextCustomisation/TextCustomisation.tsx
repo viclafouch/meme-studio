@@ -1,16 +1,21 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react'
 import InputSlider from '@components/InputSlider/InputSlider'
+import {
+  ALIGN_VERTICAL,
+  FONTS_FAMILY,
+  TEXT_ALIGN
+} from '@shared/constants/fonts'
 
 import Styled from './text-customisation.styled'
 
 type TextCustomisationProps = {
-  text: MemeText
+  text: TextBox
   index: number
-  onUpdateText: (textId: MemeText['id'], text: MemeText) => void
+  onUpdateText: (textId: TextBox['id'], text: TextBox) => void
 }
 
-function getUpdatedText(text: MemeText, values: Partial<MemeText>): MemeText {
+function getUpdatedText(text: TextBox, values: Partial<TextBox>): TextBox {
   return {
     ...text,
     ...values
@@ -20,11 +25,16 @@ function getUpdatedText(text: MemeText, values: Partial<MemeText>): MemeText {
 const TextCustomisation = (props: TextCustomisationProps) => {
   const { text, index, onUpdateText } = props
 
-  const handleEditText = (key: keyof MemeText) => {
+  const handleEditText = (key: keyof TextBox) => {
     return (
-      event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+      event: React.ChangeEvent<
+        HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement
+      >
     ) => {
-      const { value } = event.target
+      let value = event.target.value as string | boolean
+      if ('checked' in event.target) {
+        value = event.target.checked
+      }
       const newText = getUpdatedText(text, {
         [key]: value
       })
@@ -73,6 +83,63 @@ const TextCustomisation = (props: TextCustomisationProps) => {
             id="box-shadow"
             value={text.color}
             onChange={handleEditText('color')}
+          />
+        </Styled.Fieldset>
+        <Styled.Fieldset>
+          <label htmlFor="fontFamily">Police d&apos;écriture</label>
+          <select
+            id="fontFamily"
+            value={text.fontFamily}
+            onChange={handleEditText('fontFamily')}
+          >
+            {FONTS_FAMILY.map((fontName) => {
+              return (
+                <option key={fontName} value={fontName}>
+                  {fontName}
+                </option>
+              )
+            })}
+          </select>
+        </Styled.Fieldset>
+        <Styled.Fieldset>
+          <label htmlFor="alignVertical">Alignement vertical</label>
+          <select
+            id="alignVertical"
+            value={text.alignVertical}
+            onChange={handleEditText('alignVertical')}
+          >
+            {ALIGN_VERTICAL.map((alignVertical) => {
+              return (
+                <option key={alignVertical} value={alignVertical}>
+                  {alignVertical}
+                </option>
+              )
+            })}
+          </select>
+        </Styled.Fieldset>
+        <Styled.Fieldset>
+          <label htmlFor="textAlign">Alignement horizontal</label>
+          <select
+            id="textAlign"
+            value={text.textAlign}
+            onChange={handleEditText('textAlign')}
+          >
+            {TEXT_ALIGN.map((textAlign) => {
+              return (
+                <option key={textAlign} value={textAlign}>
+                  {textAlign}
+                </option>
+              )
+            })}
+          </select>
+        </Styled.Fieldset>
+        <Styled.Fieldset>
+          <label htmlFor="isUppercase">Texte en majuscule</label>
+          <input
+            type="checkbox"
+            onChange={handleEditText('isUppercase')}
+            checked={text.isUppercase}
+            id="isUppercase"
           />
         </Styled.Fieldset>
       </Styled.TextToolsContainer>
