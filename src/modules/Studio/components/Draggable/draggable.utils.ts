@@ -1,3 +1,5 @@
+import { radToDegree } from '@shared/helpers/number'
+
 import type { MaxSizes, State } from './draggable.types'
 
 export function move(
@@ -96,5 +98,22 @@ export function resize(
     width,
     top,
     left
+  }
+}
+
+export function rotate(event: MouseEvent, state: State): Pick<State, 'rotate'> {
+  const radian =
+    Math.atan2(
+      event.pageY - (state.startOffsetTop as number),
+      event.pageX - (state.startOffsetLeft as number)
+    ) -
+    Math.atan2(
+      (state.downPageY as number) - (state.startOffsetTop as number),
+      (state.downPageX as number) - (state.startOffsetLeft as number)
+    ) +
+    (state.radOnDown as number)
+  const degree = radToDegree(radian)
+  return {
+    rotate: degree > -3.2 && degree < 3.2 ? 0 : degree
   }
 }

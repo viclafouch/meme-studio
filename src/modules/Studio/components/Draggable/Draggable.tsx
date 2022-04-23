@@ -1,10 +1,13 @@
 import React from 'react'
+import { faRotateLeft } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { degreeToRad } from '@shared/helpers/number'
 import { useText } from '@stores/Editor/hooks/useTexts'
 import * as R from 'ramda'
 
 import Styled from './draggable.styled'
 import { Side, State } from './draggable.types'
-import { move, resize } from './draggable.utils'
+import { move, resize, rotate } from './draggable.utils'
 
 type DraggableProps = {
   textId: TextBox['id']
@@ -14,7 +17,7 @@ type DraggableProps = {
   ratio: (size: number) => number
 }
 
-type Type = 'drag' | 'resize'
+type Type = 'drag' | 'resize' | 'rotate'
 
 const Draggable = (props: DraggableProps) => {
   const { children, canvasHeight, canvasWidth, textId } = props
@@ -30,6 +33,10 @@ const Draggable = (props: DraggableProps) => {
       heightOnDown: null,
       topOnDown: null,
       leftOnDown: null,
+      startOffsetTop: null,
+      startOffsetLeft: null,
+      radOnDown: null,
+      rotate: text.rotate,
       left: text.centerX - R.divide(text.width, 2),
       top: text.centerY - R.divide(text.height, 2),
       width: text.width,
@@ -45,9 +52,18 @@ const Draggable = (props: DraggableProps) => {
       width: state.width,
       height: state.height,
       centerX,
-      centerY
+      centerY,
+      rotate: state.rotate
     })
-  }, [state.left, state.top, state.width, state.height, textId, updater])
+  }, [
+    state.left,
+    state.top,
+    state.width,
+    state.height,
+    state.rotate,
+    textId,
+    updater
+  ])
 
   const handleMouseDown = (event: React.MouseEvent) => {
     const { currentTarget, pageX, pageY } = event
@@ -77,6 +93,20 @@ const Draggable = (props: DraggableProps) => {
           mode: `resizing-${side}`
         }
       })
+    } else if (type === 'rotate') {
+      const boxElement = event.currentTarget.parentElement as HTMLDivElement
+      const { left, top } = boxElement.getBoundingClientRect()
+      setState((prevState) => {
+        return {
+          ...prevState,
+          downPageX: event.pageX,
+          downPageY: event.pageY,
+          startOffsetLeft: left + prevState.width / 2,
+          startOffsetTop: top + prevState.height / 2,
+          radOnDown: degreeToRad(state.rotate),
+          mode: 'rotating'
+        }
+      })
     }
   }
 
@@ -92,6 +122,9 @@ const Draggable = (props: DraggableProps) => {
         heightOnDown: null,
         leftOnDown: null,
         topOnDown: null,
+        startOffsetTop: null,
+        startOffsetLeft: null,
+        radOnDown: null,
         mode: false
       }
     })
@@ -127,6 +160,15 @@ const Draggable = (props: DraggableProps) => {
     [canvasWidth, canvasHeight]
   )
 
+  const handleRotateMove = React.useCallback((event: MouseEvent) => {
+    setState((prevState) => {
+      return {
+        ...prevState,
+        ...rotate(event, prevState)
+      }
+    })
+  }, [])
+
   React.useEffect(() => {
     if (state.mode !== false) {
       window.addEventListener('mouseup', handleMouseUp)
@@ -134,6 +176,8 @@ const Draggable = (props: DraggableProps) => {
         window.addEventListener('mousemove', handleDraggingMove)
       } else if (state.mode.includes('resizing')) {
         window.addEventListener('mousemove', handleResizeMove)
+      } else if (state.mode === 'rotating') {
+        window.addEventListener('mousemove', handleRotateMove)
       }
       return () => {
         window.removeEventListener('mouseup', handleMouseUp)
@@ -141,11 +185,19 @@ const Draggable = (props: DraggableProps) => {
           window.removeEventListener('mousemove', handleDraggingMove)
         } else if (state.mode && state.mode.includes('resizing')) {
           window.removeEventListener('mousemove', handleResizeMove)
+        } else if (state.mode === 'rotating') {
+          window.removeEventListener('mousemove', handleRotateMove)
         }
       }
     }
     return () => {}
-  }, [state.mode, handleMouseUp, handleDraggingMove, handleResizeMove])
+  }, [
+    state.mode,
+    handleMouseUp,
+    handleDraggingMove,
+    handleResizeMove,
+    handleRotateMove
+  ])
 
   const { height, width, left, top } = state
 
@@ -180,6 +232,9 @@ const Draggable = (props: DraggableProps) => {
         data-side="sw"
         onMouseDown={handleMouseDown}
       />
+      <Styled.Rotate data-type="rotate" onMouseDown={handleMouseDown}>
+        <FontAwesomeIcon icon={faRotateLeft} />
+      </Styled.Rotate>
     </Styled.Draggable>
   )
 }

@@ -1,3 +1,7 @@
-import * as R from 'ramda'
+export const degreeToRad = (degree: number): number => {
+  return (degree * Math.PI) / 180
+}
 
-export const degreeToRad = R.pipe(R.multiply(Math.PI), R.divide(180))
+export const radToDegree = (rad: number): number => {
+  return (rad * 180) / Math.PI
+}
