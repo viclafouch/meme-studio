@@ -30,7 +30,7 @@ type DefaultProviderProps = {
 
 export const DefaultProvider = (props: DefaultProviderProps): JSX.Element => {
   const { children } = props
-  const [state, updater] = useReducer(defaultReducer, initialState)
+  const [state] = useReducer(defaultReducer, initialState)
 
   useIsomorphicLayoutEffect(() => {
     document.documentElement.setAttribute('data-theme', state.theme)

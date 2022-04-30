@@ -1,6 +1,7 @@
 import React from 'react'
 import { faHeading, faImage } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Tab } from '@stores/Editor/editor'
 import { useTab } from '@stores/Editor/hooks/useTabs'
 
 import Styled from './aside.styled'

@@ -1,12 +1,12 @@
 import { useEditorStore } from '@stores/Editor/editor.store'
 import shallow from 'zustand/shallow'
 
-type UseCanvasDimensionsReturn = [
-  EditorState['canvasDimensions'],
-  EditorState['resize']
-]
+import { EditorState } from '../editor'
+
+type UseCanvasDimensionsReturn = [EditorState['canvasDimensions']]
+
 export function useCanvasDimensions(): UseCanvasDimensionsReturn {
   return useEditorStore((state) => {
-    return [state.canvasDimensions, state.resize]
+    return [state.canvasDimensions]
   }, shallow)
 }

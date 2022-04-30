@@ -32,8 +32,8 @@ const TextCustomisation = (props: TextCustomisationProps) => {
       >
     ) => {
       let value = event.target.value as string | boolean
-      if ('checked' in event.target) {
-        value = event.target.checked
+      if (event.target.getAttribute('type') === 'checkbox') {
+        value = (event.target as HTMLInputElement).checked
       }
       const newText = getUpdatedText(text, {
         [key]: value

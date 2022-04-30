@@ -29,9 +29,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(
-  ctx: GetStaticPropsContext<Params>
+  context: GetStaticPropsContext<Params>
 ): Promise<GetStaticPropsResult<Result>> {
-  const { params } = ctx
+  const { params } = context
   const memeId = params?.memeId as Meme['id']
   const queryClient = new QueryClient()
 

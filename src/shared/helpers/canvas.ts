@@ -13,7 +13,7 @@ type Line = {
   getWidth: () => number
 }
 
-function getLines(text: TextBox, ctx: CanvasRenderingContext2D): Line[] {
+function getLines(text: TextBox, context2D: CanvasRenderingContext2D): Line[] {
   return R.pipe(R.replace(/\r/g, ''), R.split('\n'), (textLines) => {
     return textLines.map((currentTextLine: string, index: number) => {
       return {
@@ -26,7 +26,7 @@ function getLines(text: TextBox, ctx: CanvasRenderingContext2D): Line[] {
             : fontSize
         },
         getWidth: () => {
-          return ctx.measureText(currentTextLine).width
+          return context2D.measureText(currentTextLine).width
         }
       }
     })

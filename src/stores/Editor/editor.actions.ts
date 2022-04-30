@@ -1,7 +1,8 @@
-import TextBox from '@shared/models/TextBox'
 import { Draft, produce } from 'immer'
 import * as R from 'ramda'
 import { SetState } from 'zustand'
+
+import { EditorState, Tab } from './editor'
 
 function getCanvasDimensions(windowSizes: Dimensions) {
   return {
@@ -34,8 +35,8 @@ export function setText(set: SetState<EditorState>) {
   return (textId: TextBox['id'], values: Partial<TextBox>) => {
     return set(
       produce((draft: Draft<EditorState>) => {
-        const textIndex = R.findIndex((memeText) => {
-          return textId === memeText.id
+        const textIndex = R.findIndex((textBox) => {
+          return textId === textBox.id
         }, draft.texts)
         draft.texts[textIndex] = {
           ...draft.texts[textIndex],

@@ -1,12 +1,14 @@
 {
-  "extends": ["@viclafouch/eslint-config-viclafouch/typescript", "next"],
+  "extends": ["@viclafouch/eslint-config-viclafouch/typescript", "plugin:@next/next/recommended"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": ["./tsconfig.json"]
   },
   "rules": {
     "react/no-unused-prop-types": "off",
+    "react/react-in-jsx-scope": "off",
     "import/no-anonymous-default-export": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
     "jsx-a11y/anchor-is-valid": [
       "error",
       {

@@ -5,6 +5,7 @@ import * as R from 'ramda'
 import create from 'zustand'
 import createContext from 'zustand/context'
 
+import { EditorState } from './editor'
 import { setCurrentTab, setResize, setText } from './editor.actions'
 
 type EditorProviderProps = {
@@ -26,8 +27,8 @@ function getCanvasDimensions(windowSizes: Dimensions) {
 
 function getRatio(meme: Nullable<Meme>, dimensions: Dimensions) {
   if (!meme) {
-    return (val: number) => {
-      return val
+    return (value: number) => {
+      return value
     }
   }
   const aspectRatio = getAspectRatio(

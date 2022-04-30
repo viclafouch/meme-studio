@@ -8,13 +8,13 @@ import Document, {
 import { ServerStyleSheet } from 'styled-components'
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext) {
+  static async getInitialProps(context: DocumentContext) {
     // highlight-next-line
     const sheet = new ServerStyleSheet()
-    const originalRenderPage = ctx.renderPage
+    const originalRenderPage = context.renderPage
     try {
       const initialProps = await Document.getInitialProps({
-        ...ctx,
+        ...context,
         renderPage: () => {
           return originalRenderPage({
             enhanceApp: (App) => {

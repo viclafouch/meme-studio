@@ -12,7 +12,11 @@ export class Meme {
 
   public localImageUrl: string
 
-  translations: any
+  translations: {
+    en: {
+      name: string
+    }
+  }
 
   texts: any
 
@@ -20,7 +24,7 @@ export class Meme {
     this.id = meme.id
     this.filename = meme.filename
     this.width = meme.width
-    this.translations = meme.translations || []
+    this.translations = meme.translations
     this.height = meme.height
     this.boxCount = meme.boxCount
     this.localImageUrl = meme.localImageUrl || null
@@ -36,6 +40,7 @@ export class Meme {
   get image(): Promise<HTMLImageElement> {
     return new Promise((resolve) => {
       const image = new Image()
+      // eslint-disable-next-line id-denylist
       image.src = this.url()
       image.onload = (): void => {
         return resolve(image)

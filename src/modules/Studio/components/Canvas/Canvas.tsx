@@ -8,7 +8,6 @@ import { useTexts } from '@stores/Editor/hooks/useTexts'
 import * as R from 'ramda'
 
 import Draggable from '../Draggable/Draggable'
-import TextBox from '../TextBox/TextBox'
 import Styled from './canvas.styled'
 
 const Canvas = () => {
@@ -65,9 +64,7 @@ const Canvas = () => {
               canvasHeight={dimensions.height}
               canvasWidth={dimensions.width}
               ratio={ratio}
-            >
-              <TextBox text={textbox} />
-            </Draggable>
+            />
           )
         })}
         <Styled.Canvas

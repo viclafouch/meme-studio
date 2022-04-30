@@ -1,8 +1,10 @@
-type Tab = 'gallery' | 'customization'
+import { Meme } from '@models/Meme'
 
-type EditorState = {
+export type Tab = 'gallery' | 'customization'
+
+export type EditorState = {
   meme: Nullable<Meme>
-  texts: MemeText[]
+  texts: TextBox[]
   currentTab: Tab
   setCurrentTab: (newTab: Tab) => void
   updateText: (textId: MemeText['id'], text: Partial<MemeText>) => void

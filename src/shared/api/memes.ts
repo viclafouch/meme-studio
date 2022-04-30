@@ -15,7 +15,7 @@ export async function getMemes() {
   )
 }
 
-export async function getMeme(memeId: Meme['id']) {
+export function getMeme(memeId: Meme['id']) {
   const dataMeme = data.memes.find((meme) => {
     return meme.id === memeId
   })

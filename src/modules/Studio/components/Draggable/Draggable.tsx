@@ -11,7 +11,6 @@ import { move, resize, rotate } from './draggable.utils'
 
 type DraggableProps = {
   textId: TextBox['id']
-  children: React.ReactNode
   canvasHeight: number
   canvasWidth: number
   ratio: (size: number) => number
@@ -20,7 +19,7 @@ type DraggableProps = {
 type Type = 'drag' | 'resize' | 'rotate'
 
 const Draggable = (props: DraggableProps) => {
-  const { children, canvasHeight, canvasWidth, textId } = props
+  const { canvasHeight, canvasWidth, textId } = props
   const [text, updater] = useText(textId)
   const [state, setState] = React.useState<State>(() => {
     return {
@@ -211,7 +210,6 @@ const Draggable = (props: DraggableProps) => {
         transform: `translate3d(${left}px, ${top}px, 0) rotate(${text.rotate}deg)`
       }}
     >
-      {children}
       <Styled.Resize
         data-type="resize"
         data-side="ne"

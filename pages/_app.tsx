@@ -11,13 +11,14 @@ import '../styles/globals.scss'
 
 config.autoAddCss = false
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const Application = ({ Component, pageProps }: AppProps) => {
   const [queryClient] = React.useState(() => {
     return getQueryClient()
   })
 
   return (
     <QueryClientProvider client={queryClient}>
+      {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
       <Hydrate state={pageProps.dehydratedState}>
         <Layout>
           <DefaultProvider>
@@ -29,4 +30,4 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   )
 }
 
-export default MyApp
+export default Application
