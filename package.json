@@ -128,7 +128,7 @@
     "morgan": "1.10.0",
     "pg": "8.5.1",
     "prerender-node": "3.2.5",
-    "sequelize": "6.3.5",
+    "sequelize": "6.28.2",
     "shortid": "2.2.16",
     "sqlite3": "5.0.0",
     "twit": "2.2.11",
