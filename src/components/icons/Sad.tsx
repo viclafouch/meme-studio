@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Sad = (props: React.SVGProps<SVGSVGElement>) => {
+const Sad = ({ ...props }: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg viewBox="0 0 100 100" {...props}>
       <g>

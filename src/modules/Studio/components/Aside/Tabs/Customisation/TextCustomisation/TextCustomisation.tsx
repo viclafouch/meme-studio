@@ -6,7 +6,6 @@ import {
   FONTS_FAMILY,
   TEXT_ALIGN
 } from '@shared/constants/fonts'
-
 import Styled from './text-customisation.styled'
 
 type TextCustomisationProps = {
@@ -32,9 +31,11 @@ const TextCustomisation = (props: TextCustomisationProps) => {
       >
     ) => {
       let value = event.target.value as string | boolean
+
       if (event.target.getAttribute('type') === 'checkbox') {
         value = (event.target as HTMLInputElement).checked
       }
+
       const newText = getUpdatedText(text, {
         [key]: value
       })

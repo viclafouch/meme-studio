@@ -10,7 +10,9 @@ export function useWindowSizeCallback(
         height: window.innerHeight
       })
     }
+
     window.addEventListener('resize', handleResize)
+
     return () => {
       return window.removeEventListener('resize', handleResize)
     }

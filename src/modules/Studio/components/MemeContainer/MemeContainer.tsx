@@ -1,6 +1,5 @@
 import React from 'react'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
-
 import EmptyContainer from '../EmptyContainer/EmptyContainer'
 import Styled from './meme-container.styled'
 

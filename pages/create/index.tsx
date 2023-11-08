@@ -1,8 +1,8 @@
 import React from 'react'
 import { dehydrate, QueryClient } from 'react-query'
 import { NextPage } from 'next'
-import { getMemes } from '@shared/api/memes'
 import CreatePage from 'modules/Studio/Studio'
+import { getMemes } from '@shared/api/memes'
 
 export async function getStaticProps() {
   const queryClient = new QueryClient()

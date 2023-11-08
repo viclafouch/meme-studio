@@ -1,7 +1,6 @@
-import { useEditorStore } from '@stores/Editor/editor.store'
 import * as R from 'ramda'
 import shallow from 'zustand/shallow'
-
+import { useEditorStore } from '@stores/Editor/editor.store'
 import { EditorState } from '../editor.d'
 
 type UseTextsReturn = [EditorState['texts'], EditorState['updateText']]

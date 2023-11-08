@@ -2,7 +2,6 @@ import * as React from 'react'
 import { useReducer } from 'react'
 import { matchIsClientSide } from '@shared/helpers/dom'
 import { useIsomorphicLayoutEffect } from '@shared/hooks/useIsomorphicLayoutEffect'
-
 import defaultReducer from './default.reducer'
 
 const getInitialThemeValue = () => {
@@ -10,10 +9,12 @@ const getInitialThemeValue = () => {
     const attr = document.documentElement.getAttribute(
       'data-theme'
     ) as Nullable<ThemeValue>
+
     if (attr === 'light' || attr === 'dark') {
       return attr
     }
   }
+
   return 'light'
 }
 

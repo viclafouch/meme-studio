@@ -1,7 +1,6 @@
 import { Draft, produce } from 'immer'
 import * as R from 'ramda'
 import { SetState } from 'zustand'
-
 import { EditorState, Tab } from './editor'
 
 function getCanvasDimensions(windowSizes: Dimensions) {
@@ -39,7 +38,7 @@ export function setText(set: SetState<EditorState>) {
           return textId === textBox.id
         }, draft.texts)
         draft.texts[textIndex] = {
-          ...draft.texts[textIndex],
+          ...(draft.texts[textIndex] as TextBox),
           ...values
         }
       })

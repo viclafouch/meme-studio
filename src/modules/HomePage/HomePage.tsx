@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Footer from '@components/Footer/Footer'
 import Page from '@components/Page/Page'
 import { Meme } from '@models/Meme'
-
 import Styled from './home-page.styled'
 
 type HomePageProps = {

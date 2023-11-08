@@ -1,9 +1,9 @@
 import React from 'react'
 import { dehydrate, DehydratedState, QueryClient } from 'react-query'
 import { GetStaticPropsContext, GetStaticPropsResult, NextPage } from 'next'
+import CreatePage from 'modules/Studio/Studio'
 import { Meme } from '@models/Meme'
 import { getMeme, getMemes } from '@shared/api/memes'
-import CreatePage from 'modules/Studio/Studio'
 
 type Params = {
   memeId: Meme['id']

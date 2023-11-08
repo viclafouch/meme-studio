@@ -1,5 +1,4 @@
 import * as R from 'ramda'
-
 import { degreeToRad } from './number'
 
 const PADDING_INLINE = 4
@@ -39,14 +38,17 @@ function applyFontSizeByWidth(
   context2D: CanvasRenderingContext2D
 ): number {
   let { fontSize } = text
+
   for (let index = 0; index < lines.length; index += 1) {
-    const line = lines[index]
+    const line = lines[index] as Line
     context2D.font = `${fontSize}px ${text.fontFamily}`
+
     while (line.getWidth() + PADDING_INLINE * 2 > text.width) {
       fontSize -= 1
       context2D.font = `${fontSize}px ${text.fontFamily}`
     }
   }
+
   return fontSize
 }
 
@@ -78,6 +80,7 @@ export function drawText(text: TextBox, context2D: CanvasRenderingContext2D) {
   context2D.lineJoin = 'round'
   context2D.lineWidth = text.boxShadow || 1
   context2D.font = `${text.fontSize}px ${text.fontFamily}`
+
   if (text.rotate !== 0) {
     context2D.translate(text.centerX, text.centerY)
     context2D.rotate(degreeToRad(text.rotate))
@@ -93,8 +96,8 @@ export function drawText(text: TextBox, context2D: CanvasRenderingContext2D) {
   context2D.font = `${fontSize}px ${text.fontFamily}`
 
   for (let index = 0; index < lines.length; index += 1) {
-    const line = lines[index]
-    const previousLine = lines[index - 1]
+    const line = lines[index] as Line
+    const previousLine = lines[index - 1] as Line
     const previousLineHeight =
       index === 0 ? 0 : previousLine.getHeight(fontSize)
     const lineWidth = line.getWidth()
@@ -128,9 +131,11 @@ export function drawText(text: TextBox, context2D: CanvasRenderingContext2D) {
     const { x } = line
     const { y } = line
     context2D.fillText(line.value, x, y)
+
     if (text.boxShadow > 0) {
       context2D.strokeText(line.value, x, y)
     }
   }
+
   context2D.restore()
 }

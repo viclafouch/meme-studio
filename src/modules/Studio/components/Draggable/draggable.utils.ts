@@ -1,5 +1,4 @@
 import { radToDegree } from '@shared/helpers/number'
-
 import type { MaxSizes, State } from './draggable.types'
 
 export function move(
@@ -11,11 +10,13 @@ export function move(
   const { downStartY, downStartX, height, width } = state
   let top = pageY - (downStartY || 0)
   let left = pageX - (downStartX || 0)
+
   if (top < 0) {
     top = 0
   } else if (top + height >= maxSizes.height) {
     top = maxSizes.height - height
   }
+
   if (left < 0) {
     left = 0
   } else if (left + width >= maxSizes.width) {
@@ -52,6 +53,7 @@ export function resize(
   if (mode === 'resizing-se' || mode === 'resizing-sw') {
     if (heightOnDown + spacingHeight > 10) {
       height = heightOnDown + spacingHeight
+
       if (top + height >= maxSizes.height) {
         height = maxSizes.height - top
       }
@@ -60,6 +62,7 @@ export function resize(
     }
   } else if (heightOnDown - spacingHeight > 10) {
     top = topOnDown + spacingHeight
+
     if (top < 0) {
       top = 0
       height = maxSizes.height - bottom
@@ -74,6 +77,7 @@ export function resize(
   if (mode === 'resizing-ne' || mode === 'resizing-se') {
     if (widthOnDown + spacingWidth > 10) {
       width = widthOnDown + spacingWidth
+
       if (left + width >= maxSizes.width) {
         width = maxSizes.width - left
       }
@@ -82,6 +86,7 @@ export function resize(
     }
   } else if (widthOnDown - spacingWidth > 10) {
     left = leftOnDown + spacingWidth
+
     if (left <= 0) {
       left = 0
       width = maxSizes.width - right
@@ -113,6 +118,7 @@ export function rotate(event: MouseEvent, state: State): Pick<State, 'rotate'> {
     ) +
     (state.radOnDown as number)
   const degree = radToDegree(radian)
+
   return {
     rotate: degree > -3.2 && degree < 3.2 ? 0 : degree
   }

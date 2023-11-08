@@ -12,6 +12,7 @@ class MyDocument extends Document {
     // highlight-next-line
     const sheet = new ServerStyleSheet()
     const originalRenderPage = context.renderPage
+
     try {
       const initialProps = await Document.getInitialProps({
         ...context,
@@ -25,6 +26,7 @@ class MyDocument extends Document {
           })
         }
       })
+
       return {
         ...initialProps,
         styles: (

@@ -1,5 +1,5 @@
-import { PARTICLES_BACKGROUND } from '@styles/utils'
 import styled from 'styled-components'
+import { PARTICLES_BACKGROUND } from '@styles/utils'
 
 type ContainerProps = Partial<{
   $animatedBackground: boolean

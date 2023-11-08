@@ -1,10 +1,9 @@
 import React from 'react'
-import { faRotateLeft } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as R from 'ramda'
 import { degreeToRad } from '@shared/helpers/number'
 import { useText } from '@stores/Editor/hooks/useTexts'
-import * as R from 'ramda'
-
+import { faRotateLeft } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Styled from './draggable.styled'
 import { Side, State } from './draggable.types'
 import { move, resize, rotate } from './draggable.utils'
@@ -13,7 +12,6 @@ type DraggableProps = {
   textId: TextBox['id']
   canvasHeight: number
   canvasWidth: number
-  ratio: (size: number) => number
 }
 
 type Type = 'drag' | 'resize' | 'rotate'
@@ -69,6 +67,7 @@ const Draggable = (props: DraggableProps) => {
     event.preventDefault()
     event.stopPropagation()
     const type = currentTarget.getAttribute('data-type') as Type
+
     if (type === 'drag') {
       setState((prevState) => {
         return {
@@ -171,6 +170,7 @@ const Draggable = (props: DraggableProps) => {
   React.useEffect(() => {
     if (state.mode !== false) {
       window.addEventListener('mouseup', handleMouseUp)
+
       if (state.mode === 'dragging') {
         window.addEventListener('mousemove', handleDraggingMove)
       } else if (state.mode.includes('resizing')) {
@@ -178,8 +178,10 @@ const Draggable = (props: DraggableProps) => {
       } else if (state.mode === 'rotating') {
         window.addEventListener('mousemove', handleRotateMove)
       }
+
       return () => {
         window.removeEventListener('mouseup', handleMouseUp)
+
         if (state.mode === 'dragging') {
           window.removeEventListener('mousemove', handleDraggingMove)
         } else if (state.mode && state.mode.includes('resizing')) {
@@ -189,6 +191,7 @@ const Draggable = (props: DraggableProps) => {
         }
       }
     }
+
     return () => {}
   }, [
     state.mode,

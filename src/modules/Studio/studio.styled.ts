@@ -1,5 +1,5 @@
-import Page from '@components/Page/Page'
 import styled from 'styled-components'
+import Page from '@components/Page/Page'
 
 export default {
   Page: styled(Page)`

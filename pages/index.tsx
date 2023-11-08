@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
-import { Meme } from '@models/Meme'
 import HomePage from 'modules/HomePage/HomePage'
-
+import { Meme } from '@models/Meme'
 import memesData from './api/meme.json'
 
 export const getServerSideProps = () => {

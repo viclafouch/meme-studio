@@ -1,5 +1,5 @@
-import { PARTICLES_BACKGROUND } from '@styles/utils'
 import styled from 'styled-components'
+import { PARTICLES_BACKGROUND } from '@styles/utils'
 
 export default {
   Container: styled.div`

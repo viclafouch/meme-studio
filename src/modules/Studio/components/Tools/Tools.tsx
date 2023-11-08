@@ -10,7 +10,6 @@ import {
   faUndo
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 import Styled from './tools.styled'
 
 const Tools = () => {

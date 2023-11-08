@@ -1,29 +1,13 @@
 {
-  "extends": ["@viclafouch/eslint-config-viclafouch/typescript", "plugin:@next/next/recommended"],
-  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "@viclafouch/eslint-config-viclafouch",
+    "@viclafouch/eslint-config-viclafouch/next",
+    "@viclafouch/eslint-config-viclafouch/imports",
+    "@viclafouch/eslint-config-viclafouch/typescript",
+    "@viclafouch/eslint-config-viclafouch/prettier"
+  ],
   "parserOptions": {
-    "project": ["./tsconfig.json"]
+    "project": true
   },
-  "rules": {
-    "react/no-unused-prop-types": "off",
-    "react/react-in-jsx-scope": "off",
-    "import/no-anonymous-default-export": "off",
-    "@typescript-eslint/no-unsafe-assignment": "off",
-    "jsx-a11y/anchor-is-valid": [
-      "error",
-      {
-        "components": ["Link"],
-        "specialLink": ["hrefLeft", "hrefRight"],
-        "aspects": ["invalidHref", "preferButton"]
-      }
-    ],
-    // For immer.js
-    "no-param-reassign": [
-      "error",
-      {
-        "props": true,
-        "ignorePropertyModificationsFor": ["draft", "context2D"]
-      }
-    ]
-  }
+  "root": true
 }

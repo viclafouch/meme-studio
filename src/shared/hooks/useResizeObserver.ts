@@ -7,18 +7,23 @@ export function useResizeObserverCallback(
   React.useEffect(() => {
     const element = ref.current
     const resizeObserver = new ResizeObserver(([event]) => {
-      const { inlineSize, blockSize } = event.contentBoxSize[0]
+      // @ts-expect-error
+      const { inlineSize, blockSize } = (event as ResizeObserverEntry)
+        .contentBoxSize[0]
       callback({
         width: inlineSize,
         height: blockSize
       })
     })
+
     if (element) {
       resizeObserver.observe(element)
+
       return () => {
         resizeObserver.unobserve(element)
       }
     }
+
     return () => {}
   }, [ref, callback])
 }

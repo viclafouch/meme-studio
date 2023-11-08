@@ -1,12 +1,11 @@
 import React from 'react'
+import * as R from 'ramda'
 import { Meme } from '@models/Meme'
 import { drawText } from '@shared/helpers/canvas'
 import { useEditorStore } from '@stores/Editor/editor.store'
 import { useCanvasDimensions } from '@stores/Editor/hooks/useCanvasDimensions'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useTexts } from '@stores/Editor/hooks/useTexts'
-import * as R from 'ramda'
-
 import Draggable from '../Draggable/Draggable'
 import Styled from './canvas.styled'
 
@@ -19,6 +18,7 @@ const Canvas = () => {
 
   React.useLayoutEffect(() => {
     const canvasElement = canvasElRef.current
+
     if (canvasElement === null) {
       return () => {}
     }
@@ -29,8 +29,9 @@ const Canvas = () => {
       }) as CanvasRenderingContext2D
       canvasElement.width = dimensions.width
       canvasElement.height = dimensions.height
+
       for (let index = 0; index < texts.length; index += 1) {
-        const text = texts[index]
+        const text = texts[index] as TextBox
         drawText(
           {
             ...text,
@@ -42,6 +43,7 @@ const Canvas = () => {
     }
 
     const frame = requestAnimationFrame(draw)
+
     return () => {
       cancelAnimationFrame(frame)
     }
@@ -63,7 +65,6 @@ const Canvas = () => {
               textId={textbox.id}
               canvasHeight={dimensions.height}
               canvasWidth={dimensions.width}
-              ratio={ratio}
             />
           )
         })}

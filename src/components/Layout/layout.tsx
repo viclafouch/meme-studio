@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Styled from './layout.styled'
 
 type LayoutProps = {
@@ -8,6 +7,7 @@ type LayoutProps = {
 
 const Layout = (props: LayoutProps) => {
   const { children } = props
+
   return <Styled.Wrapper>{children}</Styled.Wrapper>
 }
 

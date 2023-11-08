@@ -1,5 +1,4 @@
 import Head from 'next/head'
-
 import Styled from './page.styled'
 
 interface PageProps extends React.ButtonHTMLAttributes<HTMLDivElement> {
@@ -10,23 +9,24 @@ interface PageProps extends React.ButtonHTMLAttributes<HTMLDivElement> {
 
 function formatTitle(title?: string) {
   const defaultTitle = 'Meme Studio'
+
   return title ? `${defaultTitle} | ${title}` : defaultTitle
 }
 
-const Page = ({ children, animatedBackground, title, ...rest }: PageProps) => {
+const Page = ({
+  children,
+  animatedBackground = false,
+  title = '',
+  ...restProps
+}: PageProps) => {
   return (
-    <Styled.Container {...rest} $animatedBackground={animatedBackground}>
+    <Styled.Container {...restProps} $animatedBackground={animatedBackground}>
       <Head>
         <title>{formatTitle(title)}</title>
       </Head>
       {children}
     </Styled.Container>
   )
-}
-
-Page.defaultProps = {
-  animatedBackground: false,
-  title: ''
 }
 
 export default Page

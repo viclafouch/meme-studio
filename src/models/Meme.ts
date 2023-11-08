@@ -42,6 +42,7 @@ export class Meme {
       const image = new Image()
       // eslint-disable-next-line id-denylist
       image.src = this.url()
+
       image.onload = (): void => {
         return resolve(image)
       }

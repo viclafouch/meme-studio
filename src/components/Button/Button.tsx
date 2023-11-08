@@ -1,5 +1,4 @@
 import * as React from 'react'
-
 import Styled from './button.styled'
 
 interface ButtonProps<T extends React.ElementType> {
@@ -18,6 +17,7 @@ const Button = React.forwardRef(
       | undefined
   ) => {
     const { children, ...rest } = props
+
     return (
       <Styled.Button ref={ref} {...rest}>
         {children}

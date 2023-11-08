@@ -3,7 +3,6 @@ import { useQuery } from 'react-query'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getMemes } from '@shared/api/memes'
-
 import Styled from './gallery.styled'
 
 const Gallery = () => {

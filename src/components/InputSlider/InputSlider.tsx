@@ -1,5 +1,4 @@
 import * as React from 'react'
-
 import Styled from './input-slider.styled'
 
 // eslint-disable-next-line react/display-name

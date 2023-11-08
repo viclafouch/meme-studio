@@ -6,7 +6,6 @@ import { Meme } from '@models/Meme'
 import { getMeme } from '@shared/api/memes'
 import { useWindowSize } from '@shared/hooks/useWindowSize'
 import { EditorProvider } from '@stores/Editor/editor.store'
-
 import Aside from './components/Aside/Aside'
 import Canvas from './components/Canvas/Canvas'
 import MemeContainer from './components/MemeContainer/MemeContainer'

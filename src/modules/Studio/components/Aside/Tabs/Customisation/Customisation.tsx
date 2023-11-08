@@ -1,7 +1,6 @@
 import React from 'react'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useTexts } from '@stores/Editor/hooks/useTexts'
-
 import Styled from './customisation.styled'
 import EmptyCustom from './EmptyCustom/EmptyCustom'
 import TextCustomisation from './TextCustomisation/TextCustomisation'

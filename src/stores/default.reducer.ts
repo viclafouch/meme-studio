@@ -1,5 +1,4 @@
 import { Draft, produce } from 'immer'
-
 import { TOGGLE_THEME } from './default.constants'
 
 const defaultReducer = produce(

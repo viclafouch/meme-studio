@@ -1,6 +1,5 @@
-import { useEditorStore } from '@stores/Editor/editor.store'
 import shallow from 'zustand/shallow'
-
+import { useEditorStore } from '@stores/Editor/editor.store'
 import { EditorState } from '../editor'
 
 type UseCanvasDimensionsReturn = [EditorState['canvasDimensions']]

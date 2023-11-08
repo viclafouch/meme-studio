@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react'
 import Image from 'next/image'
-
 import Styled from './empty-container.styled'
 
 const EmptyContainer = () => {

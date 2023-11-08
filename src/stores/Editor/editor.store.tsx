@@ -1,10 +1,9 @@
 import React from 'react'
-import { getAspectRatio } from '@shared/helpers/dom'
 import { Meme } from 'models/Meme'
 import * as R from 'ramda'
 import create from 'zustand'
 import createContext from 'zustand/context'
-
+import { getAspectRatio } from '@shared/helpers/dom'
 import { EditorState } from './editor'
 import { setCurrentTab, setResize, setText } from './editor.actions'
 
@@ -31,12 +30,14 @@ function getRatio(meme: Nullable<Meme>, dimensions: Dimensions) {
       return value
     }
   }
+
   const aspectRatio = getAspectRatio(
     meme.width,
     meme.height,
     dimensions.width,
     dimensions.height
   )
+
   return R.pipe(R.multiply(aspectRatio), Math.round)
 }
 
@@ -47,6 +48,7 @@ const createInitialStore = (
 ) => {
   return create<EditorState>((set) => {
     const ratio = getRatio(initialMeme, initialWindowSizes)
+
     return {
       meme: initialMeme ? new Meme(initialMeme) : null,
       texts: initialTextboxes.map((textbox) => {
@@ -78,6 +80,7 @@ const EditorProvider = (props: EditorProviderProps) => {
     width: windowWidth
   })
 
+  // eslint-disable-next-line react/hook-use-state
   const [createStore] = React.useState(() => {
     return () => {
       return createInitialStore(meme, textBoxes, wrapperDimensions)
