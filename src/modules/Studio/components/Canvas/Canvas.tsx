@@ -2,7 +2,6 @@ import React from 'react'
 import * as R from 'ramda'
 import { Meme } from '@models/Meme'
 import { drawText } from '@shared/helpers/canvas'
-import { useEditorStore } from '@stores/Editor/editor.store'
 import { useCanvasDimensions } from '@stores/Editor/hooks/useCanvasDimensions'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useTexts } from '@stores/Editor/hooks/useTexts'
@@ -14,7 +13,6 @@ const Canvas = () => {
   const canvasElRef = React.useRef<HTMLCanvasElement>(null)
   const [texts] = useTexts()
   const [dimensions] = useCanvasDimensions()
-  const { ratio } = useEditorStore()
 
   React.useLayoutEffect(() => {
     const canvasElement = canvasElRef.current
@@ -47,7 +45,7 @@ const Canvas = () => {
     return () => {
       cancelAnimationFrame(frame)
     }
-  }, [texts, canvasElRef, ratio, meme, dimensions])
+  }, [texts, canvasElRef, meme, dimensions])
 
   return (
     <Styled.Container>

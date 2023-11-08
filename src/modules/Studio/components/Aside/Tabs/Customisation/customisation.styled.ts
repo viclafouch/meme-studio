@@ -16,7 +16,7 @@ export default {
     line-height: 1.2rem;
     color: rgb(212, 212, 212);
   `,
-  MemeName: styled.title`
+  MemeName: styled.h1`
     font-size: 0.7rem;
     color: #8d8d8d;
     display: inline-block;

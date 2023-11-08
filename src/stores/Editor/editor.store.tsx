@@ -1,8 +1,7 @@
 import React from 'react'
 import { Meme } from 'models/Meme'
 import * as R from 'ramda'
-import create from 'zustand'
-import createContext from 'zustand/context'
+import { createStore, StoreApi } from 'zustand'
 import { getAspectRatio } from '@shared/helpers/dom'
 import { EditorState } from './editor'
 import { setCurrentTab, setResize, setText } from './editor.actions'
@@ -15,7 +14,9 @@ type EditorProviderProps = {
   children: React.ReactNode
 }
 
-const { Provider, useStore } = createContext<EditorState>()
+export const EditorContext = React.createContext<StoreApi<EditorState>>(
+  undefined as never
+)
 
 function getCanvasDimensions(windowSizes: Dimensions) {
   return {
@@ -46,7 +47,7 @@ const createInitialStore = (
   initialTextboxes: TextBox[],
   initialWindowSizes: Dimensions
 ) => {
-  return create<EditorState>((set) => {
+  return createStore<EditorState>((set) => {
     const ratio = getRatio(initialMeme, initialWindowSizes)
 
     return {
@@ -81,13 +82,13 @@ const EditorProvider = (props: EditorProviderProps) => {
   })
 
   // eslint-disable-next-line react/hook-use-state
-  const [createStore] = React.useState(() => {
-    return () => {
-      return createInitialStore(meme, textBoxes, wrapperDimensions)
-    }
+  const [store] = React.useState(() => {
+    return createInitialStore(meme, textBoxes, wrapperDimensions)
   })
 
-  return <Provider createStore={createStore}>{children}</Provider>
+  return (
+    <EditorContext.Provider value={store}>{children}</EditorContext.Provider>
+  )
 }
 
-export { EditorProvider, useStore as useEditorStore }
+export { EditorProvider }

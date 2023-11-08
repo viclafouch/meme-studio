@@ -21,16 +21,14 @@
     "react-dom": "18.2.0",
     "react-query": "3.39.3",
     "sass": "1.69.5",
-    "styled-components": "5.3.5",
-    "zustand": "3.7.2"
+    "styled-components": "6.1.1",
+    "zustand": "4.4.6"
   },
   "devDependencies": {
     "@types/node": "20.9.0",
     "@types/ramda": "0.29.8",
     "@types/react": "18.2.37",
-    "@types/styled-components": "5.1.30",
     "@viclafouch/eslint-config-viclafouch": "^4.4.0",
-    "babel-plugin-styled-components": "2.1.4",
     "eslint": "8.53.0",
     "prettier": "3.0.3",
     "typescript": "5.2.2"

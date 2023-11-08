@@ -1,7 +1,11 @@
-import { useEditorStore } from '@stores/Editor/editor.store'
+import React from 'react'
+import { useStore } from 'zustand'
+import { EditorContext } from '@stores/Editor/editor.store'
 
 export function useMeme() {
-  return useEditorStore((state) => {
+  const store = React.useContext(EditorContext)
+
+  return useStore(store, (state) => {
     return state.meme
   })
 }

@@ -24,9 +24,7 @@ const HomePage = (props: HomePageProps) => {
           Create a meme from JPG or PNG images. Edit your image and make your
           custom meme.
         </Styled.Caption>
-        <Styled.Link href="/create" passHref>
-          Get started
-        </Styled.Link>
+        <Styled.Link href="/create">Get started</Styled.Link>
         <Styled.MemesList>
           {memes.map((meme) => {
             return (
