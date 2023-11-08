@@ -15,16 +15,15 @@ const Gallery = () => {
           {data?.map((meme) => {
             return (
               <Styled.GalleryListItem key={meme.id}>
-                <Link href={`/create/${meme.id}`} passHref shallow>
-                  <Styled.ItemLink>
-                    <Image
-                      alt={meme.translations.en.name}
-                      width={meme.width}
-                      height={meme.height}
-                      loading="lazy"
-                      src={`https://www.meme-studio.io/templates/${meme.filename}`}
-                    />
-                  </Styled.ItemLink>
+                <Link href={`/create/${meme.id}`}>
+                  <Image
+                    alt={meme.translations.en.name}
+                    width={meme.width}
+                    height={meme.height}
+                    loading="lazy"
+                    style={{ width: '100%', height: 'auto' }}
+                    src={`https://www.meme-studio.io/templates/${meme.filename}`}
+                  />
                 </Link>
               </Styled.GalleryListItem>
             )

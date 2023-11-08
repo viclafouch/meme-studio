@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import Footer from '@components/Footer/Footer'
 import Page from '@components/Page/Page'
 import { Meme } from '@models/Meme'
@@ -19,16 +18,15 @@ const HomePage = (props: HomePageProps) => {
           alt="Meme Studio logo"
           width={350}
           height={67}
-          layout="fixed"
           src="/images/logo-meme-studio.png"
         />
         <Styled.Caption>
           Create a meme from JPG or PNG images. Edit your image and make your
           custom meme.
         </Styled.Caption>
-        <Link href="/create" passHref>
-          <Styled.Link forwardedAs="a">Get started</Styled.Link>
-        </Link>
+        <Styled.Link href="/create" passHref>
+          Get started
+        </Styled.Link>
         <Styled.MemesList>
           {memes.map((meme) => {
             return (
@@ -36,8 +34,8 @@ const HomePage = (props: HomePageProps) => {
                 <Styled.MemeArticle>
                   <Image
                     alt={meme.translations.en.name}
-                    width={meme.width}
-                    height={meme.height}
+                    width={meme.width / 2}
+                    height={meme.height / 2}
                     src={`https://www.meme-studio.io/templates/${meme.filename}`}
                   />
                 </Styled.MemeArticle>

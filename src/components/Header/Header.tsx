@@ -8,16 +8,13 @@ const Header = () => {
     <Styled.Header>
       <Styled.LogoBlock>
         <Link href="/">
-          <a>
-            <Image
-              alt="Meme Studio logo"
-              width={250}
-              height={67}
-              layout="fixed"
-              priority
-              src="/images/logo-meme-studio-light.png"
-            />
-          </a>
+          <Image
+            alt="Meme Studio logo"
+            width={250}
+            height={67}
+            priority
+            src="/images/logo-meme-studio-light.png"
+          />
         </Link>
       </Styled.LogoBlock>
     </Styled.Header>

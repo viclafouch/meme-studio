@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 import Styled from './footer.styled'
 
 const Footer = () => {
@@ -7,24 +6,16 @@ const Footer = () => {
     <Styled.Footer>
       <Styled.LinksList>
         <li>
-          <Link passHref href="/about">
-            <Styled.Link>About</Styled.Link>
-          </Link>
+          <Styled.Link href="/about">About</Styled.Link>
         </li>
         <li>
-          <Link passHref href="/terms">
-            <Styled.Link>Terms</Styled.Link>
-          </Link>
+          <Styled.Link href="/terms">Terms</Styled.Link>
         </li>
         <li>
-          <Link passHref href="/gallery">
-            <Styled.Link>Gallery</Styled.Link>
-          </Link>
+          <Styled.Link href="/gallery">Gallery</Styled.Link>
         </li>
         <li>
-          <Link passHref href="/qa">
-            <Styled.Link>Q&A</Styled.Link>
-          </Link>
+          <Styled.Link href="/qa">Q&A</Styled.Link>
         </li>
         <li>
           <Styled.Link

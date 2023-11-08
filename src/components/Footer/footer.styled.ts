@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styled from 'styled-components'
 
 export default {
@@ -12,7 +13,7 @@ export default {
     display: flex;
     justify-content: center;
   `,
-  Link: styled.a`
+  Link: styled(Link)`
     display: block;
     margin: 0 0.6rem;
     color: rgba(161, 161, 161, 0.884);

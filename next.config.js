@@ -1,7 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['www.meme-studio.io'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.meme-studio.io',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
+  compiler: {
+    styledComponents: true
   },
   reactStrictMode: true,
 }

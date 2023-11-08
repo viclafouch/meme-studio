@@ -37,12 +37,10 @@ const Tools = () => {
           </Styled.ToolsButton>
         </Styled.ToolsListItem>
         <Styled.ToolsListItem>
-          <Link href="/create" passHref>
-            <a>
-              <Styled.ToolsButton type="button">
-                <FontAwesomeIcon icon={faTrashRestore} />
-              </Styled.ToolsButton>
-            </a>
+          <Link href="/create">
+            <Styled.ToolsButton type="button">
+              <FontAwesomeIcon icon={faTrashRestore} />
+            </Styled.ToolsButton>
           </Link>
         </Styled.ToolsListItem>
       </Styled.ToolsList>

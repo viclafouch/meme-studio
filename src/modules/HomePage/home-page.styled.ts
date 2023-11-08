@@ -33,7 +33,6 @@ export default {
     list-style: none;
   `,
   MemeArticle: styled.article`
-    width: 12.5rem;
     border: 0.125rem solid #000000;
   `
 }
