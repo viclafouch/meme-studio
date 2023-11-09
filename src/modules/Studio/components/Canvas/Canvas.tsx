@@ -5,14 +5,16 @@ import { drawText } from '@shared/helpers/canvas'
 import { useCanvasDimensions } from '@stores/Editor/hooks/useCanvasDimensions'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useTexts } from '@stores/Editor/hooks/useTexts'
-import Draggable from '../Draggable/Draggable'
+import { useTools } from '@stores/Editor/hooks/useTools'
+import Draggable from '../Draggable'
 import Styled from './canvas.styled'
 
 const Canvas = () => {
   const meme = useMeme() as Meme
   const canvasElRef = React.useRef<HTMLCanvasElement>(null)
   const [texts] = useTexts()
-  const [dimensions] = useCanvasDimensions()
+  const dimensions = useCanvasDimensions()
+  const { showTextAreas } = useTools()
 
   React.useLayoutEffect(() => {
     const canvasElement = canvasElRef.current
@@ -56,16 +58,18 @@ const Canvas = () => {
           backgroundImage: `url('https://www.meme-studio.io/templates/${meme.filename}')`
         }}
       >
-        {texts.map((textbox) => {
-          return (
-            <Draggable
-              key={textbox.id}
-              textId={textbox.id}
-              canvasHeight={dimensions.height}
-              canvasWidth={dimensions.width}
-            />
-          )
-        })}
+        {showTextAreas
+          ? texts.map((textbox) => {
+              return (
+                <Draggable
+                  key={textbox.id}
+                  textId={textbox.id}
+                  canvasHeight={dimensions.height}
+                  canvasWidth={dimensions.width}
+                />
+              )
+            })
+          : null}
         <Styled.Canvas
           ref={canvasElRef}
           width={dimensions.width}

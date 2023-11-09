@@ -3,8 +3,13 @@ import { Meme } from 'models/Meme'
 import * as R from 'ramda'
 import { createStore, StoreApi } from 'zustand'
 import { getAspectRatio } from '@shared/helpers/dom'
-import { EditorState } from './editor'
-import { setCurrentTab, setResize, setText } from './editor.actions'
+import {
+  setCurrentTab,
+  setResize,
+  setText,
+  toggleShowTextAreas
+} from './editor.actions'
+import { EditorState } from './editor.types'
 
 type EditorProviderProps = {
   meme: Nullable<Meme>
@@ -62,12 +67,14 @@ const createInitialStore = (
         }
       }),
       ratio,
+      showTextAreas: true,
       currentTab: initialMeme ? 'customization' : 'gallery',
       canvasDimensions: {
         height: initialMeme ? ratio(initialMeme.height) : 0,
         width: initialMeme ? ratio(initialMeme.width) : 0
       },
       setCurrentTab: setCurrentTab(set),
+      toggleShowTextAreas: toggleShowTextAreas(set),
       resize: setResize(set),
       updateText: setText(set)
     }

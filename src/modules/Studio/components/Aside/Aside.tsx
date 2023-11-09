@@ -1,5 +1,5 @@
 import React from 'react'
-import { Tab } from '@stores/Editor/editor'
+import { Tab } from '@stores/Editor/editor.types'
 import { useTab } from '@stores/Editor/hooks/useTabs'
 import { faHeading, faImage } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

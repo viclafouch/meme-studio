@@ -8,6 +8,12 @@ export class Meme {
 
   public height: number
 
+  public centerX: number
+
+  public centerY: number
+
+  public rotate: number
+
   public boxCount: number
 
   public localImageUrl: string
@@ -26,6 +32,9 @@ export class Meme {
     this.width = meme.width
     this.translations = meme.translations
     this.height = meme.height
+    this.centerX = meme.centerX
+    this.rotate = meme.rotate
+    this.centerY = meme.centerY
     this.boxCount = meme.boxCount
     this.localImageUrl = meme.localImageUrl || null
   }

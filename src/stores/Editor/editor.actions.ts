@@ -1,7 +1,7 @@
 import { Draft, produce } from 'immer'
 import * as R from 'ramda'
-import { SetState } from 'zustand'
-import { EditorState, Tab } from './editor'
+import { StoreApi } from 'zustand'
+import { EditorState, Tab } from './editor.types'
 
 function getCanvasDimensions(windowSizes: Dimensions) {
   return {
@@ -10,7 +10,7 @@ function getCanvasDimensions(windowSizes: Dimensions) {
   }
 }
 
-export function setCurrentTab(set: SetState<EditorState>) {
+export function setCurrentTab(set: StoreApi<EditorState>['setState']) {
   return (newTab: Tab) => {
     return set(
       produce((draft: Draft<EditorState>) => {
@@ -20,7 +20,7 @@ export function setCurrentTab(set: SetState<EditorState>) {
   }
 }
 
-export function setResize(set: SetState<EditorState>) {
+export function setResize(set: StoreApi<EditorState>['setState']) {
   return (windowSizes: Dimensions) => {
     return set(
       produce((draft: Draft<EditorState>) => {
@@ -30,7 +30,7 @@ export function setResize(set: SetState<EditorState>) {
   }
 }
 
-export function setText(set: SetState<EditorState>) {
+export function setText(set: StoreApi<EditorState>['setState']) {
   return (textId: TextBox['id'], values: Partial<TextBox>) => {
     return set(
       produce((draft: Draft<EditorState>) => {
@@ -41,6 +41,16 @@ export function setText(set: SetState<EditorState>) {
           ...(draft.texts[textIndex] as TextBox),
           ...values
         }
+      })
+    )
+  }
+}
+
+export function toggleShowTextAreas(set: StoreApi<EditorState>['setState']) {
+  return () => {
+    return set(
+      produce((draft: Draft<EditorState>) => {
+        draft.showTextAreas = !draft.showTextAreas
       })
     )
   }

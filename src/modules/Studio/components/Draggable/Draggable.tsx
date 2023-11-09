@@ -8,7 +8,7 @@ import Styled from './draggable.styled'
 import { Side, State } from './draggable.types'
 import { move, resize, rotate } from './draggable.utils'
 
-type DraggableProps = {
+export type DraggableProps = {
   textId: TextBox['id']
   canvasHeight: number
   canvasWidth: number

@@ -7,8 +7,10 @@ export type EditorState = {
   texts: TextBox[]
   currentTab: Tab
   setCurrentTab: (newTab: Tab) => void
-  updateText: (textId: MemeText['id'], text: Partial<MemeText>) => void
+  toggleShowTextAreas: () => void
+  updateText: (textId: Meme['id'], text: Partial<Meme>) => void
   ratio: (value: number) => number
+  showTextAreas: boolean
   canvasDimensions: {
     width: number
     height: number

@@ -2,21 +2,16 @@ import React from 'react'
 import * as R from 'ramda'
 import { useStoreWithEqualityFn } from 'zustand/traditional'
 import { EditorContext } from '@stores/Editor/editor.store'
-import { EditorState } from '../editor'
 
-type UseTextsReturn = [EditorState['texts'], EditorState['updateText']]
-
-export function useTexts(): UseTextsReturn {
+export function useTexts() {
   const store = React.useContext(EditorContext)
 
   return useStoreWithEqualityFn(store, (state) => {
-    return [state.texts, state.updateText]
+    return [state.texts, state.updateText] as const
   })
 }
 
-type UseTextReturn = [TextBox, EditorState['updateText']]
-
-export function useText(textId: TextBox['id']): UseTextReturn {
+export function useText(textId: TextBox['id']) {
   const store = React.useContext(EditorContext)
 
   return useStoreWithEqualityFn(store, (state) => {
@@ -25,6 +20,6 @@ export function useText(textId: TextBox['id']): UseTextReturn {
         return textBox.id === textId
       }, state.texts) as TextBox,
       state.updateText
-    ]
+    ] as const
   })
 }
