@@ -55,3 +55,26 @@ export function toggleShowTextAreas(set: StoreApi<EditorState>['setState']) {
     )
   }
 }
+
+export function eraseAllTexts(set: StoreApi<EditorState>['setState']) {
+  return () => {
+    return set(
+      produce((draft: Draft<EditorState>) => {
+        draft.showTextAreas = true
+        draft.texts = []
+      })
+    )
+  }
+}
+
+export function resetAll(set: StoreApi<EditorState>['setState']) {
+  return () => {
+    return set(
+      produce((draft: Draft<EditorState>) => {
+        draft.showTextAreas = true
+        draft.texts = []
+        draft.meme = null
+      })
+    )
+  }
+}

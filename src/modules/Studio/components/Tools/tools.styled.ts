@@ -43,5 +43,14 @@ export default {
     font-family: 'Alata', sans-serif;
     font-weight: 400;
     color: #ffffff;
+
+    &:disabled {
+      color: rgb(146, 146, 146);
+      cursor: not-allowed;
+    }
+
+    &:not(:disabled):hover {
+      color: #c5c5c5;
+    }
   `
 }

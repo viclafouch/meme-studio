@@ -7,7 +7,10 @@ const rightPosition = css`
 `
 
 export default {
-  Wrapper: styled.div<{ $position: 'left' | 'right' | 'top' | 'bottom' }>`
+  Wrapper: styled.div<{
+    $position: 'left' | 'right' | 'top' | 'bottom'
+    $disabled?: boolean
+  }>`
     position: relative;
     --background-tooltip: rgba(0, 0, 0, 0.79);
 
@@ -50,10 +53,16 @@ export default {
       line-height: 0;
     }
 
-    &:hover::after,
-    &:hover::before {
-      opacity: 1;
-      visibility: visible;
-    }
+    ${(props) => {
+      return !props.$disabled
+        ? css`
+            &:hover::after,
+            &:hover::before {
+              opacity: 1;
+              visibility: visible;
+            }
+          `
+        : null
+    }}
   `
 }

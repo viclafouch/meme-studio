@@ -4,6 +4,8 @@ import * as R from 'ramda'
 import { createStore, StoreApi } from 'zustand'
 import { getAspectRatio } from '@shared/helpers/dom'
 import {
+  eraseAllTexts,
+  resetAll,
   setCurrentTab,
   setResize,
   setText,
@@ -75,26 +77,32 @@ const createInitialStore = (
       },
       setCurrentTab: setCurrentTab(set),
       toggleShowTextAreas: toggleShowTextAreas(set),
+      eraseAllTexts: eraseAllTexts(set),
       resize: setResize(set),
+      resetAll: resetAll(set),
       updateText: setText(set)
     }
   })
 }
 
-const EditorProvider = (props: EditorProviderProps) => {
-  const { children, meme, windowWidth, windowHeight, textBoxes } = props
-  const wrapperDimensions = getCanvasDimensions({
-    height: windowHeight,
-    width: windowWidth
-  })
+type BearStore = ReturnType<typeof createInitialStore>
 
-  // eslint-disable-next-line react/hook-use-state
-  const [store] = React.useState(() => {
-    return createInitialStore(meme, textBoxes, wrapperDimensions)
-  })
+const EditorProvider = (props: EditorProviderProps) => {
+  const storeRef = React.useRef<BearStore>()
+  const { children, meme, windowWidth, windowHeight, textBoxes } = props
+
+  if (!storeRef.current) {
+    const wrapperDimensions = getCanvasDimensions({
+      height: windowHeight,
+      width: windowWidth
+    })
+    storeRef.current = createInitialStore(meme, textBoxes, wrapperDimensions)
+  }
 
   return (
-    <EditorContext.Provider value={store}>{children}</EditorContext.Provider>
+    <EditorContext.Provider value={storeRef.current}>
+      {children}
+    </EditorContext.Provider>
   )
 }
 

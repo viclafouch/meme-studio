@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 import Tooltip from '@components/Tooltip'
+import { useMeme } from '@stores/Editor/hooks/useMeme'
+import { useCountTexts } from '@stores/Editor/hooks/useTexts'
 import { useTools } from '@stores/Editor/hooks/useTools'
 import {
   faCrop,
@@ -15,7 +17,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Styled from './tools.styled'
 
 const Tools = () => {
-  const { showTextAreas, toggleShowTextAreas } = useTools()
+  const { showTextAreas, toggleShowTextAreas, eraseAllTexts, resetAll } =
+    useTools()
+  const countTexts = useCountTexts()
+  const meme = useMeme()
 
   const handleClick = (callback: () => void) => {
     return (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -34,10 +39,12 @@ const Tools = () => {
                 ? 'Cacher les zones de texte'
                 : 'Afficher les zones de texte'
             }
+            disabled={countTexts === 0}
             position="right"
           >
             <Styled.ToolsButton
               type="button"
+              disabled={countTexts === 0}
               onClick={handleClick(toggleShowTextAreas)}
             >
               <FontAwesomeIcon icon={faCrop} />
@@ -55,16 +62,32 @@ const Tools = () => {
           </Styled.ToolsButton>
         </Styled.ToolsListItem>
         <Styled.ToolsListItem>
-          <Styled.ToolsButton type="button">
-            <FontAwesomeIcon icon={faEraser} />
-          </Styled.ToolsButton>
+          <Tooltip
+            text="Écraser tout"
+            disabled={countTexts === 0}
+            position="right"
+          >
+            <Styled.ToolsButton
+              type="button"
+              disabled={countTexts === 0}
+              onClick={handleClick(eraseAllTexts)}
+            >
+              <FontAwesomeIcon icon={faEraser} />
+            </Styled.ToolsButton>
+          </Tooltip>
         </Styled.ToolsListItem>
         <Styled.ToolsListItem>
-          <Link href="/create">
-            <Styled.ToolsButton type="button">
-              <FontAwesomeIcon icon={faTrashRestore} />
-            </Styled.ToolsButton>
-          </Link>
+          <Tooltip text="Réinitialiser" disabled={!meme} position="right">
+            {!meme ? (
+              <Styled.ToolsButton disabled>
+                <FontAwesomeIcon icon={faTrashRestore} />
+              </Styled.ToolsButton>
+            ) : (
+              <Styled.ToolsButton as={Link} href="/create" onClick={resetAll}>
+                <FontAwesomeIcon icon={faTrashRestore} />
+              </Styled.ToolsButton>
+            )}
+          </Tooltip>
         </Styled.ToolsListItem>
       </Styled.ToolsList>
       <Styled.ToolsList>
@@ -83,4 +106,4 @@ const Tools = () => {
   )
 }
 
-export default Tools
+export default React.memo(Tools)
