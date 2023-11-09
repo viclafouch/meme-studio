@@ -3,7 +3,7 @@ import { Meme } from '@models/Meme'
 export type Tab = 'gallery' | 'customization'
 
 export type EditorState = {
-  meme: Nullable<Meme>
+  meme: Meme | null
   texts: TextBox[]
   currentTab: Tab
   setCurrentTab: (newTab: Tab) => void

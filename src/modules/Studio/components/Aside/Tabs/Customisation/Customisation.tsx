@@ -14,7 +14,7 @@ const Customisation = () => {
   }
 
   return (
-    <div>
+    <Styled.Scrollable>
       <Styled.BlockTitle>
         <Styled.Legend>Customization</Styled.Legend>
         <Styled.MemeName>{meme.translations.en.name}</Styled.MemeName>
@@ -31,7 +31,7 @@ const Customisation = () => {
           )
         })}
       </Styled.TextBlocks>
-    </div>
+    </Styled.Scrollable>
   )
 }
 

@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
 export default {
+  Scrollable: styled.div`
+    overflow-y: auto;
+  `,
   BlockTitle: styled.div`
     text-align: center;
     font-size: 1.1rem;

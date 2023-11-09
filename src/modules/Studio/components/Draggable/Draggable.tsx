@@ -16,8 +16,7 @@ type DraggableProps = {
 
 type Type = 'drag' | 'resize' | 'rotate'
 
-const Draggable = (props: DraggableProps) => {
-  const { canvasHeight, canvasWidth, textId } = props
+const Draggable = ({ canvasHeight, canvasWidth, textId }: DraggableProps) => {
   const [text, updater] = useText(textId)
   const [state, setState] = React.useState<State>(() => {
     return {
@@ -240,4 +239,4 @@ const Draggable = (props: DraggableProps) => {
   )
 }
 
-export default Draggable
+export default React.memo(Draggable)

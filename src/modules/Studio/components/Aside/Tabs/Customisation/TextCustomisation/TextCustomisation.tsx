@@ -21,9 +21,11 @@ function getUpdatedText(text: TextBox, values: Partial<TextBox>): TextBox {
   }
 }
 
-const TextCustomisation = (props: TextCustomisationProps) => {
-  const { text, index, onUpdateText } = props
-
+const TextCustomisation = ({
+  text,
+  index,
+  onUpdateText
+}: TextCustomisationProps) => {
   const handleEditText = (key: keyof TextBox) => {
     return (
       event: React.ChangeEvent<
