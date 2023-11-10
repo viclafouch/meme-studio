@@ -1,6 +1,7 @@
 import { Draft, produce } from 'immer'
 import * as R from 'ramda'
 import { StoreApi } from 'zustand'
+import { randomId } from '@shared/helpers/string'
 import { createTextBox, TextBox } from '@shared/schemas/textbox'
 import { Dimensions, EditorState, Tab } from './editor.types'
 
@@ -136,6 +137,27 @@ export function removeItem(set: StoreApi<EditorState>['setState']) {
         draft.texts = draft.texts.filter((text) => {
           return text.id !== itemId
         })
+      })
+    )
+  }
+}
+
+export function duplicateItem(set: StoreApi<EditorState>['setState']) {
+  return (itemId: string) => {
+    return set(
+      produce((draft: Draft<EditorState>) => {
+        const item = draft.texts.find((textbox) => {
+          return textbox.id === itemId
+        })
+
+        if (item) {
+          const newItem = {
+            ...item,
+            id: randomId()
+          }
+          draft.texts.push(newItem)
+          draft.itemIdSelected = newItem.id
+        }
       })
     )
   }

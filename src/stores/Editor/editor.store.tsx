@@ -6,6 +6,7 @@ import { getAspectRatio } from '@shared/helpers/dom'
 import { TextBox } from '@shared/schemas/textbox'
 import {
   addText,
+  duplicateItem,
   eraseAllTexts,
   removeItem,
   resetAll,
@@ -88,6 +89,7 @@ const createInitialStore = (
       resetAll: resetAll(set),
       addText: addText(set),
       removeItem: removeItem(set),
+      duplicateItem: duplicateItem(set),
       toggleItemIdSelected: toggleItemIdSelected(set),
       setItemIdSelected: setItemIdSelected(set),
       updateText: setText(set)

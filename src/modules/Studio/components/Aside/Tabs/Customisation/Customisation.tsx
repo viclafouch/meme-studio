@@ -6,7 +6,7 @@ import { useItemIdSelected } from '@stores/Editor/hooks/useItemIdSelected'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useTexts } from '@stores/Editor/hooks/useTexts'
 import Accordion from '@studio/components/Accordion'
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faClone, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Styled from './customisation.styled'
 import EmptyCustom from './EmptyCustom'
@@ -14,7 +14,7 @@ import TextCustomisation from './TextCustomisation'
 
 const Customisation = () => {
   const meme = useMeme()
-  const { texts, updateText, addText, removeItem } = useTexts()
+  const { texts, updateText, addText, removeItem, duplicateItem } = useTexts()
   const { itemIdSelected, toggleItemIdSelected } = useItemIdSelected()
 
   if (!meme) {
@@ -34,6 +34,14 @@ const Customisation = () => {
     }
   }
 
+  const handleDuplicateItem = (itemId: string) => {
+    return (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault()
+      event.stopPropagation()
+      duplicateItem(itemId)
+    }
+  }
+
   return (
     <Styled.Scrollable>
       <Styled.BlockTitle>
@@ -50,15 +58,26 @@ const Customisation = () => {
               isOpened={itemIdSelected === textbox.id}
               key={textbox.id}
               action={
-                <Tooltip text="Supprimer" position="top">
-                  <Styled.ActionButton
-                    aria-label="Supprimer"
-                    onClick={handleRemoveItem(textbox.id)}
-                    type="button"
-                  >
-                    <FontAwesomeIcon icon={faTrashAlt} />
-                  </Styled.ActionButton>
-                </Tooltip>
+                <>
+                  <Tooltip text="Dupliquer" position="top">
+                    <Styled.ActionButton
+                      aria-label="Dupliquer"
+                      onClick={handleDuplicateItem(textbox.id)}
+                      type="button"
+                    >
+                      <FontAwesomeIcon icon={faClone} />
+                    </Styled.ActionButton>
+                  </Tooltip>
+                  <Tooltip text="Supprimer" position="top">
+                    <Styled.ActionButton
+                      aria-label="Supprimer"
+                      onClick={handleRemoveItem(textbox.id)}
+                      type="button"
+                    >
+                      <FontAwesomeIcon icon={faTrashAlt} />
+                    </Styled.ActionButton>
+                  </Tooltip>
+                </>
               }
             >
               <TextCustomisation

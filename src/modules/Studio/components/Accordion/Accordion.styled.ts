@@ -16,6 +16,10 @@ export default {
     width: 100%;
     color: rgb(212, 212, 212);
   `,
+  Actions: styled.div`
+    display: flex;
+    align-items: center;
+  `,
   Title: styled.p`
     font-weight: 600;
     font-size: 14px;

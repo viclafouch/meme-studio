@@ -12,9 +12,9 @@ export function useTexts() {
   return useStoreWithEqualityFn(
     store,
     (state) => {
-      const { texts, updateText, addText, removeItem } = state
+      const { texts, updateText, addText, removeItem, duplicateItem } = state
 
-      return { texts, updateText, addText, removeItem } as const
+      return { texts, updateText, addText, removeItem, duplicateItem } as const
     },
     shallow
   )
@@ -34,7 +34,7 @@ export function useText(textId: TextBox['id']) {
   return useStoreWithEqualityFn(
     store,
     (state) => {
-      const { texts, updateText, addText } = state
+      const { texts, updateText, addText, duplicateItem } = state
 
       const text = R.find((textBox) => {
         return textBox.id === textId
@@ -43,7 +43,8 @@ export function useText(textId: TextBox['id']) {
       return {
         text,
         updateText,
-        addText
+        addText,
+        duplicateItem
       }
     },
     shallow

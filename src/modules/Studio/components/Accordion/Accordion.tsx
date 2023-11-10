@@ -37,7 +37,7 @@ const Accordion = ({
     <Styled.Section id={id}>
       <Styled.Header tabIndex={0} role="button" onClick={handleToggle}>
         <Styled.Title>{title}</Styled.Title>
-        {action ? <div>{action}</div> : null}
+        {action ? <Styled.Actions>{action}</Styled.Actions> : null}
       </Styled.Header>
       <Styled.Content ref={content} style={{ maxHeight: currentHeight }}>
         {children}

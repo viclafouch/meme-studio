@@ -15,6 +15,7 @@ type EditorActions = {
   resetAll: () => void
   addText: (values?: Partial<TextBox>) => void
   removeItem: (itemId: string) => void
+  duplicateItem: (itemId: string) => void
   toggleItemIdSelected: (itemId: TextBox['id']) => void
   setItemIdSelected: (itemId: TextBox['id'], value: boolean) => void
   updateText: (textId: Meme['id'], text: Partial<Meme>) => void
