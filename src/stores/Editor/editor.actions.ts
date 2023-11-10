@@ -124,3 +124,19 @@ export function addText(set: StoreApi<EditorState>['setState']) {
     )
   }
 }
+
+export function removeItem(set: StoreApi<EditorState>['setState']) {
+  return (itemId: string) => {
+    return set(
+      produce((draft: Draft<EditorState>) => {
+        if (draft.itemIdSelected === itemId) {
+          draft.itemIdSelected = null
+        }
+
+        draft.texts = draft.texts.filter((text) => {
+          return text.id !== itemId
+        })
+      })
+    )
+  }
+}

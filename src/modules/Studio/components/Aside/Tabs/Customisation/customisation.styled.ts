@@ -32,5 +32,9 @@ export default {
   TextBlocks: styled.div`
     display: flex;
     flex-direction: column;
+  `,
+  ActionButton: styled.button`
+    background-color: transparent;
+    border: 0;
   `
 }

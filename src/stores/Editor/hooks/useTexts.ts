@@ -12,9 +12,9 @@ export function useTexts() {
   return useStoreWithEqualityFn(
     store,
     (state) => {
-      const { texts, updateText, addText } = state
+      const { texts, updateText, addText, removeItem } = state
 
-      return { texts, updateText, addText } as const
+      return { texts, updateText, addText, removeItem } as const
     },
     shallow
   )

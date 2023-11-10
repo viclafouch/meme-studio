@@ -8,6 +8,7 @@ export type AccordionProps = {
   title: string
   onToggle: (id: string) => void
   id: string
+  action?: React.ReactNode
 }
 
 const Accordion = ({
@@ -15,7 +16,8 @@ const Accordion = ({
   isOpened,
   title,
   onToggle,
-  id
+  id,
+  action = null
 }: AccordionProps) => {
   const [currentHeight, setCurrentHeight] = React.useState<number>(0)
   const content = React.useRef<HTMLDivElement>(null)
@@ -35,6 +37,7 @@ const Accordion = ({
     <Styled.Section id={id}>
       <Styled.Header tabIndex={0} role="button" onClick={handleToggle}>
         <Styled.Title>{title}</Styled.Title>
+        {action ? <div>{action}</div> : null}
       </Styled.Header>
       <Styled.Content ref={content} style={{ maxHeight: currentHeight }}>
         {children}

@@ -7,6 +7,7 @@ import { TextBox } from '@shared/schemas/textbox'
 import {
   addText,
   eraseAllTexts,
+  removeItem,
   resetAll,
   setCurrentTab,
   setItemIdSelected,
@@ -86,6 +87,7 @@ const createInitialStore = (
       resize: setResize(set),
       resetAll: resetAll(set),
       addText: addText(set),
+      removeItem: removeItem(set),
       toggleItemIdSelected: toggleItemIdSelected(set),
       setItemIdSelected: setItemIdSelected(set),
       updateText: setText(set)
