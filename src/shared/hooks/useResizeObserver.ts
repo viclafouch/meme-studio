@@ -1,4 +1,5 @@
 import React from 'react'
+import { Dimensions } from '@stores/Editor/editor.types'
 
 export function useResizeObserverCallback(
   ref: React.RefObject<Element>,

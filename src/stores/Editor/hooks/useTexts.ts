@@ -1,15 +1,23 @@
 import React from 'react'
 import * as R from 'ramda'
 import { useStore } from 'zustand'
+import { shallow } from 'zustand/shallow'
 import { useStoreWithEqualityFn } from 'zustand/traditional'
+import { TextBox } from '@shared/schemas/textbox'
 import { EditorContext } from '@stores/Editor/editor.store'
 
 export function useTexts() {
   const store = React.useContext(EditorContext)
 
-  return useStoreWithEqualityFn(store, (state) => {
-    return [state.texts, state.updateText] as const
-  })
+  return useStoreWithEqualityFn(
+    store,
+    (state) => {
+      const { texts, updateText, addText } = state
+
+      return { texts, updateText, addText } as const
+    },
+    shallow
+  )
 }
 
 export function useCountTexts() {
@@ -23,12 +31,21 @@ export function useCountTexts() {
 export function useText(textId: TextBox['id']) {
   const store = React.useContext(EditorContext)
 
-  return useStoreWithEqualityFn(store, (state) => {
-    return [
-      R.find((textBox) => {
+  return useStoreWithEqualityFn(
+    store,
+    (state) => {
+      const { texts, updateText, addText } = state
+
+      const text = R.find((textBox) => {
         return textBox.id === textId
-      }, state.texts) as TextBox,
-      state.updateText
-    ] as const
-  })
+      }, texts) as TextBox
+
+      return {
+        text,
+        updateText,
+        addText
+      }
+    },
+    shallow
+  )
 }

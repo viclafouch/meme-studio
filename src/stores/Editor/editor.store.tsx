@@ -3,7 +3,9 @@ import { Meme } from 'models/Meme'
 import * as R from 'ramda'
 import { createStore, StoreApi } from 'zustand'
 import { getAspectRatio } from '@shared/helpers/dom'
+import { TextBox } from '@shared/schemas/textbox'
 import {
+  addText,
   eraseAllTexts,
   resetAll,
   setCurrentTab,
@@ -13,10 +15,10 @@ import {
   toggleItemIdSelected,
   toggleShowTextAreas
 } from './editor.actions'
-import { EditorState } from './editor.types'
+import { Dimensions, EditorState } from './editor.types'
 
 type EditorProviderProps = {
-  meme: Nullable<Meme>
+  meme: Meme | null
   textBoxes: TextBox[]
   windowWidth: number
   windowHeight: number
@@ -83,6 +85,7 @@ const createInitialStore = (
       eraseAllTexts: eraseAllTexts(set),
       resize: setResize(set),
       resetAll: resetAll(set),
+      addText: addText(set),
       toggleItemIdSelected: toggleItemIdSelected(set),
       setItemIdSelected: setItemIdSelected(set),
       updateText: setText(set)

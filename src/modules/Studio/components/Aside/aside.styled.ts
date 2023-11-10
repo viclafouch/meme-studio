@@ -13,7 +13,7 @@ export default {
     width: 100%;
     display: flex;
   `,
-  Button: styled(Button)`
+  Button: styled(Button)<{ $isActive: boolean }>`
     flex: 1;
     border-radius: 0;
     font-size: 1.5rem;

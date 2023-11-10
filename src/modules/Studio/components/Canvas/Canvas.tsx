@@ -3,6 +3,7 @@ import * as R from 'ramda'
 import { Meme } from '@models/Meme'
 import { drawText } from '@shared/helpers/canvas'
 import { useIsomorphicLayoutEffect } from '@shared/hooks/useIsomorphicLayoutEffect'
+import { TextBox } from '@shared/schemas/textbox'
 import { useCanvasDimensions } from '@stores/Editor/hooks/useCanvasDimensions'
 import { useItemIdSelected } from '@stores/Editor/hooks/useItemIdSelected'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
@@ -14,7 +15,7 @@ import Styled from './canvas.styled'
 const Canvas = () => {
   const meme = useMeme() as Meme
   const canvasElRef = React.useRef<HTMLCanvasElement>(null)
-  const [texts] = useTexts()
+  const { texts } = useTexts()
   const dimensions = useCanvasDimensions()
   const { showTextAreas } = useTools()
   const { itemIdSelected, setItemIdSelected } = useItemIdSelected()
@@ -53,7 +54,7 @@ const Canvas = () => {
   }, [texts, canvasElRef, meme, dimensions])
 
   const onDraggableClick = React.useCallback(
-    (itemId: TextBox['id']) => {
+    (itemId: string) => {
       setItemIdSelected(itemId, true)
     },
     [setItemIdSelected]

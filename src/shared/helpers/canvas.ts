@@ -1,4 +1,5 @@
 import * as R from 'ramda'
+import { TextBox } from '@shared/schemas/textbox'
 import { degreeToRad } from './number'
 
 const PADDING_INLINE = 4

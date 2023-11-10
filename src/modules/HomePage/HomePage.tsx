@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import Footer from '@components/Footer/Footer'
 import Page from '@components/Page/Page'
 import { Meme } from '@models/Meme'
@@ -22,7 +23,9 @@ const HomePage = ({ memes }: HomePageProps) => {
           Create a meme from JPG or PNG images. Edit your image and make your
           custom meme.
         </Styled.Caption>
-        <Styled.Link href="/create">Get started</Styled.Link>
+        <Styled.Link href="/create" as={Link}>
+          Get started
+        </Styled.Link>
         <Styled.MemesList>
           {memes.map((meme) => {
             return (

@@ -1,7 +1,8 @@
 import { Draft, produce } from 'immer'
 import * as R from 'ramda'
 import { StoreApi } from 'zustand'
-import { EditorState, Tab } from './editor.types'
+import { createTextBox, TextBox } from '@shared/schemas/textbox'
+import { Dimensions, EditorState, Tab } from './editor.types'
 
 function getCanvasDimensions(windowSizes: Dimensions) {
   return {
@@ -94,6 +95,31 @@ export function setItemIdSelected(set: StoreApi<EditorState>['setState']) {
     return set(
       produce((draft: Draft<EditorState>) => {
         draft.itemIdSelected = value ? itemId : null
+      })
+    )
+  }
+}
+
+export function addText(set: StoreApi<EditorState>['setState']) {
+  return (values: Partial<TextBox> = {}) => {
+    return set(
+      produce((draft: Draft<EditorState>) => {
+        const { meme, ratio } = draft
+
+        if (!meme) {
+          return
+        }
+
+        const textbox = createTextBox({
+          width: ratio(meme.width * 0.33),
+          height: ratio(meme.height * 0.33),
+          centerX: ratio(meme.width / 2),
+          centerY: ratio(meme.height / 2),
+          ...values
+        })
+
+        draft.itemIdSelected = textbox.id
+        draft.texts.push(textbox)
       })
     )
   }

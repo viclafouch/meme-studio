@@ -6,7 +6,8 @@ import {
   FONTS_FAMILY,
   TEXT_ALIGN
 } from '@shared/constants/fonts'
-import { preventEmptyTextValue } from '@shared/utils/text'
+import { TextBox } from '@shared/schemas/textbox'
+import { preventEmptyTextValue } from '@shared/utils/textbox'
 import Styled from './TextCustomisation.styled'
 
 export type TextCustomisationProps = {

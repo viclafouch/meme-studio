@@ -1,33 +1,29 @@
+/* eslint-disable react/require-default-props */
 import * as React from 'react'
-import Styled from './button.styled'
+import Styled from './Button.styled'
 
-interface ButtonProps<T extends React.ElementType> {
-  as?: T
-}
+export type ButtonProps = {
+  rounded?: boolean
+  fullWidth?: boolean
+} & React.ComponentProps<'button'>
 
 // eslint-disable-next-line react/display-name
 const Button = React.forwardRef(
-  <T extends React.ElementType = 'button'>(
-    props: ButtonProps<T> &
-      Omit<React.ComponentPropsWithoutRef<T>, keyof ButtonProps<T>>,
-    ref:
-      | ((instance: HTMLButtonElement | null) => void)
-      | React.RefObject<HTMLButtonElement>
-      | null
-      | undefined
+  (
+    { rounded = true, fullWidth = false, children, ...restProps }: ButtonProps,
+    ref: React.ForwardedRef<HTMLButtonElement>
   ) => {
-    const { children, ...rest } = props
-
     return (
-      <Styled.Button ref={ref} {...rest}>
+      <Styled.Button
+        $fullWidth={fullWidth}
+        $rounded={rounded}
+        ref={ref}
+        {...restProps}
+      >
         {children}
       </Styled.Button>
     )
   }
 )
-
-Button.defaultProps = {
-  as: 'button'
-}
 
 export default Button

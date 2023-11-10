@@ -33,3 +33,5 @@ type Await<T> = T extends {
 }
   ? U
   : T
+
+type PartialWithRequired<T, K extends keyof T> = Pick<T, K> & Partial<T>

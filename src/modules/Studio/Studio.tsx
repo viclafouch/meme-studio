@@ -34,7 +34,8 @@ const CreatePage = () => {
           windowHeight={windowSize.height}
           windowWidth={windowSize.width}
           key={meme?.id}
-          textBoxes={meme ? meme.texts : []}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          textBoxes={meme ? (meme.texts as any) : []}
           meme={meme ? new Meme(meme) : null}
         >
           <Header />

@@ -9,11 +9,11 @@ import { Side, State } from './Draggable.types'
 import { move, resize, rotate } from './Draggable.utils'
 
 export type DraggableProps = {
-  itemId: TextBox['id']
+  itemId: string
   canvasHeight: number
   canvasWidth: number
   isSelected: boolean
-  onClick: (itemId: TextBox['id']) => void
+  onClick: (itemId: string) => void
 }
 
 type Type = 'drag' | 'resize' | 'rotate'
@@ -25,7 +25,7 @@ const Draggable = ({
   isSelected,
   onClick
 }: DraggableProps) => {
-  const [text, updater] = useText(itemId)
+  const { text, updateText } = useText(itemId)
   const [state, setState] = React.useState<State>(() => {
     return {
       mode: false,
@@ -52,7 +52,7 @@ const Draggable = ({
     const centerY = state.top + state.height / 2
     const centerX = state.left + state.width / 2
 
-    updater(itemId, {
+    updateText(itemId, {
       width: state.width,
       height: state.height,
       centerX,
@@ -66,7 +66,7 @@ const Draggable = ({
     state.height,
     state.rotate,
     itemId,
-    updater
+    updateText
   ])
 
   const handleMouseDown = (event: React.MouseEvent) => {
