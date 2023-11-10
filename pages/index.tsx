@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import HomePage from 'modules/HomePage/HomePage'
+import HomePage from 'modules/HomePage'
 import { Meme } from '@models/Meme'
 import memesData from './api/meme.json'
 

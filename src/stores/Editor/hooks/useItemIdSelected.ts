@@ -9,11 +9,12 @@ export function useItemIdSelected() {
   return useStoreWithEqualityFn(
     store,
     (state) => {
-      const { itemIdSelected, toggleItemIdSelected } = state
+      const { itemIdSelected, toggleItemIdSelected, setItemIdSelected } = state
 
       return {
         itemIdSelected,
-        toggleItemIdSelected
+        toggleItemIdSelected,
+        setItemIdSelected
       } as const
     },
     shallow

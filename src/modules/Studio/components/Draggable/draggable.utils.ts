@@ -1,5 +1,5 @@
 import { radToDegree } from '@shared/helpers/number'
-import type { MaxSizes, State } from './draggable.types'
+import type { MaxSizes, State } from './Draggable.types'
 
 export function move(
   event: MouseEvent,

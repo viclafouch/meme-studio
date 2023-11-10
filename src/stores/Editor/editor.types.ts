@@ -8,6 +8,7 @@ type EditorActions = {
   eraseAllTexts: () => void
   resetAll: () => void
   toggleItemIdSelected: (itemId: TextBox['id']) => void
+  setItemIdSelected: (itemId: TextBox['id'], value: boolean) => void
   updateText: (textId: Meme['id'], text: Partial<Meme>) => void
 }
 

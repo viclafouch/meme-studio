@@ -7,6 +7,7 @@ import {
   eraseAllTexts,
   resetAll,
   setCurrentTab,
+  setItemIdSelected,
   setResize,
   setText,
   toggleItemIdSelected,
@@ -83,6 +84,7 @@ const createInitialStore = (
       resize: setResize(set),
       resetAll: resetAll(set),
       toggleItemIdSelected: toggleItemIdSelected(set),
+      setItemIdSelected: setItemIdSelected(set),
       updateText: setText(set)
     }
   })

@@ -7,15 +7,20 @@ export default {
     background-color: transparent;
     position: absolute;
     z-index: 1;
-    border: 0.0625rem dotted rgba(14, 42, 71, 0.6);
     cursor: move;
+    --color-widget: rgba(14, 42, 71, 0.6);
+    border: 0.0625rem dotted var(--color-widget);
+
+    &[aria-selected='true'] {
+      --color-widget: rgb(48, 91, 161);
+    }
   `,
   Resize: styled.div`
     display: block;
     width: ${resizeSize};
     height: ${resizeSize};
     border-radius: 50%;
-    background-color: #305ba1;
+    background-color: var(--color-widget);
     z-index: 2;
     position: absolute;
     transform: translate(-50%, -50%);
@@ -53,7 +58,7 @@ export default {
     align-items: center;
     border-radius: 0.3rem;
     transform: translateX(-50%);
-    background-color: #305ba1;
+    background-color: var(--color-widget);
     position: absolute;
     top: calc(100% + 1rem);
     left: 50%;

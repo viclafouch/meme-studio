@@ -4,20 +4,28 @@ import { degreeToRad } from '@shared/helpers/number'
 import { useText } from '@stores/Editor/hooks/useTexts'
 import { faRotateLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Styled from './draggable.styled'
-import { Side, State } from './draggable.types'
-import { move, resize, rotate } from './draggable.utils'
+import Styled from './Draggable.styled'
+import { Side, State } from './Draggable.types'
+import { move, resize, rotate } from './Draggable.utils'
 
 export type DraggableProps = {
-  textId: TextBox['id']
+  itemId: TextBox['id']
   canvasHeight: number
   canvasWidth: number
+  isSelected: boolean
+  onClick: (itemId: TextBox['id']) => void
 }
 
 type Type = 'drag' | 'resize' | 'rotate'
 
-const Draggable = ({ canvasHeight, canvasWidth, textId }: DraggableProps) => {
-  const [text, updater] = useText(textId)
+const Draggable = ({
+  canvasHeight,
+  canvasWidth,
+  itemId,
+  isSelected,
+  onClick
+}: DraggableProps) => {
+  const [text, updater] = useText(itemId)
   const [state, setState] = React.useState<State>(() => {
     return {
       mode: false,
@@ -44,7 +52,7 @@ const Draggable = ({ canvasHeight, canvasWidth, textId }: DraggableProps) => {
     const centerY = state.top + state.height / 2
     const centerX = state.left + state.width / 2
 
-    updater(textId, {
+    updater(itemId, {
       width: state.width,
       height: state.height,
       centerX,
@@ -57,7 +65,7 @@ const Draggable = ({ canvasHeight, canvasWidth, textId }: DraggableProps) => {
     state.width,
     state.height,
     state.rotate,
-    textId,
+    itemId,
     updater
   ])
 
@@ -206,6 +214,11 @@ const Draggable = ({ canvasHeight, canvasWidth, textId }: DraggableProps) => {
     <Styled.Draggable
       onMouseDown={handleMouseDown}
       data-type="drag"
+      aria-selected={isSelected}
+      onClick={() => {
+        return onClick(itemId)
+      }}
+      draggable
       style={{
         height,
         width,

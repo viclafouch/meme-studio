@@ -2,7 +2,9 @@ import React from 'react'
 import * as R from 'ramda'
 import { Meme } from '@models/Meme'
 import { drawText } from '@shared/helpers/canvas'
+import { useIsomorphicLayoutEffect } from '@shared/hooks/useIsomorphicLayoutEffect'
 import { useCanvasDimensions } from '@stores/Editor/hooks/useCanvasDimensions'
+import { useItemIdSelected } from '@stores/Editor/hooks/useItemIdSelected'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useTexts } from '@stores/Editor/hooks/useTexts'
 import { useTools } from '@stores/Editor/hooks/useTools'
@@ -15,8 +17,9 @@ const Canvas = () => {
   const [texts] = useTexts()
   const dimensions = useCanvasDimensions()
   const { showTextAreas } = useTools()
+  const { itemIdSelected, setItemIdSelected } = useItemIdSelected()
 
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const canvasElement = canvasElRef.current
 
     if (canvasElement === null) {
@@ -49,6 +52,13 @@ const Canvas = () => {
     }
   }, [texts, canvasElRef, meme, dimensions])
 
+  const onDraggableClick = React.useCallback(
+    (itemId: TextBox['id']) => {
+      setItemIdSelected(itemId, true)
+    },
+    [setItemIdSelected]
+  )
+
   return (
     <Styled.Container>
       <Styled.WrapperCanvas
@@ -59,13 +69,15 @@ const Canvas = () => {
         }}
       >
         {showTextAreas
-          ? texts.map((textbox) => {
+          ? texts.map((text) => {
               return (
                 <Draggable
-                  key={textbox.id}
-                  textId={textbox.id}
+                  key={text.id}
+                  itemId={text.id}
                   canvasHeight={dimensions.height}
                   canvasWidth={dimensions.width}
+                  onClick={onDraggableClick}
+                  isSelected={itemIdSelected === text.id}
                 />
               )
             })

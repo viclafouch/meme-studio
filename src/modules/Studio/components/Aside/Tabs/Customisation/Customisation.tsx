@@ -31,12 +31,12 @@ const Customisation = () => {
               title={preventEmptyTextValue(text.value, index)}
               id={text.id}
               isOpened={itemIdSelected === text.id}
+              key={text.id}
             >
               <TextCustomisation
                 onUpdateText={updateText}
                 text={text}
                 index={index}
-                key={text.id}
               />
             </Accordion>
           )

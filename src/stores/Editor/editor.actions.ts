@@ -88,3 +88,13 @@ export function toggleItemIdSelected(set: StoreApi<EditorState>['setState']) {
     )
   }
 }
+
+export function setItemIdSelected(set: StoreApi<EditorState>['setState']) {
+  return (itemId: TextBox['id'], value: boolean) => {
+    return set(
+      produce((draft: Draft<EditorState>) => {
+        draft.itemIdSelected = value ? itemId : null
+      })
+    )
+  }
+}
