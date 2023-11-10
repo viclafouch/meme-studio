@@ -78,3 +78,13 @@ export function resetAll(set: StoreApi<EditorState>['setState']) {
     )
   }
 }
+
+export function toggleItemIdSelected(set: StoreApi<EditorState>['setState']) {
+  return (itemId: TextBox['id']) => {
+    return set(
+      produce((draft: Draft<EditorState>) => {
+        draft.itemIdSelected = draft.itemIdSelected === itemId ? null : itemId
+      })
+    )
+  }
+}

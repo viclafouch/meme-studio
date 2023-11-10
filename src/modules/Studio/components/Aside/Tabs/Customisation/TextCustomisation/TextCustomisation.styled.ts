@@ -5,11 +5,6 @@ export default {
     display: block;
     color: rgb(212, 212, 212);
   `,
-  TextToolsHeader: styled.div`
-    background-color: rgb(88, 88, 88);
-    cursor: pointer;
-    padding: 1.125rem 1.25rem;
-  `,
   TextToolsContainer: styled.div`
     padding: 0.8125rem 0.875rem 1.4375rem 0.875rem;
   `,

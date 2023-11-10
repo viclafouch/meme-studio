@@ -6,9 +6,10 @@ import {
   FONTS_FAMILY,
   TEXT_ALIGN
 } from '@shared/constants/fonts'
-import Styled from './text-customisation.styled'
+import { preventEmptyTextValue } from '@shared/utils/text'
+import Styled from './TextCustomisation.styled'
 
-type TextCustomisationProps = {
+export type TextCustomisationProps = {
   text: TextBox
   index: number
   onUpdateText: (textId: TextBox['id'], text: TextBox) => void
@@ -47,14 +48,14 @@ const TextCustomisation = ({
 
   return (
     <Styled.TextCustomisation>
-      <Styled.TextToolsHeader>Hello world</Styled.TextToolsHeader>
       <Styled.TextToolsContainer>
         <Styled.Fieldset>
           <Styled.Textarea
             spellCheck="false"
             onChange={handleEditText('value')}
             value={text.value}
-            placeholder={`Text #${index + 1}`}
+            rows={5}
+            placeholder={preventEmptyTextValue(text.value, index)}
           />
         </Styled.Fieldset>
         <Styled.Fieldset>

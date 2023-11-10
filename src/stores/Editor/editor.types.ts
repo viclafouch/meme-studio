@@ -7,6 +7,7 @@ type EditorActions = {
   toggleShowTextAreas: () => void
   eraseAllTexts: () => void
   resetAll: () => void
+  toggleItemIdSelected: (itemId: TextBox['id']) => void
   updateText: (textId: Meme['id'], text: Partial<Meme>) => void
 }
 
@@ -14,6 +15,7 @@ export type EditorState = {
   meme: Meme | null
   texts: TextBox[]
   currentTab: Tab
+  itemIdSelected: TextBox['id'] | null
   ratio: (value: number) => number
   showTextAreas: boolean
   canvasDimensions: {

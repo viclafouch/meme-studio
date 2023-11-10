@@ -9,6 +9,7 @@ import {
   setCurrentTab,
   setResize,
   setText,
+  toggleItemIdSelected,
   toggleShowTextAreas
 } from './editor.actions'
 import { EditorState } from './editor.types'
@@ -70,6 +71,7 @@ const createInitialStore = (
       }),
       ratio,
       showTextAreas: true,
+      itemIdSelected: initialTextboxes[0]?.id ?? null,
       currentTab: initialMeme ? 'customization' : 'gallery',
       canvasDimensions: {
         height: initialMeme ? ratio(initialMeme.height) : 0,
@@ -80,6 +82,7 @@ const createInitialStore = (
       eraseAllTexts: eraseAllTexts(set),
       resize: setResize(set),
       resetAll: resetAll(set),
+      toggleItemIdSelected: toggleItemIdSelected(set),
       updateText: setText(set)
     }
   })
