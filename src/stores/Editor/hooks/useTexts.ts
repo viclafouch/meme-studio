@@ -20,6 +20,14 @@ export function useTexts() {
   )
 }
 
+export function useRatiotedTexts() {
+  const store = React.useContext(EditorContext)
+
+  return useStore(store, (state) => {
+    return state.getRatiotedTexts
+  })
+}
+
 export function useCountTexts() {
   const store = React.useContext(EditorContext)
 

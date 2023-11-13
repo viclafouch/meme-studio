@@ -27,6 +27,7 @@ export type EditorState = {
   currentTab: Tab
   itemIdSelected: TextBox['id'] | null
   ratio: (value: number) => number
+  getRatiotedTexts: () => TextBox[]
   showTextAreas: boolean
   canvasDimensions: {
     width: number

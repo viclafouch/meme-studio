@@ -8,6 +8,7 @@ import {
   addText,
   duplicateItem,
   eraseAllTexts,
+  getRatiotedTexts,
   removeItem,
   resetAll,
   setCurrentTab,
@@ -38,13 +39,10 @@ function getCanvasDimensions(windowSizes: Dimensions) {
   }
 }
 
-function getRatio(meme: Nullable<Meme>, dimensions: Dimensions) {
-  if (!meme) {
-    return (value: number) => {
-      return value
-    }
-  }
-
+function getRatio(
+  meme: Meme,
+  dimensions: ReturnType<typeof getCanvasDimensions>
+) {
   const aspectRatio = getAspectRatio(
     meme.width,
     meme.height,
@@ -60,8 +58,12 @@ const createInitialStore = (
   initialTextboxes: TextBox[],
   initialWindowSizes: Dimensions
 ) => {
-  return createStore<EditorState>((set) => {
-    const ratio = getRatio(initialMeme, initialWindowSizes)
+  return createStore<EditorState>((set, get) => {
+    const ratio = initialMeme
+      ? getRatio(initialMeme, initialWindowSizes)
+      : (value: number) => {
+          return value
+        }
 
     return {
       meme: initialMeme ? new Meme(initialMeme) : null,
@@ -74,6 +76,7 @@ const createInitialStore = (
           centerX: ratio(textbox.centerX)
         }
       }),
+      getRatiotedTexts: getRatiotedTexts(get),
       ratio,
       showTextAreas: true,
       itemIdSelected: initialTextboxes[0]?.id ?? null,

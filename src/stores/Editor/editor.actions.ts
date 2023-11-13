@@ -162,3 +162,30 @@ export function duplicateItem(set: StoreApi<EditorState>['setState']) {
     )
   }
 }
+
+export function getRatiotedTexts(get: StoreApi<EditorState>['getState']) {
+  return (): TextBox[] => {
+    const { texts, canvasDimensions, meme } = get()
+
+    if (!meme) {
+      return []
+    }
+
+    const memeWidth = meme.width
+    const memeHeight = meme.height
+
+    return texts.map((text) => {
+      return {
+        ...text,
+        centerX: Math.round(
+          (text.centerX / canvasDimensions.width) * memeWidth
+        ),
+        centerY: Math.round(
+          (text.centerY / canvasDimensions.height) * memeHeight
+        ),
+        width: Math.round((text.width / canvasDimensions.width) * memeWidth),
+        height: Math.round((text.height / canvasDimensions.height) * memeHeight)
+      }
+    })
+  }
+}
