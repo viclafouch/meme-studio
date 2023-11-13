@@ -39,18 +39,16 @@ export class Meme {
     this.localImageUrl = meme.localImageUrl || null
   }
 
-  public url(format = '.webp'): string {
-    return (
-      this.localImageUrl ||
-      `/templates/${this.filename}`.replace('.jpg', format)
-    )
+  public url() {
+    return `https://www.meme-studio.io/templates/${this.filename}`
   }
 
+  // eslint-disable-next-line class-methods-use-this
   get image(): Promise<HTMLImageElement> {
     return new Promise((resolve) => {
       const image = new Image()
       // eslint-disable-next-line id-denylist
-      image.src = this.url()
+      image.src = '/temporary-meme.jpeg'
 
       image.onload = (): void => {
         return resolve(image)

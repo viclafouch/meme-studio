@@ -1,10 +1,37 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+
+const primaryColor = css`
+  background-color: #4d90fe;
+  border: 1px solid transparent;
+  color: #ffffff;
+
+  &:not(:disabled):hover {
+    background-color: #649fff;
+  }
+`
+
+const secondaryColor = css`
+  background-color: rgb(68, 68, 68);
+  border: 1px solid rgba(189, 189, 189, 0.541);
+  color: #ffffff;
+
+  &:not(:disabled):hover {
+    background-color: #535353;
+  }
+`
+
+export const colorCss = {
+  primary: primaryColor,
+  secondary: secondaryColor
+} as const
 
 const Styled = {
-  Button: styled.button<{ $rounded: boolean; $fullWidth: boolean }>`
+  Button: styled.button<{
+    $rounded: boolean
+    $fullWidth: boolean
+    $color: 'primary' | 'secondary'
+  }>`
     font-family: Alata, sans-serif;
-    background-color: #4d90fe;
-    color: #ffffff;
     font-weight: 500;
     border-radius: ${(props) => {
       return props.$rounded ? '8px' : 0
@@ -13,7 +40,6 @@ const Styled = {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 0;
     width: ${(props) => {
       return props.$fullWidth ? '100%' : 'auto'
     }};
@@ -24,9 +50,17 @@ const Styled = {
     font-size: 16px;
     line-height: 22px;
 
+    ${(props) => {
+      return colorCss[props.$color]
+    }}
+
+    &:has(span.button-start-adornment) {
+      display: flex;
+      gap: 8px;
+    }
+
     &:not(:disabled):hover {
       cursor: pointer;
-      background-color: #649fff;
     }
   `
 }

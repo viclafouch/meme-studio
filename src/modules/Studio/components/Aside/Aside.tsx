@@ -20,6 +20,7 @@ const Aside = () => {
         <Styled.Button
           id={'gallery' as Tab}
           onClick={handleChangeTab}
+          rounded={false}
           $isActive={currentTab === 'gallery'}
         >
           <FontAwesomeIcon icon={faImage} />
@@ -27,6 +28,7 @@ const Aside = () => {
         <Styled.Button
           id={'customization' as Tab}
           onClick={handleChangeTab}
+          rounded={false}
           $isActive={currentTab === 'customization'}
         >
           <FontAwesomeIcon icon={faHeading} />

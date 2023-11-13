@@ -1,4 +1,5 @@
 import * as R from 'ramda'
+import { Meme } from '@models/Meme'
 import { TextBox } from '@shared/schemas/textbox'
 import { degreeToRad } from './number'
 
@@ -139,4 +140,33 @@ export function drawText(text: TextBox, context2D: CanvasRenderingContext2D) {
   }
 
   context2D.restore()
+}
+
+export async function exportCanvasBlob({
+  meme,
+  texts
+}: {
+  meme: Meme
+  texts: TextBox[]
+}): Promise<Blob> {
+  const canvas = document.createElement('canvas')
+  canvas.width = meme.width
+  canvas.height = meme.height
+  const context2D = canvas.getContext('2d') as CanvasRenderingContext2D
+  const image = await meme.image
+  context2D.drawImage(image, 0, 0, meme.width, meme.height)
+
+  for (const text of texts) {
+    drawText(text, context2D)
+  }
+
+  return new Promise((resolve, reject) => {
+    canvas.toBlob((blob) => {
+      if (blob) {
+        resolve(blob)
+      } else {
+        reject(new Error('toBlob failed'))
+      }
+    }, 'image/png')
+  })
 }

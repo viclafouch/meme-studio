@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app'
 import { getQueryClient } from 'queries'
 import Layout from '@components/Layout/layout'
 import { DefaultProvider } from '@stores/Default.provider'
+import { ModalOutlet } from '@stores/Modal/Modal.provider'
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import '../styles/globals.scss'
@@ -22,6 +23,7 @@ const Application = ({ Component, pageProps }: AppProps) => {
         <Layout>
           <DefaultProvider>
             <Component {...pageProps} />
+            <ModalOutlet />
           </DefaultProvider>
         </Layout>
       </Hydrate>
