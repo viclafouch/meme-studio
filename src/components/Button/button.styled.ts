@@ -36,6 +36,7 @@ const Styled = {
     border-radius: ${(props) => {
       return props.$rounded ? '8px' : 0
     }};
+    text-decoration: none;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.14);
     display: flex;
     align-items: center;

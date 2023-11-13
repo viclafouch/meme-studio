@@ -27,5 +27,17 @@ export default {
       width: 100%;
       position: absolute;
     }
+  `,
+  SizeText: styled.p`
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 20px;
+  `,
+  Actions: styled.div`
+    display: flex;
+    align-items: center;
+    max-width: 400px;
+    gap: 20px;
+    margin: 20px auto 0;
   `
 }

@@ -1,12 +1,11 @@
-/* eslint-disable react/require-default-props */
 import * as React from 'react'
 import { BaseButtonProps } from '@components/Button/Button.types'
-import Styled from './Button.styled'
+import Styled from '../Button/Button.styled'
 
-export type ButtonProps = BaseButtonProps & React.ComponentProps<'button'>
+export type LinkButtonProps = BaseButtonProps &
+  React.ComponentPropsWithoutRef<'a'>
 
-// eslint-disable-next-line react/display-name
-const Button = React.forwardRef(
+const LinkButton = React.forwardRef(
   (
     {
       rounded = true,
@@ -15,14 +14,15 @@ const Button = React.forwardRef(
       startAdornment = null,
       color = 'primary',
       ...restProps
-    }: ButtonProps,
-    ref: React.ForwardedRef<HTMLButtonElement>
+    }: LinkButtonProps,
+    ref: React.ForwardedRef<HTMLAnchorElement>
   ) => {
     return (
       <Styled.Button
         $fullWidth={fullWidth}
         $rounded={rounded}
         $color={color}
+        as="a"
         ref={ref}
         {...restProps}
       >
@@ -35,4 +35,4 @@ const Button = React.forwardRef(
   }
 )
 
-export default Button
+export default LinkButton

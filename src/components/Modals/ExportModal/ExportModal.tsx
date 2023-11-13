@@ -1,4 +1,12 @@
 import React from 'react'
+import Button from '@components/Button'
+import LinkButton from '@components/LinkButton'
+import { useClipboard } from '@shared/hooks/useClipboard'
+import {
+  faArrowCircleDown,
+  faClipboard
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Styled from './ExportModal.styled'
 
 export type ExportModalProps = {
@@ -12,6 +20,15 @@ const ExportModal = ({ canvasBlob, height, width }: ExportModalProps) => {
     return URL.createObjectURL(canvasBlob)
   }, [canvasBlob])
 
+  const { copy } = useClipboard()
+
+  const handleCopy = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+    copy({
+      blob: canvasBlob
+    })
+  }
+
   return (
     <Styled.Container>
       <Styled.Title>Prévisualisation</Styled.Title>
@@ -24,9 +41,26 @@ const ExportModal = ({ canvasBlob, height, width }: ExportModalProps) => {
       >
         <Styled.Image src={imageSrc} className="meme-img" alt="" />
       </div>
-      <span>
+      <Styled.SizeText>
         Taille réelle : {width} x {height}
-      </span>
+      </Styled.SizeText>
+      <Styled.Actions>
+        <LinkButton
+          startAdornment={<FontAwesomeIcon icon={faArrowCircleDown} />}
+          fullWidth
+          href={imageSrc}
+          download="meme.png"
+        >
+          Télécharger
+        </LinkButton>
+        <Button
+          startAdornment={<FontAwesomeIcon icon={faClipboard} />}
+          fullWidth
+          onClick={handleCopy}
+        >
+          Copier
+        </Button>
+      </Styled.Actions>
     </Styled.Container>
   )
 }

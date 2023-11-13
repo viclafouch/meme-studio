@@ -107,16 +107,16 @@ export const ModalOutlet = () => {
   }
 
   return (
-    <Modal open={isOpen} onClose={closeModal} center>
-      {Component ? (
-        <React.Suspense fallback={<div>Loading</div>}>
+    <React.Suspense fallback={null}>
+      <Modal open={isOpen} onClose={closeModal} center>
+        {Component ? (
           <Component
             {...(componentProps as React.ComponentProps<typeof Component>)}
           />
-        </React.Suspense>
-      ) : (
-        <div />
-      )}
-    </Modal>
+        ) : (
+          <div />
+        )}
+      </Modal>
+    </React.Suspense>
   )
 }
