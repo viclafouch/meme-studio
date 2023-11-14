@@ -73,7 +73,7 @@ const Canvas = () => {
           ? texts.map((text) => {
               return (
                 <Draggable
-                  key={text.id}
+                  key={text.version}
                   itemId={text.id}
                   canvasHeight={dimensions.height}
                   canvasWidth={dimensions.width}

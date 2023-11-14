@@ -26,6 +26,8 @@ const Draggable = ({
   onClick
 }: DraggableProps) => {
   const { text, updateText } = useText(itemId)
+  const modeRef = React.useRef<State['mode']>()
+
   const [state, setState] = React.useState<State>(() => {
     return {
       mode: false,
@@ -48,17 +50,20 @@ const Draggable = ({
     }
   })
 
-  React.useEffect(() => {
-    const centerY = state.top + state.height / 2
-    const centerX = state.left + state.width / 2
+  modeRef.current = state.mode
 
-    updateText(itemId, {
-      width: state.width,
-      height: state.height,
-      centerX,
-      centerY,
-      rotate: state.rotate
-    })
+  React.useEffect(() => {
+    if (modeRef.current) {
+      const centerY = state.top + state.height / 2
+      const centerX = state.left + state.width / 2
+      updateText(itemId, {
+        width: state.width,
+        height: state.height,
+        centerX,
+        centerY,
+        rotate: state.rotate
+      })
+    }
   }, [
     state.left,
     state.top,

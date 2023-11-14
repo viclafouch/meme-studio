@@ -3,20 +3,22 @@ import { Meme } from 'models/Meme'
 import * as R from 'ramda'
 import { createStore, StoreApi } from 'zustand'
 import { getAspectRatio } from '@shared/helpers/dom'
-import { TextBox } from '@shared/schemas/textbox'
+import { TextBox, updateVersion } from '@shared/schemas/textbox'
 import {
   addText,
   duplicateItem,
   eraseAllTexts,
   getRatiotedTexts,
+  redo,
   removeItem,
   resetAll,
   setCurrentTab,
   setItemIdSelected,
   setResize,
-  setText,
   toggleItemIdSelected,
-  toggleShowTextAreas
+  toggleShowTextAreas,
+  undo,
+  updateText
 } from './editor.actions'
 import { Dimensions, EditorState } from './editor.types'
 
@@ -53,6 +55,21 @@ function getRatio(
   return R.pipe(R.multiply(aspectRatio), Math.round)
 }
 
+function ratioTextboxes(
+  textboxes: TextBox[],
+  ratio: ReturnType<typeof getRatio>
+) {
+  return textboxes.map((textbox) => {
+    return {
+      ...textbox,
+      height: ratio(textbox.height),
+      width: ratio(textbox.width),
+      centerY: ratio(textbox.centerY),
+      centerX: ratio(textbox.centerX)
+    }
+  })
+}
+
 const createInitialStore = (
   initialMeme: Nullable<Meme>,
   initialTextboxes: TextBox[],
@@ -65,21 +82,23 @@ const createInitialStore = (
           return value
         }
 
+    const textboxesRatioted = ratioTextboxes(initialTextboxes, ratio)
+    const itemIdSelected = textboxesRatioted[0]?.id ?? null
+
     return {
       meme: initialMeme ? new Meme(initialMeme) : null,
-      texts: initialTextboxes.map((textbox) => {
-        return {
-          ...textbox,
-          height: ratio(textbox.height),
-          width: ratio(textbox.width),
-          centerY: ratio(textbox.centerY),
-          centerX: ratio(textbox.centerX)
-        }
-      }),
+      texts: textboxesRatioted,
       getRatiotedTexts: getRatiotedTexts(get),
       ratio,
+      history: [
+        {
+          texts: textboxesRatioted.map(updateVersion),
+          itemIdSelected
+        }
+      ],
+      historyIndex: 0,
       showTextAreas: true,
-      itemIdSelected: initialTextboxes[0]?.id ?? null,
+      itemIdSelected,
       currentTab: initialMeme ? 'customization' : 'gallery',
       canvasDimensions: {
         height: initialMeme ? ratio(initialMeme.height) : 0,
@@ -95,7 +114,9 @@ const createInitialStore = (
       duplicateItem: duplicateItem(set),
       toggleItemIdSelected: toggleItemIdSelected(set),
       setItemIdSelected: setItemIdSelected(set),
-      updateText: setText(set)
+      updateText: updateText(set),
+      undo: undo(set),
+      redo: redo(set)
     }
   })
 }

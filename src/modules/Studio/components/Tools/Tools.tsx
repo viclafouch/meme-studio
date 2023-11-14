@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Tooltip from '@components/Tooltip'
+import { useHistory } from '@stores/Editor/hooks/useHistory'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useCountTexts } from '@stores/Editor/hooks/useTexts'
 import { useTools } from '@stores/Editor/hooks/useTools'
@@ -21,6 +22,7 @@ const Tools = () => {
     useTools()
   const countTexts = useCountTexts()
   const meme = useMeme()
+  const { canUndo, canRedo, undo, redo } = useHistory()
 
   const handleClick = (callback: () => void) => {
     return (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -52,14 +54,26 @@ const Tools = () => {
           </Tooltip>
         </Styled.ToolsListItem>
         <Styled.ToolsListItem>
-          <Styled.ToolsButton type="button">
-            <FontAwesomeIcon icon={faUndo} />
-          </Styled.ToolsButton>
+          <Tooltip text="Annuler" disabled={!canUndo} position="right">
+            <Styled.ToolsButton
+              type="button"
+              disabled={!canUndo}
+              onClick={handleClick(undo)}
+            >
+              <FontAwesomeIcon icon={faUndo} />
+            </Styled.ToolsButton>
+          </Tooltip>
         </Styled.ToolsListItem>
         <Styled.ToolsListItem>
-          <Styled.ToolsButton type="button">
-            <FontAwesomeIcon icon={faRedo} />
-          </Styled.ToolsButton>
+          <Tooltip text="Rétablir" disabled={!canRedo} position="right">
+            <Styled.ToolsButton
+              type="button"
+              disabled={!canRedo}
+              onClick={handleClick(redo)}
+            >
+              <FontAwesomeIcon icon={faRedo} />
+            </Styled.ToolsButton>
+          </Tooltip>
         </Styled.ToolsListItem>
         <Styled.ToolsListItem>
           <Tooltip

@@ -15,6 +15,9 @@ export const textboxSchema = z.object({
   height: z.number(),
   centerX: z.number(),
   centerY: z.number(),
+  version: z.string().default(() => {
+    return randomId()
+  }),
   isUppercase: z.boolean().default(false),
   rotate: z.number().default(0),
   fontSize: z.number().default(80),
@@ -32,6 +35,13 @@ export function createTextBox(
     TextBox,
     'centerX' | 'centerY' | 'width' | 'height'
   >
-) {
+): TextBox {
   return textboxSchema.parse(values)
+}
+
+export function updateVersion(textbox: TextBox): TextBox {
+  return {
+    ...textbox,
+    version: randomId()
+  }
 }

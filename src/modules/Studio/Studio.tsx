@@ -5,6 +5,7 @@ import Header from '@components/Header/Header'
 import { Meme } from '@models/Meme'
 import { getMeme } from '@shared/api/memes'
 import { useWindowSize } from '@shared/hooks/useWindowSize'
+import { createTextBox } from '@shared/schemas/textbox'
 import { EditorProvider } from '@stores/Editor/editor.store'
 import Aside from './components/Aside/Aside'
 import Canvas from './components/Canvas/Canvas'
@@ -34,8 +35,8 @@ const CreatePage = () => {
           windowHeight={windowSize.height}
           windowWidth={windowSize.width}
           key={meme?.id}
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          textBoxes={meme ? (meme.texts as any) : []}
+          // @ts-expect-error
+          textBoxes={meme ? meme.texts.map(createTextBox) : []}
           meme={meme ? new Meme(meme) : null}
         >
           <Header />
