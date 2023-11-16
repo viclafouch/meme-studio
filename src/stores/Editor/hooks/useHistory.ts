@@ -21,3 +21,17 @@ export function useHistory() {
     shallow
   )
 }
+
+export function useHistoryVersion() {
+  const store = React.useContext(EditorContext)
+
+  return useStoreWithEqualityFn(
+    store,
+    (state) => {
+      const { history, historyIndex } = state
+
+      return history[historyIndex]?.version || ''
+    },
+    shallow
+  )
+}

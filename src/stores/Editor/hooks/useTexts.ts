@@ -24,7 +24,7 @@ export function useRatiotedTexts() {
   const store = React.useContext(EditorContext)
 
   return useStore(store, (state) => {
-    return state.getRatiotedTexts
+    return state.getScaledTextsByMemeSize
   })
 }
 

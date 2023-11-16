@@ -3,27 +3,23 @@ import * as R from 'ramda'
 import { StoreApi } from 'zustand'
 import { randomId } from '@shared/helpers/string'
 import { debounce } from '@shared/helpers/timeout'
-import { createTextBox, TextBox, updateVersion } from '@shared/schemas/textbox'
+import { createTextBox, TextBox } from '@shared/schemas/textbox'
+import { calculateAspectRatioFit } from '@shared/utils/canvas'
+import { calculBaseByMemeSize, calculScaledValues } from '@shared/utils/textbox'
 import { Dimensions, EditorState, Tab } from './editor.types'
 
-function getCanvasDimensions(windowSizes: Dimensions) {
-  return {
-    width: windowSizes.width - 54 - 320 - 198,
-    height: windowSizes.height - 80 - 100
-  }
-}
-
 const saveHistory = debounce((set: StoreApi<EditorState>['setState']) => {
-  set(
-    produce((draft: Draft<EditorState>) => {
-      draft.history.push({
-        texts: draft.texts.map(updateVersion),
-        itemIdSelected: draft.itemIdSelected
-      })
-      draft.currentTab = 'customization'
-      draft.historyIndex++
-    })
-  )
+  // set(
+  //   produce((draft: Draft<EditorState>) => {
+  //     draft.history.push({
+  //       texts: draft.texts,
+  //       version: randomId(),
+  //       itemIdSelected: draft.itemIdSelected
+  //     })
+  //     draft.currentTab = 'customization'
+  //     draft.historyIndex++
+  //   })
+  // )
 }, 1000)
 
 export function setCurrentTab(set: StoreApi<EditorState>['setState']) {
@@ -37,10 +33,49 @@ export function setCurrentTab(set: StoreApi<EditorState>['setState']) {
 }
 
 export function setResize(set: StoreApi<EditorState>['setState']) {
-  return (windowSizes: Dimensions) => {
+  return (containerCanvasSize: Dimensions) => {
     return set(
       produce((draft: Draft<EditorState>) => {
-        draft.canvasDimensions = getCanvasDimensions(windowSizes)
+        if (draft.meme) {
+          const { width, height, aspectRatio } = calculateAspectRatioFit(
+            draft.meme.width,
+            draft.meme.height,
+            containerCanvasSize.width,
+            containerCanvasSize.height
+          )
+          draft.canvasDimensions = {
+            width,
+            height
+          }
+
+          const calculByAspectRatio = (value: number) => {
+            return value * aspectRatio
+          }
+
+          draft.aspectRatio = aspectRatio
+          draft.calculByAspectRatio = calculByAspectRatio
+
+          // Lets repositionning our textbox by their base
+          draft.texts = draft.texts.map((textDraft) => {
+            return {
+              ...textDraft,
+              ...calculScaledValues(textDraft, calculByAspectRatio)
+            }
+          })
+
+          // Lets do the same for history
+          draft.history = draft.history.map((history) => {
+            return {
+              ...history,
+              texts: history.texts.map((textDraft) => {
+                return {
+                  ...textDraft,
+                  ...calculScaledValues(textDraft, calculByAspectRatio)
+                }
+              })
+            }
+          })
+        }
       })
     )
   }
@@ -50,12 +85,24 @@ export function updateText(set: StoreApi<EditorState>['setState']) {
   return (textId: TextBox['id'], values: Partial<TextBox>) => {
     return set(
       produce((draft: Draft<EditorState>) => {
+        const { canvasDimensions, meme } = draft
         const textIndex = R.findIndex((textBox) => {
           return textId === textBox.id
         }, draft.texts)
-        draft.texts[textIndex] = {
-          ...(draft.texts[textIndex] as TextBox),
-          ...values
+
+        let textDraft = draft.texts[textIndex]
+
+        if (textDraft && meme) {
+          textDraft = {
+            ...textDraft,
+            ...values
+          }
+          textDraft.base = calculBaseByMemeSize(
+            textDraft,
+            canvasDimensions,
+            meme
+          )
+          draft.texts[textIndex] = textDraft
         }
 
         saveHistory(set)
@@ -123,17 +170,17 @@ export function addText(set: StoreApi<EditorState>['setState']) {
   return (values: Partial<TextBox> = {}) => {
     return set(
       produce((draft: Draft<EditorState>) => {
-        const { meme, ratio } = draft
+        const { meme, calculByAspectRatio } = draft
 
         if (!meme) {
           return
         }
 
         const textbox = createTextBox({
-          width: ratio(meme.width * 0.33),
-          height: ratio(meme.height * 0.33),
-          centerX: ratio(meme.width / 2),
-          centerY: ratio(meme.height / 2),
+          width: calculByAspectRatio(meme.width * 0.33),
+          height: calculByAspectRatio(meme.height * 0.33),
+          centerX: calculByAspectRatio(meme.width / 2),
+          centerY: calculByAspectRatio(meme.height / 2),
           ...values
         })
 
@@ -187,29 +234,15 @@ export function duplicateItem(set: StoreApi<EditorState>['setState']) {
   }
 }
 
-export function getRatiotedTexts(get: StoreApi<EditorState>['getState']) {
+export function getScaledTextsByMemeSize(
+  get: StoreApi<EditorState>['getState']
+) {
   return (): TextBox[] => {
-    const { texts, canvasDimensions, meme } = get()
+    const { texts } = get()
 
-    if (!meme) {
-      return []
-    }
-
-    const memeWidth = meme.width
-    const memeHeight = meme.height
-
+    // Just need to override values by the base itself (proportionate by meme sizes)
     return texts.map((text) => {
-      return {
-        ...text,
-        centerX: Math.round(
-          (text.centerX / canvasDimensions.width) * memeWidth
-        ),
-        centerY: Math.round(
-          (text.centerY / canvasDimensions.height) * memeHeight
-        ),
-        width: Math.round((text.width / canvasDimensions.width) * memeWidth),
-        height: Math.round((text.height / canvasDimensions.height) * memeHeight)
-      }
+      return R.mergeRight(text, text.base)
     })
   }
 }

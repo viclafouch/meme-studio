@@ -13,8 +13,10 @@ type EditorActions = {
   toggleShowTextAreas: () => void
   eraseAllTexts: () => void
   resetAll: () => void
+  resize: (dimensions: Dimensions) => void
   addText: (values?: Partial<TextBox>) => void
   removeItem: (itemId: string) => void
+  calculByAspectRatio: (value: number) => number
   duplicateItem: (itemId: string) => void
   toggleItemIdSelected: (itemId: TextBox['id']) => void
   setItemIdSelected: (itemId: TextBox['id'], value: boolean) => void
@@ -27,11 +29,11 @@ export type EditorState = {
   meme: Meme | null
   texts: TextBox[]
   currentTab: Tab
+  aspectRatio: number
   historyIndex: number
   itemIdSelected: TextBox['id'] | null
-  ratio: (value: number) => number
   history: History[]
-  getRatiotedTexts: () => TextBox[]
+  getScaledTextsByMemeSize: () => TextBox[]
   showTextAreas: boolean
   canvasDimensions: {
     width: number
@@ -39,4 +41,6 @@ export type EditorState = {
   }
 } & EditorActions
 
-export type History = Pick<EditorState, 'itemIdSelected' | 'texts'>
+export type History = Pick<EditorState, 'itemIdSelected' | 'texts'> & {
+  version: string
+}

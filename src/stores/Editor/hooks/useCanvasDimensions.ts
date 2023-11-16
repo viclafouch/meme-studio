@@ -6,6 +6,12 @@ export function useCanvasDimensions() {
   const store = React.useContext(EditorContext)
 
   return useStoreWithEqualityFn(store, (state) => {
-    return state.canvasDimensions
+    const { canvasDimensions, resize, aspectRatio } = state
+
+    return {
+      canvasDimensions,
+      resize,
+      aspectRatio
+    }
   })
 }

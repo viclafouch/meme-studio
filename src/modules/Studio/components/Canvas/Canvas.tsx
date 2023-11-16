@@ -3,8 +3,10 @@ import * as R from 'ramda'
 import { Meme } from '@models/Meme'
 import { drawText } from '@shared/helpers/canvas'
 import { useIsomorphicLayoutEffect } from '@shared/hooks/useIsomorphicLayoutEffect'
+import { useWindowSizeCallback } from '@shared/hooks/useWindowSizeCallback'
 import { TextBox } from '@shared/schemas/textbox'
 import { useCanvasDimensions } from '@stores/Editor/hooks/useCanvasDimensions'
+import { useHistoryVersion } from '@stores/Editor/hooks/useHistory'
 import { useItemIdSelected } from '@stores/Editor/hooks/useItemIdSelected'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useTexts } from '@stores/Editor/hooks/useTexts'
@@ -16,9 +18,18 @@ const Canvas = () => {
   const meme = useMeme() as Meme
   const canvasElRef = React.useRef<HTMLCanvasElement>(null)
   const { texts } = useTexts()
-  const dimensions = useCanvasDimensions()
+  const containerRef = React.useRef<HTMLDivElement>(null)
+  const { resize, canvasDimensions, aspectRatio } = useCanvasDimensions()
   const { showTextAreas } = useTools()
+  const historyVersion = useHistoryVersion()
   const { itemIdSelected, setItemIdSelected } = useItemIdSelected()
+
+  useWindowSizeCallback(
+    (elementSize) => {
+      resize(elementSize)
+    },
+    { elementRef: containerRef }
+  )
 
   useIsomorphicLayoutEffect(() => {
     const canvasElement = canvasElRef.current
@@ -31,8 +42,8 @@ const Canvas = () => {
       const context2D = canvasElement.getContext('2d', {
         alpha: true
       }) as CanvasRenderingContext2D
-      canvasElement.width = dimensions.width
-      canvasElement.height = dimensions.height
+      canvasElement.width = canvasDimensions.width
+      canvasElement.height = canvasDimensions.height
 
       for (let index = 0; index < texts.length; index += 1) {
         const text = texts[index] as TextBox
@@ -51,7 +62,7 @@ const Canvas = () => {
     return () => {
       cancelAnimationFrame(frame)
     }
-  }, [texts, canvasElRef, meme, dimensions])
+  }, [texts, canvasElRef, meme, canvasDimensions])
 
   const onDraggableClick = React.useCallback(
     (itemId: string) => {
@@ -61,11 +72,11 @@ const Canvas = () => {
   )
 
   return (
-    <Styled.Container>
+    <Styled.Container ref={containerRef}>
       <Styled.WrapperCanvas
         style={{
-          height: dimensions.height,
-          width: dimensions.width,
+          height: canvasDimensions.height,
+          width: canvasDimensions.width,
           backgroundImage: `url('https://www.meme-studio.io/templates/${meme.filename}')`
         }}
       >
@@ -73,10 +84,11 @@ const Canvas = () => {
           ? texts.map((text) => {
               return (
                 <Draggable
-                  key={text.version}
+                  key={`${historyVersion}-${text.id}`}
                   itemId={text.id}
-                  canvasHeight={dimensions.height}
-                  canvasWidth={dimensions.width}
+                  aspectRatio={aspectRatio}
+                  canvasHeight={canvasDimensions.height}
+                  canvasWidth={canvasDimensions.width}
                   onClick={onDraggableClick}
                   isSelected={itemIdSelected === text.id}
                 />
@@ -85,8 +97,8 @@ const Canvas = () => {
           : null}
         <Styled.Canvas
           ref={canvasElRef}
-          width={dimensions.width}
-          height={dimensions.height}
+          width={canvasDimensions.width}
+          height={canvasDimensions.height}
         />
       </Styled.WrapperCanvas>
     </Styled.Container>

@@ -22,15 +22,15 @@ const initialState: DefaultState = {
   theme: getInitialThemeValue()
 }
 
-export const DefaultContext: React.Context<Readonly<DefaultState>> =
-  React.createContext<DefaultState>({} as never)
+export const DefaultContext = React.createContext<DefaultState>({} as never)
 
-type DefaultProviderProps = {
+export type DefaultProviderProps = {
   children: React.ReactNode
 }
 
-export const DefaultProvider = (props: DefaultProviderProps): JSX.Element => {
-  const { children } = props
+export const DefaultProvider = ({
+  children
+}: DefaultProviderProps): JSX.Element => {
   const [state] = useReducer(defaultReducer, initialState)
 
   useIsomorphicLayoutEffect(() => {

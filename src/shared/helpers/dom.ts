@@ -12,17 +12,3 @@ export function getAspectRatio(
 ) {
   return R.min(R.divide(maxWidth, srcWidth), R.divide(maxHeight, srcHeight))
 }
-
-export function calculateAspectRatioFit(
-  srcWidth: number,
-  srcHeight: number,
-  maxWidth: number,
-  maxHeight: number
-) {
-  const ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight)
-
-  return {
-    width: srcWidth * ratio,
-    height: srcHeight * ratio
-  }
-}

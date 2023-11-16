@@ -15,13 +15,13 @@ import Styled from './Header.styled'
 const Header = () => {
   const meme = useMeme()
   const showModal = useShowModal()
-  const getRatiotedTexts = useRatiotedTexts()
+  const getScaledTextsByMemeSize = useRatiotedTexts()
 
   const exportCanvasMutation = useMutation(
     (body: { meme: Meme }) => {
       return exportCanvasBlob({
         ...body,
-        texts: getRatiotedTexts()
+        texts: getScaledTextsByMemeSize()
       })
     },
     {

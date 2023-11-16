@@ -1,6 +1,8 @@
 import React from 'react'
 import * as R from 'ramda'
 import { degreeToRad } from '@shared/helpers/number'
+import { useIsomorphicLayoutEffect } from '@shared/hooks/useIsomorphicLayoutEffect'
+import { TextBox } from '@shared/schemas/textbox'
 import { useText } from '@stores/Editor/hooks/useTexts'
 import { faRotateLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,48 +16,63 @@ export type DraggableProps = {
   canvasWidth: number
   isSelected: boolean
   onClick: (itemId: string) => void
+  aspectRatio: number
 }
 
 type Type = 'drag' | 'resize' | 'rotate'
+
+function getInitialState(textbox: TextBox): State {
+  return {
+    mode: false,
+    downStartX: null,
+    downStartY: null,
+    downPageX: null,
+    downPageY: null,
+    widthOnDown: null,
+    heightOnDown: null,
+    topOnDown: null,
+    leftOnDown: null,
+    startOffsetTop: null,
+    startOffsetLeft: null,
+    radOnDown: null,
+    rotate: textbox.rotate,
+    left: textbox.centerX - R.divide(textbox.width, 2),
+    top: textbox.centerY - R.divide(textbox.height, 2),
+    width: textbox.width,
+    height: textbox.height
+  }
+}
 
 const Draggable = ({
   canvasHeight,
   canvasWidth,
   itemId,
   isSelected,
-  onClick
+  onClick,
+  aspectRatio
 }: DraggableProps) => {
   const { text, updateText } = useText(itemId)
   const modeRef = React.useRef<State['mode']>()
+  const currentScale = React.useRef(aspectRatio)
 
   const [state, setState] = React.useState<State>(() => {
-    return {
-      mode: false,
-      downStartX: null,
-      downStartY: null,
-      downPageX: null,
-      downPageY: null,
-      widthOnDown: null,
-      heightOnDown: null,
-      topOnDown: null,
-      leftOnDown: null,
-      startOffsetTop: null,
-      startOffsetLeft: null,
-      radOnDown: null,
-      rotate: text.rotate,
-      left: text.centerX - R.divide(text.width, 2),
-      top: text.centerY - R.divide(text.height, 2),
-      width: text.width,
-      height: text.height
-    }
+    return getInitialState(text)
   })
 
   modeRef.current = state.mode
 
-  React.useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
+    if (aspectRatio && currentScale.current !== aspectRatio) {
+      currentScale.current = aspectRatio
+      setState(getInitialState(text))
+    }
+  }, [text, aspectRatio])
+
+  useIsomorphicLayoutEffect(() => {
     if (modeRef.current) {
       const centerY = state.top + state.height / 2
       const centerX = state.left + state.width / 2
+
       updateText(itemId, {
         width: state.width,
         height: state.height,
