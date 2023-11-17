@@ -4,10 +4,12 @@ import type { MaxSizes, State } from './Draggable.types'
 export function move(
   event: MouseEvent,
   state: State,
+  sizes: { height: number; width: number },
   maxSizes: MaxSizes
-): Pick<State, 'left' | 'top'> {
+): { left: number; top: number } {
   const { pageY, pageX } = event
-  const { downStartY, downStartX, height, width } = state
+  const { downStartY, downStartX } = state
+  const { height, width } = sizes
   let top = pageY - (downStartY || 0)
   let left = pageX - (downStartX || 0)
 
@@ -32,8 +34,9 @@ export function move(
 export function resize(
   event: MouseEvent,
   state: State,
+  sizes: { left: number; top: number; height: number; width: number },
   maxSizes: MaxSizes
-): Pick<State, 'height' | 'width' | 'top' | 'left'> {
+): { left: number; top: number; height: number; width: number } {
   const {
     topOnDown,
     leftOnDown,
@@ -48,7 +51,7 @@ export function resize(
   const right = maxSizes.width - (leftOnDown + widthOnDown)
   const bottom = maxSizes.height - (topOnDown + heightOnDown)
 
-  let { height, width, top, left } = state
+  let { height, width, top, left } = sizes
 
   if (mode === 'resizing-se' || mode === 'resizing-sw') {
     if (heightOnDown + spacingHeight > 10) {
@@ -106,7 +109,7 @@ export function resize(
   }
 }
 
-export function rotate(event: MouseEvent, state: State): Pick<State, 'rotate'> {
+export function rotate(event: MouseEvent, state: State): { rotateDeg: number } {
   const radian =
     Math.atan2(
       event.pageY - (state.startOffsetTop as number),
@@ -120,6 +123,6 @@ export function rotate(event: MouseEvent, state: State): Pick<State, 'rotate'> {
   const degree = radToDegree(radian)
 
   return {
-    rotate: degree > -3.2 && degree < 3.2 ? 0 : degree
+    rotateDeg: degree > -3.2 && degree < 3.2 ? 0 : degree
   }
 }

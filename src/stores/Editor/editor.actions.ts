@@ -9,17 +9,16 @@ import { calculBaseByMemeSize, calculScaledValues } from '@shared/utils/textbox'
 import { Dimensions, EditorState, Tab } from './editor.types'
 
 const saveHistory = debounce((set: StoreApi<EditorState>['setState']) => {
-  // set(
-  //   produce((draft: Draft<EditorState>) => {
-  //     draft.history.push({
-  //       texts: draft.texts,
-  //       version: randomId(),
-  //       itemIdSelected: draft.itemIdSelected
-  //     })
-  //     draft.currentTab = 'customization'
-  //     draft.historyIndex++
-  //   })
-  // )
+  set(
+    produce((draft: Draft<EditorState>) => {
+      draft.history.push({
+        texts: draft.texts,
+        itemIdSelected: draft.itemIdSelected
+      })
+      draft.currentTab = 'customization'
+      draft.historyIndex++
+    })
+  )
 }, 1000)
 
 export function setCurrentTab(set: StoreApi<EditorState>['setState']) {

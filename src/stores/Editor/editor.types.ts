@@ -41,6 +41,4 @@ export type EditorState = {
   }
 } & EditorActions
 
-export type History = Pick<EditorState, 'itemIdSelected' | 'texts'> & {
-  version: string
-}
+export type History = Pick<EditorState, 'itemIdSelected' | 'texts'>

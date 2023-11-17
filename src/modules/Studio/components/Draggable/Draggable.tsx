@@ -1,9 +1,8 @@
 import React from 'react'
 import * as R from 'ramda'
 import { degreeToRad } from '@shared/helpers/number'
-import { useIsomorphicLayoutEffect } from '@shared/hooks/useIsomorphicLayoutEffect'
+import { useEvent } from '@shared/hooks/useEvent'
 import { TextBox } from '@shared/schemas/textbox'
-import { useText } from '@stores/Editor/hooks/useTexts'
 import { faRotateLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Styled from './Draggable.styled'
@@ -11,17 +10,17 @@ import { Side, State } from './Draggable.types'
 import { move, resize, rotate } from './Draggable.utils'
 
 export type DraggableProps = {
-  itemId: string
+  item: TextBox
+  updateItem: (itemId: string, itemValues: Partial<TextBox>) => void
   canvasHeight: number
   canvasWidth: number
   isSelected: boolean
-  onClick: (itemId: string) => void
-  aspectRatio: number
+  onClick: (item: TextBox) => void
 }
 
 type Type = 'drag' | 'resize' | 'rotate'
 
-function getInitialState(textbox: TextBox): State {
+function getInitialState(): State {
   return {
     mode: false,
     downStartX: null,
@@ -34,62 +33,28 @@ function getInitialState(textbox: TextBox): State {
     leftOnDown: null,
     startOffsetTop: null,
     startOffsetLeft: null,
-    radOnDown: null,
-    rotate: textbox.rotate,
-    left: textbox.centerX - R.divide(textbox.width, 2),
-    top: textbox.centerY - R.divide(textbox.height, 2),
-    width: textbox.width,
-    height: textbox.height
+    radOnDown: null
   }
 }
 
 const Draggable = ({
   canvasHeight,
   canvasWidth,
-  itemId,
+  item,
+  updateItem,
   isSelected,
-  onClick,
-  aspectRatio
+  onClick
 }: DraggableProps) => {
-  const { text, updateText } = useText(itemId)
   const modeRef = React.useRef<State['mode']>()
-  const currentScale = React.useRef(aspectRatio)
 
   const [state, setState] = React.useState<State>(() => {
-    return getInitialState(text)
+    return getInitialState()
   })
 
+  const { height, width, rotate: rotateDeg } = item
+  const left = item.centerX - R.divide(width, 2)
+  const top = item.centerY - R.divide(height, 2)
   modeRef.current = state.mode
-
-  useIsomorphicLayoutEffect(() => {
-    if (aspectRatio && currentScale.current !== aspectRatio) {
-      currentScale.current = aspectRatio
-      setState(getInitialState(text))
-    }
-  }, [text, aspectRatio])
-
-  useIsomorphicLayoutEffect(() => {
-    if (modeRef.current) {
-      const centerY = state.top + state.height / 2
-      const centerX = state.left + state.width / 2
-
-      updateText(itemId, {
-        width: state.width,
-        height: state.height,
-        centerX,
-        centerY,
-        rotate: state.rotate
-      })
-    }
-  }, [
-    state.left,
-    state.top,
-    state.width,
-    state.height,
-    state.rotate,
-    itemId,
-    updateText
-  ])
 
   const handleMouseDown = (event: React.MouseEvent) => {
     const { currentTarget, pageX, pageY } = event
@@ -101,8 +66,8 @@ const Draggable = ({
       setState((prevState) => {
         return {
           ...prevState,
-          downStartX: pageX - prevState.left,
-          downStartY: pageY - prevState.top,
+          downStartX: pageX - left,
+          downStartY: pageY - top,
           mode: 'dragging'
         }
       })
@@ -113,31 +78,31 @@ const Draggable = ({
           ...prevState,
           downPageX: pageX,
           downPageY: pageY,
-          widthOnDown: prevState.width,
-          heightOnDown: prevState.height,
-          topOnDown: prevState.top,
-          leftOnDown: prevState.left,
+          widthOnDown: width,
+          heightOnDown: height,
+          topOnDown: top,
+          leftOnDown: left,
           mode: `resizing-${side}`
         }
       })
     } else if (type === 'rotate') {
       const boxElement = event.currentTarget.parentElement as HTMLDivElement
-      const { left, top } = boxElement.getBoundingClientRect()
+      const boxBounding = boxElement.getBoundingClientRect()
       setState((prevState) => {
         return {
           ...prevState,
           downPageX: event.pageX,
           downPageY: event.pageY,
-          startOffsetLeft: left + prevState.width / 2,
-          startOffsetTop: top + prevState.height / 2,
-          radOnDown: degreeToRad(state.rotate),
+          startOffsetLeft: boxBounding.left + width / 2,
+          startOffsetTop: boxBounding.top + height / 2,
+          radOnDown: degreeToRad(rotateDeg),
           mode: 'rotating'
         }
       })
     }
   }
 
-  const handleMouseUp = React.useCallback(() => {
+  const handleMouseUp = () => {
     setState((prevState) => {
       return {
         ...prevState,
@@ -155,46 +120,65 @@ const Draggable = ({
         mode: false
       }
     })
-  }, [])
+  }
 
-  const handleDraggingMove = React.useCallback(
-    (event: MouseEvent) => {
-      setState((prevState) => {
-        return {
-          ...prevState,
-          ...move(event, prevState, {
-            width: canvasWidth,
-            height: canvasHeight
-          })
-        }
-      })
-    },
-    [canvasWidth, canvasHeight]
-  )
-
-  const handleResizeMove = React.useCallback(
-    (event: MouseEvent) => {
-      setState((prevState) => {
-        return {
-          ...prevState,
-          ...resize(event, prevState, {
-            width: canvasWidth,
-            height: canvasHeight
-          })
-        }
-      })
-    },
-    [canvasWidth, canvasHeight]
-  )
-
-  const handleRotateMove = React.useCallback((event: MouseEvent) => {
-    setState((prevState) => {
-      return {
-        ...prevState,
-        ...rotate(event, prevState)
+  const handleDraggingMove = useEvent((event: MouseEvent) => {
+    const positions = move(
+      event,
+      state,
+      {
+        height,
+        width
+      },
+      {
+        width: canvasWidth,
+        height: canvasHeight
       }
+    )
+
+    const centerY = Math.floor(positions.top + height / 2)
+    const centerX = Math.floor(positions.left + width / 2)
+
+    updateItem(item.id, {
+      centerY,
+      centerX
     })
-  }, [])
+  })
+
+  const handleResizeMove = useEvent((event: MouseEvent) => {
+    const resizer = resize(
+      event,
+      state,
+      {
+        height,
+        width,
+        top,
+        left
+      },
+      {
+        width: canvasWidth,
+        height: canvasHeight
+      }
+    )
+
+    const centerY = resizer.top + resizer.height / 2
+    const centerX = resizer.left + resizer.width / 2
+
+    updateItem(item.id, {
+      centerY,
+      centerX,
+      height: resizer.height,
+      width: resizer.width
+    })
+  })
+
+  const handleRotateMove = useEvent((event: MouseEvent) => {
+    const rotater = rotate(event, state)
+
+    updateItem(item.id, {
+      rotate: rotater.rotateDeg
+    })
+  })
 
   React.useEffect(() => {
     if (state.mode !== false) {
@@ -222,15 +206,7 @@ const Draggable = ({
     }
 
     return () => {}
-  }, [
-    state.mode,
-    handleMouseUp,
-    handleDraggingMove,
-    handleResizeMove,
-    handleRotateMove
-  ])
-
-  const { height, width, left, top } = state
+  }, [state.mode, handleDraggingMove, handleResizeMove, handleRotateMove])
 
   return (
     <Styled.Draggable
@@ -238,13 +214,13 @@ const Draggable = ({
       data-type="drag"
       aria-selected={isSelected}
       onClick={() => {
-        return onClick(itemId)
+        return onClick(item)
       }}
       draggable
       style={{
         height,
         width,
-        transform: `translate3d(${left}px, ${top}px, 0) rotate(${text.rotate}deg)`
+        transform: `translate3d(${left}px, ${top}px, 0) rotate(${rotateDeg}deg)`
       }}
     >
       <Styled.Resize

@@ -6,7 +6,6 @@ import { useIsomorphicLayoutEffect } from '@shared/hooks/useIsomorphicLayoutEffe
 import { useWindowSizeCallback } from '@shared/hooks/useWindowSizeCallback'
 import { TextBox } from '@shared/schemas/textbox'
 import { useCanvasDimensions } from '@stores/Editor/hooks/useCanvasDimensions'
-import { useHistoryVersion } from '@stores/Editor/hooks/useHistory'
 import { useItemIdSelected } from '@stores/Editor/hooks/useItemIdSelected'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useTexts } from '@stores/Editor/hooks/useTexts'
@@ -17,11 +16,10 @@ import Styled from './canvas.styled'
 const Canvas = () => {
   const meme = useMeme() as Meme
   const canvasElRef = React.useRef<HTMLCanvasElement>(null)
-  const { texts } = useTexts()
+  const { texts, updateText } = useTexts()
   const containerRef = React.useRef<HTMLDivElement>(null)
-  const { resize, canvasDimensions, aspectRatio } = useCanvasDimensions()
+  const { resize, canvasDimensions } = useCanvasDimensions()
   const { showTextAreas } = useTools()
-  const historyVersion = useHistoryVersion()
   const { itemIdSelected, setItemIdSelected } = useItemIdSelected()
 
   useWindowSizeCallback(
@@ -65,8 +63,8 @@ const Canvas = () => {
   }, [texts, canvasElRef, meme, canvasDimensions])
 
   const onDraggableClick = React.useCallback(
-    (itemId: string) => {
-      setItemIdSelected(itemId, true)
+    (item: TextBox) => {
+      setItemIdSelected(item.id, true)
     },
     [setItemIdSelected]
   )
@@ -84,11 +82,11 @@ const Canvas = () => {
           ? texts.map((text) => {
               return (
                 <Draggable
-                  key={`${historyVersion}-${text.id}`}
-                  itemId={text.id}
-                  aspectRatio={aspectRatio}
+                  key={text.id}
+                  item={text}
                   canvasHeight={canvasDimensions.height}
                   canvasWidth={canvasDimensions.width}
+                  updateItem={updateText}
                   onClick={onDraggableClick}
                   isSelected={itemIdSelected === text.id}
                 />
