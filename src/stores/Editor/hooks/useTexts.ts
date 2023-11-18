@@ -12,9 +12,21 @@ export function useTexts() {
   return useStoreWithEqualityFn(
     store,
     (state) => {
-      const { texts, updateText, addText, removeItem, duplicateItem } = state
+      const {
+        textboxes,
+        updateTextbox,
+        addTextbox,
+        removeItem,
+        duplicateItem
+      } = state
 
-      return { texts, updateText, addText, removeItem, duplicateItem } as const
+      return {
+        textboxes,
+        updateTextbox,
+        addTextbox,
+        removeItem,
+        duplicateItem
+      } as const
     },
     shallow
   )
@@ -32,7 +44,7 @@ export function useCountTexts() {
   const store = React.useContext(EditorContext)
 
   return useStore(store, (state) => {
-    return state.texts.length
+    return state.textboxes.length
   })
 }
 
@@ -42,16 +54,16 @@ export function useText(textId: TextBox['id']) {
   return useStoreWithEqualityFn(
     store,
     (state) => {
-      const { texts, updateText, addText, duplicateItem } = state
+      const { textboxes, updateTextbox, addTextbox, duplicateItem } = state
 
-      const text = R.find((textBox) => {
-        return textBox.id === textId
-      }, texts) as TextBox
+      const text = R.find((textbox) => {
+        return textbox.id === textId
+      }, textboxes) as TextBox
 
       return {
         text,
-        updateText,
-        addText,
+        updateTextbox,
+        addTextbox,
         duplicateItem
       }
     },

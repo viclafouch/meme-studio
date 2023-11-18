@@ -1,4 +1,5 @@
 import React from 'react'
+import * as R from 'remeda'
 import Button from '@components/Button/Button'
 import Tooltip from '@components/Tooltip'
 import { preventEmptyTextValue } from '@shared/utils/textbox'
@@ -14,8 +15,13 @@ import TextCustomisation from './TextCustomisation'
 
 const Customisation = () => {
   const meme = useMeme()
-  const { texts, updateText, addText, removeItem, duplicateItem } = useTexts()
+  const { textboxes, updateTextbox, addTextbox, removeItem, duplicateItem } =
+    useTexts()
   const { itemIdSelected, toggleItemIdSelected } = useItemIdSelected()
+
+  const textboxRefs = R.mapToObj(textboxes, (textbox) => {
+    return [String(textbox.id), React.createRef<HTMLTextAreaElement>()]
+  })
 
   if (!meme) {
     return <EmptyCustom />
@@ -23,7 +29,7 @@ const Customisation = () => {
 
   const handleAddTextbox = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
-    addText()
+    addTextbox()
   }
 
   const handleRemoveItem = (itemId: string) => {
@@ -42,6 +48,13 @@ const Customisation = () => {
     }
   }
 
+  const handleAfterOpenAccordion = (itemId: string) => {
+    const length = textboxRefs[itemId]?.current?.value?.length || 0
+    textboxRefs[itemId]?.current?.focus()
+    // set cursor at the end of value
+    textboxRefs[itemId]?.current?.setSelectionRange(length, length)
+  }
+
   return (
     <Styled.Scrollable>
       <Styled.BlockTitle>
@@ -49,14 +62,17 @@ const Customisation = () => {
         <Styled.MemeName>{meme.translations.en.name}</Styled.MemeName>
       </Styled.BlockTitle>
       <Styled.TextBlocks>
-        {texts.map((textbox, index) => {
+        {textboxes.map((textbox, index) => {
+          const inputRef = textboxRefs[textbox.id]
+
           return (
             <Accordion
               onToggle={toggleItemIdSelected}
-              title={preventEmptyTextValue(textbox.value, index)}
+              title={preventEmptyTextValue(textbox.properties.value, index)}
               id={textbox.id}
               isOpened={itemIdSelected === textbox.id}
               key={textbox.id}
+              onAfterOpen={handleAfterOpenAccordion}
               action={
                 <>
                   <Tooltip text="Dupliquer" position="top">
@@ -81,8 +97,9 @@ const Customisation = () => {
               }
             >
               <TextCustomisation
-                onUpdateText={updateText}
+                onUpdateTextProperties={updateTextbox}
                 text={textbox}
+                inputRef={inputRef}
                 index={index}
               />
             </Accordion>

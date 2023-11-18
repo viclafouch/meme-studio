@@ -10,8 +10,8 @@ export function calculBaseByMemeSize(
   textbox: TextBox,
   canvasDimensions: Dimensions,
   meme: Meme
-): TextBox['base'] {
-  const { width, height, centerX, centerY } = textbox
+): TextBox['properties']['base'] {
+  const { width, height, centerX, centerY } = textbox.properties
   const { width: canvasWidth, height: canvasHeight } = canvasDimensions
   const { width: memeWidth, height: memeHeight } = meme
 
@@ -28,9 +28,9 @@ export function calculScaledValues(
   calculByAspectRatio: (value: number) => number
 ) {
   return {
-    height: calculByAspectRatio(textbox.base.height),
-    width: calculByAspectRatio(textbox.base.width),
-    centerY: calculByAspectRatio(textbox.base.centerY),
-    centerX: calculByAspectRatio(textbox.base.centerX)
+    height: calculByAspectRatio(textbox.properties.base.height),
+    width: calculByAspectRatio(textbox.properties.base.width),
+    centerY: calculByAspectRatio(textbox.properties.base.centerY),
+    centerX: calculByAspectRatio(textbox.properties.base.centerX)
   }
 }

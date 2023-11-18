@@ -7,6 +7,7 @@ export type AccordionProps = {
   isOpened: boolean
   title: string
   onToggle: (id: string) => void
+  onAfterOpen: (id: string) => void
   id: string
   action?: React.ReactNode
 }
@@ -17,6 +18,7 @@ const Accordion = ({
   title,
   onToggle,
   id,
+  onAfterOpen,
   action = null
 }: AccordionProps) => {
   const [currentHeight, setCurrentHeight] = React.useState<number>(0)
@@ -33,13 +35,23 @@ const Accordion = ({
     onToggle(id)
   }
 
+  const handleTransitionEnd = () => {
+    if (isOpened) {
+      onAfterOpen(id)
+    }
+  }
+
   return (
     <Styled.Section id={id}>
       <Styled.Header tabIndex={0} role="button" onClick={handleToggle}>
         <Styled.Title>{title}</Styled.Title>
         {action ? <Styled.Actions>{action}</Styled.Actions> : null}
       </Styled.Header>
-      <Styled.Content ref={content} style={{ maxHeight: currentHeight }}>
+      <Styled.Content
+        ref={content}
+        style={{ maxHeight: currentHeight }}
+        onTransitionEnd={handleTransitionEnd}
+      >
         {children}
       </Styled.Content>
     </Styled.Section>

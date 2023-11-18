@@ -4,9 +4,9 @@ import { createStore, StoreApi } from 'zustand'
 import { randomId } from '@shared/helpers/string'
 import { TextBox } from '@shared/schemas/textbox'
 import {
-  addText,
+  addTextbox,
   duplicateItem,
-  eraseAllTexts,
+  eraseAllItems,
   getScaledTextsByMemeSize,
   redo,
   removeItem,
@@ -15,9 +15,9 @@ import {
   setItemIdSelected,
   setResize,
   toggleItemIdSelected,
-  toggleShowTextAreas,
+  toggleVisibleDraggables,
   undo,
-  updateText
+  updateTextboxProperties
 } from './editor.actions'
 import { EditorState } from './editor.types'
 
@@ -40,11 +40,11 @@ const createInitialStore = (
 
     return {
       meme: initialMeme ? new Meme(initialMeme) : null,
-      texts: initialTextboxes,
+      textboxes: initialTextboxes,
       getScaledTextsByMemeSize: getScaledTextsByMemeSize(get),
       history: [
         {
-          texts: initialTextboxes,
+          textboxes: initialTextboxes,
           itemIdSelected,
           version: randomId()
         }
@@ -54,7 +54,7 @@ const createInitialStore = (
         return value
       },
       aspectRatio: 1,
-      showTextAreas: true,
+      isVisibleDraggables: true,
       itemIdSelected,
       currentTab: initialMeme ? 'customization' : 'gallery',
       canvasDimensions: {
@@ -62,16 +62,16 @@ const createInitialStore = (
         width: 0
       },
       setCurrentTab: setCurrentTab(set),
-      toggleShowTextAreas: toggleShowTextAreas(set),
-      eraseAllTexts: eraseAllTexts(set),
+      toggleVisibleDraggables: toggleVisibleDraggables(set),
+      eraseAllItems: eraseAllItems(set),
       resize: setResize(set),
       resetAll: resetAll(set),
-      addText: addText(set),
+      addTextbox: addTextbox(set),
       removeItem: removeItem(set),
       duplicateItem: duplicateItem(set),
       toggleItemIdSelected: toggleItemIdSelected(set),
       setItemIdSelected: setItemIdSelected(set),
-      updateText: updateText(set),
+      updateTextbox: updateTextboxProperties(set),
       undo: undo(set),
       redo: redo(set)
     }

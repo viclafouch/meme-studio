@@ -1,5 +1,4 @@
 import React from 'react'
-import * as R from 'ramda'
 import { Meme } from '@models/Meme'
 import { drawText } from '@shared/helpers/canvas'
 import { useIsomorphicLayoutEffect } from '@shared/hooks/useIsomorphicLayoutEffect'
@@ -16,10 +15,10 @@ import Styled from './canvas.styled'
 const Canvas = () => {
   const meme = useMeme() as Meme
   const canvasElRef = React.useRef<HTMLCanvasElement>(null)
-  const { texts, updateText } = useTexts()
+  const { textboxes, updateTextbox } = useTexts()
   const containerRef = React.useRef<HTMLDivElement>(null)
   const { resize, canvasDimensions } = useCanvasDimensions()
-  const { showTextAreas } = useTools()
+  const { isVisibleDraggables } = useTools()
   const { itemIdSelected, setItemIdSelected } = useItemIdSelected()
 
   useWindowSizeCallback(
@@ -43,16 +42,9 @@ const Canvas = () => {
       canvasElement.width = canvasDimensions.width
       canvasElement.height = canvasDimensions.height
 
-      for (let index = 0; index < texts.length; index += 1) {
-        const text = texts[index] as TextBox
-        drawText(
-          {
-            ...text,
-            value: text.isUppercase ? R.toUpper(text.value) : text.value
-          },
-          context2D
-        )
-      }
+      textboxes.forEach((textbox) => {
+        drawText(textbox, context2D)
+      })
     }
 
     const frame = requestAnimationFrame(draw)
@@ -60,7 +52,7 @@ const Canvas = () => {
     return () => {
       cancelAnimationFrame(frame)
     }
-  }, [texts, canvasElRef, meme, canvasDimensions])
+  }, [textboxes, canvasElRef, meme, canvasDimensions])
 
   const onDraggableClick = React.useCallback(
     (item: TextBox) => {
@@ -78,17 +70,17 @@ const Canvas = () => {
           backgroundImage: `url('https://www.meme-studio.io/templates/${meme.filename}')`
         }}
       >
-        {showTextAreas
-          ? texts.map((text) => {
+        {isVisibleDraggables
+          ? textboxes.map((textbox) => {
               return (
                 <Draggable
-                  key={text.id}
-                  item={text}
+                  key={textbox.id}
+                  item={textbox}
                   canvasHeight={canvasDimensions.height}
                   canvasWidth={canvasDimensions.width}
-                  updateItem={updateText}
+                  updateItem={updateTextbox}
                   onClick={onDraggableClick}
-                  isSelected={itemIdSelected === text.id}
+                  isSelected={itemIdSelected === textbox.id}
                 />
               )
             })

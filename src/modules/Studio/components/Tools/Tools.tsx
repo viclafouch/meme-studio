@@ -18,8 +18,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Styled from './tools.styled'
 
 const Tools = () => {
-  const { showTextAreas, toggleShowTextAreas, eraseAllTexts, resetAll } =
-    useTools()
+  const {
+    isVisibleDraggables,
+    toggleVisibleDraggables,
+    eraseAllItems,
+    resetAll
+  } = useTools()
   const countTexts = useCountTexts()
   const meme = useMeme()
   const { canUndo, canRedo, undo, redo } = useHistory()
@@ -37,7 +41,7 @@ const Tools = () => {
         <Styled.ToolsListItem>
           <Tooltip
             text={
-              showTextAreas
+              isVisibleDraggables
                 ? 'Cacher les zones de texte'
                 : 'Afficher les zones de texte'
             }
@@ -47,7 +51,7 @@ const Tools = () => {
             <Styled.ToolsButton
               type="button"
               disabled={countTexts === 0}
-              onClick={handleClick(toggleShowTextAreas)}
+              onClick={handleClick(toggleVisibleDraggables)}
             >
               <FontAwesomeIcon icon={faCrop} />
             </Styled.ToolsButton>
@@ -84,7 +88,7 @@ const Tools = () => {
             <Styled.ToolsButton
               type="button"
               disabled={countTexts === 0}
-              onClick={handleClick(eraseAllTexts)}
+              onClick={handleClick(eraseAllItems)}
             >
               <FontAwesomeIcon icon={faEraser} />
             </Styled.ToolsButton>

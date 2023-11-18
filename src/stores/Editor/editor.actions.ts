@@ -12,7 +12,7 @@ const saveHistory = debounce((set: StoreApi<EditorState>['setState']) => {
   set(
     produce((draft: Draft<EditorState>) => {
       draft.history.push({
-        texts: draft.texts,
+        textboxes: draft.textboxes,
         itemIdSelected: draft.itemIdSelected
       })
       draft.currentTab = 'customization'
@@ -55,21 +55,23 @@ export function setResize(set: StoreApi<EditorState>['setState']) {
           draft.calculByAspectRatio = calculByAspectRatio
 
           // Lets repositionning our textbox by their base
-          draft.texts = draft.texts.map((textDraft) => {
-            return {
-              ...textDraft,
-              ...calculScaledValues(textDraft, calculByAspectRatio)
+          draft.textboxes = draft.textboxes.map((textboxDraft) => {
+            textboxDraft.properties = {
+              ...textboxDraft.properties,
+              ...calculScaledValues(textboxDraft, calculByAspectRatio)
             }
-          })
+
+            return textboxDraft
+          }) as TextBox[]
 
           // Lets do the same for history
           draft.history = draft.history.map((history) => {
             return {
               ...history,
-              texts: history.texts.map((textDraft) => {
+              texts: history.textboxes.map((textboxDraft) => {
                 return {
-                  ...textDraft,
-                  ...calculScaledValues(textDraft, calculByAspectRatio)
+                  ...textboxDraft,
+                  ...calculScaledValues(textboxDraft, calculByAspectRatio)
                 }
               })
             }
@@ -80,28 +82,34 @@ export function setResize(set: StoreApi<EditorState>['setState']) {
   }
 }
 
-export function updateText(set: StoreApi<EditorState>['setState']) {
-  return (textId: TextBox['id'], values: Partial<TextBox>) => {
+export function updateTextboxProperties(
+  set: StoreApi<EditorState>['setState']
+) {
+  return (
+    textboxId: TextBox['id'],
+    properties: Partial<TextBox['properties']>
+  ) => {
     return set(
       produce((draft: Draft<EditorState>) => {
         const { canvasDimensions, meme } = draft
-        const textIndex = R.findIndex((textBox) => {
-          return textId === textBox.id
-        }, draft.texts)
+        const textIndex = R.findIndex((textbox) => {
+          return textboxId === textbox.id
+        }, draft.textboxes)
 
-        let textDraft = draft.texts[textIndex]
+        const textboxDraft = draft.textboxes[textIndex]
 
-        if (textDraft && meme) {
-          textDraft = {
-            ...textDraft,
-            ...values
+        if (textboxDraft && meme) {
+          textboxDraft.properties = {
+            ...textboxDraft.properties,
+            ...properties
           }
-          textDraft.base = calculBaseByMemeSize(
-            textDraft,
+          textboxDraft.properties.base = calculBaseByMemeSize(
+            textboxDraft,
             canvasDimensions,
             meme
           )
-          draft.texts[textIndex] = textDraft
+          draft.itemIdSelected = textboxId
+          draft.textboxes[textIndex] = textboxDraft
         }
 
         saveHistory(set)
@@ -110,22 +118,24 @@ export function updateText(set: StoreApi<EditorState>['setState']) {
   }
 }
 
-export function toggleShowTextAreas(set: StoreApi<EditorState>['setState']) {
+export function toggleVisibleDraggables(
+  set: StoreApi<EditorState>['setState']
+) {
   return () => {
     return set(
       produce((draft: Draft<EditorState>) => {
-        draft.showTextAreas = !draft.showTextAreas
+        draft.isVisibleDraggables = !draft.isVisibleDraggables
       })
     )
   }
 }
 
-export function eraseAllTexts(set: StoreApi<EditorState>['setState']) {
+export function eraseAllItems(set: StoreApi<EditorState>['setState']) {
   return () => {
     return set(
       produce((draft: Draft<EditorState>) => {
-        draft.showTextAreas = true
-        draft.texts = []
+        draft.isVisibleDraggables = true
+        draft.textboxes = []
       })
     )
   }
@@ -135,8 +145,8 @@ export function resetAll(set: StoreApi<EditorState>['setState']) {
   return () => {
     return set(
       produce((draft: Draft<EditorState>) => {
-        draft.showTextAreas = true
-        draft.texts = []
+        draft.isVisibleDraggables = true
+        draft.textboxes = []
         draft.meme = null
         draft.history = []
         draft.historyIndex = 0
@@ -165,8 +175,8 @@ export function setItemIdSelected(set: StoreApi<EditorState>['setState']) {
   }
 }
 
-export function addText(set: StoreApi<EditorState>['setState']) {
-  return (values: Partial<TextBox> = {}) => {
+export function addTextbox(set: StoreApi<EditorState>['setState']) {
+  return () => {
     return set(
       produce((draft: Draft<EditorState>) => {
         const { meme, calculByAspectRatio } = draft
@@ -179,12 +189,11 @@ export function addText(set: StoreApi<EditorState>['setState']) {
           width: calculByAspectRatio(meme.width * 0.33),
           height: calculByAspectRatio(meme.height * 0.33),
           centerX: calculByAspectRatio(meme.width / 2),
-          centerY: calculByAspectRatio(meme.height / 2),
-          ...values
+          centerY: calculByAspectRatio(meme.height / 2)
         })
 
         draft.itemIdSelected = textbox.id
-        draft.texts.push(textbox)
+        draft.textboxes.push(textbox)
 
         saveHistory(set)
       })
@@ -200,8 +209,8 @@ export function removeItem(set: StoreApi<EditorState>['setState']) {
           draft.itemIdSelected = null
         }
 
-        draft.texts = draft.texts.filter((text) => {
-          return text.id !== itemId
+        draft.textboxes = draft.textboxes.filter((textbox) => {
+          return textbox.id !== itemId
         })
 
         saveHistory(set)
@@ -214,7 +223,7 @@ export function duplicateItem(set: StoreApi<EditorState>['setState']) {
   return (itemId: string) => {
     return set(
       produce((draft: Draft<EditorState>) => {
-        const item = draft.texts.find((textbox) => {
+        const item = draft.textboxes.find((textbox) => {
           return textbox.id === itemId
         })
 
@@ -223,7 +232,7 @@ export function duplicateItem(set: StoreApi<EditorState>['setState']) {
             ...item,
             id: randomId()
           }
-          draft.texts.push(newItem)
+          draft.textboxes.push(newItem)
           draft.itemIdSelected = newItem.id
         }
 
@@ -237,11 +246,14 @@ export function getScaledTextsByMemeSize(
   get: StoreApi<EditorState>['getState']
 ) {
   return (): TextBox[] => {
-    const { texts } = get()
+    const { textboxes } = get()
 
     // Just need to override values by the base itself (proportionate by meme sizes)
-    return texts.map((text) => {
-      return R.mergeRight(text, text.base)
+    return textboxes.map((textbox) => {
+      return {
+        ...textbox,
+        ...textbox.properties.base
+      }
     })
   }
 }
@@ -257,7 +269,7 @@ export function undo(set: StoreApi<EditorState>['setState']) {
 
         if (previousHistory) {
           draft.historyIndex = newHistoryIndex
-          draft.texts = previousHistory.texts
+          draft.textboxes = previousHistory.textboxes
           draft.itemIdSelected = previousHistory.itemIdSelected
         }
       })
@@ -276,7 +288,7 @@ export function redo(set: StoreApi<EditorState>['setState']) {
 
         if (nextHistory) {
           draft.historyIndex = newHistoryIndex
-          draft.texts = nextHistory.texts
+          draft.textboxes = nextHistory.textboxes
           draft.itemIdSelected = nextHistory.itemIdSelected
         }
       })

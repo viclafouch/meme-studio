@@ -13,22 +13,20 @@ import Styled from './TextCustomisation.styled'
 export type TextCustomisationProps = {
   text: TextBox
   index: number
-  onUpdateText: (textId: TextBox['id'], text: TextBox) => void
-}
-
-function getUpdatedText(text: TextBox, values: Partial<TextBox>): TextBox {
-  return {
-    ...text,
-    ...values
-  }
+  inputRef: React.RefObject<HTMLTextAreaElement> | undefined
+  onUpdateTextProperties: (
+    textId: TextBox['id'],
+    values: Partial<TextBox['properties']>
+  ) => void
 }
 
 const TextCustomisation = ({
   text,
   index,
-  onUpdateText
+  inputRef,
+  onUpdateTextProperties
 }: TextCustomisationProps) => {
-  const handleEditText = (key: keyof TextBox) => {
+  const handleEditText = (key: keyof TextBox['properties']) => {
     return (
       event: React.ChangeEvent<
         HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement
@@ -40,12 +38,13 @@ const TextCustomisation = ({
         value = (event.target as HTMLInputElement).checked
       }
 
-      const newText = getUpdatedText(text, {
+      onUpdateTextProperties(text.id, {
         [key]: value
       })
-      onUpdateText(text.id, newText)
     }
   }
+
+  const { properties } = text
 
   return (
     <Styled.TextCustomisation>
@@ -54,9 +53,10 @@ const TextCustomisation = ({
           <Styled.Textarea
             spellCheck="false"
             onChange={handleEditText('value')}
-            value={text.value}
+            value={properties.value}
             rows={5}
-            placeholder={preventEmptyTextValue(text.value, index)}
+            ref={inputRef}
+            placeholder={preventEmptyTextValue(properties.value, index)}
           />
         </Styled.Fieldset>
         <Styled.Fieldset>
@@ -66,7 +66,7 @@ const TextCustomisation = ({
             min="1"
             max="100"
             step="1"
-            value={text.fontSize}
+            value={properties.fontSize}
             onChange={handleEditText('fontSize')}
           />
         </Styled.Fieldset>
@@ -77,7 +77,7 @@ const TextCustomisation = ({
             min="1"
             max="100"
             step="1"
-            value={text.boxShadow}
+            value={properties.boxShadow}
             onChange={handleEditText('boxShadow')}
           />
         </Styled.Fieldset>
@@ -86,7 +86,7 @@ const TextCustomisation = ({
           <input
             type="color"
             id="box-shadow"
-            value={text.color}
+            value={properties.color}
             onChange={handleEditText('color')}
           />
         </Styled.Fieldset>
@@ -94,7 +94,7 @@ const TextCustomisation = ({
           <label htmlFor="fontFamily">Police d&apos;écriture</label>
           <select
             id="fontFamily"
-            value={text.fontFamily}
+            value={properties.fontFamily}
             onChange={handleEditText('fontFamily')}
           >
             {FONTS_FAMILY.map((fontName) => {
@@ -110,7 +110,7 @@ const TextCustomisation = ({
           <label htmlFor="alignVertical">Alignement vertical</label>
           <select
             id="alignVertical"
-            value={text.alignVertical}
+            value={properties.alignVertical}
             onChange={handleEditText('alignVertical')}
           >
             {ALIGN_VERTICAL.map((alignVertical) => {
@@ -126,7 +126,7 @@ const TextCustomisation = ({
           <label htmlFor="textAlign">Alignement horizontal</label>
           <select
             id="textAlign"
-            value={text.textAlign}
+            value={properties.textAlign}
             onChange={handleEditText('textAlign')}
           >
             {TEXT_ALIGN.map((textAlign) => {
@@ -143,7 +143,7 @@ const TextCustomisation = ({
           <input
             type="checkbox"
             onChange={handleEditText('isUppercase')}
-            checked={text.isUppercase}
+            checked={properties.isUppercase}
             id="isUppercase"
           />
         </Styled.Fieldset>

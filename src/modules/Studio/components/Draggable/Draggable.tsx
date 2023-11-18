@@ -11,7 +11,10 @@ import { move, resize, rotate } from './Draggable.utils'
 
 export type DraggableProps = {
   item: TextBox
-  updateItem: (itemId: string, itemValues: Partial<TextBox>) => void
+  updateItem: (
+    itemId: string,
+    itemValues: Partial<TextBox['properties']>
+  ) => void
   canvasHeight: number
   canvasWidth: number
   isSelected: boolean
@@ -51,9 +54,9 @@ const Draggable = ({
     return getInitialState()
   })
 
-  const { height, width, rotate: rotateDeg } = item
-  const left = item.centerX - R.divide(width, 2)
-  const top = item.centerY - R.divide(height, 2)
+  const { height, width, rotate: rotateDeg } = item.properties
+  const left = item.properties.centerX - R.divide(width, 2)
+  const top = item.properties.centerY - R.divide(height, 2)
   modeRef.current = state.mode
 
   const handleMouseDown = (event: React.MouseEvent) => {

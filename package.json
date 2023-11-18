@@ -22,6 +22,7 @@
     "react-dom": "18.2.0",
     "react-query": "3.39.3",
     "react-responsive-modal": "^6.4.2",
+    "remeda": "^1.29.0",
     "sass": "1.69.5",
     "styled-components": "6.1.1",
     "zod": "^3.22.4",

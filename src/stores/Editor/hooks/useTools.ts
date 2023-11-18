@@ -9,13 +9,17 @@ export function useTools() {
   return useStoreWithEqualityFn(
     store,
     (state) => {
-      const { showTextAreas, toggleShowTextAreas, eraseAllTexts, resetAll } =
-        state
+      const {
+        isVisibleDraggables,
+        toggleVisibleDraggables,
+        eraseAllItems,
+        resetAll
+      } = state
 
       return {
-        showTextAreas,
-        toggleShowTextAreas,
-        eraseAllTexts,
+        isVisibleDraggables,
+        toggleVisibleDraggables,
+        eraseAllItems,
         resetAll
       } as const
     },
