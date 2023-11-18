@@ -5,7 +5,7 @@ import Tooltip from '@components/Tooltip'
 import { preventEmptyTextValue } from '@shared/utils/textbox'
 import { useItemIdSelected } from '@stores/Editor/hooks/useItemIdSelected'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
-import { useTexts } from '@stores/Editor/hooks/useTexts'
+import { useTextboxes } from '@stores/Editor/hooks/useTextboxes'
 import Accordion from '@studio/components/Accordion'
 import { faClone, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -16,7 +16,7 @@ import TextCustomisation from './TextCustomisation'
 const Customisation = () => {
   const meme = useMeme()
   const { textboxes, updateTextbox, addTextbox, removeItem, duplicateItem } =
-    useTexts()
+    useTextboxes()
   const { itemIdSelected, toggleItemIdSelected } = useItemIdSelected()
 
   const textboxRefs = R.mapToObj(textboxes, (textbox) => {

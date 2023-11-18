@@ -1,17 +1,8 @@
-import * as R from 'ramda'
 import { Meme } from '@models/Meme'
 import data from './meme.json'
 
 export async function getMemes() {
-  return Promise.resolve(
-    R.slice(
-      0,
-      10,
-      R.map((memeData) => {
-        return memeData
-      }, data.memes)
-    )
-  )
+  return Promise.resolve(data.memes)
 }
 
 export function getMeme(memeId: Meme['id']) {

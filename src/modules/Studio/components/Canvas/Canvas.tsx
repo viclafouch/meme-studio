@@ -7,7 +7,7 @@ import { TextBox } from '@shared/schemas/textbox'
 import { useCanvasDimensions } from '@stores/Editor/hooks/useCanvasDimensions'
 import { useItemIdSelected } from '@stores/Editor/hooks/useItemIdSelected'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
-import { useTexts } from '@stores/Editor/hooks/useTexts'
+import { useTextboxes } from '@stores/Editor/hooks/useTextboxes'
 import { useTools } from '@stores/Editor/hooks/useTools'
 import Draggable from '../Draggable'
 import Styled from './canvas.styled'
@@ -15,7 +15,7 @@ import Styled from './canvas.styled'
 const Canvas = () => {
   const meme = useMeme() as Meme
   const canvasElRef = React.useRef<HTMLCanvasElement>(null)
-  const { textboxes, updateTextbox } = useTexts()
+  const { textboxes, updateTextbox } = useTextboxes()
   const containerRef = React.useRef<HTMLDivElement>(null)
   const { resize, canvasDimensions } = useCanvasDimensions()
   const { isVisibleDraggables } = useTools()

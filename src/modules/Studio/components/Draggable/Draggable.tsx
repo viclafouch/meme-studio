@@ -1,5 +1,4 @@
 import React from 'react'
-import * as R from 'ramda'
 import { degreeToRad } from '@shared/helpers/number'
 import { useEvent } from '@shared/hooks/useEvent'
 import { TextBox } from '@shared/schemas/textbox'
@@ -55,8 +54,8 @@ const Draggable = ({
   })
 
   const { height, width, rotate: rotateDeg } = item.properties
-  const left = item.properties.centerX - R.divide(width, 2)
-  const top = item.properties.centerY - R.divide(height, 2)
+  const left = item.properties.centerX - width / 2
+  const top = item.properties.centerY - height / 2
   modeRef.current = state.mode
 
   const handleMouseDown = (event: React.MouseEvent) => {

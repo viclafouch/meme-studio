@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Tooltip from '@components/Tooltip'
 import { useHistory } from '@stores/Editor/hooks/useHistory'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
-import { useCountTexts } from '@stores/Editor/hooks/useTexts'
+import { useCountTextboxes } from '@stores/Editor/hooks/useTextboxes'
 import { useTools } from '@stores/Editor/hooks/useTools'
 import {
   faCrop,
@@ -24,7 +24,7 @@ const Tools = () => {
     eraseAllItems,
     resetAll
   } = useTools()
-  const countTexts = useCountTexts()
+  const countTexts = useCountTextboxes()
   const meme = useMeme()
   const { canUndo, canRedo, undo, redo } = useHistory()
 

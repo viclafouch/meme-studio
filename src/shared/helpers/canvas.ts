@@ -1,4 +1,3 @@
-import * as R from 'ramda'
 import { Meme } from '@models/Meme'
 import { TextBox } from '@shared/schemas/textbox'
 import { degreeToRad } from './number'
@@ -18,27 +17,27 @@ function getLines(
   textboxProperties: TextBox['properties'],
   context2D: CanvasRenderingContext2D
 ): Line[] {
-  return R.pipe(R.replace(/\r/g, ''), R.split('\n'), (textLines) => {
-    return textLines.map((currentTextLine: string, index: number) => {
-      return {
-        x: 0,
-        y: 0,
-        value: currentTextLine,
-        getHeight: (fontSize: number) => {
-          return textLines.length > 1 && index !== textLines.length - 1
-            ? Math.round(1.2 * fontSize)
-            : fontSize
-        },
-        getWidth: () => {
-          return context2D.measureText(currentTextLine).width
-        }
+  const value = textboxProperties.isUppercase
+    ? textboxProperties.value.toUpperCase()
+    : textboxProperties.value
+
+  const textLines = value.replace(/\r/g, '').split('\n')
+
+  return textLines.map((textLine, index) => {
+    return {
+      x: 0,
+      y: 0,
+      value: textLine,
+      getHeight: (fontSize: number) => {
+        return textLines.length > 1 && index !== textLines.length - 1
+          ? Math.round(1.2 * fontSize)
+          : fontSize
+      },
+      getWidth: () => {
+        return context2D.measureText(textLine).width
       }
-    })
-  })(
-    textboxProperties.isUppercase
-      ? textboxProperties.value.toUpperCase()
-      : textboxProperties.value
-  )
+    }
+  })
 }
 
 function applyFontSizeByWidth(
@@ -67,9 +66,12 @@ function applyFontSizeByHeight(
   initialFontSize: number
 ): { fontSize: number; linesHeight: number } {
   let fontSize = initialFontSize
-  const getTotalHeight = R.reduce((totalHeight, current: Line) => {
-    return R.add(totalHeight, current.getHeight(fontSize))
-  }, 0)
+
+  const getTotalHeight = (currentLines: Line[]) => {
+    return currentLines.reduce((totalHeight, currentLine: Line) => {
+      return totalHeight + currentLine.getHeight(fontSize)
+    }, 0)
+  }
 
   while (getTotalHeight(lines) > textboxProperties.height - PADDING_BLOCK * 2) {
     fontSize -= 1

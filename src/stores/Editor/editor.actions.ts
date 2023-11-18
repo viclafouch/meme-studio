@@ -1,5 +1,4 @@
 import { Draft, produce } from 'immer'
-import * as R from 'ramda'
 import { StoreApi } from 'zustand'
 import { randomId } from '@shared/helpers/string'
 import { debounce } from '@shared/helpers/timeout'
@@ -92,9 +91,9 @@ export function updateTextboxProperties(
     return set(
       produce((draft: Draft<EditorState>) => {
         const { canvasDimensions, meme } = draft
-        const textIndex = R.findIndex((textbox) => {
+        const textIndex = draft.textboxes.findIndex((textbox) => {
           return textboxId === textbox.id
-        }, draft.textboxes)
+        })
 
         const textboxDraft = draft.textboxes[textIndex]
 

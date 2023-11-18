@@ -6,7 +6,7 @@ import Button from '@components/Button'
 import { Meme } from '@models/Meme'
 import { exportCanvasBlob } from '@shared/helpers/canvas'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
-import { useRatiotedTexts } from '@stores/Editor/hooks/useTexts'
+import { useRatiotedTextboxes } from '@stores/Editor/hooks/useTextboxes'
 import { useShowModal } from '@stores/Modal/Modal.provider'
 import { faArrowCircleDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,7 +15,7 @@ import Styled from './Header.styled'
 const Header = () => {
   const meme = useMeme()
   const showModal = useShowModal()
-  const getScaledTextsByMemeSize = useRatiotedTexts()
+  const getScaledTextsByMemeSize = useRatiotedTextboxes()
 
   const exportCanvasMutation = useMutation(
     (body: { meme: Meme }) => {
