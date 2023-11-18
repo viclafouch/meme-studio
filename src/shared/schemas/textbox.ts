@@ -1,3 +1,4 @@
+import { produce } from 'immer'
 import { z } from 'zod'
 import {
   ALIGN_VERTICAL,
@@ -11,6 +12,21 @@ export const textboxSchema = z
     id: z.string().default(() => {
       return randomId()
     }),
+    baseProperties: z
+      .object({
+        width: z.number(),
+        height: z.number(),
+        centerX: z.number(),
+        centerY: z.number()
+      })
+      .default(() => {
+        return {
+          width: 0,
+          height: 0,
+          centerX: 0,
+          centerY: 0
+        }
+      }),
     properties: z.object({
       value: z.string().default(''),
       width: z.number(),
@@ -27,19 +43,15 @@ export const textboxSchema = z
       alignVertical: z.enum(ALIGN_VERTICAL).default('middle')
     })
   })
-  .transform((textbox) => {
-    return {
-      ...textbox,
-      properties: {
-        ...textbox.properties,
-        base: {
-          height: textbox.properties.height,
-          width: textbox.properties.width,
-          centerY: textbox.properties.centerY,
-          centerX: textbox.properties.centerX
-        }
+  .transform((values) => {
+    return produce(values, (textboxDraft) => {
+      textboxDraft.baseProperties = {
+        height: textboxDraft.properties.height,
+        width: textboxDraft.properties.width,
+        centerY: textboxDraft.properties.centerY,
+        centerX: textboxDraft.properties.centerX
       }
-    }
+    })
   })
 
 export type TextBox = z.infer<typeof textboxSchema>

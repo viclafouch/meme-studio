@@ -54,7 +54,7 @@ export function setResize(set: StoreApi<EditorState>['setState']) {
           draft.aspectRatio = aspectRatio
           draft.calculByAspectRatio = calculByAspectRatio
 
-          // Lets repositionning our textbox by their base
+          // Lets repositionning our textbox by their baseProperties
           draft.textboxes = draft.textboxes.map((textboxDraft) => {
             textboxDraft.properties = {
               ...textboxDraft.properties,
@@ -103,7 +103,7 @@ export function updateTextboxProperties(
             ...textboxDraft.properties,
             ...properties
           }
-          textboxDraft.properties.base = calculBaseByMemeSize(
+          textboxDraft.baseProperties = calculBaseByMemeSize(
             textboxDraft,
             canvasDimensions,
             meme
@@ -248,11 +248,11 @@ export function getScaledTextsByMemeSize(
   return (): TextBox[] => {
     const { textboxes } = get()
 
-    // Just need to override values by the base itself (proportionate by meme sizes)
+    // Just need to override values by the baseProperties itself (proportionate by meme sizes)
     return textboxes.map((textbox) => {
       return {
         ...textbox,
-        ...textbox.properties.base
+        ...textbox.baseProperties
       }
     })
   }
