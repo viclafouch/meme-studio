@@ -1,4 +1,4 @@
-import { useMutation, UseMutationOptions } from 'react-query'
+import { useMutation, UseMutationOptions } from '@tanstack/react-query'
 
 const PERMISSIONS: PermissionDescriptor[] = [
   { name: 'clipboard-read' as PermissionName },
@@ -28,12 +28,15 @@ export function useClipboard(
       >
     | undefined
 ) {
-  const { mutate } = useMutation(async ({ blob }: { blob: Blob }) => {
-    await Promise.all(PERMISSIONS.map(askPermission))
+  const { mutate } = useMutation({
+    mutationFn: async ({ blob }: { blob: Blob }) => {
+      await Promise.all(PERMISSIONS.map(askPermission))
 
-    const clipboardItem = [new ClipboardItem({ [blob.type]: blob })]
-    await navigator.clipboard.write(clipboardItem)
-  }, options)
+      const clipboardItem = [new ClipboardItem({ [blob.type]: blob })]
+      await navigator.clipboard.write(clipboardItem)
+    },
+    ...options
+  })
 
   return {
     copy: mutate

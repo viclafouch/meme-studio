@@ -1,44 +1,40 @@
 import React from 'react'
-import { dehydrate, DehydratedState, QueryClient } from 'react-query'
-import { GetStaticPropsContext, GetStaticPropsResult, NextPage } from 'next'
+import { GetStaticPaths, GetStaticPropsContext } from 'next'
 import CreatePage from 'modules/Studio/Studio'
 import { Meme } from '@models/Meme'
 import { getMeme, getMemes } from '@shared/api/memes'
+import { dehydrate, QueryClient } from '@tanstack/react-query'
 
 type Params = {
   memeId: Meme['id']
 }
 
-type Result = {
-  dehydratedState: DehydratedState
-}
-
-export async function getStaticPaths() {
-  const memes = await getMemes()
-
+export const getStaticPaths = (() => {
   return {
-    paths: memes.map((meme) => {
-      return {
-        params: {
-          memeId: meme.id
-        }
-      }
-    }),
+    paths: [],
     fallback: true
   }
-}
+}) satisfies GetStaticPaths
 
-export async function getStaticProps(
-  context: GetStaticPropsContext<Params>
-): Promise<GetStaticPropsResult<Result>> {
+export async function getStaticProps(context: GetStaticPropsContext<Params>) {
   const { params } = context
   const memeId = params?.memeId as Meme['id']
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery('memes', getMemes)
-  await queryClient.prefetchQuery(['memes', memeId], () => {
-    return getMeme(memeId)
-  })
+  await Promise.all([
+    queryClient.prefetchQuery({
+      queryKey: ['memes', 10],
+      queryFn: () => {
+        return getMemes()
+      }
+    }),
+    queryClient.prefetchQuery({
+      queryKey: ['meme', memeId],
+      queryFn: () => {
+        return getMeme(memeId)
+      }
+    })
+  ])
 
   return {
     props: {
@@ -47,7 +43,7 @@ export async function getStaticProps(
   }
 }
 
-const Create: NextPage<Result> = () => {
+const Create = () => {
   return <CreatePage />
 }
 

@@ -1,12 +1,17 @@
 import React from 'react'
-import { useQuery } from 'react-query'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getMemes } from '@shared/api/memes'
+import { useQuery } from '@tanstack/react-query'
 import Styled from './Gallery.styled'
 
 const Gallery = () => {
-  const { data } = useQuery('memes', getMemes)
+  const { data } = useQuery({
+    queryKey: ['memes'],
+    queryFn: () => {
+      return getMemes()
+    }
+  })
 
   return (
     <Styled.GalleryContainer>

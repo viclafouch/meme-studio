@@ -1,43 +1,34 @@
 import React from 'react'
-import { useQuery } from 'react-query'
 import { useRouter } from 'next/router'
 import Header from '@components/Header/Header'
 import { Meme } from '@models/Meme'
 import { getMeme } from '@shared/api/memes'
-import { textboxSchema } from '@shared/schemas/textbox'
 import EditorProvider from '@stores/Editor/editor.store'
 import StudioBody from '@studio/components/StudioBody'
+import { useQuery } from '@tanstack/react-query'
 import Styled from './Studio.styled'
 
-const CreatePage = () => {
+const StudioPage = () => {
   const router = useRouter()
-  const { data } = useQuery(
-    ['memes', router.query.memeId],
-    () => {
-      const meme = getMeme(router.query.memeId as Meme['id'])
+  const { memeId } = router.query
 
-      return {
-        meme: meme ? new Meme(meme) : null,
-        textboxes: meme
-          ? meme.texts.map((text) => {
-              return textboxSchema.parse({
-                ...text,
-                properties: text
-              })
-            })
-          : []
-      }
+  const { data } = useQuery({
+    queryKey: ['memes', memeId],
+    queryFn: () => {
+      return getMeme(memeId as Meme['id'])
     },
-    {
-      enabled: Boolean(router.query.memeId)
-    }
-  )
+    enabled: Boolean(memeId)
+  })
 
   const { meme = null, textboxes = [] } = data || {}
 
   return (
     <Styled.Page>
-      <EditorProvider key={meme?.id} textBoxes={textboxes} meme={meme}>
+      <EditorProvider
+        key={meme?.id}
+        textBoxes={textboxes}
+        meme={meme ? new Meme(meme) : null}
+      >
         <Header />
         <StudioBody />
       </EditorProvider>
@@ -45,4 +36,4 @@ const CreatePage = () => {
   )
 }
 
-export default CreatePage
+export default StudioPage

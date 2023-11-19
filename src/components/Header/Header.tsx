@@ -1,5 +1,4 @@
 import React from 'react'
-import { useMutation } from 'react-query'
 import Image from 'next/image'
 import Link from 'next/link'
 import Button from '@components/Button'
@@ -10,6 +9,7 @@ import { useRatiotedTextboxes } from '@stores/Editor/hooks/useTextboxes'
 import { useShowModal } from '@stores/Modal/Modal.provider'
 import { faArrowCircleDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useMutation } from '@tanstack/react-query'
 import Styled from './Header.styled'
 
 const Header = () => {
@@ -17,23 +17,21 @@ const Header = () => {
   const showModal = useShowModal()
   const getScaledTextsByMemeSize = useRatiotedTextboxes()
 
-  const exportCanvasMutation = useMutation(
-    (body: { meme: Meme }) => {
+  const exportCanvasMutation = useMutation({
+    mutationFn: (body: { meme: Meme }) => {
       return exportCanvasBlob({
         ...body,
         texts: getScaledTextsByMemeSize()
       })
     },
-    {
-      onSuccess: (blob: Blob, variables) => {
-        showModal('export', {
-          canvasBlob: blob,
-          width: variables.meme.width,
-          height: variables.meme.height
-        })
-      }
+    onSuccess: (blob: Blob, variables) => {
+      showModal('export', {
+        canvasBlob: blob,
+        width: variables.meme.width,
+        height: variables.meme.height
+      })
     }
-  )
+  })
 
   const handleOpenExportModal = (
     event: React.MouseEvent<HTMLButtonElement>

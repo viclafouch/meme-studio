@@ -37,5 +37,6 @@ export default {
     background-color: transparent;
     border: 0;
     cursor: pointer;
+    color: #ffffff;
   `
 }

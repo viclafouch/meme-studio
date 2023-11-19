@@ -45,7 +45,6 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta name="color-scheme" content="dark light" />
           <link
             href="https://fonts.googleapis.com/css2?family=Alata&display=swap"
             rel="stylesheet"
