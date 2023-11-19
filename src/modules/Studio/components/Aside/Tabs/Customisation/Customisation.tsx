@@ -1,31 +1,32 @@
 import React from 'react'
-import * as R from 'remeda'
-import Button from '@components/Button/Button'
+import Button from '@components/Button'
 import Tooltip from '@components/Tooltip'
+import { Meme } from '@models/Meme'
+import { useEvent } from '@shared/hooks/useEvent'
+import { TextBox } from '@shared/schemas/textbox'
 import { preventEmptyTextValue } from '@shared/utils/textbox'
 import { useItemIdSelected } from '@stores/Editor/hooks/useItemIdSelected'
-import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useTextboxes } from '@stores/Editor/hooks/useTextboxes'
 import Accordion from '@studio/components/Accordion'
 import { faClone, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Styled from './customisation.styled'
-import EmptyCustom from './EmptyCustom'
+import Styled from './Customisation.styled'
 import TextCustomisation from './TextCustomisation'
 
-const Customisation = () => {
-  const meme = useMeme()
-  const { textboxes, updateTextbox, addTextbox, removeItem, duplicateItem } =
+export type CustomisationProps = {
+  meme: Meme
+  textboxes: TextBox[]
+  textboxRefs: Record<TextBox['id'], React.RefObject<HTMLTextAreaElement>>
+}
+
+const Customisation = ({
+  textboxRefs,
+  meme,
+  textboxes
+}: CustomisationProps) => {
+  const { updateTextbox, addTextbox, removeItem, duplicateItem } =
     useTextboxes()
   const { itemIdSelected, toggleItemIdSelected } = useItemIdSelected()
-
-  const textboxRefs = R.mapToObj(textboxes, (textbox) => {
-    return [String(textbox.id), React.createRef<HTMLTextAreaElement>()]
-  })
-
-  if (!meme) {
-    return <EmptyCustom />
-  }
 
   const handleAddTextbox = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
@@ -48,12 +49,42 @@ const Customisation = () => {
     }
   }
 
-  const handleAfterOpenAccordion = (itemId: string) => {
-    const length = textboxRefs[itemId]?.current?.value?.length || 0
-    textboxRefs[itemId]?.current?.focus()
-    // set cursor at the end of value
-    textboxRefs[itemId]?.current?.setSelectionRange(length, length)
+  const handleAfterOpenAccordion = (item: TextBox) => {
+    return () => {
+      const inputElement = textboxRefs[item.id]?.current
+
+      if (inputElement) {
+        const { length } = inputElement.value
+        inputElement.focus()
+        // set cursor at the end of value
+        inputElement.setSelectionRange(length, length)
+      }
+    }
   }
+
+  const handleToggleAccordion = (item: TextBox) => {
+    return () => {
+      toggleItemIdSelected(item.id)
+    }
+  }
+
+  const handleKeypress = useEvent(() => {
+    if (itemIdSelected) {
+      const inputElement = textboxRefs[itemIdSelected]?.current
+
+      if (inputElement) {
+        inputElement.focus()
+      }
+    }
+  })
+
+  React.useEffect(() => {
+    window.addEventListener('keypress', handleKeypress, false)
+
+    return () => {
+      window.removeEventListener('keypress', handleKeypress, false)
+    }
+  }, [handleKeypress])
 
   return (
     <Styled.Scrollable>
@@ -67,12 +98,11 @@ const Customisation = () => {
 
           return (
             <Accordion
-              onToggle={toggleItemIdSelected}
+              onToggle={handleToggleAccordion(textbox)}
               title={preventEmptyTextValue(textbox.properties.value, index)}
-              id={textbox.id}
               isOpened={itemIdSelected === textbox.id}
               key={textbox.id}
-              onAfterOpen={handleAfterOpenAccordion}
+              onAfterOpen={handleAfterOpenAccordion(textbox)}
               action={
                 <>
                   <Tooltip text="Dupliquer" position="top">
@@ -98,9 +128,9 @@ const Customisation = () => {
             >
               <TextCustomisation
                 onUpdateTextProperties={updateTextbox}
-                text={textbox}
-                inputRef={inputRef}
+                textbox={textbox}
                 index={index}
+                inputRef={inputRef}
               />
             </Accordion>
           )

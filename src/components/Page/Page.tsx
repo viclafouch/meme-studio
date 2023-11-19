@@ -1,10 +1,11 @@
 import Head from 'next/head'
-import Styled from './page.styled'
+import Styled from './Page.styled'
 
-interface PageProps extends React.ButtonHTMLAttributes<HTMLDivElement> {
+export type PageProps = {
   children: React.ReactNode
   animatedBackground?: boolean
   title?: string
+  className?: string
 }
 
 function formatTitle(title?: string) {
@@ -17,10 +18,13 @@ const Page = ({
   children,
   animatedBackground = false,
   title = '',
-  ...restProps
+  className = ''
 }: PageProps) => {
   return (
-    <Styled.Container {...restProps} $animatedBackground={animatedBackground}>
+    <Styled.Container
+      className={className}
+      $animatedBackground={animatedBackground}
+    >
       <Head>
         <title>{formatTitle(title)}</title>
       </Head>

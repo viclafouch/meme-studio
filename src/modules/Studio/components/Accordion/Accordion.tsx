@@ -6,9 +6,8 @@ export type AccordionProps = {
   children: React.ReactNode
   isOpened: boolean
   title: string
-  onToggle: (id: string) => void
-  onAfterOpen: (id: string) => void
-  id: string
+  onToggle: () => void
+  onAfterOpen: () => void
   action?: React.ReactNode
 }
 
@@ -17,7 +16,6 @@ const Accordion = ({
   isOpened,
   title,
   onToggle,
-  id,
   onAfterOpen,
   action = null
 }: AccordionProps) => {
@@ -32,17 +30,17 @@ const Accordion = ({
 
   const handleToggle = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault()
-    onToggle(id)
+    onToggle()
   }
 
   const handleTransitionEnd = () => {
     if (isOpened) {
-      onAfterOpen(id)
+      onAfterOpen()
     }
   }
 
   return (
-    <Styled.Section id={id}>
+    <Styled.Section>
       <Styled.Header tabIndex={0} role="button" onClick={handleToggle}>
         <Styled.Title>{title}</Styled.Title>
         {action ? <Styled.Actions>{action}</Styled.Actions> : null}

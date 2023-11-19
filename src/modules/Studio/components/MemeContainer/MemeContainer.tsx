@@ -1,9 +1,9 @@
 import React from 'react'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
 import EmptyContainer from '../EmptyContainer/EmptyContainer'
-import Styled from './meme-container.styled'
+import Styled from './MemeContainer.styled'
 
-type MemeContainerProps = {
+export type MemeContainerProps = {
   children: React.ReactNode
 }
 

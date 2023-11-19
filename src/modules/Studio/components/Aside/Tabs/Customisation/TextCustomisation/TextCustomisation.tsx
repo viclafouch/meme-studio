@@ -11,7 +11,7 @@ import { preventEmptyTextValue } from '@shared/utils/textbox'
 import Styled from './TextCustomisation.styled'
 
 export type TextCustomisationProps = {
-  text: TextBox
+  textbox: TextBox
   index: number
   inputRef: React.RefObject<HTMLTextAreaElement> | undefined
   onUpdateTextProperties: (
@@ -21,7 +21,7 @@ export type TextCustomisationProps = {
 }
 
 const TextCustomisation = ({
-  text,
+  textbox,
   index,
   inputRef,
   onUpdateTextProperties
@@ -38,13 +38,13 @@ const TextCustomisation = ({
         value = (event.target as HTMLInputElement).checked
       }
 
-      onUpdateTextProperties(text.id, {
+      onUpdateTextProperties(textbox.id, {
         [key]: value
       })
     }
   }
 
-  const { properties } = text
+  const { properties } = textbox
 
   return (
     <Styled.TextCustomisation>

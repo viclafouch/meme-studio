@@ -78,14 +78,10 @@ const createInitialStore = (
   })
 }
 
-type BearStore = ReturnType<typeof createInitialStore>
-
 const EditorProvider = ({ children, meme, textBoxes }: EditorProviderProps) => {
-  const storeRef = React.useRef<BearStore>()
+  const storeRef = React.useRef<ReturnType<typeof createInitialStore>>()
 
-  if (!storeRef.current) {
-    storeRef.current = createInitialStore(meme, textBoxes)
-  }
+  storeRef.current ??= createInitialStore(meme, textBoxes)
 
   return (
     <EditorContext.Provider value={storeRef.current}>
@@ -94,4 +90,4 @@ const EditorProvider = ({ children, meme, textBoxes }: EditorProviderProps) => {
   )
 }
 
-export { EditorProvider }
+export default EditorProvider

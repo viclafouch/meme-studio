@@ -5,16 +5,11 @@ import Header from '@components/Header/Header'
 import { Meme } from '@models/Meme'
 import { getMeme } from '@shared/api/memes'
 import { textboxSchema } from '@shared/schemas/textbox'
-import { EditorProvider } from '@stores/Editor/editor.store'
-import Aside from './components/Aside/Aside'
-import Canvas from './components/Canvas/Canvas'
-import MemeContainer from './components/MemeContainer/MemeContainer'
-import Tools from './components/Tools/Tools'
-import Styled from './studio.styled'
+import EditorProvider from '@stores/Editor/editor.store'
+import StudioBody from '@studio/components/StudioBody'
+import Styled from './Studio.styled'
 
 const CreatePage = () => {
-  const containerRef = React.useRef<HTMLDivElement>(null)
-
   const router = useRouter()
   const { data } = useQuery(
     ['memes', router.query.memeId],
@@ -44,15 +39,7 @@ const CreatePage = () => {
     <Styled.Page>
       <EditorProvider key={meme?.id} textBoxes={textboxes} meme={meme}>
         <Header />
-        <Styled.Studio>
-          <Tools />
-          <Styled.DefaultContainer ref={containerRef}>
-            <MemeContainer>
-              <Canvas />
-            </MemeContainer>
-          </Styled.DefaultContainer>
-          <Aside />
-        </Styled.Studio>
+        <StudioBody />
       </EditorProvider>
     </Styled.Page>
   )
