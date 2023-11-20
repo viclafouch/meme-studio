@@ -2,11 +2,11 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getMemes } from '@shared/api/memes'
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import Styled from './Gallery.styled'
 
 const Gallery = () => {
-  const { data } = useQuery({
+  const { data } = useSuspenseQuery({
     queryKey: ['memes'],
     queryFn: () => {
       return getMemes()

@@ -40,7 +40,7 @@ export default {
     background-color: transparent;
     padding: 1px 7px 2px;
     font-size: 13px;
-    font-family: 'Alata', sans-serif;
+    font-family: inherit;
     font-weight: 400;
     color: #ffffff;
 

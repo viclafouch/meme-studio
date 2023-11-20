@@ -1,27 +1,21 @@
+'use client'
+
 import React from 'react'
-import { useRouter } from 'next/router'
 import Header from '@components/Header/Header'
 import { Meme } from '@models/Meme'
 import { getMeme } from '@shared/api/memes'
+import { TextBox } from '@shared/schemas/textbox'
 import EditorProvider from '@stores/Editor/editor.store'
 import StudioBody from '@studio/components/StudioBody'
 import { useQuery } from '@tanstack/react-query'
 import Styled from './Studio.styled'
 
-const StudioPage = () => {
-  const router = useRouter()
-  const { memeId } = router.query
+export type StudioPageProps = {
+  meme?: Meme | null
+  textboxes?: TextBox[]
+}
 
-  const { data } = useQuery({
-    queryKey: ['memes', memeId],
-    queryFn: () => {
-      return getMeme(memeId as Meme['id'])
-    },
-    enabled: Boolean(memeId)
-  })
-
-  const { meme = null, textboxes = [] } = data || {}
-
+const StudioPage = ({ meme = null, textboxes = [] }: StudioPageProps) => {
   return (
     <Styled.Page>
       <EditorProvider

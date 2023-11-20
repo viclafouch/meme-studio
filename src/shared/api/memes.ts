@@ -11,7 +11,7 @@ export function getMeme(memeId: Meme['id']) {
     return id === memeId
   })
 
-  return {
+  return Promise.resolve({
     meme: meme ? meme : null,
     textboxes: meme
       ? meme.texts.map((text) => {
@@ -21,5 +21,5 @@ export function getMeme(memeId: Meme['id']) {
           })
         })
       : []
-  }
+  })
 }

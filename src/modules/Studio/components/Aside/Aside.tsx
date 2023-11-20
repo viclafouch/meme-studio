@@ -45,7 +45,9 @@ const Aside = ({ textboxRefs }: AsideProps) => {
         </Styled.Button>
       </Styled.Header>
       {currentTab === 'gallery' ? (
-        <Gallery />
+        <React.Suspense fallback={<div>waiting 100....</div>}>
+          <Gallery />
+        </React.Suspense>
       ) : (
         // eslint-disable-next-line react/jsx-no-useless-fragment
         <>

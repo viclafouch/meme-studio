@@ -31,7 +31,7 @@ const Styled = {
     $fullWidth: boolean
     $color: 'primary' | 'secondary'
   }>`
-    font-family: Alata, sans-serif;
+    font-family: inherit;
     font-weight: 500;
     border-radius: ${(props) => {
       return props.$rounded ? '8px' : 0
