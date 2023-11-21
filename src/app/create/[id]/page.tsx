@@ -20,8 +20,6 @@ export async function generateStaticParams() {
 const Page = async ({ params }: { params: { id: string } }) => {
   const meme = await getMeme(params.id)
 
-  console.log(meme)
-
   if (meme) {
     return <CreatePage meme={meme.meme} textboxes={meme.textboxes} />
   }

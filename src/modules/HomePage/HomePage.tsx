@@ -13,7 +13,7 @@ export type HomePageProps = {
 
 const HomePage = ({ memes }: HomePageProps) => {
   return (
-    <Page animatedBackground>
+    <Page>
       <Styled.ContentBlock>
         <Image
           alt="Meme Studio logo"
