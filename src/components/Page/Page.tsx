@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import { cx } from '@styled-system/css'
-import * as styles from './Page.styles'
+import { Box } from '@styled-system/jsx'
 
 export type PageProps = {
   children: React.ReactNode
@@ -16,12 +15,18 @@ function formatTitle(title?: string) {
 
 const Page = ({ children, title = '', className = '' }: PageProps) => {
   return (
-    <div className={cx(styles.containerCss, className)}>
+    <Box
+      flex="1"
+      display="flex"
+      width="full"
+      flexDir="column"
+      className={className}
+    >
       <Head>
         <title>{formatTitle(title)}</title>
       </Head>
       {children}
-    </div>
+    </Box>
   )
 }
 
