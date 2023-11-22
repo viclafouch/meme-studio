@@ -7,10 +7,10 @@ import { exportCanvasBlob } from '@shared/helpers/canvas'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useRatiotedTextboxes } from '@stores/Editor/hooks/useTextboxes'
 import { useShowModal } from '@stores/Modal/Modal.provider'
+import { Flex, Grid } from '@styled-system/jsx'
 import { faArrowCircleDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMutation } from '@tanstack/react-query'
-import Styled from './Header.styled'
 
 const Header = () => {
   const meme = useMeme()
@@ -48,9 +48,20 @@ const Header = () => {
   }
 
   return (
-    <Styled.Header>
+    <Grid
+      height="5rem"
+      width="full"
+      alignItems="center"
+      justifyContent="center"
+      position="relative"
+      bg="primary"
+      zIndex={999}
+      paddingInline="12"
+      boxShadow="md"
+      gridTemplateColumns="1fr auto 1fr"
+    >
       <div />
-      <Styled.LogoBlock>
+      <div>
         <Link href="/">
           <Image
             alt="Meme Studio logo"
@@ -60,8 +71,8 @@ const Header = () => {
             src="/images/logo-meme-studio-light.png"
           />
         </Link>
-      </Styled.LogoBlock>
-      <Styled.RightBlock>
+      </div>
+      <Flex align="center" justify="flex-end">
         <Button
           disabled={!meme}
           color="secondary"
@@ -70,8 +81,8 @@ const Header = () => {
         >
           Exporter
         </Button>
-      </Styled.RightBlock>
-    </Styled.Header>
+      </Flex>
+    </Grid>
   )
 }
 

@@ -5,6 +5,7 @@ import { useHistory } from '@stores/Editor/hooks/useHistory'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useCountTextboxes } from '@stores/Editor/hooks/useTextboxes'
 import { useTools } from '@stores/Editor/hooks/useTools'
+import { Flex, styled } from '@styled-system/jsx'
 import {
   faCrop,
   faEraser,
@@ -36,8 +37,18 @@ const Tools = () => {
   }
 
   return (
-    <Styled.ToolsAside>
-      <Styled.ToolsList>
+    <Flex
+      direction="column"
+      width="full"
+      height="full"
+      justify="space-between"
+      color="white"
+      zIndex={3}
+      position="relative"
+      bg="secondary"
+      boxShadow="2px 0px 5px 0px rgb(0 0 0 / 29%)"
+    >
+      <styled.ul display="flex" flexDir="column" alignItems="center">
         <Styled.ToolsListItem>
           <Tooltip
             text={
@@ -107,7 +118,7 @@ const Tools = () => {
             )}
           </Tooltip>
         </Styled.ToolsListItem>
-      </Styled.ToolsList>
+      </styled.ul>
       <Styled.ToolsList>
         <Styled.ToolsListItem>
           <Styled.ToolsButton type="button">
@@ -120,7 +131,7 @@ const Tools = () => {
           </Styled.ToolsButton>
         </Styled.ToolsListItem>
       </Styled.ToolsList>
-    </Styled.ToolsAside>
+    </Flex>
   )
 }
 

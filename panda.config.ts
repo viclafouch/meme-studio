@@ -1,6 +1,13 @@
-import { defineConfig } from '@pandacss/dev'
+import { defineConfig, defineGlobalStyles } from '@pandacss/dev'
+
+const globalCss = defineGlobalStyles({
+  html: {
+    fontSize: '16px'
+  }
+})
 
 export default defineConfig({
+  globalCss,
   // Whether to use css reset
   preflight: true,
 
@@ -14,7 +21,14 @@ export default defineConfig({
 
   // Useful for theme customization
   theme: {
-    extend: {}
+    extend: {
+      tokens: {
+        colors: {
+          primary: { value: 'rgb(100, 159, 255)' },
+          secondary: { value: 'rgb(48, 48, 48)' }
+        }
+      }
+    }
   },
 
   // The output directory for your css system

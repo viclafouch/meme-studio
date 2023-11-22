@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Footer from '@components/Footer/Footer'
 import Page from '@components/Page/Page'
 import { Meme } from '@models/Meme'
+import { Flex } from '@styled-system/jsx'
 import Styled from './HomePage.styled'
 
 export type HomePageProps = {
@@ -14,7 +15,14 @@ export type HomePageProps = {
 const HomePage = ({ memes }: HomePageProps) => {
   return (
     <Page>
-      <Styled.ContentBlock>
+      <Flex
+        align="center"
+        direction="column"
+        justify="center"
+        marginTop="14"
+        flex={1}
+        textAlign="center"
+      >
         <Image
           alt="Meme Studio logo"
           width={350}
@@ -44,7 +52,7 @@ const HomePage = ({ memes }: HomePageProps) => {
             )
           })}
         </Styled.MemesList>
-      </Styled.ContentBlock>
+      </Flex>
       <Footer />
     </Page>
   )

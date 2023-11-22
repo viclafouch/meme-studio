@@ -6,18 +6,6 @@ const ToolsListItem = styled.li`
 `
 
 export default {
-  ToolsAside: styled.aside`
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: rgb(48, 48, 48);
-    color: #ffffff;
-    box-shadow: 2px 0px 5px 0px rgb(0 0 0 / 29%);
-    z-index: 3;
-    position: relative;
-  `,
   ToolsListItem,
   ToolsList: styled.ul`
     display: flex;
