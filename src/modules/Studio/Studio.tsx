@@ -1,32 +1,30 @@
-'use client'
-
 import React from 'react'
 import Header from '@components/Header/Header'
+import Page from '@components/Page'
 import { Meme } from '@models/Meme'
-import { getMeme } from '@shared/api/memes'
 import { TextBox } from '@shared/schemas/textbox'
 import EditorProvider from '@stores/Editor/editor.store'
 import StudioBody from '@studio/components/StudioBody'
-import { useQuery } from '@tanstack/react-query'
-import Styled from './Studio.styled'
+import { css } from '@styled-system/css'
 
 export type StudioPageProps = {
   meme?: Meme | null
   textboxes?: TextBox[]
 }
 
-const StudioPage = ({ meme = null, textboxes = [] }: StudioPageProps) => {
+const defaultTextboxes: TextBox[] = []
+
+const StudioPage = ({
+  meme = null,
+  textboxes = defaultTextboxes
+}: StudioPageProps) => {
   return (
-    <Styled.Page>
-      <EditorProvider
-        key={meme?.id}
-        textBoxes={textboxes}
-        meme={meme ? new Meme(meme) : null}
-      >
+    <Page className={css({ height: '100vh' })}>
+      <EditorProvider key={meme?.id} textBoxes={textboxes} meme={meme || null}>
         <Header />
-        <StudioBody />
+        {/* <StudioBody /> */}
       </EditorProvider>
-    </Styled.Page>
+    </Page>
   )
 }
 
