@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import * as R from 'remeda'
 import { useTextboxes } from '@stores/Editor/hooks/useTextboxes'
@@ -5,7 +7,7 @@ import Aside from '@studio/components/Aside'
 import Canvas from '@studio/components/Canvas'
 import MemeContainer from '@studio/components/MemeContainer'
 import Tools from '@studio/components/Tools'
-import Styled from './StudioBody.styled'
+import { Box, Grid } from '@styled-system/jsx'
 
 const StudioBody = () => {
   const { textboxes } = useTextboxes()
@@ -17,15 +19,28 @@ const StudioBody = () => {
   }, [textboxes])
 
   return (
-    <Styled.Studio>
+    <Grid
+      width="full"
+      overflow="hidden"
+      gridTemplateColumns="3.375rem auto 20rem"
+      bg="secondary"
+      gap="0"
+      height="calc(calc(100vh - 5rem))"
+    >
       <Tools />
-      <Styled.DefaultContainer>
+      <Box
+        width="full"
+        height="full"
+        position="relative"
+        padding="3.125rem 6.25rem"
+        borderRight="0.125rem solid rgb(88, 88, 88)"
+      >
         <MemeContainer>
           <Canvas />
         </MemeContainer>
-      </Styled.DefaultContainer>
+      </Box>
       <Aside textboxRefs={textboxRefs} />
-    </Styled.Studio>
+    </Grid>
   )
 }
 

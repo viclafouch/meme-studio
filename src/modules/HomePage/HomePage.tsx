@@ -1,8 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import Footer from '@components/Footer/Footer'
+import LinkButton from '@components/LinkButton'
 import Page from '@components/Page/Page'
 import { Meme } from '@models/Meme'
 import { Flex } from '@styled-system/jsx'
@@ -33,9 +33,7 @@ const HomePage = ({ memes }: HomePageProps) => {
           Create a meme from JPG or PNG images. Edit your image and make your
           custom meme.
         </Styled.Caption>
-        <Styled.Link href="/create" as={Link}>
-          Get started
-        </Styled.Link>
+        <LinkButton href="/create">Get started</LinkButton>
         <Styled.MemesList>
           {memes.map((meme) => {
             return (

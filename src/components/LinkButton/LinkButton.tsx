@@ -1,36 +1,37 @@
+/* eslint-disable react/require-default-props */
 import * as React from 'react'
-import { BaseButtonProps } from '@components/Button/Button.types'
-import Styled from '../Button/Button.styled'
+import Link, { LinkProps } from 'next/link'
+import * as styles from '@components/Button/Button.styles'
 
-export type LinkButtonProps = BaseButtonProps &
-  React.ComponentPropsWithoutRef<'a'>
+export type LinkButtonProps = styles.ButtonVariants &
+  LinkProps & {
+    startAdornment?: React.ReactNode | null
+    children: React.ReactNode | null
+  }
 
 const LinkButton = React.forwardRef(
   (
     {
-      rounded = true,
-      fullWidth = false,
+      rounded,
+      fullWidth,
       children,
       startAdornment = null,
-      color = 'primary',
-      ...restProps
+      color,
+      ...restAnchorProps
     }: LinkButtonProps,
     ref: React.ForwardedRef<HTMLAnchorElement>
   ) => {
     return (
-      <Styled.Button
-        $fullWidth={fullWidth}
-        $rounded={rounded}
-        $color={color}
-        as="a"
+      <Link
+        className={styles.button({ color, rounded, fullWidth })}
         ref={ref}
-        {...restProps}
+        {...restAnchorProps}
       >
         {startAdornment ? (
           <span className="button-start-adornment">{startAdornment}</span>
         ) : null}
         {children}
-      </Styled.Button>
+      </Link>
     )
   }
 )

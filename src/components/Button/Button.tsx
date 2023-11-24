@@ -1,36 +1,44 @@
 /* eslint-disable react/require-default-props */
 import * as React from 'react'
-import { BaseButtonProps } from '@components/Button/Button.types'
-import Styled from './Button.styled'
+import { cx } from '@styled-system/css'
+import * as styles from './Button.styles'
 
-export type ButtonProps = BaseButtonProps & React.ComponentProps<'button'>
+export type ButtonProps = styles.ButtonVariants &
+  React.ComponentPropsWithoutRef<'button'> & {
+    startAdornment?: React.ReactNode | null
+  }
 
-// eslint-disable-next-line react/display-name
 const Button = React.forwardRef(
   (
     {
-      rounded = true,
-      fullWidth = false,
       children,
       startAdornment = null,
-      color = 'primary',
-      ...restProps
+      color,
+      rounded,
+      fullWidth,
+      className,
+      ...restButtonProps
     }: ButtonProps,
     ref: React.ForwardedRef<HTMLButtonElement>
   ) => {
+    const classes = styles.button({ rounded, fullWidth, color })
+
     return (
-      <Styled.Button
-        $fullWidth={fullWidth}
-        $rounded={rounded}
-        $color={color}
+      <button
         ref={ref}
-        {...restProps}
+        type="button"
+        className={cx(classes.root, className)}
+        {...restButtonProps}
       >
         {startAdornment ? (
-          <span className="button-start-adornment">{startAdornment}</span>
+          <span
+            className={cx(classes['start-adornment'], 'button-start-adornment')}
+          >
+            {startAdornment}
+          </span>
         ) : null}
         {children}
-      </Styled.Button>
+      </button>
     )
   }
 )

@@ -1,13 +1,16 @@
+'use client'
+
 import React from 'react'
+import Button from '@components/Button'
 import { TextBox } from '@shared/schemas/textbox'
 import { Tab } from '@stores/Editor/editor.types'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useTab } from '@stores/Editor/hooks/useTabs'
 import { useTextboxes } from '@stores/Editor/hooks/useTextboxes'
 import EmptyCustom from '@studio/components/Aside/Tabs/Customisation/EmptyCustom'
+import { styled } from '@styled-system/jsx'
 import { faHeading, faImage } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Styled from './Aside.styled'
 import Customisation from './Tabs/Customisation'
 import Gallery from './Tabs/Gallery/Gallery'
 
@@ -25,25 +28,32 @@ const Aside = ({ textboxRefs }: AsideProps) => {
   }
 
   return (
-    <Styled.Aside>
-      <Styled.Header>
-        <Styled.Button
-          id={'gallery' as Tab}
+    <styled.aside
+      display="flex"
+      width="full"
+      flexDir="column"
+      bg="gray.400"
+      zIndex={2}
+      height="calc(100vh - 5rem)"
+    >
+      <styled.header display="flex" width="full">
+        <Button
+          id="gallery"
           onClick={handleChangeTab}
-          rounded={false}
-          $isActive={currentTab === 'gallery'}
+          fullWidth
+          aria-current={currentTab === 'gallery'}
         >
           <FontAwesomeIcon icon={faImage} />
-        </Styled.Button>
-        <Styled.Button
-          id={'customization' as Tab}
+        </Button>
+        <Button
+          id="customization"
+          fullWidth
           onClick={handleChangeTab}
-          rounded={false}
-          $isActive={currentTab === 'customization'}
+          aria-current={currentTab === 'customization'}
         >
           <FontAwesomeIcon icon={faHeading} />
-        </Styled.Button>
-      </Styled.Header>
+        </Button>
+      </styled.header>
       {currentTab === 'gallery' ? (
         <React.Suspense fallback={<div>waiting 100....</div>}>
           <Gallery />
@@ -62,7 +72,7 @@ const Aside = ({ textboxRefs }: AsideProps) => {
           )}
         </>
       )}
-    </Styled.Aside>
+    </styled.aside>
   )
 }
 

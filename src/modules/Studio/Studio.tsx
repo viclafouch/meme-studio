@@ -22,7 +22,7 @@ const StudioPage = ({
     <Page className={css({ height: '100vh' })}>
       <EditorProvider key={meme?.id} textBoxes={textboxes} meme={meme || null}>
         <Header />
-        {/* <StudioBody /> */}
+        <StudioBody />
       </EditorProvider>
     </Page>
   )

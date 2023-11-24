@@ -1,13 +1,20 @@
 import React from 'react'
 import Sad from '@components/icons/Sad'
-import Styled from './empty-custom.styled'
+import { Flex, styled } from '@styled-system/jsx'
 
 const EmptyCustom = () => {
   return (
-    <Styled.EmptyCustom>
+    <Flex
+      align="center"
+      justify="center"
+      direction="column"
+      flex={1}
+      textAlign="center"
+      gap="1"
+    >
       <Sad width={50} />
-      <Styled.EmptyTypography>No meme selected</Styled.EmptyTypography>
-    </Styled.EmptyCustom>
+      <styled.p color="white">No meme selected</styled.p>
+    </Flex>
   )
 }
 

@@ -24,8 +24,12 @@ export default defineConfig({
     extend: {
       tokens: {
         colors: {
-          primary: { value: 'rgb(100, 159, 255)' },
-          secondary: { value: 'rgb(48, 48, 48)' }
+          primary: {
+            DEFAULT: { value: 'rgb(100, 159, 255)' }
+          },
+          secondary: {
+            DEFAULT: { value: 'rgb(48, 48, 48)' }
+          }
         }
       }
     }
