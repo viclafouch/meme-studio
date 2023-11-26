@@ -1,7 +1,7 @@
 import React from 'react'
 import { Alata } from 'next/font/google'
-import Layout from '@components/Layout/layout'
 import { ModalOutlet } from '@stores/Modal/Modal.provider'
+import { Flex } from '@styled-system/jsx'
 import StyledComponentsRegistry from '@styles/registry'
 import QueryProvider from '../queries/QueryProvider'
 import '@fortawesome/fontawesome-svg-core/styles.css'
@@ -15,10 +15,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <body className={atlata.className}>
         <StyledComponentsRegistry>
           <QueryProvider>
-            <Layout>
+            <Flex direction="column" w="full" minH="100vh">
               {children}
               <ModalOutlet />
-            </Layout>
+            </Flex>
           </QueryProvider>
         </StyledComponentsRegistry>
       </body>

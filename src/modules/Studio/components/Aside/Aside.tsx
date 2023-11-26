@@ -32,7 +32,7 @@ const Aside = ({ textboxRefs }: AsideProps) => {
       display="flex"
       width="full"
       flexDir="column"
-      bg="gray.400"
+      bg="secondary"
       zIndex={2}
       height="calc(100vh - 5rem)"
     >

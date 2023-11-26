@@ -2,8 +2,8 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getMemes } from '@shared/api/memes'
+import { styled, VStack } from '@styled-system/jsx'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import Styled from './Gallery.styled'
 
 const Gallery = () => {
   const { data } = useSuspenseQuery({
@@ -14,12 +14,12 @@ const Gallery = () => {
   })
 
   return (
-    <Styled.GalleryContainer>
-      <Styled.GalleryScrollable>
-        <Styled.GalleryList>
-          {data?.map((meme) => {
+    <VStack gap="0" h="full">
+      <styled.div overflowY="auto">
+        <styled.ul px="1" w="full" bg="gray.300">
+          {data.map((meme) => {
             return (
-              <Styled.GalleryListItem key={meme.id}>
+              <li key={meme.id}>
                 <Link href={`/create/${meme.id}`}>
                   <Image
                     alt={meme.translations.en.name}
@@ -30,12 +30,12 @@ const Gallery = () => {
                     src={`https://www.meme-studio.io/templates/${meme.filename}`}
                   />
                 </Link>
-              </Styled.GalleryListItem>
+              </li>
             )
           })}
-        </Styled.GalleryList>
-      </Styled.GalleryScrollable>
-    </Styled.GalleryContainer>
+        </styled.ul>
+      </styled.div>
+    </VStack>
   )
 }
 
