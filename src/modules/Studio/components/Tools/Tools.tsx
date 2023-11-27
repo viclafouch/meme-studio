@@ -18,7 +18,7 @@ import {
   faUndo
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Styled from './Tools.styled'
+import { buttonRecipe, ToolsButton, ToolsListItem } from './Tools.styles'
 
 const Tools = () => {
   const {
@@ -51,7 +51,7 @@ const Tools = () => {
       boxShadow="2px 0px 5px 0px rgb(0 0 0 / 29%)"
     >
       <styled.ul display="flex" flexDir="column" alignItems="center">
-        <Styled.ToolsListItem>
+        <ToolsListItem>
           <Tooltip
             text={
               isVisibleDraggables
@@ -61,78 +61,82 @@ const Tools = () => {
             disabled={countTexts === 0}
             position="right"
           >
-            <Styled.ToolsButton
+            <ToolsButton
               type="button"
               disabled={countTexts === 0}
               onClick={handleClick(toggleVisibleDraggables)}
             >
               <FontAwesomeIcon icon={faCrop} />
-            </Styled.ToolsButton>
+            </ToolsButton>
           </Tooltip>
-        </Styled.ToolsListItem>
-        <Styled.ToolsListItem>
+        </ToolsListItem>
+        <ToolsListItem>
           <Tooltip text="Annuler" disabled={!canUndo} position="right">
-            <Styled.ToolsButton
+            <ToolsButton
               type="button"
               disabled={!canUndo}
               onClick={handleClick(undo)}
             >
               <FontAwesomeIcon icon={faUndo} />
-            </Styled.ToolsButton>
+            </ToolsButton>
           </Tooltip>
-        </Styled.ToolsListItem>
-        <Styled.ToolsListItem>
+        </ToolsListItem>
+        <ToolsListItem>
           <Tooltip text="Rétablir" disabled={!canRedo} position="right">
-            <Styled.ToolsButton
+            <ToolsButton
               type="button"
               disabled={!canRedo}
               onClick={handleClick(redo)}
             >
               <FontAwesomeIcon icon={faRedo} />
-            </Styled.ToolsButton>
+            </ToolsButton>
           </Tooltip>
-        </Styled.ToolsListItem>
-        <Styled.ToolsListItem>
+        </ToolsListItem>
+        <ToolsListItem>
           <Tooltip
             text="Écraser tout"
             disabled={countTexts === 0}
             position="right"
           >
-            <Styled.ToolsButton
+            <ToolsButton
               type="button"
               disabled={countTexts === 0}
               onClick={handleClick(eraseAllItems)}
             >
               <FontAwesomeIcon icon={faEraser} />
-            </Styled.ToolsButton>
+            </ToolsButton>
           </Tooltip>
-        </Styled.ToolsListItem>
-        <Styled.ToolsListItem>
+        </ToolsListItem>
+        <ToolsListItem>
           <Tooltip text="Réinitialiser" disabled={!meme} position="right">
             {!meme ? (
-              <Styled.ToolsButton disabled>
+              <ToolsButton disabled>
                 <FontAwesomeIcon icon={faTrashRestore} />
-              </Styled.ToolsButton>
+              </ToolsButton>
             ) : (
-              <Styled.ToolsButton as={Link} href="/create" onClick={resetAll}>
+              <Link
+                className={buttonRecipe()}
+                href="/create"
+                onClick={resetAll}
+              >
                 <FontAwesomeIcon icon={faTrashRestore} />
-              </Styled.ToolsButton>
+              </Link>
             )}
           </Tooltip>
-        </Styled.ToolsListItem>
+        </ToolsListItem>
       </styled.ul>
-      <Styled.ToolsList>
-        <Styled.ToolsListItem>
-          <Styled.ToolsButton type="button">
+      <styled.ul display="flex" flexDir="column" alignItems="center">
+        <ToolsListItem>
+          <ToolsButton type="button">
             <FontAwesomeIcon icon={faSun} />
-          </Styled.ToolsButton>
-        </Styled.ToolsListItem>
-        <Styled.ToolsListItem>
-          <Styled.ToolsButton type="button">
+          </ToolsButton>
+        </ToolsListItem>
+        <ToolsListItem>
+          <ToolsButton type="button">
             <FontAwesomeIcon icon={faQuestionCircle} />
-          </Styled.ToolsButton>
-        </Styled.ToolsListItem>
-      </Styled.ToolsList>
+          </ToolsButton>
+        </ToolsListItem>
+      </styled.ul>
     </Flex>
   )
 }

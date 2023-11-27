@@ -38,6 +38,23 @@ export default defineConfig({
     }
   },
 
+  patterns: {
+    extend: {
+      particulesBg: {
+        properties: {},
+        transform() {
+          return {
+            backgroundSize: 'cover',
+            backgroundAttachment: 'fixed',
+            backgroundRepeat: 'repeat-y',
+            backgroundImage:
+              "url('https://www.meme-studio.io/images/particles.svg')"
+          }
+        }
+      }
+    }
+  },
+
   // The output directory for your css system
   outdir: 'styled-system'
 })

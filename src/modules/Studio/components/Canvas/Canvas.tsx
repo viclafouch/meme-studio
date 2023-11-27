@@ -11,8 +11,9 @@ import { useItemIdSelected } from '@stores/Editor/hooks/useItemIdSelected'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useTextboxes } from '@stores/Editor/hooks/useTextboxes'
 import { useTools } from '@stores/Editor/hooks/useTools'
+import { css } from '@styled-system/css'
+import { Box } from '@styled-system/jsx'
 import Draggable from '../Draggable'
-import Styled from './canvas.styled'
 
 const Canvas = () => {
   const meme = useMeme() as Meme
@@ -64,15 +65,27 @@ const Canvas = () => {
   )
 
   return (
-    <Styled.Container ref={containerRef}>
-      <Styled.WrapperCanvas
+    <Box h="full" w="full" position="relative" ref={containerRef}>
+      <div
+        className={css({
+          bgPosition: 'center',
+          bgRepeat: 'no-repeat',
+          bgSize: '100%',
+          left: '50%',
+          top: '50%',
+          position: 'absolute',
+          transform: 'translate(-50%, -50%)',
+          zIndex: 2,
+          boxShadow:
+            '0 1px 4px rgb(0 0 0 / 30%), 0 0 40px rgb(0 0 0 / 10%) inset'
+        })}
         style={{
           height: canvasDimensions.height,
           width: canvasDimensions.width,
           backgroundImage: `url('https://www.meme-studio.io/templates/${meme.filename}')`
         }}
       >
-        {isVisibleDraggables
+        {isVisibleDraggables && canvasDimensions.height
           ? textboxes.map((textbox) => {
               return (
                 <Draggable
@@ -87,13 +100,14 @@ const Canvas = () => {
               )
             })
           : null}
-        <Styled.Canvas
+        <canvas
+          className={css({ position: 'relative', zIndex: '-1' })}
           ref={canvasElRef}
           width={canvasDimensions.width}
           height={canvasDimensions.height}
         />
-      </Styled.WrapperCanvas>
-    </Styled.Container>
+      </div>
+    </Box>
   )
 }
 

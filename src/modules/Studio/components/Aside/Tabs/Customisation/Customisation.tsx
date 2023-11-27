@@ -11,7 +11,6 @@ import Accordion from '@studio/components/Accordion'
 import { Box, HStack, styled, VStack } from '@styled-system/jsx'
 import { faClone, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Styled from './Customisation.styled'
 import TextCustomisation from './TextCustomisation'
 
 export type CustomisationProps = {
@@ -89,10 +88,19 @@ const Customisation = ({
 
   return (
     <Box overflowY="auto">
-      <Styled.BlockTitle>
-        <Styled.Legend>Customization</Styled.Legend>
-        <Styled.MemeName>{meme.translations.en.name}</Styled.MemeName>
-      </Styled.BlockTitle>
+      <VStack textAlign="center" p="2" m="2" gap={2}>
+        <styled.span display="block">Customization</styled.span>
+        <styled.h1
+          fontSize="sm"
+          lineClamp="1"
+          whiteSpace="nowrap"
+          textOverflow="ellipsis"
+          overflow="hidden"
+          maxW="full"
+        >
+          {meme.translations.en.name}
+        </styled.h1>
+      </VStack>
       <VStack gap={0}>
         {textboxes.map((textbox, index) => {
           const inputRef = textboxRefs[textbox.id]

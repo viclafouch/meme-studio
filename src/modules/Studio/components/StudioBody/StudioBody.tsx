@@ -32,7 +32,6 @@ const StudioBody = () => {
         width="full"
         height="full"
         position="relative"
-        padding="3.125rem 6.25rem"
         borderRight="0.125rem solid rgb(88, 88, 88)"
       >
         <MemeContainer>

@@ -1,13 +1,11 @@
-'use client'
-
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react'
 import Image from 'next/image'
-import Styled from './empty-container.styled'
+import { css } from '@styled-system/css'
+import { Center, styled } from '@styled-system/jsx'
 
 const EmptyContainer = () => {
   return (
-    <Styled.Container>
+    <Center flexDir="column" h="full">
       <Image
         alt="Choose meme"
         width={360}
@@ -15,18 +13,35 @@ const EmptyContainer = () => {
         priority
         src="/images/choose-meme.svg"
       />
-      <Styled.ChooseTypography>
+      <styled.p textAlign="center" marginTop="5">
         Please select a meme in the gallery <br />
         <label htmlFor="local-meme">
-          <Styled.FileInput
+          <input
             type="file"
+            className={css({
+              w: 0,
+              h: 0,
+              opacity: 0,
+              position: 'absolute',
+              visibility: 'hidden'
+            })}
             accept="image/png, image/jpeg"
             id="local-meme"
           />
-          or <Styled.ClickableBrowse>drop an image</Styled.ClickableBrowse>.
+          or{' '}
+          <span
+            className={css({
+              textDecoration: 'underline',
+              cursor: 'pointer',
+              color: 'primary'
+            })}
+          >
+            drop an image
+          </span>
+          .
         </label>
-      </Styled.ChooseTypography>
-    </Styled.Container>
+      </styled.p>
+    </Center>
   )
 }
 
