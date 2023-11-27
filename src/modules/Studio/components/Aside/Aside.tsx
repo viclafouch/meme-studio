@@ -8,6 +8,7 @@ import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useTab } from '@stores/Editor/hooks/useTabs'
 import { useTextboxes } from '@stores/Editor/hooks/useTextboxes'
 import EmptyCustom from '@studio/components/Aside/Tabs/Customisation/EmptyCustom'
+import { GallerySuspend } from '@studio/components/Aside/Tabs/Gallery'
 import { styled } from '@styled-system/jsx'
 import { faHeading, faImage } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -41,6 +42,8 @@ const Aside = ({ textboxRefs }: AsideProps) => {
           id="gallery"
           onClick={handleChangeTab}
           fullWidth
+          size="large"
+          color={currentTab === 'gallery' ? 'primary' : 'primaryDark'}
           aria-current={currentTab === 'gallery'}
         >
           <FontAwesomeIcon icon={faImage} />
@@ -48,6 +51,8 @@ const Aside = ({ textboxRefs }: AsideProps) => {
         <Button
           id="customization"
           fullWidth
+          size="large"
+          color={currentTab === 'customization' ? 'primary' : 'primaryDark'}
           onClick={handleChangeTab}
           aria-current={currentTab === 'customization'}
         >
@@ -55,7 +60,7 @@ const Aside = ({ textboxRefs }: AsideProps) => {
         </Button>
       </styled.header>
       {currentTab === 'gallery' ? (
-        <React.Suspense fallback={<div>waiting 100....</div>}>
+        <React.Suspense fallback={<GallerySuspend />}>
           <Gallery />
         </React.Suspense>
       ) : (

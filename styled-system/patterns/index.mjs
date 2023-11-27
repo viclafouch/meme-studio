@@ -19,3 +19,4 @@ export * from './float.mjs';
 export * from './bleed.mjs';
 export * from './visually-hidden.mjs';
 export * from './particules-bg.mjs';
+export * from './skeleton.mjs';

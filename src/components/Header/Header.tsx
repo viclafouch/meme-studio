@@ -12,7 +12,7 @@ const Header = () => {
       alignItems="center"
       justifyContent="center"
       position="relative"
-      bgColor="primary"
+      bgColor="primary.dark"
       zIndex={999}
       paddingInline="12"
       boxShadow="md"

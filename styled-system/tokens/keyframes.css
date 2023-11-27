@@ -25,4 +25,9 @@
             animation-timing-function: cubic-bezier(0,0,0.2,1)
         }
     }
+    @keyframes skeletonLoading {
+        to {
+            background-position-x: -200%
+        }
+    }
 }

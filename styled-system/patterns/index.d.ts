@@ -20,3 +20,4 @@ export * from './float';
 export * from './bleed';
 export * from './visually-hidden';
 export * from './particules-bg';
+export * from './skeleton';

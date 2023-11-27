@@ -35,6 +35,13 @@ export default defineConfig({
             DEFAULT: { value: 'rgb(48, 48, 48)' }
           }
         }
+      },
+      keyframes: {
+        skeletonLoading: {
+          to: {
+            backgroundPositionX: '-200%'
+          }
+        }
       }
     }
   },
@@ -50,6 +57,18 @@ export default defineConfig({
             backgroundRepeat: 'repeat-y',
             backgroundImage:
               "url('https://www.meme-studio.io/images/particles.svg')"
+          }
+        }
+      },
+      skeleton: {
+        properties: {},
+        transform(props) {
+          return {
+            background:
+              'linear-gradient(to right, #656871 0%, #888b94 20%, #656871 40%, #656871 100%)',
+            backgroundSize: '200% 100%',
+            animation: '1.5s skeletonLoading linear infinite',
+            ...props
           }
         }
       }
