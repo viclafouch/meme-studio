@@ -55,6 +55,7 @@ const createInitialStore = (
       calculByAspectRatio: (value) => {
         return value
       },
+      inputsRef: new Map(),
       aspectRatio: 1,
       isVisibleDraggables: true,
       itemIdSelected,

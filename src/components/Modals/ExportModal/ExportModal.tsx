@@ -2,12 +2,13 @@ import React from 'react'
 import Button from '@components/Button'
 import LinkButton from '@components/LinkButton'
 import { useClipboard } from '@shared/hooks/useClipboard'
+import { css } from '@styled-system/css'
+import { Box, Flex } from '@styled-system/jsx'
 import {
   faArrowCircleDown,
   faClipboard
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Styled from './ExportModal.styled'
 
 export type ExportModalProps = {
   canvasBlob: Blob
@@ -30,8 +31,8 @@ const ExportModal = ({ canvasBlob, height, width }: ExportModalProps) => {
   }
 
   return (
-    <Styled.Container>
-      <Styled.Title>Prévisualisation</Styled.Title>
+    <Box textAlign="center">
+      <h2 className={css({ mb: '5', fontSize: '2xl' })}>Prévisualisation</h2>
       <div
         onContextMenu={(
           event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -39,29 +40,51 @@ const ExportModal = ({ canvasBlob, height, width }: ExportModalProps) => {
           return event.preventDefault()
         }}
       >
-        <Styled.Image src={imageSrc} className="meme-img" alt="" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={imageSrc}
+          className={css({
+            maxW: 'full',
+            maxH: '490px',
+            boxShadow:
+              '0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset'
+          })}
+          alt=""
+        />
       </div>
-      <Styled.SizeText>
+      <p className={css({ mt: 5 })}>
         Taille réelle : {width} x {height}
-      </Styled.SizeText>
-      <Styled.Actions>
+      </p>
+      <Flex
+        maxW="7/12"
+        mx="auto"
+        mt="5"
+        gap="5"
+        justifyContent="center"
+        alignItems="stretch"
+        w="full"
+      >
         <LinkButton
           startAdornment={<FontAwesomeIcon icon={faArrowCircleDown} />}
           fullWidth
           href={imageSrc}
           download="meme.png"
+          rounded
+          color="primaryDark"
         >
           Télécharger
         </LinkButton>
         <Button
           startAdornment={<FontAwesomeIcon icon={faClipboard} />}
           fullWidth
+          rounded
           onClick={handleCopy}
+          color="primary"
         >
           Copier
         </Button>
-      </Styled.Actions>
-    </Styled.Container>
+      </Flex>
+    </Box>
   )
 }
 

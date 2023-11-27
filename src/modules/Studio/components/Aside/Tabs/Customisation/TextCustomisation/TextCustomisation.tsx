@@ -5,6 +5,7 @@ import {
   FONTS_FAMILY,
   TEXT_ALIGN
 } from '@shared/constants/fonts'
+import { useGlobalInputsRef } from '@shared/hooks/useGlobalInputsRef'
 import { TextBox } from '@shared/schemas/textbox'
 import { preventEmptyTextValue } from '@shared/utils/textbox'
 import { css } from '@styled-system/css'
@@ -14,7 +15,6 @@ import { Fieldset } from './TextCustomisation.styles'
 export type TextCustomisationProps = {
   textbox: TextBox
   index: number
-  inputRef: React.RefObject<HTMLTextAreaElement> | undefined
   onUpdateTextProperties: (
     textId: TextBox['id'],
     values: Partial<TextBox['properties']>
@@ -24,9 +24,10 @@ export type TextCustomisationProps = {
 const TextCustomisation = ({
   textbox,
   index,
-  inputRef,
   onUpdateTextProperties
 }: TextCustomisationProps) => {
+  const { setRef } = useGlobalInputsRef()
+
   const handleEditText = (key: keyof TextBox['properties']) => {
     return (
       event: React.ChangeEvent<
@@ -66,7 +67,7 @@ const TextCustomisation = ({
             onChange={handleEditText('value')}
             value={properties.value}
             rows={5}
-            ref={inputRef}
+            ref={setRef(textbox.id)}
             placeholder={preventEmptyTextValue(properties.value, index)}
           />
         </Fieldset>

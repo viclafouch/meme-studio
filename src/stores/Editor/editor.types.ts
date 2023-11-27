@@ -32,6 +32,7 @@ export type EditorState = {
   meme: Meme | null
   textboxes: TextBox[]
   currentTab: Tab
+  inputsRef: Map<string, React.RefObject<HTMLTextAreaElement>>
   aspectRatio: number
   historyIndex: number
   itemIdSelected: TextBox['id'] | null

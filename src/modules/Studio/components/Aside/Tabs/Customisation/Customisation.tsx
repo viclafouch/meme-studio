@@ -3,6 +3,7 @@ import Button from '@components/Button'
 import Tooltip from '@components/Tooltip'
 import { Meme } from '@models/Meme'
 import { useEvent } from '@shared/hooks/useEvent'
+import { useGlobalInputsRef } from '@shared/hooks/useGlobalInputsRef'
 import { TextBox } from '@shared/schemas/textbox'
 import { preventEmptyTextValue } from '@shared/utils/textbox'
 import { useItemIdSelected } from '@stores/Editor/hooks/useItemIdSelected'
@@ -15,18 +16,13 @@ import TextCustomisation from './TextCustomisation'
 
 export type CustomisationProps = {
   meme: Meme
-  textboxes: TextBox[]
-  textboxRefs: Record<TextBox['id'], React.RefObject<HTMLTextAreaElement>>
 }
 
-const Customisation = ({
-  textboxRefs,
-  meme,
-  textboxes
-}: CustomisationProps) => {
-  const { updateTextbox, addTextbox, removeItem, duplicateItem } =
+const Customisation = ({ meme }: CustomisationProps) => {
+  const { textboxes, updateTextbox, addTextbox, removeItem, duplicateItem } =
     useTextboxes()
   const { itemIdSelected, toggleItemIdSelected } = useItemIdSelected()
+  const { getRef } = useGlobalInputsRef()
 
   const handleAddTextbox = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
@@ -51,7 +47,7 @@ const Customisation = ({
 
   const handleAfterOpenAccordion = (item: TextBox) => {
     return () => {
-      const inputElement = textboxRefs[item.id]?.current
+      const inputElement = getRef(item.id)?.current
 
       if (inputElement) {
         const { length } = inputElement.value
@@ -70,7 +66,7 @@ const Customisation = ({
 
   const handleKeypress = useEvent(() => {
     if (itemIdSelected) {
-      const inputElement = textboxRefs[itemIdSelected]?.current
+      const inputElement = getRef(itemIdSelected)?.current
 
       if (inputElement) {
         inputElement.focus()
@@ -103,8 +99,6 @@ const Customisation = ({
       </VStack>
       <VStack gap={0}>
         {textboxes.map((textbox, index) => {
-          const inputRef = textboxRefs[textbox.id]
-
           return (
             <Accordion
               onToggle={handleToggleAccordion(textbox)}
@@ -113,7 +107,7 @@ const Customisation = ({
               key={textbox.id}
               onAfterOpen={handleAfterOpenAccordion(textbox)}
               action={
-                <HStack gap={3}>
+                <HStack gap={3} alignItems="center">
                   <Tooltip text="Dupliquer" position="top">
                     <styled.button
                       aria-label="Dupliquer"
@@ -141,7 +135,6 @@ const Customisation = ({
                 onUpdateTextProperties={updateTextbox}
                 textbox={textbox}
                 index={index}
-                inputRef={inputRef}
               />
             </Accordion>
           )

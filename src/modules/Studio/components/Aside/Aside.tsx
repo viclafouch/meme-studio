@@ -2,11 +2,9 @@
 
 import React from 'react'
 import Button from '@components/Button'
-import { TextBox } from '@shared/schemas/textbox'
 import { Tab } from '@stores/Editor/editor.types'
 import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { useTab } from '@stores/Editor/hooks/useTabs'
-import { useTextboxes } from '@stores/Editor/hooks/useTextboxes'
 import EmptyCustom from '@studio/components/Aside/Tabs/Customisation/EmptyCustom'
 import { GallerySuspend } from '@studio/components/Aside/Tabs/Gallery'
 import { styled } from '@styled-system/jsx'
@@ -15,13 +13,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Customisation from './Tabs/Customisation'
 import Gallery from './Tabs/Gallery/Gallery'
 
-export type AsideProps = {
-  textboxRefs: Record<TextBox['id'], React.RefObject<HTMLTextAreaElement>>
-}
-
-const Aside = ({ textboxRefs }: AsideProps) => {
+const Aside = () => {
   const [currentTab, setCurrentTab] = useTab()
-  const { textboxes } = useTextboxes()
   const meme = useMeme()
 
   const handleChangeTab = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -65,17 +58,7 @@ const Aside = ({ textboxRefs }: AsideProps) => {
         </React.Suspense>
       ) : (
         // eslint-disable-next-line react/jsx-no-useless-fragment
-        <>
-          {meme ? (
-            <Customisation
-              meme={meme}
-              textboxes={textboxes}
-              textboxRefs={textboxRefs}
-            />
-          ) : (
-            <EmptyCustom />
-          )}
-        </>
+        <>{meme ? <Customisation meme={meme} /> : <EmptyCustom />}</>
       )}
     </styled.aside>
   )

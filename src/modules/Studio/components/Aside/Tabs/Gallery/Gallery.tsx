@@ -3,9 +3,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getMemes } from '@shared/api/memes'
 import { styled, VStack } from '@styled-system/jsx'
+import { useSuspenseQuery } from '@tanstack/react-query'
 
-const Gallery = async () => {
-  const memes = await getMemes()
+const Gallery = () => {
+  const { data: memes } = useSuspenseQuery({
+    queryKey: ['memes'],
+    queryFn: () => {
+      return getMemes()
+    }
+  })
 
   return (
     <VStack gap="0" h="full">

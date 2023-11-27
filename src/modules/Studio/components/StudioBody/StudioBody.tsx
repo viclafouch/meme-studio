@@ -1,8 +1,4 @@
-'use client'
-
 import React from 'react'
-import * as R from 'remeda'
-import { useTextboxes } from '@stores/Editor/hooks/useTextboxes'
 import Aside from '@studio/components/Aside'
 import Canvas from '@studio/components/Canvas'
 import MemeContainer from '@studio/components/MemeContainer'
@@ -10,14 +6,6 @@ import Tools from '@studio/components/Tools'
 import { Box, Grid } from '@styled-system/jsx'
 
 const StudioBody = () => {
-  const { textboxes } = useTextboxes()
-
-  const textboxRefs = React.useMemo(() => {
-    return R.mapToObj(textboxes, (textbox) => {
-      return [String(textbox.id), React.createRef<HTMLTextAreaElement>()]
-    })
-  }, [textboxes])
-
   return (
     <Grid
       width="full"
@@ -38,7 +26,7 @@ const StudioBody = () => {
           <Canvas />
         </MemeContainer>
       </Box>
-      <Aside textboxRefs={textboxRefs} />
+      <Aside />
     </Grid>
   )
 }
