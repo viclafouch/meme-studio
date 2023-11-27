@@ -1655,6 +1655,10 @@ const tokens = {
     "value": "rgb(100, 159, 255)",
     "variable": "var(--colors-primary)"
   },
+  "colors.primary.dark": {
+    "value": "rgb(48, 91, 161)",
+    "variable": "var(--colors-primary-dark)"
+  },
   "colors.secondary": {
     "value": "rgb(48, 48, 48)",
     "variable": "var(--colors-secondary)"
@@ -1858,6 +1862,10 @@ const tokens = {
   "colors.colorPalette.950": {
     "value": "var(--colors-color-palette-950)",
     "variable": "var(--colors-color-palette-950)"
+  },
+  "colors.colorPalette.dark": {
+    "value": "var(--colors-color-palette-dark)",
+    "variable": "var(--colors-color-palette-dark)"
   }
 }
 

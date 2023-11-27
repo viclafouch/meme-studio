@@ -16,12 +16,13 @@ const Button = React.forwardRef(
       color,
       rounded,
       fullWidth,
+      size,
       className,
       ...restButtonProps
     }: ButtonProps,
     ref: React.ForwardedRef<HTMLButtonElement>
   ) => {
-    const classes = styles.button({ rounded, fullWidth, color })
+    const classes = styles.button({ rounded, fullWidth, color, size })
 
     return (
       <button
@@ -31,9 +32,7 @@ const Button = React.forwardRef(
         {...restButtonProps}
       >
         {startAdornment ? (
-          <span
-            className={cx(classes['start-adornment'], 'button-start-adornment')}
-          >
+          <span className={cx(classes['start-adornment'], 'start-adornment')}>
             {startAdornment}
           </span>
         ) : null}

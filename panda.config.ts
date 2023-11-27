@@ -28,7 +28,8 @@ export default defineConfig({
       tokens: {
         colors: {
           primary: {
-            DEFAULT: { value: 'rgb(100, 159, 255)' }
+            DEFAULT: { value: 'rgb(100, 159, 255)' },
+            dark: { value: 'rgb(48, 91, 161)' }
           },
           secondary: {
             DEFAULT: { value: 'rgb(48, 48, 48)' }

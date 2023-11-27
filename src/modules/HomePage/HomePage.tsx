@@ -1,58 +1,37 @@
-'use client'
-
 import Image from 'next/image'
-import Footer from '@components/Footer/Footer'
+import Footer from '@components/Footer'
 import LinkButton from '@components/LinkButton'
-import Page from '@components/Page/Page'
-import { Meme } from '@models/Meme'
-import { Flex } from '@styled-system/jsx'
-import Styled from './HomePage.styled'
+import MemesList from '@components/MemesList'
+import { css } from '@styled-system/css'
+import { Box, Center, Container, VStack } from '@styled-system/jsx'
+import { particulesBg } from '@styled-system/patterns'
 
-export type HomePageProps = {
-  memes: Meme[]
-}
-
-const HomePage = ({ memes }: HomePageProps) => {
+const HomePage = () => {
   return (
-    <Page>
-      <Flex
-        align="center"
-        direction="column"
-        justify="center"
-        marginTop="14"
-        flex={1}
-        textAlign="center"
-      >
+    <VStack h="100vh" bgColor="secondary" className={particulesBg()}>
+      <Center flexDir="column" marginTop="14" flex={1} textAlign="center">
         <Image
           alt="Meme Studio logo"
           width={350}
           height={67}
-          src="/images/logo-meme-studio.png"
+          priority
+          src="/images/logo-meme-studio-dark.png"
         />
-        <Styled.Caption>
-          Create a meme from JPG or PNG images. Edit your image and make your
-          custom meme.
-        </Styled.Caption>
-        <LinkButton href="/create">Get started</LinkButton>
-        <Styled.MemesList>
-          {memes.map((meme) => {
-            return (
-              <li key={meme.id}>
-                <Styled.MemeArticle>
-                  <Image
-                    alt={meme.translations.en.name}
-                    width={meme.width / 2}
-                    height={meme.height / 2}
-                    src={`https://www.meme-studio.io/templates/${meme.filename}`}
-                  />
-                </Styled.MemeArticle>
-              </li>
-            )
-          })}
-        </Styled.MemesList>
-      </Flex>
+        <Container maxW="2xl">
+          <p className={css({ mt: '3', fontSize: 'xl', mb: '5' })}>
+            Create a meme from JPG or PNG images. Edit your image and make your
+            custom meme.
+          </p>
+          <LinkButton color="primaryDark" size="large" rounded href="/create">
+            Get started
+          </LinkButton>
+          <Box mt="7">
+            <MemesList />
+          </Box>
+        </Container>
+      </Center>
       <Footer />
-    </Page>
+    </VStack>
   )
 }
 

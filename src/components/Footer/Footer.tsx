@@ -1,32 +1,52 @@
 import React from 'react'
-import Styled from './footer.styled'
+import Link from 'next/link'
+import { css } from '@styled-system/css'
+import { styled } from '@styled-system/jsx'
+import { center } from '@styled-system/patterns'
+
+const LinkStyled = styled(Link, {
+  base: {
+    marginX: '2',
+    color: 'gray.400',
+    _hover: {
+      color: 'gray.100'
+    }
+  }
+})
 
 const Footer = () => {
   return (
-    <Styled.Footer>
-      <Styled.LinksList>
+    <footer
+      className={css({
+        textAlign: 'center',
+        w: 'full',
+        pt: '7',
+        pb: '3'
+      })}
+    >
+      <ul className={center()}>
         <li>
-          <Styled.Link href="/about">About</Styled.Link>
+          <LinkStyled href="/about">About</LinkStyled>
         </li>
         <li>
-          <Styled.Link href="/terms">Terms</Styled.Link>
+          <LinkStyled href="/terms">Terms</LinkStyled>
         </li>
         <li>
-          <Styled.Link href="/gallery">Gallery</Styled.Link>
+          <LinkStyled href="/gallery">Gallery</LinkStyled>
         </li>
         <li>
-          <Styled.Link href="/qa">Q&A</Styled.Link>
+          <LinkStyled href="/qa">Q&A</LinkStyled>
         </li>
         <li>
-          <Styled.Link
+          <LinkStyled
             href="https://github.com/viclafouch/meme-studio"
             target="_blank"
           >
             Github
-          </Styled.Link>
+          </LinkStyled>
         </li>
-      </Styled.LinksList>
-    </Styled.Footer>
+      </ul>
+    </footer>
   )
 }
 

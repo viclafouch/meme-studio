@@ -1,5 +1,3 @@
-import HomePage, { HomePageProps } from './HomePage'
-
-export type { HomePageProps }
+import HomePage from './HomePage'
 
 export default HomePage

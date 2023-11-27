@@ -23,7 +23,7 @@ const StudioBody = () => {
       width="full"
       overflow="hidden"
       gridTemplateColumns="3.375rem auto 20rem"
-      bg="secondary"
+      bgColor="secondary"
       gap="0"
       height="calc(calc(100vh - 5rem))"
     >

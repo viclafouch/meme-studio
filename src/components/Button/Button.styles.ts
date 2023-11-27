@@ -9,17 +9,15 @@ export const button = sva({
       alignItems: 'center',
       justifyContent: 'center',
       letterSpacing: '0.5px',
-      fontSize: '1rem',
       lineHeight: '22px',
       textDecoration: 'none',
       boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.14)',
-      padding: '14px 18px',
       fontWeight: '500',
       transition: 'background-color 0.3s',
       '&:not(:disabled)': {
         cursor: 'pointer'
       },
-      '&:has(.button-start-adornment)': {
+      '&:has(.start-adornment)': {
         gap: '8px'
       }
     },
@@ -37,6 +35,16 @@ export const button = sva({
           }
         }
       },
+      primaryDark: {
+        root: {
+          color: 'white',
+          bg: 'primary.dark',
+          border: '1px solid transparent',
+          '&:not(:disabled):hover': {
+            bg: '#649fff'
+          }
+        }
+      },
       secondary: {
         root: {
           color: 'white',
@@ -45,6 +53,23 @@ export const button = sva({
           '&:not(:disabled):hover': {
             bg: '#535353'
           }
+        }
+      }
+    },
+    size: {
+      medium: {
+        root: {
+          paddingX: '2.5',
+          paddingY: '2.5',
+          fontSize: '1rem'
+        }
+      },
+      large: {
+        root: {
+          fontWeight: '600',
+          paddingX: '5',
+          paddingY: '5',
+          fontSize: '1.2rem'
         }
       }
     },
@@ -76,7 +101,8 @@ export const button = sva({
   defaultVariants: {
     fullWidth: false,
     rounded: false,
-    color: 'primary'
+    color: 'primary',
+    size: 'medium'
   }
 })
 

@@ -16,7 +16,7 @@ const Gallery = () => {
   return (
     <VStack gap="0" h="full">
       <styled.div overflowY="auto">
-        <styled.ul px="1" w="full" bg="gray.300">
+        <styled.ul px="1" w="full" bgColor="gray.300">
           {data.map((meme) => {
             return (
               <li key={meme.id}>

@@ -1,11 +1,10 @@
 import React from 'react'
 import Header from '@components/Header/Header'
-import Page from '@components/Page'
 import { Meme } from '@models/Meme'
 import { TextBox } from '@shared/schemas/textbox'
 import EditorProvider from '@stores/Editor/editor.store'
 import StudioBody from '@studio/components/StudioBody'
-import { css } from '@styled-system/css'
+import { Box } from '@styled-system/jsx'
 
 export type StudioPageProps = {
   meme?: Meme | null
@@ -19,12 +18,12 @@ const StudioPage = ({
   textboxes = defaultTextboxes
 }: StudioPageProps) => {
   return (
-    <Page className={css({ height: '100vh' })}>
+    <Box h="100vh" w="full">
       <EditorProvider key={meme?.id} textBoxes={textboxes} meme={meme || null}>
         <Header />
         <StudioBody />
       </EditorProvider>
-    </Page>
+    </Box>
   )
 }
 

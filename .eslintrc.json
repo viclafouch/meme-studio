@@ -9,5 +9,10 @@
   "parserOptions": {
     "project": true
   },
-  "root": true
+  "root": true,
+  "rules": {
+    "react-hooks/exhaustive-deps": ["error", {
+      "additionalHooks": "useIsomorphicLayoutEffect"
+    }]
+  }
 }

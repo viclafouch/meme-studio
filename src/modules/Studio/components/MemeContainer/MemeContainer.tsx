@@ -18,6 +18,7 @@ const MemeContainer = ({ children }: MemeContainerProps) => {
       h="full"
       w="full"
       padding="3.125rem 6.25rem"
+      bgColor="secondary"
       className={!meme ? particulesBg() : ''}
     >
       {!meme ? (

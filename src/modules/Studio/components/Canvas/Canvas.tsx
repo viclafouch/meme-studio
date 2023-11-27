@@ -39,9 +39,9 @@ const Canvas = () => {
     }
 
     const draw = (): void => {
-      const context2D = canvasElement.getContext('2d', {
-        alpha: true
-      }) as CanvasRenderingContext2D
+      const context2D = canvasElement.getContext(
+        '2d'
+      ) as CanvasRenderingContext2D
       canvasElement.width = canvasDimensions.width
       canvasElement.height = canvasDimensions.height
 
@@ -55,7 +55,7 @@ const Canvas = () => {
     return () => {
       cancelAnimationFrame(frame)
     }
-  }, [textboxes, canvasElRef, meme, canvasDimensions])
+  }, [textboxes, canvasDimensions])
 
   const onDraggableClick = React.useCallback(
     (item: TextBox) => {
