@@ -8,6 +8,7 @@ import { preventEmptyTextValue } from '@shared/utils/textbox'
 import { useItemIdSelected } from '@stores/Editor/hooks/useItemIdSelected'
 import { useTextboxes } from '@stores/Editor/hooks/useTextboxes'
 import Accordion from '@studio/components/Accordion'
+import { Box, HStack, styled, VStack } from '@styled-system/jsx'
 import { faClone, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Styled from './Customisation.styled'
@@ -87,12 +88,12 @@ const Customisation = ({
   }, [handleKeypress])
 
   return (
-    <Styled.Scrollable>
+    <Box overflowY="auto">
       <Styled.BlockTitle>
         <Styled.Legend>Customization</Styled.Legend>
         <Styled.MemeName>{meme.translations.en.name}</Styled.MemeName>
       </Styled.BlockTitle>
-      <Styled.TextBlocks>
+      <VStack gap={0}>
         {textboxes.map((textbox, index) => {
           const inputRef = textboxRefs[textbox.id]
 
@@ -104,26 +105,28 @@ const Customisation = ({
               key={textbox.id}
               onAfterOpen={handleAfterOpenAccordion(textbox)}
               action={
-                <>
+                <HStack gap={3}>
                   <Tooltip text="Dupliquer" position="top">
-                    <Styled.ActionButton
+                    <styled.button
                       aria-label="Dupliquer"
                       onClick={handleDuplicateItem(textbox.id)}
                       type="button"
+                      cursor="pointer"
                     >
                       <FontAwesomeIcon icon={faClone} />
-                    </Styled.ActionButton>
+                    </styled.button>
                   </Tooltip>
                   <Tooltip text="Supprimer" position="top">
-                    <Styled.ActionButton
+                    <styled.button
                       aria-label="Supprimer"
                       onClick={handleRemoveItem(textbox.id)}
                       type="button"
+                      cursor="pointer"
                     >
                       <FontAwesomeIcon icon={faTrashAlt} />
-                    </Styled.ActionButton>
+                    </styled.button>
                   </Tooltip>
-                </>
+                </HStack>
               }
             >
               <TextCustomisation
@@ -135,11 +138,11 @@ const Customisation = ({
             </Accordion>
           )
         })}
-      </Styled.TextBlocks>
+      </VStack>
       <Button rounded={false} fullWidth onClick={handleAddTextbox}>
         Ajouter un texte
       </Button>
-    </Styled.Scrollable>
+    </Box>
   )
 }
 

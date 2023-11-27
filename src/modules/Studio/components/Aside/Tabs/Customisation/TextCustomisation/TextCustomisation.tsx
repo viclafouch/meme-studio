@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react'
-import InputSlider from '@components/InputSlider/InputSlider'
 import {
   ALIGN_VERTICAL,
   FONTS_FAMILY,
@@ -8,7 +7,9 @@ import {
 } from '@shared/constants/fonts'
 import { TextBox } from '@shared/schemas/textbox'
 import { preventEmptyTextValue } from '@shared/utils/textbox'
-import Styled from './TextCustomisation.styled'
+import { css } from '@styled-system/css'
+import { Box } from '@styled-system/jsx'
+import { Fieldset } from './TextCustomisation.styles'
 
 export type TextCustomisationProps = {
   textbox: TextBox
@@ -47,10 +48,20 @@ const TextCustomisation = ({
   const { properties } = textbox
 
   return (
-    <Styled.TextCustomisation>
-      <Styled.TextToolsContainer>
-        <Styled.Fieldset>
-          <Styled.Textarea
+    <Box>
+      <Box p="0.8125rem 0.875rem 1.4375rem 0.875rem">
+        <Fieldset>
+          <textarea
+            className={css({
+              w: 'full',
+              fontFamily: 'Arial',
+              resize: 'none',
+              borderRadius: 'xs',
+              padding: '2',
+              borderWidth: '2px',
+              borderStyle: 'solid',
+              borderColor: 'ButtonHighlight'
+            })}
             spellCheck="false"
             onChange={handleEditText('value')}
             value={properties.value}
@@ -58,10 +69,11 @@ const TextCustomisation = ({
             ref={inputRef}
             placeholder={preventEmptyTextValue(properties.value, index)}
           />
-        </Styled.Fieldset>
-        <Styled.Fieldset>
+        </Fieldset>
+        <Fieldset>
           <label htmlFor="font-size">Font Size</label>
-          <InputSlider
+          <input
+            type="range"
             id="font-size"
             min="1"
             max="100"
@@ -69,10 +81,11 @@ const TextCustomisation = ({
             value={properties.fontSize}
             onChange={handleEditText('fontSize')}
           />
-        </Styled.Fieldset>
-        <Styled.Fieldset>
+        </Fieldset>
+        <Fieldset>
           <label htmlFor="box-shadow">Box Shadow</label>
-          <InputSlider
+          <input
+            type="range"
             id="box-shadow"
             min="1"
             max="100"
@@ -80,8 +93,8 @@ const TextCustomisation = ({
             value={properties.boxShadow}
             onChange={handleEditText('boxShadow')}
           />
-        </Styled.Fieldset>
-        <Styled.Fieldset>
+        </Fieldset>
+        <Fieldset>
           <label htmlFor="box-shadow">Color</label>
           <input
             type="color"
@@ -89,8 +102,8 @@ const TextCustomisation = ({
             value={properties.color}
             onChange={handleEditText('color')}
           />
-        </Styled.Fieldset>
-        <Styled.Fieldset>
+        </Fieldset>
+        <Fieldset>
           <label htmlFor="fontFamily">Police d&apos;écriture</label>
           <select
             id="fontFamily"
@@ -105,8 +118,8 @@ const TextCustomisation = ({
               )
             })}
           </select>
-        </Styled.Fieldset>
-        <Styled.Fieldset>
+        </Fieldset>
+        <Fieldset>
           <label htmlFor="alignVertical">Alignement vertical</label>
           <select
             id="alignVertical"
@@ -121,8 +134,8 @@ const TextCustomisation = ({
               )
             })}
           </select>
-        </Styled.Fieldset>
-        <Styled.Fieldset>
+        </Fieldset>
+        <Fieldset>
           <label htmlFor="textAlign">Alignement horizontal</label>
           <select
             id="textAlign"
@@ -137,8 +150,8 @@ const TextCustomisation = ({
               )
             })}
           </select>
-        </Styled.Fieldset>
-        <Styled.Fieldset>
+        </Fieldset>
+        <Fieldset>
           <label htmlFor="isUppercase">Texte en majuscule</label>
           <input
             type="checkbox"
@@ -146,9 +159,9 @@ const TextCustomisation = ({
             checked={properties.isUppercase}
             id="isUppercase"
           />
-        </Styled.Fieldset>
-      </Styled.TextToolsContainer>
-    </Styled.TextCustomisation>
+        </Fieldset>
+      </Box>
+    </Box>
   )
 }
 

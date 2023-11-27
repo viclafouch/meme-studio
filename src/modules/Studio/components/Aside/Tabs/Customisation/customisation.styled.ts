@@ -1,9 +1,6 @@
 import styled from 'styled-components'
 
 export default {
-  Scrollable: styled.div`
-    overflow-y: auto;
-  `,
   BlockTitle: styled.div`
     text-align: center;
     font-size: 1.1rem;
@@ -32,11 +29,5 @@ export default {
   TextBlocks: styled.div`
     display: flex;
     flex-direction: column;
-  `,
-  ActionButton: styled.button`
-    background-color: transparent;
-    border: 0;
-    cursor: pointer;
-    color: #ffffff;
   `
 }

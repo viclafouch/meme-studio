@@ -3,6 +3,9 @@ import { defineConfig, defineGlobalStyles } from '@pandacss/dev'
 const globalCss = defineGlobalStyles({
   html: {
     fontSize: '16px'
+  },
+  '*': {
+    colorScheme: 'dark'
   }
 })
 

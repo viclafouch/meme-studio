@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export default {
   Section: styled.section`
+    width: 100%;
     & + & {
       border-top: 1px solid rgba(255, 255, 255, 0.478);
     }
