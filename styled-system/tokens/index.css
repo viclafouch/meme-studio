@@ -415,7 +415,9 @@
   --colors-slate-950: #020617;
   --colors-primary: rgb(100, 159, 255);
   --colors-primary-dark: rgb(48, 91, 161);
-  --colors-secondary: rgb(48, 48, 48);
+  --colors-secondary-dark: rgb(48, 48, 48);
+  --colors-secondary: rgb(68, 68, 68);
+  --colors-secondary-light: rgb(88, 88, 88);
   --breakpoints-sm: 640px;
   --breakpoints-md: 768px;
   --breakpoints-lg: 1024px;

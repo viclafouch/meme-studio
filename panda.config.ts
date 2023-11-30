@@ -32,7 +32,9 @@ export default defineConfig({
             dark: { value: 'rgb(48, 91, 161)' }
           },
           secondary: {
-            DEFAULT: { value: 'rgb(48, 48, 48)' }
+            dark: { value: 'rgb(48, 48, 48)' },
+            DEFAULT: { value: 'rgb(68, 68, 68)' },
+            light: { value: 'rgb(88, 88, 88)' }
           }
         }
       },

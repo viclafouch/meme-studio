@@ -2,7 +2,8 @@
 
 import React from 'react'
 import { useIsomorphicLayoutEffect } from '@shared/hooks/useIsomorphicLayoutEffect'
-import Styled from './Accordion.styled'
+import { css } from '@styled-system/css'
+import { Box, Center } from '@styled-system/jsx'
 
 export type AccordionProps = {
   children: React.ReactNode
@@ -42,19 +43,60 @@ const Accordion = ({
   }
 
   return (
-    <Styled.Section>
-      <Styled.Header tabIndex={0} role="button" onClick={handleToggle}>
-        <Styled.Title>{title}</Styled.Title>
-        {action ? <Styled.Actions>{action}</Styled.Actions> : null}
-      </Styled.Header>
-      <Styled.Content
+    <section
+      className={css({
+        w: 'full',
+        '& + &': {
+          borderTop: '1px solid rgba(255, 255, 255, 0.478)'
+        }
+      })}
+    >
+      <header
+        className={css({
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          display: 'flex',
+          p: '5',
+          w: 'full',
+          bgColor: 'secondary.light',
+          cursor: 'pointer',
+          color: 'zinc.300'
+        })}
+        onKeyDown={onToggle}
+        tabIndex={0}
+        role="button"
+        onClick={handleToggle}
+      >
+        <p
+          className={css({
+            lineClamp: 1,
+            whiteSpace: 'nowrap',
+            h: '1rem',
+            textOverflow: 'ellipsis',
+            maxWidth: '60%',
+            fontWeight: '600',
+            fontSize: 'xs',
+            overflow: 'hidden'
+          })}
+        >
+          {title}
+        </p>
+        {action ? <Center>{action}</Center> : null}
+      </header>
+      <Box
+        className={css({
+          overflow: 'hidden',
+          transition: 'max-height 600ms ease',
+          willChange: 'max-height',
+          bg: 'secondary'
+        })}
         ref={content}
         style={{ maxHeight: currentHeight }}
         onTransitionEnd={handleTransitionEnd}
       >
         {children}
-      </Styled.Content>
-    </Styled.Section>
+      </Box>
+    </section>
   )
 }
 

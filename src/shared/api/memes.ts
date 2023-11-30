@@ -9,17 +9,15 @@ export async function getMemes() {
 export function getMeme(memeId: Meme['id']) {
   const meme = data.memes.find(({ id }) => {
     return id === memeId
-  })
+  })!
 
   return Promise.resolve({
-    meme: meme ? meme : null,
-    textboxes: meme
-      ? meme.texts.map((text) => {
-          return textboxSchema.parse({
-            ...text,
-            properties: text
-          })
-        })
-      : []
+    meme,
+    textboxes: meme.texts.map((text) => {
+      return textboxSchema.parse({
+        ...text,
+        properties: text
+      })
+    })
   })
 }

@@ -1659,9 +1659,17 @@ const tokens = {
     "value": "rgb(48, 91, 161)",
     "variable": "var(--colors-primary-dark)"
   },
-  "colors.secondary": {
+  "colors.secondary.dark": {
     "value": "rgb(48, 48, 48)",
+    "variable": "var(--colors-secondary-dark)"
+  },
+  "colors.secondary": {
+    "value": "rgb(68, 68, 68)",
     "variable": "var(--colors-secondary)"
+  },
+  "colors.secondary.light": {
+    "value": "rgb(88, 88, 88)",
+    "variable": "var(--colors-secondary-light)"
   },
   "breakpoints.sm": {
     "value": "640px",
@@ -1866,6 +1874,10 @@ const tokens = {
   "colors.colorPalette.dark": {
     "value": "var(--colors-color-palette-dark)",
     "variable": "var(--colors-color-palette-dark)"
+  },
+  "colors.colorPalette.light": {
+    "value": "var(--colors-color-palette-light)",
+    "variable": "var(--colors-color-palette-light)"
   }
 }
 

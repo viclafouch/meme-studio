@@ -47,7 +47,7 @@ const Tools = () => {
       color="white"
       zIndex={3}
       position="relative"
-      bgColor="secondary"
+      bgColor="secondary.dark"
       boxShadow="2px 0px 5px 0px rgb(0 0 0 / 29%)"
     >
       <styled.ul display="flex" flexDir="column" alignItems="center">

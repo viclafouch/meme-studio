@@ -2,9 +2,10 @@ import React from 'react'
 import { degreeToRad } from '@shared/helpers/number'
 import { useEvent } from '@shared/hooks/useEvent'
 import { TextBox } from '@shared/schemas/textbox'
+import { css } from '@styled-system/css'
 import { faRotateLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Styled from './Draggable.styled'
+import { DraggableBox, ResizeBox, RotateBox } from './Draggable.styles'
 import { Side, State } from './Draggable.types'
 import { move, resize, rotate } from './Draggable.utils'
 
@@ -211,7 +212,7 @@ const Draggable = ({
   }, [state.mode, handleDraggingMove, handleResizeMove, handleRotateMove])
 
   return (
-    <Styled.Draggable
+    <DraggableBox
       onMouseDown={handleMouseDown}
       data-type="drag"
       aria-selected={isSelected}
@@ -225,30 +226,33 @@ const Draggable = ({
         transform: `translate3d(${left}px, ${top}px, 0) rotate(${rotateDeg}deg)`
       }}
     >
-      <Styled.Resize
+      <ResizeBox
         data-type="resize"
         data-side="ne"
         onMouseDown={handleMouseDown}
       />
-      <Styled.Resize
+      <ResizeBox
         data-type="resize"
         data-side="nw"
         onMouseDown={handleMouseDown}
       />
-      <Styled.Resize
+      <ResizeBox
         data-type="resize"
         data-side="se"
         onMouseDown={handleMouseDown}
       />
-      <Styled.Resize
+      <ResizeBox
         data-type="resize"
         data-side="sw"
         onMouseDown={handleMouseDown}
       />
-      <Styled.Rotate data-type="rotate" onMouseDown={handleMouseDown}>
-        <FontAwesomeIcon icon={faRotateLeft} />
-      </Styled.Rotate>
-    </Styled.Draggable>
+      <RotateBox data-type="rotate" onMouseDown={handleMouseDown}>
+        <FontAwesomeIcon
+          className={css({ w: '11px', h: '11px' })}
+          icon={faRotateLeft}
+        />
+      </RotateBox>
+    </DraggableBox>
   )
 }
 

@@ -1,27 +1,22 @@
 import React from 'react'
-import Styled from './Tooltip.styled'
+import { VariantsProps, Wrapper } from './Tooltip.styled'
 
 export type TooltipProps = {
   children: React.ReactNode
   text: string
   disabled?: boolean
-  position: 'left' | 'right' | 'top' | 'bottom'
-}
+} & VariantsProps
 
 const Tooltip = ({
   children,
   text,
-  position,
+  position = 'top',
   disabled = false
 }: TooltipProps) => {
   return (
-    <Styled.Wrapper
-      $disabled={disabled}
-      $position={position}
-      data-tooltip={text}
-    >
+    <Wrapper position={position} aria-disabled={disabled} data-tooltip={text}>
       {children}
-    </Styled.Wrapper>
+    </Wrapper>
   )
 }
 
