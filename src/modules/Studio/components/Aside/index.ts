@@ -1,5 +1,3 @@
-import Aside, { AsideProps } from './Aside'
-
-export type { AsideProps }
+import Aside from './Aside'
 
 export default Aside

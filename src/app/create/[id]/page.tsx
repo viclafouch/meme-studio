@@ -30,6 +30,7 @@ export async function generateStaticParams() {
 const Page = async ({ params }: PageProps) => {
   const meme = await getMeme(params.id)
 
+  // @ts-expect-error
   return <CreatePage meme={meme.meme} textboxes={meme.textboxes} />
 }
 
