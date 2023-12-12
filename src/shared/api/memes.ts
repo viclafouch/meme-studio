@@ -1,5 +1,4 @@
-import { Meme } from '@models/Meme'
-import { textboxSchema } from '@viclafouch/meme-studio-utilities/schemas'
+import { Meme, textboxSchema } from '@viclafouch/meme-studio-utilities/schemas'
 import data from './meme.json'
 
 export async function getMemes() {

@@ -1,5 +1,3 @@
-import Customisation, { CustomisationProps } from './Customisation'
-
-export type { CustomisationProps }
+import Customisation from './Customisation'
 
 export default Customisation

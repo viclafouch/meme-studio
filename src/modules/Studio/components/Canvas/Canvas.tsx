@@ -83,7 +83,7 @@ const Canvas = () => {
         style={{
           height: canvasDimensions.height,
           width: canvasDimensions.width,
-          backgroundImage: `url('https://www.meme-studio.io/templates/${meme.filename}')`
+          backgroundImage: `url('https://www.meme-studio.io/templates/${meme.imageUrl}')`
         }}
       >
         {isVisibleDraggables && canvasDimensions.height

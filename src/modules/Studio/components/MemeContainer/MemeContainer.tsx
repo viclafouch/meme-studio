@@ -33,7 +33,7 @@ const MemeContainer = ({ children }: MemeContainerProps) => {
             bgSize="cover"
             filter="opacity(0.4) brightness(88%) blur(0.25rem)"
             style={{
-              backgroundImage: `url('https://www.meme-studio.io/templates/${meme.filename}')`
+              backgroundImage: `url('https://www.meme-studio.io/templates/${meme.imageUrl}')`
             }}
           />
           {children}

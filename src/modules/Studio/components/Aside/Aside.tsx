@@ -57,7 +57,7 @@ const Aside = () => {
         </React.Suspense>
       ) : (
         // eslint-disable-next-line react/jsx-no-useless-fragment
-        <>{meme ? <Customisation meme={meme} /> : <EmptyCustom />}</>
+        <>{meme ? <Customisation /> : <EmptyCustom />}</>
       )}
     </styled.aside>
   )
