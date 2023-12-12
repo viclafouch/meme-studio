@@ -1,15 +1,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react'
+import { css } from '@styled-system/css'
+import { Box } from '@styled-system/jsx'
 import {
   ALIGN_VERTICAL,
   FONTS_FAMILY,
   TEXT_ALIGN
-} from '@shared/constants/fonts'
-import { useGlobalInputsRef } from '@shared/hooks/useGlobalInputsRef'
-import { TextBox } from '@shared/schemas/textbox'
-import { preventEmptyTextValue } from '@shared/utils/textbox'
-import { css } from '@styled-system/css'
-import { Box } from '@styled-system/jsx'
+} from '@viclafouch/meme-studio-utilities/constants'
+import { useGlobalInputsRef } from '@viclafouch/meme-studio-utilities/hooks'
+import { TextBox } from '@viclafouch/meme-studio-utilities/schemas'
+import { preventEmptyTextValue } from '@viclafouch/meme-studio-utilities/utils'
 import { Fieldset } from './TextCustomisation.styles'
 
 export type TextCustomisationProps = {

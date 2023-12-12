@@ -1,18 +1,19 @@
 'use client'
 
 import React from 'react'
-import { Meme } from '@models/Meme'
-import { drawText } from '@shared/helpers/canvas'
-import { useIsomorphicLayoutEffect } from '@shared/hooks/useIsomorphicLayoutEffect'
-import { useWindowSizeCallback } from '@shared/hooks/useWindowSizeCallback'
-import { TextBox } from '@shared/schemas/textbox'
-import { useCanvasDimensions } from '@stores/Editor/hooks/useCanvasDimensions'
-import { useItemIdSelected } from '@stores/Editor/hooks/useItemIdSelected'
-import { useMeme } from '@stores/Editor/hooks/useMeme'
-import { useTextboxes } from '@stores/Editor/hooks/useTextboxes'
-import { useTools } from '@stores/Editor/hooks/useTools'
 import { css } from '@styled-system/css'
 import { Box } from '@styled-system/jsx'
+import { drawText } from '@viclafouch/meme-studio-utilities/helpers'
+import {
+  useCanvasDimensions,
+  useIsomorphicLayoutEffect,
+  useItemIdSelected,
+  useMeme,
+  useTextboxes,
+  useTools,
+  useWindowSizeCallback
+} from '@viclafouch/meme-studio-utilities/hooks'
+import { Meme, TextBox } from '@viclafouch/meme-studio-utilities/schemas'
 import Draggable from '../Draggable'
 
 const Canvas = () => {

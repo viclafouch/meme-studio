@@ -2,11 +2,13 @@
 
 import React from 'react'
 import Button from '@components/Button'
-import { Meme } from '@models/Meme'
-import { exportCanvasBlob } from '@shared/helpers/canvas'
-import { useMeme } from '@stores/Editor/hooks/useMeme'
-import { useRatiotedTextboxes } from '@stores/Editor/hooks/useTextboxes'
 import { useShowModal } from '@stores/Modal/Modal.provider'
+import { exportCanvasBlob } from '@viclafouch/meme-studio-utilities/helpers'
+import {
+  useMeme,
+  useRatiotedTextboxes
+} from '@viclafouch/meme-studio-utilities/hooks'
+import { Meme } from '@viclafouch/meme-studio-utilities/schemas'
 import { faArrowCircleDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMutation } from '@tanstack/react-query'

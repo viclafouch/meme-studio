@@ -3,11 +3,13 @@
 import React from 'react'
 import Link from 'next/link'
 import Tooltip from '@components/Tooltip'
-import { useHistory } from '@stores/Editor/hooks/useHistory'
-import { useMeme } from '@stores/Editor/hooks/useMeme'
-import { useCountTextboxes } from '@stores/Editor/hooks/useTextboxes'
-import { useTools } from '@stores/Editor/hooks/useTools'
 import { Flex, styled } from '@styled-system/jsx'
+import {
+  useCountTextboxes,
+  useHistory,
+  useMeme,
+  useTools
+} from '@viclafouch/meme-studio-utilities/hooks'
 import {
   faCrop,
   faEraser,

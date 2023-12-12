@@ -1,9 +1,9 @@
 'use client'
 
 import React from 'react'
-import { useIsomorphicLayoutEffect } from '@shared/hooks/useIsomorphicLayoutEffect'
 import { css } from '@styled-system/css'
 import { Box, Center } from '@styled-system/jsx'
+import { useIsomorphicLayoutEffect } from '@viclafouch/meme-studio-utilities/hooks'
 
 export type AccordionProps = {
   children: React.ReactNode

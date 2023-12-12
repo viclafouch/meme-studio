@@ -3,7 +3,7 @@
 import React from 'react'
 import Modal from 'react-responsive-modal'
 import { create } from 'zustand'
-import { useIsomorphicLayoutEffect } from '@shared/hooks/useIsomorphicLayoutEffect'
+import { useIsomorphicLayoutEffect } from '@viclafouch/meme-studio-utilities/hooks'
 import { MODALS } from './Modals.constants'
 import 'react-responsive-modal/styles.css'
 

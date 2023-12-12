@@ -1,15 +1,16 @@
 import React from 'react'
 import Button from '@components/Button'
 import Tooltip from '@components/Tooltip'
-import { Meme } from '@models/Meme'
-import { useEvent } from '@shared/hooks/useEvent'
-import { useGlobalInputsRef } from '@shared/hooks/useGlobalInputsRef'
-import { TextBox } from '@shared/schemas/textbox'
-import { preventEmptyTextValue } from '@shared/utils/textbox'
-import { useItemIdSelected } from '@stores/Editor/hooks/useItemIdSelected'
-import { useTextboxes } from '@stores/Editor/hooks/useTextboxes'
 import Accordion from '@studio/components/Accordion'
 import { Box, HStack, styled, VStack } from '@styled-system/jsx'
+import {
+  useEvent,
+  useGlobalInputsRef,
+  useItemIdSelected,
+  useTextboxes
+} from '@viclafouch/meme-studio-utilities/hooks'
+import { Meme, TextBox } from '@viclafouch/meme-studio-utilities/schemas'
+import { preventEmptyTextValue } from '@viclafouch/meme-studio-utilities/utils'
 import { faClone, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import TextCustomisation from './TextCustomisation'

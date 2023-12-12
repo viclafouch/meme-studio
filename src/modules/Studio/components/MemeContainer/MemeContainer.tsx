@@ -1,9 +1,9 @@
 'use client'
 
 import React from 'react'
-import { useMeme } from '@stores/Editor/hooks/useMeme'
 import { Box, Center } from '@styled-system/jsx'
 import { particulesBg } from '@styled-system/patterns'
+import { useMeme } from '@viclafouch/meme-studio-utilities/hooks'
 import EmptyContainer from '../EmptyContainer'
 
 export type MemeContainerProps = {

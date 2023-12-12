@@ -1,5 +1,5 @@
 import { Meme } from '@models/Meme'
-import { TextBox } from '@shared/schemas/textbox'
+import { TextBox } from '@viclafouch/meme-studio-utilities/schemas'
 
 export type Tab = 'gallery' | 'customization'
 

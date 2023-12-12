@@ -1,4 +1,4 @@
-import { radToDegree } from '@shared/helpers/number'
+import { radToDegree } from '@viclafouch/meme-studio-utilities/helpers'
 import type { MaxSizes, State } from './Draggable.types'
 
 export function move(

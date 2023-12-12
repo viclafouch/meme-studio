@@ -1,9 +1,9 @@
 import React from 'react'
 import Button from '@components/Button'
 import LinkButton from '@components/LinkButton'
-import { useClipboard } from '@shared/hooks/useClipboard'
 import { css } from '@styled-system/css'
 import { Box, Flex } from '@styled-system/jsx'
+import { useClipboard } from '@viclafouch/meme-studio-utilities/hooks'
 import {
   faArrowCircleDown,
   faClipboard
