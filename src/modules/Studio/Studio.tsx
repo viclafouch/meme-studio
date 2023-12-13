@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '@components/Header/Header'
-import { EditorProvider } from '@stores/Editor/editor.store'
+import { EditorProvider } from '@stores/Editor/Editor.provider'
 import StudioBody from '@studio/components/StudioBody'
 import { Box } from '@styled-system/jsx'
 import { Meme, TextBox } from '@viclafouch/meme-studio-utilities/schemas'

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 8080",
     "prepare": "panda codegen",
     "build": "next build",
     "start": "next start",
@@ -16,7 +16,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@tanstack/react-query": "^5.13.4",
     "@tanstack/react-query-next-experimental": "^5.13.4",
-    "@viclafouch/meme-studio-utilities": "^1.0.4",
+    "@viclafouch/meme-studio-utilities": "^1.0.7",
     "clsx": "^2.0.0",
     "immer": "10.0.3",
     "nanoid": "^5.0.4",
@@ -26,6 +26,7 @@
     "react-responsive-modal": "^6.4.2",
     "remeda": "^1.30.0",
     "sass": "1.69.5",
+    "wretch": "^2.7.1",
     "zod": "^3.22.4",
     "zustand": "4.4.7"
   },

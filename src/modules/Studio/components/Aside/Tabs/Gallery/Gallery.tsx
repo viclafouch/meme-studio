@@ -22,12 +22,13 @@ const Gallery = () => {
               <li key={meme.id}>
                 <Link href={`/create/${meme.id}`}>
                   <Image
-                    alt={meme.translations.en.name}
+                    // TODO: alt
+                    alt="Meme Name"
                     width={meme.width}
                     height={meme.height}
                     loading="lazy"
                     style={{ width: '100%', height: 'auto' }}
-                    src={`https://www.meme-studio.io/templates/${meme.filename}`}
+                    src={meme.imageUrl}
                   />
                 </Link>
               </li>

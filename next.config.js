@@ -3,10 +3,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'www.meme-studio.io',
-        port: '',
-        pathname: '/**',
+        protocol: 'http',
+        hostname: 'res.cloudinary.com'
       },
     ],
   },

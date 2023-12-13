@@ -10,10 +10,11 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { id } = params
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { meme } = await getMeme(id)
 
   return {
-    title: meme?.translations.fr.name
+    title: 'test'
   }
 }
 
@@ -30,7 +31,6 @@ export async function generateStaticParams() {
 const Page = async ({ params }: PageProps) => {
   const meme = await getMeme(params.id)
 
-  // @ts-expect-error
   return <CreatePage meme={meme.meme} textboxes={meme.textboxes} />
 }
 

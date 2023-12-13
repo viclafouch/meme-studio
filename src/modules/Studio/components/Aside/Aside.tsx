@@ -2,11 +2,11 @@
 
 import React from 'react'
 import Button from '@components/Button'
-import { Tab } from '@stores/Editor/editor.types'
 import EmptyCustom from '@studio/components/Aside/Tabs/Customisation/EmptyCustom'
 import { GallerySuspend } from '@studio/components/Aside/Tabs/Gallery'
 import { styled } from '@styled-system/jsx'
 import { useMeme, useTab } from '@viclafouch/meme-studio-utilities/hooks'
+import { Tab } from '@viclafouch/meme-studio-utilities/stores'
 import { faHeading, faImage } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Customisation from './Tabs/Customisation'

@@ -22,7 +22,8 @@ const MemeList = async ({ limit = 3 }) => {
             <article>
               <Link href={`/create/${meme.id}`}>
                 <Image
-                  alt={meme.translations.en.name}
+                  // TODO: alt
+                  alt="Meme name"
                   className={css({
                     borderWidth: '2px',
                     borderStyle: 'solid',
@@ -30,7 +31,7 @@ const MemeList = async ({ limit = 3 }) => {
                   })}
                   width={meme.width / 2}
                   height={meme.height / 2}
-                  src={`https://www.meme-studio.io/templates/${meme.filename}`}
+                  src={meme.imageUrl}
                 />
               </Link>
             </article>
