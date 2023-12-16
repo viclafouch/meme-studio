@@ -99,7 +99,7 @@ const TextCustomisation = ({
           <label htmlFor="box-shadow">Color</label>
           <input
             type="color"
-            id="box-shadow"
+            id="color"
             value={properties.color}
             onChange={handleEditText('color')}
           />

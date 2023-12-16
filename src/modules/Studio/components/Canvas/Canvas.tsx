@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 import { css } from '@styled-system/css'
 import { Box } from '@styled-system/jsx'
 import {
@@ -52,10 +53,17 @@ const Canvas = () => {
         })}
         style={{
           height: canvasDimensions.height,
-          width: canvasDimensions.width,
-          backgroundImage: `url('${meme.imageUrl}')`
+          width: canvasDimensions.width
         }}
       >
+        <Image
+          src={meme.imageUrl}
+          priority
+          alt=""
+          className={css({ zIndex: -1 })}
+          fill
+          sizes=""
+        />
         {isVisibleDraggables && canvasDimensions.height
           ? textboxes.map((textbox) => {
               return (

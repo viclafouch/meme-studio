@@ -1,6 +1,8 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
+import { css } from '@styled-system/css'
 import { Box, Center } from '@styled-system/jsx'
 import { particulesBg } from '@styled-system/patterns'
 import { useMeme } from '@viclafouch/meme-studio-utilities/hooks'
@@ -28,14 +30,16 @@ const MemeContainer = ({ children }: MemeContainerProps) => {
           <Box
             inset="-0.25rem"
             position="absolute"
-            bgPosition="center"
-            bgRepeat="no-repeat"
-            bgSize="cover"
             filter="opacity(0.4) brightness(88%) blur(0.25rem)"
-            style={{
-              backgroundImage: `url('${meme.imageUrl}')`
-            }}
-          />
+          >
+            <Image
+              src={meme.imageUrl}
+              priority
+              alt=""
+              className={css({ zIndex: -1 })}
+              fill
+            />
+          </Box>
           {children}
         </>
       )}
