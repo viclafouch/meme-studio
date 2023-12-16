@@ -1,17 +1,24 @@
 import wretch from 'wretch'
-import { Meme } from '@viclafouch/meme-studio-utilities/schemas'
+import { z } from 'zod'
+import {
+  LightMeme,
+  lightMemeSchema,
+  Meme,
+  memeSchema
+} from '@viclafouch/meme-studio-utilities/schemas'
 
-const request = wretch('http://localhost:3000/api')
+const request = wretch('http://localhost:3000/api').options({
+  // see https://nextjs.org/docs/app/api-reference/functions/fetch
+  cache: 'force-cache'
+})
 
 export async function getMemes() {
-  return request.url('/memes').get().json<Meme[]>()
+  return request
+    .url('/memes')
+    .get()
+    .json<LightMeme[]>(z.array(lightMemeSchema).parse)
 }
 
 export async function getMeme(memeId: Meme['id']) {
-  const meme = await request.url(`/memes/${memeId}`).get().json<Meme>()
-
-  return Promise.resolve({
-    meme,
-    textboxes: []
-  })
+  return request.url(`/memes/${memeId}`).get().json<Meme>(memeSchema.parse)
 }

@@ -11,7 +11,7 @@ export async function generateMetadata({
   const { id } = params
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { meme } = await getMeme(id)
+  const meme = await getMeme(id)
 
   return {
     title: 'test'
@@ -31,7 +31,7 @@ export async function generateStaticParams() {
 const Page = async ({ params }: PageProps) => {
   const meme = await getMeme(params.id)
 
-  return <CreatePage meme={meme.meme} textboxes={meme.textboxes} />
+  return <CreatePage meme={meme} textboxes={meme.textboxes} />
 }
 
 export default Page
