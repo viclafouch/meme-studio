@@ -6,7 +6,7 @@
     "dev": "next dev -p 8080",
     "prepare": "panda codegen",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 8080",
     "lint": "tsc --noEmit && eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "npm run lint -- --fix"
   },
@@ -16,7 +16,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@tanstack/react-query": "^5.13.4",
     "@tanstack/react-query-next-experimental": "^5.13.4",
-    "@viclafouch/meme-studio-utilities": "^1.0.13",
+    "@viclafouch/meme-studio-utilities": "^1.0.16",
     "clsx": "^2.0.0",
     "immer": "10.0.3",
     "nanoid": "^5.0.4",

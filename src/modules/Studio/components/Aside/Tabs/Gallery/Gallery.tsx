@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getMemes } from '@shared/api/memes'
 import { styled, VStack } from '@styled-system/jsx'
+import { getMemeSlug } from '@viclafouch/meme-studio-utilities/utils'
 import { useSuspenseQuery } from '@tanstack/react-query'
 
 const Gallery = () => {
@@ -20,10 +21,9 @@ const Gallery = () => {
           {memes.map((meme) => {
             return (
               <li key={meme.id}>
-                <Link href={`/create/${meme.id}`}>
+                <Link href={`/create/${getMemeSlug(meme)}`}>
                   <Image
-                    // TODO: alt
-                    alt="Meme Name"
+                    alt={meme.name}
                     width={meme.width}
                     height={meme.height}
                     loading="lazy"

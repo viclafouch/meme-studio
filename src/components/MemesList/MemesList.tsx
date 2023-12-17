@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { getMemes } from '@shared/api/memes'
 import { css } from '@styled-system/css'
 import { flex } from '@styled-system/patterns'
+import { getMemeSlug } from '@viclafouch/meme-studio-utilities/utils'
 
 export type MemeListProps = {
   limit?: number
@@ -20,10 +21,9 @@ const MemeList = async ({ limit = 3 }) => {
         return (
           <li key={meme.id} className={css({ maxW: '200px', px: '3' })}>
             <article>
-              <Link href={`/create/${meme.id}`}>
+              <Link href={`/create/${getMemeSlug(meme)}`}>
                 <Image
-                  // TODO: alt
-                  alt="Meme name"
+                  alt={meme.name}
                   className={css({
                     borderWidth: '2px',
                     borderStyle: 'solid',
