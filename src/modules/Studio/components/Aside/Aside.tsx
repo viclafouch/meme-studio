@@ -1,13 +1,19 @@
 'use client'
 
 import React from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
 import Button from '@components/Button'
 import EmptyCustom from '@studio/components/Aside/Tabs/Customisation/EmptyCustom'
 import { GallerySuspend } from '@studio/components/Aside/Tabs/Gallery'
-import { styled } from '@styled-system/jsx'
+import { css } from '@styled-system/css'
+import { styled, VStack } from '@styled-system/jsx'
 import { useMeme, useTab } from '@viclafouch/meme-studio-utilities/hooks'
 import { Tab } from '@viclafouch/meme-studio-utilities/stores'
-import { faHeading, faImage } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCircleExclamation,
+  faHeading,
+  faImage
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Customisation from './Tabs/Customisation'
 import Gallery from './Tabs/Gallery/Gallery'
@@ -52,9 +58,21 @@ const Aside = () => {
         </Button>
       </styled.header>
       {currentTab === 'gallery' ? (
-        <React.Suspense fallback={<GallerySuspend />}>
-          <Gallery />
-        </React.Suspense>
+        <ErrorBoundary
+          fallback={
+            <VStack textAlign="center" pt={5}>
+              <FontAwesomeIcon
+                className={css({ fontSize: 30 })}
+                icon={faCircleExclamation}
+              />
+              Something went wrong
+            </VStack>
+          }
+        >
+          <React.Suspense fallback={<GallerySuspend />}>
+            <Gallery />
+          </React.Suspense>
+        </ErrorBoundary>
       ) : (
         // eslint-disable-next-line react/jsx-no-useless-fragment
         <>{meme ? <Customisation meme={meme} /> : <EmptyCustom />}</>

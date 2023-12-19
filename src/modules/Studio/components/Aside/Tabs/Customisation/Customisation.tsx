@@ -84,7 +84,7 @@ const Customisation = ({ meme }: CustomisationProps) => {
   }, [handleKeypress])
 
   return (
-    <Box overflowY="auto">
+    <Box overflowY="auto" overflowX="hidden">
       <VStack textAlign="center" p="2" m="2" gap={2}>
         <styled.span display="block">Customization</styled.span>
         <styled.h1
