@@ -36,7 +36,7 @@ const MemeContainer = ({ children }: MemeContainerProps) => {
               src={meme.imageUrl}
               priority
               alt=""
-              className={css({ zIndex: -1 })}
+              className={css({ zIndex: -1, objectFit: 'cover' })}
               fill
             />
           </Box>

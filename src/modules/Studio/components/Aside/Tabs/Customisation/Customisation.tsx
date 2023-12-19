@@ -9,13 +9,17 @@ import {
   useItemIdSelected,
   useTextboxes
 } from '@viclafouch/meme-studio-utilities/hooks'
-import { TextBox } from '@viclafouch/meme-studio-utilities/schemas'
+import { Meme, TextBox } from '@viclafouch/meme-studio-utilities/schemas'
 import { preventEmptyTextValue } from '@viclafouch/meme-studio-utilities/utils'
 import { faClone, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import TextCustomisation from './TextCustomisation'
 
-const Customisation = () => {
+export type CustomisationProps = {
+  meme: Meme
+}
+
+const Customisation = ({ meme }: CustomisationProps) => {
   const { textboxes, updateTextbox, addTextbox, removeItem, duplicateItem } =
     useTextboxes()
   const { itemIdSelected, toggleItemIdSelected } = useItemIdSelected()
@@ -91,7 +95,7 @@ const Customisation = () => {
           overflow="hidden"
           maxW="full"
         >
-          test
+          {meme.name}
         </styled.h1>
       </VStack>
       <VStack gap={0}>

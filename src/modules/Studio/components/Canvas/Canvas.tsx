@@ -59,8 +59,9 @@ const Canvas = () => {
         <Image
           src={meme.imageUrl}
           priority
+          unoptimized
           alt=""
-          className={css({ zIndex: -1 })}
+          className={css({ zIndex: -1, objectFit: 'cover' })}
           fill
           sizes=""
         />

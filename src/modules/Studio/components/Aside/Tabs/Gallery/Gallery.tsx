@@ -27,6 +27,7 @@ const Gallery = () => {
                     width={meme.width}
                     height={meme.height}
                     loading="lazy"
+                    unoptimized
                     style={{ width: '100%', height: 'auto' }}
                     src={meme.imageUrl}
                   />

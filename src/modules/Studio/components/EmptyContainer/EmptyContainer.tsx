@@ -2,8 +2,20 @@ import React from 'react'
 import Image from 'next/image'
 import { css } from '@styled-system/css'
 import { Center, styled } from '@styled-system/jsx'
+import { useImageLocal } from '@viclafouch/meme-studio-utilities/hooks'
 
 const EmptyContainer = () => {
+  const setImageLocal = useImageLocal()
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = event.target
+    const [file] = Array.from(files || [])
+
+    if (file) {
+      setImageLocal(file)
+    }
+  }
+
   return (
     <Center flexDir="column" h="full">
       <Image
@@ -18,6 +30,7 @@ const EmptyContainer = () => {
         <label htmlFor="local-meme">
           <input
             type="file"
+            onChange={handleChange}
             className={css({
               w: 0,
               h: 0,
