@@ -22,6 +22,9 @@ export async function generateMetadata({
 
   return {
     title: meme.name,
+    openGraph: {
+      images: [meme.imageUrl]
+    },
     alternates: {
       canonical: `https://www.meme-studio.io/create/${params.slug}`
     }

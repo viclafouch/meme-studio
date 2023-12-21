@@ -18,7 +18,6 @@ import {
   faQuestionCircle,
   faRedo,
   faSquare as faSquareFilled,
-  faSun,
   faTrashRestore,
   faUndo
 } from '@fortawesome/free-solid-svg-icons'
@@ -156,11 +155,6 @@ const Tools = () => {
         </ToolsListItem>
       </styled.ul>
       <styled.ul display="flex" flexDir="column" alignItems="center">
-        <ToolsListItem>
-          <ToolsButton type="button">
-            <FontAwesomeIcon icon={faSun} />
-          </ToolsButton>
-        </ToolsListItem>
         <ToolsListItem>
           <ToolsButton type="button">
             <FontAwesomeIcon icon={faQuestionCircle} />

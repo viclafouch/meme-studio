@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import ExportButton from '@components/Header/ExportButton'
-import { Flex, Grid } from '@styled-system/jsx'
+import { Box, Flex, Grid } from '@styled-system/jsx'
 
 const Header = () => {
   return (
@@ -19,7 +19,7 @@ const Header = () => {
       gridTemplateColumns="1fr auto 1fr"
     >
       <div />
-      <div>
+      <Box py="1.5">
         <Link href="/">
           <Image
             alt="Meme Studio logo"
@@ -29,7 +29,7 @@ const Header = () => {
             src="/images/logo-meme-studio-light.png"
           />
         </Link>
-      </div>
+      </Box>
       <Flex align="center" justify="flex-end">
         <ExportButton />
       </Flex>
