@@ -72,7 +72,10 @@ const Canvas = () => {
             left: 0,
             right: 0
           })}
-          style={{ top: topBlock.isVisible ? topBlockHeight : 0 }}
+          style={{
+            top: topBlock.isVisible ? topBlockHeight : 0,
+            height: 'auto'
+          }}
           width={canvasDimensions.width}
           height={canvasDimensions.height}
         />

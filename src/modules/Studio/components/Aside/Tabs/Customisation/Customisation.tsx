@@ -20,14 +20,14 @@ export type CustomisationProps = {
 }
 
 const Customisation = ({ meme }: CustomisationProps) => {
-  const { textboxes, updateTextbox, addTextbox, removeItem, duplicateItem } =
+  const { textboxes, updateTextbox, addItem, removeItem, duplicateItem } =
     useTextboxes()
   const { itemIdSelected, toggleItemIdSelected } = useItemIdSelected()
   const { getRef } = useGlobalInputsRef()
 
   const handleAddTextbox = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
-    addTextbox()
+    addItem()
   }
 
   const handleRemoveItem = (itemId: string) => {
