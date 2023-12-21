@@ -6,7 +6,8 @@ import { useShowModal } from '@stores/Modal/Modal.provider'
 import { exportCanvasBlob } from '@viclafouch/meme-studio-utilities/helpers'
 import {
   useMeme,
-  useRatiotedTextboxes
+  useRatiotedTextboxes,
+  useTopBlock
 } from '@viclafouch/meme-studio-utilities/hooks'
 import { Meme } from '@viclafouch/meme-studio-utilities/schemas'
 import { faArrowCircleDown } from '@fortawesome/free-solid-svg-icons'
@@ -16,12 +17,14 @@ import { useMutation } from '@tanstack/react-query'
 const ExportButton = () => {
   const meme = useMeme()
   const showModal = useShowModal()
+  const topBlock = useTopBlock()
   const getScaledTextsByMemeSize = useRatiotedTextboxes()
 
   const exportCanvasMutation = useMutation({
     mutationFn: (body: { meme: Meme }) => {
       return exportCanvasBlob({
-        ...body,
+        meme: body.meme,
+        topBlock,
         texts: getScaledTextsByMemeSize()
       })
     },
