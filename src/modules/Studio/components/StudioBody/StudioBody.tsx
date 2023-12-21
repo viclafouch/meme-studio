@@ -20,6 +20,7 @@ const StudioBody = () => {
         width="full"
         height="full"
         position="relative"
+        overflowY="scroll"
         borderRight="0.125rem solid rgb(88, 88, 88)"
       >
         <MemeContainer>

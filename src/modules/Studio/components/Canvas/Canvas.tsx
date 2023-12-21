@@ -10,7 +10,8 @@ import {
   useItemIdSelected,
   useMeme,
   useTextboxes,
-  useTools
+  useTools,
+  useTopBlock
 } from '@viclafouch/meme-studio-utilities/hooks'
 import { Meme, TextBox } from '@viclafouch/meme-studio-utilities/schemas'
 import Draggable from '../Draggable'
@@ -20,8 +21,9 @@ const Canvas = () => {
   const canvasElRef = React.useRef<HTMLCanvasElement>(null)
   const { textboxes, updateTextbox } = useTextboxes()
   const containerRef = React.useRef<HTMLDivElement>(null)
-  const { canvasDimensions } = useCanvasDimensions()
+  const { canvasDimensions, calculByAspectRatio } = useCanvasDimensions()
   const { isVisibleDraggables } = useTools()
+  const topBlock = useTopBlock()
   const { itemIdSelected, setItemIdSelected } = useItemIdSelected()
 
   useDrawing({
@@ -36,34 +38,43 @@ const Canvas = () => {
     [setItemIdSelected]
   )
 
+  const topBlockHeight = calculByAspectRatio(topBlock.baseHeight)
+
   return (
-    <Box h="full" w="full" position="relative" ref={containerRef}>
-      <div
-        className={css({
-          bgPosition: 'center',
-          bgRepeat: 'no-repeat',
-          bgSize: '100%',
-          left: '50%',
-          top: '50%',
-          position: 'absolute',
-          transform: 'translate(-50%, -50%)',
-          zIndex: 2,
-          boxShadow:
-            '0 1px 4px rgb(0 0 0 / 30%), 0 0 40px rgb(0 0 0 / 10%) inset'
-        })}
-        style={{
-          height: canvasDimensions.height,
-          width: canvasDimensions.width
-        }}
+    <Box w="full" position="relative" ref={containerRef}>
+      <Box
+        zIndex={2}
+        position="relative"
+        shadow="0 1px 4px rgb(0 0 0 / 30%), 0 0 40px rgb(0 0 0 / 10%) inset"
+        style={{ width: canvasDimensions.width }}
       >
+        {topBlock.isVisible ? (
+          <Box
+            bg="white"
+            position="absolute"
+            left="0"
+            right="0"
+            top="0"
+            w="full"
+            zIndex={-1}
+            style={{ height: topBlockHeight }}
+          />
+        ) : null}
         <Image
           src={meme.imageUrl}
           priority
           unoptimized
-          alt=""
-          className={css({ zIndex: -1, objectFit: 'cover' })}
-          fill
-          sizes=""
+          alt={meme.name}
+          className={css({
+            zIndex: -1,
+            objectFit: 'cover',
+            position: 'absolute',
+            left: 0,
+            right: 0
+          })}
+          style={{ top: topBlock.isVisible ? topBlockHeight : 0 }}
+          width={canvasDimensions.width}
+          height={canvasDimensions.height}
         />
         {isVisibleDraggables && canvasDimensions.height
           ? textboxes.map((textbox) => {
@@ -86,7 +97,7 @@ const Canvas = () => {
           width={canvasDimensions.width}
           height={canvasDimensions.height}
         />
-      </div>
+      </Box>
     </Box>
   )
 }

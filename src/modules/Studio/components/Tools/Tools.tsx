@@ -10,11 +10,14 @@ import {
   useMeme,
   useTools
 } from '@viclafouch/meme-studio-utilities/hooks'
+import { faSquare } from '@fortawesome/free-regular-svg-icons'
 import {
   faCrop,
+  faCropSimple,
   faEraser,
   faQuestionCircle,
   faRedo,
+  faSquare as faSquareFilled,
   faSun,
   faTrashRestore,
   faUndo
@@ -27,10 +30,13 @@ const Tools = () => {
     isVisibleDraggables,
     toggleVisibleDraggables,
     eraseAllItems,
-    resetAll
+    resetAll,
+    toggleTopBlockVisible,
+    isTopBlockVisible
   } = useTools()
   const countTexts = useCountTextboxes()
   const meme = useMeme()
+
   const { canUndo, canRedo, undo, redo } = useHistory()
 
   const handleClick = (callback: () => void) => {
@@ -68,7 +74,29 @@ const Tools = () => {
               disabled={countTexts === 0}
               onClick={handleClick(toggleVisibleDraggables)}
             >
-              <FontAwesomeIcon icon={faCrop} />
+              <FontAwesomeIcon
+                icon={isVisibleDraggables ? faCropSimple : faCrop}
+              />
+            </ToolsButton>
+          </Tooltip>
+        </ToolsListItem>
+        <ToolsListItem>
+          <Tooltip
+            text={
+              isTopBlockVisible
+                ? 'Retirer la zone supérieure'
+                : 'Ajouter une zone supérieure'
+            }
+            position="right"
+          >
+            <ToolsButton
+              type="button"
+              disabled={!meme}
+              onClick={handleClick(toggleTopBlockVisible)}
+            >
+              <FontAwesomeIcon
+                icon={isTopBlockVisible ? faSquareFilled : faSquare}
+              />
             </ToolsButton>
           </Tooltip>
         </ToolsListItem>

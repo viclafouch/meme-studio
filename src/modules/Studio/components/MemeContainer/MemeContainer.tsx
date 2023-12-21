@@ -1,8 +1,6 @@
 'use client'
 
 import React from 'react'
-import Image from 'next/image'
-import { css } from '@styled-system/css'
 import { Box, Center } from '@styled-system/jsx'
 import { particulesBg } from '@styled-system/patterns'
 import { useMeme } from '@viclafouch/meme-studio-utilities/hooks'
@@ -17,32 +15,28 @@ const MemeContainer = ({ children }: MemeContainerProps) => {
 
   return (
     <Center
-      h="full"
+      minH="full"
       w="full"
       padding="3.125rem 6.25rem"
       bgColor="secondary"
+      position="relative"
       className={!meme ? particulesBg() : ''}
     >
-      {!meme ? (
-        <EmptyContainer />
-      ) : (
-        <>
-          <Box
-            inset="-0.25rem"
-            position="absolute"
-            filter="opacity(0.4) brightness(88%) blur(0.25rem)"
-          >
-            <Image
-              src={meme.imageUrl}
-              priority
-              alt=""
-              className={css({ zIndex: -1, objectFit: 'cover' })}
-              fill
-            />
-          </Box>
-          {children}
-        </>
-      )}
+      {meme ? (
+        <Box
+          w="full"
+          h="full"
+          position="absolute"
+          inset="-0.25rem"
+          filter="opacity(0.4) brightness(88%) blur(0.25rem)"
+          bgAttachment="fixed"
+          bgSize="cover"
+          bgRepeat="no-repeat"
+          bgPosition="center"
+          style={{ backgroundImage: `url(${meme.imageUrl}` }}
+        />
+      ) : null}
+      {!meme ? <EmptyContainer /> : children}
     </Center>
   )
 }
