@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react'
+import { useTranslations } from 'next-intl'
 import { css } from '@styled-system/css'
 import { Box } from '@styled-system/jsx'
 import {
@@ -26,6 +27,8 @@ const TextCustomisation = ({
   index,
   onUpdateTextProperties
 }: TextCustomisationProps) => {
+  const t = useTranslations()
+
   const { setRef } = useGlobalInputsRef()
 
   const handleEditText = (key: keyof TextBox['properties']) => {
@@ -48,6 +51,18 @@ const TextCustomisation = ({
 
   const { properties } = textbox
 
+  const verticalAligns = {
+    top: t('common.top'),
+    middle: t('common.center'),
+    bottom: t('common.bottom')
+  } as const satisfies { [key in (typeof ALIGN_VERTICAL)[number]]: string }
+
+  const horizontalAligns = {
+    left: t('common.left'),
+    center: t('common.center'),
+    right: t('common.right')
+  } as const satisfies { [key in (typeof TEXT_ALIGN)[number]]: string }
+
   return (
     <Box>
       <Box p="0.8125rem 0.875rem 1.4375rem 0.875rem">
@@ -68,11 +83,15 @@ const TextCustomisation = ({
             value={properties.value}
             rows={5}
             ref={setRef(textbox.id)}
-            placeholder={preventEmptyTextValue(properties.value, index)}
+            placeholder={preventEmptyTextValue(
+              properties.value,
+              index,
+              `${t('common.text')} #`
+            )}
           />
         </Fieldset>
         <Fieldset>
-          <label htmlFor="font-size">Font Size</label>
+          <label htmlFor="font-size">{t('common.fontSize')}</label>
           <input
             type="range"
             id="font-size"
@@ -84,7 +103,7 @@ const TextCustomisation = ({
           />
         </Fieldset>
         <Fieldset>
-          <label htmlFor="box-shadow">Box Shadow</label>
+          <label htmlFor="box-shadow">{t('common.boxShadow')}</label>
           <input
             type="range"
             id="box-shadow"
@@ -96,7 +115,7 @@ const TextCustomisation = ({
           />
         </Fieldset>
         <Fieldset>
-          <label htmlFor="box-shadow">Color</label>
+          <label htmlFor="box-shadow">{t('common.color')}</label>
           <input
             type="color"
             id="color"
@@ -105,7 +124,7 @@ const TextCustomisation = ({
           />
         </Fieldset>
         <Fieldset>
-          <label htmlFor="fontFamily">Police d&apos;écriture</label>
+          <label htmlFor="fontFamily">{t('common.fontFamily')}</label>
           <select
             id="fontFamily"
             value={properties.fontFamily}
@@ -121,7 +140,7 @@ const TextCustomisation = ({
           </select>
         </Fieldset>
         <Fieldset>
-          <label htmlFor="alignVertical">Alignement vertical</label>
+          <label htmlFor="alignVertical">{t('common.verticalAlign')}</label>
           <select
             id="alignVertical"
             value={properties.alignVertical}
@@ -130,14 +149,14 @@ const TextCustomisation = ({
             {ALIGN_VERTICAL.map((alignVertical) => {
               return (
                 <option key={alignVertical} value={alignVertical}>
-                  {alignVertical}
+                  {verticalAligns[alignVertical]}
                 </option>
               )
             })}
           </select>
         </Fieldset>
         <Fieldset>
-          <label htmlFor="textAlign">Alignement horizontal</label>
+          <label htmlFor="textAlign">{t('common.horizontalAlignment')}</label>
           <select
             id="textAlign"
             value={properties.textAlign}
@@ -146,14 +165,14 @@ const TextCustomisation = ({
             {TEXT_ALIGN.map((textAlign) => {
               return (
                 <option key={textAlign} value={textAlign}>
-                  {textAlign}
+                  {horizontalAligns[textAlign]}
                 </option>
               )
             })}
           </select>
         </Fieldset>
         <Fieldset>
-          <label htmlFor="isUppercase">Texte en majuscule</label>
+          <label htmlFor="isUppercase">{t('common.textInUppercase')}</label>
           <input
             type="checkbox"
             onChange={handleEditText('isUppercase')}

@@ -1,6 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { useLocale } from 'next-intl'
+import { Locale } from '@i18n/config'
+import { Link } from '@i18n/navigation'
 import { getMemes } from '@shared/api/memes'
 import { css } from '@styled-system/css'
 import { flex } from '@styled-system/patterns'
@@ -11,7 +13,9 @@ export type MemeListProps = {
 }
 
 const MemeList = async ({ limit = 3 }) => {
-  const memes = await getMemes()
+  const locale = useLocale() as Locale
+
+  const memes = await getMemes({ locale })
 
   const memesSliced = memes.slice(0, limit)
 
@@ -23,6 +27,7 @@ const MemeList = async ({ limit = 3 }) => {
             <article>
               <Link href={`/create/${getMemeSlug(meme)}`}>
                 <Image
+                  // TODO: i18n
                   alt={meme.name}
                   className={css({
                     borderWidth: '2px',

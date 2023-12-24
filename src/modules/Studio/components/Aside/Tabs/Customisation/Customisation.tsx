@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslations } from 'next-intl'
 import Button from '@components/Button'
 import Tooltip from '@components/Tooltip'
 import Accordion from '@studio/components/Accordion'
@@ -22,6 +23,7 @@ export type CustomisationProps = {
 const Customisation = ({ meme }: CustomisationProps) => {
   const { textboxes, updateTextbox, addItem, removeItem, duplicateItem } =
     useTextboxes()
+  const t = useTranslations()
   const { itemIdSelected, toggleItemIdSelected } = useItemIdSelected()
   const { getRef } = useGlobalInputsRef()
 
@@ -86,7 +88,7 @@ const Customisation = ({ meme }: CustomisationProps) => {
   return (
     <Box overflowY="auto" overflowX="hidden">
       <VStack textAlign="center" p="2" m="2" gap={2}>
-        <styled.span display="block">Customization</styled.span>
+        <styled.span display="block">{t('common.customization')}</styled.span>
         <styled.h1
           fontSize="sm"
           lineClamp="1"
@@ -95,6 +97,7 @@ const Customisation = ({ meme }: CustomisationProps) => {
           overflow="hidden"
           maxW="full"
         >
+          {/* TODO: i18n */}
           {meme.name}
         </styled.h1>
       </VStack>
@@ -103,15 +106,19 @@ const Customisation = ({ meme }: CustomisationProps) => {
           return (
             <Accordion
               onToggle={handleToggleAccordion(textbox)}
-              title={preventEmptyTextValue(textbox.properties.value, index)}
+              title={preventEmptyTextValue(
+                textbox.properties.value,
+                index,
+                `${t('common.text')} #`
+              )}
               isOpened={itemIdSelected === textbox.id}
               key={textbox.id}
               onAfterOpen={handleAfterOpenAccordion(textbox)}
               action={
                 <HStack gap={3} alignItems="center">
-                  <Tooltip text="Dupliquer" position="top">
+                  <Tooltip text={t('common.duplicate')} position="top">
                     <styled.button
-                      aria-label="Dupliquer"
+                      aria-label={t('common.duplicate')}
                       onClick={handleDuplicateItem(textbox.id)}
                       type="button"
                       cursor="pointer"
@@ -119,9 +126,9 @@ const Customisation = ({ meme }: CustomisationProps) => {
                       <FontAwesomeIcon icon={faClone} />
                     </styled.button>
                   </Tooltip>
-                  <Tooltip text="Supprimer" position="top">
+                  <Tooltip text={t('common.delete')} position="top">
                     <styled.button
-                      aria-label="Supprimer"
+                      aria-label={t('common.delete')}
                       onClick={handleRemoveItem(textbox.id)}
                       type="button"
                       cursor="pointer"
@@ -142,7 +149,7 @@ const Customisation = ({ meme }: CustomisationProps) => {
         })}
       </VStack>
       <Button rounded={false} fullWidth onClick={handleAddTextbox}>
-        Ajouter un texte
+        {t('tools.addText')}
       </Button>
     </Box>
   )

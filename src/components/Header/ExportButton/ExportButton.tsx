@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { useTranslations } from 'next-intl'
 import Button from '@components/Button'
 import { useShowModal } from '@stores/Modal/Modal.provider'
 import { exportCanvasBlob } from '@viclafouch/meme-studio-utilities/helpers'
@@ -16,6 +17,7 @@ import { useMutation } from '@tanstack/react-query'
 
 const ExportButton = () => {
   const meme = useMeme()
+  const t = useTranslations()
   const showModal = useShowModal()
   const topBlock = useTopBlock()
   const getScaledTextsByMemeSize = useRatiotedTextboxes()
@@ -59,7 +61,7 @@ const ExportButton = () => {
       onClick={handleOpenExportModal}
       startAdornment={<FontAwesomeIcon icon={faArrowCircleDown} />}
     >
-      Exporter
+      {t('common.export')}
     </Button>
   )
 }

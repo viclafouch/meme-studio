@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslations } from 'next-intl'
 import Button from '@components/Button'
 import LinkButton from '@components/LinkButton'
 import { css } from '@styled-system/css'
@@ -17,6 +18,8 @@ export type ExportModalProps = {
 }
 
 const ExportModal = ({ canvasBlob, height, width }: ExportModalProps) => {
+  const t = useTranslations()
+
   const imageSrc = React.useMemo(() => {
     return URL.createObjectURL(canvasBlob)
   }, [canvasBlob])
@@ -30,7 +33,9 @@ const ExportModal = ({ canvasBlob, height, width }: ExportModalProps) => {
 
   return (
     <Box textAlign="center">
-      <h2 className={css({ mb: '5', fontSize: '2xl' })}>Prévisualisation</h2>
+      <h2 className={css({ mb: '5', fontSize: '2xl' })}>
+        {t('common.preview')}
+      </h2>
       <div
         onContextMenu={(
           event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -52,7 +57,7 @@ const ExportModal = ({ canvasBlob, height, width }: ExportModalProps) => {
         />
       </div>
       <p className={css({ mt: 5 })}>
-        Taille réelle : {width} x {height}
+        {t('common.fullSize')} {width} x {height}
       </p>
       <Flex
         maxW="7/12"
@@ -71,7 +76,7 @@ const ExportModal = ({ canvasBlob, height, width }: ExportModalProps) => {
           rounded
           color="primaryDark"
         >
-          Télécharger
+          {t('common.download')}
         </LinkButton>
         <Button
           startAdornment={<FontAwesomeIcon icon={faClipboard} />}
@@ -80,7 +85,7 @@ const ExportModal = ({ canvasBlob, height, width }: ExportModalProps) => {
           onClick={handleCopy}
           color="primary"
         >
-          Copier
+          {t('common.copy')}
         </Button>
       </Flex>
     </Box>

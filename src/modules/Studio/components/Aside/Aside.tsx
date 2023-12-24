@@ -37,6 +37,7 @@ const Aside = () => {
     >
       <styled.header display="flex" width="full">
         <Button
+          // TODO: aria
           id="gallery"
           onClick={handleChangeTab}
           fullWidth

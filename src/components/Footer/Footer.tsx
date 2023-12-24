@@ -1,5 +1,6 @@
 import React from 'react'
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@i18n/navigation'
 import { css } from '@styled-system/css'
 import { styled } from '@styled-system/jsx'
 import { center } from '@styled-system/patterns'
@@ -15,6 +16,8 @@ const LinkStyled = styled(Link, {
 })
 
 const Footer = () => {
+  const t = useTranslations('footer')
+
   return (
     <footer
       className={css({
@@ -26,16 +29,16 @@ const Footer = () => {
     >
       <ul className={center()}>
         <li>
-          <LinkStyled href="/about">About</LinkStyled>
+          <LinkStyled href="/about">{t('about')}</LinkStyled>
         </li>
         <li>
-          <LinkStyled href="/terms">Terms</LinkStyled>
+          <LinkStyled href="/terms">{t('about')}</LinkStyled>
         </li>
         <li>
-          <LinkStyled href="/gallery">Gallery</LinkStyled>
+          <LinkStyled href="/gallery">{t('gallery')}</LinkStyled>
         </li>
         <li>
-          <LinkStyled href="/qa">Q&A</LinkStyled>
+          <LinkStyled href="/qa">{t('qaa')}</LinkStyled>
         </li>
         <li>
           <LinkStyled

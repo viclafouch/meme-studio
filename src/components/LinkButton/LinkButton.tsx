@@ -1,7 +1,7 @@
 /* eslint-disable react/require-default-props */
 import * as React from 'react'
-import Link, { LinkProps } from 'next/link'
 import * as styles from '@components/Button/Button.styles'
+import { Link, LinkProps } from '@i18n/navigation'
 import { cx } from '@styled-system/css'
 
 export type LinkButtonProps = styles.ButtonVariants &

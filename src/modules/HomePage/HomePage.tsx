@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import Footer from '@components/Footer'
 import LinkButton from '@components/LinkButton'
 import MemesList from '@components/MemesList'
@@ -7,6 +8,8 @@ import { Box, Center, Container, VStack } from '@styled-system/jsx'
 import { particulesBg } from '@styled-system/patterns'
 
 const HomePage = () => {
+  const t = useTranslations()
+
   return (
     <VStack h="100vh" bgColor="secondary" className={particulesBg()}>
       <Center flexDir="column" marginTop="14" flex={1} textAlign="center">
@@ -19,11 +22,10 @@ const HomePage = () => {
         />
         <Container maxW="2xl">
           <p className={css({ mt: '3', fontSize: 'xl', mb: '5' })}>
-            Create a meme from JPG or PNG images. Edit your image and make your
-            custom meme.
+            {t('common.intro')}
           </p>
           <LinkButton color="primaryDark" size="large" rounded href="/create">
-            Get started
+            {t('common.getStarted')}
           </LinkButton>
           <Box mt="7">
             <MemesList />

@@ -1,11 +1,13 @@
 import React from 'react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import { css } from '@styled-system/css'
 import { Center, styled } from '@styled-system/jsx'
 import { useImageLocal } from '@viclafouch/meme-studio-utilities/hooks'
 
 const EmptyContainer = () => {
   const setImageLocal = useImageLocal()
+  const t = useTranslations()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target
@@ -26,7 +28,7 @@ const EmptyContainer = () => {
         src="/images/choose-meme.svg"
       />
       <styled.p textAlign="center" marginTop="5">
-        Please select a meme in the gallery <br />
+        {t('common.selectAFile')} <br />
         <label htmlFor="local-meme">
           <input
             type="file"
@@ -41,7 +43,7 @@ const EmptyContainer = () => {
             accept="image/png, image/jpeg"
             id="local-meme"
           />
-          or{' '}
+          {t('common.or')}{' '}
           <span
             className={css({
               textDecoration: 'underline',
@@ -49,7 +51,7 @@ const EmptyContainer = () => {
               color: 'primary'
             })}
           >
-            drop an image
+            {t('common.dropImage')}
           </span>
           .
         </label>

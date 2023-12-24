@@ -1,16 +1,20 @@
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { useLocale } from 'next-intl'
+import { Locale } from '@i18n/config'
+import { Link } from '@i18n/navigation'
 import { getMemes } from '@shared/api/memes'
 import { styled, VStack } from '@styled-system/jsx'
 import { getMemeSlug } from '@viclafouch/meme-studio-utilities/utils'
 import { useSuspenseQuery } from '@tanstack/react-query'
 
 const Gallery = () => {
+  const locale = useLocale() as Locale
+
   const { data: memes } = useSuspenseQuery({
     queryKey: ['memes'],
     queryFn: () => {
-      return getMemes()
+      return getMemes({ locale })
     }
   })
 

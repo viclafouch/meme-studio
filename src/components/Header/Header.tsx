@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
 import ExportButton from '@components/Header/ExportButton'
+import { Link } from '@i18n/navigation'
 import { Box, Flex, Grid } from '@styled-system/jsx'
 
 const Header = () => {

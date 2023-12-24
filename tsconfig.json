@@ -11,6 +11,7 @@
       "@studio/*": ["modules/Studio/*"],
       "@models/*": ["models/*"],
       "@styled-system/*": ["../styled-system/*"],
+      "@i18n/*": ["i18n/*"]
     },
     "plugins": [
       {

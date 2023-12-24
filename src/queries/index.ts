@@ -5,7 +5,7 @@ export function getQueryClient() {
     defaultOptions: {
       queries: {
         staleTime: 5 * 1000,
-        refetchOnWindowFocus: false,
+        refetchOnWindowFocus: process.env.NODE_ENV === 'production',
         retry: false
       }
     }

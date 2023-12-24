@@ -64,6 +64,7 @@ const Canvas = () => {
           src={meme.imageUrl}
           priority
           unoptimized
+          // TODO: i18n
           alt={meme.name}
           className={css({
             zIndex: -1,

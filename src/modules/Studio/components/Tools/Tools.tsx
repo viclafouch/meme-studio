@@ -1,8 +1,9 @@
 'use client'
 
 import React from 'react'
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import Tooltip from '@components/Tooltip'
+import { Link } from '@i18n/navigation'
 import { Flex, styled } from '@styled-system/jsx'
 import {
   useCountTextboxes,
@@ -25,6 +26,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { buttonRecipe, ToolsButton, ToolsListItem } from './Tools.styles'
 
 const Tools = () => {
+  const t = useTranslations()
   const {
     isVisibleDraggables,
     toggleVisibleDraggables,
@@ -62,8 +64,8 @@ const Tools = () => {
           <Tooltip
             text={
               isVisibleDraggables
-                ? 'Cacher les zones de texte'
-                : 'Afficher les zones de texte'
+                ? t('tools.hideDraggableVisible')
+                : t('tools.showDraggableVisible')
             }
             disabled={countTexts === 0}
             position="right"
@@ -83,8 +85,8 @@ const Tools = () => {
           <Tooltip
             text={
               isTopBlockVisible
-                ? 'Retirer la zone supérieure'
-                : 'Ajouter une zone supérieure'
+                ? t('tools.deleteTopBlock')
+                : t('tools.addTopBlock')
             }
             position="right"
           >
@@ -100,7 +102,7 @@ const Tools = () => {
           </Tooltip>
         </ToolsListItem>
         <ToolsListItem>
-          <Tooltip text="Annuler" disabled={!canUndo} position="right">
+          <Tooltip text={t('tools.undo')} disabled={!canUndo} position="right">
             <ToolsButton
               type="button"
               disabled={!canUndo}
@@ -111,7 +113,7 @@ const Tools = () => {
           </Tooltip>
         </ToolsListItem>
         <ToolsListItem>
-          <Tooltip text="Rétablir" disabled={!canRedo} position="right">
+          <Tooltip text={t('tools.redo')} disabled={!canRedo} position="right">
             <ToolsButton
               type="button"
               disabled={!canRedo}
@@ -123,7 +125,7 @@ const Tools = () => {
         </ToolsListItem>
         <ToolsListItem>
           <Tooltip
-            text="Écraser tout"
+            text={t('tools.eraseAll')}
             disabled={countTexts === 0}
             position="right"
           >
@@ -137,7 +139,7 @@ const Tools = () => {
           </Tooltip>
         </ToolsListItem>
         <ToolsListItem>
-          <Tooltip text="Réinitialiser" disabled={!meme} position="right">
+          <Tooltip text={t('tools.reset')} disabled={!meme} position="right">
             {!meme ? (
               <ToolsButton disabled>
                 <FontAwesomeIcon icon={faTrashRestore} />
