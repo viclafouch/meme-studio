@@ -14,9 +14,7 @@ export type MemeListProps = {
 
 const MemeList = async ({ limit = 3 }) => {
   const locale = useLocale() as Locales
-
   const memes = await getMemes({ locale })
-
   const memesSliced = memes.slice(0, limit)
 
   return (

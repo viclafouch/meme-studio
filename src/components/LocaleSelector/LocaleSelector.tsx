@@ -10,8 +10,8 @@ import { Box, VStack } from '@styled-system/jsx'
 import { Locales } from '@viclafouch/meme-studio-utilities/constants'
 
 const FlagByLocale = {
-  [Locales.en]: FlagEn,
-  [Locales.fr]: FlagFr
+  en: FlagEn,
+  fr: FlagFr
 } as const satisfies { [key in Locales]: React.ElementType }
 
 const LocaleSelector = () => {
@@ -43,8 +43,8 @@ const LocaleSelector = () => {
   const localesList: {
     [key in Locales]: string
   } = {
-    [Locales.en]: t('common.english'),
-    [Locales.fr]: t('common.french')
+    en: t('common.english'),
+    fr: t('common.french')
   }
 
   const CurrentFlagComponent = FlagByLocale[locale]

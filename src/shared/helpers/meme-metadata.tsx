@@ -1,7 +1,7 @@
-import { getMemeWithMetadata } from '@shared/api/memes'
+import { getMeme } from '@shared/api/memes'
 import { baseURL } from '@shared/constants/env'
-import { LightMeme, Meme } from '@viclafouch/meme-studio-utilities/schemas'
-import { Locales } from '@viclafouch/meme-studio-utilities/shared/constants/locales'
+import { Locales, locales } from '@viclafouch/meme-studio-utilities/constants'
+import { Meme } from '@viclafouch/meme-studio-utilities/schemas'
 import { getMemeSlug } from '@viclafouch/meme-studio-utilities/utils'
 
 type Metadata = {
@@ -13,11 +13,11 @@ type Metadata = {
 }
 
 type MetadataByLocale = {
-  meme: LightMeme
+  meme: Meme
   metadata: {
-    [Locales.en]: Metadata
+    [locales.en]: Metadata
   } & {
-    [key in Exclude<Locales, Locales.en>]?: Metadata
+    [key in Exclude<Locales, 'en'>]?: Metadata
   }
 }
 
@@ -25,7 +25,7 @@ export async function getMemeMetadata(
   id: string,
   locale: Locales
 ): Promise<MetadataByLocale> {
-  const meme = await getMemeWithMetadata(id, { locale })
+  const meme = await getMeme(id, { locale })
   const slug = getMemeSlug({ name: meme.name, id: meme.id })
 
   const urlEn = new URL(baseURL)
@@ -53,9 +53,9 @@ export async function getMemeMetadata(
           name: meme.name,
           keywords: meme.keywords,
           slug,
-          locale: Locales.en,
+          locale: locales.en,
           url: urlEn.toString()
-        } satisfies MetadataByLocale['metadata'][Locales.en]
+        } satisfies MetadataByLocale['metadata']['en']
       }
     } as MetadataByLocale
   )

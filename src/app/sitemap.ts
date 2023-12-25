@@ -1,18 +1,17 @@
 import { MetadataRoute } from 'next'
 import { getMemes } from '@shared/api/memes'
 import { baseURL } from '@shared/constants/env'
-import { Locales } from '@viclafouch/meme-studio-utilities/constants'
 import { getMemeSlug } from '@viclafouch/meme-studio-utilities/utils'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const memes = await getMemes({ locale: Locales.en })
+  const memes = await getMemes({ locale: 'en' })
 
   return memes
     .flatMap((meme) => {
       return [
         {
           slug: getMemeSlug(meme),
-          locale: Locales.en
+          locale: 'en'
         },
         ...meme.translations.map((translation) => {
           return {

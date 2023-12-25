@@ -1,9 +1,9 @@
 import { Pathnames } from 'next-intl/navigation'
-import { Locales } from '@viclafouch/meme-studio-utilities/constants'
+import { Locales, locales } from '@viclafouch/meme-studio-utilities/constants'
 
-export const defaultLocale = Locales.en
+export const defaultLocale = locales.en
 
-export const localesArray = Object.values(Locales)
+export const localesArray = Object.values(locales)
 
 export type PagePropsWithLocaleParams<
   T extends object = Record<string, never>
