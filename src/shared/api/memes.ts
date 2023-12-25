@@ -1,13 +1,13 @@
 import wretch from 'wretch'
 import QueryStringAddon from 'wretch/addons/queryString'
 import { z } from 'zod'
-import { Locale } from '@i18n/config'
 import {
-  LightMeme,
-  lightMemeSchema,
   Meme,
-  memeSchema
+  memeSchema,
+  memeWithMetadataSchema,
+  MemeWithMetatada
 } from '@viclafouch/meme-studio-utilities/schemas'
+import { Locales } from '@viclafouch/meme-studio-utilities/shared/constants/locales'
 
 const request = wretch('http://localhost:3000/api')
   .options({
@@ -16,21 +16,32 @@ const request = wretch('http://localhost:3000/api')
   })
   .addon(QueryStringAddon)
 
-export async function getMemes({ locale }: { locale: Locale }) {
+export async function getMemes({ locale }: { locale: Locales }) {
   return request
     .url('/memes')
     .query({ locale })
     .get()
-    .json<LightMeme[]>(z.array(lightMemeSchema).parse)
+    .json<MemeWithMetatada[]>(z.array(memeWithMetadataSchema).parse)
 }
 
 export async function getMeme(
   memeId: Meme['id'],
-  { locale }: { locale: Locale }
+  { locale }: { locale: Locales }
 ) {
   return request
     .url(`/memes/${memeId}`)
     .query({ locale })
     .get()
     .json<Meme>(memeSchema.parse)
+}
+
+export async function getMemeWithMetadata(
+  memeId: Meme['id'],
+  { locale }: { locale: Locales }
+) {
+  return request
+    .url(`/memes/metadata/${memeId}`)
+    .query({ locale })
+    .get()
+    .json<MemeWithMetatada>(memeWithMetadataSchema.parse)
 }

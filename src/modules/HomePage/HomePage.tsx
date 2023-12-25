@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import Footer from '@components/Footer'
 import LinkButton from '@components/LinkButton'
+import LocaleSelector from '@components/LocaleSelector'
 import MemesList from '@components/MemesList'
 import { css } from '@styled-system/css'
 import { Box, Center, Container, VStack } from '@styled-system/jsx'
@@ -12,6 +13,9 @@ const HomePage = () => {
 
   return (
     <VStack h="100vh" bgColor="secondary" className={particulesBg()}>
+      <Box position="absolute" right={30} top={30}>
+        <LocaleSelector />
+      </Box>
       <Center flexDir="column" marginTop="14" flex={1} textAlign="center">
         <Image
           alt="Meme Studio logo"

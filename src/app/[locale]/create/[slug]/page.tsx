@@ -5,45 +5,61 @@ import { notFound, RedirectType } from 'next/navigation'
 import { useLocale } from 'next-intl'
 import { unstable_setRequestLocale } from 'next-intl/server'
 import CreatePage from 'modules/Studio'
-import { Locale, locales, PagePropsWithLocaleParams } from '@i18n/config'
+import { PagePropsWithLocaleParams } from '@i18n/config'
 import { redirect } from '@i18n/navigation'
 import { getMeme, getMemes } from '@shared/api/memes'
+import { getMemeMetadata } from '@shared/helpers/meme-metadata'
 import { Meme } from '@viclafouch/meme-studio-utilities/schemas'
+import { Locales } from '@viclafouch/meme-studio-utilities/shared/constants/locales'
 import {
   getMemeIdFromSlug,
   getMemeSlug
 } from '@viclafouch/meme-studio-utilities/utils'
 
+type PageProps = PagePropsWithLocaleParams<{ params: { slug: string } }>
+
 export async function generateMetadata({
   params
-}: PagePropsWithLocaleParams<{ params: { slug: string } }>): Promise<Metadata> {
+}: PageProps): Promise<Metadata> {
   const { slug, locale } = params
   const id = getMemeIdFromSlug(slug)
 
-  const meme = await getMeme(id, { locale })
+  const { meme, ...metadataByLocales } = await getMemeMetadata(id, locale)
+  const metadata = metadataByLocales.metadata[locale]!
 
   return {
-    // use locale
-    title: meme.name,
+    title: metadata.name,
+    keywords: metadata.keywords,
     alternates: {
-      canonical: `https://www.meme-studio.io/create/${params.slug}`
+      canonical: metadata.url,
+      languages: Object.values(metadataByLocales.metadata).reduce(
+        (accumulator, currentValue) => {
+          accumulator[currentValue.locale] = currentValue.url
+
+          return accumulator
+        },
+        {} as Record<Locales, string>
+      )
     }
   }
 }
 
-export async function generateStaticParams() {
-  const memesPromises = await Promise.all(
-    locales.map((locale) => {
-      return getMemes({ locale })
-    })
-  )
+export async function generateStaticParams(): Promise<PageProps['params'][]> {
+  const memes = await getMemes({ locale: Locales.en })
 
-  return memesPromises.flat().map((meme) => {
-    const slug = getMemeSlug(meme)
-
-    return {
-      slug
-    }
+  return memes.flatMap((meme) => {
+    return [
+      {
+        slug: getMemeSlug(meme),
+        locale: Locales.en
+      },
+      ...meme.translations.map((translation) => {
+        return {
+          slug: getMemeSlug({ name: translation.name, id: meme.id }),
+          locale: translation.locale
+        }
+      })
+    ]
   })
 }
 
@@ -51,7 +67,7 @@ const Page = async ({
   params
 }: PagePropsWithLocaleParams<{ params: { slug: string } }>) => {
   unstable_setRequestLocale(params.locale)
-  const locale = useLocale() as Locale
+  const locale = useLocale() as Locales
 
   const id = getMemeIdFromSlug(params.slug)
 

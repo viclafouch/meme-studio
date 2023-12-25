@@ -1,7 +1,9 @@
 import React from 'react'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 import CreatePage from 'modules/Studio'
-import { PagePropsWithLocaleParams } from '@i18n/config'
+import { localesArray, PagePropsWithLocaleParams } from '@i18n/config'
+
+type PageProps = PagePropsWithLocaleParams
 
 export async function generateMetadata({
   params: { locale }
@@ -13,7 +15,15 @@ export async function generateMetadata({
   }
 }
 
-const Page = ({ params }: PagePropsWithLocaleParams) => {
+export function generateStaticParams(): Promise<PageProps['params'][]> {
+  return Promise.resolve(
+    localesArray.map((locale) => {
+      return { locale }
+    })
+  )
+}
+
+const Page = ({ params }: PageProps) => {
   unstable_setRequestLocale(params.locale)
 
   return <CreatePage />

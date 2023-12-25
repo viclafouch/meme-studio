@@ -1,9 +1,14 @@
 import createMiddleware from 'next-intl/middleware'
-import { defaultLocale, localePrefix, locales, pathnames } from '@i18n/config'
+import {
+  defaultLocale,
+  localePrefix,
+  localesArray,
+  pathnames
+} from '@i18n/config'
 
 export default createMiddleware({
   defaultLocale,
-  locales,
+  locales: localesArray,
   pathnames,
   localePrefix
 })

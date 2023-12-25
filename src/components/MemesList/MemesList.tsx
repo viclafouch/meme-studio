@@ -1,11 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
 import { useLocale } from 'next-intl'
-import { Locale } from '@i18n/config'
 import { Link } from '@i18n/navigation'
 import { getMemes } from '@shared/api/memes'
 import { css } from '@styled-system/css'
 import { flex } from '@styled-system/patterns'
+import { Locales } from '@viclafouch/meme-studio-utilities/constants'
 import { getMemeSlug } from '@viclafouch/meme-studio-utilities/utils'
 
 export type MemeListProps = {
@@ -13,7 +13,7 @@ export type MemeListProps = {
 }
 
 const MemeList = async ({ limit = 3 }) => {
-  const locale = useLocale() as Locale
+  const locale = useLocale() as Locales
 
   const memes = await getMemes({ locale })
 
@@ -27,7 +27,6 @@ const MemeList = async ({ limit = 3 }) => {
             <article>
               <Link href={`/create/${getMemeSlug(meme)}`}>
                 <Image
-                  // TODO: i18n
                   alt={meme.name}
                   className={css({
                     borderWidth: '2px',

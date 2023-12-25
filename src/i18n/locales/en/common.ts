@@ -25,6 +25,9 @@ export default {
   or: 'or',
   dropImage: 'drop an image',
   getStarted: 'Get started',
+  french: 'French',
+  english: 'English',
+  switchLang: 'Switch language',
   intro:
     'Create a meme from JPG or PNG images. Edit your image and make your custom meme.'
 } as const

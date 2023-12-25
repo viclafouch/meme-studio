@@ -1,26 +1,29 @@
 import { Pathnames } from 'next-intl/navigation'
+import { Locales } from '@viclafouch/meme-studio-utilities/constants'
 
-export const locales = ['fr', 'en'] as const
+export const defaultLocale = Locales.en
 
-export type Locale = (typeof locales)[number]
-
-export const defaultLocale: Locale = 'en'
+export const localesArray = Object.values(Locales)
 
 export type PagePropsWithLocaleParams<
   T extends object = Record<string, never>
 > = T & {
   params: {
-    locale: Locale
+    locale: Locales
   }
 }
 
 export const pathnames = {
   '/': '/',
   '/create': {
-    fr: '/toto',
+    fr: '/creer-un-meme',
     en: '/create'
+  },
+  '/create/[slug]': {
+    fr: '/creer-un-meme/[slug]',
+    en: '/create/[slug]'
   }
-} satisfies Pathnames<typeof locales>
+} satisfies Pathnames<typeof localesArray>
 
 // Use the default: `always`
 export const localePrefix = undefined

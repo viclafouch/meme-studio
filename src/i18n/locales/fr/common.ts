@@ -24,7 +24,10 @@ export default {
   selectAFile: 'Veuillez sélectionner un mème de la galerie',
   or: 'ou',
   dropImage: 'importez une image',
-  getStarted: 'Get started',
+  getStarted: 'Commencer maintenant',
+  french: 'Francais',
+  english: 'Anglais',
+  switchLang: 'Changer de langue',
   intro:
     "Créez un mème à partir d'images JPG ou PNG. Modifiez votre image et créez votre mème personnalisé !"
 } as const

@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation'
 import { getRequestConfig } from 'next-intl/server'
-import { locales } from '@i18n/config'
+import { localesArray } from '@i18n/config'
 
 export default getRequestConfig(async ({ locale }: { locale: string }) => {
-  if (!locales.includes(locale)) {
+  if (!localesArray.includes(locale)) {
     notFound()
   }
 

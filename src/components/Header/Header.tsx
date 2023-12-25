@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import ExportButton from '@components/Header/ExportButton'
+import LocaleSelector from '@components/LocaleSelector'
 import { Link } from '@i18n/navigation'
 import { Box, Flex, Grid } from '@styled-system/jsx'
 
@@ -30,7 +31,8 @@ const Header = () => {
           />
         </Link>
       </Box>
-      <Flex align="center" justify="flex-end">
+      <Flex align="center" justify="flex-end" gap={5}>
+        <LocaleSelector />
         <ExportButton />
       </Flex>
     </Grid>

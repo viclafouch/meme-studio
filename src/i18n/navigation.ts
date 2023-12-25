@@ -1,8 +1,8 @@
 import React from 'react'
 import { createSharedPathnamesNavigation } from 'next-intl/navigation'
-import { localePrefix, locales } from './config'
+import { localePrefix, localesArray } from './config'
 
 export const { Link, redirect, usePathname, useRouter } =
-  createSharedPathnamesNavigation({ locales, localePrefix })
+  createSharedPathnamesNavigation({ locales: localesArray, localePrefix })
 
 export type LinkProps = React.ComponentProps<typeof Link>
