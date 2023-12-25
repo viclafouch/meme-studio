@@ -61,7 +61,7 @@ const ExportButton = () => {
       onClick={handleOpenExportModal}
       startAdornment={<FontAwesomeIcon icon={faArrowCircleDown} />}
     >
-      {t('common.export')}
+      {t('common.export').toUpperCase()}
     </Button>
   )
 }

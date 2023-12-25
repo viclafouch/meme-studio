@@ -24,6 +24,8 @@ export default {
   selectAFile: 'Please select a meme in the gallery',
   or: 'or',
   dropImage: 'drop an image',
+  noSelectedMeme: 'No Selected Meme',
+  browseMemes: 'Browse memes',
   getStarted: 'Get started',
   french: 'French',
   english: 'English',

@@ -14,6 +14,11 @@ export const button = sva({
       boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.14)',
       fontWeight: '500',
       transition: 'background-color 0.3s',
+      '&:disabled': {
+        bg: 'rgb(146, 146, 146)',
+        color: '#b3b0b0',
+        cursor: 'not-allowed'
+      },
       '&:not(:disabled)': {
         cursor: 'pointer'
       },
@@ -31,7 +36,7 @@ export const button = sva({
           bg: 'primary',
           border: '1px solid transparent',
           '&:not(:disabled):hover': {
-            bg: '#649fff'
+            bg: 'primary.dark'
           }
         }
       },
@@ -57,6 +62,13 @@ export const button = sva({
       }
     },
     size: {
+      small: {
+        root: {
+          paddingX: '1',
+          paddingY: '1',
+          fontSize: '0.8rem'
+        }
+      },
       medium: {
         root: {
           paddingX: '2.5',

@@ -19,7 +19,7 @@ import Customisation from './Tabs/Customisation'
 import Gallery from './Tabs/Gallery/Gallery'
 
 const Aside = () => {
-  const [currentTab, setCurrentTab] = useTab()
+  const { currentTab, setCurrentTab } = useTab()
   const meme = useMeme()
 
   const handleChangeTab = (event: React.MouseEvent<HTMLButtonElement>) => {
