@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import Button from '@components/Button'
 import LinkButton from '@components/LinkButton'
@@ -43,16 +44,19 @@ const ExportModal = ({ canvasBlob, height, width }: ExportModalProps) => {
           return event.preventDefault()
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={imageSrc}
           className={css({
-            maxW: 'full',
-            maxH: '490px',
+            maxW: '600px',
+            maxH: '500px',
             marginX: 'auto',
+            objectFit: 'contain',
             boxShadow:
               '0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset'
           })}
+          unoptimized
+          height={height}
+          width={width}
           alt=""
         />
       </div>

@@ -3,6 +3,7 @@
 import React from 'react'
 import { useTranslations } from 'next-intl'
 import Button from '@components/Button'
+import { useNotifications } from '@shared/hooks/useNotifications'
 import { useShowModal } from '@stores/Modal/Modal.provider'
 import { exportCanvasBlob } from '@viclafouch/meme-studio-utilities/helpers'
 import {
@@ -20,21 +21,30 @@ const ExportButton = () => {
   const t = useTranslations()
   const showModal = useShowModal()
   const topBlock = useTopBlock()
+  const { notifyError } = useNotifications()
   const getScaledTextsByMemeSize = useRatiotedTextboxes()
 
   const exportCanvasMutation = useMutation({
-    mutationFn: (body: { meme: Meme }) => {
+    mutationFn: async (body: { meme: Meme }) => {
+      await new Promise((resolve) => {
+        return setTimeout(resolve, 300)
+      })
+
       return exportCanvasBlob({
         meme: body.meme,
         topBlock,
         texts: getScaledTextsByMemeSize()
       })
     },
+    onError: () => {
+      notifyError()
+    },
     onSuccess: (blob: Blob, variables) => {
       showModal('export', {
         canvasBlob: blob,
         width: variables.meme.width,
-        height: variables.meme.height
+        height:
+          variables.meme.height + (topBlock.isVisible ? topBlock.baseHeight : 0)
       })
     }
   })

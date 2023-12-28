@@ -31,5 +31,8 @@ export default {
   english: 'Anglais',
   switchLang: 'Changer de langue',
   intro:
-    "Créez un mème à partir d'images JPG ou PNG. Modifiez votre image et créez votre mème personnalisé !"
+    "Créez un mème à partir d'images JPG ou PNG. Modifiez votre image et créez votre mème personnalisé !",
+  errors: {
+    unknown: 'Une erreur inconnue est survenue'
+  }
 } as const

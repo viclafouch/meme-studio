@@ -86,7 +86,7 @@ const Customisation = ({ meme }: CustomisationProps) => {
   }, [handleKeypress])
 
   return (
-    <Box overflowY="auto" overflowX="hidden">
+    <Box overflowY="auto" overflowX="hidden" pb={10}>
       <VStack textAlign="center" p="2" m="2" gap={2}>
         <styled.span display="block">{t('common.customization')}</styled.span>
         <styled.h1
@@ -97,7 +97,6 @@ const Customisation = ({ meme }: CustomisationProps) => {
           overflow="hidden"
           maxW="full"
         >
-          {/* TODO: i18n */}
           {meme.name}
         </styled.h1>
       </VStack>

@@ -15,7 +15,7 @@ export async function generateMetadata({
   }
 }
 
-export function generateStaticParams(): Promise<PageProps['params'][]> {
+export async function generateStaticParams(): Promise<PageProps['params'][]> {
   return Promise.resolve(
     localesArray.map((locale) => {
       return { locale }

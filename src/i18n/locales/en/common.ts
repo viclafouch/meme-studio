@@ -31,5 +31,8 @@ export default {
   english: 'English',
   switchLang: 'Switch language',
   intro:
-    'Create a meme from JPG or PNG images. Edit your image and make your custom meme.'
+    'Create a meme from JPG or PNG images. Edit your image and make your custom meme.',
+  errors: {
+    unknown: 'An unknown error has occurred.'
+  }
 } as const

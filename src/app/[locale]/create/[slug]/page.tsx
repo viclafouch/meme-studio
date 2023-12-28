@@ -9,7 +9,7 @@ import { PagePropsWithLocaleParams } from '@i18n/config'
 import { redirect } from '@i18n/navigation'
 import { getMeme, getMemes } from '@shared/api/memes'
 import { getMemeMetadata } from '@shared/helpers/meme-metadata'
-import { Locales } from '@viclafouch/meme-studio-utilities/constants'
+import { Locales, locales } from '@viclafouch/meme-studio-utilities/constants'
 import { Meme } from '@viclafouch/meme-studio-utilities/schemas'
 import {
   getMemeIdFromSlug,
@@ -45,13 +45,13 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams(): Promise<PageProps['params'][]> {
-  const memes = await getMemes({ locale: 'en' })
+  const memes = await getMemes({ locale: locales.en })
 
   return memes.flatMap((meme) => {
     return [
       {
         slug: getMemeSlug(meme),
-        locale: 'en'
+        locale: locales.en
       },
       ...meme.translations.map((translation) => {
         return {

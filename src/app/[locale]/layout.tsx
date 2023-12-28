@@ -4,6 +4,7 @@ import { Alata } from 'next/font/google'
 import { useMessages, useNow, useTimeZone } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 import QueryProvider from 'queries/QueryProvider'
+import ToastContainer from '@components/NotificationProvider'
 import { localesArray, PagePropsWithLocaleParams } from '@i18n/config'
 import I18NProvider from '@i18n/I18NProvider'
 import { ModalOutlet } from '@stores/Modal/Modal.provider'
@@ -27,7 +28,7 @@ export async function generateMetadata({
   }
 }
 
-export function generateStaticParams(): Promise<LayoutProps['params'][]> {
+export async function generateStaticParams(): Promise<LayoutProps['params'][]> {
   return Promise.resolve(
     localesArray.map((locale) => {
       return { locale }
@@ -55,6 +56,11 @@ const RootLayout = ({
             locale={params.locale}
             now={now}
           >
+            <ToastContainer
+              position="bottom-left"
+              draggable={false}
+              theme="dark"
+            />
             <>
               {children}
               <ModalOutlet />
