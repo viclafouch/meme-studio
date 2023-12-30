@@ -3,7 +3,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { css } from '@styled-system/css'
-import { Box } from '@styled-system/jsx'
+import { Box, Center } from '@styled-system/jsx'
 import {
   useCanvasDimensions,
   useDrawing,
@@ -41,7 +41,7 @@ const Canvas = () => {
   const topBlockHeight = calculByAspectRatio(topBlock.baseHeight)
 
   return (
-    <Box w="full" position="relative" ref={containerRef}>
+    <Center w="full" ref={containerRef}>
       <Box
         zIndex={2}
         position="relative"
@@ -101,7 +101,7 @@ const Canvas = () => {
           height={canvasDimensions.height}
         />
       </Box>
-    </Box>
+    </Center>
   )
 }
 
