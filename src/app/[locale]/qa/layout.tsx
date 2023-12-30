@@ -8,7 +8,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Header actions={<LocaleSelector />} />
-      <main className={css({ flex: 1 })}>{children}</main>
+      <main className={css({ flex: 1, bg: 'secondary.dark' })}>{children}</main>
       <Footer />
     </>
   )

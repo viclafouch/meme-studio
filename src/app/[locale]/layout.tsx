@@ -52,7 +52,13 @@ const RootLayout = ({
       <body
         className={cx(
           atlata.className,
-          css({ minH: '100dvh', display: 'flex', flexDirection: 'column' })
+          css({
+            minH: '100dvh',
+            display: 'flex',
+            flexDirection: 'column',
+            bg: 'secondary',
+            color: 'secondary.textContrast'
+          })
         )}
       >
         <QueryProvider>

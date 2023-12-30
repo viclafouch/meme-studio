@@ -2,6 +2,7 @@ import about from './about'
 import common from './common'
 import footer from './footer'
 import gallery from './gallery'
+import qAq from './qAq'
 import tools from './tools'
 
-export default { common, footer, tools, gallery, about }
+export default { common, footer, tools, gallery, about, qAq }

@@ -37,7 +37,8 @@ export default defineConfig({
           secondary: {
             dark: { value: 'rgb(48, 48, 48)' },
             DEFAULT: { value: 'rgb(68, 68, 68)' },
-            light: { value: 'rgb(88, 88, 88)' }
+            light: { value: 'rgb(88, 88, 88)' },
+            textContrast: { value: '#f0f0f0' }
           }
         }
       },
