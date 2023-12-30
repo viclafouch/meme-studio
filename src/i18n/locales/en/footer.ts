@@ -4,4 +4,4 @@ export default {
   gallery: 'Gallery',
   qaa: 'Q&A',
   github: 'Github'
-}
+} as const

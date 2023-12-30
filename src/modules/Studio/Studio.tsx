@@ -1,5 +1,7 @@
 import React from 'react'
+import ExportButton from '@components/ExportButton'
 import Header from '@components/Header/Header'
+import LocaleSelector from '@components/LocaleSelector'
 import { EditorProvider } from '@stores/Editor/Editor.provider'
 import StudioBody from '@studio/components/StudioBody'
 import { Box } from '@styled-system/jsx'
@@ -19,7 +21,14 @@ const StudioPage = ({
   return (
     <Box h="100vh" w="full">
       <EditorProvider key={meme?.id} textBoxes={textboxes} meme={meme || null}>
-        <Header />
+        <Header
+          actions={
+            <>
+              <LocaleSelector />
+              <ExportButton />
+            </>
+          }
+        />
         <StudioBody />
       </EditorProvider>
     </Box>

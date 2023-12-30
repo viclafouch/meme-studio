@@ -1,15 +1,21 @@
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
+import { useLocale } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 import Footer from '@components/Footer'
 import LinkButton from '@components/LinkButton'
 import LocaleSelector from '@components/LocaleSelector'
 import MemesList from '@components/MemesList'
+import { getMemes } from '@shared/api/memes'
 import { css } from '@styled-system/css'
 import { Box, Center, Container, VStack } from '@styled-system/jsx'
 import { particulesBg } from '@styled-system/patterns'
+import { Locales } from '@viclafouch/meme-studio-utilities/constants'
 
-const HomePage = () => {
-  const t = useTranslations()
+const HomePage = async () => {
+  const locale = useLocale() as Locales
+  const memes = await getMemes({ locale })
+  const memesSliced = memes.slice(0, 3)
+  const t = await getTranslations()
 
   return (
     <VStack h="100vh" bgColor="secondary" className={particulesBg()}>
@@ -32,7 +38,26 @@ const HomePage = () => {
             {t('common.getStarted')}
           </LinkButton>
           <Box mt="7">
-            <MemesList />
+            <MemesList
+              className={css({
+                display: 'grid',
+                gridTemplateColumns: {
+                  lg: 'repeat(3, 1fr)',
+                  sm: 'repeat(1, 1fr)'
+                },
+                gap: 5,
+                '& > li': {
+                  height: '20vh',
+                  border: '2px solid white',
+                  overflow: 'hidden'
+                },
+                '& > li > a > img': {
+                  objectFit: 'cover',
+                  height: '100%!important'
+                }
+              })}
+              memes={memesSliced}
+            />
           </Box>
         </Container>
       </Center>

@@ -31,7 +31,7 @@ const MemesList = ({
                 height={meme.height}
                 loading="lazy"
                 unoptimized
-                style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+                style={{ width: '100%', height: 'auto' }}
                 src={meme.imageUrl}
               />
               <Styled.MemeTitle>{meme.name}</Styled.MemeTitle>
