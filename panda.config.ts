@@ -6,6 +6,9 @@ const globalCss = defineGlobalStyles({
   },
   '*': {
     colorScheme: 'dark'
+  },
+  iframe: {
+    colorScheme: 'initial'
   }
 })
 

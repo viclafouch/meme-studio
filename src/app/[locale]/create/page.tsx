@@ -1,7 +1,7 @@
 import React from 'react'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 import CreatePage from 'modules/Studio'
-import { localesArray, PagePropsWithLocaleParams } from '@i18n/config'
+import { PagePropsWithLocaleParams } from '@i18n/config'
 
 type PageProps = PagePropsWithLocaleParams
 
@@ -13,14 +13,6 @@ export async function generateMetadata({
   return {
     title: t('common.createMeme')
   }
-}
-
-export async function generateStaticParams(): Promise<PageProps['params'][]> {
-  return Promise.resolve(
-    localesArray.map((locale) => {
-      return { locale }
-    })
-  )
 }
 
 const Page = ({ params }: PageProps) => {

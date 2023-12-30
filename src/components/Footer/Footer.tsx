@@ -23,17 +23,16 @@ const Footer = () => {
       className={css({
         textAlign: 'center',
         w: 'full',
-        pt: '7',
-        pb: '3'
+        p: 6
       })}
     >
       <ul className={center()}>
         <li>
           <LinkStyled href="/about">{t('about')}</LinkStyled>
         </li>
-        <li>
-          <LinkStyled href="/terms">{t('about')}</LinkStyled>
-        </li>
+        {/* <li>
+          <LinkStyled href="/terms">{t('terms')}</LinkStyled>
+        </li> */}
         <li>
           <LinkStyled href="/gallery">{t('gallery')}</LinkStyled>
         </li>

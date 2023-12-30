@@ -8,6 +8,7 @@ import ToastContainer from '@components/NotificationProvider'
 import { localesArray, PagePropsWithLocaleParams } from '@i18n/config'
 import I18NProvider from '@i18n/I18NProvider'
 import { ModalOutlet } from '@stores/Modal/Modal.provider'
+import { css, cx } from '@styled-system/css'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import '../../../styles/globals.css'
 
@@ -48,7 +49,12 @@ const RootLayout = ({
 
   return (
     <html lang={params.locale}>
-      <body className={atlata.className}>
+      <body
+        className={cx(
+          atlata.className,
+          css({ minH: '100dvh', display: 'flex', flexDirection: 'column' })
+        )}
+      >
         <QueryProvider>
           <I18NProvider
             timeZone={timeZone}
