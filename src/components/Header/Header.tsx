@@ -29,7 +29,7 @@ const Header = ({ actions = null }: HeaderProps) => {
             width={250}
             height={67}
             priority
-            src="/images/logo-meme-studio-light.png"
+            src="/images/logo-meme-studio-dark.png"
           />
         </Link>
       </Box>

@@ -42,12 +42,15 @@ const HomePage = async () => {
               className={css({
                 display: 'grid',
                 gridTemplateColumns: {
-                  lg: 'repeat(3, 1fr)',
+                  md: 'repeat(3, 1fr)',
                   sm: 'repeat(1, 1fr)'
                 },
                 gap: 5,
                 '& > li': {
-                  height: '20vh',
+                  height: {
+                    md: '20vh',
+                    sm: '300px'
+                  },
                   border: '2px solid white',
                   overflow: 'hidden'
                 },
