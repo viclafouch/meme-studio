@@ -7,7 +7,9 @@ import { Box, HStack, styled, VStack } from '@styled-system/jsx'
 import {
   useEvent,
   useGlobalInputsRef,
+  useIsomorphicLayoutEffect,
   useItemIdSelected,
+  usePrevious,
   useTextboxes
 } from '@viclafouch/meme-studio-utilities/hooks'
 import { Meme, TextBox } from '@viclafouch/meme-studio-utilities/schemas'
@@ -26,6 +28,7 @@ const Customisation = ({ meme }: CustomisationProps) => {
   const t = useTranslations()
   const { itemIdSelected, toggleItemIdSelected } = useItemIdSelected()
   const { getRef } = useGlobalInputsRef()
+  const previousItemIdSelected = usePrevious(itemIdSelected)
 
   const handleAddTextbox = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
@@ -76,6 +79,18 @@ const Customisation = ({ meme }: CustomisationProps) => {
       }
     }
   })
+
+  useIsomorphicLayoutEffect(() => {
+    if (previousItemIdSelected && itemIdSelected !== previousItemIdSelected) {
+      const inputElement = getRef(previousItemIdSelected)?.current
+
+      if (inputElement) {
+        // Don't wait animation for new itemIdSelected to blur the previous input element
+        // Force to blur now
+        inputElement.blur()
+      }
+    }
+  }, [previousItemIdSelected, itemIdSelected, getRef])
 
   React.useEffect(() => {
     window.addEventListener('keypress', handleKeypress, false)
