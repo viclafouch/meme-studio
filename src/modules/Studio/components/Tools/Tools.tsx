@@ -4,6 +4,7 @@ import React from 'react'
 import { useTranslations } from 'next-intl'
 import Tooltip from '@components/Tooltip'
 import { Link } from '@i18n/navigation'
+import { useShowModal } from '@stores/Modal/Modal.provider'
 import { Flex, styled } from '@styled-system/jsx'
 import {
   useCountTextboxes,
@@ -37,6 +38,7 @@ const Tools = () => {
   } = useTools()
   const countTexts = useCountTextboxes()
   const meme = useMeme()
+  const showModal = useShowModal()
 
   const { canUndo, canRedo, undo, redo } = useHistory()
 
@@ -45,6 +47,12 @@ const Tools = () => {
       event.preventDefault()
       callback()
     }
+  }
+
+  const handleShowQaA = (event: React.MouseEvent<HTMLButtonElement>) => {
+    handleClick(() => {
+      return showModal('qaa', {})
+    })(event)
   }
 
   return (
@@ -88,6 +96,7 @@ const Tools = () => {
                 ? t('tools.deleteTopBlock')
                 : t('tools.addTopBlock')
             }
+            disabled={!meme}
             position="right"
           >
             <ToolsButton
@@ -158,9 +167,11 @@ const Tools = () => {
       </styled.ul>
       <styled.ul display="flex" flexDir="column" alignItems="center">
         <ToolsListItem>
-          <ToolsButton type="button">
-            <FontAwesomeIcon icon={faQuestionCircle} />
-          </ToolsButton>
+          <Tooltip text={t('qAq.metadataTitle')} position="right">
+            <ToolsButton type="button" onClick={handleShowQaA}>
+              <FontAwesomeIcon icon={faQuestionCircle} />
+            </ToolsButton>
+          </Tooltip>
         </ToolsListItem>
       </styled.ul>
     </Flex>

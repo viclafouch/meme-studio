@@ -111,10 +111,9 @@ export const ModalOutlet = () => {
   return (
     <React.Suspense fallback={null}>
       <Modal open={isOpen} onClose={closeModal} center>
-        {Component ? (
-          <Component
-            {...(componentProps as React.ComponentProps<typeof Component>)}
-          />
+        {Component && componentProps ? (
+          // @ts-expect-error
+          <Component {...componentProps} />
         ) : (
           <div />
         )}

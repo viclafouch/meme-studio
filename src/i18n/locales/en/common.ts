@@ -23,7 +23,7 @@ export default {
   bottom: 'Bottom',
   selectAFile: 'Please select a meme in the gallery',
   or: 'or',
-  dropImage: 'drop an image',
+  dropImage: 'choose an image',
   noSelectedMeme: 'No Selected Meme',
   browseMemes: 'Browse memes',
   getStarted: 'Get started',

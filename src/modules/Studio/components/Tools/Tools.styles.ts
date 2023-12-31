@@ -4,7 +4,9 @@ import { styled } from '@styled-system/jsx'
 export const ToolsListItem = styled('li', {
   base: {
     w: 'full',
-    borderBottom: '1px solid rgba(200, 200, 200, 0.397)'
+    '&:not(:last-of-type)': {
+      borderBottom: '1px solid rgba(200, 200, 200, 0.397)'
+    }
   }
 })
 

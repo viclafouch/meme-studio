@@ -3,7 +3,6 @@ import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 import { PagePropsWithLocaleParams } from '@i18n/config'
 import AboutEnMDX from '@i18n/locales/en/md/about.mdx'
 import AboutFrMDX from '@i18n/locales/fr/md/about.mdx'
-import { css } from '@styled-system/css'
 import { Box, Container } from '@styled-system/jsx'
 import { Locales, locales } from '@viclafouch/meme-studio-utilities/constants'
 
@@ -33,18 +32,7 @@ const Page = ({ params }: PageProps) => {
   return (
     <Container maxW="8/12">
       <Box mt={6}>
-        <MdxComponent
-          components={{
-            h1: (props) => {
-              // eslint-disable-next-line jsx-a11y/heading-has-content
-              return <h1 className={css({ fontSize: 'xx-large' })} {...props} />
-            },
-            a: (props) => {
-              // eslint-disable-next-line jsx-a11y/anchor-has-content
-              return <a className={css({ color: 'primary' })} {...props} />
-            }
-          }}
-        />
+        <MdxComponent />
         <Box mt={10}>
           <iframe
             src="https://ghbtns.com/github-btn.html?user=viclafouch&repo=meme-studio&type=star&count=true"

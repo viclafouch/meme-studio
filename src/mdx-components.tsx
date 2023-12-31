@@ -12,6 +12,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       // eslint-disable-next-line jsx-a11y/heading-has-content
       return <h1 className={css({ fontSize: 'xx-large' })} {...props} />
     },
+    a: (props) => {
+      // eslint-disable-next-line jsx-a11y/anchor-has-content
+      return <a className={css({ color: 'primary' })} {...props} />
+    },
     ...components
   }
   // Allows customizing built-in components, e.g. to add styling.

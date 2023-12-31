@@ -5,5 +5,10 @@ export const MODALS = {
     component: React.lazy(() => {
       return import('@components/Modals/ExportModal')
     })
+  },
+  qaa: {
+    component: React.lazy(() => {
+      return import('@components/Modals/QaAModal')
+    })
   }
 } as const
