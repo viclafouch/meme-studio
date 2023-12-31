@@ -418,6 +418,7 @@
   --colors-secondary-dark: rgb(48, 48, 48);
   --colors-secondary: rgb(68, 68, 68);
   --colors-secondary-light: rgb(88, 88, 88);
+  --colors-secondary-text-contrast: #f0f0f0;
   --breakpoints-sm: 640px;
   --breakpoints-md: 768px;
   --breakpoints-lg: 1024px;

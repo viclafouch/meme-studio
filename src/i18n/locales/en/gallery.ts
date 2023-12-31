@@ -1,5 +1,5 @@
 export default {
-  metadataTitle: 'Tous les mèmes',
+  metadataTitle: 'All memes',
   metadataDescription:
-    "Découvrez l'ensemble des mèmes de Meme Studio et trouvez celui qui vous correspond afin de créer votre propre mème !"
+    'Explore a diverse collection of memes on Meme Studio. Find the perfect template to unleash your creativity. Choose, customize with personalized text, and create your own unique memes effortlessly!'
 } as const

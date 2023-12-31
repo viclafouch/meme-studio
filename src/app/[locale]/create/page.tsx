@@ -11,7 +11,8 @@ export async function generateMetadata({
   const t = await getTranslations({ locale })
 
   return {
-    title: t('common.createMeme')
+    title: t('create.metadataTitle'),
+    description: t('create.metadataDescription')
   }
 }
 

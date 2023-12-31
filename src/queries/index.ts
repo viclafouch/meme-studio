@@ -1,3 +1,4 @@
+import { IS_PROD } from '@shared/constants/env'
 import { QueryClient } from '@tanstack/react-query'
 
 export function getQueryClient() {
@@ -5,7 +6,7 @@ export function getQueryClient() {
     defaultOptions: {
       queries: {
         staleTime: 5 * 1000,
-        refetchOnWindowFocus: process.env.NODE_ENV === 'production',
+        refetchOnWindowFocus: IS_PROD,
         retry: false
       }
     }

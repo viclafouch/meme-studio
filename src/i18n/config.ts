@@ -19,6 +19,18 @@ export const pathnames = {
     fr: '/creer-un-meme',
     en: '/create'
   },
+  '/gallery': {
+    fr: '/gallerie',
+    en: '/gallery'
+  },
+  '/qa': {
+    fr: '/faq',
+    en: '/qa'
+  },
+  '/about': {
+    fr: '/a-propos',
+    en: '/about'
+  },
   '/create/[slug]': {
     fr: '/creer-un-meme/[slug]',
     en: '/create/[slug]'

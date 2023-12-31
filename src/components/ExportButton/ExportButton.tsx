@@ -71,7 +71,7 @@ const ExportButton = () => {
       onClick={handleOpenExportModal}
       startAdornment={<FontAwesomeIcon icon={faArrowCircleDown} />}
     >
-      {t('common.export').toUpperCase()}
+      {t('tools.exportMeme').toUpperCase()}
     </Button>
   )
 }

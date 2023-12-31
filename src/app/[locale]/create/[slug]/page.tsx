@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { isRedirectError } from 'next/dist/client/components/redirect'
 import { notFound, RedirectType } from 'next/navigation'
 import { useLocale } from 'next-intl'
-import { unstable_setRequestLocale } from 'next-intl/server'
+import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 import CreatePage from 'modules/Studio'
 import { PagePropsWithLocaleParams } from '@i18n/config'
 import { redirect } from '@i18n/navigation'
@@ -23,12 +23,14 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug, locale } = params
   const id = getMemeIdFromSlug(slug)
+  const t = await getTranslations({ locale })
 
   const { meme, ...metadataByLocales } = await getMemeMetadata(id, locale)
   const metadata = metadataByLocales.metadata[locale]!
 
   return {
     title: metadata.name,
+    description: t('createSlug.metadataDescription', { name: metadata.name }),
     keywords: metadata.keywords,
     alternates: {
       canonical: metadata.url,

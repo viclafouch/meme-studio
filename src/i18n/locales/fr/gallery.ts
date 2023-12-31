@@ -1,5 +1,5 @@
 export default {
-  metadataTitle: 'All memes',
+  metadataTitle: 'Galeries de mèmes gratuits',
   metadataDescription:
-    "Discover all Meme Studio's memes and find the one that's right for you to create your own!"
+    'Découvrez une collection diversifiée de mèmes sur Meme Studio. Trouvez le modèle parfait pour libérer votre créativité. Choisissez, personnalisez avec du texte personnalisé et créez vos propres mèmes uniques sans effort !'
 } as const

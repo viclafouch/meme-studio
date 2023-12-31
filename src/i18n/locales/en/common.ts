@@ -1,5 +1,4 @@
 export default {
-  export: 'Export',
   preview: 'Preview',
   createMeme: 'Create a Meme',
   fullSize: 'Full size:',

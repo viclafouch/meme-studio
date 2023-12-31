@@ -1,11 +1,12 @@
 export default {
   addText: 'Add a text',
-  addTopBlock: 'Add upper zone',
-  deleteTopBlock: 'Remove upper zone',
+  addTopBlock: 'Add padding top',
+  deleteTopBlock: 'Remove padding top',
   eraseAll: 'Erase all',
   reset: 'Reset',
   undo: 'Undo',
   redo: 'Redo',
   hideDraggableVisible: 'Hide texts zone',
-  showDraggableVisible: 'Show texts zone'
+  showDraggableVisible: 'Show texts zone',
+  exportMeme: 'Export meme'
 } as const

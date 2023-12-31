@@ -1671,6 +1671,10 @@ const tokens = {
     "value": "rgb(88, 88, 88)",
     "variable": "var(--colors-secondary-light)"
   },
+  "colors.secondary.textContrast": {
+    "value": "#f0f0f0",
+    "variable": "var(--colors-secondary-text-contrast)"
+  },
   "breakpoints.sm": {
     "value": "640px",
     "variable": "var(--breakpoints-sm)"
@@ -1878,6 +1882,10 @@ const tokens = {
   "colors.colorPalette.light": {
     "value": "var(--colors-color-palette-light)",
     "variable": "var(--colors-color-palette-light)"
+  },
+  "colors.colorPalette.textContrast": {
+    "value": "var(--colors-color-palette-text-contrast)",
+    "variable": "var(--colors-color-palette-text-contrast)"
   }
 }
 
