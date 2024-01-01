@@ -14,8 +14,6 @@ import {
 } from '@viclafouch/meme-studio-utilities/hooks'
 import { faSquare } from '@fortawesome/free-regular-svg-icons'
 import {
-  faCrop,
-  faCropSimple,
   faEraser,
   faQuestionCircle,
   faRedo,
@@ -28,14 +26,8 @@ import { buttonRecipe, ToolsButton, ToolsListItem } from './Tools.styles'
 
 const Tools = () => {
   const t = useTranslations()
-  const {
-    isVisibleDraggables,
-    toggleVisibleDraggables,
-    eraseAllItems,
-    resetAll,
-    toggleTopBlockVisible,
-    isTopBlockVisible
-  } = useTools()
+  const { eraseAllItems, resetAll, toggleTopBlockVisible, isTopBlockVisible } =
+    useTools()
   const countTexts = useCountTextboxes()
   const meme = useMeme()
   const showModal = useShowModal()
@@ -68,27 +60,6 @@ const Tools = () => {
       boxShadow="2px 0px 5px 0px rgb(0 0 0 / 29%)"
     >
       <styled.ul display="flex" flexDir="column" alignItems="center">
-        <ToolsListItem>
-          <Tooltip
-            text={
-              isVisibleDraggables
-                ? t('tools.hideDraggableVisible')
-                : t('tools.showDraggableVisible')
-            }
-            disabled={countTexts === 0}
-            position="right"
-          >
-            <ToolsButton
-              type="button"
-              disabled={countTexts === 0}
-              onClick={handleClick(toggleVisibleDraggables)}
-            >
-              <FontAwesomeIcon
-                icon={isVisibleDraggables ? faCropSimple : faCrop}
-              />
-            </ToolsButton>
-          </Tooltip>
-        </ToolsListItem>
         <ToolsListItem>
           <Tooltip
             text={

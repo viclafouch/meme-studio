@@ -6,6 +6,7 @@ export const DraggableBox = styled('div', {
   base: {
     position: 'absolute',
     zIndex: 1,
+    visibility: 'hidden',
     cursor: 'move',
     bgColor: 'transparent',
     '--color-widget': 'rgba(14, 42, 71, 0.6)',

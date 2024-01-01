@@ -3,18 +3,18 @@
 import React from 'react'
 import Image from 'next/image'
 import { css } from '@styled-system/css'
-import { Box, Center } from '@styled-system/jsx'
+import { Box } from '@styled-system/jsx'
 import {
   useCanvasDimensions,
   useDrawing,
   useItemIdSelected,
   useMeme,
   useTextboxes,
-  useTools,
   useTopBlock
 } from '@viclafouch/meme-studio-utilities/hooks'
 import { Meme, TextBox } from '@viclafouch/meme-studio-utilities/schemas'
 import Draggable from '../Draggable'
+import * as Styled from './Canvas.styles'
 
 const Canvas = () => {
   const meme = useMeme() as Meme
@@ -22,7 +22,6 @@ const Canvas = () => {
   const { textboxes, updateTextbox } = useTextboxes()
   const containerRef = React.useRef<HTMLDivElement>(null)
   const { canvasDimensions, calculByAspectRatio } = useCanvasDimensions()
-  const { isVisibleDraggables } = useTools()
   const topBlock = useTopBlock()
   const { itemIdSelected, setItemIdSelected } = useItemIdSelected()
 
@@ -41,7 +40,7 @@ const Canvas = () => {
   const topBlockHeight = calculByAspectRatio(topBlock.baseHeight)
 
   return (
-    <Center w="full" ref={containerRef}>
+    <Styled.Wrapper ref={containerRef}>
       <Box
         zIndex={2}
         position="relative"
@@ -79,7 +78,7 @@ const Canvas = () => {
           width={canvasDimensions.width}
           height={canvasDimensions.height}
         />
-        {isVisibleDraggables && canvasDimensions.height
+        {canvasDimensions.height
           ? textboxes.map((textbox) => {
               return (
                 <Draggable
@@ -101,7 +100,7 @@ const Canvas = () => {
           height={canvasDimensions.height}
         />
       </Box>
-    </Center>
+    </Styled.Wrapper>
   )
 }
 

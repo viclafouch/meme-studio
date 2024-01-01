@@ -6,7 +6,5 @@ export default {
   reset: 'Réinitialiser',
   undo: 'Annuler',
   redo: 'Rétablir',
-  hideDraggableVisible: 'Cacher les zones de texte',
-  showDraggableVisible: 'Afficher les zones de texte',
   exportMeme: 'Exporter le mème'
 } as const
