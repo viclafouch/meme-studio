@@ -5,6 +5,9 @@ import { useTranslations } from 'next-intl'
 import Button from '@components/Button'
 import { useNotifications } from '@shared/hooks/useNotifications'
 import { useShowModal } from '@stores/Modal/Modal.provider'
+import { faArrowCircleDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useMutation } from '@tanstack/react-query'
 import { exportCanvasBlob } from '@viclafouch/meme-studio-utilities/helpers'
 import {
   useMeme,
@@ -12,9 +15,6 @@ import {
   useTopBlock
 } from '@viclafouch/meme-studio-utilities/hooks'
 import { Meme } from '@viclafouch/meme-studio-utilities/schemas'
-import { faArrowCircleDown } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useMutation } from '@tanstack/react-query'
 
 const ExportButton = () => {
   const meme = useMeme()

@@ -5,12 +5,12 @@ import Button from '@components/Button'
 import LinkButton from '@components/LinkButton'
 import { css } from '@styled-system/css'
 import { Box, Flex } from '@styled-system/jsx'
-import { useClipboard } from '@viclafouch/meme-studio-utilities/hooks'
 import {
   faArrowCircleDown,
   faClipboard
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useClipboard } from '@viclafouch/meme-studio-utilities/hooks'
 
 export type ExportModalProps = {
   canvasBlob: Blob

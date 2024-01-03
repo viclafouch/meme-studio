@@ -4,6 +4,8 @@ import Button from '@components/Button'
 import Tooltip from '@components/Tooltip'
 import Accordion from '@studio/components/Accordion'
 import { Box, HStack, styled, VStack } from '@styled-system/jsx'
+import { faClone, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   useEvent,
   useGlobalInputsRef,
@@ -14,8 +16,6 @@ import {
 } from '@viclafouch/meme-studio-utilities/hooks'
 import { Meme, TextBox } from '@viclafouch/meme-studio-utilities/schemas'
 import { preventEmptyTextValue } from '@viclafouch/meme-studio-utilities/utils'
-import { faClone, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import TextCustomisation from './TextCustomisation'
 
 export type CustomisationProps = {

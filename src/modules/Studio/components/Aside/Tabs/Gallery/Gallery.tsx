@@ -5,8 +5,8 @@ import { useLocale } from 'next-intl'
 import MemesList from '@components/MemesList'
 import { getMemes } from '@shared/api/memes'
 import { styled, VStack } from '@styled-system/jsx'
-import { Locales } from '@viclafouch/meme-studio-utilities/constants'
 import { useSuspenseQuery } from '@tanstack/react-query'
+import { Locales } from '@viclafouch/meme-studio-utilities/constants'
 
 const Gallery = () => {
   const locale = useLocale() as Locales

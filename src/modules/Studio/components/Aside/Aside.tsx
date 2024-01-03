@@ -7,14 +7,14 @@ import EmptyCustom from '@studio/components/Aside/Tabs/Customisation/EmptyCustom
 import { GallerySuspend } from '@studio/components/Aside/Tabs/Gallery'
 import { css } from '@styled-system/css'
 import { styled, VStack } from '@styled-system/jsx'
-import { useMeme, useTab } from '@viclafouch/meme-studio-utilities/hooks'
-import { Tab } from '@viclafouch/meme-studio-utilities/stores'
 import {
   faCircleExclamation,
   faHeading,
   faImage
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useMeme, useTab } from '@viclafouch/meme-studio-utilities/hooks'
+import { Tab } from '@viclafouch/meme-studio-utilities/stores'
 import Customisation from './Tabs/Customisation'
 import Gallery from './Tabs/Gallery/Gallery'
 

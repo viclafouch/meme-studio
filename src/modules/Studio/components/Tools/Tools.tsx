@@ -6,12 +6,6 @@ import Tooltip from '@components/Tooltip'
 import { Link } from '@i18n/navigation'
 import { useShowModal } from '@stores/Modal/Modal.provider'
 import { Flex, styled } from '@styled-system/jsx'
-import {
-  useCountTextboxes,
-  useHistory,
-  useMeme,
-  useTools
-} from '@viclafouch/meme-studio-utilities/hooks'
 import { faSquare } from '@fortawesome/free-regular-svg-icons'
 import {
   faEraser,
@@ -22,6 +16,12 @@ import {
   faUndo
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  useCountTextboxes,
+  useHistory,
+  useMeme,
+  useTools
+} from '@viclafouch/meme-studio-utilities/hooks'
 import { buttonRecipe, ToolsButton, ToolsListItem } from './Tools.styles'
 
 const Tools = () => {
