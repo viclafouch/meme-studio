@@ -20,7 +20,7 @@ const StudioPage = ({
 }: StudioPageProps) => {
   return (
     <Box h="100vh" w="full">
-      <EditorProvider key={meme?.id} textBoxes={textboxes} meme={meme || null}>
+      <EditorProvider textBoxes={textboxes} meme={meme || null}>
         <Header
           actions={
             <>

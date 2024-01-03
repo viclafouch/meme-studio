@@ -4,7 +4,7 @@ import MemesList from '@components/MemesList'
 import { PagePropsWithLocaleParams } from '@i18n/config'
 import { getMemes } from '@shared/api/memes'
 import { css } from '@styled-system/css'
-import { Box, Container } from '@styled-system/jsx'
+import { Box, Container, styled } from '@styled-system/jsx'
 import { particulesBg } from '@styled-system/patterns'
 
 type PageProps = PagePropsWithLocaleParams
@@ -22,12 +22,21 @@ export async function generateMetadata({
 
 const Page = async ({ params }: PageProps) => {
   unstable_setRequestLocale(params.locale)
-
+  const t = await getTranslations()
   const memes = await getMemes({ locale: params.locale })
 
   return (
     <Box py={8} bgColor="secondary" className={particulesBg()}>
       <Container maxW={{ lg: '9/12' }}>
+        <Box mb={10} textAlign="center">
+          <styled.h1 fontSize="xx-large" mb={3} textAlign="center">
+            {t('gallery.metadataTitle')}
+          </styled.h1>
+          <styled.p>
+            Blank customizable templates of the most popular trending and latest
+            memes. Over 1 million templates, updated continously.
+          </styled.p>
+        </Box>
         <MemesList
           className={css({
             display: 'grid',
