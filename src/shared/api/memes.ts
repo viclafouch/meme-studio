@@ -12,7 +12,7 @@ import {
 
 const request = wretch('https://meme-studio-admin.vercel.app/api')
   .options({
-    // see https://nextjs.org/docs/app/api-reference/functions/fetch
+    // see here https://nextjs.org/docs/app/api-reference/functions/fetch
     cache: IS_PROD ? 'force-cache' : 'no-store'
   })
   .addon(QueryStringAddon)
