@@ -3,7 +3,6 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@viclafouch/meme-studio-utilities/*": ["../../meme-studio-utilities/lib/*"],
       "@stores/*": ["stores/*"],
       "@shared/*": ["shared/*"],
       "@components/*": ["components/*"],
