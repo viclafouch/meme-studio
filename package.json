@@ -20,7 +20,7 @@
     "@next/mdx": "^14.0.4",
     "@tanstack/react-query": "^5.13.4",
     "@tanstack/react-query-next-experimental": "^5.13.4",
-    "@viclafouch/meme-studio-utilities": "^1.0.24",
+    "@viclafouch/meme-studio-utilities": "^1.0.26",
     "immer": "10.0.3",
     "next": "14.0.4",
     "next-intl": "^3.4.0",

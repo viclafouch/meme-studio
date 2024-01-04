@@ -9,6 +9,7 @@ import { Flex, styled } from '@styled-system/jsx'
 import { faSquare } from '@fortawesome/free-regular-svg-icons'
 import {
   faEraser,
+  faFont,
   faQuestionCircle,
   faRedo,
   faSquare as faSquareFilled,
@@ -26,8 +27,13 @@ import { buttonRecipe, ToolsButton, ToolsListItem } from './Tools.styles'
 
 const Tools = () => {
   const t = useTranslations()
-  const { eraseAllItems, resetAll, toggleTopBlockVisible, isTopBlockVisible } =
-    useTools()
+  const {
+    eraseAllItems,
+    resetAll,
+    toggleTopBlockVisible,
+    isTopBlockVisible,
+    addItem
+  } = useTools()
   const countTexts = useCountTextboxes()
   const meme = useMeme()
   const showModal = useShowModal()
@@ -60,6 +66,17 @@ const Tools = () => {
       boxShadow="2px 0px 5px 0px rgb(0 0 0 / 29%)"
     >
       <styled.ul display="flex" flexDir="column" alignItems="center">
+        <ToolsListItem>
+          <Tooltip text={t('tools.addText')} disabled={!meme} position="right">
+            <ToolsButton
+              type="button"
+              disabled={!meme}
+              onClick={handleClick(addItem)}
+            >
+              <FontAwesomeIcon icon={faFont} />
+            </ToolsButton>
+          </Tooltip>
+        </ToolsListItem>
         <ToolsListItem>
           <Tooltip
             text={
