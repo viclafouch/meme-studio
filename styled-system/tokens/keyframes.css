@@ -30,4 +30,12 @@
             background-position-x: -200%
         }
     }
+    @keyframes octocat {
+        0%, 100% {
+            transform: rotate(0)
+        }
+        100% {
+            transform: scale(1.5)
+        }
+    }
 }

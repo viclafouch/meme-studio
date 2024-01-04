@@ -1,7 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
+import GithubIcon from '@components/icons/Github'
 import { Link } from '@i18n/navigation'
 import { Box, Flex, Grid } from '@styled-system/jsx'
+import { Bubble } from './Header.styles'
 
 export type HeaderProps = {
   actions?: React.ReactNode
@@ -21,7 +23,20 @@ const Header = ({ actions = null }: HeaderProps) => {
       boxShadow="md"
       gridTemplateColumns="1fr auto 1fr"
     >
-      <div />
+      <Box position="relative" height="full">
+        <Box>
+          <Bubble
+            target="_blank"
+            href="https://github.com/viclafouch/meme-studio"
+            className="github-corner"
+            aria-label="View source on GitHub"
+            title="View source on GitHub"
+            rel="noreferrer noopener"
+          >
+            <GithubIcon />
+          </Bubble>
+        </Box>
+      </Box>
       <Box py="1.5">
         <Link href="/">
           <Image
