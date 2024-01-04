@@ -2,7 +2,8 @@
 
 import React from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
-import Button from '@components/Button'
+import { useTranslations } from 'next-intl'
+import { TabButton } from '@studio/components/Aside/Aside.styles'
 import EmptyCustom from '@studio/components/Aside/Tabs/Customisation/EmptyCustom'
 import { GallerySuspend } from '@studio/components/Aside/Tabs/Gallery'
 import { css } from '@styled-system/css'
@@ -19,6 +20,7 @@ import Customisation from './Tabs/Customisation'
 import Gallery from './Tabs/Gallery/Gallery'
 
 const Aside = () => {
+  const t = useTranslations()
   const { currentTab, setCurrentTab } = useTab()
   const meme = useMeme()
 
@@ -36,27 +38,22 @@ const Aside = () => {
       height="calc(100vh - 5rem)"
     >
       <styled.header display="flex" width="full">
-        <Button
-          // TODO: aria
+        <TabButton
           id="gallery"
+          aria-label={t('tools.goToGallery')}
           onClick={handleChangeTab}
-          fullWidth
-          size="large"
-          color={currentTab === 'gallery' ? 'primary' : 'primaryDark'}
           aria-current={currentTab === 'gallery'}
         >
           <FontAwesomeIcon icon={faImage} />
-        </Button>
-        <Button
+        </TabButton>
+        <TabButton
           id="customization"
-          fullWidth
-          size="large"
-          color={currentTab === 'customization' ? 'primary' : 'primaryDark'}
+          aria-label={t('tools.goToCustomization')}
           onClick={handleChangeTab}
           aria-current={currentTab === 'customization'}
         >
           <FontAwesomeIcon icon={faHeading} />
-        </Button>
+        </TabButton>
       </styled.header>
       {currentTab === 'gallery' ? (
         <ErrorBoundary

@@ -6,5 +6,7 @@ export default {
   reset: 'Réinitialiser',
   undo: 'Annuler',
   redo: 'Rétablir',
-  exportMeme: 'Exporter le mème'
+  exportMeme: 'Exporter le mème',
+  goToCustomization: 'Personnaliser les textes',
+  goToGallery: 'Parcourir les mèmes'
 } as const

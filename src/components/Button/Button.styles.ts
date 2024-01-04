@@ -1,31 +1,34 @@
 import { RecipeVariantProps, sva } from '@styled-system/css'
+import { SystemStyleObject } from '@styled-system/types'
+
+export const buttonRootStyles: SystemStyleObject = {
+  fontFamily: 'inherit',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  letterSpacing: '0.5px',
+  lineHeight: '22px',
+  textDecoration: 'none',
+  boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.14)',
+  fontWeight: '500',
+  transition: 'background-color 0.3s',
+  '&:disabled': {
+    bg: 'rgb(146, 146, 146)',
+    color: '#b3b0b0',
+    cursor: 'not-allowed'
+  },
+  '&:not(:disabled)': {
+    cursor: 'pointer'
+  },
+  '&:has(.start-adornment)': {
+    gap: '8px'
+  }
+}
 
 export const button = sva({
   slots: ['root', 'start-adornment'],
   base: {
-    root: {
-      fontFamily: 'inherit',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      letterSpacing: '0.5px',
-      lineHeight: '22px',
-      textDecoration: 'none',
-      boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.14)',
-      fontWeight: '500',
-      transition: 'background-color 0.3s',
-      '&:disabled': {
-        bg: 'rgb(146, 146, 146)',
-        color: '#b3b0b0',
-        cursor: 'not-allowed'
-      },
-      '&:not(:disabled)': {
-        cursor: 'pointer'
-      },
-      '&:has(.start-adornment)': {
-        gap: '8px'
-      }
-    },
+    root: buttonRootStyles,
     'start-adornment': {}
   },
   variants: {
