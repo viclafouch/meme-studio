@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from 'next/image'
-import { useCloseModal } from '@stores/Modal/Modal.provider'
 import { styled } from '@styled-system/jsx'
 import { LightMeme } from '@viclafouch/meme-studio-utilities/schemas'
 import { getMemeSlug } from '@viclafouch/meme-studio-utilities/utils'
@@ -17,8 +16,6 @@ const MemesList = ({
   className = '',
   disableHoverShowTitle = false
 }: MemesListProps) => {
-  const closeModal = useCloseModal()
-
   return (
     <styled.ul className={className}>
       {memes.map((meme) => {
@@ -27,9 +24,6 @@ const MemesList = ({
             <Styled.MemeLink
               disableHoverShowTitle={disableHoverShowTitle}
               href={`/create/${getMemeSlug(meme)}`}
-              onClick={() => {
-                return closeModal()
-              }}
             >
               <Image
                 alt={meme.name}

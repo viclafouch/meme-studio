@@ -72,7 +72,11 @@ export function useCloseModal() {
   })
 }
 
-export const ModalOutlet = () => {
+export type ModalProviderProps = {
+  children: React.ReactNode
+}
+
+export const ModalProvider = ({ children }: ModalProviderProps) => {
   const [isMounted, setIsMounted] = React.useState(false)
   const {
     component: Component,
@@ -109,15 +113,18 @@ export const ModalOutlet = () => {
   }
 
   return (
-    <React.Suspense fallback={null}>
-      <Modal open={isOpen} onClose={closeModal} center>
-        {Component && componentProps ? (
-          // @ts-expect-error
-          <Component {...componentProps} />
-        ) : (
-          <div />
-        )}
-      </Modal>
-    </React.Suspense>
+    <>
+      <React.Suspense fallback={null}>
+        <Modal open={isOpen} onClose={closeModal} center>
+          {Component && componentProps ? (
+            // @ts-expect-error
+            <Component {...componentProps} />
+          ) : (
+            <div />
+          )}
+        </Modal>
+      </React.Suspense>
+      {children}
+    </>
   )
 }

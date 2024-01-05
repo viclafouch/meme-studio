@@ -8,7 +8,7 @@ import QueryProvider from 'queries/QueryProvider'
 import ToastContainer from '@components/NotificationProvider'
 import { localesArray, PagePropsWithLocaleParams } from '@i18n/config'
 import I18NProvider from '@i18n/I18NProvider'
-import { ModalOutlet } from '@stores/Modal/Modal.provider'
+import { ModalProvider } from '@stores/Modal/Modal.provider'
 import { css, cx } from '@styled-system/css'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import '../../../styles/globals.css'
@@ -75,10 +75,7 @@ const RootLayout = ({
               draggable={false}
               theme="dark"
             />
-            <>
-              {children}
-              <ModalOutlet />
-            </>
+            <ModalProvider>{children}</ModalProvider>
           </I18NProvider>
         </QueryProvider>
       </body>
