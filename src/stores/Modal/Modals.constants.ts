@@ -10,5 +10,10 @@ export const MODALS = {
     component: React.lazy(() => {
       return import('@components/Modals/QaAModal')
     })
+  },
+  gallery: {
+    component: React.lazy(() => {
+      return import('@components/Modals/GalleryModal')
+    })
   }
 } as const

@@ -2,7 +2,13 @@ import { defineConfig, defineGlobalStyles } from '@pandacss/dev'
 
 const globalCss = defineGlobalStyles({
   html: {
-    fontSize: '16px'
+    fontSize: '16px',
+    mdDown: {
+      '&:has( #studio)': {
+        overflow: 'hidden',
+        overscrollBehavior: 'none'
+      }
+    }
   },
   '*': {
     colorScheme: 'dark'

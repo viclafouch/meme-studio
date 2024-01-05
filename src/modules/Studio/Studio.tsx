@@ -19,7 +19,7 @@ const StudioPage = ({
   textboxes = defaultTextboxes
 }: StudioPageProps) => {
   return (
-    <Box h="100dvh" w="full" display="flex" flexDir="column">
+    <Box h="100dvh" w="full" display="flex" flexDir="column" id="studio">
       <EditorProvider textBoxes={textboxes} meme={meme || null}>
         <Header
           actions={

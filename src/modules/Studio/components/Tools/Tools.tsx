@@ -55,16 +55,21 @@ const Tools = () => {
 
   return (
     <Flex
-      direction={{ md: 'column' }}
       width="full"
-      height={{ mdDown: '54px', md: '100%' }}
+      height="54px"
       justify="space-between"
       color="white"
       zIndex={3}
       overflowX="auto"
+      overflowY="hidden"
       position="relative"
       bgColor="secondary.dark"
       boxShadow="2px 0px 5px 0px rgb(0 0 0 / 29%)"
+      md={{
+        flexDir: 'column',
+        h: '100%',
+        overflow: 'visible'
+      }}
     >
       <styled.ul display="flex" flexDir={{ md: 'column' }} alignItems="center">
         <ToolsListItem>

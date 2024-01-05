@@ -17,9 +17,8 @@ const MemeContainer = ({ children }: MemeContainerProps) => {
     <Center
       minH="full"
       w="full"
-      padding={{
-        mdDown: '1.125rem 1.25rem',
-        md: '3.125rem 6.25rem'
+      md={{
+        p: '3.125rem 6.25rem'
       }}
       bgColor="secondary"
       position="relative"

@@ -7,8 +7,9 @@ export const buttonRootStyles: SystemStyleObject = {
   alignItems: 'center',
   justifyContent: 'center',
   letterSpacing: '0.5px',
-  lineHeight: '22px',
+  lineHeight: '25px',
   textDecoration: 'none',
+  textAlign: 'center',
   boxShadow: '0 3px 6px 0 rgba(0, 0, 0, 0.14)',
   fontWeight: '500',
   transition: 'background-color 0.3s',
@@ -49,7 +50,7 @@ export const button = sva({
           bg: 'primary.dark',
           border: '1px solid transparent',
           '&:not(:disabled):hover': {
-            bg: '#649fff'
+            bg: 'rgb(27 65 126)'
           }
         }
       },
@@ -60,6 +61,16 @@ export const button = sva({
           border: '1px solid rgba(189, 189, 189, 0.541)',
           '&:not(:disabled):hover': {
             bg: '#535353'
+          }
+        }
+      },
+      secondaryDark: {
+        root: {
+          color: 'white',
+          bg: 'secondary.dark',
+          border: '1px solid rgba(189, 189, 189, 0.541)',
+          '&:not(:disabled):hover': {
+            bg: 'rgb(32 32 32)'
           }
         }
       }

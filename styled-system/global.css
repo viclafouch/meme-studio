@@ -1,6 +1,6 @@
 @layer base {
   :root {
-    --made-with-panda: '🐼'
+    --made-with-panda: '🐼';
     }
 
   *, *::before, *::after, ::backdrop {
@@ -31,18 +31,25 @@
     --skew-x: 0;
     --skew-y: 0;
     --scale-x: 1;
-    --scale-y: 1
+    --scale-y: 1;
     }
 
   html {
-    font-size: 16px
+    font-size: 16px;
     }
 
   * {
-    color-scheme: dark
+    color-scheme: dark;
     }
 
   iframe {
-    color-scheme: initial
+    color-scheme: initial;
+    }
+
+  @media screen and (max-width: 47.9975em) {
+    html:has( #studio) {
+      overflow: hidden;
+      overscroll-behavior: none;
+        }
     }
 }

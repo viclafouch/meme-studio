@@ -3,10 +3,12 @@ import * as React from 'react'
 import { cx } from '@styled-system/css'
 import * as styles from './Button.styles'
 
-export type ButtonProps = styles.ButtonVariants &
-  React.ComponentPropsWithoutRef<'button'> & {
-    startAdornment?: React.ReactNode | null
-  }
+export type BaseButtonProps = styles.ButtonVariants & {
+  startAdornment?: React.ReactNode | null
+}
+
+export type ButtonProps = BaseButtonProps &
+  React.ComponentPropsWithoutRef<'button'>
 
 const Button = React.forwardRef(
   (
