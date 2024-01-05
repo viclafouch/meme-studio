@@ -4,43 +4,45 @@ import { RecipeVariantProps } from '@styled-system/types'
 
 const styles = cva({
   base: {
-    position: 'relative',
-    '--background-tooltip': 'rgba(0, 0, 0, 0.79)',
+    md: {
+      position: 'relative',
+      '--background-tooltip': 'rgba(0, 0, 0, 0.79)',
 
-    _before: {
-      visibility: 'hidden',
-      opacity: 0,
-      position: 'absolute',
-      pointerEvents: 'none',
-      zIndex: 2,
-      maxWidth: '200px',
-      textAlign: 'center',
-      color: 'white',
-      padding: '6px 5px',
-      borderRadius: '3px',
-      whiteSpace: 'nowrap',
-      textTransform: 'none',
-      bgColor: 'var(--background-tooltip)',
-      fontSize: 'x-small',
-      content: 'attr(data-tooltip)'
-    },
+      _before: {
+        visibility: 'hidden',
+        opacity: 0,
+        position: 'absolute',
+        pointerEvents: 'none',
+        zIndex: 2,
+        maxWidth: '200px',
+        textAlign: 'center',
+        color: 'white',
+        padding: '6px 5px',
+        borderRadius: '3px',
+        whiteSpace: 'nowrap',
+        textTransform: 'none',
+        bgColor: 'var(--background-tooltip)',
+        fontSize: 'x-small',
+        content: 'attr(data-tooltip)'
+      },
 
-    _after: {
-      visibility: 'hidden',
-      opacity: 0,
-      position: 'absolute',
-      pointerEvents: 'none',
-      zIndex: 2,
-      marginLeft: '-5px',
-      fontSize: 0,
-      lineHeight: 0,
-      content: '""'
-    },
+      _after: {
+        visibility: 'hidden',
+        opacity: 0,
+        position: 'absolute',
+        pointerEvents: 'none',
+        zIndex: 2,
+        marginLeft: '-5px',
+        fontSize: 0,
+        lineHeight: 0,
+        content: '""'
+      },
 
-    '&:not([aria-disabled="true"]):hover': {
-      '&:before, &:after': {
-        visibility: 'visible',
-        opacity: 1
+      '&:not([aria-disabled="true"]):hover': {
+        '&:before, &:after': {
+          visibility: 'visible',
+          opacity: 1
+        }
       }
     }
   },

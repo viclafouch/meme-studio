@@ -5,7 +5,9 @@ export const ToolsListItem = styled('li', {
   base: {
     w: 'full',
     '&:not(:last-of-type)': {
-      borderBottom: '1px solid rgba(200, 200, 200, 0.397)'
+      md: {
+        borderBottom: '1px solid rgba(200, 200, 200, 0.397)'
+      }
     }
   }
 })
@@ -15,12 +17,16 @@ export const buttonRecipe = cva({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    w: 'full',
+    w: '54px',
     h: '54px',
     cursor: 'pointer',
     color: 'white',
     fontSize: 'sm',
     p: '1px 7px 2px',
+
+    md: {
+      w: 'full'
+    },
 
     '&:disabled': {
       cursor: 'not-allowed',

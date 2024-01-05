@@ -24,7 +24,7 @@ const Header = ({ actions = null }: HeaderProps) => {
       gridTemplateColumns="1fr auto 1fr"
     >
       <Box position="relative" height="full">
-        <Box>
+        <Box display={{ mdDown: 'none' }}>
           <Bubble
             target="_blank"
             href="https://github.com/viclafouch/meme-studio"
@@ -48,7 +48,12 @@ const Header = ({ actions = null }: HeaderProps) => {
           />
         </Link>
       </Box>
-      <Flex align="center" justify="flex-end" gap={5}>
+      <Flex
+        align="center"
+        justify="flex-end"
+        gap={5}
+        display={{ mdDown: 'none', md: 'flex' }}
+      >
         {actions}
       </Flex>
     </Grid>

@@ -6,6 +6,11 @@ export const Wrapper = styled('div', {
     alignItems: 'center',
     justifyContent: 'center',
     width: 'full',
+    '& [draggable]': {
+      visibility: {
+        md: 'hidden'
+      }
+    },
     '&:has([draggable][aria-grabbed="true"]) [draggable]': {
       visibility: 'visible'
     },

@@ -55,17 +55,18 @@ const Tools = () => {
 
   return (
     <Flex
-      direction="column"
+      direction={{ md: 'column' }}
       width="full"
-      height="full"
+      height={{ mdDown: '54px', md: '100%' }}
       justify="space-between"
       color="white"
       zIndex={3}
+      overflowX="auto"
       position="relative"
       bgColor="secondary.dark"
       boxShadow="2px 0px 5px 0px rgb(0 0 0 / 29%)"
     >
-      <styled.ul display="flex" flexDir="column" alignItems="center">
+      <styled.ul display="flex" flexDir={{ md: 'column' }} alignItems="center">
         <ToolsListItem>
           <Tooltip text={t('tools.addText')} disabled={!meme} position="right">
             <ToolsButton
