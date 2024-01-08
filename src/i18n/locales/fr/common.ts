@@ -4,7 +4,7 @@ export default {
   createMeme: 'Créer un Mème',
   fullSize: 'Taille réelle :',
   download: 'Télécharger',
-  copy: 'Copier',
+  copy: 'Copier dans le presse-papier',
   customization: 'Personnalisation',
   duplicate: 'Dupliquer',
   delete: 'Supprimer',
@@ -32,6 +32,7 @@ export default {
   switchLang: 'Changer de langue',
   intro:
     "Créez un mème à partir d'images JPG ou PNG. Modifiez votre image et créez votre mème personnalisé !",
+  copied: 'Copié dans le presse-papier',
   errors: {
     unknown: 'Une erreur inconnue est survenue'
   }

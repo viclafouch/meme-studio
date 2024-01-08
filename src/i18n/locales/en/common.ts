@@ -3,7 +3,7 @@ export default {
   createMeme: 'Create a Meme',
   fullSize: 'Full size:',
   download: 'Download',
-  copy: 'Copy',
+  copy: 'Copy to clipboard',
   customization: 'Customization',
   duplicate: 'Duplicate',
   delete: 'Delete',
@@ -31,6 +31,7 @@ export default {
   switchLang: 'Switch language',
   intro:
     'Create a meme from JPG or PNG images. Edit your image and make your custom meme.',
+  copied: 'Copied to clipboard',
   errors: {
     unknown: 'An unknown error has occurred.'
   }

@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import Button from '@components/Button'
 import LinkButton from '@components/LinkButton'
+import { useNotifications } from '@shared/hooks/useNotifications'
 import { css } from '@styled-system/css'
 import { Box, Flex } from '@styled-system/jsx'
 import {
@@ -20,6 +21,7 @@ export type ExportModalProps = {
 
 const ExportModal = ({ canvasBlob, height, width }: ExportModalProps) => {
   const t = useTranslations()
+  const { notifySuccess, notifyError } = useNotifications()
 
   const imageSrc = React.useMemo(() => {
     return URL.createObjectURL(canvasBlob)
@@ -27,9 +29,15 @@ const ExportModal = ({ canvasBlob, height, width }: ExportModalProps) => {
 
   const { copy } = useClipboard()
 
-  const handleCopy = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleCopy = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
-    copy(canvasBlob)
+
+    try {
+      await copy(canvasBlob)
+      notifySuccess('common.copied')
+    } catch (error) {
+      notifyError()
+    }
   }
 
   return (
@@ -64,17 +72,15 @@ const ExportModal = ({ canvasBlob, height, width }: ExportModalProps) => {
         {t('common.fullSize')} {width} x {height}
       </p>
       <Flex
-        maxW="7/12"
         mx="auto"
         mt="5"
         gap="5"
         justifyContent="center"
-        alignItems="stretch"
+        alignItems="center"
         w="full"
       >
         <LinkButton
           startAdornment={<FontAwesomeIcon icon={faArrowCircleDown} />}
-          fullWidth
           href={imageSrc}
           download="meme.png"
           rounded
@@ -84,7 +90,6 @@ const ExportModal = ({ canvasBlob, height, width }: ExportModalProps) => {
         </LinkButton>
         <Button
           startAdornment={<FontAwesomeIcon icon={faClipboard} />}
-          fullWidth
           rounded
           onClick={handleCopy}
           color="primary"
