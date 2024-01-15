@@ -7,7 +7,7 @@ transform() {
     backgroundSize: "cover",
     backgroundAttachment: "fixed",
     backgroundRepeat: "repeat-y",
-    backgroundImage: "url('https://www.meme-studio.io/images/particles.svg')"
+    backgroundImage: "url('/images/particles.svg')"
   };
 }}
 
