@@ -1,0 +1,16 @@
+@layer reset, base, tokens, recipes, utilities;
+
+.react-responsive-modal-root {
+  .react-responsive-modal-modal {
+    background-color: rgb(48, 48, 48);
+    color: #ffffff;
+  }
+
+  .react-responsive-modal-closeButton {
+    color: #ffffff;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+}

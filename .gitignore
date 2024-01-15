@@ -20,6 +20,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/dist
+.vscode
+.next
+tsconfig.tsbuildinfo
+.vercel
 
-db.development.sqlite
+certificates

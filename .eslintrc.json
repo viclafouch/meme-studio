@@ -1,0 +1,37 @@
+{
+  "extends": [
+    "@viclafouch/eslint-config-viclafouch",
+    "@viclafouch/eslint-config-viclafouch/next",
+    "@viclafouch/eslint-config-viclafouch/imports",
+    "@viclafouch/eslint-config-viclafouch/typescript",
+    "@viclafouch/eslint-config-viclafouch/prettier"
+  ],
+  "parserOptions": {
+    "project": true
+  },
+  "root": true,
+  "rules": {
+    "react-hooks/exhaustive-deps": [
+      "error",
+      {
+        "additionalHooks": "useIsomorphicLayoutEffect"
+      }
+    ],
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "next/link",
+            "message": "Please use i18n Link from @i18n/navigation"
+          },
+          {
+            "name": "next/navigation",
+            "importNames": ["redirect"],
+            "message": "Please use redirect function from @i18n/navigation"
+          }
+        ]
+      }
+    ]
+  }
+}

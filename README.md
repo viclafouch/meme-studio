@@ -1,10 +1,3 @@
-<div align="center">
-  <a href="https://www.meme-studio.io" target="_blank" title="Meme Studio">
-    <img alt="Meme Studio" src="https://github.com/viclafouch/meme-studio/blob/master/meme-studio.gif" />
-  </a>
-</div>
-<br />
-
 # Meme Studio
 
 The Meme Studio is designed to be insanely fast and provide powerful customization for your memes, while still being simple and easy to use.
@@ -22,12 +15,11 @@ Website : [meme-studio.io](https://www.meme-studio.io)
 
 #### What I use:
 
-- [ReactJS](https://github.com/facebook/react) - Framework JS
-- [React-Helmet](https://github.com/nfl/react-helmet) - SEO
+- [Next.js](https://nextjs.org) - Framework React.js
+- [Panda-css](https://panda-css.com) - Built time CSS in JS
 - [Immer](https://immerjs.github.io/immer/docs/introduction) - Immutability library
-- [React-i18next](https://github.com/i18next/react-i18next) - Internationalization
-- [ExpressJS](https://expressjs.com) - Server side
-- [Sequelize](https://sequelize.org) - Database
+- [Next Intl](https://next-intl-docs.vercel.app) - Internationalization
+- [Tanstack Query](https://tanstack.com/query/latest) - Async state Managment
 
 ### Contributing
 
@@ -38,3 +30,7 @@ Any contributions and/or pull requests would be welcome.
 1. Clone the repository: `git clone https://github.com/viclafouch/meme-studio.git`
 2. Install the npm dependencies `npm install`
 3. Start server: `npm run dev`
+
+### Release
+
+1. With vercel: `npx vercel --prod`

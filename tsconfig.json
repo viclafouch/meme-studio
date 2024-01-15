@@ -1,31 +1,24 @@
 {
+  "extends": "@viclafouch/eslint-config-viclafouch/tsconfig.json",
   "compilerOptions": {
-    "sourceMap": true,
-    "noImplicitAny": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "target": "es6",
-    "jsx": "react",
     "baseUrl": "./src",
     "paths": {
-      "@client/components/*": ["client/ts/components/*"],
-      "@client/containers/*": ["client/ts/containers/*"],
-      "@client/store/*": ["client/ts/store/*"],
-      "@client/utils/*": ["client/ts/utils/*"],
-      "@client/*": ["client/*"],
-      "@server/*": ["server/lib/*"],
+      // "@viclafouch/meme-studio-utilities/*": ["../../meme-studio-utilities/lib/*"],
+      "@stores/*": ["stores/*"],
       "@shared/*": ["shared/*"],
-      "@src/*": ["*"]
-    }
+      "@components/*": ["components/*"],
+      "@styles/*": ["styles/*"],
+      "@studio/*": ["modules/Studio/*"],
+      "@models/*": ["models/*"],
+      "@styled-system/*": ["../styled-system/*"],
+      "@i18n/*": ["i18n/*"]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "src/client/node_modules/**/*",
-    "**/*.spec.ts"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }
