@@ -3,7 +3,6 @@ import { Metadata } from 'next'
 import { Alata } from 'next/font/google'
 import { useMessages, useNow, useTimeZone } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
-import NextTopLoader from 'nextjs-toploader'
 import QueryProvider from 'queries/QueryProvider'
 import ToastContainer from '@components/NotificationProvider'
 import { localesArray, PagePropsWithLocaleParams } from '@i18n/config'
@@ -62,7 +61,6 @@ const RootLayout = ({
           })
         )}
       >
-        <NextTopLoader />
         <QueryProvider>
           <I18NProvider
             timeZone={timeZone}
