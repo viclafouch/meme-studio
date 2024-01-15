@@ -1,8 +1,6 @@
 /* eslint-disable */
 export * from './factory';
-
 export * from './is-valid-prop';
-
 export * from './box';
 export * from './flex';
 export * from './stack';
@@ -25,5 +23,4 @@ export * from './bleed';
 export * from './visually-hidden';
 export * from './particules-bg';
 export * from './skeleton';
-
 export type { HTMLStyledProps, StyledComponent } from '../types/jsx';
