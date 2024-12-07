@@ -1,7 +1,7 @@
 import React from 'react'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
-import { PagePropsWithLocaleParams } from '@i18n/config'
+import type { PagePropsWithLocaleParams } from '@i18n/config'
 import HomePage from '../../modules/HomePage'
 
 type PageProps = PagePropsWithLocaleParams

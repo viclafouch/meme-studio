@@ -1,5 +1,8 @@
-import { Pathnames } from 'next-intl/navigation'
-import { Locales, locales } from '@viclafouch/meme-studio-utilities/constants'
+import { type Pathnames } from 'next-intl/routing'
+import {
+  type Locales,
+  locales
+} from '@viclafouch/meme-studio-utilities/constants'
 
 export const defaultLocale = locales.en
 

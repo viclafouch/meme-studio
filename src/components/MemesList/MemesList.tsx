@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { styled } from '@styled-system/jsx'
-import { LightMeme } from '@viclafouch/meme-studio-utilities/schemas'
+import type { LightMeme } from '@viclafouch/meme-studio-utilities/schemas'
 import { getMemeSlug } from '@viclafouch/meme-studio-utilities/utils'
 import * as Styled from './MemesList.styles'
 

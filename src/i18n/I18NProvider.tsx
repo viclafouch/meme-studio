@@ -1,12 +1,12 @@
 'use client'
 
-import { ReactNode } from 'react'
-import { AbstractIntlMessages, NextIntlClientProvider } from 'next-intl'
+import React from 'react'
+import { type AbstractIntlMessages, NextIntlClientProvider } from 'next-intl'
 
 type I18NProviderProps = {
   messages: AbstractIntlMessages
   locale: string
-  children: ReactNode
+  children: React.ReactNode
   timeZone: string
   now: Date
 }

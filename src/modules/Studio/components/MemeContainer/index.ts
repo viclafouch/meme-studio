@@ -1,4 +1,4 @@
-import MemeContainer, { MemeContainerProps } from './MemeContainer'
+import MemeContainer, { type MemeContainerProps } from './MemeContainer'
 
 export type { MemeContainerProps }
 

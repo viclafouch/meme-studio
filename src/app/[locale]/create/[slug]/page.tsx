@@ -1,16 +1,16 @@
 import React from 'react'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { isRedirectError } from 'next/dist/client/components/redirect'
 import { notFound, RedirectType } from 'next/navigation'
 import { useLocale } from 'next-intl'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 import CreatePage from 'modules/Studio'
-import { PagePropsWithLocaleParams } from '@i18n/config'
+import type { PagePropsWithLocaleParams } from '@i18n/config'
 import { redirect } from '@i18n/navigation'
 import { getMeme, getMemes } from '@shared/api/memes'
 import { getMemeMetadata } from '@shared/helpers/meme-metadata'
-import { Locales } from '@viclafouch/meme-studio-utilities/constants'
-import { Meme } from '@viclafouch/meme-studio-utilities/schemas'
+import type { Locales } from '@viclafouch/meme-studio-utilities/constants'
+import type { Meme } from '@viclafouch/meme-studio-utilities/schemas'
 import {
   getMemeIdFromSlug,
   getMemeSlug
@@ -34,14 +34,13 @@ export async function generateMetadata({
     keywords: metadata.keywords,
     alternates: {
       canonical: metadata.url,
-      languages: Object.values(metadataByLocales.metadata).reduce(
-        (accumulator, currentValue) => {
-          accumulator[currentValue.locale] = currentValue.url
+      languages: Object.values(metadataByLocales.metadata).reduce<
+        Record<Locales, string>
+      >((accumulator, currentValue) => {
+        accumulator[currentValue.locale] = currentValue.url
 
-          return accumulator
-        },
-        {} as Record<Locales, string>
-      )
+        return accumulator
+      }, {})
     }
   }
 }

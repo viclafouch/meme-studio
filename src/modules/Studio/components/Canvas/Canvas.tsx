@@ -12,7 +12,7 @@ import {
   useTextboxes,
   useTopBlock
 } from '@viclafouch/meme-studio-utilities/hooks'
-import { Meme, TextBox } from '@viclafouch/meme-studio-utilities/schemas'
+import type { Meme, TextBox } from '@viclafouch/meme-studio-utilities/schemas'
 import Draggable from '../Draggable'
 import * as Styled from './Canvas.styles'
 

@@ -14,7 +14,7 @@ import {
   useRatiotedTextboxes,
   useTopBlock
 } from '@viclafouch/meme-studio-utilities/hooks'
-import { Meme } from '@viclafouch/meme-studio-utilities/schemas'
+import type { Meme } from '@viclafouch/meme-studio-utilities/schemas'
 
 const ExportButton = () => {
   const meme = useMeme()

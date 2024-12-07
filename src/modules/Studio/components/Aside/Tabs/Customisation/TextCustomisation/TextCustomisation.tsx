@@ -9,7 +9,7 @@ import {
   TEXT_ALIGN
 } from '@viclafouch/meme-studio-utilities/constants'
 import { useGlobalInputsRef } from '@viclafouch/meme-studio-utilities/hooks'
-import { TextBox } from '@viclafouch/meme-studio-utilities/schemas'
+import { type TextBox } from '@viclafouch/meme-studio-utilities/schemas'
 import { preventEmptyTextValue } from '@viclafouch/meme-studio-utilities/utils'
 import { Fieldset } from './TextCustomisation.styles'
 

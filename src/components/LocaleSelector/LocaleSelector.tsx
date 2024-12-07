@@ -7,7 +7,7 @@ import FlagFr from '@components/LocaleSelector/flags/fr'
 import { Link, usePathname } from '@i18n/navigation'
 import { css } from '@styled-system/css'
 import { Box, VStack } from '@styled-system/jsx'
-import { Locales } from '@viclafouch/meme-studio-utilities/constants'
+import type { Locales } from '@viclafouch/meme-studio-utilities/constants'
 
 const FlagByLocale = {
   en: FlagEn,

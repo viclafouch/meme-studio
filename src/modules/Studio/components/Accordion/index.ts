@@ -1,4 +1,4 @@
-import Accordion, { AccordionProps } from './Accordion'
+import Accordion, { type AccordionProps } from './Accordion'
 
 export type { AccordionProps }
 

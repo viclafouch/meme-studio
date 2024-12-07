@@ -1,6 +1,6 @@
 import { cva } from '@styled-system/css'
 import { styled } from '@styled-system/jsx'
-import { RecipeVariantProps } from '@styled-system/types'
+import type { RecipeVariantProps } from '@styled-system/types'
 
 const styles = cva({
   base: {

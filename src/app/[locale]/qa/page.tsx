@@ -1,10 +1,13 @@
 import React from 'react'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
-import { PagePropsWithLocaleParams } from '@i18n/config'
+import type { PagePropsWithLocaleParams } from '@i18n/config'
 import QaAEnMDX from '@i18n/locales/en/md/qAa.mdx'
 import QaAFrMDX from '@i18n/locales/fr/md/qAa.mdx'
 import { Box, Container } from '@styled-system/jsx'
-import { Locales, locales } from '@viclafouch/meme-studio-utilities/constants'
+import {
+  type Locales,
+  locales
+} from '@viclafouch/meme-studio-utilities/constants'
 
 type PageProps = PagePropsWithLocaleParams
 

@@ -1,5 +1,5 @@
-import { RecipeVariantProps, sva } from '@styled-system/css'
-import { SystemStyleObject } from '@styled-system/types'
+import { type RecipeVariantProps, sva } from '@styled-system/css'
+import type { SystemStyleObject } from '@styled-system/types'
 
 export const buttonRootStyles: SystemStyleObject = {
   fontFamily: 'inherit',

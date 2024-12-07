@@ -14,7 +14,7 @@ import {
   usePrevious,
   useTextboxes
 } from '@viclafouch/meme-studio-utilities/hooks'
-import { Meme, TextBox } from '@viclafouch/meme-studio-utilities/schemas'
+import type { Meme, TextBox } from '@viclafouch/meme-studio-utilities/schemas'
 import { preventEmptyTextValue } from '@viclafouch/meme-studio-utilities/utils'
 import TextCustomisation from './TextCustomisation'
 

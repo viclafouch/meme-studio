@@ -3,7 +3,7 @@ import { css } from '@styled-system/css'
 import { faRotateLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useDraggable } from '@viclafouch/meme-studio-utilities/hooks'
-import { TextBox } from '@viclafouch/meme-studio-utilities/schemas'
+import type { TextBox } from '@viclafouch/meme-studio-utilities/schemas'
 import { DraggableBox, ResizeBox, RotateBox } from './Draggable.styles'
 
 export type DraggableProps = {

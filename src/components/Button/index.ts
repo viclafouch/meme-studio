@@ -1,4 +1,4 @@
-import Button, { BaseButtonProps, ButtonProps } from './Button'
+import Button, { type BaseButtonProps, type ButtonProps } from './Button'
 
 export type { BaseButtonProps, ButtonProps }
 

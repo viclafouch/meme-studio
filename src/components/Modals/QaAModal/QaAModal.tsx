@@ -3,7 +3,10 @@ import { useLocale } from 'next-intl'
 import QaAEnMDX from '@i18n/locales/en/md/qAa.mdx'
 import QaAFrMDX from '@i18n/locales/fr/md/qAa.mdx'
 import { Container } from '@styled-system/jsx'
-import { Locales, locales } from '@viclafouch/meme-studio-utilities/constants'
+import {
+  type Locales,
+  locales
+} from '@viclafouch/meme-studio-utilities/constants'
 
 const qAaMDXByLocales = {
   [locales.fr]: QaAFrMDX,

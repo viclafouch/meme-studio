@@ -1,4 +1,6 @@
-import InputHiddenButton, { InputHiddenButtonProps } from './InputHiddenButton'
+import InputHiddenButton, {
+  type InputHiddenButtonProps
+} from './InputHiddenButton'
 
 export type { InputHiddenButtonProps }
 

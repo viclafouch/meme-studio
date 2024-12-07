@@ -1,4 +1,4 @@
-import Header, { HeaderProps } from './Header'
+import Header, { type HeaderProps } from './Header'
 
 export type { HeaderProps }
 

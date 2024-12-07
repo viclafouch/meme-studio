@@ -1,5 +1,5 @@
 import React from 'react'
-import { VariantsProps, Wrapper } from './Tooltip.styled'
+import { type VariantsProps, Wrapper } from './Tooltip.styled'
 
 export type TooltipProps = {
   children: React.ReactNode

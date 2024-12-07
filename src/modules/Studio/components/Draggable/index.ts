@@ -1,4 +1,4 @@
-import Draggable, { DraggableProps } from './Draggable'
+import Draggable, { type DraggableProps } from './Draggable'
 
 export type { DraggableProps }
 

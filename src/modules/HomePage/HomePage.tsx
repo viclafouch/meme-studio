@@ -9,7 +9,7 @@ import { getMemes } from '@shared/api/memes'
 import { css } from '@styled-system/css'
 import { Box, Center, Container, VStack } from '@styled-system/jsx'
 import { particulesBg } from '@styled-system/patterns'
-import { Locales } from '@viclafouch/meme-studio-utilities/constants'
+import type { Locales } from '@viclafouch/meme-studio-utilities/constants'
 
 const HomePage = async () => {
   const locale = useLocale() as Locales

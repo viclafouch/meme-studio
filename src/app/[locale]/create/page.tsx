@@ -1,7 +1,7 @@
 import React from 'react'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 import CreatePage from 'modules/Studio'
-import { PagePropsWithLocaleParams } from '@i18n/config'
+import type { PagePropsWithLocaleParams } from '@i18n/config'
 
 type PageProps = PagePropsWithLocaleParams
 

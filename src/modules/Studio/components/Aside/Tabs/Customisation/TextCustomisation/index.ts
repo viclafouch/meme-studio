@@ -1,4 +1,6 @@
-import TextCustomisation, { TextCustomisationProps } from './TextCustomisation'
+import TextCustomisation, {
+  type TextCustomisationProps
+} from './TextCustomisation'
 
 export type { TextCustomisationProps }
 

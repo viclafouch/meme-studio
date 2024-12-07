@@ -1,4 +1,4 @@
-import ExportModal, { ExportModalProps } from './ExportModal'
+import ExportModal, { type ExportModalProps } from './ExportModal'
 
 export type { ExportModalProps }
 

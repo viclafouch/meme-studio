@@ -1,7 +1,7 @@
 import React from 'react'
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
 import MemesList from '@components/MemesList'
-import { PagePropsWithLocaleParams } from '@i18n/config'
+import type { PagePropsWithLocaleParams } from '@i18n/config'
 import { getMemes } from '@shared/api/memes'
 import { css } from '@styled-system/css'
 import { Box, Container, styled } from '@styled-system/jsx'

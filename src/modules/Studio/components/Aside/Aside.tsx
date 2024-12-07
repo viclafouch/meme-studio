@@ -15,7 +15,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMeme, useTab } from '@viclafouch/meme-studio-utilities/hooks'
-import { Tab } from '@viclafouch/meme-studio-utilities/stores'
+import type { Tab } from '@viclafouch/meme-studio-utilities/stores'
 import Customisation from './Tabs/Customisation'
 import Gallery from './Tabs/Gallery/Gallery'
 

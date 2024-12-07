@@ -1,4 +1,4 @@
-import LinkButton, { LinkButtonProps } from './LinkButton'
+import LinkButton, { type LinkButtonProps } from './LinkButton'
 
 export type { LinkButtonProps }
 

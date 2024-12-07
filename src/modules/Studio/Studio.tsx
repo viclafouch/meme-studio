@@ -5,7 +5,7 @@ import LocaleSelector from '@components/LocaleSelector'
 import { EditorProvider } from '@stores/Editor/Editor.provider'
 import StudioBody from '@studio/components/StudioBody'
 import { Box } from '@styled-system/jsx'
-import { Meme, TextBox } from '@viclafouch/meme-studio-utilities/schemas'
+import type { Meme, TextBox } from '@viclafouch/meme-studio-utilities/schemas'
 
 export type StudioPageProps = {
   meme?: Meme | null

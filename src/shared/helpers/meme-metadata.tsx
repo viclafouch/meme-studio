@@ -1,7 +1,10 @@
 import { getMeme } from '@shared/api/memes'
 import { baseURL } from '@shared/constants/env'
-import { Locales, locales } from '@viclafouch/meme-studio-utilities/constants'
-import { Meme } from '@viclafouch/meme-studio-utilities/schemas'
+import {
+  type Locales,
+  locales
+} from '@viclafouch/meme-studio-utilities/constants'
+import { type Meme } from '@viclafouch/meme-studio-utilities/schemas'
 import { getMemeSlug } from '@viclafouch/meme-studio-utilities/utils'
 
 type Metadata = {
@@ -31,7 +34,7 @@ export async function getMemeMetadata(
   const urlEn = new URL(baseURL)
   urlEn.pathname = `/en/create/${slug}`
 
-  return meme.translations.reduce(
+  return meme.translations.reduce<MetadataByLocale>(
     (accumulator, translation) => {
       const localeURL = new URL(baseURL)
       const intlSlug = getMemeSlug({ name: translation.name, id: meme.id })
@@ -57,6 +60,6 @@ export async function getMemeMetadata(
           url: urlEn.toString()
         } satisfies MetadataByLocale['metadata']['en']
       }
-    } as MetadataByLocale
+    }
   )
 }

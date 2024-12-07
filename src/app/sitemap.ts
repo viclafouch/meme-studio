@@ -1,4 +1,4 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next'
 import { getMemes } from '@shared/api/memes'
 import { baseURL } from '@shared/constants/env'
 import { getMemeSlug } from '@viclafouch/meme-studio-utilities/utils'

@@ -1,5 +1,5 @@
 import React, { useId } from 'react'
-import { BaseButtonProps } from '@components/Button'
+import type { BaseButtonProps } from '@components/Button'
 import { css, cx } from '@styled-system/css'
 import * as styles from '../Button/Button.styles'
 

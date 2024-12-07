@@ -2,11 +2,11 @@ import wretch from 'wretch'
 import QueryStringAddon from 'wretch/addons/queryString'
 import { z } from 'zod'
 import { IS_PROD } from '@shared/constants/env'
-import { Locales } from '@viclafouch/meme-studio-utilities/constants'
+import type { Locales } from '@viclafouch/meme-studio-utilities/constants'
 import {
-  LightMeme,
+  type LightMeme,
   lightMemeSchema,
-  Meme,
+  type Meme,
   memeSchema
 } from '@viclafouch/meme-studio-utilities/schemas'
 
