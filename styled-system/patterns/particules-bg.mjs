@@ -1,4 +1,4 @@
-import { mapObject } from '../helpers.mjs';
+import { getPatternStyles, patternFns } from '../helpers.mjs';
 import { css } from '../css/index.mjs';
 
 const particulesBgConfig = {
@@ -11,7 +11,10 @@ transform() {
   };
 }}
 
-export const getParticulesBgStyle = (styles = {}) => particulesBgConfig.transform(styles, { map: mapObject })
+export const getParticulesBgStyle = (styles = {}) => {
+  const _styles = getPatternStyles(particulesBgConfig, styles)
+  return particulesBgConfig.transform(_styles, patternFns)
+}
 
 export const particulesBg = (styles) => css(getParticulesBgStyle(styles))
 particulesBg.raw = getParticulesBgStyle

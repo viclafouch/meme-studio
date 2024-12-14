@@ -1,5 +1,5 @@
 import React from 'react'
-import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import type { PagePropsWithLocaleParams } from '@i18n/config'
 import QaAEnMDX from '@i18n/locales/en/md/qAa.mdx'
 import QaAFrMDX from '@i18n/locales/fr/md/qAa.mdx'
@@ -16,9 +16,8 @@ const qAaMDXByLocales = {
   [locales.en]: QaAEnMDX
 } as const satisfies { [key in Locales]: React.ElementType }
 
-export async function generateMetadata({
-  params: { locale }
-}: PagePropsWithLocaleParams) {
+export async function generateMetadata({ params }: PagePropsWithLocaleParams) {
+  const { locale } = await params
   const t = await getTranslations({ locale })
 
   return {
@@ -27,10 +26,11 @@ export async function generateMetadata({
   }
 }
 
-const Page = ({ params }: PageProps) => {
-  unstable_setRequestLocale(params.locale)
+const Page = async ({ params }: PageProps) => {
+  const { locale } = await params
+  setRequestLocale(locale)
 
-  const MdxComponent = qAaMDXByLocales[params.locale]
+  const MdxComponent = qAaMDXByLocales[locale]
 
   return (
     <Container maxW="8/12">

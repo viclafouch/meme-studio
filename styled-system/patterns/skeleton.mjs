@@ -1,4 +1,4 @@
-import { mapObject } from '../helpers.mjs';
+import { getPatternStyles, patternFns } from '../helpers.mjs';
 import { css } from '../css/index.mjs';
 
 const skeletonConfig = {
@@ -11,7 +11,10 @@ transform(props) {
   };
 }}
 
-export const getSkeletonStyle = (styles = {}) => skeletonConfig.transform(styles, { map: mapObject })
+export const getSkeletonStyle = (styles = {}) => {
+  const _styles = getPatternStyles(skeletonConfig, styles)
+  return skeletonConfig.transform(_styles, patternFns)
+}
 
 export const skeleton = (styles) => css(getSkeletonStyle(styles))
 skeleton.raw = getSkeletonStyle

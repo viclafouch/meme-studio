@@ -1,13 +1,12 @@
 import React from 'react'
-import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import CreatePage from 'modules/Studio'
 import type { PagePropsWithLocaleParams } from '@i18n/config'
 
 type PageProps = PagePropsWithLocaleParams
 
-export async function generateMetadata({
-  params: { locale }
-}: PagePropsWithLocaleParams) {
+export async function generateMetadata({ params }: PagePropsWithLocaleParams) {
+  const { locale } = await params
   const t = await getTranslations({ locale })
 
   return {
@@ -16,8 +15,9 @@ export async function generateMetadata({
   }
 }
 
-const Page = ({ params }: PageProps) => {
-  unstable_setRequestLocale(params.locale)
+const Page = async ({ params }: PageProps) => {
+  const { locale } = await params
+  setRequestLocale(locale)
 
   return <CreatePage />
 }

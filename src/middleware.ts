@@ -1,17 +1,7 @@
 import createMiddleware from 'next-intl/middleware'
-import {
-  defaultLocale,
-  localePrefix,
-  localesArray,
-  pathnames
-} from '@i18n/config'
+import { routing } from '@i18n/navigation'
 
-export default createMiddleware({
-  defaultLocale,
-  locales: localesArray,
-  pathnames,
-  localePrefix
-})
+export default createMiddleware(routing)
 
 export const config = {
   matcher: [
@@ -24,6 +14,6 @@ export const config = {
 
     // Set a cookie to remember the previous locale for
     // all requests that have a locale prefix
-    `/(fr|en)/:path*`
+    '/(fr|en)/:path*'
   ]
 }

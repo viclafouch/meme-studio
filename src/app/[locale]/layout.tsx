@@ -1,12 +1,12 @@
 import React from 'react'
 import type { Metadata } from 'next'
 import { Alata } from 'next/font/google'
-import { useMessages, useNow, useTimeZone } from 'next-intl'
-import { getTranslations } from 'next-intl/server'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages, getTranslations } from 'next-intl/server'
 import QueryProvider from 'queries/QueryProvider'
 import ToastContainer from '@components/NotificationProvider'
-import { localesArray, type PagePropsWithLocaleParams } from '@i18n/config'
-import I18NProvider from '@i18n/I18NProvider'
+import { type PagePropsWithLocaleParams } from '@i18n/config'
+import { routing } from '@i18n/navigation'
 import { ModalProvider } from '@stores/Modal/Modal.provider'
 import { css, cx } from '@styled-system/css'
 import '@fortawesome/fontawesome-svg-core/styles.css'
@@ -17,8 +17,9 @@ const atlata = Alata({ weight: '400', subsets: ['latin'] })
 type LayoutProps = PagePropsWithLocaleParams
 
 export async function generateMetadata({
-  params: { locale }
+  params
 }: LayoutProps): Promise<Metadata> {
+  const { locale } = await params
   const t = await getTranslations({ locale })
 
   return {
@@ -29,26 +30,23 @@ export async function generateMetadata({
   }
 }
 
-export async function generateStaticParams(): Promise<LayoutProps['params'][]> {
-  return Promise.resolve(
-    localesArray.map((locale) => {
-      return { locale }
-    })
-  )
+export function generateStaticParams() {
+  return routing.locales.map((locale) => {
+    return { locale }
+  })
 }
 
-const RootLayout = ({
+const RootLayout = async ({
   children,
   params
 }: {
   children: React.ReactNode
 } & LayoutProps) => {
-  const messages = useMessages()
-  const timeZone = useTimeZone()!
-  const now = useNow()
+  const { locale } = await params
+  const messages = await getMessages()
 
   return (
-    <html lang={params.locale}>
+    <html lang={locale}>
       <body
         className={cx(
           atlata.className,
@@ -62,19 +60,14 @@ const RootLayout = ({
         )}
       >
         <QueryProvider>
-          <I18NProvider
-            timeZone={timeZone}
-            messages={messages}
-            locale={params.locale}
-            now={now}
-          >
+          <NextIntlClientProvider messages={messages} locale={locale}>
             <ToastContainer
               position="bottom-left"
               draggable={false}
               theme="dark"
             />
             <ModalProvider>{children}</ModalProvider>
-          </I18NProvider>
+          </NextIntlClientProvider>
         </QueryProvider>
       </body>
     </html>

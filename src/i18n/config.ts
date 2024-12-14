@@ -11,9 +11,9 @@ export const localesArray = Object.values(locales)
 export type PagePropsWithLocaleParams<
   T extends object = Record<string, never>
 > = T & {
-  params: {
+  params: Promise<{
     locale: Locales
-  }
+  }>
 }
 
 export const pathnames = {

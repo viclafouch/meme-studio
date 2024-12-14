@@ -1,5 +1,5 @@
 import React from 'react'
-import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
 import MemesList from '@components/MemesList'
 import type { PagePropsWithLocaleParams } from '@i18n/config'
 import { getMemes } from '@shared/api/memes'
@@ -9,9 +9,8 @@ import { particulesBg } from '@styled-system/patterns'
 
 type PageProps = PagePropsWithLocaleParams
 
-export async function generateMetadata({
-  params: { locale }
-}: PagePropsWithLocaleParams) {
+export async function generateMetadata({ params }: PagePropsWithLocaleParams) {
+  const { locale } = await params
   const t = await getTranslations({ locale })
 
   return {
@@ -21,9 +20,9 @@ export async function generateMetadata({
 }
 
 const Page = async ({ params }: PageProps) => {
-  unstable_setRequestLocale(params.locale)
+  const { locale } = await params
   const t = await getTranslations()
-  const memes = await getMemes({ locale: params.locale })
+  const memes = await getMemes({ locale })
 
   return (
     <Box py={8} bgColor="secondary" className={particulesBg()}>

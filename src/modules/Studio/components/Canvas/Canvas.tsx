@@ -18,9 +18,9 @@ import * as Styled from './Canvas.styles'
 
 const Canvas = () => {
   const meme = useMeme() as Meme
-  const canvasElRef = React.useRef<HTMLCanvasElement>(null)
+  const canvasElRef = React.useRef<HTMLCanvasElement>(null!)
   const { textboxes, updateTextbox } = useTextboxes()
-  const containerRef = React.useRef<HTMLDivElement>(null)
+  const containerRef = React.useRef<HTMLDivElement>(null!)
   const { canvasDimensions, calculByAspectRatio } = useCanvasDimensions()
   const topBlock = useTopBlock()
   const { itemIdSelected, setItemIdSelected } = useItemIdSelected()

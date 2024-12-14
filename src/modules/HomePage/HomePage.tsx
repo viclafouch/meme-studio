@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { useLocale } from 'next-intl'
 import { getTranslations } from 'next-intl/server'
 import Footer from '@components/Footer'
 import LinkButton from '@components/LinkButton'
@@ -11,8 +10,11 @@ import { Box, Center, Container, VStack } from '@styled-system/jsx'
 import { particulesBg } from '@styled-system/patterns'
 import type { Locales } from '@viclafouch/meme-studio-utilities/constants'
 
-const HomePage = async () => {
-  const locale = useLocale() as Locales
+type PageProps = {
+  locale: Locales
+}
+
+const HomePage = async ({ locale }: PageProps) => {
   const memes = await getMemes({ locale })
   const memesSliced = memes.slice(0, 3)
   const t = await getTranslations()

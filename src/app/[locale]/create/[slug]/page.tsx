@@ -1,9 +1,7 @@
 import React from 'react'
 import type { Metadata } from 'next'
-import { isRedirectError } from 'next/dist/client/components/redirect'
 import { notFound, RedirectType } from 'next/navigation'
-import { useLocale } from 'next-intl'
-import { getTranslations, unstable_setRequestLocale } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import CreatePage from 'modules/Studio'
 import type { PagePropsWithLocaleParams } from '@i18n/config'
 import { redirect } from '@i18n/navigation'
@@ -16,12 +14,14 @@ import {
   getMemeSlug
 } from '@viclafouch/meme-studio-utilities/utils'
 
-type PageProps = PagePropsWithLocaleParams<{ params: { slug: string } }>
+type PageProps = PagePropsWithLocaleParams<{
+  params: Promise<{ slug: string }>
+}>
 
 export async function generateMetadata({
   params
 }: PageProps): Promise<Metadata> {
-  const { slug, locale } = params
+  const { locale, slug } = await params
   const id = getMemeIdFromSlug(slug)
   const t = await getTranslations({ locale })
 
@@ -36,11 +36,17 @@ export async function generateMetadata({
       canonical: metadata.url,
       languages: Object.values(metadataByLocales.metadata).reduce<
         Record<Locales, string>
-      >((accumulator, currentValue) => {
-        accumulator[currentValue.locale] = currentValue.url
+      >(
+        (accumulator, currentValue) => {
+          accumulator[currentValue.locale] = currentValue.url
 
-        return accumulator
-      }, {})
+          return accumulator
+        },
+        {
+          fr: '',
+          en: ''
+        }
+      )
     }
   }
 }
@@ -48,7 +54,8 @@ export async function generateMetadata({
 export async function generateStaticParams({
   params
 }: PagePropsWithLocaleParams) {
-  const memes = await getMemes({ locale: params.locale })
+  const { locale } = await params
+  const memes = await getMemes({ locale })
 
   return memes.map((meme) => {
     return {
@@ -59,11 +66,11 @@ export async function generateStaticParams({
 
 const Page = async ({
   params
-}: PagePropsWithLocaleParams<{ params: { slug: string } }>) => {
-  unstable_setRequestLocale(params.locale)
-  const locale = useLocale() as Locales
+}: PagePropsWithLocaleParams<{ params: Promise<{ slug: string }> }>) => {
+  const { locale, slug } = await params
+  setRequestLocale(locale)
 
-  const id = getMemeIdFromSlug(params.slug)
+  const id = getMemeIdFromSlug(slug)
 
   let meme: Meme
 
@@ -72,16 +79,19 @@ const Page = async ({
 
     const correctSlug = getMemeSlug(meme)
 
-    if (correctSlug !== params.slug) {
+    if (correctSlug !== slug) {
       const redirectUrl = `/create/${correctSlug}`
 
-      await redirect(redirectUrl, RedirectType.replace)
+      await redirect(
+        {
+          locale,
+          href: redirectUrl
+        },
+        RedirectType.replace
+      )
     }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    if (isRedirectError(error)) {
-      throw error
-    }
-
     notFound()
   }
 

@@ -1,10 +1,11 @@
-import { notFound } from 'next/navigation'
 import { getRequestConfig } from 'next-intl/server'
-import { localesArray } from '@i18n/config'
+import { routing } from './navigation'
 
-export default getRequestConfig(async ({ locale }: { locale: string }) => {
-  if (!localesArray.includes(locale)) {
-    notFound()
+export default getRequestConfig(async ({ requestLocale }) => {
+  let locale = await requestLocale
+
+  if (!locale || !routing.locales.includes(locale)) {
+    locale = routing.defaultLocale
   }
 
   const messages = await import(`./locales/${locale}/index.ts`)

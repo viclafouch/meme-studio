@@ -1,5 +1,6 @@
-const withNextIntl = require('next-intl/plugin')(
-  // Specify a custom path here
+const createNextIntlPlugin = require('next-intl/plugin')
+
+const withNextIntl = createNextIntlPlugin(
   './src/i18n/index.ts'
 )
 
