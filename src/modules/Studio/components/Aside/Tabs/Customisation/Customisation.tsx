@@ -58,7 +58,7 @@ const Customisation = ({ meme }: CustomisationProps) => {
       if (inputElement) {
         const { length } = inputElement.value
         inputElement.focus()
-        // set cursor at the end of value
+        // Set cursor at the end of value
         inputElement.setSelectionRange(length, length)
       }
     }

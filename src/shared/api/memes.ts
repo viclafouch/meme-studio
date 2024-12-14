@@ -12,12 +12,12 @@ import {
 
 const request = wretch('https://meme-studio-admin.vercel.app/api')
   .options({
-    // see here https://nextjs.org/docs/app/api-reference/functions/fetch
+    // See here https://nextjs.org/docs/app/api-reference/functions/fetch
     cache: IS_PROD ? 'force-cache' : 'no-store'
   })
   .addon(QueryStringAddon)
 
-export async function getMemes({ locale }: { locale: Locales }) {
+export function getMemes({ locale }: { locale: Locales }) {
   return request
     .url('/memes')
     .query({ locale })
@@ -25,10 +25,7 @@ export async function getMemes({ locale }: { locale: Locales }) {
     .json<LightMeme[]>(z.array(lightMemeSchema).parse)
 }
 
-export async function getMeme(
-  memeId: Meme['id'],
-  { locale }: { locale: Locales }
-) {
+export function getMeme(memeId: Meme['id'], { locale }: { locale: Locales }) {
   return request
     .url(`/memes/${memeId}`)
     .query({ locale })

@@ -90,7 +90,6 @@ const Page = async ({
         RedirectType.replace
       )
     }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     notFound()
   }

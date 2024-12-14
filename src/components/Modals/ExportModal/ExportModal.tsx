@@ -35,7 +35,6 @@ const ExportModal = ({ canvasBlob, height, width }: ExportModalProps) => {
     try {
       await copy(canvasBlob)
       notifySuccess('common.copied')
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       notifyError()
     }

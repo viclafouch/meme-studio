@@ -27,7 +27,7 @@ const ExportButton = () => {
   const exportCanvasMutation = useMutation({
     mutationFn: async (body: { meme: Meme }) => {
       await new Promise((resolve) => {
-        return setTimeout(resolve, 300)
+        setTimeout(resolve, 300)
       })
 
       return exportCanvasBlob({

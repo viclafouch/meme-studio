@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react'
 import { useTranslations } from 'next-intl'
 import { css } from '@styled-system/css'
