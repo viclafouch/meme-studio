@@ -1,11 +1,10 @@
 'use client'
 
 import React from 'react'
-import Modal from 'react-responsive-modal'
 import { create } from 'zustand'
+import Modal from '@components/Modal/Modal'
 import { useIsomorphicLayoutEffect } from '@viclafouch/meme-studio-utilities/hooks'
 import { MODALS } from './Modals.constants'
-import 'react-responsive-modal/styles.css'
 
 type Modals = typeof MODALS
 type ModalKey = keyof Modals
@@ -115,7 +114,7 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
   return (
     <>
       <React.Suspense fallback={null}>
-        <Modal open={isOpen} onClose={closeModal} center>
+        <Modal isOpen={isOpen} onClose={closeModal}>
           {Component && componentProps ? (
             // @ts-expect-error
             <Component {...componentProps} />

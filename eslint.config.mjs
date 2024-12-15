@@ -20,29 +20,31 @@ export default [
       '**/.next/**',
       '**/styled-system/**'
     ]
+  },
+  {
+    rules: {
+      'react-hooks/exhaustive-deps': [
+        'error',
+        {
+          additionalHooks: 'useIsomorphicLayoutEffect'
+        }
+      ],
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: 'next/link',
+              message: 'Please use i18n Link from @i18n/navigation'
+            },
+            {
+              name: 'next/navigation',
+              importNames: ['redirect'],
+              message: 'Please use redirect function from @i18n/navigation'
+            }
+          ]
+        }
+      ]
+    }
   }
-  // {
-  //   'react-hooks/exhaustive-deps': [
-  //     'error',
-  //     {
-  //       AdditionalHooks: 'useIsomorphicLayoutEffect'
-  //     }
-  //   ],
-  //   'no-restricted-imports': [
-  //     'error',
-  //     {
-  //       Paths: [
-  //         {
-  //           Name: 'next/link',
-  //           Message: 'Please use i18n Link from @i18n/navigation'
-  //         },
-  //         {
-  //           Name: 'next/navigation',
-  //           ImportNames: ['redirect'],
-  //           Message: 'Please use redirect function from @i18n/navigation'
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // }
 ]

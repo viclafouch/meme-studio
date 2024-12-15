@@ -57,6 +57,7 @@ const ExportModal = ({ canvasBlob, height, width }: ExportModalProps) => {
           className={css({
             maxW: '600px',
             maxH: '500px',
+            w: 'full',
             marginX: 'auto',
             objectFit: 'contain',
             boxShadow:
@@ -78,6 +79,10 @@ const ExportModal = ({ canvasBlob, height, width }: ExportModalProps) => {
         justifyContent="center"
         alignItems="center"
         w="full"
+        flexDir={{
+          mdDown: 'column',
+          md: 'row'
+        }}
       >
         <LinkButton
           startAdornment={<FontAwesomeIcon icon={faArrowCircleDown} />}
