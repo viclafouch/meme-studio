@@ -1,18 +1,16 @@
-import fsPromises from 'node:fs/promises'
 import { z } from 'zod'
 import type { Locales } from '@viclafouch/meme-studio-utilities/constants'
 import {
   type Meme,
   memeSchema
 } from '@viclafouch/meme-studio-utilities/schemas'
+import memesEn from './memes-with-text-boxes-en.json'
+import memesFr from './memes-with-text-boxes-fr.json'
 
-export async function getMemes({ locale }: { locale: Locales }) {
-  const memes = await fsPromises.readFile(
-    `${process.cwd()}/src/shared/api/memes-with-text-boxes-${locale}.json`,
-    'utf8'
+export function getMemes({ locale }: { locale: Locales }) {
+  return Promise.resolve(
+    z.array(memeSchema).parse(locale === 'fr' ? memesFr : memesEn)
   )
-
-  return z.array(memeSchema).parse(JSON.parse(memes))
 }
 
 export async function getMeme(
