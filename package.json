@@ -18,6 +18,7 @@
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.1.2",
+    "@next/third-parties": "^15.1.2",
     "@tanstack/react-query": "^5.62.8",
     "@tanstack/react-query-next-experimental": "^5.62.8",
     "@viclafouch/meme-studio-utilities": "2.0.0",
