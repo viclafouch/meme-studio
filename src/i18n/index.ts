@@ -13,6 +13,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   return {
     messages: messages.default,
     timeZone: 'Europe/Vienna',
-    now: new Date()
+    now: new Date(),
+    locale
   }
 })
