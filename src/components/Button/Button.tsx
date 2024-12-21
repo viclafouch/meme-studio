@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import * as React from 'react'
 import { cx } from '@styled-system/css'
 import * as styles from './Button.styles'

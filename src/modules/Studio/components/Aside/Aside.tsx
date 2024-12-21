@@ -15,11 +15,16 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMeme, useTab } from '@viclafouch/meme-studio-utilities/hooks'
+import type { Meme } from '@viclafouch/meme-studio-utilities/schemas'
 import type { Tab } from '@viclafouch/meme-studio-utilities/stores'
 import Customisation from './Tabs/Customisation'
 import Gallery from './Tabs/Gallery/Gallery'
 
-const Aside = () => {
+export type AsideProps = {
+  memesPromise: Promise<Meme[]>
+}
+
+const Aside = ({ memesPromise }: AsideProps) => {
   const t = useTranslations()
   const { currentTab, setCurrentTab } = useTab()
   const meme = useMeme()
@@ -68,7 +73,7 @@ const Aside = () => {
           }
         >
           <React.Suspense fallback={<GallerySuspend />}>
-            <Gallery />
+            <Gallery memesPromise={memesPromise} />
           </React.Suspense>
         </ErrorBoundary>
       ) : (

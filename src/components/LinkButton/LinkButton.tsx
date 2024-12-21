@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import * as React from 'react'
 import * as styles from '@components/Button/Button.styles'
 import { Link, type LinkProps } from '@i18n/navigation'

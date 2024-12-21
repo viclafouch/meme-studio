@@ -7,8 +7,13 @@ import { useShowModal } from '@stores/Modal/Modal.provider'
 import { css } from '@styled-system/css'
 import { Center, styled } from '@styled-system/jsx'
 import { useImageLocal } from '@viclafouch/meme-studio-utilities/hooks'
+import type { Meme } from '@viclafouch/meme-studio-utilities/schemas'
 
-const EmptyContainer = () => {
+export type EmptyContainerProps = {
+  memesPromise: Promise<Meme[]>
+}
+
+const EmptyContainer = ({ memesPromise }: EmptyContainerProps) => {
   const setImageLocal = useImageLocal()
   const t = useTranslations()
   const showModal = useShowModal()
@@ -26,7 +31,9 @@ const EmptyContainer = () => {
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault()
-    showModal('gallery', {})
+    showModal('gallery', {
+      memesPromise
+    })
   }
 
   return (

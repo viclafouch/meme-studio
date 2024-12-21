@@ -1,11 +1,17 @@
 import React from 'react'
+import { getLocale } from 'next-intl/server'
+import { getMemes } from '@shared/api/memes'
 import Aside from '@studio/components/Aside'
 import Canvas from '@studio/components/Canvas'
 import MemeContainer from '@studio/components/MemeContainer'
 import Tools from '@studio/components/Tools'
 import { Box } from '@styled-system/jsx'
+import type { Locales } from '@viclafouch/meme-studio-utilities/constants'
 
-const StudioBody = () => {
+const StudioBody = async () => {
+  const locale = (await getLocale()) as Locales
+  const memesPromise = getMemes({ locale })
+
   return (
     <Box
       width="full"
@@ -31,12 +37,12 @@ const StudioBody = () => {
           md: '0.125rem solid rgb(88, 88, 88)'
         }}
       >
-        <MemeContainer>
+        <MemeContainer memesPromise={memesPromise}>
           <Canvas />
         </MemeContainer>
       </Box>
       <Box display={{ mdDown: 'none' }}>
-        <Aside />
+        <Aside memesPromise={memesPromise} />
       </Box>
     </Box>
   )

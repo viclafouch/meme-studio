@@ -4,13 +4,15 @@ import React from 'react'
 import { Box, Center } from '@styled-system/jsx'
 import { particulesBg } from '@styled-system/patterns'
 import { useMeme } from '@viclafouch/meme-studio-utilities/hooks'
+import type { Meme } from '@viclafouch/meme-studio-utilities/schemas'
 import EmptyContainer from '../EmptyContainer'
 
 export type MemeContainerProps = {
+  memesPromise: Promise<Meme[]>
   children: React.ReactNode
 }
 
-const MemeContainer = ({ children }: MemeContainerProps) => {
+const MemeContainer = ({ children, memesPromise }: MemeContainerProps) => {
   const meme = useMeme()
 
   return (
@@ -38,7 +40,7 @@ const MemeContainer = ({ children }: MemeContainerProps) => {
           style={{ backgroundImage: `url(${meme.imageUrl}` }}
         />
       ) : null}
-      {!meme ? <EmptyContainer /> : children}
+      {!meme ? <EmptyContainer memesPromise={memesPromise} /> : children}
     </Center>
   )
 }
