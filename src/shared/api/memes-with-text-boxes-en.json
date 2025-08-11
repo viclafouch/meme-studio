@@ -1,49 +1,5 @@
 [
   {
-    "id": "65881c3bf8095c45d63b313c",
-    "width": 800,
-    "height": 634,
-    "imagePublicId": "memes/520732c9-c1a2-439d-92ac-a25ec5344aea",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418938/memes/520732c9-c1a2-439d-92ac-a25ec5344aea.jpg",
-    "keywords": [
-      "JNR",
-      "intern"
-    ],
-    "name": "JNR - The Worst Internr",
-    "textboxes": [
-      {
-        "id": "65959520344861789125715b",
-        "properties": {
-          "value": "",
-          "width": 767,
-          "height": 153,
-          "centerX": 399,
-          "centerY": 76,
-          "isUppercase": false,
-          "rotate": 0,
-          "fontSize": 69,
-          "fontFamily": "Arial",
-          "boxShadow": 2,
-          "color": "#000000",
-          "textAlign": "left",
-          "alignVertical": "middle"
-        }
-      }
-    ],
-    "translations": [
-      {
-        "id": "659595203448617891257159",
-        "keywords": [
-          "test",
-          "dqsdsqdq",
-          "dqs"
-        ],
-        "name": "test fr",
-        "locale": "fr"
-      }
-    ]
-  },
-  {
     "id": "65881c3cf8095c45d63b313f",
     "width": 815,
     "height": 800,

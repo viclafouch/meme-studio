@@ -1,55 +1,10 @@
 [
   {
-    "id": "65881c3bf8095c45d63b313c",
-    "width": 800,
-    "height": 634,
-    "imagePublicId": "memes/520732c9-c1a2-439d-92ac-a25ec5344aea",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418938/memes/520732c9-c1a2-439d-92ac-a25ec5344aea.jpg",
-    "keywords": [
-      "test",
-      "dqsdsqdq",
-      "dqs"
-    ],
-    "name": "test fr",
-    "textboxes": [
-      {
-        "id": "65959520344861789125715b",
-        "properties": {
-          "value": "",
-          "width": 767,
-          "height": 153,
-          "centerX": 399,
-          "centerY": 76,
-          "isUppercase": false,
-          "rotate": 0,
-          "fontSize": 69,
-          "fontFamily": "Arial",
-          "boxShadow": 2,
-          "color": "#000000",
-          "textAlign": "left",
-          "alignVertical": "middle"
-        }
-      }
-    ],
-    "translations": [
-      {
-        "id": "659595203448617891257159",
-        "keywords": [
-          "test",
-          "dqsdsqdq",
-          "dqs"
-        ],
-        "name": "test fr",
-        "locale": "fr"
-      }
-    ]
-  },
-  {
     "id": "65881c3cf8095c45d63b313f",
     "width": 815,
     "height": 800,
     "imagePublicId": "memes/e6697280-6377-4cfa-9e58-9a1de3e70db6",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418939/memes/e6697280-6377-4cfa-9e58-9a1de3e70db6.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/AJ06FX-r2.webp",
     "keywords": [
       "FC",
       "sardoche"
@@ -92,7 +47,7 @@
     "width": 542,
     "height": 600,
     "imagePublicId": "memes/d4c5c301-8b87-450a-95ce-8e1dc3b360b1",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418941/memes/d4c5c301-8b87-450a-95ce-8e1dc3b360b1.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/v9aQPkuBh.webp",
     "keywords": [
       "monstre",
       "Mike Wazowski",
@@ -155,7 +110,7 @@
     "width": 556,
     "height": 757,
     "imagePublicId": "memes/bbfee6c0-3c35-401c-8ea6-6e02fc369616",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418943/memes/bbfee6c0-3c35-401c-8ea6-6e02fc369616.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/dRDdg1Qz_.webp",
     "keywords": [
       "apprendre",
       "amis",
@@ -326,7 +281,7 @@
     "width": 847,
     "height": 800,
     "imagePublicId": "memes/8809cd03-f69a-489f-8488-b685b006abad",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418944/memes/8809cd03-f69a-489f-8488-b685b006abad.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/L0a71kiDY.webp",
     "keywords": [
       "trump",
       "donald",
@@ -371,7 +326,7 @@
     "width": 1002,
     "height": 800,
     "imagePublicId": "memes/a4af48fd-a4da-410c-b044-6bbaff9f6710",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418945/memes/a4af48fd-a4da-410c-b044-6bbaff9f6710.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/1nlDvghM2.webp",
     "keywords": [
       "interview",
       "Trump",
@@ -452,7 +407,7 @@
     "width": 780,
     "height": 800,
     "imagePublicId": "memes/7a6498df-1be6-400f-a1d8-dcfe515ec524",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418947/memes/7a6498df-1be6-400f-a1d8-dcfe515ec524.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/ORDOs0xg2.webp",
     "keywords": [
       "WWE",
       "performance",
@@ -533,7 +488,7 @@
     "width": 914,
     "height": 800,
     "imagePublicId": "memes/9c3b7e4f-a141-47de-bb1b-d2bd4fff6b3f",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418948/memes/9c3b7e4f-a141-47de-bb1b-d2bd4fff6b3f.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/jFOLzN2tb.webp",
     "keywords": [
       "black",
       "ordinateur",
@@ -598,7 +553,7 @@
     "width": 979,
     "height": 800,
     "imagePublicId": "memes/8001f67b-7900-4487-9f20-6e947e24a20e",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418949/memes/8001f67b-7900-4487-9f20-6e947e24a20e.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/KaGI9deuz.webp",
     "keywords": [
       "palmashow",
       "helmut",
@@ -663,7 +618,7 @@
     "width": 800,
     "height": 596,
     "imagePublicId": "memes/4a3d34e0-c6dc-4d3a-abe3-e78e44440b8b",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418950/memes/4a3d34e0-c6dc-4d3a-abe3-e78e44440b8b.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/xqT-N09YZ.webp",
     "keywords": [
       "Sweating Jordan Peele",
       "sweat",
@@ -712,7 +667,7 @@
     "width": 1032,
     "height": 800,
     "imagePublicId": "memes/be23f752-0bfc-4059-92a6-fd4492fce94b",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418951/memes/be23f752-0bfc-4059-92a6-fd4492fce94b.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/-0degoA5V.webp",
     "keywords": [
       "denis",
       "koh lanta",
@@ -759,7 +714,7 @@
     "width": 665,
     "height": 499,
     "imagePublicId": "memes/ef9083f7-d2f6-404e-9f39-bed6b573254e",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418953/memes/ef9083f7-d2f6-404e-9f39-bed6b573254e.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/DiGDaylDU.webp",
     "keywords": [
       "fumer",
       "cigarette",
@@ -804,7 +759,7 @@
     "width": 600,
     "height": 800,
     "imagePublicId": "memes/c7296535-9167-42aa-b68c-fd40b5e1cd8f",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418954/memes/c7296535-9167-42aa-b68c-fd40b5e1cd8f.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/9CgqZFT75.webp",
     "keywords": [
       "youtube",
       "assis",
@@ -851,7 +806,7 @@
     "width": 800,
     "height": 453,
     "imagePublicId": "memes/74be4de7-f5f0-456d-a06f-f8115303546c",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418956/memes/74be4de7-f5f0-456d-a06f-f8115303546c.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/7HAREEhrC.webp",
     "keywords": [
       "basket",
       "nba",
@@ -900,7 +855,7 @@
     "width": 800,
     "height": 333,
     "imagePublicId": "memes/5d9728b4-65f9-4a25-bcf6-706254f797e3",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418957/memes/5d9728b4-65f9-4a25-bcf6-706254f797e3.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/zN5mdaFKx.webp",
     "keywords": [
       "alexandra",
       "seum"
@@ -943,7 +898,7 @@
     "width": 800,
     "height": 579,
     "imagePublicId": "memes/5f978c32-18ca-4b55-86a4-148765931cb1",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418958/memes/5f978c32-18ca-4b55-86a4-148765931cb1.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/rV0oc2zFz.webp",
     "keywords": [
       "sam",
       "koh",
@@ -988,7 +943,7 @@
     "width": 800,
     "height": 448,
     "imagePublicId": "memes/a9b25049-d3ff-487f-af3d-da93740f8c42",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418959/memes/a9b25049-d3ff-487f-af3d-da93740f8c42.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/bvsxtsOh5.webp",
     "keywords": [
       "alexandra",
       "vote",
@@ -1035,7 +990,7 @@
     "width": 800,
     "height": 419,
     "imagePublicId": "memes/008d8ddc-0ffa-488b-9261-e399bef13d33",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418961/memes/008d8ddc-0ffa-488b-9261-e399bef13d33.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/qo4y-I1vG.webp",
     "keywords": [
       "koh",
       "lanta",
@@ -1102,7 +1057,7 @@
     "width": 500,
     "height": 323,
     "imagePublicId": "memes/5bd2ab58-6c22-4508-b096-3fbab22ef5e6",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418962/memes/5bd2ab58-6c22-4508-b096-3fbab22ef5e6.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/qG9EZCeq9.webp",
     "keywords": [
       "yo",
       "dawg",
@@ -1167,7 +1122,7 @@
     "width": 800,
     "height": 800,
     "imagePublicId": "memes/23c86e26-760e-40c9-850f-9737002fd4e0",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418963/memes/23c86e26-760e-40c9-850f-9737002fd4e0.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/V18tmjzCOi.webp",
     "keywords": [
       "bird",
       "box"
@@ -1228,7 +1183,7 @@
     "width": 500,
     "height": 263,
     "imagePublicId": "memes/038f70a6-e8f4-4612-a7fd-57d71d23524e",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418965/memes/038f70a6-e8f4-4612-a7fd-57d71d23524e.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/z2UOhqZEOM.webp",
     "keywords": [
       "sparta",
       "leonidas"
@@ -1289,7 +1244,7 @@
     "width": 500,
     "height": 348,
     "imagePublicId": "memes/e7fbcc7c-4c01-427b-bcc8-5debfa2f5017",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418966/memes/e7fbcc7c-4c01-427b-bcc8-5debfa2f5017.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/X2EnqvDceo.webp",
     "keywords": [
       "am",
       "i",
@@ -1360,7 +1315,7 @@
     "width": 620,
     "height": 496,
     "imagePublicId": "memes/27fb3616-e95f-41e2-8d5e-0e2d359dcdcb",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418967/memes/27fb3616-e95f-41e2-8d5e-0e2d359dcdcb.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/52v0vwBNUx.webp",
     "keywords": [
       "mugatu",
       "so",
@@ -1427,7 +1382,7 @@
     "width": 500,
     "height": 324,
     "imagePublicId": "memes/3d059361-080b-4a7e-8b9e-a4a38a1dcaf1",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418969/memes/3d059361-080b-4a7e-8b9e-a4a38a1dcaf1.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/dkoG3VmZwF.webp",
     "keywords": [
       "captain",
       "picard",
@@ -1490,7 +1445,7 @@
     "width": 500,
     "height": 500,
     "imagePublicId": "memes/8e65d93f-d7fb-48dc-b214-4612ab12368c",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418971/memes/8e65d93f-d7fb-48dc-b214-4612ab12368c.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/giQ4KPdj90.webp",
     "keywords": [
       "philosoraptor"
     ],
@@ -1549,7 +1504,7 @@
     "width": 500,
     "height": 704,
     "imagePublicId": "memes/ee895374-154f-491d-bf59-1006c4dad814",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418972/memes/ee895374-154f-491d-bf59-1006c4dad814.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/QU8DF7uQ6i.webp",
     "keywords": [
       "keep",
       "calm",
@@ -1600,7 +1555,7 @@
     "width": 420,
     "height": 316,
     "imagePublicId": "memes/dd5580f2-4438-4574-83b8-aaff4673eb58",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418973/memes/dd5580f2-4438-4574-83b8-aaff4673eb58.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/pmq0d5KsO8.webp",
     "keywords": [
       "too",
       "damn",
@@ -1663,7 +1618,7 @@
     "width": 500,
     "height": 303,
     "imagePublicId": "memes/65e03305-6a4c-4cde-b396-3ca23db37516",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418974/memes/65e03305-6a4c-4cde-b396-3ca23db37516.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/UJgSSxktWJ.webp",
     "keywords": [
       "matrix",
       "morpheus"
@@ -1724,7 +1679,7 @@
     "width": 423,
     "height": 734,
     "imagePublicId": "memes/b85f5456-28c9-4ca3-b4b8-f0daf38c0374",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418976/memes/b85f5456-28c9-4ca3-b4b8-f0daf38c0374.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/quT0xw4PBc.webp",
     "keywords": [
       "marvel",
       "civil",
@@ -1789,7 +1744,7 @@
     "width": 720,
     "height": 476,
     "imagePublicId": "memes/32d17ae6-5a92-4899-a96e-5e92004f1b4e",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418978/memes/32d17ae6-5a92-4899-a96e-5e92004f1b4e.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/mM1dVuvZYa.webp",
     "keywords": [
       "me",
       "and",
@@ -1854,7 +1809,7 @@
     "width": 500,
     "height": 367,
     "imagePublicId": "memes/fd6ef05e-caad-4fc2-8c99-40f641a48944",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418979/memes/fd6ef05e-caad-4fc2-8c99-40f641a48944.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/XCmhlf4N-I.webp",
     "keywords": [
       "i",
       "should",
@@ -1923,7 +1878,7 @@
     "width": 343,
     "height": 604,
     "imagePublicId": "memes/122fac20-17ec-476c-a6ec-f25ad774841a",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418981/memes/122fac20-17ec-476c-a6ec-f25ad774841a.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/G3FXqkNP47.webp",
     "keywords": [
       "put",
       "it",
@@ -1990,7 +1945,7 @@
     "width": 595,
     "height": 800,
     "imagePublicId": "memes/57fb0fc5-85ee-4bf3-bc50-60e20dcc6804",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418984/memes/57fb0fc5-85ee-4bf3-bc50-60e20dcc6804.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/sVboXso_JA.webp",
     "keywords": [
       "uncle",
       "sam"
@@ -2051,7 +2006,7 @@
     "width": 500,
     "height": 616,
     "imagePublicId": "memes/6b9de557-ca3b-4082-a02a-55aba27d522a",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418985/memes/6b9de557-ca3b-4082-a02a-55aba27d522a.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/tNBSXjIdtE.webp",
     "keywords": [
       "grumpy",
       "cat"
@@ -2112,7 +2067,7 @@
     "width": 460,
     "height": 523,
     "imagePublicId": "memes/11c4ddd8-45ee-43b2-b8d9-e6acd8ce4810",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418987/memes/11c4ddd8-45ee-43b2-b8d9-e6acd8ce4810.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/2KSzKN1obI.webp",
     "keywords": [
       "face",
       "you",
@@ -2181,7 +2136,7 @@
     "width": 491,
     "height": 550,
     "imagePublicId": "memes/1ecd498d-e61c-441d-9000-91f4f17b1c9d",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418988/memes/1ecd498d-e61c-441d-9000-91f4f17b1c9d.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/y3hiRqoAey.webp",
     "keywords": [
       "i'll",
       "just",
@@ -2246,7 +2201,7 @@
     "width": 500,
     "height": 667,
     "imagePublicId": "memes/5710f97f-0be5-410e-ba42-25b59c38620f",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418989/memes/5710f97f-0be5-410e-ba42-25b59c38620f.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/9deqLTybgC.webp",
     "keywords": [
       "surprised",
       "koala"
@@ -2307,7 +2262,7 @@
     "width": 323,
     "height": 800,
     "imagePublicId": "memes/9791e8c7-14c3-48d7-9532-95d2c7406000",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418991/memes/9791e8c7-14c3-48d7-9532-95d2c7406000.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/pAK980F_rC.webp",
     "keywords": [
       "peter",
       "parker",
@@ -2388,7 +2343,7 @@
     "width": 500,
     "height": 405,
     "imagePublicId": "memes/91e03484-ab34-4046-9b3b-85360a5f6db9",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418992/memes/91e03484-ab34-4046-9b3b-85360a5f6db9.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/94m8bMbjVi.webp",
     "keywords": [
       "dr",
       "evil",
@@ -2451,7 +2406,7 @@
     "width": 550,
     "height": 545,
     "imagePublicId": "memes/8534f87b-d554-4145-84c5-0124ef4021eb",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418993/memes/8534f87b-d554-4145-84c5-0124ef4021eb.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/30z608x-xS.webp",
     "keywords": [
       "creepy",
       "condescending",
@@ -2514,7 +2469,7 @@
     "width": 805,
     "height": 800,
     "imagePublicId": "memes/8d97710f-b672-4f44-8619-8fac683424b6",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418995/memes/8d97710f-b672-4f44-8619-8fac683424b6.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/Fbe-BUEwxW.webp",
     "keywords": [
       "be",
       "like",
@@ -2613,7 +2568,7 @@
     "width": 300,
     "height": 300,
     "imagePublicId": "memes/e896e6d9-182c-498b-a5c3-26ef15357772",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418996/memes/e896e6d9-182c-498b-a5c3-26ef15357772.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/l34b2Z-Mn_.webp",
     "keywords": [
       "look",
       "at",
@@ -2676,7 +2631,7 @@
     "width": 800,
     "height": 464,
     "imagePublicId": "memes/a5ae15cf-3ad0-4ebd-83df-d9e6eddabce0",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418998/memes/a5ae15cf-3ad0-4ebd-83df-d9e6eddabce0.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/gld1L4BT7Q.webp",
     "keywords": [
       "presidential",
       "alert"
@@ -2737,7 +2692,7 @@
     "width": 622,
     "height": 477,
     "imagePublicId": "memes/5dd08876-b797-4f7b-982c-4897a02dc596",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703418999/memes/5dd08876-b797-4f7b-982c-4897a02dc596.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/o78WUoxFwX.webp",
     "keywords": [
       "brace",
       "yourselves",
@@ -2804,7 +2759,7 @@
     "width": 800,
     "height": 534,
     "imagePublicId": "memes/3211e6a5-ed6f-4555-85b6-cd9a34e3c05e",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419000/memes/3211e6a5-ed6f-4555-85b6-cd9a34e3c05e.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/ynXecP8yxW.webp",
     "keywords": [
       "and",
       "just",
@@ -2851,7 +2806,7 @@
     "width": 500,
     "height": 366,
     "imagePublicId": "memes/0c0a47d6-a366-4ac7-ba4f-86b059841cfc",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419002/memes/0c0a47d6-a366-4ac7-ba4f-86b059841cfc.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/y2iJBQTzEe.webp",
     "keywords": [
       "imagination",
       "spongebob"
@@ -2912,7 +2867,7 @@
     "width": 620,
     "height": 675,
     "imagePublicId": "memes/0a2a04c1-68bf-4acc-a649-732a63fa0a05",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419003/memes/0a2a04c1-68bf-4acc-a649-732a63fa0a05.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/l2logUBKbh.webp",
     "keywords": [
       "see",
       "nobody",
@@ -2975,7 +2930,7 @@
     "width": 500,
     "height": 500,
     "imagePublicId": "memes/47ee3554-5fa9-4dea-b814-94deb8c56c94",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419005/memes/47ee3554-5fa9-4dea-b814-94deb8c56c94.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/K6ofUrtebI.webp",
     "keywords": [
       "success",
       "kid"
@@ -3036,7 +2991,7 @@
     "width": 500,
     "height": 750,
     "imagePublicId": "memes/199d8057-554d-455c-bff4-cd670f04b19d",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419006/memes/199d8057-554d-455c-bff4-cd670f04b19d.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/fjNiOAhveT.webp",
     "keywords": [
       "squidward"
     ],
@@ -3095,7 +3050,7 @@
     "width": 1051,
     "height": 800,
     "imagePublicId": "memes/e5373a2d-183a-4ae5-a1de-39d63cc469f7",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419008/memes/e5373a2d-183a-4ae5-a1de-39d63cc469f7.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/RIMN7kvR2U.webp",
     "keywords": [
       "well",
       "yes,",
@@ -3144,7 +3099,7 @@
     "width": 620,
     "height": 800,
     "imagePublicId": "memes/9315a3ba-1400-40b0-a412-31b59dc7008b",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419009/memes/9315a3ba-1400-40b0-a412-31b59dc7008b.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/86HYBVsFz7.webp",
     "keywords": [
       "say",
       "it",
@@ -3209,7 +3164,7 @@
     "width": 381,
     "height": 378,
     "imagePublicId": "memes/50d700ee-c8f1-4537-87de-f5701431ae0f",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419011/memes/50d700ee-c8f1-4537-87de-f5701431ae0f.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/oXANJggAyf.webp",
     "keywords": [
       "maury",
       "lie",
@@ -3272,7 +3227,7 @@
     "width": 620,
     "height": 463,
     "imagePublicId": "memes/da4cc73e-cf51-4884-9df3-a7d3fbbea98a",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419012/memes/da4cc73e-cf51-4884-9df3-a7d3fbbea98a.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/7VGnPzU7tT.webp",
     "keywords": [
       "scared",
       "cat"
@@ -3333,7 +3288,7 @@
     "width": 500,
     "height": 355,
     "imagePublicId": "memes/d00c1ebb-93e8-462b-b811-cd357d796389",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419013/memes/d00c1ebb-93e8-462b-b811-cd357d796389.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/91Eisa6MF7.webp",
     "keywords": [
       "x",
       "all",
@@ -3398,7 +3353,7 @@
     "width": 640,
     "height": 631,
     "imagePublicId": "memes/e649e65d-05d5-4381-a764-08ceb6583be3",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419014/memes/e649e65d-05d5-4381-a764-08ceb6583be3.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/lcNKBOOd4E.webp",
     "keywords": [
       "sleeping",
       "shaq"
@@ -3459,7 +3414,7 @@
     "width": 580,
     "height": 282,
     "imagePublicId": "memes/06a93e1e-e5cf-4a55-8cd8-b69060993626",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419015/memes/06a93e1e-e5cf-4a55-8cd8-b69060993626.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/SFr_N0dTDs.webp",
     "keywords": [
       "this",
       "is",
@@ -3522,7 +3477,7 @@
     "width": 715,
     "height": 800,
     "imagePublicId": "memes/92a27f5e-930a-4afc-abce-84c9c6f9350d",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419017/memes/92a27f5e-930a-4afc-abce-84c9c6f9350d.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/pGJfxfVYrV.webp",
     "keywords": [
       "they're",
       "the",
@@ -3605,7 +3560,7 @@
     "width": 500,
     "height": 375,
     "imagePublicId": "memes/60e705a2-dbb6-4c02-b473-a5cb87dc813e",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419019/memes/60e705a2-dbb6-4c02-b473-a5cb87dc813e.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/pqZucAYPFv.webp",
     "keywords": [
       "jack",
       "sparrow",
@@ -3670,7 +3625,7 @@
     "width": 300,
     "height": 418,
     "imagePublicId": "memes/4775116b-9212-4c2b-aed1-73fc7b4dd218",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419020/memes/4775116b-9212-4c2b-aed1-73fc7b4dd218.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/B-KnPdTNw_.webp",
     "keywords": [
       "this",
       "is",
@@ -3712,7 +3667,7 @@
     "width": 800,
     "height": 499,
     "imagePublicId": "memes/fffd7117-ce43-4a6c-9a12-8f58f3086ac9",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419021/memes/fffd7117-ce43-4a6c-9a12-8f58f3086ac9.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/K6Yp7a__3G.webp",
     "keywords": [
       "who",
       "would",
@@ -3775,7 +3730,7 @@
     "width": 500,
     "height": 500,
     "imagePublicId": "memes/e607c811-1688-4d9b-a087-9227bc06c548",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419022/memes/e607c811-1688-4d9b-a087-9227bc06c548.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/Lt_Zn8i4Ly.webp",
     "keywords": [
       "y",
       "u",
@@ -3838,7 +3793,7 @@
     "width": 475,
     "height": 562,
     "imagePublicId": "memes/179695a2-20a9-499d-841c-4dc56c8d93b5",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419023/memes/179695a2-20a9-499d-841c-4dc56c8d93b5.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/8oWi9AHPiW.webp",
     "keywords": [
       "bad",
       "luck",
@@ -3901,7 +3856,7 @@
     "width": 500,
     "height": 333,
     "imagePublicId": "memes/e353cb7e-fb8d-4739-ae7f-dd26708d118b",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419025/memes/e353cb7e-fb8d-4739-ae7f-dd26708d118b.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/J2y_dJHRQj.webp",
     "keywords": [
       "laughing",
       "men",
@@ -3966,7 +3921,7 @@
     "width": 600,
     "height": 600,
     "imagePublicId": "memes/9f52ad40-4b7f-440c-9f59-cae5ca62c506",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419027/memes/9f52ad40-4b7f-440c-9f59-cae5ca62c506.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/tob-aKSXR3.webp",
     "keywords": [
       "but",
       "that's",
@@ -4035,7 +3990,7 @@
     "width": 500,
     "height": 331,
     "imagePublicId": "memes/9d4bac37-1d07-4b09-a772-7ac12bd5c588",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419028/memes/9d4bac37-1d07-4b09-a772-7ac12bd5c588.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/0UE2MXhyMn.webp",
     "keywords": [
       "evil",
       "toddler"
@@ -4096,7 +4051,7 @@
     "width": 599,
     "height": 626,
     "imagePublicId": "memes/997fb757-8e53-41dc-bc38-edeeb3a1bd50",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419029/memes/997fb757-8e53-41dc-bc38-edeeb3a1bd50.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/9mC0b6DFjC.webp",
     "keywords": [
       "black",
       "girl",
@@ -4159,7 +4114,7 @@
     "width": 552,
     "height": 367,
     "imagePublicId": "memes/c95fbc56-eb96-455c-b7c6-d252491a22ba",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419030/memes/c95fbc56-eb96-455c-b7c6-d252491a22ba.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/ihrXZigbzV.webp",
     "keywords": [
       "first",
       "world",
@@ -4204,7 +4159,7 @@
     "width": 581,
     "height": 800,
     "imagePublicId": "memes/7582db45-aafb-4c7a-a507-caacb3df71aa",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419032/memes/7582db45-aafb-4c7a-a507-caacb3df71aa.png",
+    "imageUrl": "https://www.meme-studio.io/templates/SBc--HuK8X.png",
     "keywords": [
       "panik",
       "kalm",
@@ -4285,7 +4240,7 @@
     "width": 550,
     "height": 690,
     "imagePublicId": "memes/85f38b37-a1f8-4cd4-a045-3fab302b27ee",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419034/memes/85f38b37-a1f8-4cd4-a045-3fab302b27ee.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/YhhnkQN6Uj.webp",
     "keywords": [
       "the",
       "most",
@@ -4356,7 +4311,7 @@
     "width": 600,
     "height": 400,
     "imagePublicId": "memes/0b6314eb-af67-47f3-90bd-d410cbc5bf39",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419035/memes/0b6314eb-af67-47f3-90bd-d410cbc5bf39.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/Yo-Mltw_2H.webp",
     "keywords": [
       "leonardo",
       "dicaprio",
@@ -4419,7 +4374,7 @@
     "width": 640,
     "height": 480,
     "imagePublicId": "memes/fa921f1a-cb8e-4cbd-bbe6-5149bcc5c9ba",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419037/memes/fa921f1a-cb8e-4cbd-bbe6-5149bcc5c9ba.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/kW-270YPSN.webp",
     "keywords": [
       "grandma",
       "finds",
@@ -4484,7 +4439,7 @@
     "width": 700,
     "height": 325,
     "imagePublicId": "memes/cf95a453-c120-4fc8-abc1-5467c52f6070",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419038/memes/cf95a453-c120-4fc8-abc1-5467c52f6070.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/NawUuinevO.webp",
     "keywords": [
       "evil",
       "kermit"
@@ -4545,7 +4500,7 @@
     "width": 500,
     "height": 500,
     "imagePublicId": "memes/bbfed0b6-c256-4ea7-b4e7-e0c86238cf7b",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419039/memes/bbfed0b6-c256-4ea7-b4e7-e0c86238cf7b.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/fjQ16G_fmb.webp",
     "keywords": [
       "third",
       "world",
@@ -4610,7 +4565,7 @@
     "width": 620,
     "height": 713,
     "imagePublicId": "memes/c0d91713-d2bb-4737-b15e-4063dac8fb42",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419040/memes/c0d91713-d2bb-4737-b15e-4063dac8fb42.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/_VAxg9c_5K.webp",
     "keywords": [
       "star",
       "wars",
@@ -4673,7 +4628,7 @@
     "width": 618,
     "height": 499,
     "imagePublicId": "memes/e9feb5bd-4e4c-4c6a-a263-47cc1071b314",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419042/memes/e9feb5bd-4e4c-4c6a-a263-47cc1071b314.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/Rtw7-NUWUR.webp",
     "keywords": [
       "marked",
       "safe",
@@ -4736,7 +4691,7 @@
     "width": 620,
     "height": 620,
     "imagePublicId": "memes/44050628-c4ce-41dc-a2ad-60bf43a7b095",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419043/memes/44050628-c4ce-41dc-a2ad-60bf43a7b095.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/kcH-txu-an.webp",
     "keywords": [
       "doge"
     ],
@@ -4795,7 +4750,7 @@
     "width": 720,
     "height": 709,
     "imagePublicId": "memes/565ec7cc-e72d-43c9-84d1-0b9da26dbdf7",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419044/memes/565ec7cc-e72d-43c9-84d1-0b9da26dbdf7.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/8V2CSutGxl.webp",
     "keywords": [
       "sad",
       "pablo",
@@ -4876,7 +4831,7 @@
     "width": 500,
     "height": 333,
     "imagePublicId": "memes/1c4726c6-1eaa-4e7d-96ce-29e4c90ecebc",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419046/memes/1c4726c6-1eaa-4e7d-96ce-29e4c90ecebc.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/2jIOcEwt3o.webp",
     "keywords": [
       "don't",
       "you",
@@ -4939,7 +4894,7 @@
     "width": 526,
     "height": 440,
     "imagePublicId": "memes/2345ba85-cbd1-43e9-8045-707c665da8c2",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419047/memes/2345ba85-cbd1-43e9-8045-707c665da8c2.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/ucU35UcLA7.webp",
     "keywords": [
       "that",
       "would",
@@ -4986,7 +4941,7 @@
     "width": 426,
     "height": 426,
     "imagePublicId": "memes/373f2423-e167-4055-bccb-fbd41f0a47e1",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419048/memes/373f2423-e167-4055-bccb-fbd41f0a47e1.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/RALwaSgx2g.webp",
     "keywords": [
       "third",
       "world",
@@ -5051,7 +5006,7 @@
     "width": 423,
     "height": 600,
     "imagePublicId": "memes/c53218da-0e7f-47da-9fca-91c6163c59ba",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419050/memes/c53218da-0e7f-47da-9fca-91c6163c59ba.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/ecBbhGAOnU.webp",
     "keywords": [
       "finding",
       "neverland"
@@ -5130,7 +5085,7 @@
     "width": 620,
     "height": 464,
     "imagePublicId": "memes/701df998-2a11-4b2d-b34c-6ee0606cbb31",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419051/memes/701df998-2a11-4b2d-b34c-6ee0606cbb31.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/0BujHcTnzo.webp",
     "keywords": [
       "Oprah You get a",
       "gagner",
@@ -5193,7 +5148,7 @@
     "width": 500,
     "height": 436,
     "imagePublicId": "memes/fc21fc6d-0b5f-41e0-bfee-f5d8e44f69b2",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419052/memes/fc21fc6d-0b5f-41e0-bfee-f5d8e44f69b2.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/A5BdG2M7rf.webp",
     "keywords": [
       "explication",
       "alien",
@@ -5258,7 +5213,7 @@
     "width": 552,
     "height": 414,
     "imagePublicId": "memes/1e370e40-782b-48a0-a615-ecb39ee53ca0",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419054/memes/1e370e40-782b-48a0-a615-ecb39ee53ca0.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/w8-ouGycP5.webp",
     "keywords": [
       "Not Sure If",
       "incertain",
@@ -5323,7 +5278,7 @@
     "width": 600,
     "height": 471,
     "imagePublicId": "memes/64431971-3152-41cc-8797-2b1211fac4ea",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419055/memes/64431971-3152-41cc-8797-2b1211fac4ea.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/vs3wTaXjQE.webp",
     "keywords": [
       "Y'all Got Any More Of..",
       "Dave Chappelle",
@@ -5386,7 +5341,7 @@
     "width": 1177,
     "height": 800,
     "imagePublicId": "memes/6969aa31-f690-48bb-8c54-821f0708e378",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419056/memes/6969aa31-f690-48bb-8c54-821f0708e378.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/7MbvlrlGgS.webp",
     "keywords": [
       "X",
       "X Everywhere",
@@ -5453,7 +5408,7 @@
     "width": 685,
     "height": 800,
     "imagePublicId": "memes/04662d78-e86b-4cdf-8d4d-de1cc0a11898",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419057/memes/04662d78-e86b-4cdf-8d4d-de1cc0a11898.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/x_AHY8qK0j.webp",
     "keywords": [
       "Spongebob Ight Imma Head Out",
       "bob",
@@ -5481,7 +5436,7 @@
     "width": 800,
     "height": 666,
     "imagePublicId": "memes/ec887cc4-c848-4106-9a68-ab4b6b12eaba",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419059/memes/ec887cc4-c848-4106-9a68-ab4b6b12eaba.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/e_3kBhZ9VE.webp",
     "keywords": [
       "singe"
     ],
@@ -5540,7 +5495,7 @@
     "width": 750,
     "height": 750,
     "imagePublicId": "memes/4318f512-5468-4768-ab7b-c8950c893f6a",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419060/memes/4318f512-5468-4768-ab7b-c8950c893f6a.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/Yp3Dz4LPTU.webp",
     "keywords": [
       "Bernie Sanders",
       "aide",
@@ -5603,7 +5558,7 @@
     "width": 500,
     "height": 375,
     "imagePublicId": "memes/9591bbcc-d0a8-455c-984c-fc52ff0b61f5",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419062/memes/9591bbcc-d0a8-455c-984c-fc52ff0b61f5.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/9SL8f4yjde.webp",
     "keywords": [
       "fille",
       "gamine",
@@ -5672,7 +5627,7 @@
     "width": 568,
     "height": 700,
     "imagePublicId": "memes/349074f3-4a0a-4ebe-b1c8-7d5f1ac00488",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419064/memes/349074f3-4a0a-4ebe-b1c8-7d5f1ac00488.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/LrScFT6ksE.webp",
     "keywords": [
       "The Rock Driving",
       "Race to witch mountain",
@@ -5741,7 +5696,7 @@
     "width": 976,
     "height": 800,
     "imagePublicId": "memes/602677c7-f835-4cfc-baa1-b2ec14be0d9f",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419066/memes/602677c7-f835-4cfc-baa1-b2ec14be0d9f.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/YhuQgl6uS2.webp",
     "keywords": [
       "Trump Bill Signing",
       "document",
@@ -5808,7 +5763,7 @@
     "width": 556,
     "height": 800,
     "imagePublicId": "memes/db03f0ff-f232-474d-bc5a-5a993d8f74d8",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419067/memes/db03f0ff-f232-474d-bc5a-5a993d8f74d8.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/Z76_CfJzHX.webp",
     "keywords": [
       "Hard To Swallow Pills",
       "médicament",
@@ -5855,7 +5810,7 @@
     "width": 298,
     "height": 403,
     "imagePublicId": "memes/f6cc771a-8b65-43c2-92d3-73a68c359ada",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419068/memes/f6cc771a-8b65-43c2-92d3-73a68c359ada.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/MUjhnp_B48.webp",
     "keywords": [
       "attendre",
       "squelette",
@@ -5918,7 +5873,7 @@
     "width": 828,
     "height": 800,
     "imagePublicId": "memes/2f491ccf-5cce-4b15-9744-051bfe98276e",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419070/memes/2f491ccf-5cce-4b15-9744-051bfe98276e.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/cKn23PEkWO.webp",
     "keywords": [
       "Tate Parker",
       "comic"
@@ -5979,7 +5934,7 @@
     "width": 711,
     "height": 800,
     "imagePublicId": "memes/acf248a8-e20a-4799-ae0a-dddb50f1620c",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419071/memes/acf248a8-e20a-4799-ae0a-dddb50f1620c.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/z4FlsB4RoS.webp",
     "keywords": [
       "Who Killed Hannibal",
       "Eric Andre"
@@ -6058,7 +6013,7 @@
     "width": 702,
     "height": 395,
     "imagePublicId": "memes/dde73086-a9eb-48aa-b087-bc4af1631217",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419073/memes/dde73086-a9eb-48aa-b087-bc4af1631217.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/xYaAhEcYEi.webp",
     "keywords": [
       "homme",
       "taper",
@@ -6125,7 +6080,7 @@
     "width": 800,
     "height": 800,
     "imagePublicId": "memes/36cd23cb-3f30-47ea-91f4-3ac32c928a1b",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419074/memes/36cd23cb-3f30-47ea-91f4-3ac32c928a1b.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/l3M6C0bygE.webp",
     "keywords": [
       "Surprised Pikachu",
       "pokemon"
@@ -6186,7 +6141,7 @@
     "width": 568,
     "height": 335,
     "imagePublicId": "memes/6b6f02a7-df64-46a4-965b-6db39f0a78d7",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419075/memes/6b6f02a7-df64-46a4-965b-6db39f0a78d7.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/EAb16qe3IE.webp",
     "keywords": [
       "One does not simply",
       "mordor",
@@ -6251,7 +6206,7 @@
     "width": 500,
     "height": 649,
     "imagePublicId": "memes/c9df855a-379d-40c9-a232-8291c00c73cd",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419076/memes/c9df855a-379d-40c9-a232-8291c00c73cd.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/jkIb_KoolR.webp",
     "keywords": [
       "suggestion",
       "réunion",
@@ -6350,7 +6305,7 @@
     "width": 600,
     "height": 446,
     "imagePublicId": "memes/d4d63089-a7f1-4e9f-a83c-84a8d01fa73a",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419078/memes/d4d63089-a7f1-4e9f-a83c-84a8d01fa73a.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/M_RwcHZahW.webp",
     "keywords": [
       "bouton",
       "bleu",
@@ -6413,7 +6368,7 @@
     "width": 680,
     "height": 550,
     "imagePublicId": "memes/932f1ec4-6b56-400e-88ed-2865ef5bf5cf",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419080/memes/932f1ec4-6b56-400e-88ed-2865ef5bf5cf.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/lh4WkZyHia.webp",
     "keywords": [
       "tom",
       "jerry"
@@ -6474,7 +6429,7 @@
     "width": 800,
     "height": 582,
     "imagePublicId": "memes/a5f990c5-d894-4b4f-99d9-58c323900f66",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419081/memes/a5f990c5-d894-4b4f-99d9-58c323900f66.png",
+    "imageUrl": "https://www.meme-studio.io/templates/4082jU8BJB.png",
     "keywords": [
       "winnie l'ourson",
       "gentleman"
@@ -6535,7 +6490,7 @@
     "width": 480,
     "height": 601,
     "imagePublicId": "memes/a74b01eb-acf9-4450-99f8-214a56f0f397",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419083/memes/a74b01eb-acf9-4450-99f8-214a56f0f397.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/hNUD2fJWEe.webp",
     "keywords": [
       "András Arató"
     ],
@@ -6594,7 +6549,7 @@
     "width": 800,
     "height": 573,
     "imagePublicId": "memes/11cfb13e-d545-408e-abab-32472c1c5bd7",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419084/memes/11cfb13e-d545-408e-abab-32472c1c5bd7.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/QaF7ILuO13.webp",
     "keywords": [
       "poignée",
       "check",
@@ -6675,7 +6630,7 @@
     "width": 284,
     "height": 800,
     "imagePublicId": "memes/e056f586-193c-4624-9d6b-c34e4a2460f3",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419086/memes/e056f586-193c-4624-9d6b-c34e4a2460f3.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/41hJHlBJhz.webp",
     "keywords": [
       "américain",
       "hélicoptère",
@@ -6794,7 +6749,7 @@
     "width": 680,
     "height": 438,
     "imagePublicId": "memes/884d2280-10ba-465d-a8dd-d9954501429a",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419087/memes/884d2280-10ba-465d-a8dd-d9954501429a.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/tICNFqF30n.webp",
     "keywords": [
       "femme",
       "crier",
@@ -6857,7 +6812,7 @@
     "width": 359,
     "height": 800,
     "imagePublicId": "memes/acc0f63d-5915-4797-a360-be9248bed005",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419089/memes/acc0f63d-5915-4797-a360-be9248bed005.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/GVk5PTTnOw.webp",
     "keywords": [
       "mouette"
     ],
@@ -6952,7 +6907,7 @@
     "width": 891,
     "height": 800,
     "imagePublicId": "memes/4b8d77d4-2a4c-4383-84db-3fab73fb11d5",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419090/memes/4b8d77d4-2a4c-4383-84db-3fab73fb11d5.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/pBWab15KK5.webp",
     "keywords": [
       "piegon",
       "curieux",
@@ -7033,7 +6988,7 @@
     "width": 800,
     "height": 763,
     "imagePublicId": "memes/d7ca8352-3afd-4f67-ad01-858f4b1870e7",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419091/memes/d7ca8352-3afd-4f67-ad01-858f4b1870e7.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/bCfwMFA4LX.webp",
     "keywords": [
       "Left Exit 12 Off Ramp",
       "voiture",
@@ -7118,7 +7073,7 @@
     "width": 502,
     "height": 353,
     "imagePublicId": "memes/ea9b5185-37a5-4416-a849-c15fb5792ef5",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419093/memes/ea9b5185-37a5-4416-a849-c15fb5792ef5.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/AUwqJ5ZvoB.webp",
     "keywords": [
       "mocking",
       "spongebob"
@@ -7179,7 +7134,7 @@
     "width": 595,
     "height": 800,
     "imagePublicId": "memes/f0988c37-d312-4524-905b-e5065514cb38",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419094/memes/f0988c37-d312-4524-905b-e5065514cb38.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/znjQiHE5mb.webp",
     "keywords": [
       "Running Away Balloon",
       "ballon",
@@ -7296,7 +7251,7 @@
     "width": 500,
     "height": 494,
     "imagePublicId": "memes/9a9417ab-ff58-4f8b-8e5f-aca3ba5a2e82",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419095/memes/9a9417ab-ff58-4f8b-8e5f-aca3ba5a2e82.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/_3BF7x0uz9.webp",
     "keywords": [
       "uno",
       "cartes",
@@ -7359,7 +7314,7 @@
     "width": 570,
     "height": 800,
     "imagePublicId": "memes/36f76aba-f5c8-4752-809a-ac47a10214c4",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419096/memes/36f76aba-f5c8-4752-809a-ac47a10214c4.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/o0n-hFYEQ_.webp",
     "keywords": [
       "cerveau"
     ],
@@ -7454,7 +7409,7 @@
     "width": 482,
     "height": 361,
     "imagePublicId": "memes/afe136d7-9bfc-4012-9c32-87611f5827b3",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419098/memes/afe136d7-9bfc-4012-9c32-87611f5827b3.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/ld5dpNOEpV.webp",
     "keywords": [
       "changer",
       "avis"
@@ -7497,7 +7452,7 @@
     "width": 400,
     "height": 387,
     "imagePublicId": "memes/b124f13a-6af7-406b-bdf8-44d0abe831ab",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419099/memes/b124f13a-6af7-406b-bdf8-44d0abe831ab.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/n4KbGN7GVb.webp",
     "keywords": [
       "batman",
       "giffle",
@@ -7560,7 +7515,7 @@
     "width": 529,
     "height": 800,
     "imagePublicId": "memes/9c6c4162-258f-47ed-8185-cf533fd18283",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419101/memes/9c6c4162-258f-47ed-8185-cf533fd18283.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/NdQSMfzLRG.webp",
     "keywords": [
       "deux",
       "boutons"
@@ -7621,7 +7576,7 @@
     "width": 800,
     "height": 800,
     "imagePublicId": "memes/d4b03d64-4277-41c9-8c0b-13d7008b5f9f",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419102/memes/d4b03d64-4277-41c9-8c0b-13d7008b5f9f.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/yrJsOp1TrW.webp",
     "keywords": [
       "drake",
       "hotline",
@@ -7684,7 +7639,7 @@
     "width": 800,
     "height": 533,
     "imagePublicId": "memes/a3ef4499-d518-446e-85ae-01cf67921a73",
-    "imageUrl": "https://res.cloudinary.com/dltusgxea/image/upload/v1703419104/memes/a3ef4499-d518-446e-85ae-01cf67921a73.jpg",
+    "imageUrl": "https://www.meme-studio.io/templates/EsI5fipc3.webp",
     "keywords": [
       "distrait",
       "ami"
